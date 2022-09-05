@@ -1,16 +1,2 @@
-# harfaty
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Herfaty
+“Herfaty” is an application for crafts and handicrafts directed to children with talents. The application aims to provide a suitable environment for them to share their work and start their own small business through it under the supervision of their parents. In addition, the application provides an educational part that helps the children to master the craft they want to learn.
