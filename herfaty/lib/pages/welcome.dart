@@ -8,11 +8,23 @@ class Welcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      
       child: Scaffold(
-        body: SizedBox(
-          height: double.infinity,
+        body: Container(
+        // SizedBox(
+  height: double.infinity,
           width: double.infinity,
+
+
+  decoration: const BoxDecoration(
+    image: DecorationImage(
+        image: AssetImage(
+                  "assets/images/main_topp.png"),
+        fit: BoxFit.cover),
+  ),
+          
           child: Stack(
+            
             children: [
               SizedBox(
                 width: double.infinity,
@@ -21,17 +33,17 @@ class Welcome extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: 110,
+                      height: 40,
                     ),
                   
-                    Text("أهلا بك", style: TextStyle(fontSize: 33, fontFamily: "myfont"),),
+                    Text("", style: TextStyle(fontSize: 33, fontFamily: "myfont"),),
                     SizedBox(
-                      height: 35,
+                      height: 33,
                     ),
                   
                      Image.asset(
                   "assets/images/logo_transparent.png",
-                  width: 260,
+                  width: 270,
                 ),
                   
                     ElevatedButton(
@@ -76,20 +88,21 @@ class Welcome extends StatelessWidget {
                   ],
                 ),
               ),
-              Positioned(
-                left: 0,
-                child: Image.asset(
-                  "assets/images/main_topp.png",
-                  width: 111,
-                ),
-              ),
-              Positioned(
-                bottom: 0,
-                child: Image.asset(
-                  "assets/images/main_bottom.png",
-                  width: 111,
-                ),
-              ),
+              // Positioned(
+              //   left: 0,
+              //   child: Image.asset(
+              //     "assets/images/main_topp.png",
+              //     width: 444,
+                  
+              //   ),
+              // ),
+              // // Positioned(
+              //   bottom: 0,
+              //   child: Image.asset(
+              //     "assets/images/main_bottom.png",
+              //     width: 111,
+              //   ),
+              // ),
             ],
           ),
         ),

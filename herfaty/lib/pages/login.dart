@@ -21,7 +21,7 @@ class Login extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(
-                        height: 35,
+                        height: 220,
                       ),
                       Text(
                         "تسجيل الدخول",
@@ -36,7 +36,7 @@ class Login extends StatelessWidget {
                       ),
                       Container(
                         decoration: BoxDecoration(
-                          color: Colors.purple[100],
+                          color: Color.fromARGB(255, 114, 159, 160),
                           borderRadius: BorderRadius.circular(66),
                         ),
                         width: 266,
@@ -45,7 +45,7 @@ class Login extends StatelessWidget {
                           decoration: InputDecoration(
                               icon: Icon(
                                 Icons.person,
-                                color: Colors.purple[800],
+                                color: Color.fromARGB(255, 26, 96, 91),
                               ),
                               hintText: ": البريد الإلكتروني ",
                               border: InputBorder.none),
@@ -56,7 +56,7 @@ class Login extends StatelessWidget {
                       ),
                       Container(
                         decoration: BoxDecoration(
-                          color: Colors.purple[100],
+                          color: Color.fromARGB(255, 114, 159, 160),
                           borderRadius: BorderRadius.circular(66),
                         ),
                         width: 266,
@@ -66,11 +66,11 @@ class Login extends StatelessWidget {
                           decoration: InputDecoration(
                               suffix: Icon(
                                 Icons.visibility,
-                                color: Colors.purple[900],
+                                color: Color.fromARGB(255, 26, 96, 91),
                               ),
                               icon: Icon(
                                 Icons.lock,
-                                color: Colors.purple[800],
+                                color: Color.fromARGB(255, 26, 96, 91),
                                 size: 19,
                               ),
                               hintText: ": الرقم السري ",
@@ -85,7 +85,7 @@ class Login extends StatelessWidget {
                         
                         style: ButtonStyle(
                           backgroundColor:
-                              MaterialStateProperty.all(Colors.purple),
+                              MaterialStateProperty.all(Color.fromARGB(255, 35, 125, 118)),
                           padding: MaterialStateProperty.all(
                               EdgeInsets.symmetric(
                                   horizontal: 106, vertical: 10)),
@@ -120,15 +120,15 @@ class Login extends StatelessWidget {
                 Positioned(
                   left: 0,
                   child: Image.asset(
-                    "assets/images/main_top.png",
-                    width: 111,
+                    "assets/images/main_topp.png",
+                    width: 150,
                   ),
                 ),
                 Positioned(
                   bottom: 0,
                   right: 0,
                   child: Image.asset(
-                    "assets/images/login_bottom.png",
+                    "assets/images/main_topp.png",
                     width: 111,
                   ),
                 ),
