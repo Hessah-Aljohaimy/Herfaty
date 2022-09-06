@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>214121930308-b92tvl742c4p8gklc004hrhv0h81n4kh.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.214121930308-b92tvl742c4p8gklc004hrhv0h81n4kh</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCH6PG11hX7ClJ7BJCuZwhsdI0shzO-6Tk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>214121930308</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.herfaty</string>
+	<key>PROJECT_ID</key>
+	<string>herfty-app-48871</string>
+	<key>STORAGE_BUCKET</key>
+	<string>herfty-app-48871.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:214121930308:ios:7e7bde77c5308fc5eea611</string>
+	<key>DATABASE_URL</key>
+	<string>https://herfty-app-48871-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
