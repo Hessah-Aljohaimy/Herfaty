@@ -7,25 +7,33 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      
       child: Scaffold(
+                resizeToAvoidBottomInset: false,
+
           body: SafeArea(
         child: Scaffold(
+                  resizeToAvoidBottomInset: false,
+
           body: SizedBox(
+            
             height: double.infinity,
             width: double.infinity,
             child: Stack(
               children: [
+                
                 SizedBox(
                   width: double.infinity,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(
-                        height: 220,
+                        height: 210,
                       ),
                       Text(
                         "تسجيل الدخول",
-                        style: TextStyle(fontSize: 33, fontFamily: "myfont"),
+                        style: TextStyle(fontSize: 33, fontFamily: "myfont" ,),
+                        
                       ),
                       SizedBox(
                         height: 35,
