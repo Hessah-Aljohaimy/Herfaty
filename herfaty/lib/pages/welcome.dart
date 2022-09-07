@@ -82,7 +82,7 @@ class Welcome extends StatelessWidget {
                       ),
                       child: Text(
                         "تسجيل جديد",
-                        style: TextStyle(fontSize: 22, color: Colors.grey[850]),
+                        style: TextStyle(fontSize: 22, color: Color.fromARGB(255, 255, 255, 255)),
                       ),
                     ),
                   ],

@@ -1,24 +1,17 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
-import 'package:herfaty/pages/forget_password.dart';
+import 'package:herfaty/pages/login.dart';
 
 
-  var loginAs = [   
-    'مالك المتجر',
-    'مشرف',
 
-  ];
-
-  String dropdownValue = 'مشتري';
-
-class login extends StatefulWidget {
-      const login({Key? key}) : super(key: key);
+class forget_password extends StatefulWidget {
+      const forget_password({Key? key}) : super(key: key);
 
   @override
-  State<login> createState() => _login();
+  State<forget_password> createState() => _forget_password();
 }
 
-class _login extends State<login> {
+class _forget_password extends State<forget_password> {
   @override
   Widget build(BuildContext context) {
  return SafeArea(
@@ -44,10 +37,10 @@ class _login extends State<login> {
                     children: [
                    
                  SizedBox(
-                        height: 86,
+                        height: 120,
                       ),
                       Text(
-                        "تسجيل الدخول",
+                        "إعادة تعيين الرمز السري",
                         style: TextStyle(fontSize: 33, fontFamily: "myfont" ,),
                         
                       ),
@@ -61,37 +54,6 @@ class _login extends State<login> {
                       ),
                     
                     
- Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          
-                           DropdownButton<String>(
-  // Step 3.
-  value: dropdownValue,
-  // Step 4.
-  items: <String>[ 'مالك المتجر','مشرف','مشتري']
-      .map<DropdownMenuItem<String>>((String value) {
-    return DropdownMenuItem<String>(
-      value: value,
-      
-      child: Text(
-        value,
-        style: TextStyle(fontSize: 15),
-      ),
-    );
-  }).toList(),
-  // Step 5.
-  onChanged: (String? newValue) {
-    setState(() {
-      dropdownValue = newValue!;
-    });
-  },
-),
-                          Text("  :تسجيل الدخول ك"),
-
-                          
-                        ],
-                      ), 
                      
                       SizedBox(
                         height: 20,
@@ -116,32 +78,7 @@ class _login extends State<login> {
                               border: InputBorder.none),
                         ),
                       ),
-                      SizedBox(
-                        height: 23,
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 114, 159, 160),
-                          borderRadius: BorderRadius.circular(66),
-                        ),
-                        width: 266,
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: TextField(
-                          obscureText: true,
-                          decoration: InputDecoration(
-                              suffix: Icon(
-                                Icons.visibility,
-                                color: Color.fromARGB(255, 26, 96, 91),
-                              ),
-                              icon: Icon(
-                                Icons.lock,
-                                color: Color.fromARGB(255, 26, 96, 91),
-                                size: 19,
-                              ),
-                              hintText: ": الرقم السري ",
-                              border: InputBorder.none),
-                        ),
-                      ),
+                     
                       SizedBox(
                         height: 17,
                       ),
@@ -159,7 +96,7 @@ class _login extends State<login> {
                                   borderRadius: BorderRadius.circular(27))),
                         ),
                         child: Text(
-                          "تسجيل الدخول",
+                          "إعادة تعيين",
                           style: TextStyle(fontSize: 14),
                         ),
                       ),
@@ -168,26 +105,16 @@ class _login extends State<login> {
                       ),
 
 
-                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          GestureDetector(
-                            onTap: (){ Navigator.pushNamed(context, "/forget_password");},
-                            child: Text(" إعادة تعيين الرمز السري ", style: TextStyle(fontWeight: FontWeight.bold),)),
-
-                          Text("نسيت الرمز السري؟"),
-
-                          
-                        ],
-                      ), 
+                       
+                      
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           GestureDetector(
-                            onTap: (){ Navigator.pushNamed(context, "/signup");},
-                            child: Text(" تسجيل جديد ", style: TextStyle(fontWeight: FontWeight.bold),)),
+                            onTap: (){ Navigator.pushNamed(context, "/login");},
+                            child: Text(" الدخول ", style: TextStyle(fontWeight: FontWeight.bold),)),
 
-                          Text("ليس لديك حساب ؟"),
+                          Text("الرجوع إلى صفحة "),
 
                           
                         ],
