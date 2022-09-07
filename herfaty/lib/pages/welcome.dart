@@ -69,7 +69,7 @@ class Welcome extends StatelessWidget {
                   
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, "/signup");
+                        Navigator.pushNamed(context, "/");
                       },
                       
                       style: ButtonStyle(
