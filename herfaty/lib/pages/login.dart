@@ -38,6 +38,7 @@ class Login extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: Color.fromARGB(255, 114, 159, 160),
                           borderRadius: BorderRadius.circular(66),
+                          
                         ),
                         width: 266,
                         padding: EdgeInsets.symmetric(horizontal: 16),
@@ -128,8 +129,8 @@ class Login extends StatelessWidget {
                   bottom: 0,
                   right: 0,
                   child: Image.asset(
-                    "assets/images/main_topp.png",
-                    width: 111,
+                    "assets/images/login_bottom.png",
+                    width: 200,
                   ),
                 ),
               ],
