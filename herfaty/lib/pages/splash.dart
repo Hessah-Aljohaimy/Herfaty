@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:herfaty/constants/colors.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -16,7 +15,7 @@ class _SplashState extends State<Splash> {
 
   Widget initWidget() {
     Color mycolor = new Color(0x51908E);
-    Color mySeconedColor = new Color(0xFFEDB2)
+    Color mySeconedColor = new Color(0xFFEDB2);
     return Scaffold(
       body: Stack(
         children: [

@@ -18,16 +18,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: "/",
       routes: {
-<<<<<<< Updated upstream
         //SignupHerafy
         // "/": (context) => const Welcome(),
         // "/": (context) => const SignupHerafy(),
         //Splash
         "/": (context) => const Splash(),
-=======
-        "/": (context) => const Welcome(),
-        "/signup": (context) => const Signup(),
->>>>>>> Stashed changes
       },
     );
   }
