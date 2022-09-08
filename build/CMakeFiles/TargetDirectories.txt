@@ -1,0 +1,9 @@
+C:/Users/Hessa/Documents/Herfaty/build/CMakeFiles/Experimental.dir
+C:/Users/Hessa/Documents/Herfaty/build/CMakeFiles/Nightly.dir
+C:/Users/Hessa/Documents/Herfaty/build/CMakeFiles/Continuous.dir
+C:/Users/Hessa/Documents/Herfaty/build/CMakeFiles/NightlyMemoryCheck.dir
+C:/Users/Hessa/Documents/Herfaty/build/CMakeFiles/Herfaty.dir
+C:/Users/Hessa/Documents/Herfaty/build/CMakeFiles/PACKAGE.dir
+C:/Users/Hessa/Documents/Herfaty/build/CMakeFiles/RUN_TESTS.dir
+C:/Users/Hessa/Documents/Herfaty/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/Hessa/Documents/Herfaty/build/CMakeFiles/ZERO_CHECK.dir

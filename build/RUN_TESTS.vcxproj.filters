@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Hessa\Documents\Herfaty\build\CMakeFiles\82bfa1efaa681db325b355991950c69e\RUN_TESTS_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{A679386C-80D9-3DE7-A22E-40F609616115}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
