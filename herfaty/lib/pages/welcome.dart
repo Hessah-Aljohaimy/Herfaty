@@ -28,7 +28,7 @@ class Welcome extends StatelessWidget {
                     ),
                   ),
                   Image.asset(
-                    "herfaty/assets/images/HerfatyLogo.png",
+                    "assets/images/HerfatyLogo.png",
                     width: 120,
                   ),
                   ElevatedButton(
@@ -74,7 +74,7 @@ class Welcome extends StatelessWidget {
                 top: 0,
                 left: 0,
                 child: Image.asset(
-                  "herfaty/assets/images/main_left_side.png",
+                  "assets/images/main_left_side.png",
                   width: 111,
                 ),
               ),
@@ -83,7 +83,7 @@ class Welcome extends StatelessWidget {
                 bottom: 0,
                 right: 0,
                 child: Image.asset(
-                  "herfaty/assets/images/craftiRightSide.png",
+                  "assets/images/craftiRightSide.png",
                   width: 120,
                 ),
               )
