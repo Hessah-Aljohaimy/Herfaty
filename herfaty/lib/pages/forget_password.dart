@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
 import 'package:herfaty/pages/login.dart';
+import 'package:herfaty/pages/reusable_widgets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 
@@ -13,7 +15,7 @@ class forget_password extends StatefulWidget {
 
 class _forget_password extends State<forget_password> {
    final _formKey = GlobalKey<FormState>();
-
+  TextEditingController _emailTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
 return Form(
@@ -63,35 +65,37 @@ return Form(
                       Container(
                          width: 290,
                         height: 53,                     padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            labelText: "البريد الإلكتروني",
-                                                        labelStyle: TextStyle(color: Color.fromARGB(255, 26, 96, 91)),
+                        child:  reusableTextField("البريد الإلكتروني", Icons.person_outline, false,
+                    _emailTextController),
+  //                       TextFormField(
+  //                         decoration: InputDecoration(
+  //                           labelText: "البريد الإلكتروني",
+  //                                                       labelStyle: TextStyle(color: Color.fromARGB(255, 26, 96, 91)),
 
-                               suffix: Icon(
-                                Icons.person,
-                                color: Color.fromARGB(255, 26, 96, 91),
-                              ),
-  enabledBorder:  OutlineInputBorder(
-                                 borderSide: BorderSide( color: Color.fromARGB(255, 26, 96, 91)), 
+  //                              suffix: Icon(
+  //                               Icons.person,
+  //                               color: Color.fromARGB(255, 26, 96, 91),
+  //                             ),
+  // enabledBorder:  OutlineInputBorder(
+  //                                borderSide: BorderSide( color: Color.fromARGB(255, 26, 96, 91)), 
                                  
-                              ),
-                              focusedBorder:OutlineInputBorder(
-                                 borderSide: BorderSide( width: 2,color: Color.fromARGB(255, 26, 96, 91)),
-                                 ),
-                               ),           
-                                validator: (value) {
-    if (value == null || value.isEmpty) {
-      return 'ادخل البريد الإلكتروني';
-    }
-     if (!RegExp(
-                      r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
-                  .hasMatch(value)) {
-                return 'ادخل بريد إلكتروني صحيح';
-              }
-    return null;
-  },          
-                                  ),
+  //                             ),
+  //                             focusedBorder:OutlineInputBorder(
+  //                                borderSide: BorderSide( width: 2,color: Color.fromARGB(255, 26, 96, 91)),
+  //                                ),
+  //                              ),           
+  //                               validator: (value) {
+  //   if (value == null || value.isEmpty) {
+  //     return 'ادخل البريد الإلكتروني';
+  //   }
+  //    if (!RegExp(
+  //                     r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
+  //                 .hasMatch(value)) {
+  //               return 'ادخل بريد إلكتروني صحيح';
+  //             }
+  //   return null;
+  // },          
+  //                                 ),
                       ),
                      
                       SizedBox(
@@ -99,7 +103,14 @@ return Form(
                       ),
                       ElevatedButton(
                         onPressed: () {     
-                          if (_formKey.currentState!.validate()) {}
+                          if (_formKey.currentState!.validate()) {
+
+
+ FirebaseAuth.instance
+                      .sendPasswordResetEmail(email: _emailTextController.text)
+                      .then((value) => Navigator.of(context).pop()); 
+print("seeennded");
+                          }
                             },
                         
                         style: ButtonStyle(

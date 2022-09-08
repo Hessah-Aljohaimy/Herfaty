@@ -168,6 +168,13 @@ return Form(
                         
                         reusableTextField("الرمز السري", Icons.lock_outline, true,
                     _passwordTextController),
+  //                   validator: (value) {
+  //   if (value == null || value.isEmpty) {
+  //     return 'ادخل الرمز السري';
+  //   }
+  //   return null;
+  // },
+  //                       ),
   //                       TextFormField(
                           
 
@@ -208,11 +215,17 @@ return Form(
                         onPressed: () {    
 
                            if (_formKey.currentState!.validate()) {
-                            // FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password).then((value) {
-                              Navigator.pushNamed(context, "/home_screen");
-
-                          //  }
-                          //  );
+                            FirebaseAuth.instance
+                            .signInWithEmailAndPassword(email: _emailTextController.text,
+                          password: _passwordTextController.text)
+                      .then((value) {
+                     Navigator.pushNamed(context, "/home_screen");
+                  }).onError((error, stackTrace) {
+                    print("Error hhhhhh");
+                  });
+                           
+  
+                           
                 }   
                   },
                         
