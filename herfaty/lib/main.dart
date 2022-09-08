@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:herfaty/pages/signup.dart';
+import 'package:herfaty/pages/signupCustomer.dart';
 import 'package:herfaty/pages/welcome.dart';
 
 import 'package:herfaty/pages/signupHerafy.dart';
@@ -23,6 +24,8 @@ class MyApp extends StatelessWidget {
         // "/": (context) => const SignupHerafy(),
         //Splash
         "/": (context) => const Welcome(),
+        // "/SignupHerafy": (context) => const SignupHerafy(),
+        // "/SignupCustomer": (context) => const SignupCustomer(),
       },
     );
   }
