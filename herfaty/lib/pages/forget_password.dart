@@ -65,11 +65,13 @@ return Form(
                         height: 53,                     padding: EdgeInsets.symmetric(horizontal: 16),
                         child: TextFormField(
                           decoration: InputDecoration(
+                            labelText: "البريد الإلكتروني",
+                                                        labelStyle: TextStyle(color: Color.fromARGB(255, 26, 96, 91)),
+
                                suffix: Icon(
                                 Icons.person,
                                 color: Color.fromARGB(255, 26, 96, 91),
                               ),
-                              hintText: ": البريد الإلكتروني ",
   enabledBorder:  OutlineInputBorder(
                                  borderSide: BorderSide( color: Color.fromARGB(255, 26, 96, 91)), 
                                  
@@ -82,6 +84,11 @@ return Form(
     if (value == null || value.isEmpty) {
       return 'ادخل البريد الإلكتروني';
     }
+     if (!RegExp(
+                      r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
+                  .hasMatch(value)) {
+                return 'ادخل بريد إلكتروني صحيح';
+              }
     return null;
   },          
                                   ),

@@ -1,4 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:herfaty/pages/reusable_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:herfaty/pages/forget_password.dart';
 
@@ -9,8 +12,6 @@ class login extends StatefulWidget {
       const login({Key? key}) : super(key: key);
 
 
-
-
   @override
   State<login> createState() => _login();
 }
@@ -18,6 +19,9 @@ class login extends StatefulWidget {
 class _login extends State<login> {
  final _formKey = GlobalKey<FormState>();
 
+
+ TextEditingController _passwordTextController = TextEditingController();
+  TextEditingController _emailTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -107,33 +111,47 @@ return Form(
                        width: 290,
                         height: 53,
                         padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: TextFormField(
-                          
-                          decoration: InputDecoration(
-                  
-                              suffix: Icon(
-                                Icons.person,
-                                color: Color.fromARGB(255, 26, 96, 91),
-                              ),
-                              hintText: ": البريد الإلكتروني ",
+                        child: reusableTextField("البريد الإلكتروني", Icons.person_outline, false,
+                    _emailTextController),
 
-                               enabledBorder:  OutlineInputBorder(
-                                 borderSide: BorderSide( color: Color.fromARGB(255, 26, 96, 91)), 
+                //  SizedBox(
+                //   height: 20,
+                //          ),
+
+                     ),
+                        // TextFormField(
+                          
+  //                         decoration: InputDecoration(
+  //                           labelText: "البريد الإلكتروني",
+  //                           labelStyle: TextStyle(color: Color.fromARGB(255, 26, 96, 91)),
+  //                             suffix: Icon(
+  //                               Icons.person,
+  //                               color: Color.fromARGB(255, 26, 96, 91),
+  //                             ),
+  //                             // hintText: ": البريد الإلكتروني ",
+
+  //                              enabledBorder:  OutlineInputBorder(
+  //                                borderSide: BorderSide( color: Color.fromARGB(255, 26, 96, 91)), 
                                  
-                              ),
-                              focusedBorder:OutlineInputBorder(
-                                 borderSide: BorderSide(  width: 2,color: Color.fromARGB(255, 26, 96, 91)),
-                                 ),
-                   ),
-                                            validator: (value) {
-    if (value == null || value.isEmpty) {
-      return 'ادخل البريد الإلكتروني';
-    }
-    return null;
-  },
+  //                             ),
+  //                             focusedBorder:OutlineInputBorder(
+  //                                borderSide: BorderSide(  width: 2,color: Color.fromARGB(255, 26, 96, 91)),
+  //                                ),
+  //                  ),
+  //                                           validator: (value) {
+  //   if (value == null || value.isEmpty) {
+  //     return 'ادخل البريد الإلكتروني';
+  //   }
+  //    if (!RegExp(
+  //                     r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
+  //                 .hasMatch(value)) {
+  //               return 'ادخل بريد إلكتروني صحيح';
+  //             }
+  //   return null;
+  // },
                  
-                      ),
-                      ),
+                   //    ),
+                 
                       SizedBox(
                         height: 23,
                       ),
@@ -146,40 +164,55 @@ return Form(
                        width: 290,
                         height: 53,
                         padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: TextFormField(
-                          obscureText: true,
-                          decoration: InputDecoration(
-                              suffix: Icon(
-                                Icons.lock,
-                                color: Color.fromARGB(255, 26, 96, 91),
-                              ),
+                        child: 
+                        
+                        reusableTextField("الرمز السري", Icons.lock_outline, true,
+                    _passwordTextController),
+  //                       TextFormField(
+                          
+
+                          
+  //                         obscureText: true,
+  //                         decoration: InputDecoration(
+  //                        labelText: "الرقم السري ",
+  //                           labelStyle: TextStyle(color: Color.fromARGB(255, 26, 96, 91)),
+
+  //                             suffix: Icon(
+  //                               Icons.lock,
+  //                               color: Color.fromARGB(255, 26, 96, 91),
+  //                             ),
                             
                           
-                              hintText: ": الرقم السري ",
-                               enabledBorder:  OutlineInputBorder(
-                                 borderSide: BorderSide( color: Color.fromARGB(255, 26, 96, 91)), 
+  //                             // hintText: ": الرقم السري ",
+  //                              enabledBorder:  OutlineInputBorder(
+  //                                borderSide: BorderSide( color: Color.fromARGB(255, 26, 96, 91)), 
                                  
-                              ),
-                              focusedBorder:OutlineInputBorder(
-                                 borderSide: BorderSide( width: 2,color: Color.fromARGB(255, 26, 96, 91)),
-                                 ),
-                               ),
+  //                             ),
+  //                             focusedBorder:OutlineInputBorder(
+  //                                borderSide: BorderSide( width: 2,color: Color.fromARGB(255, 26, 96, 91)),
+  //                                ),
+  //                              ),
                                
-                                            validator: (value) {
-    if (value == null || value.isEmpty) {
-      return 'ادخل الرمز السري';
-    }
-    return null;
-  },
-                        ),
+  //                                           validator: (value) {
+  //   if (value == null || value.isEmpty) {
+  //     return 'ادخل الرمز السري';
+  //   }
+  //   return null;
+  // },
+  //                       ),
                       ),
                       SizedBox(
                         height: 17,
                       ),
                       ElevatedButton(
                         onPressed: () {    
+
                            if (_formKey.currentState!.validate()) {
-                  // If the form is valid, display a Snackbar.
+                            // FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password).then((value) {
+                              Navigator.pushNamed(context, "/home_screen");
+
+                          //  }
+                          //  );
                 }   
                   },
                         

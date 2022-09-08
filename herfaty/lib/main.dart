@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:herfaty/pages/login.dart';
 import 'package:herfaty/pages/welcome.dart';
 import 'package:herfaty/pages/forget_password.dart';
+import 'package:herfaty/pages/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         "/" : (context) => const Welcome(),
         "/login" : (context) => const login(),
         "/forget_password" : (context) => const forget_password(),
+        "/home_screen" : (context) => const homeScreen(),
 
       },
     );
