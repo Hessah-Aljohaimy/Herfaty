@@ -3,26 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:herfaty/pages/forget_password.dart';
 
 
-  var loginAs = [   
-    'مالك المتجر',
-    'مشرف',
 
-  ];
-
-  String dropdownValue = 'مشتري';
 
 class login extends StatefulWidget {
       const login({Key? key}) : super(key: key);
+
+
+
 
   @override
   State<login> createState() => _login();
 }
 
 class _login extends State<login> {
+ final _formKey = GlobalKey<FormState>();
+
+
   @override
   Widget build(BuildContext context) {
- return SafeArea(
-      
+return Form(
+      key: _formKey,
       child: Scaffold(
                 resizeToAvoidBottomInset: false,
 
@@ -35,7 +35,7 @@ class _login extends State<login> {
             height: double.infinity,
             width: double.infinity,
             child: Stack(
-              children: [
+              children: <Widget>[
                 
                 SizedBox(
                   width: double.infinity,
@@ -61,92 +61,127 @@ class _login extends State<login> {
                       ),
                     
                     
- Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
+//  Row(
+//                         mainAxisAlignment: MainAxisAlignment.center,
+//                         children: [
                           
-                           DropdownButton<String>(
-  // Step 3.
-  value: dropdownValue,
-  // Step 4.
-  items: <String>[ 'مالك المتجر','مشتري','مشرف']
-      .map<DropdownMenuItem<String>>((String value) {
-    return DropdownMenuItem<String>(
-      value: value,
+//                            DropdownButton<String>(
+//   // Step 3.
+//   value: dropdownValue,
+//   // Step 4.
+//   items: <String>[ 'مالك المتجر','مشتري','مشرف']
+//       .map<DropdownMenuItem<String>>((String value) {
+//     return DropdownMenuItem<String>(
+//       value: value,
       
-      child: Text(
-        value,
-        style: TextStyle(fontSize: 15),
-      ),
-    );
-  }).toList(),
-  // Step 5.
-  onChanged: (String? newValue) {
-    setState(() {
-      dropdownValue = newValue!;
-    });
-  },
-),
-                          Text("  :تسجيل الدخول ك"),
+//       child: Text(
+//         value,
+//         style: TextStyle(fontSize: 15),
+//       ),
+//     );
+//   }).toList(),
+//   // Step 5.
+//   onChanged: (String? newValue) {
+//     setState(() {
+//       dropdownValue = newValue!;
+//     });
+//   },
+// ),
+//                           Text("  :تسجيل الدخول ك"),
 
                           
-                        ],
-                      ), 
+//                         ],
+//                       ), 
                      
                       SizedBox(
                         height: 20,
                       ),
                       Container(
                         
-                        decoration: BoxDecoration(
+                        // decoration: BoxDecoration(
                           
-                          color: Color.fromARGB(255, 114, 159, 160),
-                          borderRadius: BorderRadius.circular(66),
+                        //   color: Color.fromARGB(255, 114, 159, 160),
+                        //   borderRadius: BorderRadius.circular(66),
                           
-                        ),
-                        width: 266,
+                        // ),
+                       width: 290,
+                        height: 53,
                         padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: TextField(
+                        child: TextFormField(
+                          
                           decoration: InputDecoration(
-                              icon: Icon(
+                  
+                              suffix: Icon(
                                 Icons.person,
                                 color: Color.fromARGB(255, 26, 96, 91),
                               ),
                               hintText: ": البريد الإلكتروني ",
-                              border: InputBorder.none),
-                        ),
+
+                               enabledBorder:  OutlineInputBorder(
+                                 borderSide: BorderSide( color: Color.fromARGB(255, 26, 96, 91)), 
+                                 
+                              ),
+                              focusedBorder:OutlineInputBorder(
+                                 borderSide: BorderSide(  width: 2,color: Color.fromARGB(255, 26, 96, 91)),
+                                 ),
+                   ),
+                                            validator: (value) {
+    if (value == null || value.isEmpty) {
+      return 'ادخل البريد الإلكتروني';
+    }
+    return null;
+  },
+                 
+                      ),
                       ),
                       SizedBox(
                         height: 23,
                       ),
                       Container(
-                        decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 114, 159, 160),
-                          borderRadius: BorderRadius.circular(66),
-                        ),
-                        width: 266,
+                        // decoration: BoxDecoration(
+                        //   color: Color.fromARGB(255, 114, 159, 160),
+                        //   borderRadius: BorderRadius.circular(0),
+                        //   border:OutlinedBorder(),
+                        // ),
+                       width: 290,
+                        height: 53,
                         padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: TextField(
+                        child: TextFormField(
                           obscureText: true,
                           decoration: InputDecoration(
                               suffix: Icon(
-                                Icons.visibility,
-                                color: Color.fromARGB(255, 26, 96, 91),
-                              ),
-                              icon: Icon(
                                 Icons.lock,
                                 color: Color.fromARGB(255, 26, 96, 91),
-                                size: 19,
                               ),
+                            
+                          
                               hintText: ": الرقم السري ",
-                              border: InputBorder.none),
+                               enabledBorder:  OutlineInputBorder(
+                                 borderSide: BorderSide( color: Color.fromARGB(255, 26, 96, 91)), 
+                                 
+                              ),
+                              focusedBorder:OutlineInputBorder(
+                                 borderSide: BorderSide( width: 2,color: Color.fromARGB(255, 26, 96, 91)),
+                                 ),
+                               ),
+                               
+                                            validator: (value) {
+    if (value == null || value.isEmpty) {
+      return 'ادخل الرمز السري';
+    }
+    return null;
+  },
                         ),
                       ),
                       SizedBox(
                         height: 17,
                       ),
                       ElevatedButton(
-                        onPressed: () {         },
+                        onPressed: () {    
+                           if (_formKey.currentState!.validate()) {
+                  // If the form is valid, display a Snackbar.
+                }   
+                  },
                         
                         style: ButtonStyle(
                           backgroundColor:
@@ -173,7 +208,7 @@ class _login extends State<login> {
                         children: [
                           GestureDetector(
                             onTap: (){ Navigator.pushNamed(context, "/forget_password");},
-                            child: Text(" إعادة تعيين الرمز السري ", style: TextStyle(fontWeight: FontWeight.bold),)),
+                            child: Text(" إعادة تعيين الرمز السري ", style: TextStyle(fontWeight: FontWeight.bold ,color: Color.fromARGB(255, 53, 47, 244),),)),
 
                           Text("نسيت الرمز السري؟"),
 
@@ -185,7 +220,7 @@ class _login extends State<login> {
                         children: [
                           GestureDetector(
                             onTap: (){ Navigator.pushNamed(context, "/signup");},
-                            child: Text(" تسجيل جديد ", style: TextStyle(fontWeight: FontWeight.bold),)),
+                            child: Text(" تسجيل جديد ", style: TextStyle(fontWeight: FontWeight.bold,color: Color.fromARGB(255, 53, 47, 244)),)),
 
                           Text("ليس لديك حساب ؟"),
 
@@ -214,8 +249,10 @@ class _login extends State<login> {
             ),
           ),
         ),
-      )),
-    );  }
+      )
+      ),
+    );  
+    }
 }
 
 

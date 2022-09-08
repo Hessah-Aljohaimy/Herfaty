@@ -12,10 +12,12 @@ class forget_password extends StatefulWidget {
 }
 
 class _forget_password extends State<forget_password> {
+   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
- return SafeArea(
-      
+return Form(
+      key: _formKey,
       child: Scaffold(
                 resizeToAvoidBottomInset: false,
 
@@ -59,31 +61,39 @@ class _forget_password extends State<forget_password> {
                         height: 20,
                       ),
                       Container(
-                        
-                        decoration: BoxDecoration(
-                          
-                          color: Color.fromARGB(255, 114, 159, 160),
-                          borderRadius: BorderRadius.circular(66),
-                          
-                        ),
-                        width: 266,
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: TextField(
+                         width: 290,
+                        height: 53,                     padding: EdgeInsets.symmetric(horizontal: 16),
+                        child: TextFormField(
                           decoration: InputDecoration(
-                              icon: Icon(
+                               suffix: Icon(
                                 Icons.person,
                                 color: Color.fromARGB(255, 26, 96, 91),
                               ),
                               hintText: ": البريد الإلكتروني ",
-                              border: InputBorder.none),
-                        ),
+  enabledBorder:  OutlineInputBorder(
+                                 borderSide: BorderSide( color: Color.fromARGB(255, 26, 96, 91)), 
+                                 
+                              ),
+                              focusedBorder:OutlineInputBorder(
+                                 borderSide: BorderSide( width: 2,color: Color.fromARGB(255, 26, 96, 91)),
+                                 ),
+                               ),           
+                                validator: (value) {
+    if (value == null || value.isEmpty) {
+      return 'ادخل البريد الإلكتروني';
+    }
+    return null;
+  },          
+                                  ),
                       ),
                      
                       SizedBox(
                         height: 17,
                       ),
                       ElevatedButton(
-                        onPressed: () {         },
+                        onPressed: () {     
+                          if (_formKey.currentState!.validate()) {}
+                            },
                         
                         style: ButtonStyle(
                           backgroundColor:
@@ -112,7 +122,7 @@ class _forget_password extends State<forget_password> {
                         children: [
                           GestureDetector(
                             onTap: (){ Navigator.pushNamed(context, "/login");},
-                            child: Text(" الدخول ", style: TextStyle(fontWeight: FontWeight.bold),)),
+                            child: Text(" الدخول ", style: TextStyle(fontWeight: FontWeight.bold,color: Color.fromARGB(255, 53, 47, 244)),)),
 
                           Text("الرجوع إلى صفحة "),
 
