@@ -62,8 +62,8 @@ flutter:
   
   
   
-  assets:  
-    - herfaty/build/flutter_assets/assets/
+  # assets:  
+  #   - assets/images/
 
 
 

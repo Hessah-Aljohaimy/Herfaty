@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//Here is the splash screen
 class Splash extends StatefulWidget {
   const Splash({super.key});
 

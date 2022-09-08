@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         // "/": (context) => const Welcome(),
         // "/": (context) => const SignupHerafy(),
         //Splash
-        "/": (context) => const Splash(),
+        "/": (context) => const Welcome(),
       },
     );
   }
