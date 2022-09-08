@@ -69,7 +69,7 @@ class _login extends State<login> {
   // Step 3.
   value: dropdownValue,
   // Step 4.
-  items: <String>[ 'مالك المتجر','مشرف','مشتري']
+  items: <String>[ 'مالك المتجر','مشتري','مشرف']
       .map<DropdownMenuItem<String>>((String value) {
     return DropdownMenuItem<String>(
       value: value,
