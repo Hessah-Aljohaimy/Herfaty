@@ -1,7 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+<<<<<<< Updated upstream
 import 'package:herfaty/constants/colors.dart';
+=======
+>>>>>>> Stashed changes
 
 class Welcome extends StatelessWidget {
   const Welcome({Key? key}) : super(key: key);
@@ -15,6 +18,7 @@ class Welcome extends StatelessWidget {
           width: double.infinity,
           child: Stack(
             children: [
+<<<<<<< Updated upstream
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -86,11 +90,66 @@ class Welcome extends StatelessWidget {
               //     width: 120,
               //   ),
               // ),
+=======
+              SizedBox(
+                width: double.infinity,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 35,
+                    ),
+                    Text(
+                      "Welcome to Herfaty App",
+                      style: TextStyle(fontSize: 33, fontFamily: "myfont"),
+                    ),
+                    SizedBox(
+                      height: 35,
+                    ),
+                    SizedBox(
+                      height: 22,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, "/signup");
+                      },
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.purple[100]),
+                        padding: MaterialStateProperty.all(
+                            EdgeInsets.symmetric(horizontal: 77, vertical: 13)),
+                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(27))),
+                      ),
+                      child: Text(
+                        "SIGNUP",
+                        style: TextStyle(fontSize: 17, color: Colors.grey[850]),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Positioned(
+                left: 0,
+                child: Image.asset(
+                  "assets/images/main_top.png",
+                  width: 111,
+                ),
+              ),
+              Positioned(
+                bottom: 0,
+                child: Image.asset(
+                  "assets/images/main_bottom.png",
+                  width: 111,
+                ),
+              ),
+>>>>>>> Stashed changes
             ],
           ),
         ),
       ),
     );
+<<<<<<< Updated upstream
 
 //     const darkGreen = const Color(0x51908E);
 //     const lightBlue = const Color(0x9BD6E6);
@@ -170,5 +229,7 @@ class Welcome extends StatelessWidget {
 //         ),
 //       ),
 //     );
+=======
+>>>>>>> Stashed changes
   }
 }

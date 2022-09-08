@@ -1,10 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:herfaty/constants/colors.dart';
 
-class SignupHerafy extends StatelessWidget {
-  const SignupHerafy({Key? key}) : super(key: key);
+class Signup extends StatelessWidget {
+  const Signup({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,28 +25,21 @@ class SignupHerafy extends StatelessWidget {
                         height: 20,
                       ),
                       Text(
-                        "تسجيل حساب جديد",
+                        "Sign up",
                         style: TextStyle(
                             fontSize: 35,
                             fontFamily: "myfont",
-                            color: Colors.black),
+                            color: Colors.grey[800]),
                       ),
                       SizedBox(
                         height: 21,
-                      ),
-                      Text(
-                        "معلومات الحرفي",
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontFamily: "myfont",
-                            color: Colors.black),
                       ),
                       SizedBox(
                         height: 27,
                       ),
                       Container(
                         decoration: BoxDecoration(
-                          color: Colors.green[100],
+                          color: Colors.purple[100],
                           borderRadius: BorderRadius.circular(66),
                         ),
                         width: 266,
@@ -56,9 +48,9 @@ class SignupHerafy extends StatelessWidget {
                           decoration: InputDecoration(
                               icon: Icon(
                                 Icons.person,
-                                color: Colors.white,
+                                color: Colors.purple[800],
                               ),
-                              hintText: ":أدخل اسم الحرفي",
+                              hintText: "Your Email :",
                               border: InputBorder.none),
                         ),
                       ),
@@ -67,27 +59,7 @@ class SignupHerafy extends StatelessWidget {
                       ),
                       Container(
                         decoration: BoxDecoration(
-                          color: Colors.green[100],
-                          borderRadius: BorderRadius.circular(66),
-                        ),
-                        width: 266,
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: TextField(
-                          decoration: InputDecoration(
-                              icon: Icon(
-                                Icons.email,
-                                color: Colors.white,
-                              ),
-                              hintText: ":أدخل عنوان البريد الإلكتروني",
-                              border: InputBorder.none),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 23,
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.green[100],
+                          color: Colors.purple[100],
                           borderRadius: BorderRadius.circular(66),
                         ),
                         width: 266,
@@ -97,54 +69,14 @@ class SignupHerafy extends StatelessWidget {
                           decoration: InputDecoration(
                               suffix: Icon(
                                 Icons.visibility,
-                                color: Colors.white,
+                                color: Colors.purple[900],
                               ),
                               icon: Icon(
                                 Icons.lock,
-                                color: Colors.white,
+                                color: Colors.purple[800],
                                 size: 19,
                               ),
-                              hintText: ":أدخل الرقم السري",
-                              border: InputBorder.none),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 23,
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.green[100],
-                          borderRadius: BorderRadius.circular(66),
-                        ),
-                        width: 266,
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: TextField(
-                          decoration: InputDecoration(
-                              icon: Icon(
-                                Icons.date_range,
-                                color: Colors.white,
-                              ),
-                              hintText: ":أدخل تاريخ الميلاد",
-                              border: InputBorder.none),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 17,
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.green[100],
-                          borderRadius: BorderRadius.circular(66),
-                        ),
-                        width: 266,
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: TextField(
-                          decoration: InputDecoration(
-                              icon: Icon(
-                                Icons.phone_android,
-                                color: Colors.white,
-                              ),
-                              hintText: ":أدخل رقم الجوال",
+                              hintText: "Password :",
                               border: InputBorder.none),
                         ),
                       ),
@@ -155,7 +87,7 @@ class SignupHerafy extends StatelessWidget {
                         onPressed: () {},
                         style: ButtonStyle(
                           backgroundColor:
-                              MaterialStateProperty.all(Colors.blue),
+                              MaterialStateProperty.all(Colors.purple),
                           padding: MaterialStateProperty.all(
                               EdgeInsets.symmetric(
                                   horizontal: 89, vertical: 10)),
@@ -164,7 +96,7 @@ class SignupHerafy extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(27))),
                         ),
                         child: Text(
-                          "سجل الحساب",
+                          "Sign up",
                           style: TextStyle(fontSize: 24),
                         ),
                       ),
@@ -174,16 +106,14 @@ class SignupHerafy extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            " تسجيل الدخول",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
+                          Text("Already have an accout? "),
                           GestureDetector(
                             onTap: () {
                               Navigator.pushNamed(context, "/login");
                             },
                             child: Text(
-                              " هل لديك حساب بالفعل؟",
+                              " Log in",
+                              style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                           ),
                         ],
@@ -200,10 +130,80 @@ class SignupHerafy extends StatelessWidget {
                               thickness: 0.6,
                               color: Colors.purple[900],
                             )),
+                            Text(
+                              "OR",
+                              style: TextStyle(
+                                color: Colors.purple[900],
+                              ),
+                            ),
+                            Expanded(
+                                child: Divider(
+                              thickness: 0.6,
+                              color: Colors.purple[900],
+                            )),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(vertical: 27),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: () {},
+                              child: Container(
+                                padding: EdgeInsets.all(13),
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                        color: Colors.purple, width: 1)),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 22,
+                            ),
+                            GestureDetector(
+                              onTap: () {},
+                              child: Container(
+                                padding: EdgeInsets.all(13),
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                        color: Colors.purple, width: 1)),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 22,
+                            ),
+                            GestureDetector(
+                              onTap: () {},
+                              child: Container(
+                                padding: EdgeInsets.all(13),
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                        color: Colors.purple, width: 1)),
+                              ),
+                            ),
                           ],
                         ),
                       ),
                     ],
+                  ),
+                ),
+                Positioned(
+                  left: 0,
+                  child: Image.asset(
+                    "assets/images/main_top.png",
+                    width: 111,
+                  ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: Image.asset(
+                    "assets/images/login_bottom.png",
+                    width: 111,
                   ),
                 ),
               ],

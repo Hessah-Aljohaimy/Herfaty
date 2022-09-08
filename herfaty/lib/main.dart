@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:herfaty/pages/signup.dart';
+import 'package:herfaty/pages/welcome.dart';
 
 import 'package:herfaty/pages/signupHerafy.dart';
 import 'package:herfaty/pages/splash.dart';
@@ -16,11 +18,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: "/",
       routes: {
+<<<<<<< Updated upstream
         //SignupHerafy
         // "/": (context) => const Welcome(),
         // "/": (context) => const SignupHerafy(),
         //Splash
         "/": (context) => const Splash(),
+=======
+        "/": (context) => const Welcome(),
+        "/signup": (context) => const Signup(),
+>>>>>>> Stashed changes
       },
     );
   }
