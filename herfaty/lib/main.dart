@@ -22,6 +22,7 @@ class _MyAppState extends State<MyApp> {
       initialRoute: "/",
       routes: {
         "/": (context) => const Splash(),
+        "/welcome": (context) => const Welcome(),
         "/signupCustomer": (context) => const SignupCustomer(),
         "/signupHerfay": (context) => const SignupHerafy(),
         // "/home_screen": (context) => const Home_Screen(),
