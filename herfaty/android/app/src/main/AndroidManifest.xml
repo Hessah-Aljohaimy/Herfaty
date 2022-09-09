@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.herfaty">
    <application
+        android:requestLegacyExternalStroage="true"
         android:label="herfaty"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
