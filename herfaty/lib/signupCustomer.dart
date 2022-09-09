@@ -21,7 +21,7 @@ class _SignupCustomerState extends State<SignupCustomer> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return Form(
       child: Scaffold(
           body: SafeArea(
         child: Scaffold(
@@ -249,6 +249,21 @@ class _SignupCustomerState extends State<SignupCustomer> {
                               color: Color.fromARGB(255, 26, 96, 91),
                             )),
                           ],
+                        ),
+                      ),
+                      Positioned(
+                        left: 0,
+                        child: Image.asset(
+                          "assets/images/main_topp.png",
+                          width: 150,
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 0,
+                        right: 0,
+                        child: Image.asset(
+                          "assets/images/login_bottom.png",
+                          width: 200,
                         ),
                       ),
                     ],

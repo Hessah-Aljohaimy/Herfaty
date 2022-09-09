@@ -51,13 +51,6 @@ class _SplashState extends State<Splash> {
               child: Image.asset("assets/images/HerfatyLogo.png"),
             ),
           ),
-          Positioned(
-            bottom: 30,
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(
-                  Color.fromARGB(255, 26, 96, 91)),
-            ),
-          ),
         ],
       ),
     );
