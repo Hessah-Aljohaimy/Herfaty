@@ -36,9 +36,9 @@ class Welcome extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(
-                      height: 40,
-                    ),
+                    // SizedBox(
+                    //   height: 0,
+                    // ),
                   
                     Text("", style: TextStyle(fontSize: 33, fontFamily: "myfont"),),
                     SizedBox(
@@ -47,7 +47,7 @@ class Welcome extends StatelessWidget {
                   
                      Image.asset(
                   "assets/images/logo_transparent.png",
-                  width: 270,
+                  width: 290,
                 ),
                   
                     ElevatedButton(
@@ -64,7 +64,7 @@ class Welcome extends StatelessWidget {
                       ),
                       child: Text(
                         "تسجيل الدخول",
-                        style: TextStyle(fontSize: 20,fontFamily: "Tajawal"),
+                        style: TextStyle(fontSize: 18,fontFamily: "Tajawal",fontWeight:FontWeight.bold),
                       ),
                     ),
                     SizedBox(
@@ -86,7 +86,7 @@ class Welcome extends StatelessWidget {
                       ),
                       child: Text(
                         "تسجيل جديد",
-                        style: TextStyle(fontSize: 22, color: Color.fromARGB(255, 255, 255, 255),fontFamily: "Tajawal"),
+                        style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 255, 255, 255),fontFamily: "Tajawal",fontWeight:FontWeight.bold),
                       ),
                     ),
                   ],

@@ -50,19 +50,25 @@ return Form(
                     children: [
                    
                  SizedBox(
-                        height: 110,
+                        height: 120,
+                      ),
+                      Image.asset(
+                  "assets/images/HerfatyLogoCroped.png",
+                  width: 140,
+                ),
+                 SizedBox(
+                        height: 30,
                       ),
                       Text(
                         "تسجيل الدخول",
-                        style: TextStyle(fontSize: 33, fontFamily: "Tajawal" ,),
+                        style: TextStyle(fontSize: 33, fontFamily: "Tajawal" ,fontWeight: FontWeight.bold,color: Color.fromARGB(255, 26, 96, 91) ),
                         
                       ),
 
-
-  // Image.asset(
-  //                 "assets/images/logo_transparent.png",
-  //                 width: 100,
-  //               ),
+  SizedBox(
+                        height: 10,
+                      ),
+  
 
                       // SizedBox(
                       //   height: 20,
@@ -70,7 +76,7 @@ return Form(
                       
 
    SizedBox(
-                        height: 70,
+                        height: 30,
                       ),
                     
                     
@@ -271,7 +277,7 @@ return Form(
                         ),
                         child: Text(
                           "تسجيل الدخول",
-                          style: TextStyle(fontSize: 14,fontFamily: "Tajawal"),
+                          style: TextStyle(fontSize: 14,fontFamily: "Tajawal",fontWeight: FontWeight.bold),
                         ),
                       ),
                       SizedBox(
@@ -301,7 +307,8 @@ return Form(
                         children: [
                           GestureDetector(
                             onTap: (){ Navigator.pushNamed(context, "/signup");},
-                            child: Text(" تسجيل جديد ", style: TextStyle(fontWeight: FontWeight.bold,color: Color.fromARGB(255, 53, 47, 244),fontFamily: "Tajawal"),)),
+                            child: Text(" تسجيل جديد ", 
+                            style: TextStyle(fontWeight: FontWeight.bold,color: Color.fromARGB(255, 53, 47, 244),fontFamily: "Tajawal" ),)),
 
                           Text("ليس لديك حساب ؟",style:TextStyle(fontFamily: "Tajawal")),
 
@@ -314,7 +321,7 @@ return Form(
                 Positioned(
                   left: 0,
                   child: Image.asset(
-                    "assets/images/main_topp.png",
+                    "assets/images/login_toppp.png",
                     width: 150,
                   ),
                 ),
@@ -322,7 +329,7 @@ return Form(
                   bottom: 0,
                   right: 0,
                   child: Image.asset(
-                    "assets/images/login_bottom.png",
+                    "assets/images/main_botomm.png",
                     width: 200,
                   ),
                 ),

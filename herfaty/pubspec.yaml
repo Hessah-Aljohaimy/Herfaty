@@ -82,7 +82,7 @@ flutter:
     - family: Tajawal
       fonts:
         - asset: assets/fonts/Tajawal-Regular.ttf
-  #       - asset: assets/fonts/Tajwal-Bold.ttf
+        - asset: assets/fonts/Tajawal-Bold.ttf
   #         weight: 600
   #   - family: Trajan Pro
   #     fonts:

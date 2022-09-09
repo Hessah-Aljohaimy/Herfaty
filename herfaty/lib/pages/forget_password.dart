@@ -45,11 +45,11 @@ return Form(
                       ),
                       Text(
                         "إعادة تعيين الرمز السري",
-                        style: TextStyle(fontSize: 33, fontFamily: "myfont" ,),
+                        style: TextStyle(fontSize: 33, fontFamily: "myfont" ,fontWeight: FontWeight.bold,color: Color.fromARGB(255, 26, 96, 91)),
                         
                       ),
                       SizedBox(
-                        height: 20,
+                        height: 14,
                       ),
                       
 
@@ -59,9 +59,9 @@ return Form(
                     
                     
                      
-                      SizedBox(
-                        height: 20,
-                      ),
+                      // SizedBox(
+                      //   height: 0,
+                      // ),
                       Container(
                          width: 290,
                         height: 53,                     padding: EdgeInsets.symmetric(horizontal: 16),
@@ -135,14 +135,14 @@ return Form(
                               MaterialStateProperty.all(Color.fromARGB(255, 35, 125, 118)),
                           padding: MaterialStateProperty.all(
                               EdgeInsets.symmetric(
-                                  horizontal: 106, vertical: 10)),
+                                  horizontal: 106, vertical: 13)),
                           shape: MaterialStateProperty.all(
                               RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(27))),
                         ),
                         child: Text(
                           "إعادة تعيين",
-                          style: TextStyle(fontSize: 14),
+                          style: TextStyle(fontSize: 14, fontFamily: "Tajawal",fontWeight: FontWeight.bold),
                         ),
                       ),
                       SizedBox(
@@ -157,9 +157,9 @@ return Form(
                         children: [
                           GestureDetector(
                             onTap: (){ Navigator.pushNamed(context, "/login");},
-                            child: Text(" الدخول ", style: TextStyle(fontWeight: FontWeight.bold,color: Color.fromARGB(255, 53, 47, 244)),)),
+                            child: Text(" الدخول ", style: TextStyle(fontFamily: "Tajawal", fontWeight: FontWeight.bold,color: Color.fromARGB(255, 53, 47, 244)),)),
 
-                          Text("الرجوع إلى صفحة "),
+                          Text("الرجوع إلى صفحة ",style: TextStyle(fontFamily: "Tajawal"),),
 
                           
                         ],
@@ -170,7 +170,7 @@ return Form(
                 Positioned(
                   left: 0,
                   child: Image.asset(
-                    "assets/images/main_topp.png",
+                    "assets/images/login_toppp.png",
                     width: 150,
                   ),
                 ),
@@ -178,7 +178,7 @@ return Form(
                   bottom: 0,
                   right: 0,
                   child: Image.asset(
-                    "assets/images/login_bottom.png",
+                    "assets/images/main_botomm.png",
                     width: 200,
                   ),
                 ),

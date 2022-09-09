@@ -5,7 +5,7 @@ import 'package:herfaty/pages/forget_password.dart';
 import 'package:herfaty/pages/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart'; 
 
 
 void main() async {
