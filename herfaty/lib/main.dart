@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:herfaty/pages/splash.dart';
 import 'package:herfaty/signupCustomer.dart';
 import 'package:herfaty/signupHerafy.dart';
 import 'package:herfaty/welcome.dart';
@@ -20,7 +21,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       initialRoute: "/",
       routes: {
-        "/": (context) => const Welcome(),
+        "/": (context) => const Splash(),
         "/signupCustomer": (context) => const SignupCustomer(),
         "/signupHerfay": (context) => const SignupHerafy(),
         // "/home_screen": (context) => const Home_Screen(),

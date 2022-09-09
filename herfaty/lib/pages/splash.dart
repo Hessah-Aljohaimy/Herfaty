@@ -15,25 +15,27 @@ class _SplashState extends State<Splash> {
   }
 
   Widget initWidget() {
-    Color mycolor = const Color.fromARGB(0, 92, 157, 155);
-    Color mySeconedColor = const Color.fromARGB(0, 245, 214, 111);
+    // Color mycolor = const Color.fromARGB(248, 198, 149, 100);
+    // Color mySeconedColor = const Color.fromARGB(255, 237, 178, 100);
     return Scaffold(
       body: Stack(
         children: [
           const Text("It is splash page"),
           Container(
             decoration: BoxDecoration(
-                color: mycolor,
+                color: Color.fromARGB(232, 238, 232, 182),
                 gradient: LinearGradient(
-                  colors: [(mycolor), (mySeconedColor)],
+                  colors: [
+                    (Color.fromARGB(248, 198, 149, 100)),
+                    (const Color.fromARGB(255, 237, 178, 100))
+                  ],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 )),
           ),
           Center(
             child: Container(
-              child: Image.asset(
-                  "herfaty/build/flutter_assets/assets/images/HerfatyLogo.png"),
+              child: Image.asset("assets/images/HerfatyLogo.png"),
             ),
           ),
         ],
