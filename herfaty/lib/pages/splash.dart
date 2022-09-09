@@ -32,32 +32,31 @@ class _SplashState extends State<Splash> {
     return Scaffold(
       body: Stack(
         children: [
-          Column(
-            children: [
-              Container(
-                width: double.infinity,
-                height: double.infinity,
-                decoration: BoxDecoration(
-                    color: Color.fromARGB(232, 238, 232, 182),
-                    gradient: LinearGradient(
-                      colors: [
-                        (Color.fromARGB(248, 228, 175, 122)),
-                        (Color.fromARGB(255, 243, 231, 103))
-                      ],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                    )),
-              ),
-              Center(
-                child: Container(
-                  child: Image.asset("assets/images/HerfatyLogo.png"),
-                ),
-              ),
-            ],
+          Container(
+            width: double.infinity,
+            height: double.infinity,
+            decoration: BoxDecoration(
+                color: Color.fromARGB(232, 238, 232, 182),
+                gradient: LinearGradient(
+                  colors: [
+                    (Color.fromARGB(248, 228, 175, 122)),
+                    (Color.fromARGB(255, 243, 231, 103))
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                )),
           ),
-          CircularProgressIndicator(
-            valueColor:
-                AlwaysStoppedAnimation<Color>(Color.fromARGB(255, 26, 96, 91)),
+          Center(
+            child: Container(
+              child: Image.asset("assets/images/HerfatyLogo.png"),
+            ),
+          ),
+          Positioned(
+            bottom: 30,
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(
+                  Color.fromARGB(255, 26, 96, 91)),
+            ),
           ),
         ],
       ),
