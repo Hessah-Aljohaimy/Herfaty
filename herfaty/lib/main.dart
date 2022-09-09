@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
+
 import 'package:herfaty/pages/signup.dart';
 import 'package:herfaty/pages/signupCustomer.dart';
 import 'package:herfaty/pages/welcome.dart';
@@ -7,10 +7,9 @@ import 'package:herfaty/pages/welcome.dart';
 import 'package:herfaty/pages/signupHerafy.dart';
 import 'package:herfaty/pages/splash.dart';
 import 'package:herfaty/pages/welcome.dart';
-=======
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
->>>>>>> main
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
