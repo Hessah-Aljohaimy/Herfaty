@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:herfaty/test_Login.dart';
 import 'package:herfaty/reusable_widgits.dart';
-import 'package:herfaty/test_Login.dart';
-import 'package:herfaty/Welcome.dart';
+
+
 // ignore_for_file: file_names, prefer_const_constructors
 
 class SignupHerafy extends StatefulWidget {
@@ -25,6 +25,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
   @override
   Widget build(BuildContext context) {
     return Form(
+    key: _formKey,
       child: Scaffold(
 
           resizeToAvoidBottomInset: false,

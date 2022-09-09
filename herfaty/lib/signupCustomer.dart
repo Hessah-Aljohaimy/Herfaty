@@ -15,6 +15,7 @@ class SignupCustomer extends StatefulWidget {
 }
 
 class _SignupCustomerState extends State<SignupCustomer> {
+  final _formKey = GlobalKey<FormState>();
   TextEditingController _passwordTextController = TextEditingController();
   TextEditingController _emailTextEditingController = TextEditingController();
   TextEditingController _nameTextEditingController = TextEditingController();
@@ -22,6 +23,7 @@ class _SignupCustomerState extends State<SignupCustomer> {
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: _formKey,
       child: Scaffold(
           resizeToAvoidBottomInset: false,
           body: SafeArea(
@@ -112,7 +114,7 @@ class _SignupCustomerState extends State<SignupCustomer> {
                             height: 53,
                             padding: EdgeInsets.symmetric(horizontal: 16),
                             child: reusableTextField(
-                                "اسم المشتري",
+                                " اسم المشتري الثنائي",
                                 Icons.person_outline,
                                 false,
                                 _nameTextEditingController),
@@ -178,7 +180,7 @@ class _SignupCustomerState extends State<SignupCustomer> {
                             width: 290,
                             height: 53,
                             padding: EdgeInsets.symmetric(horizontal: 16),
-                            child: reusableTextField("الرقم السري", Icons.lock,
+                            child: reusableTextField("كلمة المرور", Icons.lock,
                                 true, _passwordTextController),
                           ),
 
@@ -192,7 +194,11 @@ class _SignupCustomerState extends State<SignupCustomer> {
                             height: 17,
                           ),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                // FirebaseAuth.instance.singIn
+                              }
+                            },
                             style: ButtonStyle(
                               backgroundColor:
                                   MaterialStateProperty.all(Colors.blue),
