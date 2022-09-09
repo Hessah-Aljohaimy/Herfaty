@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:herfaty/signupCustomer.dart';
 import 'package:herfaty/signupHerafy.dart';
 
-class Welcome extends StatelessWidget {
-  const Welcome({Key? key}) : super(key: key);
+class WelcomeRegestration extends StatelessWidget {
+  const WelcomeRegestration({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +22,14 @@ class Welcome extends StatelessWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Text(
+                        "!أهلا بك ",
+                        style: TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
                       Positioned(
                         bottom: 50,
                         top: 50,
@@ -32,14 +40,6 @@ class Welcome extends StatelessWidget {
                         ),
                       ),
 
-                      Text(
-                        "!أهلا بك ",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
                       // Image.asset(
                       //   "assets/images/HerfatyLogo.png",
                       //   width: 120,

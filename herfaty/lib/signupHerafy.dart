@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:herfaty/test_Login.dart';
 import 'package:herfaty/reusable_widgits.dart';
 import 'package:herfaty/test_Login.dart';
-import 'package:herfaty/welcome.dart';
+import 'package:herfaty/Welcome.dart';
 // ignore_for_file: file_names, prefer_const_constructors
 
 class SignupHerafy extends StatefulWidget {
@@ -40,11 +40,11 @@ class _SignupHerafyState extends State<SignupHerafy> {
                       left: 0,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Welcome()),
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //       builder: (context) => const Welcome()),
+                          // );
                         },
                         style: ButtonStyle(
                           backgroundColor:
@@ -71,18 +71,18 @@ class _SignupHerafyState extends State<SignupHerafy> {
                           const SizedBox(
                             height: 12,
                           ),
-                          GestureDetector(
-                            onTap: () {},
-                            child: CircleAvatar(
-                              radius: MediaQuery.of(context).size.width * 0.10,
-                              backgroundColor: Colors.white,
-                              child: Icon(
-                                Icons.add_photo_alternate,
-                                color: Colors.grey,
-                                size: MediaQuery.of(context).size.width * 0.10,
-                              ),
-                            ),
-                          ),
+                          // GestureDetector(
+                          //   onTap: () {},
+                          //   child: CircleAvatar(
+                          //     radius: MediaQuery.of(context).size.width * 0.10,
+                          //     backgroundColor: Colors.white,
+                          //     child: Icon(
+                          //       Icons.add_photo_alternate,
+                          //       color: Colors.grey,
+                          //       size: MediaQuery.of(context).size.width * 0.10,
+                          //     ),
+                          //   ),
+                          // ),
 
                           // ignore: prefer_const_constructors
                           SizedBox(
@@ -336,15 +336,6 @@ class _SignupHerafyState extends State<SignupHerafy> {
                           ),
                           SizedBox(
                             width: 299,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                    child: Divider(
-                                  thickness: 0.6,
-                                  color: Colors.purple[900],
-                                )),
-                              ],
-                            ),
                           ),
                         ],
                       ),

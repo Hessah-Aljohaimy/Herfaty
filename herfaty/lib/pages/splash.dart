@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:herfaty/welcome.dart';
+import 'package:herfaty/Welcome.dart';
 
 //Here is the splash screen
 class Splash extends StatefulWidget {
@@ -14,11 +14,11 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> {
   @override
   void initState() {
-    super.initState();
-    Timer(
-        Duration(seconds: 3),
-        () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => Welcome())));
+    // super.initState();
+    // Timer(
+    //     Duration(seconds: 3),
+    //     () => Navigator.pushReplacement(
+    //         context, MaterialPageRoute(builder: (context) => Welcome())));
   }
 
   @override

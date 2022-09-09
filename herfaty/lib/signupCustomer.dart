@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:herfaty/reusable_widgits.dart';
 import 'package:herfaty/test_Login.dart';
 // import 'package:herfaty/test_Login.dart';
-import 'package:herfaty/welcome.dart';
+import 'package:herfaty/Welcome.dart';
 
 class SignupCustomer extends StatefulWidget {
   const SignupCustomer({super.key});
@@ -43,11 +43,11 @@ class _SignupCustomerState extends State<SignupCustomer> {
                             left: 0,
                             child: ElevatedButton(
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const Welcome()),
-                                );
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //       builder: (context) => const Welcome()),
+                                // );
                               },
                               style: ButtonStyle(
                                 backgroundColor:
