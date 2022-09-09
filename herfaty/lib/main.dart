@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:herfaty/pages/splash.dart';
+import 'package:herfaty/splash.dart';
 import 'package:herfaty/signupCustomer.dart';
 import 'package:herfaty/signupHerafy.dart';
 import 'package:herfaty/Welcome.dart';
