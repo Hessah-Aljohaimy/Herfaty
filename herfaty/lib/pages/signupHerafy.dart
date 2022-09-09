@@ -1,7 +1,6 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: file_names, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-
 
 class SignupHerafy extends StatelessWidget {
   const SignupHerafy({Key? key}) : super(key: key);
@@ -22,26 +21,33 @@ class SignupHerafy extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      // ignore: prefer_const_constructors
                       SizedBox(
                         height: 20,
                       ),
+                      // ignore: prefer_const_constructors
                       Text(
                         "تسجيل حساب جديد",
+                        // ignore: prefer_const_constructors
                         style: TextStyle(
                             fontSize: 35,
                             fontFamily: "myfont",
                             color: Colors.black),
                       ),
+                      // ignore: prefer_const_constructors
                       SizedBox(
                         height: 21,
                       ),
+                      // ignore: prefer_const_constructors
                       Text(
                         "معلومات الحرفي",
+                        // ignore: prefer_const_constructors
                         style: TextStyle(
                             fontSize: 20,
                             fontFamily: "myfont",
                             color: Colors.black),
                       ),
+                      // ignore: prefer_const_constructors
                       SizedBox(
                         height: 27,
                       ),

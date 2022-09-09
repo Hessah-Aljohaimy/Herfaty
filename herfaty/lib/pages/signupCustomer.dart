@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, file_names
+
 import 'package:flutter/material.dart';
 
 class SignupCustomer extends StatelessWidget {
@@ -20,6 +22,7 @@ class SignupCustomer extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      // ignore: prefer_const_constructors
                       SizedBox(
                         height: 20,
                       ),

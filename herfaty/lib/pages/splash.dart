@@ -15,12 +15,12 @@ class _SplashState extends State<Splash> {
   }
 
   Widget initWidget() {
-    Color mycolor = new Color(0x51908E);
-    Color mySeconedColor = new Color(0xFFEDB2);
+    Color mycolor = const Color.fromARGB(0, 92, 157, 155);
+    Color mySeconedColor = const Color.fromARGB(0, 245, 214, 111);
     return Scaffold(
       body: Stack(
         children: [
-          Text("It is splash page"),
+          const Text("It is splash page"),
           Container(
             decoration: BoxDecoration(
                 color: mycolor,
