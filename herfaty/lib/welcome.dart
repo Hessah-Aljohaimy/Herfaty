@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:herfaty/signupCustomer.dart';
+import 'package:herfaty/signupHerafy.dart';
 
 class Welcome extends StatelessWidget {
   const Welcome({Key? key}) : super(key: key);
@@ -18,20 +20,24 @@ class Welcome extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "أهلا بك أيها الحرفي",
+                    "أهلا بك ",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.green,
                     ),
                   ),
-                  Image.asset(
-                    "assets/images/HerfatyLogo.png",
-                    width: 120,
-                  ),
+                  // Image.asset(
+                  //   "assets/images/HerfatyLogo.png",
+                  //   width: 120,
+                  // ),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, "/SignupHerafy");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SignupHerafy()),
+                      );
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(Colors.green),
@@ -50,7 +56,11 @@ class Welcome extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, "/signupCustomer");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SignupCustomer()),
+                      );
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(Colors.green),
@@ -68,23 +78,23 @@ class Welcome extends StatelessWidget {
               ),
 //Here are the photos to the screen for UI
               ///////////////Positioned///////
-              Positioned(
-                top: 0,
-                left: 0,
-                child: Image.asset(
-                  "assets/images/main_left_side.png",
-                  width: 111,
-                ),
-              ),
+              // Positioned(
+              //   top: 0,
+              //   left: 0,
+              //   child: Image.asset(
+              //     "assets/main_left_side.png",
+              //     width: 111,
+              //   ),
+              // ),
               // /////////////////////////////////////////////
-              Positioned(
-                bottom: 0,
-                right: 0,
-                child: Image.asset(
-                  "assets/images/craftiRightSide.png",
-                  width: 120,
-                ),
-              )
+              // Positioned(
+              //   bottom: 0,
+              //   right: 0,
+              //   child: Image.asset(
+              //     "assets/craftiRightSide.png",
+              //     width: 120,
+              //   ),
+              // )
               //              SizedBox(
 
 //     const darkGreen = const Color(0x51908E);
@@ -99,3 +109,4 @@ class Welcome extends StatelessWidget {
     );
   }
 }
+// ignore_for_file: prefer_const_constructors
