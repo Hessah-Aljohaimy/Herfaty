@@ -1,4 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'dart:math';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:herfaty/pages/reusable_widgets.dart';
@@ -52,7 +54,7 @@ return Form(
                       ),
                       Text(
                         "تسجيل الدخول",
-                        style: TextStyle(fontSize: 33, fontFamily: "myfont" ,),
+                        style: TextStyle(fontSize: 33, fontFamily: "Tajawal" ,),
                         
                       ),
                       SizedBox(
@@ -111,7 +113,7 @@ return Form(
                        width: 290,
                         height: 53,
                         padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: reusableTextField("البريد الإلكتروني", Icons.person_outline, false,
+                        child: reusableTextField("البريد الإلكتروني", Icons.person, false,
                     _emailTextController),
 
                 //  SizedBox(
@@ -166,7 +168,7 @@ return Form(
                         padding: EdgeInsets.symmetric(horizontal: 16),
                         child: 
                         
-                        reusableTextField("الرمز السري", Icons.lock_outline, true,
+                        reusableTextField("الرمز السري", Icons.lock, true,
                     _passwordTextController),
   //                   validator: (value) {
   //   if (value == null || value.isEmpty) {
@@ -217,16 +219,38 @@ return Form(
                            if (_formKey.currentState!.validate()) {
                             FirebaseAuth.instance
                             .signInWithEmailAndPassword(email: _emailTextController.text,
-                          password: _passwordTextController.text)
+                          password: _passwordTextController.text).catchError((err){
+                            showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("خطأ"),
+              content: Text('البريد الإلكتروني أو الرمز السري غير صحيح، حاول مجددا'),
+              actions: <Widget>[
+                TextButton(
+                  child: Text("حسنا"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            );
+          });
+                          }
+                          )
                       .then((value) {
                      Navigator.pushNamed(context, "/home_screen");
                   }).onError((error, stackTrace) {
                     print("Error hhhhhh");
                   });
-                           
+                  
+                   }
+               
+                         
+                       
   
                            
-                }   
+                // }   
                   },
                         
                         style: ButtonStyle(
@@ -301,7 +325,12 @@ return Form(
     }
 }
 
-
+String? validateEmail(String? formEmail){
+      if (formEmail == null || formEmail.isEmpty) 
+return 'أدخل البريد الإلكتروني';
+ 
+ return null;
+}
 
 // var selcted = 'مشتري';  
  

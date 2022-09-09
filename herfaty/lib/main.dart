@@ -5,6 +5,7 @@ import 'package:herfaty/pages/forget_password.dart';
 import 'package:herfaty/pages/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 
 void main() async {
@@ -22,6 +23,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  MaterialApp(
+
+
+localizationsDelegates: [
+    GlobalMaterialLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+  ],
+  supportedLocales: [
+   const Locale('er', 'AE'),// English, no country code
+  ],
+
       initialRoute: "/" ,
       routes: {
         "/" : (context) => const Welcome(),

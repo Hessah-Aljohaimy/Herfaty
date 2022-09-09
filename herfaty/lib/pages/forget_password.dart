@@ -65,7 +65,7 @@ return Form(
                       Container(
                          width: 290,
                         height: 53,                     padding: EdgeInsets.symmetric(horizontal: 16),
-                        child:  reusableTextField("البريد الإلكتروني", Icons.person_outline, false,
+                        child:  reusableTextField("البريد الإلكتروني", Icons.person , false,
                     _emailTextController),
   //                       TextFormField(
   //                         decoration: InputDecoration(
@@ -106,10 +106,27 @@ return Form(
                           if (_formKey.currentState!.validate()) {
 
 
- FirebaseAuth.instance
-                      .sendPasswordResetEmail(email: _emailTextController.text)
+ FirebaseAuth.instance.sendPasswordResetEmail(email: _emailTextController.text)
+                      .catchError((err){
+                            showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("خطأ"),
+              content: Text('البريد الإلكتروني أو الرمز السري غير صحيح، حاول مجددا'),
+              actions: <Widget>[
+                TextButton(
+                  child: Text("حسنا"),
+                  onPressed: () {
+                                       Navigator.of(context).pop();
+                  },
+                )
+              ],
+            );
+          });
+                          }
+                          )
                       .then((value) => Navigator.of(context).pop()); 
-print("seeennded");
                           }
                             },
                         

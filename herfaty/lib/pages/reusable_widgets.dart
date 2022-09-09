@@ -12,7 +12,7 @@ TextFormField reusableTextField(String text, IconData icon, bool isPasswordType,
     TextStyle(color: Color.fromARGB(255, 26, 96, 91)),
     decoration: InputDecoration(
       suffix: Icon(
-                                Icons.person,
+                                icon,
                                 color: Color.fromARGB(255, 26, 96, 91),
                               ),
       labelText: text,
@@ -31,6 +31,21 @@ TextFormField reusableTextField(String text, IconData icon, bool isPasswordType,
     keyboardType: isPasswordType
         ? TextInputType.visiblePassword
         : TextInputType.emailAddress,
+        validator: (value) {
+    if (value == null || value.isEmpty) {
+      return text;
+    }
+     if (!RegExp(
+                      r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
+                  .hasMatch(value)&& !isPasswordType) {
+                return 'ادخل بريد إلكتروني صحيح';
+              }
+
+          
+    return null;
+  },
+                 
+                  
   );
 }
 
@@ -60,4 +75,12 @@ Container firebaseUIButton(BuildContext context, String title, Function onTap) {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),
     ),
   );
+}
+
+
+String? validateEmail(String? formEmail){
+      if (formEmail == null || formEmail.isEmpty) 
+return 'أدخل البريد الإلكتروني';
+ 
+ return null;
 }
