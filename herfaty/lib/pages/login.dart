@@ -28,6 +28,7 @@ class _login extends State<login> {
   @override
   Widget build(BuildContext context) {
 return Form(
+      
       key: _formKey,
       child: Scaffold(
                 resizeToAvoidBottomInset: false,
@@ -61,7 +62,8 @@ return Form(
                       ),
                       Text(
                         "تسجيل الدخول",
-                        style: TextStyle(fontSize: 33, fontFamily: "Tajawal" ,fontWeight: FontWeight.bold,color: Color.fromARGB(255, 26, 96, 91) ),
+                        style: TextStyle(fontSize: 33, fontFamily: "Tajawal" 
+                        ,fontWeight: FontWeight.bold,color: Color.fromARGB(255, 26, 96, 91) ),
                         
                       ),
 

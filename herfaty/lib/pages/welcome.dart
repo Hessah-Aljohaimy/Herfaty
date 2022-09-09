@@ -1,16 +1,17 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart'; 
 
 class Welcome extends StatelessWidget {
   const Welcome({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return  SafeArea(
       
 
-
+      
 
 
       child: Scaffold(
@@ -23,7 +24,7 @@ class Welcome extends StatelessWidget {
   decoration: const BoxDecoration(
     image: DecorationImage(
         image: AssetImage(
-                  "assets/images/main_topp.png"),
+                  "assets/images/login_toppp.png"),
         fit: BoxFit.cover),
   ),
           

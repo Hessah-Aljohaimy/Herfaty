@@ -19,6 +19,7 @@ class _forget_password extends State<forget_password> {
   @override
   Widget build(BuildContext context) {
 return Form(
+  
       key: _formKey,
       child: Scaffold(
                 resizeToAvoidBottomInset: false,
@@ -35,6 +36,7 @@ return Form(
               children: [
                 
                 SizedBox(
+                  
                   width: double.infinity,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -43,9 +45,10 @@ return Form(
                  SizedBox(
                         height: 120,
                       ),
+                      
                       Text(
                         "إعادة تعيين الرمز السري",
-                        style: TextStyle(fontSize: 33, fontFamily: "myfont" ,fontWeight: FontWeight.bold,color: Color.fromARGB(255, 26, 96, 91)),
+                        style: TextStyle(fontSize: 33, fontFamily: "myfont" ,fontWeight: FontWeight.bold,color: Color.fromARGB(255, 26, 96, 91),),
                         
                       ),
                       SizedBox(
@@ -102,33 +105,38 @@ return Form(
                         height: 17,
                       ),
                       ElevatedButton(
-                        onPressed: () {     
-                          if (_formKey.currentState!.validate()) {
+                           onPressed: (){
+                            
+                           } ,
+//                           if (_formKey.currentState!.validate()) {
 
 
- FirebaseAuth.instance.sendPasswordResetEmail(email: _emailTextController.text)
-                      .catchError((err){
-                            showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text("خطأ"),
-              content: Text('البريد الإلكتروني أو الرمز السري غير صحيح، حاول مجددا'),
-              actions: <Widget>[
-                TextButton(
-                  child: Text("حسنا"),
-                  onPressed: () {
-                                       Navigator.of(context).pop();
-                  },
-                )
-              ],
-            );
-          });
-                          }
-                          )
-                      .then((value) => Navigator.of(context).pop()); 
-                          }
-                            },
+//  FirebaseAuth.instance.sendPasswordResetEmail(email: _emailTextController.text)
+//                       .catchError((err){
+          //                   showDialog(
+          // context: context,
+          // builder: (BuildContext context) {
+          //   return AlertDialog(
+          //     title: Text("خطأ"),
+          //     content: Text('البريد الإلكتروني أو الرمز السري غير صحيح، حاول مجددا'),
+          //     actions: <Widget>[
+          //       TextButton(
+          //         child: Text("حسنا"),
+          //         onPressed: () {
+          //                              Navigator.of(context).pop();
+          //         },
+          //       )
+          //     ],
+          //   );
+          // });
+                      //     }
+                      //     )
+                      // .then((value) => Navigator.of(context).pop()); 
+
+
+                      
+                          // }
+                          
                         
                         style: ButtonStyle(
                           backgroundColor:
@@ -187,9 +195,35 @@ return Form(
           ),
         ),
       )),
-    );  }
+    );  
+    
+    Future resetPassword() async{
+      try{
+      await  FirebaseAuth.instance.sendPasswordResetEmail(email: _emailTextController.text.trim());
+                        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("jlll"),
+              content: Text('البريد الإلكتروني أو الرمز السري غير صحيح، حاول مجددا'),
+              actions: <Widget>[
+                TextButton(
+                  child: Text("حسنا"),
+                  onPressed: () {
+                                       Navigator.of(context).pop();
+                  },
+                )
+              ],
+            );
+          });
+      }
+      on FirebaseAuthException catch(e){
+Navigator.of(context).pop();
+      }
+    }
+    
+    }
 }
-
 
 
 // var selcted = 'مشتري';  
