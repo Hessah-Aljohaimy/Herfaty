@@ -58,13 +58,13 @@ class Welcome extends StatelessWidget {
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 35, 125, 118)),
                         padding: MaterialStateProperty.all(
-                            EdgeInsets.symmetric(horizontal: 77, vertical: 10)),
+                            EdgeInsets.symmetric(horizontal: 90, vertical: 13)),
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(27))),
                       ),
                       child: Text(
                         "تسجيل الدخول",
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 20,fontFamily: "Tajawal"),
                       ),
                     ),
                     SizedBox(
@@ -80,13 +80,13 @@ class Welcome extends StatelessWidget {
                         backgroundColor:
                             MaterialStateProperty.all(Color.fromARGB(255, 114, 159, 160)),
                         padding: MaterialStateProperty.all(
-                            EdgeInsets.symmetric(horizontal: 77, vertical: 9)),
+                            EdgeInsets.symmetric(horizontal: 90, vertical: 13)),
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(27))),
                       ),
                       child: Text(
                         "تسجيل جديد",
-                        style: TextStyle(fontSize: 22, color: Color.fromARGB(255, 255, 255, 255)),
+                        style: TextStyle(fontSize: 22, color: Color.fromARGB(255, 255, 255, 255),fontFamily: "Tajawal"),
                       ),
                     ),
                   ],

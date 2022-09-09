@@ -25,14 +25,14 @@ class MyApp extends StatelessWidget {
     return  MaterialApp(
 
 
-localizationsDelegates: [
-    GlobalMaterialLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-  ],
-  supportedLocales: [
-   const Locale('er', 'AE'),// English, no country code
-  ],
+// localizationsDelegates: [
+//     GlobalMaterialLocalizations.delegate,
+//     GlobalWidgetsLocalizations.delegate,
+//     GlobalCupertinoLocalizations.delegate,
+//   ],
+//   supportedLocales: [
+//    const Locale('er', 'AE'),// English, no country code
+//   ],
 
       initialRoute: "/" ,
       routes: {

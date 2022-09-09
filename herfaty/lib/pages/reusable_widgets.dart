@@ -9,14 +9,14 @@ TextFormField reusableTextField(String text, IconData icon, bool isPasswordType,
     enableSuggestions: !isPasswordType,
     autocorrect: !isPasswordType,
     style: 
-    TextStyle(color: Color.fromARGB(255, 26, 96, 91)),
+    TextStyle(color: Color.fromARGB(255, 26, 96, 91),fontFamily: "Tajawal"),
     decoration: InputDecoration(
       suffix: Icon(
                                 icon,
                                 color: Color.fromARGB(255, 26, 96, 91),
                               ),
       labelText: text,
-      labelStyle:TextStyle(color: Color.fromARGB(255, 26, 96, 91)),
+      labelStyle:TextStyle(color: Color.fromARGB(255, 26, 96, 91),fontFamily: "Tajawal"),
       // floatingLabelBehavior: FloatingLabelBehavior.never,
       fillColor: Colors.white.withOpacity(0.3),
       
@@ -62,7 +62,7 @@ Container firebaseUIButton(BuildContext context, String title, Function onTap) {
       child: Text(
         title,
         style: const TextStyle(
-            color: Colors.black87, fontWeight: FontWeight.bold, fontSize: 16),
+            color: Colors.black87, fontWeight: FontWeight.bold, fontSize: 16,fontFamily: "Tajawal"),
       ),
       style: ButtonStyle(
           backgroundColor: MaterialStateProperty.resolveWith((states) {

@@ -50,16 +50,23 @@ return Form(
                     children: [
                    
                  SizedBox(
-                        height: 86,
+                        height: 110,
                       ),
                       Text(
                         "تسجيل الدخول",
                         style: TextStyle(fontSize: 33, fontFamily: "Tajawal" ,),
                         
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
+
+
+  // Image.asset(
+  //                 "assets/images/logo_transparent.png",
+  //                 width: 100,
+  //               ),
+
+                      // SizedBox(
+                      //   height: 20,
+                      // ),
                       
 
    SizedBox(
@@ -100,7 +107,7 @@ return Form(
 //                       ), 
                      
                       SizedBox(
-                        height: 20,
+                        height: 16,
                       ),
                       Container(
                         
@@ -257,15 +264,14 @@ return Form(
                           backgroundColor:
                               MaterialStateProperty.all(Color.fromARGB(255, 35, 125, 118)),
                           padding: MaterialStateProperty.all(
-                              EdgeInsets.symmetric(
-                                  horizontal: 106, vertical: 10)),
+                              EdgeInsets.symmetric( horizontal: 90, vertical: 13)),
                           shape: MaterialStateProperty.all(
                               RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(27))),
                         ),
                         child: Text(
                           "تسجيل الدخول",
-                          style: TextStyle(fontSize: 14),
+                          style: TextStyle(fontSize: 14,fontFamily: "Tajawal"),
                         ),
                       ),
                       SizedBox(
@@ -278,21 +284,26 @@ return Form(
                         children: [
                           GestureDetector(
                             onTap: (){ Navigator.pushNamed(context, "/forget_password");},
-                            child: Text(" إعادة تعيين الرمز السري ", style: TextStyle(fontWeight: FontWeight.bold ,color: Color.fromARGB(255, 53, 47, 244),),)),
+                            child: Text(" إعادة تعيين الرمز السري ", style: TextStyle(fontWeight: FontWeight.bold ,color: Color.fromARGB(255, 53, 47, 244),fontFamily: "Tajawal"),)),
 
-                          Text("نسيت الرمز السري؟"),
+                          Text("نسيت الرمز السري؟",style:TextStyle(fontFamily: "Tajawal")),
 
                           
                         ],
                       ), 
+                       SizedBox(
+                        height: 10,
+                      ),
+
                       Row(
+                        
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           GestureDetector(
                             onTap: (){ Navigator.pushNamed(context, "/signup");},
-                            child: Text(" تسجيل جديد ", style: TextStyle(fontWeight: FontWeight.bold,color: Color.fromARGB(255, 53, 47, 244)),)),
+                            child: Text(" تسجيل جديد ", style: TextStyle(fontWeight: FontWeight.bold,color: Color.fromARGB(255, 53, 47, 244),fontFamily: "Tajawal"),)),
 
-                          Text("ليس لديك حساب ؟"),
+                          Text("ليس لديك حساب ؟",style:TextStyle(fontFamily: "Tajawal")),
 
                           
                         ],
