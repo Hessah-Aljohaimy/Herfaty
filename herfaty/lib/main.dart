@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import, duplicate_import
+
 import 'package:flutter/material.dart';
 
 import 'package:herfaty/pages/signup.dart';
@@ -9,7 +11,6 @@ import 'package:herfaty/pages/splash.dart';
 import 'package:herfaty/pages/welcome.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
