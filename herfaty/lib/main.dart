@@ -25,6 +25,7 @@ class _MyAppState extends State<MyApp> {
         "/welcome": (context) => const Welcome(),
         "/signupCustomer": (context) => const SignupCustomer(),
         "/signupHerfay": (context) => const SignupHerafy(),
+        // "/home_screen": (context) => const Home_Screen(),
       },
     );
   }

@@ -352,7 +352,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
                     Positioned(
                       left: 0,
                       child: Image.asset(
-                        "assets/images/main_topp.png",
+                        "assets/images/login_toppp.png",
                         width: 150,
                       ),
                     ),
@@ -360,7 +360,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
                       bottom: 0,
                       right: 0,
                       child: Image.asset(
-                        "assets/images/login_bottom.png",
+                        "assets/images/main_botomm.png",
                         width: 200,
                       ),
                     ),
