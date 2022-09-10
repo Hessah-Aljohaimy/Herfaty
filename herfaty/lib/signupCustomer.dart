@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart';
 import 'package:herfaty/reusable_widgits.dart';
 import 'package:herfaty/test_Login.dart';
-
-import 'package:herfaty/welcomeRegestration.dart';
 
 class SignupCustomer extends StatefulWidget {
   const SignupCustomer({super.key});
@@ -14,79 +11,86 @@ class SignupCustomer extends StatefulWidget {
 }
 
 class _SignupCustomerState extends State<SignupCustomer> {
+  final emailController = TextEditingController();
+  final numberController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   TextEditingController _passwordTextController = TextEditingController();
   TextEditingController _emailTextEditingController = TextEditingController();
   TextEditingController _nameTextEditingController = TextEditingController();
+  @override
+//   void initState(){
+// super.initState();
+// emailController.addListener(() {setState(() {
+
+// });})
+//   }
 
   @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
       child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          body: SafeArea(
-            child: Scaffold(
-              resizeToAvoidBottomInset: false,
-              body: SizedBox(
-                height: double.infinity,
-                width: double.infinity,
-                child: Stack(
-                  children: [
-                    SizedBox(
-                      width: double.infinity,
+        resizeToAvoidBottomInset: false,
+        body: SafeArea(
+          child: Scaffold(
+            resizeToAvoidBottomInset: false,
+            body: SizedBox(
+              height: double.infinity,
+              width: double.infinity,
+              child: Stack(
+                children: [
+                  Positioned(
+                    left: 0,
+                    top: 0,
+                    child: Image.asset(
+                      "assets/images/login_toppp.png",
+                      width: 150,
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: Image.asset(
+                      "assets/images/main_botomm.png",
+                      width: 200,
+                    ),
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          // ignore: prefer_const_constructors
-                          Positioned(
-                            top: 0,
-                            left: 0,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const WelcomeRegestration()),
-                                );
-                              },
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all(Colors.green),
-                                padding: MaterialStateProperty.all(
-                                    EdgeInsets.symmetric(
-                                        horizontal: 79, vertical: 10)),
-                                shape: MaterialStateProperty.all(
-                                    RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(27))),
-                              ),
-                              child: Text(
-                                " العوده للصفحه الرئيسيه",
-                                style: TextStyle(fontSize: 10),
-                              ),
+                          SizedBox(
+                            height: 20,
+                          ),
+
+                          Container(
+                              child: Image.asset(
+                            "assets/images/HerfatyLogoCroped.png",
+                            height: 120,
+                          )),
+                          Text(
+                            "تسجيل حساب جديد",
+                            style: TextStyle(
+                              fontSize: 35,
+                              fontFamily: "Tajawal",
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 26, 96, 91),
                             ),
                           ),
                           SizedBox(
                             height: 20,
                           ),
-                          Text(
-                            "تسجيل حساب جديد",
-                            style: TextStyle(
-                                fontSize: 35,
-                                fontFamily: "myfont",
-                                color: Colors.black),
-                          ),
-                          SizedBox(
-                            height: 21,
-                          ),
+
                           Text(
                             "معلومات المشتري",
                             style: TextStyle(
-                                fontSize: 20,
-                                fontFamily: "myfont",
-                                color: Colors.black),
+                              fontSize: 20,
+                              fontFamily: "Tajawal",
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(248, 228, 175, 122),
+                            ),
                           ),
                           SizedBox(
                             height: 27,
@@ -97,6 +101,9 @@ class _SignupCustomerState extends State<SignupCustomer> {
                             width: 290,
                             height: 53,
                             padding: EdgeInsets.symmetric(horizontal: 16),
+                            // child: TextFormField (
+                            //   validator: (value) => value.isEmpty?'ادخل اسم المشتري الثنائي':null,
+
                             child: reusableTextField(
                                 " اسم المشتري الثنائي",
                                 Icons.person_outline,
@@ -107,7 +114,6 @@ class _SignupCustomerState extends State<SignupCustomer> {
                           SizedBox(
                             height: 20,
                           ),
-
                           Container(
                             width: 290,
                             height: 53,
@@ -121,7 +127,6 @@ class _SignupCustomerState extends State<SignupCustomer> {
                           SizedBox(
                             height: 23,
                           ),
-
                           Container(
                             width: 290,
                             height: 53,
@@ -129,7 +134,6 @@ class _SignupCustomerState extends State<SignupCustomer> {
                             child: reusableTextField("كلمة المرور", Icons.lock,
                                 true, _passwordTextController),
                           ),
-
                           SizedBox(
                             height: 23,
                           ),
@@ -143,11 +147,17 @@ class _SignupCustomerState extends State<SignupCustomer> {
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 // FirebaseAuth.instance.singIn
+                                //FirebaseAuth.instance..createUserWithEmailAndPassword(email:_emailTextEditingController.text,password:_passwordTextController.text).then((value) (){
+                                //Navigator.push(context,MaterialPageRoute(builder:(context)=>HomeScreen()));
+                                //
+                                //
+                                //});
+                                print('hello');
                               }
                             },
                             style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all(Colors.blue),
+                              backgroundColor: MaterialStateProperty.all(
+                                  Color.fromARGB(255, 26, 96, 91)),
                               padding: MaterialStateProperty.all(
                                   EdgeInsets.symmetric(
                                       horizontal: 89, vertical: 10)),
@@ -172,14 +182,15 @@ class _SignupCustomerState extends State<SignupCustomer> {
                                 },
                                 child: Text(
                                   " هل لديك حساب بالفعل؟",
+                                  style: TextStyle(fontFamily: "Tajawal"),
                                 ),
                               ),
                               TextButton(
                                 child: Text(
                                   " تسجيل الدخول",
                                   style: TextStyle(
-                                    decoration: TextDecoration.underline,
-                                  ),
+                                      decoration: TextDecoration.underline,
+                                      fontFamily: "Tajawal"),
                                 ),
                                 onPressed: () {
                                   Navigator.push(
@@ -207,29 +218,16 @@ class _SignupCustomerState extends State<SignupCustomer> {
                               ],
                             ),
                           ),
-                          Positioned(
-                            left: 0,
-                            child: Image.asset(
-                              "assets/images/login_toppp.png",
-                              width: 150,
-                            ),
-                          ),
-                          Positioned(
-                            bottom: 0,
-                            right: 0,
-                            child: Image.asset(
-                              "assets/images/main_botomm.png",
-                              width: 200,
-                            ),
-                          ),
                         ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 }

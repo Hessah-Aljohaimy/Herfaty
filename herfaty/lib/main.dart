@@ -3,6 +3,7 @@ import 'package:herfaty/signupShop.dart';
 import 'package:herfaty/splash.dart';
 import 'package:herfaty/signupCustomer.dart';
 import 'package:herfaty/signupHerafy.dart';
+import 'package:herfaty/test_Login.dart';
 import 'package:herfaty/welcomeRegestration.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -37,6 +38,7 @@ class _MyAppState extends State<MyApp> {
         "/signupCustomer": (context) => const SignupCustomer(),
         "/signupHerfay": (context) => const SignupHerafy(),
         "/signupShop": (context) => const SignupShop(),
+        "/test_Login": (context) => const TestLogin(),
       },
     );
   }

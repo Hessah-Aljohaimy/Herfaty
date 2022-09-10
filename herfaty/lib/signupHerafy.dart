@@ -15,12 +15,12 @@ class SignupHerafy extends StatefulWidget {
 class _SignupHerafyState extends State<SignupHerafy> {
   int currentStep = 0;
 
-  DateTime _selectedDate = DateTime(2017, 12, 30);
+  DateTime date = DateTime(2017, 12, 30);
   final _formKey = GlobalKey<FormState>();
   TextEditingController _passwordTextController = TextEditingController();
   TextEditingController _emailTextEditingController = TextEditingController();
   TextEditingController _nameTextEditingController = TextEditingController();
-  TextEditingController _textEditingController = TextEditingController();
+  TextEditingController _dateController = TextEditingController();
 
   TextEditingController _PhoneNumberTextEditingController =
       TextEditingController();
@@ -39,6 +39,22 @@ class _SignupHerafyState extends State<SignupHerafy> {
           title: Text('معلومات الحرفي'),
           content: Column(
             children: <Widget>[
+              // Positioned(
+              //   left: 0,
+              //   top: 0,
+              //   child: Image.asset(
+              //     "assets/images/login_toppp.png",
+              //     width: 150,
+              //   ),
+              // ),
+              // Positioned(
+              //   bottom: 0,
+              //   right: 0,
+              //   child: Image.asset(
+              //     "assets/images/main_botomm.png",
+              //     width: 200,
+              //   ),
+              // ),
               // ignore: prefer_const_constructors
               SizedBox(
                 height: 20,
@@ -48,18 +64,36 @@ class _SignupHerafyState extends State<SignupHerafy> {
                 "تسجيل حساب جديد",
                 // ignore: prefer_const_constructors
                 style: TextStyle(
-                    fontSize: 35, fontFamily: "myfont", color: Colors.black),
+                  fontSize: 35,
+                  fontFamily: "Tajawal",
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 26, 96, 91),
+                ),
               ),
               // ignore: prefer_const_constructors
               SizedBox(
-                height: 21,
+                height: 20,
               ),
+
+              Container(
+                  child: Image.asset(
+                "assets/images/HerfatyLogoCroped.png",
+                height: 120,
+              )),
+              SizedBox(
+                height: 10,
+              ),
+
               // ignore: prefer_const_constructors
               Text(
                 "معلومات الحرفي",
                 // ignore: prefer_const_constructors
                 style: TextStyle(
-                    fontSize: 20, fontFamily: "myfont", color: Colors.black),
+                  fontSize: 20,
+                  fontFamily: "Tajawal",
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(248, 228, 175, 122),
+                ),
               ),
               // ignore: prefer_const_constructors
               SizedBox(
@@ -101,6 +135,15 @@ class _SignupHerafyState extends State<SignupHerafy> {
                 height: 17,
               ),
 
+              Container(
+                width: 290,
+                height: 53,
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: reusableTextField("تاريخ الميلاد",
+                    Icons.calendar_today_rounded, false, _dateController),
+              ),
+              ///////////////////////////Importing DatePicker//////////////////////
+
               // GestureDetector(
               //   onTap: () async {
               //     DateTime? newDate = await showDatePicker(
@@ -141,17 +184,17 @@ class _SignupHerafyState extends State<SignupHerafy> {
               //     setState(() => date = newDate);
               //   },
               // ),
-              Container(
-                width: 290,
-                height: 53,
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: TextField(
-                  controller: _textEditingController,
-                  onTap: () {
-                    _selectDate(context);
-                  },
-                ),
-              ),
+              // Container(
+              //   width: 290,
+              //   height: 53,
+              //   padding: EdgeInsets.symmetric(horizontal: 16),
+              //   child: TextField(
+              //     controller: _dateController,
+              //     onTap: () {
+              //       _selectDate(context);
+              //     },
+              //   ),
+              // ),
               SizedBox(
                 height: 17,
               ),
@@ -173,122 +216,160 @@ class _SignupHerafyState extends State<SignupHerafy> {
           state: currentStep > 1 ? StepState.complete : StepState.indexed,
           isActive: currentStep >= 1,
           title: Text('معلومات المتجر'),
-          content: Column(
-            children: <Widget>[
-              // ignore: prefer_const_constructors
-              SizedBox(
-                height: 20,
-              ),
-              // ignore: prefer_const_constructors
-              Text(
-                "تسجيل حساب جديد",
+          content: Container(
+            child: Column(
+              children: <Widget>[
+                // Positioned(
+                //   left: 0,
+                //   top: 0,
+                //   child: Image.asset(
+                //     "assets/images/login_toppp.png",
+                //     width: 150,
+                //   ),
+                // ),
+                // Positioned(
+                //   bottom: 0,
+                //   right: 0,
+                //   child: Image.asset(
+                //     "assets/images/main_botomm.png",
+                //     width: 200,
+                //   ),
+                // ),
                 // ignore: prefer_const_constructors
-                style: TextStyle(
-                    fontSize: 35, fontFamily: "myfont", color: Colors.black),
-              ),
-              // ignore: prefer_const_constructors
-              SizedBox(
-                height: 21,
-              ),
-              // ignore: prefer_const_constructors
-              Text(
-                "معلومات المتجر",
-                // ignore: prefer_const_constructors
-                style: TextStyle(
-                    fontSize: 20, fontFamily: "myfont", color: Colors.black),
-              ),
-              // ignore: prefer_const_constructors
-              SizedBox(
-                height: 27,
-              ),
-
-              Text(
-                "أرفق صورة الشعار الخاصة بك",
-                // ignore: prefer_const_constructors
-                style: TextStyle(
-                    fontSize: 20, fontFamily: "myfont", color: Colors.black),
-              ),
-
-              Container(
-                width: 290,
-                height: 53,
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: reusableTextField("اسم المتجر", Icons.shop, false,
-                    _shopnameTextEditingController),
-              ),
-
-              SizedBox(
-                height: 20,
-              ),
-
-              Container(
-                width: 290,
-                height: 53,
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: reusableTextField("وصف المتجر", Icons.shop_2, false,
-                    _shopdescriptionTextEditingController),
-              ),
-
-              SizedBox(
-                height: 17,
-              ),
-
-              SizedBox(
-                height: 17,
-              ),
-              Text("!هيا لتبدأ رحلتك"),
-              SizedBox(
-                height: 6,
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.blue),
-                  padding: MaterialStateProperty.all(
-                      EdgeInsets.symmetric(horizontal: 89, vertical: 10)),
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(27))),
+                SizedBox(
+                  height: 20,
                 ),
-                child: Text(
-                  "سجل الحساب",
-                  style: TextStyle(fontSize: 24),
-                ),
-              ),
-              SizedBox(
-                height: 33,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, "/login");
-                    },
-                    child: Text(
-                      " هل لديك حساب بالفعل؟",
-                    ),
+                // ignore: prefer_const_constructors
+                Text(
+                  "تسجيل حساب جديد",
+                  // ignore: prefer_const_constructors
+                  style: TextStyle(
+                    fontSize: 35,
+                    fontFamily: "Tajawal",
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 26, 96, 91),
                   ),
-                  TextButton(
-                    child: Text(
-                      " تسجيل الدخول",
-                      style: TextStyle(
-                        decoration: TextDecoration.underline,
+                ),
+                // ignore: prefer_const_constructors
+                SizedBox(
+                  height: 21,
+                ),
+                // ignore: prefer_const_constructors
+                Text(
+                  "معلومات المتجر",
+                  // ignore: prefer_const_constructors
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontFamily: "Tajawal",
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(248, 228, 175, 122),
+                  ),
+                ),
+                // ignore: prefer_const_constructors
+                SizedBox(
+                  height: 27,
+                ),
+
+                Text(
+                  "أرفق صورة الشعار الخاصة بك",
+                  // ignore: prefer_const_constructors
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontFamily: "Tajawal",
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 26, 96, 91),
+                  ),
+                ),
+
+////////////////////////////Importing Picture //////////////////////////////////
+
+                Container(
+                  width: 290,
+                  height: 53,
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: reusableTextField("اسم المتجر", Icons.shop, false,
+                      _shopnameTextEditingController),
+                ),
+
+                SizedBox(
+                  height: 20,
+                ),
+
+                Container(
+                  width: 290,
+                  height: 53,
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: reusableTextField("وصف المتجر", Icons.shop_2, false,
+                      _shopdescriptionTextEditingController),
+                ),
+
+                SizedBox(
+                  height: 17,
+                ),
+
+                SizedBox(
+                  height: 17,
+                ),
+                Text("!هيا لتبدأ رحلتك"),
+                SizedBox(
+                  height: 6,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+//1 Authentication
+
+//2 Routing
+                    Navigator.of(context).pushNamed("test_Login");
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
+                        Color.fromARGB(255, 26, 96, 91)),
+                    padding: MaterialStateProperty.all(
+                        EdgeInsets.symmetric(horizontal: 89, vertical: 10)),
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(27))),
+                  ),
+                  child: Text(
+                    "سجل الحساب",
+                    style: TextStyle(fontSize: 24),
+                  ),
+                ),
+                SizedBox(
+                  height: 33,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, "/login");
+                      },
+                      child: Text(
+                        " هل لديك حساب بالفعل؟",
                       ),
                     ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const TestLogin()),
-                      );
-                    },
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 17,
-              ),
-            ],
+                    TextButton(
+                      child: Text(
+                        " تسجيل الدخول",
+                        style: TextStyle(
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const TestLogin()),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 17,
+                ),
+              ],
+            ),
           ),
         ),
       ];
@@ -316,21 +397,21 @@ class _SignupHerafyState extends State<SignupHerafy> {
           controlsBuilder: (BuildContext context, ControlsDetails controls) {
             return Row(
               children: <Widget>[
-                Positioned(
-                  left: 0,
-                  child: Image.asset(
-                    "assets/images/login_toppp.png",
-                    width: 150,
-                  ),
-                ),
-                Positioned(
-                  bottom: 0,
-                  right: 0,
-                  child: Image.asset(
-                    "assets/images/main_botomm.png",
-                    width: 200,
-                  ),
-                ),
+                // Positioned(
+                //   left: 0,
+                //   child: Image.asset(
+                //     "assets/images/login_toppp.png",
+                //     width: 150,
+                //   ),
+                // ),
+                // Positioned(
+                //   bottom: 0,
+                //   right: 0,
+                //   child: Image.asset(
+                //     "assets/images/main_botomm.png",
+                //     width: 200,
+                //   ),
+                // ),
                 if (currentStep != 1)
                   Expanded(
                     child: ElevatedButton(
@@ -340,7 +421,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
                         backgroundColor: MaterialStateProperty.all(
                             Color.fromARGB(255, 26, 96, 91)),
                         padding: MaterialStateProperty.all(
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10)),
+                            EdgeInsets.symmetric(horizontal: 89, vertical: 10)),
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(27))),
                       ),
@@ -354,9 +435,9 @@ class _SignupHerafyState extends State<SignupHerafy> {
                       onPressed: controls.onStepCancel,
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
-                            Color.fromARGB(255, 26, 96, 91)),
+                            Color.fromARGB(248, 228, 175, 122)),
                         padding: MaterialStateProperty.all(
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10)),
+                            EdgeInsets.symmetric(horizontal: 89, vertical: 10)),
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(27))),
                       ),

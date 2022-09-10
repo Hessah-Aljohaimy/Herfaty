@@ -19,81 +19,92 @@ class WelcomeRegestration extends StatelessWidget {
               width: double.infinity,
               child: Stack(
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "أهلا بك !",
-                        style: TextStyle(
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                  Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "أهلا بك !",
+                          style: TextStyle(
+                            fontSize: 40,
+                            fontFamily: "Tajawal",
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 26, 96, 91),
+                          ),
                         ),
-                      ),
-                      Positioned(
-                        bottom: 50,
-                        top: 50,
-                        right: 10,
-                        child: Image.asset(
-                          "assets/images/kid_Waving.png",
-                          width: 200,
+                        Positioned(
+                          bottom: 50,
+                          top: 50,
+                          right: 10,
+                          child: Image.asset(
+                            "assets/images/kid_Waving.png",
+                            width: 200,
+                          ),
                         ),
-                      ),
 
-                      // Image.asset(
-                      //   "assets/images/HerfatyLogo.png",
-                      //   width: 120,
-                      // ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const SignupHerafy()),
-                          );
-                        },
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              Color.fromARGB(255, 26, 96, 91)),
-                          padding: MaterialStateProperty.all(
-                              EdgeInsets.symmetric(
-                                  horizontal: 79, vertical: 10)),
-                          shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(27))),
+                        // Image.asset(
+                        //   "assets/images/HerfatyLogo.png",
+                        //   width: 120,
+                        // ),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SignupHerafy()),
+                            );
+                          },
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                Color.fromARGB(255, 26, 96, 91)),
+                            padding: MaterialStateProperty.all(
+                                EdgeInsets.symmetric(
+                                    horizontal: 79, vertical: 10)),
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(27))),
+                          ),
+                          child: Text(
+                            " تسجيل حساب حرفي",
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontFamily: "Tajawal",
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
-                        child: Text(
-                          " تسجيل حساب حرفي",
-                          style: TextStyle(fontSize: 24),
+                        SizedBox(
+                          height: 21,
                         ),
-                      ),
-                      SizedBox(
-                        height: 21,
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const SignupCustomer()),
-                          );
-                        },
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              Color.fromARGB(255, 26, 96, 91)),
-                          padding: MaterialStateProperty.all(
-                              EdgeInsets.symmetric(
-                                  horizontal: 79, vertical: 10)),
-                          shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(27))),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SignupCustomer()),
+                            );
+                          },
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                Color.fromARGB(255, 26, 96, 91)),
+                            padding: MaterialStateProperty.all(
+                                EdgeInsets.symmetric(
+                                    horizontal: 79, vertical: 10)),
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(27))),
+                          ),
+                          child: Text(
+                            "تسجيل حساب مشتري",
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontFamily: "Tajawal",
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
-                        child: Text(
-                          "تسجيل حساب مشتري",
-                          style: TextStyle(fontSize: 24),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
 //Here are the photos to the screen for UI
                   ///////////////Positioned///////

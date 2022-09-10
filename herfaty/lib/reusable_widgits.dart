@@ -29,6 +29,19 @@ TextFormField reusableTextField(String text, IconData icon, bool isPasswordType,
     keyboardType: isPasswordType
         ? TextInputType.visiblePassword
         : TextInputType.emailAddress,
+    validator: (value) {
+      if (value == null || value.isEmpty) {
+        return "أدخل " + text;
+      }
+
+      if (!RegExp(r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
+              .hasMatch(value) &&
+          !isPasswordType) {
+        return 'أدخل بريد إلكتروني صحيح';
+      }
+
+      return null;
+    },
   );
 }
 

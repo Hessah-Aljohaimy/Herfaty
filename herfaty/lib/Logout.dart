@@ -12,7 +12,14 @@ class _LogoutState extends State<Logout> {
   Widget build(BuildContext context) {
     return Scaffold(
 
-// body:Center(child: ElevatedButton(child: Text("تسجيل الخروج"),onPressed: (){ Navigator.push(context, MaterialPageRoute(builder:(context)=>login())},))
+// body:Center(child: ElevatedButton(child: Text("تسجيل الخروج"),onPressed: (){
+//
+//FirebaseAuth.instance.SignOut().then((value) => {
+//
+//Navigator.push(context, MaterialPageRoute(builder:(context)=>login())},))
+//}
+//
+//
 
         );
   }
