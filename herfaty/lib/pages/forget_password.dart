@@ -111,8 +111,9 @@ return Form(
                       //   height: 0,
                       // ),
                       Container(
-                         width: 290,
-                        height: 53,                     padding: EdgeInsets.symmetric(horizontal: 16),
+                        //  width: 290,
+                        // height: 53, 
+                        padding: EdgeInsets.symmetric(horizontal: 60),
                         child:  reusableTextField("البريد الإلكتروني", Icons.person , false,
                     _emailTextController),
   //                       TextFormField(
@@ -150,7 +151,7 @@ return Form(
                         height: 17,
                       ),
                       ElevatedButton(
-                           onPressed: resetPassword ,
+                           onPressed: resetPassword , 
 //                           if (_formKey.currentState!.validate()) {
 
 
@@ -196,6 +197,7 @@ return Form(
                           style: TextStyle(fontSize: 14, fontFamily: "Tajawal",fontWeight: FontWeight.bold),
                         ),
                       ),
+                      
                       SizedBox(
                         height: 17,
                       ),

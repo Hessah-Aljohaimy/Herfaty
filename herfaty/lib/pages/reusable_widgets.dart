@@ -11,6 +11,8 @@ TextFormField reusableTextField(String text, IconData icon, bool isPasswordType,
     style: 
     TextStyle(color: Color.fromARGB(255, 26, 96, 91),fontFamily: "Tajawal"),
     decoration: InputDecoration(
+      contentPadding: const EdgeInsets.symmetric(vertical: 1.0,horizontal: 23),
+
       suffix: Icon(
                                 icon,
                                 color: Color.fromARGB(255, 26, 96, 91),
@@ -22,23 +24,38 @@ TextFormField reusableTextField(String text, IconData icon, bool isPasswordType,
       
                                enabledBorder:  OutlineInputBorder(
                                  borderSide: BorderSide( color: Color.fromARGB(255, 26, 96, 91)), 
-                                                     
+                                  
                               ),
                               focusedBorder:OutlineInputBorder(
                                  borderSide: BorderSide(  width: 2,color: Color.fromARGB(255, 26, 96, 91)),
                                  ),
+                                 errorStyle: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
+                              
+                                 errorBorder:  OutlineInputBorder(
+
+                                borderSide: BorderSide( color: Color.fromARGB(255, 164, 46, 46)   ), 
+                            
+
+
+                                 ), 
+
+focusedErrorBorder:  OutlineInputBorder(
+                                 borderSide: BorderSide(  width: 2,color: Color.fromARGB(255, 164, 46, 46)),
+                                 ),
+
     ),
     keyboardType: isPasswordType
         ? TextInputType.visiblePassword
         : TextInputType.emailAddress,
         validator: (value) {
     if (value == null || value.isEmpty) {
-      return text;
+      return "أدخل "+text;
+
     }
      if (!RegExp(
                       r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
                   .hasMatch(value)&& !isPasswordType) {
-                return 'ادخل بريد إلكتروني صحيح';
+                return 'أدخل بريد إلكتروني صحيح';
               }
 
           

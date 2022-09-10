@@ -114,9 +114,9 @@ return Form(
 //                         ],
 //                       ), 
                      
-                      SizedBox(
-                        height: 16,
-                      ),
+                      // SizedBox(
+                      //   height: 1,
+                      // ),
                       Container(
                         
                         // decoration: BoxDecoration(
@@ -125,9 +125,9 @@ return Form(
                         //   borderRadius: BorderRadius.circular(66),
                           
                         // ),
-                       width: 290,
-                        height: 53,
-                        padding: EdgeInsets.symmetric(horizontal: 16),
+                      //  width: 290,
+                      //   height: 53,
+                        padding: EdgeInsets.symmetric(horizontal: 60),
                         child: reusableTextField("البريد الإلكتروني", Icons.person, false,
                     _emailTextController),
 
@@ -178,9 +178,9 @@ return Form(
                         //   borderRadius: BorderRadius.circular(0),
                         //   border:OutlinedBorder(),
                         // ),
-                       width: 290,
-                        height: 53,
-                        padding: EdgeInsets.symmetric(horizontal: 16),
+                      //  width: 290,
+                        // height: 53,
+                        padding: EdgeInsets.symmetric(horizontal: 60),
                         child: 
                         
                         reusableTextField("كلمة المرور", Icons.lock, true,
