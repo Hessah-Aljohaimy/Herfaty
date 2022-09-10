@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:herfaty/signupShop.dart';
 import 'package:herfaty/splash.dart';
 import 'package:herfaty/signupCustomer.dart';
 import 'package:herfaty/signupHerafy.dart';
 import 'package:herfaty/welcomeRegestration.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,13 +21,22 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: [
+        GlobalCupertinoLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale("ar", "AE"),
+        Locale("ar", "AE"),
+      ],
       initialRoute: "/",
       routes: {
         "/": (context) => const Splash(),
         "/welcomeRegestration": (context) => const WelcomeRegestration(),
         "/signupCustomer": (context) => const SignupCustomer(),
         "/signupHerfay": (context) => const SignupHerafy(),
-        // "/home_screen": (context) => const Home_Screen(),
+        "/signupShop": (context) => const SignupShop(),
       },
     );
   }

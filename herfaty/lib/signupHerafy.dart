@@ -15,6 +15,23 @@ class SignupHerafy extends StatefulWidget {
 class _SignupHerafyState extends State<SignupHerafy> {
   final _formKey = GlobalKey<FormState>();
 
+// List<Step> stepList()=>[
+
+// const Step(
+//   isActive:currentStep>=0 ,
+//   title: Text('Herfay Information'),
+//    content: Center(
+//   child: Text('Herfay Information'),
+//   )),
+// const Step(
+//   title: Text('shop Information'),
+//    content: Center(
+//   child: Text('shop Information'),
+//   )),
+
+// ];
+
+  int currentStep = 0;
   TextEditingController _passwordTextController = TextEditingController();
   TextEditingController _emailTextEditingController = TextEditingController();
   TextEditingController _nameTextEditingController = TextEditingController();
@@ -26,6 +43,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
+
       child: Scaffold(
           resizeToAvoidBottomInset: false,
           body: SafeArea(
@@ -34,12 +52,16 @@ class _SignupHerafyState extends State<SignupHerafy> {
               body: SizedBox(
                 height: double.infinity,
                 width: double.infinity,
+// child:Stepper(
+//   type:StepperType.horizontal,
+//   currentStep:currentStep,
+//   steps:stepList() ,
+// onStepContinue:(){
+//  },
+// )
+
                 child: Stack(
                   children: [
-                    ////////////////////////I will remov it //////////////////////
-
-////////////////////////////////////////////////////////////////////
-
                     Positioned(
                       top: 0,
                       left: 0,

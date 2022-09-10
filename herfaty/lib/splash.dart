@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:herfaty/Welcome.dart';
+
 import 'package:herfaty/welcomeRegestration.dart';
 
 //Here is the splash screen
@@ -17,11 +17,9 @@ class _SplashState extends State<Splash> {
   void initState() {
     super.initState();
     Timer(
-        Duration(seconds: 3),() => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => WelcomeRegestration()
-            )
-            )
-            );
+        Duration(seconds: 3),
+        () => Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => WelcomeRegestration())));
   }
 
   @override

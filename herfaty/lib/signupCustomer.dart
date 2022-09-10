@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-// ignore_for_file: prefer_const_constructors, file_names
 
 import 'package:flutter/material.dart';
 import 'package:herfaty/reusable_widgits.dart';
 import 'package:herfaty/test_Login.dart';
-// import 'package:herfaty/test_Login.dart';
-import 'package:herfaty/Welcome.dart';
+
+import 'package:herfaty/welcomeRegestration.dart';
 
 class SignupCustomer extends StatefulWidget {
   const SignupCustomer({super.key});
@@ -45,11 +44,12 @@ class _SignupCustomerState extends State<SignupCustomer> {
                             left: 0,
                             child: ElevatedButton(
                               onPressed: () {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //       builder: (context) => const Welcome()),
-                                // );
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const WelcomeRegestration()),
+                                );
                               },
                               style: ButtonStyle(
                                 backgroundColor:
@@ -92,23 +92,7 @@ class _SignupCustomerState extends State<SignupCustomer> {
                             height: 27,
                           ),
                           //////////////////Inputs Fields//////////////
-                          // Container(
-                          //   decoration: BoxDecoration(
-                          //     color: Colors.green[100],
-                          //     borderRadius: BorderRadius.circular(66),
-                          //   ),
-                          //   width: 266,
-                          //   padding: EdgeInsets.symmetric(horizontal: 16),
-                          //   child: TextField(
-                          //     decoration: InputDecoration(
-                          //         icon: Icon(
-                          //           Icons.person,
-                          //           color: Colors.white,
-                          //         ),
-                          //         hintText: "أدخل اسم المشتري",
-                          //         border: InputBorder.none),
-                          //   ),
-                          // ),
+
                           Container(
                             width: 290,
                             height: 53,
@@ -123,23 +107,7 @@ class _SignupCustomerState extends State<SignupCustomer> {
                           SizedBox(
                             height: 20,
                           ),
-                          // Container(
-                          //   decoration: BoxDecoration(
-                          //     color: Colors.green[100],
-                          //     borderRadius: BorderRadius.circular(66),
-                          //   ),
-                          //   width: 266,
-                          //   padding: EdgeInsets.symmetric(horizontal: 16),
-                          //   child: TextField(
-                          //     decoration: InputDecoration(
-                          //         icon: Icon(
-                          //           Icons.email,
-                          //           color: Colors.white,
-                          //         ),
-                          //         hintText: ":أدخل عنوان البريد الإلكتروني",
-                          //         border: InputBorder.none),
-                          //   ),
-                          // ),
+
                           Container(
                             width: 290,
                             height: 53,
@@ -153,29 +121,7 @@ class _SignupCustomerState extends State<SignupCustomer> {
                           SizedBox(
                             height: 23,
                           ),
-                          // Container(
-                          //   decoration: BoxDecoration(
-                          //     color: Colors.green[100],
-                          //     borderRadius: BorderRadius.circular(66),
-                          //   ),
-                          //   width: 266,
-                          //   padding: EdgeInsets.symmetric(horizontal: 16),
-                          //   child: TextField(
-                          //     obscureText: true,
-                          //     decoration: InputDecoration(
-                          //         suffix: Icon(
-                          //           Icons.visibility,
-                          //           color: Colors.white,
-                          //         ),
-                          //         icon: Icon(
-                          //           Icons.lock,
-                          //           color: Colors.white,
-                          //           size: 19,
-                          //         ),
-                          //         hintText: ":أدخل الرقم السري",
-                          //         border: InputBorder.none),
-                          //   ),
-                          // ),
+
                           Container(
                             width: 290,
                             height: 53,
