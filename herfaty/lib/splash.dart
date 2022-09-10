@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:herfaty/Welcome.dart';
+import 'package:herfaty/welcomeRegestration.dart';
 
 //Here is the splash screen
 class Splash extends StatefulWidget {
@@ -14,11 +15,13 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> {
   @override
   void initState() {
-    // super.initState();
-    // Timer(
-    //     Duration(seconds: 3),
-    //     () => Navigator.pushReplacement(
-    //         context, MaterialPageRoute(builder: (context) => Welcome())));
+    super.initState();
+    Timer(
+        Duration(seconds: 3),() => Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => WelcomeRegestration()
+            )
+            )
+            );
   }
 
   @override
@@ -27,8 +30,6 @@ class _SplashState extends State<Splash> {
   }
 
   Widget initWidget() {
-    // Color mycolor = const Color.fromARGB(248, 198, 149, 100);
-    // Color mySeconedColor = const Color.fromARGB(255, 237, 178, 100);
     return Scaffold(
       body: Stack(
         children: [

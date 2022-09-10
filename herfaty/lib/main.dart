@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:herfaty/splash.dart';
 import 'package:herfaty/signupCustomer.dart';
 import 'package:herfaty/signupHerafy.dart';
-import 'package:herfaty/Welcome.dart';
+import 'package:herfaty/welcomeRegestration.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +22,7 @@ class _MyAppState extends State<MyApp> {
       initialRoute: "/",
       routes: {
         "/": (context) => const Splash(),
-        // "/Welcome": (context) => const Welcome(),
+        "/welcomeRegestration": (context) => const WelcomeRegestration(),
         "/signupCustomer": (context) => const SignupCustomer(),
         "/signupHerfay": (context) => const SignupHerafy(),
         // "/home_screen": (context) => const Home_Screen(),
