@@ -183,7 +183,7 @@ return Form(
                         padding: EdgeInsets.symmetric(horizontal: 16),
                         child: 
                         
-                        reusableTextField("الرمز السري", Icons.lock, true,
+                        reusableTextField("كلمة المرور", Icons.lock, true,
                     _passwordTextController),
   //                   validator: (value) {
   //   if (value == null || value.isEmpty) {
@@ -240,7 +240,7 @@ return Form(
           builder: (BuildContext context) {
             return AlertDialog(
               title: Text("خطأ"),
-              content: Text('البريد الإلكتروني أو الرمز السري غير صحيح، حاول مجددا'),
+              content: Text('البريد الإلكتروني أو كلمة المرور غير صحيح، حاول مجددا'),
               actions: <Widget>[
                 TextButton(
                   child: Text("حسنا"),
@@ -292,7 +292,7 @@ return Form(
                         children: [
                           GestureDetector(
                             onTap: (){ Navigator.pushNamed(context, "/forget_password");},
-                            child: Text(" إعادة تعيين الرمز السري ", style: TextStyle(fontWeight: FontWeight.bold ,color: Color.fromARGB(255, 53, 47, 244),fontFamily: "Tajawal"),)),
+                            child: Text(" إعادة تعيين كلمة المرور ", style: TextStyle(fontWeight: FontWeight.bold ,color: Color.fromARGB(255, 53, 47, 244),fontFamily: "Tajawal"),)),
 
                           Text("نسيت الرمز السري؟",style:TextStyle(fontFamily: "Tajawal")),
 

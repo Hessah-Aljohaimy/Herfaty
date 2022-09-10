@@ -16,6 +16,51 @@ class forget_password extends StatefulWidget {
 class _forget_password extends State<forget_password> {
    final _formKey = GlobalKey<FormState>();
   TextEditingController _emailTextController = TextEditingController();
+
+Future resetPassword() async{
+      try{
+         if (_formKey.currentState!.validate()) {
+      await  FirebaseAuth.instance.sendPasswordResetEmail(email: _emailTextController.text.trim());
+                        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("إعادة تعيين كلمة المرور"),
+              content: Text('تم إرسال رسالة إعادة تعيين كلمة المرور إلى بريدك الإلكتروني'),
+              actions: <Widget>[
+                TextButton(
+                  child: Text("حسنا"),
+                  onPressed: () {
+                                       Navigator.of(context).pop();
+                  },
+                )
+              ],
+            );
+          }); }
+      }
+      on FirebaseAuthException catch(e){
+
+ showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+               title: Text("إعادة تعيين كلمة المرور"),
+              content: Text('تم إرسال رسالة إعادة تعيين كلمة المرور إلى بريدك الإلكتروني'),
+              actions: <Widget>[
+                TextButton(
+                  child: Text("حسنا"),
+                  onPressed: () {
+                                       Navigator.of(context).pop();
+                  },
+                )
+              ],
+            );
+          }
+          );
+      }
+    }
+    
+
   @override
   Widget build(BuildContext context) {
 return Form(
@@ -105,9 +150,7 @@ return Form(
                         height: 17,
                       ),
                       ElevatedButton(
-                           onPressed: (){
-                            
-                           } ,
+                           onPressed: resetPassword ,
 //                           if (_formKey.currentState!.validate()) {
 
 
@@ -197,30 +240,30 @@ return Form(
       )),
     );  
     
-    Future resetPassword() async{
-      try{
-      await  FirebaseAuth.instance.sendPasswordResetEmail(email: _emailTextController.text.trim());
-                        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text("jlll"),
-              content: Text('البريد الإلكتروني أو الرمز السري غير صحيح، حاول مجددا'),
-              actions: <Widget>[
-                TextButton(
-                  child: Text("حسنا"),
-                  onPressed: () {
-                                       Navigator.of(context).pop();
-                  },
-                )
-              ],
-            );
-          });
-      }
-      on FirebaseAuthException catch(e){
-Navigator.of(context).pop();
-      }
-    }
+// Future resetPassword() async{
+//       try{
+//       await  FirebaseAuth.instance.sendPasswordResetEmail(email: _emailTextController.text.trim());
+//                         showDialog(
+//           context: context,
+//           builder: (BuildContext context) {
+//             return AlertDialog(
+//               title: Text("jlll"),
+//               content: Text('البريد الإلكتروني أو الرمز السري غير صحيح، حاول مجددا'),
+//               actions: <Widget>[
+//                 TextButton(
+//                   child: Text("حسنا"),
+//                   onPressed: () {
+//                                        Navigator.of(context).pop();
+//                   },
+//                 )
+//               ],
+//             );
+//           });
+//       }
+//       on FirebaseAuthException catch(e){
+// Navigator.of(context).pop();
+//       }
+//     }
     
     }
 }
