@@ -31,8 +31,8 @@ class MyApp extends StatelessWidget {
 //     GlobalCupertinoLocalizations.delegate,
 //   ],
 //   supportedLocales: [
-//    const Locale('er', 'AE'),// English, no country code
-//   ],
+//     Locale("er", "AE"),// English, no country code
+//   ], locale:Locale("ar","AE"),
 
       initialRoute: "/" ,
       routes: {
