@@ -140,15 +140,7 @@ class AppBar extends StatelessWidget {
           bottomLeft: Radius.circular(20),
           bottomRight: Radius.circular(20),
         ),
-        gradient: LinearGradient(
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
-          stops: [0.1, 0.5],
-          colors: [
-            Color(0xffFFEDB2),
-            Color(0xffFFEDB2),
-          ],
-        ),
+        color: kPrimaryLight,
       ),
       child: Column(
         children: [
@@ -156,13 +148,18 @@ class AppBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // ignore: prefer_const_constructors
               Text(
-                ",مرحباً\n صباح الخير",
-                style:
-                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                "مرحباً\n ",
+                // ignore: prefer_const_constructors
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20),
+                textDirection: TextDirection.rtl,
               ),
               CircleButton(
-                icon: Icons.notifications,
+                icon: Icons.account_circle_sharp,
                 onPressed: () {},
               ),
             ],

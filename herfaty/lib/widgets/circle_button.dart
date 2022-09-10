@@ -10,17 +10,18 @@ class CircleButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
-      width: 40,
+      height: 30,
+      width: 30,
       decoration: const BoxDecoration(
         shape: BoxShape.circle,
         color: kPrimaryLight,
       ),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(1.0),
         child: Icon(
           icon,
           color: Colors.white,
+          size: 40,
         ),
       ),
     );
