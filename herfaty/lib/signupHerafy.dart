@@ -14,6 +14,7 @@ class SignupHerafy extends StatefulWidget {
 
 class _SignupHerafyState extends State<SignupHerafy> {
   final _formKey = GlobalKey<FormState>();
+
   TextEditingController _passwordTextController = TextEditingController();
   TextEditingController _emailTextEditingController = TextEditingController();
   TextEditingController _nameTextEditingController = TextEditingController();
@@ -36,6 +37,9 @@ class _SignupHerafyState extends State<SignupHerafy> {
                 child: Stack(
                   children: [
                     ////////////////////////I will remov it //////////////////////
+
+////////////////////////////////////////////////////////////////////
+
                     Positioned(
                       top: 0,
                       left: 0,
@@ -64,7 +68,6 @@ class _SignupHerafyState extends State<SignupHerafy> {
                         ),
                       ),
                     ),
-
                     SizedBox(
                       width: double.infinity,
                       child: Column(
@@ -102,7 +105,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
                             height: 53,
                             padding: EdgeInsets.symmetric(horizontal: 16),
                             child: reusableTextField(
-                                "اسم الحرفي",
+                                " اسم الحرفي الثنائي",
                                 Icons.person_outline,
                                 false,
                                 _nameTextEditingController),

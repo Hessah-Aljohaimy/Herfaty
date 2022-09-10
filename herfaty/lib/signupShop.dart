@@ -46,7 +46,7 @@ class _SignupShopState extends State<SignupShop> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                       
+                     
                           Positioned(
                             top: 0,
                             left: 0,
@@ -103,23 +103,7 @@ class _SignupShopState extends State<SignupShop> {
                             height: 27,
                           ),
                           //////////////////Inputs Fields//////////////
-                          // Container(
-                          //   decoration: BoxDecoration(
-                          //     color: Colors.green[100],
-                          //     borderRadius: BorderRadius.circular(66),
-                          //   ),
-                          //   width: 266,
-                          //   padding: EdgeInsets.symmetric(horizontal: 16),
-                          //   child: TextField(
-                          //     decoration: InputDecoration(
-                          //         icon: Icon(
-                          //           Icons.person,
-                          //           color: Colors.white,
-                          //         ),
-                          //         hintText: "أدخل اسم المشتري",
-                          //         border: InputBorder.none),
-                          //   ),
-                          // ),
+                      
                           Container(
                             width: 290,
                             height: 53,
@@ -134,23 +118,7 @@ class _SignupShopState extends State<SignupShop> {
                           SizedBox(
                             height: 20,
                           ),
-                          // Container(
-                          //   decoration: BoxDecoration(
-                          //     color: Colors.green[100],
-                          //     borderRadius: BorderRadius.circular(66),
-                          //   ),
-                          //   width: 266,
-                          //   padding: EdgeInsets.symmetric(horizontal: 16),
-                          //   child: TextField(
-                          //     decoration: InputDecoration(
-                          //         icon: Icon(
-                          //           Icons.email,
-                          //           color: Colors.white,
-                          //         ),
-                          //         hintText: ":أدخل عنوان البريد الإلكتروني",
-                          //         border: InputBorder.none),
-                          //   ),
-                          // ),
+              
                           Container(
                             width: 290,
                             height: 53,
@@ -159,18 +127,33 @@ class _SignupShopState extends State<SignupShop> {
                                 "وصف عن المتجر",
                                 Icons.email_rounded,
                                 false,
-                                _emailTextEditingController),
+                                _shopDescriptionController),
                           ),
                           SizedBox(
                             height: 23,
                           ),
-                          // Container(
+                        
+
+        Container(
+                            width: 290,
+                            height: 53,
+                            padding: EdgeInsets.symmetric(horizontal: 16),
+                            child: reusableTextField(
+                                "وصف عن المتجر",
+                                Icons.email_rounded,
+                                false,
+                                _shopDescriptionController),
+                          ),
 
 
-
-
-
-
+                        ],
+                      ),
+                      ),
+                      ],
+                      ),
+                      ),
+                      ),
+                      ),
 
 
 
