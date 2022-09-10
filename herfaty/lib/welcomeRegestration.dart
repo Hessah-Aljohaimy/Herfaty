@@ -23,7 +23,7 @@ class WelcomeRegestration extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "!أهلا بك ",
+                        "أهلا بك !",
                         style: TextStyle(
                           fontSize: 40,
                           fontWeight: FontWeight.bold,
@@ -63,7 +63,7 @@ class WelcomeRegestration extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(27))),
                         ),
                         child: Text(
-                          " تسجيل حساب كحرفي",
+                          " تسجيل حساب حرفي",
                           style: TextStyle(fontSize: 24),
                         ),
                       ),
@@ -89,7 +89,7 @@ class WelcomeRegestration extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(27))),
                         ),
                         child: Text(
-                          "تسجيل حساب كمشتري",
+                          "تسجيل حساب مشتري",
                           style: TextStyle(fontSize: 24),
                         ),
                       ),

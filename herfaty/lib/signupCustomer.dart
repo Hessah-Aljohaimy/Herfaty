@@ -166,6 +166,14 @@ class _SignupCustomerState extends State<SignupCustomer> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pushNamed(context, "/login");
+                                },
+                                child: Text(
+                                  " هل لديك حساب بالفعل؟",
+                                ),
+                              ),
                               TextButton(
                                 child: Text(
                                   " تسجيل الدخول",
@@ -181,14 +189,6 @@ class _SignupCustomerState extends State<SignupCustomer> {
                                             const TestLogin()),
                                   );
                                 },
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.pushNamed(context, "/login");
-                                },
-                                child: Text(
-                                  " هل لديك حساب بالفعل؟",
-                                ),
                               ),
                             ],
                           ),
