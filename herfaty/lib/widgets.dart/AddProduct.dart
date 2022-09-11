@@ -75,8 +75,32 @@ class _AddProductState extends State<AddProduct> {
                 hintText: 'اسم المنتج',
                 prefixIcon: Padding(
                   padding: EdgeInsets.only(top: 15),
-                  child: Icon(Icons.person),
+                  child: Icon(Icons.person, color: Color.fromARGB(255, 26, 96, 91)),
                 ),
+                labelStyle:TextStyle(color: Color.fromARGB(255, 26, 96, 91),fontFamily: "Tajawal"),
+      // floatingLabelBehavior: FloatingLabelBehavior.never,
+      fillColor: Colors.white.withOpacity(0.3),
+      
+                               enabledBorder:  OutlineInputBorder(
+                                 borderSide: BorderSide( color: Color.fromARGB(255, 26, 96, 91)), 
+                                  
+                              ),
+                              focusedBorder:OutlineInputBorder(
+                                 borderSide: BorderSide(  width: 2,color: Color.fromARGB(255, 26, 96, 91)),
+                                 ),
+                                   errorStyle: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
+                              
+                                 errorBorder:  OutlineInputBorder(
+
+                                borderSide: BorderSide( color: Color.fromARGB(255, 164, 46, 46)   ), 
+                            
+
+
+                                 ), 
+
+focusedErrorBorder:  OutlineInputBorder(
+                                 borderSide: BorderSide(  width: 2,color: Color.fromARGB(255, 164, 46, 46)),
+                                 ),
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -95,8 +119,32 @@ class _AddProductState extends State<AddProduct> {
                 hintText: 'تفاصيل المنتج',
                 prefixIcon: Padding(
                   padding: EdgeInsets.only(top: 15),
-                  child: Icon(Icons.description),
+                  child: Icon(Icons.description, color: Color.fromARGB(255, 26, 96, 91)),
                 ),
+                labelStyle:TextStyle(color: Color.fromARGB(255, 26, 96, 91),fontFamily: "Tajawal"),
+      // floatingLabelBehavior: FloatingLabelBehavior.never,
+      fillColor: Colors.white.withOpacity(0.3),
+      
+                               enabledBorder:  OutlineInputBorder(
+                                 borderSide: BorderSide( color: Color.fromARGB(255, 26, 96, 91)), 
+                                  
+                              ),
+                              focusedBorder:OutlineInputBorder(
+                                 borderSide: BorderSide(  width: 2,color: Color.fromARGB(255, 26, 96, 91)),
+                                 ),
+                                   errorStyle: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
+                              
+                                 errorBorder:  OutlineInputBorder(
+
+                                borderSide: BorderSide( color: Color.fromARGB(255, 164, 46, 46)   ), 
+                            
+
+
+                                 ), 
+
+focusedErrorBorder:  OutlineInputBorder(
+                                 borderSide: BorderSide(  width: 2,color: Color.fromARGB(255, 164, 46, 46)),
+                                 ),
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -116,12 +164,36 @@ class _AddProductState extends State<AddProduct> {
                 hintText: 'الكمية المتاحة',
                 prefixIcon: Padding(
                   padding: EdgeInsets.only(top: 15),
-                  child: Icon(Icons.numbers),
+                  child: Icon(Icons.numbers, color: Color.fromARGB(255, 26, 96, 91)),
                 ),
+                labelStyle:TextStyle(color: Color.fromARGB(255, 26, 96, 91),fontFamily: "Tajawal"),
+      // floatingLabelBehavior: FloatingLabelBehavior.never,
+      fillColor: Colors.white.withOpacity(0.3),
+      
+                               enabledBorder:  OutlineInputBorder(
+                                 borderSide: BorderSide( color: Color.fromARGB(255, 26, 96, 91)), 
+                                  
+                              ),
+                              focusedBorder:OutlineInputBorder(
+                                 borderSide: BorderSide(  width: 2,color: Color.fromARGB(255, 26, 96, 91)),
+                                 ),
+                                   errorStyle: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
+                              
+                                 errorBorder:  OutlineInputBorder(
+
+                                borderSide: BorderSide( color: Color.fromARGB(255, 164, 46, 46)   ), 
+                            
+
+
+                                 ), 
+
+focusedErrorBorder:  OutlineInputBorder(
+                                 borderSide: BorderSide(  width: 2,color: Color.fromARGB(255, 164, 46, 46)),
+                                 ),
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
+                  return 'أدخل كمية المنتج';
                 }
                 return null;
               },
@@ -167,14 +239,29 @@ class _AddProductState extends State<AddProduct> {
                 }
               },
               child: Text("أضافة منتج"),
-              style: ElevatedButton.styleFrom(
-                  primary: Color.fromARGB(255, 26, 96, 91)),
+              style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Color.fromARGB(255, 35, 125, 118)),
+                          padding: MaterialStateProperty.all(
+                              EdgeInsets.symmetric( horizontal: 90, vertical: 13)),
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(27))),
+                        ),
             ),
             SizedBox(
               height: 20,
             ),
             ElevatedButton(
-              style: ElevatedButton.styleFrom(primary: Colors.red),
+              style:ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Color.fromARGB(255, 167, 29, 29)),
+                          padding: MaterialStateProperty.all(
+                              EdgeInsets.symmetric( horizontal: 90, vertical: 13)),
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(27))),
+                        ),
               onPressed: () {
                 Navigator.of(context).pop();
               },
