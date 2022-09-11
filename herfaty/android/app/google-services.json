@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "829924956073",
+    "firebase_url": "https://herfaty-54792-default-rtdb.firebaseio.com",
+    "project_id": "herfaty-54792",
+    "storage_bucket": "herfaty-54792.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:829924956073:android:116d03e75887089d6056b8",
+        "android_client_info": {
+          "package_name": "com.example.herfaty"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "829924956073-sb5bclddfpi1f2o7l26ml6svpfalet5d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXTcm9E5K-jA8cirzRPLIWHtLasxCUDBM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "829924956073-sb5bclddfpi1f2o7l26ml6svpfalet5d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "829924956073-3orfga3eg1nlcjv21fsdn4uhf4v4if2m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.herfaty"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:829924956073:android:8dbd43903d1621266056b8",
+        "android_client_info": {
+          "package_name": "com.example.sampleproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "829924956073-sb5bclddfpi1f2o7l26ml6svpfalet5d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXTcm9E5K-jA8cirzRPLIWHtLasxCUDBM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "829924956073-sb5bclddfpi1f2o7l26ml6svpfalet5d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "829924956073-3orfga3eg1nlcjv21fsdn4uhf4v4if2m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.herfaty"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
