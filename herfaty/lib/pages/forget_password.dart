@@ -114,7 +114,7 @@ return Form(
                         //  width: 290,
                         // height: 53, 
                         padding: EdgeInsets.symmetric(horizontal: 60),
-                        child:  reusableTextField("البريد الإلكتروني", Icons.person , false,
+                        child:  reusableTextField("البريد الإلكتروني", Icons.email , false,
                     _emailTextController),
   //                       TextFormField(
   //                         decoration: InputDecoration(
@@ -208,11 +208,12 @@ return Form(
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                           Text("الرجوع إلى صفحة ",style: TextStyle(fontFamily: "Tajawal"),),
                           GestureDetector(
                             onTap: (){ Navigator.pushNamed(context, "/login");},
-                            child: Text(" الدخول ", style: TextStyle(fontFamily: "Tajawal", decoration: TextDecoration.underline,color: Color.fromARGB(255, 53, 47, 244)),)),
+                            child: Text("تسجيل الدخول ", style: TextStyle(fontFamily: "Tajawal", decoration: TextDecoration.underline,color: Color.fromARGB(255, 53, 47, 244)),)),
 
-                          Text("الرجوع إلى صفحة ",style: TextStyle(fontFamily: "Tajawal"),),
+                         
 
                           
                         ],

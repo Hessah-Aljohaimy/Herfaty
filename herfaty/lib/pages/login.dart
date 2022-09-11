@@ -128,7 +128,7 @@ return Form(
                       //  width: 290,
                       //   height: 53,
                         padding: EdgeInsets.symmetric(horizontal: 60),
-                        child: reusableTextField("البريد الإلكتروني", Icons.person, false,
+                        child: reusableTextField("البريد الإلكتروني", Icons.email, false,
                     _emailTextController),
 
                 //  SizedBox(
@@ -331,12 +331,13 @@ return Form(
                         
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                               Text("ليس لديك حساب ؟",style:TextStyle(fontFamily: "Tajawal")),
                           GestureDetector(
                             onTap: (){ Navigator.pushNamed(context, "/signup");},
                             child: Text(" تسجيل جديد ", 
                             style: TextStyle(color: Color.fromARGB(255, 53, 47, 244),decoration: TextDecoration.underline ,fontFamily: "Tajawal"),)),
 
-                          Text("ليس لديك حساب ؟",style:TextStyle(fontFamily: "Tajawal")),
+                     
 
                           
                         ],
