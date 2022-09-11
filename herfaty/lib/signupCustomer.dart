@@ -1,7 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:herfaty/customerModel.dart';
+import 'package:herfaty/herafyModel.dart';
 
 import 'package:herfaty/reusable_widgits.dart';
 import 'package:herfaty/test_Login.dart';
+import 'package:herfaty/welcomeRegestration.dart';
 
 class SignupCustomer extends StatefulWidget {
   const SignupCustomer({super.key});
@@ -11,18 +17,19 @@ class SignupCustomer extends StatefulWidget {
 }
 
 class _SignupCustomerState extends State<SignupCustomer> {
+  var _sheetController;
+  var _loading = true;
   final emailController = TextEditingController();
   final numberController = TextEditingController();
+  final auth = FirebaseAuth.instance;
   final _formKey = GlobalKey<FormState>();
   TextEditingController _passwordTextController = TextEditingController();
   TextEditingController _emailTextEditingController = TextEditingController();
-  TextEditingController _nameTextEditingController = TextEditingController();
+  TextEditingController nameTextEditingController = TextEditingController();
   @override
 //   void initState(){
 // super.initState();
-// emailController.addListener(() {setState(() {
-
-// });})
+//  final _auth = FirebaseAuth.instance;
 //   }
 
   @override
@@ -108,7 +115,7 @@ class _SignupCustomerState extends State<SignupCustomer> {
                                 " اسم المشتري الثنائي",
                                 Icons.person,
                                 false,
-                                _nameTextEditingController),
+                                nameTextEditingController),
                           ),
 
                           SizedBox(
@@ -146,13 +153,99 @@ class _SignupCustomerState extends State<SignupCustomer> {
                           ElevatedButton(
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
+                                signupCustomer(_emailTextEditingController.text,
+                                    _passwordTextController.text);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const TestLogin()),
+                                );
                                 // FirebaseAuth.instance.singIn
-                                //FirebaseAuth.instance..createUserWithEmailAndPassword(email:_emailTextEditingController.text,password:_passwordTextController.text).then((value) (){
-                                //Navigator.push(context,MaterialPageRoute(builder:(context)=>HomeScreen()));
-                                //
-                                //
-                                //});
-                                print(' ');
+                                // FirebaseAuth.instance..createUserWithEmailAndPassword(email:_emailTextEditingController.text,password:_passwordTextController.text).then((value) (){
+                                // Navigator.push(context,MaterialPageRoute(builder:(context)=>HomeScreen()));
+
+                                // });
+
+/*
+
+void _validateRegisterInput() async {
+      final FormState? form = _formKey.currentState;
+
+      if (_formKey.currentState?.validate()) {
+        form?.save();
+        _sheetController.setState(() {
+          _loading = true;
+        });
+        try {
+          FirebaseUser user = await FirebaseAuth.instance
+              .createUserWithEmailAndPassword(
+                  email: _email, password: _password);
+          UserUpdateInfo userUpdateInfo = new UserUpdateInfo();
+          userUpdateInfo.displayName = _displayName;
+          user.updateProfile(userUpdateInfo).then((onValue) {
+            Navigator.of(context).pushReplacementNamed('/home');
+            Firestore.instance.collection('users').document().setData(
+                {'email': _email, 'displayName': _displayName}).then((onValue) {
+              _sheetController.setState(() {
+                _loading = false;
+              });
+            });
+          });
+        } catch (error) {
+          switch (error.code) {
+            case "ERROR_EMAIL_ALREADY_IN_USE":
+              {
+                _sheetController.setState(() {
+                  errorMsg = "البريد الإلكتروني مستخدم مسبقا";
+                  _loading = false;
+                });
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        content: Container(
+                          child: Text(errorMsg),
+                        ),
+                      );
+                    });
+              }
+              break;
+            case "ERROR_WEAK_PASSWORD":
+              {
+                _sheetController.setState(() {
+                  errorMsg = "The password must be 6 characters long or more.";
+                  _loading = false;
+                });
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        content: Container(
+                          child: Text(errorMsg),
+                        ),
+                      );
+                    });
+              }
+              break;
+            default:
+              {
+                _sheetController.setState(() {
+                  errorMsg = "";
+                });
+              }
+          }
+        }
+      } else {
+        setState(() {
+          _autoValidate = true;
+        });
+      }
+    }
+
+
+*/
+
+                                print(' customer signed up correctly');
                               }
                             },
                             style: ButtonStyle(
@@ -230,5 +323,52 @@ class _SignupCustomerState extends State<SignupCustomer> {
       ),
     );
   }
+<<<<<<< Updated upstream
 // Future registerWithEmailAndPassword(String email)
+=======
+//
+//
+//
+//
+//
+//
+// Future registerWithEmailAndPassword(String email)
+
+  void signupCustomer(String email, String password) async {
+    if (_formKey.currentState!.validate()) {
+      await auth
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((value) => {postDetailsToFirestore()})
+          .catchError((e) {
+        Fluttertoast.showToast(msg: e!.message);
+      });
+    }
+  }
+
+  postDetailsToFirestore() async {
+    //crating our firestore
+//calling our user model
+//sending these values
+
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    User? user = auth.currentUser!;
+
+    CustomerModel customerModel = CustomerModel();
+    customerModel.email = user.email;
+    customerModel.uid = user.uid;
+    customerModel.customer_name = nameTextEditingController.text;
+
+    await firebaseFirestore
+        .collection("customers")
+        .doc("c3")
+        .set(customerModel.toMAp());
+
+    Fluttertoast.showToast(msg: "تم تسجيل الحساب بنجاح");
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const TestLogin()),
+    );
+  }
+>>>>>>> Stashed changes
 }
