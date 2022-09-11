@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -50,23 +48,6 @@ class _CartState extends State<Cart> {
 
         //test
 
-        body: StreamBuilder<List<CartModal>>(
-            stream: readCart(),
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return Text("somting wrong");
-              } else if (snapshot.hasData) {
-                final cItems = snapshot.data!;
-
-                return ListView(
-                  children: cItems.map(buildCitems).toList(),
-                );
-              } else {
-                return Center(child: CircularProgressIndicator());
-              }
-            }),
-
-/*
         body: Center(
           child: ListView.builder(
               itemCount: cartItems.length,
@@ -150,8 +131,6 @@ class _CartState extends State<Cart> {
               }),
         ),
 
-        */
-
         /*body: Column(
           children: const [
             //AppBarc(),
@@ -204,7 +183,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
 }
 
 //like video read data
-
+/*
 Stream<List<CartModal>> readCart() =>
     FirebaseFirestore.instance.collection('cart').snapshots().map((snapshot) =>
         snapshot.docs.map((doc) => CartModal.fromJson(doc.data())).toList());
@@ -236,4 +215,4 @@ Widget buildCitems(CartModal Cart) => ListTile(
       //leading : CircleAvatar ( child : Text ( ' $ { user.age } ')),
       title: Text(Cart.title),
       subtitle: Text(Cart.price.toString()),
-    );
+    );*/

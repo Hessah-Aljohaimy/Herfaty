@@ -136,8 +136,8 @@ class AppBar extends StatelessWidget {
         color: Color.fromARGB(232, 238, 232, 182),
         gradient: LinearGradient(
           colors: [
-            (Color.fromARGB(248, 228, 175, 122)),
-            (Color.fromARGB(255, 243, 231, 103))
+            (Color.fromARGB(255, 81, 144, 142)),
+            (Color.fromARGB(255, 85, 150, 165)),
           ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,

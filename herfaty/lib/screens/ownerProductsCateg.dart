@@ -31,7 +31,7 @@ class _ownerProductsCategScreenState extends State<ownerProductsCategScreen> {
           },
           label: const Text('أضف منتج جديد'),
           icon: const Icon(Icons.add),
-          backgroundColor: Color(0xffF8C695),
+          backgroundColor: Color(0xff51908E),
           extendedPadding: EdgeInsetsDirectional.only(start: 100.0, end: 100.0),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -150,8 +150,8 @@ class AppBar extends StatelessWidget {
         color: Color.fromARGB(232, 238, 232, 182),
         gradient: LinearGradient(
           colors: [
-            (Color.fromARGB(248, 228, 175, 122)),
-            (Color.fromARGB(255, 243, 231, 103))
+            (Color.fromARGB(255, 81, 144, 142)),
+            (Color.fromARGB(255, 85, 150, 165)),
           ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,

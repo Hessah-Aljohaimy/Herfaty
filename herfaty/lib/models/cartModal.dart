@@ -10,7 +10,6 @@ class CartModal {
       required this.price,
       required this.quantity});
 
-/*
   CartModal.fromJson(Map<String, dynamic> json) {
     image = json['image'];
     title = json['title'];
@@ -26,7 +25,7 @@ class CartModal {
     data['quantity'] = this.quantity;
     return data;
   }
-*/
+/*
 
 //like video
   Map<String, dynamic> toJson() => {
@@ -41,5 +40,5 @@ class CartModal {
         title: json['title'],
         price: json['price'],
         quantity: json['quantity'],
-      );
+      );*/
 }

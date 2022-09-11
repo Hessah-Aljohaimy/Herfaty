@@ -51,7 +51,7 @@ class _ownerBaseScreenState extends State<ownerBaseScreen> {
                 icOrdersOutlined,
                 height: kBottomNavigationBarItemSize,
               ),
-              label: "الطلبات",
+              label: "منتجاتي",
             ),
           ],
           currentIndex: _selectedIndex,
