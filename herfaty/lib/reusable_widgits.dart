@@ -8,15 +8,15 @@ TextFormField reusableTextField(String text, IconData icon, bool isPasswordType,
     enableSuggestions: !isPasswordType,
     autocorrect: !isPasswordType,
     minLines:text=="وصف المتجر"?1:1,
-     maxLines:text=="وصف المتجر"?5:1,
+     maxLines:text=="وصف المتجر"?9:1,
     
-    keyboardType:text=="وصف المتجر"?TextInputType.multiline: TextInputType.multiline,
+    keyboardType:text=="صف المتجر"?TextInputType.multiline: TextInputType.multiline,
     
     style: TextStyle(color: Color.fromARGB(255, 26, 96, 91)),
     
     decoration: InputDecoration(
 
-      contentPadding: const EdgeInsets.symmetric(vertical: 1.0,horizontal: 23),
+      contentPadding: const EdgeInsets.symmetric(vertical: 2.0,horizontal: 23),
       suffix: Icon(
         icon,
         color: Color.fromARGB(255, 26, 96, 91),
@@ -57,7 +57,7 @@ hintText: text=="كلمة المرور"? "كلمة يجب المرور أن لا
 
 
     // keyboardType: isPasswordType ? TextInputType.visiblePassword : TextInputType.emailAddress,
-        //  keyboardType: text == "عمر الطفل"? TextInputType.number:null,
+        //  keyboardType: text == "عمر الطفل"? TextInputType.number:TextInputType.none,
     validator: (value) {
       if (value == null || value.isEmpty) {
         return "أدخل " + text;

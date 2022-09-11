@@ -101,9 +101,10 @@ class _SignupHerafyState extends State<SignupHerafy> {
                 height: 27,
               ),
               Container(
-                width: 290,
-                height: 53,
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                // width: 290,
+                // height: 53,
+                // padding: EdgeInsets.symmetric(horizontal: 16),
+                  padding: EdgeInsets.symmetric(horizontal: 60),
                 child: reusableTextField("اسم الحرفي", Icons.person,
                     false, _nameTextEditingController),
               ),
@@ -113,9 +114,10 @@ class _SignupHerafyState extends State<SignupHerafy> {
               ),
 
               Container(
-                width: 290,
-                height: 53,
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                // width: 290,
+                // height: 53,
+                // padding: EdgeInsets.symmetric(horizontal: 16),
+                  padding: EdgeInsets.symmetric(horizontal: 60),
                 child: reusableTextField("البريد الإلكتروني",
                     Icons.email_rounded, false, _emailTextEditingController),
               ),
@@ -125,9 +127,10 @@ class _SignupHerafyState extends State<SignupHerafy> {
               ),
 
               Container(
-                width: 290,
-                height: 53,
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                // width: 290,
+                // height: 53,
+                // padding: EdgeInsets.symmetric(horizontal: 16),
+                  padding: EdgeInsets.symmetric(horizontal: 60),
                 child: reusableTextField(
                     "كلمة المرور", Icons.lock, true, _passwordTextController),
               ),
@@ -137,9 +140,10 @@ class _SignupHerafyState extends State<SignupHerafy> {
               ),
 
               Container(
-                width: 290,
-                height: 53,
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                // width: 290,
+                // height: 53,
+                // padding: EdgeInsets.symmetric(horizontal: 16),
+                  padding: EdgeInsets.symmetric(horizontal: 60),
                 child: reusableTextField("عمر الطفل",
                     Icons.calendar_today_rounded, false, _dateController),
               ),
@@ -201,15 +205,49 @@ class _SignupHerafyState extends State<SignupHerafy> {
               ),
 
               Container(
-                width: 290,
-                height: 53,
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                // width: 290,
+                // height: 53,
+                // padding: EdgeInsets.symmetric(horizontal: 16),
+                  padding: EdgeInsets.symmetric(horizontal: 60),
                 child: reusableTextField("رقم الجوال", Icons.phone_android,
                     false, _PhoneNumberTextEditingController),
               ),
               SizedBox(
                 height: 17,
               ),
+        
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, "/login");
+                      },
+                      child: Text(
+                        " هل لديك حساب بالفعل؟",
+                      ),
+                    ),
+                    TextButton(
+                      child: Text(
+                        " تسجيل الدخول",
+                        style: TextStyle(
+                          decoration: TextDecoration.underline
+                       ,color: Color.fromARGB(255, 53, 47, 244) ),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const TestLogin()),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+                   SizedBox(
+                height: 17,
+              ),
+              
             ],
           ),
         ),
@@ -291,9 +329,9 @@ class _SignupHerafyState extends State<SignupHerafy> {
 ////////////////////////////Importing Picture //////////////////////////////////
 
                 Container(
-                  width: 290,
-                  height: 53,
-                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  // width: 290,
+                  // height: 53,
+               padding: EdgeInsets.symmetric(horizontal: 60),
                   child: reusableTextField("اسم المتجر", Icons.shop, false,
                       _shopnameTextEditingController),
                 ),
@@ -303,9 +341,9 @@ class _SignupHerafyState extends State<SignupHerafy> {
                 ),
 
                 Container(
-                  width: 290,
-                  height: 53,
-                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  // width: 290,
+                  // height: 53,
+                  padding: EdgeInsets.symmetric(horizontal: 60),
                   child: reusableTextField("وصف المتجر", Icons.shop_2, false,
                       _shopdescriptionTextEditingController),
                 ),
