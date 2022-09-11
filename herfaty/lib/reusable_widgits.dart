@@ -8,7 +8,10 @@ TextFormField reusableTextField(String text, IconData icon, bool isPasswordType,
     enableSuggestions: !isPasswordType,
     autocorrect: !isPasswordType,
     style: TextStyle(color: Color.fromARGB(255, 26, 96, 91)),
+    
     decoration: InputDecoration(
+
+      contentPadding: const EdgeInsets.symmetric(vertical: 1.0,horizontal: 23),
       suffix: Icon(
         icon,
         color: Color.fromARGB(255, 26, 96, 91),
@@ -25,6 +28,23 @@ TextFormField reusableTextField(String text, IconData icon, bool isPasswordType,
         borderSide:
             BorderSide(width: 2, color: Color.fromARGB(255, 26, 96, 91)),
       ),
+
+ errorStyle: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
+                              
+                                 errorBorder:  OutlineInputBorder(
+
+                                borderSide: BorderSide( color: Color.fromARGB(255, 164, 46, 46)   ), 
+                            
+
+
+                                 ), 
+
+focusedErrorBorder:  OutlineInputBorder(
+                                 borderSide: BorderSide(  width: 2,color: Color.fromARGB(255, 164, 46, 46)),
+                                 ),
+
+
+
     ),
     keyboardType: isPasswordType
         ? TextInputType.visiblePassword

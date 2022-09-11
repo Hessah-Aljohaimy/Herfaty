@@ -98,15 +98,15 @@ class _SignupCustomerState extends State<SignupCustomer> {
                           //////////////////Inputs Fields//////////////
 
                           Container(
-                            width: 290,
-                            height: 53,
-                            padding: EdgeInsets.symmetric(horizontal: 16),
+                             // width: 290,
+                            // height: 53,
+  padding: EdgeInsets.symmetric(horizontal: 60),
                             // child: TextFormField (
                             //   validator: (value) => value.isEmpty?'ادخل اسم المشتري الثنائي':null,
 
                             child: reusableTextField(
                                 " اسم المشتري الثنائي",
-                                Icons.person_outline,
+                                Icons.person,
                                 false,
                                 _nameTextEditingController),
                           ),
@@ -115,10 +115,10 @@ class _SignupCustomerState extends State<SignupCustomer> {
                             height: 20,
                           ),
                           Container(
-                            width: 290,
-                            height: 53,
-                            padding: EdgeInsets.symmetric(horizontal: 16),
-                            child: reusableTextField(
+                            // width: 290,
+                            // height: 53,
+  padding: EdgeInsets.symmetric(horizontal: 60),
+                              child: reusableTextField(
                                 "البريد الإلكتروني",
                                 Icons.email_rounded,
                                 false,
@@ -128,9 +128,9 @@ class _SignupCustomerState extends State<SignupCustomer> {
                             height: 23,
                           ),
                           Container(
-                            width: 290,
-                            height: 53,
-                            padding: EdgeInsets.symmetric(horizontal: 16),
+                           // width: 290,
+                            // height: 53,
+  padding: EdgeInsets.symmetric(horizontal: 60),
                             child: reusableTextField("كلمة المرور", Icons.lock,
                                 true, _passwordTextController),
                           ),
@@ -230,5 +230,5 @@ class _SignupCustomerState extends State<SignupCustomer> {
       ),
     );
   }
-Future registerWithEmailAndPassword(String email)
+// Future registerWithEmailAndPassword(String email)
 }

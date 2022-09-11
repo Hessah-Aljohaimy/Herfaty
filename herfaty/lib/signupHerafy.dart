@@ -103,7 +103,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
                 width: 290,
                 height: 53,
                 padding: EdgeInsets.symmetric(horizontal: 16),
-                child: reusableTextField("اسم الحرفي", Icons.person_outline,
+                child: reusableTextField("اسم الحرفي", Icons.person,
                     false, _nameTextEditingController),
               ),
 
