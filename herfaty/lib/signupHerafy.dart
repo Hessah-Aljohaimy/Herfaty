@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/test_Login.dart';
 import 'package:herfaty/reusable_widgits.dart';
 import 'package:herfaty/welcomeRegestration.dart';
@@ -315,11 +316,16 @@ class _SignupHerafyState extends State<SignupHerafy> {
                   height: 6,
                 ),
                 ElevatedButton(
-                  onPressed: () {
 //1 Authentication
-
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const TestLogin()));
 //2 Routing
-                    Navigator.of(context).pushNamed("test_Login");
+
+                    }
                   },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
@@ -416,7 +422,17 @@ class _SignupHerafyState extends State<SignupHerafy> {
                   Expanded(
                     child: ElevatedButton(
                       child: Text("التالي"),
-                      onPressed: controls.onStepContinue,
+                      onPressed: () {
+                        try {
+                          if (_formKey.currentState!.validate()) {
+                            Fluttertoast.showToast(msg: "لا توجد مشكله");
+                          }
+                        } catch (e) {
+                          Fluttertoast.showToast(msg: "حاول مجددا");
+                        }
+
+                        controls.onStepContinue;
+                      },
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
                             Color.fromARGB(255, 26, 96, 91)),

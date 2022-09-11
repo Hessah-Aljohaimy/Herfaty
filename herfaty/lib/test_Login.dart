@@ -24,13 +24,15 @@ class _TestLoginState extends State<TestLogin> {
                     height: 20,
                   ),
                   // ignore: prefer_const_constructors
-                  Text(
-                    "تجربة تسجيل حساب جديد",
-                    // ignore: prefer_const_constructors
-                    style: TextStyle(
-                        fontSize: 35,
-                        fontFamily: "myfont",
-                        color: Colors.black),
+                  Center(
+                    child: Text(
+                      "تجربة تسجيل حساب جديد",
+                      // ignore: prefer_const_constructors
+                      style: TextStyle(
+                          fontSize: 35,
+                          fontFamily: "myfont",
+                          color: Colors.black),
+                    ),
                   ),
                   // ignore: prefer_const_constructors
                   SizedBox(
