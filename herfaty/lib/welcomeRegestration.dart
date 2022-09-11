@@ -25,15 +25,12 @@ class WelcomeRegestration extends StatelessWidget {
                       children: [
                         Text(
                           "أهلا بك !",
-                          style: TextStyle(
-                            fontSize: 40,
-                            fontFamily: "Tajawal",
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 26, 96, 91),
+                          style: TextStyle(fontSize: 33, fontFamily: "Tajawal" 
+                        ,fontWeight: FontWeight.bold,color: Color.fromARGB(255, 26, 96, 91)
                           ),
                         ),
                          SizedBox(
-                          height: 21,
+                          height: 15,
                         ),
                         Positioned(
                           bottom: 50,
@@ -51,6 +48,16 @@ class WelcomeRegestration extends StatelessWidget {
                         //   "assets/images/HerfatyLogo.png",
                         //   width: 120,
                         // ),
+
+                         Text(
+                          "تسجيل حساب جديد",
+                          style: TextStyle(fontSize: 33, fontFamily: "Tajawal" 
+                        ,fontWeight: FontWeight.bold,color: Color.fromARGB(255, 26, 96, 91)
+                          ),
+                        ),
+                         SizedBox(
+                          height: 21,
+                        ),
                         ElevatedButton(
                           onPressed: () {
                             Navigator.push(
@@ -69,7 +76,7 @@ class WelcomeRegestration extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(27))),
                           ),
                           child: Text(
-                            " تسجيل حساب حرفي",
+                            " حرفي",
                             style: TextStyle(
                               fontSize: 14,
                               fontFamily: "Tajawal",
@@ -98,7 +105,7 @@ class WelcomeRegestration extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(27))),
                           ),
                           child: Text(
-                            "تسجيل حساب مشتري",
+                            "مشتري",
                             style: TextStyle(
                               fontSize: 14,
                               fontFamily: "Tajawal",

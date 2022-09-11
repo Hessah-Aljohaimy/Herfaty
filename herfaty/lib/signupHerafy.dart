@@ -39,6 +39,12 @@ class _SignupHerafyState extends State<SignupHerafy> {
           title: Text('معلومات الحرفي'),
           content: Column(
             children: <Widget>[
+              
+              Container(
+                  child: Image.asset(
+                "assets/images/HerfatyLogoCroped.png",
+                height: 120,
+              )),
               // Positioned(
               //   left: 0,
               //   top: 0,
@@ -75,11 +81,6 @@ class _SignupHerafyState extends State<SignupHerafy> {
                 height: 20,
               ),
 
-              Container(
-                  child: Image.asset(
-                "assets/images/HerfatyLogoCroped.png",
-                height: 120,
-              )),
               SizedBox(
                 height: 10,
               ),
@@ -219,6 +220,12 @@ class _SignupHerafyState extends State<SignupHerafy> {
           content: Container(
             child: Column(
               children: <Widget>[
+                
+              Container(
+                  child: Image.asset(
+                "assets/images/HerfatyLogoCroped.png",
+                height: 120,
+              )),
                 // Positioned(
                 //   left: 0,
                 //   top: 0,

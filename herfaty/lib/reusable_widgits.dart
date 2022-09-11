@@ -7,6 +7,11 @@ TextFormField reusableTextField(String text, IconData icon, bool isPasswordType,
     obscureText: isPasswordType,
     enableSuggestions: !isPasswordType,
     autocorrect: !isPasswordType,
+    minLines:text=="وصف المتجر"?1:1,
+     maxLines:text=="وصف المتجر"?5:1,
+    
+    keyboardType:text=="وصف المتجر"?TextInputType.multiline: TextInputType.multiline,
+    
     style: TextStyle(color: Color.fromARGB(255, 26, 96, 91)),
     
     decoration: InputDecoration(
@@ -28,6 +33,7 @@ TextFormField reusableTextField(String text, IconData icon, bool isPasswordType,
         borderSide:
             BorderSide(width: 2, color: Color.fromARGB(255, 26, 96, 91)),
       ),
+      
 
  errorStyle: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
                               
@@ -43,12 +49,15 @@ focusedErrorBorder:  OutlineInputBorder(
                                  borderSide: BorderSide(  width: 2,color: Color.fromARGB(255, 164, 46, 46)),
                                  ),
 
+hintText: text=="كلمة المرور"? "كلمة يجب المرور أن لا تقل عن 6 خانات":"",
+
 
 
     ),
-    keyboardType: isPasswordType
-        ? TextInputType.visiblePassword
-        : TextInputType.emailAddress,
+
+
+    // keyboardType: isPasswordType ? TextInputType.visiblePassword : TextInputType.emailAddress,
+        //  keyboardType: text == "عمر الطفل"? TextInputType.number:null,
     validator: (value) {
       if (value == null || value.isEmpty) {
         return "أدخل " + text;
@@ -64,7 +73,7 @@ focusedErrorBorder:  OutlineInputBorder(
       if (text == "كلمة المرور") {
         if (value.length < 6) return "كلمة المرور يجب أن لا تقل عن 6 خانات";
       }
-      if (text == "تاريخ الميلاد") {
+      if (text == "عمر الطفل") {
         return "  yyyy/mm/dd ادخل تاريخ الميلاد ";
       }
 

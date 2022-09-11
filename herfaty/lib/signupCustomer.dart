@@ -135,11 +135,11 @@ class _SignupCustomerState extends State<SignupCustomer> {
                                 true, _passwordTextController),
                                 
                           ),
-                                   Positioned(
-                                    right: 0,
-                                    bottom: 0,
-                                    child:
-                          Text("* كلمه المرور لا تقل عن 6 خانات", style: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),),),
+                          //          Positioned(
+                          //           right: 0,
+                          //           bottom: 0,
+                          //           child:
+                          // Text("* كلمه المرور لا تقل عن 6 خانات", style: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),),),
                           SizedBox(
                             height: 23,
                           ),
@@ -196,7 +196,7 @@ class _SignupCustomerState extends State<SignupCustomer> {
                                   " تسجيل الدخول",
                                   style: TextStyle(
                                       decoration: TextDecoration.underline,
-                                      fontFamily: "Tajawal"),
+                                      fontFamily: "Tajawal",color:Color.fromARGB(255, 53, 47, 244)),
                                 ),
                                 onPressed: () {
                                   Navigator.push(
@@ -212,18 +212,18 @@ class _SignupCustomerState extends State<SignupCustomer> {
                           SizedBox(
                             height: 17,
                           ),
-                          SizedBox(
-                            width: 299,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                    child: Divider(
-                                  thickness: 0.6,
-                                  color: Color.fromARGB(255, 26, 96, 91),
-                                )),
-                              ],
-                            ),
-                          ),
+                          // SizedBox(
+                          //   width: 299,
+                          //   child: Row(
+                          //     children: [
+                          //       Expanded(
+                          //           child: Divider(
+                          //         thickness: 0.6,
+                          //         color: Color.fromARGB(255, 26, 96, 91),
+                          //       )),
+                          //     ],
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
