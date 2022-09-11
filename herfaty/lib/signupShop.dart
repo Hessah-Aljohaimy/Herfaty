@@ -32,6 +32,7 @@ class _SignupShopState extends State<SignupShop> {
     return Form(
       key: _formKey,
       child: Scaffold(
+        
         resizeToAvoidBottomInset: false,
           body: SafeArea(
             child: Scaffold(

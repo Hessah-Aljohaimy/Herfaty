@@ -152,7 +152,7 @@ class _SignupCustomerState extends State<SignupCustomer> {
                                 //
                                 //
                                 //});
-                                print('hello');
+                                print(' ');
                               }
                             },
                             style: ButtonStyle(
@@ -230,4 +230,5 @@ class _SignupCustomerState extends State<SignupCustomer> {
       ),
     );
   }
+Future registerWithEmailAndPassword(String email)
 }

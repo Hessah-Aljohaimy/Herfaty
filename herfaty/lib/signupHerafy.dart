@@ -139,7 +139,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
                 width: 290,
                 height: 53,
                 padding: EdgeInsets.symmetric(horizontal: 16),
-                child: reusableTextField("تاريخ الميلاد",
+                child: reusableTextField("عمر الطفل",
                     Icons.calendar_today_rounded, false, _dateController),
               ),
               ///////////////////////////Importing DatePicker//////////////////////

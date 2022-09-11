@@ -34,10 +34,18 @@ TextFormField reusableTextField(String text, IconData icon, bool isPasswordType,
         return "أدخل " + text;
       }
 
-      if (!RegExp(r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
+      if (text == "البريد الإلكتروني" &&
+          !RegExp(r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
               .hasMatch(value) &&
           !isPasswordType) {
         return 'أدخل بريد إلكتروني صحيح';
+      }
+
+      if (text == "كلمة المرور") {
+        if (value.length < 6) return "كلمة المرور يجب أن لا تقل عن 6 خانات";
+      }
+      if (text == "تاريخ الميلاد") {
+        return "  yyyy/mm/dd ادخل تاريخ الميلاد ";
       }
 
       return null;
