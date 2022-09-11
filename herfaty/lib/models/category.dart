@@ -22,7 +22,7 @@ List<Category> categoryList = [
     thumbnail: 'assets/icons/painting3.png',
   ),
   Category(
-    name: 'حياكة وتطريز',
+    name: 'الحياكة والتطريز',
     noOfProducts: 16,
     thumbnail: 'assets/icons/crochet2.png',
   ),

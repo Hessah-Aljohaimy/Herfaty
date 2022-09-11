@@ -1,10 +1,9 @@
-import 'package:herfaty/constants/color.dart';
 import 'package:flutter/material.dart';
 
-class CircleButton extends StatelessWidget {
+class profileButton extends StatelessWidget {
   final IconData icon;
   final GestureTapCallback onPressed;
-  const CircleButton({Key? key, required this.icon, required this.onPressed})
+  const profileButton({Key? key, required this.icon, required this.onPressed})
       : super(key: key);
 
   @override
@@ -14,7 +13,6 @@ class CircleButton extends StatelessWidget {
       width: 30,
       decoration: const BoxDecoration(
         shape: BoxShape.circle,
-        color: kPrimaryLight,
       ),
       child: Padding(
         padding: const EdgeInsets.all(1.0),

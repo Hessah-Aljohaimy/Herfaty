@@ -1,7 +1,12 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:herfaty/screens/ownerProductsCateg.dart';
+import 'package:herfaty/screens/owner_base_screen.dart';
 import 'firebase_options.dart';
-import 'package:herfaty/screens/base_screen.dart';
+import 'package:herfaty/screens/customer_base_screen.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,6 +23,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('ar', 'AE'),
+      ],
       debugShowCheckedModeBanner: false,
       title: 'حرفتي',
       theme: ThemeData(
@@ -44,7 +57,9 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const BaseScreen(),
+      home: const customerBaseScreen(),
+      //home: const ownerBaseScreen(),
+      //home: const ownerProductsCategScreen(),
     );
   }
 }

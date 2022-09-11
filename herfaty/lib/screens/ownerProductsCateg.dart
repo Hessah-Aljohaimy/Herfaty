@@ -1,22 +1,19 @@
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/constants/size.dart';
 import 'package:herfaty/models/category.dart';
-//import 'package:herfaty/screens/course_screen.dart';
-//import 'package:herfaty/screens/details_screen.dart';
-import 'package:herfaty/widgets/circle_button.dart';
+import 'package:herfaty/widgets/profile_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-//import '../widgets/search_testfield.dart';
-
-class FeaturedScreen extends StatefulWidget {
-  const FeaturedScreen({Key? key}) : super(key: key);
+class ownerProductsCategScreen extends StatefulWidget {
+  const ownerProductsCategScreen({Key? key}) : super(key: key);
 
   @override
-  _FeaturedScreenState createState() => _FeaturedScreenState();
+  _ownerProductsCategScreenState createState() =>
+      _ownerProductsCategScreenState();
 }
 
-class _FeaturedScreenState extends State<FeaturedScreen> {
+class _ownerProductsCategScreenState extends State<ownerProductsCategScreen> {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -28,6 +25,16 @@ class _FeaturedScreenState extends State<FeaturedScreen> {
             Body(),
           ],
         ),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            // Add your onPressed code here!
+          },
+          label: const Text('أضف منتج جديد'),
+          icon: const Icon(Icons.add),
+          backgroundColor: Color(0xffF8C695),
+          extendedPadding: EdgeInsetsDirectional.only(start: 100.0, end: 100.0),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
     );
   }
@@ -140,7 +147,15 @@ class AppBar extends StatelessWidget {
           bottomLeft: Radius.circular(20),
           bottomRight: Radius.circular(20),
         ),
-        color: kPrimaryLight,
+        color: Color.fromARGB(232, 238, 232, 182),
+        gradient: LinearGradient(
+          colors: [
+            (Color.fromARGB(248, 228, 175, 122)),
+            (Color.fromARGB(255, 243, 231, 103))
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
       ),
       child: Column(
         children: [
@@ -158,7 +173,7 @@ class AppBar extends StatelessWidget {
                     fontSize: 20),
                 textDirection: TextDirection.rtl,
               ),
-              CircleButton(
+              profileButton(
                 icon: Icons.account_circle_sharp,
                 onPressed: () {},
               ),

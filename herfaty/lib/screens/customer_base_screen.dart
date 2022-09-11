@@ -1,24 +1,25 @@
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/constants/icons.dart';
 import 'package:herfaty/constants/size.dart';
-import 'package:herfaty/screens/featuerd_screen.dart';
+import 'package:herfaty/screens/customerHome.dart';
 import 'package:flutter/material.dart';
+import 'package:herfaty/cart/cart.dart';
 
-class BaseScreen extends StatefulWidget {
-  const BaseScreen({Key? key}) : super(key: key);
+class customerBaseScreen extends StatefulWidget {
+  const customerBaseScreen({Key? key}) : super(key: key);
 
   @override
-  _BaseScreenState createState() => _BaseScreenState();
+  _customerBaseScreenState createState() => _customerBaseScreenState();
 }
 
-class _BaseScreenState extends State<BaseScreen> {
+class _customerBaseScreenState extends State<customerBaseScreen> {
   int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
-    FeaturedScreen(),
-    FeaturedScreen(),
-    FeaturedScreen(),
-    FeaturedScreen(),
+    customerHomeScreen(),
+    Cart(),
+    customerHomeScreen(),
+    customerHomeScreen(),
   ];
   @override
   Widget build(BuildContext context) {
