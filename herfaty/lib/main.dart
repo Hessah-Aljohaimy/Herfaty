@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:herfaty/pages/login.dart';
+import 'package:herfaty/pages/splash.dart';
 import 'package:herfaty/pages/welcome.dart';
 import 'package:herfaty/pages/forget_password.dart';
 import 'package:herfaty/pages/home_screen.dart';
@@ -36,7 +37,8 @@ localizationsDelegates: [
 
       initialRoute: "/" ,
       routes: {
-        "/" : (context) => const Welcome(),
+        "/" : (context) => const Splash(),
+         "/welcome" : (context) => const Welcome(),
         "/login" : (context) => const login(),
         "/forget_password" : (context) => const forget_password(),
         "/home_screen" : (context) => const homeScreen(),
