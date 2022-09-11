@@ -134,6 +134,7 @@ class _SignupCustomerState extends State<SignupCustomer> {
                             child: reusableTextField("كلمة المرور", Icons.lock,
                                 true, _passwordTextController),
                           ),
+                          Text("كلمه المرور لا تقل عن 6 خانات", style: TextStyle(color: Color.fromARGB(255, 112, 21, 21)),),
                           SizedBox(
                             height: 23,
                           ),
@@ -166,7 +167,7 @@ class _SignupCustomerState extends State<SignupCustomer> {
                                       borderRadius: BorderRadius.circular(27))),
                             ),
                             child: Text(
-                              "سجل الحساب",
+                              "تسجيل الحساب",
                               style: TextStyle(fontSize: 24),
                             ),
                           ),

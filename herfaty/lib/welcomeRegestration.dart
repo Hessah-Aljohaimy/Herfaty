@@ -32,6 +32,9 @@ class WelcomeRegestration extends StatelessWidget {
                             color: Color.fromARGB(255, 26, 96, 91),
                           ),
                         ),
+                         SizedBox(
+                          height: 21,
+                        ),
                         Positioned(
                           bottom: 50,
                           top: 50,
@@ -41,7 +44,9 @@ class WelcomeRegestration extends StatelessWidget {
                             width: 200,
                           ),
                         ),
-
+ SizedBox(
+                          height: 21,
+                        ),
                         // Image.asset(
                         //   "assets/images/HerfatyLogo.png",
                         //   width: 120,
@@ -56,10 +61,9 @@ class WelcomeRegestration extends StatelessWidget {
                           },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
-                                Color.fromARGB(255, 26, 96, 91)),
+                               Color(0xff51908E)),
                             padding: MaterialStateProperty.all(
-                                EdgeInsets.symmetric(
-                                    horizontal: 79, vertical: 10)),
+                                EdgeInsets.symmetric( horizontal: 90, vertical: 13)),
                             shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(27))),
@@ -67,7 +71,7 @@ class WelcomeRegestration extends StatelessWidget {
                           child: Text(
                             " تسجيل حساب حرفي",
                             style: TextStyle(
-                              fontSize: 24,
+                              fontSize: 14,
                               fontFamily: "Tajawal",
                               fontWeight: FontWeight.bold,
                             ),
@@ -86,10 +90,9 @@ class WelcomeRegestration extends StatelessWidget {
                           },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
-                                Color.fromARGB(255, 26, 96, 91)),
+                               Color(0xff51908E)),
                             padding: MaterialStateProperty.all(
-                                EdgeInsets.symmetric(
-                                    horizontal: 79, vertical: 10)),
+                                EdgeInsets.symmetric( horizontal: 90, vertical: 13)),
                             shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(27))),
@@ -97,7 +100,7 @@ class WelcomeRegestration extends StatelessWidget {
                           child: Text(
                             "تسجيل حساب مشتري",
                             style: TextStyle(
-                              fontSize: 24,
+                              fontSize: 14,
                               fontFamily: "Tajawal",
                               fontWeight: FontWeight.bold,
                             ),
