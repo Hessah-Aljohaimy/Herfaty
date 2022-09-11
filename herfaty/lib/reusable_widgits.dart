@@ -7,14 +7,14 @@ TextFormField reusableTextField(String text, IconData icon, bool isPasswordType,
     obscureText: isPasswordType,
     enableSuggestions: !isPasswordType,
     autocorrect: !isPasswordType,
-    style: TextStyle(color: Color.fromARGB(106, 26, 96, 91)),
+    style: TextStyle(color: Color.fromARGB(166, 26, 96, 91)),
     
     decoration: InputDecoration(
 
       contentPadding: const EdgeInsets.symmetric(vertical: 1.0,horizontal: 23),
       suffix: Icon(
         icon,
-        color: Color.fromARGB(255, 26, 96, 91),
+        color: Color.fromARGB(106, 26, 96, 91),
       ),
       labelText: text,
       labelStyle: TextStyle(color: Color.fromARGB(255, 26, 96, 91)),
