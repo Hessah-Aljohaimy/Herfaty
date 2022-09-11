@@ -310,7 +310,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
                 SizedBox(
                   height: 17,
                 ),
-                Text("!هيا لتبدأ رحلتك"),
+                Text("هيا لتبدأ رحلتك!"),
                 SizedBox(
                   height: 6,
                 ),
@@ -323,15 +323,15 @@ class _SignupHerafyState extends State<SignupHerafy> {
                   },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
-                        Color.fromARGB(255, 26, 96, 91)),
+                       Color(0xff51908E)),
                     padding: MaterialStateProperty.all(
-                        EdgeInsets.symmetric(horizontal: 89, vertical: 10)),
+                        EdgeInsets.symmetric(horizontal: 90, vertical: 13)),
                     shape: MaterialStateProperty.all(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(27))),
                   ),
                   child: Text(
-                    "سجل الحساب",
-                    style: TextStyle(fontSize: 24),
+                    "تسجيل الحساب",
+                    style: TextStyle(fontSize: 14,fontFamily: "Tajawal",fontWeight: FontWeight.bold),
                   ),
                 ),
                 SizedBox(
@@ -352,8 +352,8 @@ class _SignupHerafyState extends State<SignupHerafy> {
                       child: Text(
                         " تسجيل الدخول",
                         style: TextStyle(
-                          decoration: TextDecoration.underline,
-                        ),
+                          decoration: TextDecoration.underline
+                       ,color: Color.fromARGB(255, 53, 47, 244) ),
                       ),
                       onPressed: () {
                         Navigator.push(
@@ -419,9 +419,9 @@ class _SignupHerafyState extends State<SignupHerafy> {
                       onPressed: controls.onStepContinue,
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
-                            Color.fromARGB(255, 26, 96, 91)),
+                           Color(0xff51908E)),
                         padding: MaterialStateProperty.all(
-                            EdgeInsets.symmetric(horizontal: 89, vertical: 10)),
+                            EdgeInsets.symmetric(horizontal: 90, vertical: 13)),
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(27))),
                       ),
@@ -437,7 +437,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
                         backgroundColor: MaterialStateProperty.all(
                             Color.fromARGB(248, 228, 175, 122)),
                         padding: MaterialStateProperty.all(
-                            EdgeInsets.symmetric(horizontal: 89, vertical: 10)),
+                            EdgeInsets.symmetric(horizontal: 90, vertical: 13)),
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(27))),
                       ),

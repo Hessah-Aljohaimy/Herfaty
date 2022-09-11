@@ -133,8 +133,13 @@ class _SignupCustomerState extends State<SignupCustomer> {
   padding: EdgeInsets.symmetric(horizontal: 60),
                             child: reusableTextField("كلمة المرور", Icons.lock,
                                 true, _passwordTextController),
+                                
                           ),
-                          Text("كلمه المرور لا تقل عن 6 خانات", style: TextStyle(color: Color.fromARGB(255, 112, 21, 21)),),
+                                   Positioned(
+                                    right: 0,
+                                    bottom: 0,
+                                    child:
+                          Text("* كلمه المرور لا تقل عن 6 خانات", style: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),),),
                           SizedBox(
                             height: 23,
                           ),
@@ -158,17 +163,17 @@ class _SignupCustomerState extends State<SignupCustomer> {
                             },
                             style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all(
-                                  Color.fromARGB(255, 26, 96, 91)),
+                                 Color(0xff51908E)),
                               padding: MaterialStateProperty.all(
                                   EdgeInsets.symmetric(
-                                      horizontal: 89, vertical: 10)),
+                                      horizontal: 90, vertical: 13)),
                               shape: MaterialStateProperty.all(
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(27))),
                             ),
                             child: Text(
                               "تسجيل الحساب",
-                              style: TextStyle(fontSize: 24),
+                              style: TextStyle(fontSize: 14,fontFamily: "Tajawal",fontWeight: FontWeight.bold),
                             ),
                           ),
                           SizedBox(
