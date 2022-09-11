@@ -57,7 +57,7 @@ class Welcome extends StatelessWidget {
                       },
                       
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 35, 125, 118)),
+                        backgroundColor: MaterialStateProperty.all(Color(0xff51908E)),
                         padding: MaterialStateProperty.all(
                             EdgeInsets.symmetric(horizontal: 90, vertical: 13)),
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
@@ -79,7 +79,7 @@ class Welcome extends StatelessWidget {
                       
                       style: ButtonStyle(
                         backgroundColor:
-                            MaterialStateProperty.all(Color.fromARGB(255, 114, 159, 160)),
+                            MaterialStateProperty.all(Color(0xff51908E)),
                         padding: MaterialStateProperty.all(
                             EdgeInsets.symmetric(horizontal: 90, vertical: 13)),
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(

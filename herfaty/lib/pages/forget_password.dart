@@ -44,8 +44,8 @@ Future resetPassword() async{
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-               title: Text("إعادة تعيين كلمة المرور"),
-              content: Text('تم إرسال رسالة إعادة تعيين كلمة المرور إلى بريدك الإلكتروني'),
+               title: Text("خطأ"),
+              content: Text('البريد الإلكتروني غير موجود'),
               actions: <Widget>[
                 TextButton(
                   child: Text("حسنا"),
@@ -184,7 +184,7 @@ return Form(
                         
                         style: ButtonStyle(
                           backgroundColor:
-                              MaterialStateProperty.all(Color.fromARGB(255, 35, 125, 118)),
+                              MaterialStateProperty.all(Color(0xff51908E)),
                           padding: MaterialStateProperty.all(
                               EdgeInsets.symmetric(
                                   horizontal: 106, vertical: 13)),
