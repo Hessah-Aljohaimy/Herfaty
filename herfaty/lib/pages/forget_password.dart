@@ -92,7 +92,7 @@ return Form(
                       ),
                       
                       Text(
-                        "إعادة تعيين الرمز السري",
+                        "إعادة تعيين كلمة المرور",
                         style: TextStyle(fontSize: 33, fontFamily: "myfont" ,fontWeight: FontWeight.bold,color: Color.fromARGB(255, 26, 96, 91),),
                         
                       ),
@@ -210,7 +210,7 @@ return Form(
                         children: [
                           GestureDetector(
                             onTap: (){ Navigator.pushNamed(context, "/login");},
-                            child: Text(" الدخول ", style: TextStyle(fontFamily: "Tajawal", fontWeight: FontWeight.bold,color: Color.fromARGB(255, 53, 47, 244)),)),
+                            child: Text(" الدخول ", style: TextStyle(fontFamily: "Tajawal", decoration: TextDecoration.underline,color: Color.fromARGB(255, 53, 47, 244)),)),
 
                           Text("الرجوع إلى صفحة ",style: TextStyle(fontFamily: "Tajawal"),),
 

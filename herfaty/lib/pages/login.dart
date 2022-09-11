@@ -292,11 +292,35 @@ return Form(
                         children: [
                           GestureDetector(
                             onTap: (){ Navigator.pushNamed(context, "/forget_password");},
-                            child: Text(" إعادة تعيين كلمة المرور ", style: TextStyle(fontWeight: FontWeight.bold ,color: Color.fromARGB(255, 53, 47, 244),fontFamily: "Tajawal"),)),
+                            child: Text("نسيت كلمة المرور؟", style: TextStyle(color: Color.fromARGB(255, 53, 47, 244),fontFamily: "Tajawal",decoration: TextDecoration.underline),)),
 
-                          Text("نسيت الرمز السري؟",style:TextStyle(fontFamily: "Tajawal")),
+                          Text("",style:TextStyle(fontFamily: "Tajawal"),),
 
-                          
+                          //  GestureDetector(
+                          //       onTap: () {
+                          //         Navigator.pushNamed(context, "/login");
+                          //       },
+                          //       child: Text(
+                          //         "",
+                          //         style: TextStyle(fontFamily: "Tajawal"),
+                          //       ),
+                          //     ),
+                          //     TextButton(
+                          //       child: Text(
+                          //         "نسيت كلمة",
+                          //         style: TextStyle(
+                          //             decoration: TextDecoration.underline,
+                          //             fontFamily: "Tajawal",color:Color.fromARGB(255, 53, 47, 244)),
+                          //       ),
+                          //       onPressed: () {
+                          //         Navigator.push(
+                          //           context,
+                          //           MaterialPageRoute(
+                          //               builder: (context) =>
+                          //                   const forget_password()),
+                          //         );
+                          //       },
+                          //     ),
                         ],
                       ), 
                        SizedBox(
@@ -310,7 +334,7 @@ return Form(
                           GestureDetector(
                             onTap: (){ Navigator.pushNamed(context, "/signup");},
                             child: Text(" تسجيل جديد ", 
-                            style: TextStyle(fontWeight: FontWeight.bold,color: Color.fromARGB(255, 53, 47, 244),fontFamily: "Tajawal" ),)),
+                            style: TextStyle(color: Color.fromARGB(255, 53, 47, 244),decoration: TextDecoration.underline ,fontFamily: "Tajawal"),)),
 
                           Text("ليس لديك حساب ؟",style:TextStyle(fontFamily: "Tajawal")),
 

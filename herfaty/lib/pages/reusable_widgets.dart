@@ -9,7 +9,7 @@ TextFormField reusableTextField(String text, IconData icon, bool isPasswordType,
     enableSuggestions: !isPasswordType,
     autocorrect: !isPasswordType,
     style: 
-    TextStyle(color: Color.fromARGB(166, 26, 96, 91),fontFamily: "Tajawal"),
+    TextStyle(color: Color.fromARGB(255, 26, 96, 91),fontFamily: "Tajawal"),
     decoration: InputDecoration(
       contentPadding: const EdgeInsets.symmetric(vertical: 1.0,horizontal: 23),
 
