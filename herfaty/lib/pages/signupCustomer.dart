@@ -47,15 +47,15 @@ class _SignupCustomerState extends State<SignupCustomer> {
                       width: 150,
                     ),
                   ),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
+                  // Positioned(
+                  //   bottom: 0,
+                  //   right: 0,
                     
-                    child: Image.asset(
-                      "assets/images/main_botomm.png",
-                      width: 200,
-                    ),
-                  ),
+                  //   child: Image.asset(
+                  //     "assets/images/main_botomm.png",
+                  //     width: 200,
+                  //   ),
+                  // ),
                   SizedBox(
                     width: double.infinity,
                     child: SingleChildScrollView(
@@ -63,14 +63,17 @@ class _SignupCustomerState extends State<SignupCustomer> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           SizedBox(
-                            height: 20,
+                            height: 70,
                           ),
 
                           Container(
                               child: Image.asset(
                             "assets/images/HerfatyLogoCroped.png",
-                            height: 120,
+                            height: 100,
                           )),
+                           SizedBox(
+                        height: 30,
+                      ),
                           Text(
                             "تسجيل حساب جديد",
                             style: TextStyle(

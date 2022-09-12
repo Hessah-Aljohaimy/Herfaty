@@ -64,15 +64,15 @@ focusedErrorBorder:  OutlineInputBorder(
       return "أدخل "+text;
 
     }
-     if (!RegExp(
-                      r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
-                  .hasMatch(value)&& !isPasswordType) {
-                return 'أدخل بريد إلكتروني صحيح';
-              }
+    //  if (!RegExp(
+    //                   r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
+    //               .hasMatch(value)&& !isPasswordType) {
+    //             return 'أدخل بريد إلكتروني صحيح';
+    //           }
 
-              if (text == "كلمة المرور") {
-        if (value.length < 6) return "";
-      }
+    //           if (text == "كلمة المرور") {
+    //     if (value.length < 6) return "";
+    //   }
 
           
     return null;

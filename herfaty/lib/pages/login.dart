@@ -51,11 +51,11 @@ return Form(
                     children: [
                    
                  SizedBox(
-                        height: 120,
+                        height: 90,
                       ),
                       Image.asset(
                   "assets/images/HerfatyLogoCroped.png",
-                  width: 140,
+                  width: 180,
                 ),
                  SizedBox(
                         height: 30,

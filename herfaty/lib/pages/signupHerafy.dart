@@ -43,7 +43,9 @@ PickedFile? _imageFile;
 
 
   List<Step> stepList() => [
+    
         Step(
+          
           state: currentStep > 0 ? StepState.complete : StepState.indexed,
           isActive: currentStep >= 0,
           title: Text('معلومات الحرفي'),
@@ -55,14 +57,7 @@ PickedFile? _imageFile;
                 "assets/images/HerfatyLogoCroped.png",
                 height: 120,
               )),
-              // Positioned(
-              //   left: 0,
-              //   top: 0,
-              //   child: Image.asset(
-              //     "assets/images/login_toppp.png",
-              //     width: 150,
-              //   ),
-              // ),
+         
               // Positioned(
               //   bottom: 0,
               //   right: 0,
@@ -71,7 +66,7 @@ PickedFile? _imageFile;
               //     width: 200,
               //   ),
               // ),
-              // ignore: prefer_const_constructors
+           
               SizedBox(
                 height: 20,
               ),
@@ -416,6 +411,9 @@ Container(
                 imageProfile(),
 
 ////////////////////////////Importing Picture //////////////////////////////////
+ SizedBox(
+                  height: 27,
+                ),
 
                 Container(
                   // width: 290,
@@ -795,7 +793,7 @@ Widget imageProfile() {
         CircleAvatar(
           radius: 80.0,
           backgroundImage: _imageFile == null
-              ? AssetImage("images/Circular_Logo.png") as ImageProvider
+              ? AssetImage("assets/images/Circular_Logo.png") as ImageProvider
               : FileImage(File(_imageFile!.path)),
           //images\Circular_Logo.png
           // _imageFile.path
@@ -832,7 +830,7 @@ Widget imageProfile() {
         horizontal: 20,
         vertical: 20,
       ),
-      child: Column(
+      child: Column(   
         children: <Widget>[
           Text(
             "اختر صورة",
