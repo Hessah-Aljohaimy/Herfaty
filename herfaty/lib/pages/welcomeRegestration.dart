@@ -112,6 +112,23 @@ class WelcomeRegestration extends StatelessWidget {
                             ),
                           ),
                         ),
+ SizedBox(
+                          height: 21,
+                        ),
+                          
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                           Text("الرجوع إلى صفحة ",style: TextStyle(fontFamily: "Tajawal"),),
+                          GestureDetector(
+                            onTap: (){ Navigator.pushNamed(context, "/login");},
+                            child: Text("تسجيل الدخول ", style: TextStyle(fontFamily: "Tajawal", decoration: TextDecoration.underline,color: Color.fromARGB(255, 53, 47, 244)),)),
+
+                         
+
+                          
+                        ],
+                      )
                       ],
                       
                     ),
@@ -138,6 +155,7 @@ class WelcomeRegestration extends StatelessWidget {
                   ),
                 ],
               ),
+              
             ),
           ),
           // ),

@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/pages/login.dart';
 import 'package:herfaty/pages/reusable_widgets.dart';
 import 'package:herfaty/pages/welcomeRegestration.dart';
+import 'package:intl/intl.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import 'dart:async';
 
 // ignore_for_file: file_names, prefer_const_constructors
 
@@ -21,7 +26,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
   TextEditingController _emailTextEditingController = TextEditingController();
   TextEditingController _nameTextEditingController = TextEditingController();
   TextEditingController _dateController = TextEditingController();
-
+TextEditingController _BODController=TextEditingController();
   TextEditingController _PhoneNumberTextEditingController =
       TextEditingController();
 
@@ -31,6 +36,11 @@ class _SignupHerafyState extends State<SignupHerafy> {
 
   TextEditingController _shopdescriptionTextEditingController =
       TextEditingController();
+PickedFile? _imageFile;
+  final ImagePicker _picker = ImagePicker();
+
+
+
 
   List<Step> stepList() => [
         Step(
@@ -142,15 +152,89 @@ padding: const EdgeInsets.only(left:85),
               SizedBox(
                 height: 17,
               ),
+Container(
+                  width: 290,
+                  height: 53,
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: Center(
+                      child: TextField(
+                    controller: _BODController,
+                    //editing controller of this TextField
+                    decoration: InputDecoration(
+                      suffix: Icon(
+                        Icons.calendar_today_rounded,
+                        color: Color.fromARGB(255, 26, 96, 91),
+                      ),
+                      labelText: "تاريخ الميلاد",
+                      labelStyle:
+                          TextStyle(color: Color.fromARGB(106, 26, 96, 91)),
+                      fillColor: Colors.white.withOpacity(0.3),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Color.fromARGB(255, 26, 96, 91)),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            width: 2, color: Color.fromARGB(255, 26, 96, 91)),
+                      ),
+                    ),
 
-              Container(
-                // width: 290,
-                // height: 53,
-                // padding: EdgeInsets.symmetric(horizontal: 16),
-                  padding: EdgeInsets.symmetric(horizontal: 60),
-                child: reusableTextFieldForAge("عمر الطفل",
-                    Icons.calendar_today_rounded, false, _dateController),
-              ),
+                    readOnly:
+                        true, //set it true, so that user will not able to edit text
+                    onTap: () async {
+                      DateTime? pickedDate = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(
+                            2000), //DateTime.now() - not to allow to choose before today.
+                        lastDate: DateTime(2101),
+
+                        builder: (context, child) {
+                          return Theme(
+                            data: Theme.of(context).copyWith(
+                              colorScheme: ColorScheme.light(
+                                primary: Color(0xff51908E), // <-- SEE HERE
+                                onPrimary: Colors.white, // <-- SEE HERE
+                                onSurface: Colors.black, // <-- SEE HERE
+                              ),
+                              textButtonTheme: TextButtonThemeData(
+                                style: TextButton.styleFrom(
+                                  primary:
+                                      Color(0xff51908E), // button text color
+                                ),
+                              ),
+                            ),
+                            child: child!,
+                          );
+                        },
+                      );
+
+                      if (pickedDate != null) {
+                        print(
+                            pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                        String formattedDate =
+                            DateFormat('yyyy-MM-dd').format(pickedDate);
+                        print(
+                            formattedDate); //formatted date output using intl package =>  2021-03-16
+                        //you can implement different kind of Date Format here according to your requirement
+
+                        setState(() {
+                          _BODController.text =
+                              formattedDate; //set output date to TextField value.
+                        });
+                      } else {
+                        print("لم يتم اختيار تاريخ الميلاد");
+                      }
+                    },
+                  ))),
+              // Container( ///////////////يدخل العمر ك رقمممممم
+              //   // width: 290,
+              //   // height: 53,
+              //   // padding: EdgeInsets.symmetric(horizontal: 16),
+              //     padding: EdgeInsets.symmetric(horizontal: 60),
+              //   child: reusableTextFieldForAge("عمر الطفل",
+              //       Icons.calendar_today_rounded, false, _dateController),
+              // ),
               ///////////////////////////Importing DatePicker//////////////////////
 
               // GestureDetector(
@@ -329,6 +413,7 @@ padding: const EdgeInsets.only(left:85),
                     color: Color.fromARGB(255, 26, 96, 91),
                   ),
                 ),
+                imageProfile(),
 
 ////////////////////////////Importing Picture //////////////////////////////////
 
@@ -348,7 +433,7 @@ padding: const EdgeInsets.only(left:85),
                   // width: 290,
                   // height: 53,
                   padding: EdgeInsets.symmetric(horizontal: 60),
-                  child: reusableTextField("وصف المتجر", Icons.shop_2, false,
+                  child: reusableTextFieldDec("وصف المتجر", Icons.shop_2, false,
                       _shopdescriptionTextEditingController),
                 ),
 
@@ -368,7 +453,7 @@ padding: const EdgeInsets.only(left:85),
 //1 Authentication
 
 //2 Routing
-                    Navigator.of(context).pushNamed("test_Login");
+                    Navigator.of(context).pushNamed("home_screen");
                   },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
@@ -704,41 +789,102 @@ padding: const EdgeInsets.only(left:85),
       ),
     ); //form
   }
+Widget imageProfile() {
+    return Center(
+      child: Stack(children: <Widget>[
+        CircleAvatar(
+          radius: 80.0,
+          backgroundImage: _imageFile == null
+              ? AssetImage("images/Circular_Logo.png") as ImageProvider
+              : FileImage(File(_imageFile!.path)),
+          //images\Circular_Logo.png
+          // _imageFile.path
+          //
+          // ?  as ImageProvider
+          // :
+        ),
+        Positioned(
+          bottom: 20.0,
+          right: 20.0,
+          child: InkWell(
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                builder: ((builder) => bottomSheet()),
+              );
+            },
+            child: Icon(
+              Icons.camera_alt,
+              color: Colors.teal,
+              size: 28.0,
+            ),
+          ),
+        ),
+      ]),
+    );
+  }
 
-  _selectDate(BuildContext context) async {
-//   DateTime newSelectedDate = await showDatePicker(
-// // context: context,
-// initialDate:  _selectedDate,
-// firstDate: DateTime(2007),
-// lastDate: DateTime(2017)),
-// builder: (BuildContext context, Widget child) {
-// return Theme(
-//             data: ThemeData.dark().copyWith(
-//               colorScheme: ColorScheme.dark(
-//                 primary: Color.fromARGB(255, 26, 96, 91),
-//                 onPrimary: Colors.white,
-//                 surface: Colors.blueGrey,
-//                 onSurface: Colors.black,
-//               ),
-//               dialogBackgroundColor: Colors.white,
-//             ),
-//             child: child,
-//           );
-//         }
+  Widget bottomSheet() {
+    return Container(
+      height: 100.0,
+      width: MediaQuery.of(context).size.width,
+      margin: EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 20,
+      ),
+      child: Column(
+        children: <Widget>[
+          Text(
+            "اختر صورة",
+            style: TextStyle(
+              fontSize: 20.0,
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+            TextButton.icon(
+              icon: Icon(Icons.camera),
+              onPressed: () {
+                takePhoto(ImageSource.camera);
+              },
+              label: Text("الكاميرا"),
+            ),
+            TextButton.icon(
+              icon: Icon(Icons.image),
+              onPressed: () {
+                takePhoto(ImageSource.gallery);
+              },
+              label: Text("الصور"),
+            ),
+          ])
+        ],
+      ),
+    );
+  }
 
-//     if (newSelectedDate != null) {
-//       _selectedDate = newSelectedDate;
-//       _textEditingController
-//         ..text = DateFormat.yMMMd().format(_selectedDate)
-//         ..selection = TextSelection.fromPosition(TextPosition(
-//             offset: _textEditingController.text.length,
-//             affinity: TextAffinity.upstream));
-//     }
+  void takePhoto(ImageSource source) async {
+    final pickedFile = await _picker.getImage(
+      source: source,
+    );
+    setState(() {
+      try {
+        _imageFile = pickedFile!;
+      } catch (e) {
+        Fluttertoast.showToast(
+          msg: 'هناك مشكلة أعد ادخال الصوره مجددا',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 3,
+          backgroundColor: Colors.white,
+          textColor: Colors.red,
+          fontSize: 18.0,
+        );
+      }
+    });
   }
 }
-
-
-
       
 
 //get image from user

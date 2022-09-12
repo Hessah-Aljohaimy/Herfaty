@@ -33,7 +33,7 @@ class _SignupCustomerState extends State<SignupCustomer> {
         resizeToAvoidBottomInset: true,
         body: SafeArea(
           child: Scaffold(
-            resizeToAvoidBottomInset: false,
+            resizeToAvoidBottomInset: true,
             body: SizedBox(
               height: double.infinity,
               width: double.infinity,
@@ -50,6 +50,7 @@ class _SignupCustomerState extends State<SignupCustomer> {
                   Positioned(
                     bottom: 0,
                     right: 0,
+                    
                     child: Image.asset(
                       "assets/images/main_botomm.png",
                       width: 200,
