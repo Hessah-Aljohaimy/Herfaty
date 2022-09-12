@@ -74,14 +74,14 @@ class Welcome extends StatelessWidget {
                   
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, "/");
+                        Navigator.pushNamed(context, "/welcomeRegestration");
                       },
                       
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Color(0xff51908E)),
                         padding: MaterialStateProperty.all(
-                            EdgeInsets.symmetric(horizontal: 90, vertical: 13)),
+                            EdgeInsets.symmetric(horizontal: 93, vertical: 12)),
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(27))),
                       ),

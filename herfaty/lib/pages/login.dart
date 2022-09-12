@@ -333,7 +333,7 @@ return Form(
                         children: [
                                Text("ليس لديك حساب ؟",style:TextStyle(fontFamily: "Tajawal")),
                           GestureDetector(
-                            onTap: (){ Navigator.pushNamed(context, "/signup");},
+                            onTap: (){ Navigator.pushNamed(context, "/welcomeRegestration");},
                             child: Text(" تسجيل جديد ", 
                             style: TextStyle(color: Color.fromARGB(255, 53, 47, 244),decoration: TextDecoration.underline ,fontFamily: "Tajawal"),)),
 

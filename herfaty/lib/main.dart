@@ -7,8 +7,9 @@ import 'package:herfaty/pages/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter_localizations/flutter_localizations.dart'; 
-
-
+import 'package:herfaty/pages/signupCustomer.dart';
+import 'package:herfaty/pages/signupHerafy.dart';
+import 'package:herfaty/pages/welcomeRegestration.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -42,7 +43,10 @@ localizationsDelegates: [
         "/login" : (context) => const login(),
         "/forget_password" : (context) => const forget_password(),
         "/home_screen" : (context) => const homeScreen(),
-
+ "/welcomeRegestration": (context) => const WelcomeRegestration(),
+        "/signupCustomer": (context) => const SignupCustomer(),
+        "/signupHerfay": (context) => const SignupHerafy(),
+       
       },
     );
   }
