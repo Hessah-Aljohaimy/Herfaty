@@ -4,6 +4,7 @@ import 'package:herfaty/models.dart/product.dart';
 
 class Firestore {
   static Future saveProduct(Product product) async {
+    //async because it takes time
     await FirebaseFirestore.instance
         .collection("Products")
         .add(product.toMap());

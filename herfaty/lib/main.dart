@@ -16,10 +16,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          appBarTheme: AppBarTheme(color: Color.fromARGB(255, 26, 96, 91))),
+      theme: ThemeData(appBarTheme: AppBarTheme(color: Colors.white)),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -39,8 +37,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:
-            Align(alignment: Alignment.centerRight, child: Text("إضافة منتج")),
+        title: Align(
+            alignment: Alignment.centerRight,
+            child:
+                Text("إضافة منتج", style: TextStyle(color: Color(0xff51908E)))),
       ),
       body: AddProduct(),
 
