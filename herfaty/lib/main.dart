@@ -43,7 +43,7 @@ localizationsDelegates: [
         "/login" : (context) => const login(),
         "/forget_password" : (context) => const forget_password(),
         "/home_screen" : (context) => const homeScreen(),
- "/welcomeRegestration": (context) => const WelcomeRegestration(),
+        "/welcomeRegestration": (context) => const WelcomeRegestration(),
         "/signupCustomer": (context) => const SignupCustomer(),
         "/signupHerfay": (context) => const SignupHerafy(),
        

@@ -156,17 +156,50 @@ padding: const EdgeInsets.only(left:85),
                             height: 17,
                           ),
                           ElevatedButton(
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
+                            onPressed: () async {
+                              try {
+                                if (_formKey.currentState!.validate()) {
+  await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _emailTextEditingController.text, 
+    password: _passwordTextController.text)
+    .then((value) {
+                     Navigator.pushNamed(context, "/home_screen");});
+                                }
+} on FirebaseAuthException catch(error) {
+  showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("خطأ"),
+              content: Text('البريد الإلكتروني موجود مسبقا'),
+              actions: <Widget>[
+                TextButton(
+                  child: Text("حسنا"),
+                  onPressed: () {
+                                       Navigator.of(context).pop();
+                  },
+                )
+              ],
+            );
+          });} 
+    //                           try{
+    //                           if (_formKey.currentState!.validate()) {
                             
     //  FirebaseAuth.instance.createUserWithEmailAndPassword(email:_emailTextEditingController.text,password:_passwordTextController.text)
-    //  .then((value)  {
-    //                             Navigator.push(context,MaterialPageRoute(builder:(context)=>homeScreen()));
-                                
-                                
-    //                             });
-                 print('');
-                              }
+     
+
+
+    //  .then((value) {
+    //                  Navigator.pushNamed(context, "/home_screen");
+    //               }).onError((error, stackTrace) {
+    //                 print("Error hhhhhh");
+    //               });
+    //                           }
+    //                           }
+    //                           on FirebaseAuthException catch(e){
+    //                             print('rwwwwwwrrrrr');
+    //                           }
+
+                              
                             },
                             style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all(
