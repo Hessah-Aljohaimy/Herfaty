@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:herfaty/pages/home_screen.dart';
 
 import 'package:herfaty/pages/reusable_widgets.dart';
 import 'package:herfaty/pages/login.dart';
@@ -156,13 +158,14 @@ padding: const EdgeInsets.only(left:85),
                           ElevatedButton(
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                // FirebaseAuth.instance.singIn
-                                //FirebaseAuth.instance..createUserWithEmailAndPassword(email:_emailTextEditingController.text,password:_passwordTextController.text).then((value) (){
-                                //Navigator.push(context,MaterialPageRoute(builder:(context)=>HomeScreen()));
-                                //
-                                //
-                                //});
-                                print(' ');
+                            
+    //  FirebaseAuth.instance.createUserWithEmailAndPassword(email:_emailTextEditingController.text,password:_passwordTextController.text)
+    //  .then((value)  {
+    //                             Navigator.push(context,MaterialPageRoute(builder:(context)=>homeScreen()));
+                                
+                                
+    //                             });
+                 print('');
                               }
                             },
                             style: ButtonStyle(
