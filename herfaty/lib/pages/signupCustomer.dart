@@ -154,8 +154,8 @@ padding: const EdgeInsets.only(left:85),
                           ElevatedButton(
                             onPressed: () async {
                               try {
+
                                 if (_formKey.currentState!.validate()) {
-                                   _emailTextEditingController.text.replaceAll(" ", "");
 
   await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _emailTextEditingController.text, 
     password: _passwordTextController.text)
@@ -254,7 +254,11 @@ padding: const EdgeInsets.only(left:85),
 //Datebase
   Future createCustomer(Customer customer) async {
     final docCustomr = FirebaseFirestore.instance.collection('customers').doc();
-    customer.id = docCustomr.id;
+
+final FirebaseAuth auth = FirebaseAuth.instance;
+  final User? user = auth.currentUser;
+  final uid = user!.uid;
+  customer.id = uid;
 
     final json = customer.toJson();
 

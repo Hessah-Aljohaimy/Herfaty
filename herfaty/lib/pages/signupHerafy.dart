@@ -255,7 +255,21 @@ Container(
               SizedBox(
                 height: 17,
               ),
-
+     SizedBox(
+                            width: 299,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                    child: Divider(
+                                  thickness: 2,
+                                  color: Color.fromARGB(255, 26, 96, 91),
+                                )),
+                              ],
+                            ),
+                          ),
+                           SizedBox(
+                height: 17,
+              ),
         Text(
                   "معلومات المتجر",
                  
@@ -315,7 +329,7 @@ Container(
                 SizedBox(
                   height: 17,
                 ),
-                Text("هيا لتبدأ رحلتك!"),
+                Text("هيا لتبدأ رحلتك!",style: TextStyle(fontFamily: 'Tajawal',fontSize: 18),),
                 SizedBox(
                   height: 6,
                 ),
@@ -323,8 +337,8 @@ Container(
                   onPressed: () async{
 
  try {
+
                                 if (_formKey.currentState!.validate()) {
-                      _emailTextEditingController.text.replaceAll(" ", "");
 
   await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _emailTextEditingController.text, 
     password: _passwordTextController.text)
@@ -474,9 +488,7 @@ Widget imageProfile() {
               fontSize: 20.0,
             ),
           ),
-          SizedBox(
-            height: 20,
-          ),
+         
           Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
             TextButton.icon(
               icon: Icon(Icons.camera),
@@ -485,10 +497,13 @@ Widget imageProfile() {
                 
                 final XFile? photo =
                     await _picker.pickImage(source: ImageSource.camera);
-
+         try{
                 final file = File(photo!.path);
                 uploadImageToFirebaseStorage(file);
-                
+          }
+         catch(e){
+  print('error');
+             }
                 
                 Navigator.of(context).pop();
               },
@@ -503,9 +518,13 @@ Widget imageProfile() {
                 // Pick an image
                 final XFile? photo =
                     await _picker.pickImage(source: ImageSource.gallery);
-
+try{
                 final file = File(photo!.path);
                 uploadImageToFirebaseStorage(file);
+}catch(e){
+  print('error');
+}
+                
                 Navigator.of(context).pop();
               },
               label: Text("الصور"),
@@ -553,7 +572,12 @@ Widget imageProfile() {
 //Datebase
   Future   createShopOwner(ShopOwner shopowner) async {
     final docShopOWner = FirebaseFirestore.instance.collection('shop_owner').doc();
-    shopowner.id = docShopOWner.id;
+    
+final FirebaseAuth auth = FirebaseAuth.instance;
+
+  final User? user = auth.currentUser;
+  final uid = user!.uid;
+  shopowner.id = uid;
 
     final json = shopowner.toJson();
 
@@ -590,7 +614,6 @@ class ShopOwner {
 'name':name,
 'email':email,
 'password':password,
-
 'DOB':DOB,
 'logo':logo,
 'phone_number':phone_number,
