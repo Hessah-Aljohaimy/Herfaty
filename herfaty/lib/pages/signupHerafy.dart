@@ -9,6 +9,8 @@ import 'dart:io';
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+// import 'package:herfaty/firestore/firestore.dart';
 // ignore_for_file: file_names, prefer_const_constructors
 
 class SignupHerafy extends StatefulWidget {
@@ -28,16 +30,16 @@ class _SignupHerafyState extends State<SignupHerafy> {
   TextEditingController _nameTextEditingController = TextEditingController();
   TextEditingController _dateController = TextEditingController();
 TextEditingController _BODController=TextEditingController();
-  TextEditingController _PhoneNumberTextEditingController =
-      TextEditingController();
+  TextEditingController _PhoneNumberTextEditingController =TextEditingController();
 
-  TextEditingController _shopnameTextEditingController =
-      TextEditingController();
+  TextEditingController _shopnameTextEditingController =TextEditingController();
   TextEditingController _shoplogoEditingController = TextEditingController();
 
-  TextEditingController _shopdescriptionTextEditingController =
-      TextEditingController();
+  TextEditingController _shopdescriptionTextEditingController =TextEditingController();
+
 PickedFile? _imageFile;
+
+
   final ImagePicker _picker = ImagePicker();
 
 
@@ -322,6 +324,8 @@ Container(
 
  try {
                                 if (_formKey.currentState!.validate()) {
+                      _emailTextEditingController.text.replaceAll(" ", "");
+
   await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _emailTextEditingController.text, 
     password: _passwordTextController.text)
     .then((value) {
@@ -330,16 +334,16 @@ Container(
                          name: _nameTextEditingController.text,
                             email: _emailTextEditingController.text,
                             password: _passwordTextController.text,
-                            DOB:_BODController,
-                            phone_number:_PhoneNumberTextEditingController,
-                            logo:_shoplogoEditingController,
-                            shopname:_shopnameTextEditingController,
-                            shopdescription:_shopdescriptionTextEditingController
+                            DOB:_BODController.text,
+                            phone_number:_PhoneNumberTextEditingController.text,
+                            logo:_shoplogoEditingController.text,
+                            shopname:_shopnameTextEditingController.text,
+                            shopdescription:_shopdescriptionTextEditingController.text
 
 
 
                           );
-                          createCustomer(shopowner);
+                          createShopOwner(shopowner);
                      Navigator.pushNamed(context, "/home_screen");});
                                 }
 } on FirebaseAuthException catch(error) {
@@ -427,7 +431,7 @@ Widget imageProfile() {
           backgroundImage: _imageFile == null
               ? AssetImage("assets/images/Circular_Logo.png") as ImageProvider
               : FileImage(File(_imageFile!.path)),
-          //images\Circular_Logo.png
+         
           // _imageFile.path
           //
           // ?  as ImageProvider
@@ -476,24 +480,46 @@ Widget imageProfile() {
           Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
             TextButton.icon(
               icon: Icon(Icons.camera),
-              onPressed: () {
-                takePhoto(ImageSource.camera);
+              onPressed: () async {
+                // Capture a photo
+                
+                final XFile? photo =
+                    await _picker.pickImage(source: ImageSource.camera);
+
+                final file = File(photo!.path);
+                uploadImageToFirebaseStorage(file);
+                
+                
+                Navigator.of(context).pop();
               },
               label: Text("الكاميرا"),
             ),
+
+
+            
             TextButton.icon(
               icon: Icon(Icons.image),
-              onPressed: () {
-                takePhoto(ImageSource.gallery);
+             onPressed: () async {
+                // Pick an image
+                final XFile? photo =
+                    await _picker.pickImage(source: ImageSource.gallery);
+
+                final file = File(photo!.path);
+                uploadImageToFirebaseStorage(file);
+                Navigator.of(context).pop();
               },
               label: Text("الصور"),
+
+
+
+
             ),
           ])
         ],
       ),
     );
   }
-
+//logo
   void takePhoto(ImageSource source) async {
     final pickedFile = await _picker.getImage(
       source: source,
@@ -519,70 +545,13 @@ Widget imageProfile() {
 
       
 
-//get image from user
-
-      // GestureDetector(
-      //   onTap: () {},
-      //   child: CircleAvatar(
-      //     radius: MediaQuery.of(context).size.width * 0.10,
-      //     backgroundColor: Colors.white,
-      //     child: Icon(
-      //       Icons.add_photo_alternate,
-      //       color: Colors.grey,
-      //       size: MediaQuery.of(context).size.width * 0.10,
-      //     ),
-      //   ),
-      // ),
 
 
-      /**
-       * 
-       ElevatedButton(
-                      child: Text("التالي"),
-                      onPressed: controls.onStepContinue,
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                           Color(0xff51908E)),
-                        padding: MaterialStateProperty.all(
-                            EdgeInsets.symmetric(horizontal: 90, vertical: 13)),
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(27))),
-                      ),
-                    ),* 
-       * /**
-       * 
-       * 
-       * 
-        ElevatedButton(
-                      child: Text("السابق"),
-                      onPressed: controls.onStepCancel,
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                            Color.fromARGB(248, 228, 175, 122)),
-                        padding: MaterialStateProperty.all(
-                            EdgeInsets.symmetric(horizontal: 90, vertical: 13)),
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(27))),
-                      ),
-                    ),* 
-       * 
-       * 
-       * 
-       * 
-       
-       
-       
-       / */
-       * 
-       * 
-       * 
-
-
-       */
+ 
 
       
 //Datebase
-  Future createCustomer(ShopOwner shopowner) async {
+  Future   createShopOwner(ShopOwner shopowner) async {
     final docShopOWner = FirebaseFirestore.instance.collection('shop_owner').doc();
     shopowner.id = docShopOWner.id;
 
@@ -604,7 +573,7 @@ class ShopOwner {
   final String shopname;
   final String shopdescription;
 
-  Customer({
+  ShopOwner({
     this.id = '',
     required this.name,
     required this.email,
@@ -620,7 +589,32 @@ class ShopOwner {
 'id':id,
 'name':name,
 'email':email,
-'password':password,};
+'password':password,
+
+'DOB':DOB,
+'logo':logo,
+'phone_number':phone_number,
+'shopdescription':shopdescription,
+'shopname':shopname,
+
+};
 
 
+
+  }
+  // initilazie Image Picker library
+  final ImagePicker _picker = ImagePicker();
+  var uploadImageUrl = ""; //image URL before choose pic
+  // Firebase storage + ref for pic place
+  final storageRef = FirebaseStorage.instance.ref();
+
+  void uploadImageToFirebaseStorage(File file) async {
+    // Create a reference to 'images/mountains.jpg'
+    final imagesRef =
+        storageRef.child("shopOwnerLogos/${DateTime.now().millisecondsSinceEpoch}.png");
+    await imagesRef.putFile(file);
+
+    uploadImageUrl = await imagesRef.getDownloadURL();
+    //setState(() {});
+    print("uploaded:" + uploadImageUrl);
   }

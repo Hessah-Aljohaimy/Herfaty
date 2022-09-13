@@ -106,7 +106,7 @@ class _SignupCustomerState extends State<SignupCustomer> {
                             // child: TextFormField (
                             //   validator: (value) => value.isEmpty?'ادخل اسم المشتري الثنائي':null,
 
-                            child: reusableTextField(
+                            child: reusableTextFieldForName(
                                 " اسم المشتري الثنائي",
                                 Icons.person,
                                 false,
@@ -155,6 +155,8 @@ padding: const EdgeInsets.only(left:85),
                             onPressed: () async {
                               try {
                                 if (_formKey.currentState!.validate()) {
+                                   _emailTextEditingController.text.replaceAll(" ", "");
+
   await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _emailTextEditingController.text, 
     password: _passwordTextController.text)
     .then((value) {

@@ -232,6 +232,9 @@ return Form(
                         onPressed: () {    
 
                            if (_formKey.currentState!.validate()) {
+
+ _emailTextController.text.replaceAll(" ", "");
+
                             FirebaseAuth.instance
                             .signInWithEmailAndPassword(email: _emailTextController.text,
                           password: _passwordTextController.text).catchError((err){
