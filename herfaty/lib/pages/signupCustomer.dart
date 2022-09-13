@@ -158,6 +158,12 @@ padding: const EdgeInsets.only(left:85),
   await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _emailTextEditingController.text, 
     password: _passwordTextController.text)
     .then((value) {
+         final customer = Customer(
+                            name: _nameTextEditingController.text,
+                            email: _emailTextEditingController.text,
+                            password: _passwordTextController.text,
+                          );
+                          createCustomer(customer);
                      Navigator.pushNamed(context, "/home_screen");});
                                 }
 } on FirebaseAuthException catch(error) {
@@ -178,31 +184,7 @@ padding: const EdgeInsets.only(left:85),
             );
           });} 
 
-
-          final customer = Customer(
-                            name: _nameTextEditingController.text,
-                            email: _emailTextEditingController.text,
-                            password: _passwordTextController.text,
-                          );
-                          createCustomer(customer);
-    //                           try{
-    //                           if (_formKey.currentState!.validate()) {
-                            
-    //  FirebaseAuth.instance.createUserWithEmailAndPassword(email:_emailTextEditingController.text,password:_passwordTextController.text)
-     
-
-
-    //  .then((value) {
-    //                  Navigator.pushNamed(context, "/home_screen");
-    //               }).onError((error, stackTrace) {
-    //                 print("Error hhhhhh");
-    //               });
-    //                           }
-    //                           }
-    //                           on FirebaseAuthException catch(e){
-    //                             print('rwwwwwwrrrrr');
-    //                           }
-
+                  
                               
                             },
                             style: ButtonStyle(

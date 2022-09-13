@@ -7,7 +7,8 @@ import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'dart:async';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 // ignore_for_file: file_names, prefer_const_constructors
 
 class SignupHerafy extends StatefulWidget {
@@ -42,66 +43,82 @@ PickedFile? _imageFile;
 
 
 
-  List<Step> stepList() => [
-    
-        Step(
-          
-          state: currentStep > 0 ? StepState.complete : StepState.indexed,
-          isActive: currentStep >= 0,
-          title: Text('معلومات الحرفي'),
-          content: Column(
-            children: <Widget>[
-              
-              Container(
-                  child: Image.asset(
-                "assets/images/HerfatyLogoCroped.png",
-                height: 120,
-              )),
-         
-              // Positioned(
-              //   bottom: 0,
-              //   right: 0,
-              //   child: Image.asset(
-              //     "assets/images/main_botomm.png",
-              //     width: 200,
-              //   ),
-              // ),
-           
-              SizedBox(
-                height: 20,
-              ),
-              // ignore: prefer_const_constructors
-              Text(
-                "تسجيل حساب جديد",
-                // ignore: prefer_const_constructors
-                style: TextStyle(
-                  fontSize: 35,
-                  fontFamily: "Tajawal",
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 26, 96, 91),
-                ),
-              ),
-              // ignore: prefer_const_constructors
-              SizedBox(
-                height: 20,
-              ),
+  @override
+  Widget build(BuildContext context) {
 
-              SizedBox(
-                height: 10,
-              ),
 
-              // ignore: prefer_const_constructors
-              Text(
-                "معلومات الحرفي",
-                // ignore: prefer_const_constructors
-                style: TextStyle(
-                  fontSize: 20,
-                  fontFamily: "Tajawal",
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(248, 228, 175, 122),
-                ),
-              ),
-              // ignore: prefer_const_constructors
+    return Form(
+      key: _formKey,
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
+        body: SafeArea(
+          child: Scaffold(
+            resizeToAvoidBottomInset: true,
+            body: SizedBox(
+              height: double.infinity,
+              width: double.infinity,
+              child: Stack(
+                children: [
+                  Positioned(
+                    left: 0,
+                    top: 0,
+                    child: Image.asset(
+                      "assets/images/login_toppp.png",
+                      width: 150,
+                    ),
+                  ),
+                  // Positioned(
+                  //   bottom: 0,
+                  //   right: 0,
+                    
+                  //   child: Image.asset(
+                  //     "assets/images/main_botomm.png",
+                  //     width: 200,
+                  //   ),
+                  // ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 70,
+                          ),
+
+                          Container(
+                              child: Image.asset(
+                            "assets/images/HerfatyLogoCroped.png",
+                            height: 100,
+                          )),
+                           SizedBox(
+                        height: 30,
+                      ),
+                          Text(
+                            "تسجيل حساب جديد",
+                            style: TextStyle(
+                              fontSize: 35,
+                              fontFamily: "Tajawal",
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 26, 96, 91),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+
+                          Text(
+                            "معلومات الحرفي",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontFamily: "Tajawal",
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(248, 228, 175, 122),
+                            ),
+                          ),
+
+
+
               SizedBox(
                 height: 27,
               ),
@@ -222,170 +239,24 @@ Container(
                       }
                     },
                   ))),
-              // Container( ///////////////يدخل العمر ك رقمممممم
-              //   // width: 290,
-              //   // height: 53,
-              //   // padding: EdgeInsets.symmetric(horizontal: 16),
-              //     padding: EdgeInsets.symmetric(horizontal: 60),
-              //   child: reusableTextFieldForAge("عمر الطفل",
-              //       Icons.calendar_today_rounded, false, _dateController),
-              // ),
-              ///////////////////////////Importing DatePicker//////////////////////
-
-              // GestureDetector(
-              //   onTap: () async {
-              //     DateTime? newDate = await showDatePicker(
-              //         context: context,
-              //         initialDate: date,
-              //         firstDate: DateTime(2007),
-              //         lastDate: DateTime(2017));
-
-              //     //if cancelled
-              //     if (newDate == null) return;
-              //     //if not null
-              //     setState(() => date = newDate);
-              //   },
-              //   child: Container(
-              //       child: Padding(
-              //     padding: const EdgeInsets.all(30.0),
-              //     child: TextField(
-              //       controller: _dateController,
-              //       decoration: const InputDecoration(
-              //         icon: Icon(Icons.calendar_today_rounded),
-              //         labelText: ' تاريخ الميلاد',
-              //       ),
-              //     ),
-              //   )),
-              // ),
-              // ElevatedButton(
-              //   child: Text('أدخل تاريخ الميلاد'),
-              //   onPressed: () async {
-              //     DateTime? newDate = await showDatePicker(
-              //         context: context,
-              //         initialDate: date,
-              //         firstDate: DateTime(2007),
-              //         lastDate: DateTime(2017));
-
-              //     //if cancelled
-              //     if (newDate == null) return;
-              //     //if not null
-              //     setState(() => date = newDate);
-              //   },
-              // ),
-              // Container(
-              //   width: 290,
-              //   height: 53,
-              //   padding: EdgeInsets.symmetric(horizontal: 16),
-              //   child: TextField(
-              //     controller: _dateController,
-              //     onTap: () {
-              //       _selectDate(context);
-              //     },
-              //   ),
-              // ),
-              SizedBox(
-                height: 17,
-              ),
-
-              Container(
+                   SizedBox(
+                  height: 17,
+                ),
+          Container(
                 // width: 290,
                 // height: 53,
                 // padding: EdgeInsets.symmetric(horizontal: 16),
                   padding: EdgeInsets.symmetric(horizontal: 60),
-                child: reusableTextFieldForAge("رقم الجوال", Icons.phone_android,
+                child: reusableTextFieldForPhone("رقم الجوال", Icons.phone_android,
                     false, _PhoneNumberTextEditingController),
               ),
               SizedBox(
                 height: 17,
               ),
-        
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, "/login");
-                      },
-                      child: Text(
-                        " هل لديك حساب بالفعل؟",
-                      ),
-                    ),
-                    TextButton(
-                      child: Text(
-                        " تسجيل الدخول",
-                        style: TextStyle(
-                          decoration: TextDecoration.underline
-                       ,color: Color.fromARGB(255, 53, 47, 244) ),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const login()),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-                   SizedBox(
-                height: 17,
-              ),
-              
-            ],
-          ),
-        ),
-        Step(
-          state: currentStep > 1 ? StepState.complete : StepState.indexed,
-          isActive: currentStep >= 1,
-          title: Text('معلومات المتجر'),
-          content: Container(
-            child: Column(
-              children: <Widget>[
-                
-              Container(
-                  child: Image.asset(
-                "assets/images/HerfatyLogoCroped.png",
-                height: 120,
-              )),
-                // Positioned(
-                //   left: 0,
-                //   top: 0,
-                //   child: Image.asset(
-                //     "assets/images/login_toppp.png",
-                //     width: 150,
-                //   ),
-                // ),
-                // Positioned(
-                //   bottom: 0,
-                //   right: 0,
-                //   child: Image.asset(
-                //     "assets/images/main_botomm.png",
-                //     width: 200,
-                //   ),
-                // ),
-                // ignore: prefer_const_constructors
-                SizedBox(
-                  height: 20,
-                ),
-                // ignore: prefer_const_constructors
-                Text(
-                  "تسجيل حساب جديد",
-                  // ignore: prefer_const_constructors
-                  style: TextStyle(
-                    fontSize: 35,
-                    fontFamily: "Tajawal",
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 26, 96, 91),
-                  ),
-                ),
-                // ignore: prefer_const_constructors
-                SizedBox(
-                  height: 21,
-                ),
-                // ignore: prefer_const_constructors
-                Text(
+
+        Text(
                   "معلومات المتجر",
-                  // ignore: prefer_const_constructors
+                 
                   style: TextStyle(
                     fontSize: 20,
                     fontFamily: "Tajawal",
@@ -393,14 +264,14 @@ Container(
                     color: Color.fromARGB(248, 228, 175, 122),
                   ),
                 ),
-                // ignore: prefer_const_constructors
+                
                 SizedBox(
                   height: 27,
                 ),
 
                 Text(
                   "أرفق صورة الشعار الخاصة بك",
-                  // ignore: prefer_const_constructors
+               
                   style: TextStyle(
                     fontSize: 15,
                     fontFamily: "Tajawal",
@@ -447,12 +318,52 @@ Container(
                   height: 6,
                 ),
                 ElevatedButton(
-                  onPressed: () {
-//1 Authentication
+                  onPressed: () async{
 
-//2 Routing
-                    Navigator.of(context).pushNamed("home_screen");
+ try {
+                                if (_formKey.currentState!.validate()) {
+  await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _emailTextEditingController.text, 
+    password: _passwordTextController.text)
+    .then((value) {
+         final shopowner = ShopOwner(
+          
+                         name: _nameTextEditingController.text,
+                            email: _emailTextEditingController.text,
+                            password: _passwordTextController.text,
+                            DOB:_BODController,
+                            phone_number:_PhoneNumberTextEditingController,
+                            logo:_shoplogoEditingController,
+                            shopname:_shopnameTextEditingController,
+                            shopdescription:_shopdescriptionTextEditingController
+
+
+
+                          );
+                          createCustomer(shopowner);
+                     Navigator.pushNamed(context, "/home_screen");});
+                                }
+} on FirebaseAuthException catch(error) {
+  showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("خطأ"),
+              content: Text('البريد الإلكتروني موجود مسبقا'),
+              actions: <Widget>[
+                TextButton(
+                  child: Text("حسنا"),
+                  onPressed: () {
+                                       Navigator.of(context).pop();
                   },
+                )
+              ],
+            );
+          });} 
+
+
+                
+                    
+                    },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
                        Color(0xff51908E)),
@@ -489,300 +400,21 @@ Container(
             ),
           ),
         ),
-      ];
 
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      child: Scaffold(
-        body: Stepper(
-          type: StepperType.horizontal,
 
-          currentStep: currentStep,
-          onStepContinue: () {
-            final isLastStep = currentStep == stepList().length - 1;
-            if (isLastStep) {
-              print('Completed');
-            } else {
-              setState(() => currentStep += 1);
-            }
-          },
 
-          onStepCancel: () {
-            currentStep == 0 ? null : setState(() => currentStep -= 1);
-          },
-          controlsBuilder: (BuildContext context, ControlsDetails controls) {
-            return Row(
-              children: <Widget>[
-                // Positioned(
-                //   left: 0,
-                //   child: Image.asset(
-                //     "assets/images/login_toppp.png",
-                //     width: 150,
-                //   ),
-                // ),
-                // Positioned(
-                //   bottom: 0,
-                //   right: 0,
-                //   child: Image.asset(
-                //     "assets/images/main_botomm.png",
-                //     width: 200,
-                //   ),
-                // ),
-                if (currentStep != 1)
-                  Expanded(
-                    child: ElevatedButton(
-                      child: Text("التالي"),
-                      onPressed: controls.onStepContinue,
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                           Color(0xff51908E)),
-                        padding: MaterialStateProperty.all(
-                            EdgeInsets.symmetric(horizontal: 90, vertical: 13)),
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(27))),
-                      ),
-                    ),
-                  ),
-                const SizedBox(width: 12),
-                if (currentStep != 0)
-                  Expanded(
-                    child: ElevatedButton(
-                      child: Text("السابق"),
-                      onPressed: controls.onStepCancel,
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                            Color.fromARGB(248, 228, 175, 122)),
-                        padding: MaterialStateProperty.all(
-                            EdgeInsets.symmetric(horizontal: 90, vertical: 13)),
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(27))),
-                      ),
-                    ),
-                  ),
-              ],
-            );
-          },
-          steps: stepList(),
-//controls buldier
 
-//           child: Scaffold(
-//             body: SizedBox(
-//               height: double.infinity,
-//               width: double.infinity,
-//               child: Stack(
-//                 children: [
-//                   SizedBox(
-//                     width: double.infinity,
-//                     child: Column(
-//                       crossAxisAlignment: CrossAxisAlignment.center,
-//                       children: <Widget>[
-// //get image from user
 
-//                         // ignore: prefer_const_constructors
-//                         SizedBox(
-//                           height: 20,
-//                         ),
-//                         // ignore: prefer_const_constructors
-//                         Text(
-//                           "تسجيل حساب جديد",
-//                           // ignore: prefer_const_constructors
-//                           style: TextStyle(
-//                               fontSize: 35,
-//                               fontFamily: "myfont",
-//                               color: Colors.black),
-//                         ),
-//                         // ignore: prefer_const_constructors
-//                         SizedBox(
-//                           height: 21,
-//                         ),
-//                         // ignore: prefer_const_constructors
-//                         Text(
-//                           "معلومات الحرفي",
-//                           // ignore: prefer_const_constructors
-//                           style: TextStyle(
-//                               fontSize: 20,
-//                               fontFamily: "myfont",
-//                               color: Colors.black),
-//                         ),
-//                         // ignore: prefer_const_constructors
-//                         SizedBox(
-//                           height: 27,
-//                         ),
-//                         Container(
-//                           width: 290,
-//                           height: 53,
-//                           padding: EdgeInsets.symmetric(horizontal: 16),
-//                           child: reusableTextField(
-//                               "اسم الحرفي",
-//                               Icons.person_outline,
-//                               false,
-//                               _nameTextEditingController),
-//                         ),
 
-//                         SizedBox(
-//                           height: 20,
-//                         ),
 
-//                         Container(
-//                           width: 290,
-//                           height: 53,
-//                           padding: EdgeInsets.symmetric(horizontal: 16),
-//                           child: reusableTextField(
-//                               "البريد الإلكتروني",
-//                               Icons.email_rounded,
-//                               false,
-//                               _emailTextEditingController),
-//                         ),
 
-//                         SizedBox(
-//                           height: 23,
-//                         ),
 
-//                         Container(
-//                           width: 290,
-//                           height: 53,
-//                           padding: EdgeInsets.symmetric(horizontal: 16),
-//                           child: reusableTextField("الرقم السري", Icons.lock,
-//                               true, _passwordTextController),
-//                         ),
 
-//                         SizedBox(
-//                           height: 17,
-//                         ),
 
-//                         // GestureDetector(
-//                         //   onTap: () async {
-//                         //     DateTime? newDate = await showDatePicker(
-//                         //         context: context,
-//                         //         initialDate: date,
-//                         //         firstDate: DateTime(2007),
-//                         //         lastDate: DateTime(2017));
 
-//                         //     //if cancelled
-//                         //     if (newDate == null) return;
-//                         //     //if not null
-//                         //     setState(() => date = newDate);
-//                         //   },
-//                         //   child: Container(
-//                         //       child: Padding(
-//                         //     padding: const EdgeInsets.all(30.0),
-//                         //     child: TextField(
-//                         //       controller: _dateController,
-//                         //       decoration: const InputDecoration(
-//                         //         icon: Icon(Icons.calendar_today_rounded),
-//                         //         labelText: ' تاريخ الميلاد',
-//                         //       ),
-//                         //     ),
-//                         //   )),
-//                         // ),
-//                         // ElevatedButton(
-//                         //   child: Text('أدخل تاريخ الميلاد'),
-//                         //   onPressed: () async {
-//                         //     DateTime? newDate = await showDatePicker(
-//                         //         context: context,
-//                         //         initialDate: date,
-//                         //         firstDate: DateTime(2007),
-//                         //         lastDate: DateTime(2017));
-
-//                         //     //if cancelled
-//                         //     if (newDate == null) return;
-//                         //     //if not null
-//                         //     setState(() => date = newDate);
-//                         //   },
-//                         // ),
-//                         Container(
-//                           width: 290,
-//                           height: 53,
-//                           padding: EdgeInsets.symmetric(horizontal: 16),
-//                           child: TextField(
-
-//                             controller: _textEditingController,
-//                             onTap: () {
-//                               _selectDate(context);
-//                             },
-//                           ),
-//                         ),
-//                         SizedBox(
-//                           height: 17,
-//                         ),
-
-//                         Container(
-//                           width: 290,
-//                           height: 53,
-//                           padding: EdgeInsets.symmetric(horizontal: 16),
-//                           child: reusableTextField(
-//                               "رقم الجوال",
-//                               Icons.phone_android,
-//                               false,
-//                               _PhoneNumberTextEditingController),
-//                         ),
-
-//                         SizedBox(
-//                           height: 17,
-//                         ),
-//                         Text("!هيا لتبدأ رحلتك"),
-//                         SizedBox(
-//                           height: 6,
-//                         ),
-//                         ElevatedButton(
-//                           onPressed: () {},
-//                           style: ButtonStyle(
-//                             backgroundColor:
-//                                 MaterialStateProperty.all(Colors.blue),
-//                             padding: MaterialStateProperty.all(
-//                                 EdgeInsets.symmetric(
-//                                     horizontal: 89, vertical: 10)),
-//                             shape: MaterialStateProperty.all(
-//                                 RoundedRectangleBorder(
-//                                     borderRadius: BorderRadius.circular(27))),
-//                           ),
-//                           child: Text(
-//                             "سجل الحساب",
-//                             style: TextStyle(fontSize: 24),
-//                           ),
-//                         ),
-//                         SizedBox(
-//                           height: 33,
-//                         ),
-//                         Row(
-//                           mainAxisAlignment: MainAxisAlignment.center,
-//                           children: [
-//                             TextButton(
-//                               child: Text(
-//                                 " تسجيل الدخول",
-//                                 style: TextStyle(
-//                                   decoration: TextDecoration.underline,
-//                                 ),
-//                               ),
-//                               onPressed: () {
-//                                 Navigator.push(
-//                                   context,
-//                                   MaterialPageRoute(
-//                                       builder: (context) => const TestLogin()),
-//                                 );
-//                               },
-//                             ),
-//                             GestureDetector(
-//                               onTap: () {
-//                                 Navigator.pushNamed(context, "/login");
-//                               },
-//                               child: Text(
-//                                 " هل لديك حساب بالفعل؟",
-//                               ),
-//                             ),
-//                           ],
-//                         ),
-//                         SizedBox(
-//                           height: 17,
-//                         ),
-//                       ], //children
-//                     ), //col
-//                   ), //SizedBox
-//                 ], //children
-//               ), //stack
-//             ), //sized box
-//           ), //scaffold
+       ] ),
+      ),
+          ),
         ),
       ),
     ); //form
@@ -883,6 +515,8 @@ Widget imageProfile() {
     });
   }
 }
+
+
       
 
 //get image from user
@@ -899,3 +533,94 @@ Widget imageProfile() {
       //     ),
       //   ),
       // ),
+
+
+      /**
+       * 
+       ElevatedButton(
+                      child: Text("التالي"),
+                      onPressed: controls.onStepContinue,
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                           Color(0xff51908E)),
+                        padding: MaterialStateProperty.all(
+                            EdgeInsets.symmetric(horizontal: 90, vertical: 13)),
+                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(27))),
+                      ),
+                    ),* 
+       * /**
+       * 
+       * 
+       * 
+        ElevatedButton(
+                      child: Text("السابق"),
+                      onPressed: controls.onStepCancel,
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                            Color.fromARGB(248, 228, 175, 122)),
+                        padding: MaterialStateProperty.all(
+                            EdgeInsets.symmetric(horizontal: 90, vertical: 13)),
+                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(27))),
+                      ),
+                    ),* 
+       * 
+       * 
+       * 
+       * 
+       
+       
+       
+       / */
+       * 
+       * 
+       * 
+
+
+       */
+
+      
+//Datebase
+  Future createCustomer(ShopOwner shopowner) async {
+    final docShopOWner = FirebaseFirestore.instance.collection('shop_owner').doc();
+    shopowner.id = docShopOWner.id;
+
+    final json = shopowner.toJson();
+
+    await docShopOWner.set(json);
+  }
+
+
+//Database
+class ShopOwner {
+  String id;
+  final String name;
+  final String email;
+  final String password;
+  final String DOB;
+  final String phone_number;
+  final String logo;
+  final String shopname;
+  final String shopdescription;
+
+  Customer({
+    this.id = '',
+    required this.name,
+    required this.email,
+    required this.password,
+    required this.DOB,
+    required this.phone_number,
+    required this.logo,
+    required this.shopname,
+    required this.shopdescription,
+  });
+
+  Map<String,dynamic> toJson()=>{
+'id':id,
+'name':name,
+'email':email,
+'password':password,};
+
+
+  }
