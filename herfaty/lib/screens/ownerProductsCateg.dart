@@ -209,7 +209,7 @@ class categories extends StatelessWidget {
                     itemCount: cItems.length,
                   );
                 } else {
-                  return Center(child: Text("loading"));
+                  return Center(child: Text("يتم التحميل"));
                 }
               })
         ],

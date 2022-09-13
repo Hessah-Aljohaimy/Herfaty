@@ -142,10 +142,10 @@ class AppBar extends StatelessWidget {
                     fontSize: 20),
                 textDirection: TextDirection.rtl,
               ),
-              profileButton(
+              /* profileButton(
                 icon: Icons.account_circle_sharp,
                 onPressed: () {},
-              ),
+              ),*/
             ],
           ),
           const SizedBox(
@@ -195,7 +195,7 @@ class Services extends StatelessWidget {
                     itemCount: cItems.length,
                   );
                 } else {
-                  return Center(child: Text("loading"));
+                  return Center(child: Text("يتم التحميل"));
                 }
               })
         ],
