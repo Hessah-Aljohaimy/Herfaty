@@ -1,7 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:herfaty/pages/home_screen.dart';
-//import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:herfaty/pages/reusable_widgets.dart';
 import 'package:herfaty/pages/login.dart';
 
@@ -20,12 +21,7 @@ class _SignupCustomerState extends State<SignupCustomer> {
   TextEditingController _emailTextEditingController = TextEditingController();
   TextEditingController _nameTextEditingController = TextEditingController();
   @override
-//   void initState(){
-// super.initState();
-// emailController.addListener(() {setState(() {
 
-// });})
-//   }
 
   @override
   Widget build(BuildContext context) {
@@ -181,6 +177,14 @@ padding: const EdgeInsets.only(left:85),
               ],
             );
           });} 
+
+
+          final customer = Customer(
+                            name: _nameTextEditingController.text,
+                            email: _emailTextEditingController.text,
+                            password: _passwordTextController.text,
+                          );
+                          createCustomer(customer);
     //                           try{
     //                           if (_formKey.currentState!.validate()) {
                             
@@ -262,3 +266,37 @@ padding: const EdgeInsets.only(left:85),
   }
 // Future registerWithEmailAndPassword(String email)
 }
+
+//Datebase
+  Future createCustomer(Customer customer) async {
+    final docCustomr = FirebaseFirestore.instance.collection('customers').doc();
+    customer.id = docCustomr.id;
+
+    final json = customer.toJson();
+
+    await docCustomr.set(json);
+  }
+
+
+//Database
+class Customer {
+  String id;
+  final String name;
+  final String email;
+  final String password;
+
+  Customer({
+    this.id = '',
+    required this.name,
+    required this.email,
+    required this.password,
+  });
+
+  Map<String,dynamic> toJson()=>{
+'id':id,
+'name':name,
+'email':email,
+'password':password,};
+
+
+  }
