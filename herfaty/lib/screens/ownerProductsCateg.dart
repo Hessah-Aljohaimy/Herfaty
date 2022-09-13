@@ -1,6 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/constants/size.dart';
-import 'package:herfaty/models/category.dart';
+import 'package:herfaty/models/Category.dart';
 import 'package:herfaty/widgets/profile_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,6 +24,7 @@ class _ownerProductsCategScreenState extends State<ownerProductsCategScreen> {
           children: const [
             AppBar(),
             Body(),
+            categories(),
           ],
         ),
         floatingActionButton: FloatingActionButton.extended(
@@ -59,25 +61,6 @@ class Body extends StatelessWidget {
             ],
           ),
         ),
-        GridView.builder(
-          shrinkWrap: true,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 8,
-          ),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 0.8,
-            crossAxisSpacing: 20,
-            mainAxisSpacing: 24,
-          ),
-          itemBuilder: (context, index) {
-            return CategoryCard(
-              category: categoryList[index],
-            );
-          },
-          itemCount: categoryList.length,
-        ),
       ],
     );
   }
@@ -112,7 +95,7 @@ class CategoryCard extends StatelessWidget {
             Align(
               alignment: Alignment.topRight,
               child: Image.asset(
-                category.thumbnail,
+                category.photo,
                 height: kCategoryCardImageSize,
               ),
             ),
@@ -120,10 +103,10 @@ class CategoryCard extends StatelessWidget {
               height: 10,
             ),
             Text(category.name),
-            Text(
+            /*Text(
               "${category.noOfProducts.toString()} منتج",
               style: Theme.of(context).textTheme.bodySmall,
-            ),
+            ),*/
           ],
         ),
       ),
@@ -173,10 +156,10 @@ class AppBar extends StatelessWidget {
                     fontSize: 20),
                 textDirection: TextDirection.rtl,
               ),
-              profileButton(
+              /* profileButton(
                 icon: Icons.account_circle_sharp,
                 onPressed: () {},
-              ),
+              ),*/
             ],
           ),
           const SizedBox(
@@ -187,3 +170,58 @@ class AppBar extends StatelessWidget {
     );
   }
 }
+
+class categories extends StatelessWidget {
+  const categories({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          StreamBuilder<List<Category>>(
+              stream: readCaterories(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Text('somting wrong \n ${snapshot.error}');
+                } else if (snapshot.hasData) {
+                  final cItems = snapshot.data!.toList();
+
+                  return GridView.builder(
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 8,
+                    ),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.8,
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 24,
+                    ),
+                    itemBuilder: (context, index) {
+                      return CategoryCard(
+                        category: cItems[index],
+                      );
+                    },
+                    itemCount: cItems.length,
+                  );
+                } else {
+                  return Center(child: Text("loading"));
+                }
+              })
+        ],
+      ),
+    );
+  }
+}
+
+// Stream to reach collection
+
+Stream<List<Category>> readCaterories() => FirebaseFirestore.instance
+    .collection('categories')
+    .snapshots()
+    .map((snapshot) =>
+        snapshot.docs.map((doc) => Category.fromJson(doc.data())).toList());

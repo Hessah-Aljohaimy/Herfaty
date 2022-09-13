@@ -1,34 +1,21 @@
 class Category {
-  String thumbnail;
+  String photo;
   String name;
-  int noOfProducts;
+  //int noOfProducts;
 
   Category({
     required this.name,
-    required this.noOfProducts,
-    required this.thumbnail,
+    //required this.noOfProducts,
+    required this.photo,
   });
-}
 
-List<Category> categoryList = [
-  Category(
-    name: 'الخرز والإكسسوار',
-    noOfProducts: 55,
-    thumbnail: 'assets/icons/beads.png',
-  ),
-  Category(
-    name: 'الرسم والتلوين',
-    noOfProducts: 20,
-    thumbnail: 'assets/icons/painting3.png',
-  ),
-  Category(
-    name: 'الحياكة والتطريز',
-    noOfProducts: 16,
-    thumbnail: 'assets/icons/crochet2.png',
-  ),
-  Category(
-    name: 'الفخاريات',
-    noOfProducts: 25,
-    thumbnail: 'assets/icons/pottery1.png',
-  ),
-];
+  Map<String, dynamic> toJson() => {
+        'photo': photo,
+        'name': name,
+      };
+
+  static Category fromJson(Map<String, dynamic> json) => Category(
+        name: json['name'],
+        photo: json['photo'],
+      );
+}

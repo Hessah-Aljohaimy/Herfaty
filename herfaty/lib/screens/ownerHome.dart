@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/constants/size.dart';
 import 'package:herfaty/models/ownerServices.dart';
@@ -22,6 +23,7 @@ class _ownerHomeScreenState extends State<ownerHomeScreen> {
           children: const [
             AppBar(),
             Body(),
+            Services(),
           ],
         ),
       ),
@@ -47,25 +49,6 @@ class Body extends StatelessWidget {
               ),
             ],
           ),
-        ),
-        GridView.builder(
-          shrinkWrap: true,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 8,
-          ),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 0.8,
-            crossAxisSpacing: 20,
-            mainAxisSpacing: 24,
-          ),
-          itemBuilder: (context, index) {
-            return ownerServicesCard(
-              ownerService: servicesList[index],
-            );
-          },
-          itemCount: servicesList.length,
         ),
       ],
     );
@@ -102,7 +85,7 @@ class ownerServicesCard extends StatelessWidget {
             Align(
               alignment: Alignment.topRight,
               child: Image.asset(
-                ownerService.thumbnail,
+                ownerService.photo,
                 height: kCategoryCardImageSize,
               ),
             ),
@@ -173,3 +156,59 @@ class AppBar extends StatelessWidget {
     );
   }
 }
+
+class Services extends StatelessWidget {
+  const Services({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          StreamBuilder<List<ownerServices>>(
+              stream: readCaterories(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Text('somting wrong \n ${snapshot.error}');
+                } else if (snapshot.hasData) {
+                  final cItems = snapshot.data!.toList();
+
+                  return GridView.builder(
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 8,
+                    ),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.8,
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 24,
+                    ),
+                    itemBuilder: (context, index) {
+                      return ownerServicesCard(
+                        ownerService: cItems[index],
+                      );
+                    },
+                    itemCount: cItems.length,
+                  );
+                } else {
+                  return Center(child: Text("loading"));
+                }
+              })
+        ],
+      ),
+    );
+  }
+}
+
+// Stream to reach collection
+
+Stream<List<ownerServices>> readCaterories() => FirebaseFirestore.instance
+    .collection('ownerServices')
+    .snapshots()
+    .map((snapshot) => snapshot.docs
+        .map((doc) => ownerServices.fromJson(doc.data()))
+        .toList());

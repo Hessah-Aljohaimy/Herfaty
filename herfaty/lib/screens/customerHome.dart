@@ -1,7 +1,8 @@
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/constants/size.dart';
-import 'package:herfaty/models/category.dart';
+import 'package:herfaty/models/Category.dart';
 import 'package:herfaty/widgets/profile_button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -22,6 +23,7 @@ class _customerHomeScreenState extends State<customerHomeScreen> {
           children: const [
             AppBar(),
             Body(),
+            categories(),
           ],
         ),
       ),
@@ -47,25 +49,6 @@ class Body extends StatelessWidget {
               ),
             ],
           ),
-        ),
-        GridView.builder(
-          shrinkWrap: true,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 8,
-          ),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 0.8,
-            crossAxisSpacing: 20,
-            mainAxisSpacing: 24,
-          ),
-          itemBuilder: (context, index) {
-            return CategoryCard(
-              category: categoryList[index],
-            );
-          },
-          itemCount: categoryList.length,
         ),
       ],
     );
@@ -101,7 +84,7 @@ class CategoryCard extends StatelessWidget {
             Align(
               alignment: Alignment.topRight,
               child: Image.asset(
-                category.thumbnail,
+                category.photo,
                 height: kCategoryCardImageSize,
               ),
             ),
@@ -109,10 +92,10 @@ class CategoryCard extends StatelessWidget {
               height: 10,
             ),
             Text(category.name),
-            Text(
+            /*Text(
               "${category.noOfProducts.toString()} منتج",
               style: Theme.of(context).textTheme.bodySmall,
-            ),
+            ),*/
           ],
         ),
       ),
@@ -136,7 +119,6 @@ class AppBar extends StatelessWidget {
           bottomLeft: Radius.circular(20),
           bottomRight: Radius.circular(20),
         ),
-        color: Color.fromARGB(232, 238, 232, 182),
         gradient: LinearGradient(
           colors: [
             (Color.fromARGB(255, 81, 144, 142)),
@@ -152,27 +134,83 @@ class AppBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // ignore: prefer_const_constructors
               Text(
                 "مرحباً\n ",
-                // ignore: prefer_const_constructors
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 20),
-                textDirection: TextDirection.rtl,
               ),
-              profileButton(
+
+              //profile icon
+              /*
                 icon: Icons.account_circle_sharp,
                 onPressed: () {},
-              ),
+              */
             ],
           ),
-          const SizedBox(
+
+          //to be deleted if no need it
+          /*const SizedBox(
             height: 20,
-          ),
+          ),*/
         ],
       ),
     );
   }
 }
+
+class categories extends StatelessWidget {
+  const categories({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          StreamBuilder<List<Category>>(
+              stream: readCaterories(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Text('somting wrong \n ${snapshot.error}');
+                } else if (snapshot.hasData) {
+                  final cItems = snapshot.data!.toList();
+
+                  return GridView.builder(
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 8,
+                    ),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.8,
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 24,
+                    ),
+                    itemBuilder: (context, index) {
+                      return CategoryCard(
+                        category: cItems[index],
+                      );
+                    },
+                    itemCount: cItems.length,
+                  );
+                } else {
+                  return Center(child: Text("loading"));
+                }
+              })
+        ],
+      ),
+    );
+  }
+}
+
+// Stream to reach collection
+
+Stream<List<Category>> readCaterories() => FirebaseFirestore.instance
+    .collection('categories')
+    .snapshots()
+    .map((snapshot) =>
+        snapshot.docs.map((doc) => Category.fromJson(doc.data())).toList());

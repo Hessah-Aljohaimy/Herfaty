@@ -1,16 +1,31 @@
 class ownerServices {
-  String thumbnail;
+  String photo;
   String name;
 
   ownerServices({
     required this.name,
-    required this.thumbnail,
+    required this.photo,
   });
+
+  Map<String, dynamic> toJson() => {
+        'photo': photo,
+        'name': name,
+      };
+
+  static ownerServices fromJson(Map<String, dynamic> json) => ownerServices(
+        name: json['name'],
+        photo: json['photo'],
+      );
 }
 
+
+
+
+/*
 List<ownerServices> servicesList = [
   ownerServices(
     name: 'منتجاتي ',
-    thumbnail: 'assets/icons/products.png',
+    photo: 'assets/icons/products.png',
   ),
 ];
+*/
