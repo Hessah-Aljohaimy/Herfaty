@@ -17,7 +17,7 @@ class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
     double total = 0;
-    var items;
+    double t;
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
@@ -35,7 +35,6 @@ class _CartState extends State<Cart> {
                 return Text("No items on the cart yet");
               } else if (snapshot.hasData) {
                 final cItems = snapshot.data!.toList();
-                items = cItems;
                 Size size = MediaQuery.of(context).size;
 
                 return Column(
@@ -49,12 +48,13 @@ class _CartState extends State<Cart> {
                               total = (cItems[index].price *
                                       cItems[index].quantity) +
                                   total;
+                              t = total;
                               /*final httpsReference = FirebaseStorage.instance
                                   .refFromURL(cItems[index].image);
                                   httpsReference.getDownloadURL().then(url => { 
                                       targetImg.src = url; 
                                     }); */
-                              print(total);
+                              //print(total);
                               return Container(
                                 margin: EdgeInsets.only(
                                     top: 8.0, left: 8.0, right: 8.0),

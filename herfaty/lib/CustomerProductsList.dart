@@ -11,18 +11,15 @@ import 'package:herfaty/screens/customer_base_screen.dart';
 import 'constants/color.dart';
 import 'constants/icons.dart';
 
-class CustomerProductsList extends StatefulWidget {
-  const CustomerProductsList({
-    Key? key,
-    required categoryName,
-  }) : super(key: key);
-  @override
-  State<CustomerProductsList> createState() => _CustomerProductsListState();
-}
+class CustomerProductsList extends StatelessWidget {
+  String categoryName;
 
-class _CustomerProductsListState extends State<CustomerProductsList> {
+  CustomerProductsList({
+    required categoryName,
+    Key? key,
+  })  : this.categoryName = categoryName,
+        super(key: key);
   //variable to store the category name from categories page
-  String categoryName = "";
 
   //  صفحة عائشة ترسل لي هنا اسم الفئة بناء عليه أعرض المنتجات
   Stream<List<Product1>> readPrpducts() => FirebaseFirestore.instance
@@ -37,7 +34,7 @@ class _CustomerProductsListState extends State<CustomerProductsList> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: productsListAppBar(),
+      appBar: productsListAppBar(context),
       bottomNavigationBar: navMethod(), // the new nav need tap change page
       //NavigationBar(), // the old nav
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -186,7 +183,7 @@ class _CustomerProductsListState extends State<CustomerProductsList> {
   }
 
   //AppBar
-  AppBar productsListAppBar() {
+  AppBar productsListAppBar(var context) {
     return AppBar(
       elevation: 0,
       backgroundColor: Colors.white,
@@ -206,7 +203,7 @@ class _CustomerProductsListState extends State<CustomerProductsList> {
           size: 22.0,
         ),
         onPressed: () {
-          customerBaseScreen();
+          Navigator.pop(context);
         }, //نخليه يرجع لصفحة المنتجات اللي عند عائشة
       ),
     );

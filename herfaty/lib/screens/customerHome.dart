@@ -202,37 +202,32 @@ class categories extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        const CustomerProductsList(
-                                            categoryName:
-                                                "فنون الورق والتلوين")),
+                                    builder: (context) => CustomerProductsList(
+                                        categoryName: "فنون الورق والتلوين")),
                               );
                             }
                             if (cItems[index].name == "الخرز والإكسسوار") {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        const CustomerProductsList(
-                                            categoryName: "الخرز والإكسسوار")),
+                                    builder: (context) => CustomerProductsList(
+                                        categoryName: "الخرز والإكسسوار")),
                               );
                             }
                             if (cItems[index].name == "الفخاريات") {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        const CustomerProductsList(
-                                            categoryName: "الفخاريات")),
+                                    builder: (context) => CustomerProductsList(
+                                        categoryName: "الفخاريات")),
                               );
                             }
                             if (cItems[index].name == "الحياكة والتطريز") {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        const CustomerProductsList(
-                                            categoryName: "الحياكة والتطريز")),
+                                    builder: (context) => CustomerProductsList(
+                                        categoryName: "الحياكة والتطريز")),
                               );
                             }
                           });
