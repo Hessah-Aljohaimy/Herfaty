@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -8,6 +7,8 @@ import 'package:image_picker/image_picker.dart'; //there
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+
+import 'constants/color.dart';
 
 class AddProduct extends StatefulWidget {
   AddProduct({super.key});
@@ -20,10 +21,10 @@ class _AddProductState extends State<AddProduct> {
   final _formKey = GlobalKey<FormState>(); //To validate form
 
   // Initial Selected Value
-  String dropdownvalue = 'الرسم والتلوين'; // default value
+  String dropdownvalue = 'فنون الورق والتلوين'; // default value
   // List of items in our dropdown menu
   var items = [
-    'الرسم والتلوين',
+    'فنون الورق والتلوين',
     'الخرز والإكسسوار',
     'الفخاريات',
     'الحياكة والتطريز',
@@ -44,11 +45,11 @@ class _AddProductState extends State<AddProduct> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Align(
-            alignment: Alignment.centerRight,
-            child:
-                Text("إضافة منتج", style: TextStyle(color: Color(0xff51908E)))),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(56.0),
+        child: Container(
+          child: const DefaultAppBar(title: " إضافة منتج"),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -59,23 +60,27 @@ class _AddProductState extends State<AddProduct> {
 
             children: <Widget>[
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 100),
-                child: ElevatedButton.icon(
-                  onPressed: () async {
-                    await _showMyDialog();
-                  },
-                  style: ElevatedButton.styleFrom(
-                      primary: const Color.fromARGB(255, 26, 96, 91)),
-                  icon: Icon(
-                    // <-- Icon
-                    Icons.image,
-                    size: 24.0,
+                //margin: EdgeInsets.symmetric(horizontal: 100),
+                child: SizedBox(
+                  width: 400,
+                  height: 40,
+                  child: ElevatedButton.icon(
+                    onPressed: () async {
+                      await _showMyDialog();
+                    },
+                    style: ElevatedButton.styleFrom(primary: kPrimaryColor),
+                    icon: Icon(
+                      // <-- Icon
+                      Icons.image,
+                      size: 24.0,
+                    ),
+
+                    label: Text(
+                      'إرفاق صورة',
+                      style: TextStyle(fontSize: 22, fontFamily: "Tajawal"),
+                      //textAlign: TextAlign.right,
+                    ), // <-- Text
                   ),
-                  label: Text(
-                    'إرفاق صورة',
-                    style: TextStyle(fontSize: 22),
-                    textAlign: TextAlign.right,
-                  ), // <-- Text
                 ),
               ),
               SizedBox(
@@ -92,18 +97,25 @@ class _AddProductState extends State<AddProduct> {
 
               Row(
                 //
-                mainAxisAlignment: MainAxisAlignment.end, //for right edge
+                mainAxisAlignment:
+                    MainAxisAlignment.spaceEvenly, //for right edge
                 children: [
+                  SizedBox(width: 20), // for space
+                  Text(
+                    'فئة المنتج',
+                    style: TextStyle(fontSize: 22, fontFamily: "Tajawal"),
+                  ),
+
                   DropdownButton(
                     // Initial Value
                     value: dropdownvalue,
                     underline: Container(
                       height: 3,
-                      color: Color.fromARGB(255, 26, 96, 91), //<-- SEE HERE
+                      color: kPrimaryColor, //<-- SEE HERE
                     ),
                     icon: Icon(Icons.arrow_drop_down),
                     style: const TextStyle(
-                        color: Color.fromARGB(255, 26, 96, 91), //<-- SEE HERE
+                        color: kPrimaryColor, //<-- SEE HERE
                         fontSize: 20,
                         fontWeight: FontWeight.bold),
                     // Down Arrow Icon
@@ -124,12 +136,6 @@ class _AddProductState extends State<AddProduct> {
                         dropdownvalue = newValue!;
                       });
                     },
-                  ),
-
-                  SizedBox(width: 20), // for space
-                  Text(
-                    'فئة المنتج',
-                    style: TextStyle(fontSize: 22),
                   ),
                 ],
               ),
@@ -180,21 +186,18 @@ class _AddProductState extends State<AddProduct> {
                     child: Icon(
                         Icons
                             .production_quantity_limits_sharp, //sara rdits from here
-                        color: Color.fromARGB(255, 26, 96, 91)),
+                        color: kPrimaryColor),
                   ),
-                  labelStyle: TextStyle(
-                      color: Color.fromARGB(255, 26, 96, 91),
-                      fontFamily: "Tajawal"),
+                  labelStyle:
+                      TextStyle(color: kPrimaryColor, fontFamily: "Tajawal"),
                   // floatingLabelBehavior: FloatingLabelBehavior.never,
                   fillColor: Colors.white.withOpacity(0.3),
 
                   enabledBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Color.fromARGB(255, 26, 96, 91)),
+                    borderSide: BorderSide(color: kPrimaryColor),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        width: 2, color: Color.fromARGB(255, 26, 96, 91)),
+                    borderSide: BorderSide(width: 2, color: kPrimaryColor),
                   ),
                   errorStyle:
                       TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
@@ -247,21 +250,18 @@ class _AddProductState extends State<AddProduct> {
                   prefixIcon: Padding(
                     padding: EdgeInsets.only(top: 15),
                     child: Icon(Icons.description, //Sara edits
-                        color: Color.fromARGB(255, 26, 96, 91)),
+                        color: kPrimaryColor),
                   ),
-                  labelStyle: TextStyle(
-                      color: Color.fromARGB(255, 26, 96, 91),
-                      fontFamily: "Tajawal"),
+                  labelStyle:
+                      TextStyle(color: kPrimaryColor, fontFamily: "Tajawal"),
                   // floatingLabelBehavior: FloatingLabelBehavior.never,
                   fillColor: Colors.white.withOpacity(0.3),
 
                   enabledBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Color.fromARGB(255, 26, 96, 91)),
+                    borderSide: BorderSide(color: kPrimaryColor),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        width: 2, color: Color.fromARGB(255, 26, 96, 91)),
+                    borderSide: BorderSide(width: 2, color: kPrimaryColor),
                   ),
                   errorStyle:
                       TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
@@ -302,21 +302,18 @@ class _AddProductState extends State<AddProduct> {
                     padding: EdgeInsets.only(top: 15),
                     child: Icon(Icons.numbers,
                         //Sara edits
-                        color: Color.fromARGB(255, 26, 96, 91)),
+                        color: kPrimaryColor),
                   ),
-                  labelStyle: TextStyle(
-                      color: Color.fromARGB(255, 26, 96, 91),
-                      fontFamily: "Tajawal"),
+                  labelStyle:
+                      TextStyle(color: kPrimaryColor, fontFamily: "Tajawal"),
                   // floatingLabelBehavior: FloatingLabelBehavior.never,
                   fillColor: Colors.white.withOpacity(0.3),
 
                   enabledBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Color.fromARGB(255, 26, 96, 91)),
+                    borderSide: BorderSide(color: kPrimaryColor),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        width: 2, color: Color.fromARGB(255, 26, 96, 91)),
+                    borderSide: BorderSide(width: 2, color: kPrimaryColor),
                   ),
                   errorStyle:
                       TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
@@ -365,21 +362,18 @@ class _AddProductState extends State<AddProduct> {
                     padding: EdgeInsets.only(top: 15),
                     child: Icon(Icons.attach_money_outlined,
                         //Sara edits
-                        color: Color.fromARGB(255, 26, 96, 91)),
+                        color: kPrimaryColor),
                   ),
-                  labelStyle: TextStyle(
-                      color: Color.fromARGB(255, 26, 96, 91),
-                      fontFamily: "Tajawal"),
+                  labelStyle:
+                      TextStyle(color: kPrimaryColor, fontFamily: "Tajawal"),
                   // floatingLabelBehavior: FloatingLabelBehavior.never,
                   fillColor: Colors.white.withOpacity(0.3),
 
                   enabledBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Color.fromARGB(255, 26, 96, 91)),
+                    borderSide: BorderSide(color: kPrimaryColor),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        width: 2, color: Color.fromARGB(255, 26, 96, 91)),
+                    borderSide: BorderSide(width: 2, color: kPrimaryColor),
                   ),
                   errorStyle:
                       TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
@@ -452,8 +446,7 @@ class _AddProductState extends State<AddProduct> {
                   style: TextStyle(fontSize: 22),
                 ),
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
-                      Color.fromARGB(255, 35, 125, 118)),
+                  backgroundColor: MaterialStateProperty.all(kPrimaryColor),
                   padding: MaterialStateProperty.all(
                       EdgeInsets.symmetric(horizontal: 90, vertical: 13)),
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
@@ -573,3 +566,34 @@ class _AddProductState extends State<AddProduct> {
                       //   height: 53,
                         padding: EdgeInsets.symmetric(horizontal: 60),
                         child:*/
+
+class DefaultAppBar extends StatelessWidget {
+  final String title;
+  const DefaultAppBar({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      title: Text(title, style: TextStyle(color: kPrimaryColor)),
+      leading: IconButton(
+        padding: EdgeInsets.only(right: 20),
+        icon: const Icon(
+          Icons.arrow_back, //سهم العودة
+          color: kPrimaryColor,
+          size: 22.0,
+        ),
+        onPressed: () {
+          Navigator.pop(context);
+        },
+      ),
+      centerTitle: true,
+      backgroundColor: Colors.white,
+      elevation: 0,
+      automaticallyImplyLeading: false,
+      iconTheme: IconThemeData(color: kPrimaryColor),
+    );
+  }
+}

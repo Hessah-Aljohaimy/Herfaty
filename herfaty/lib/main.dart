@@ -5,6 +5,7 @@ import 'package:herfaty/pages/welcome.dart';
 import 'package:herfaty/pages/forget_password.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:herfaty/screens/navCustomer.dart';
+import 'package:herfaty/screens/navOwner.dart';
 import 'firebase_options.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:herfaty/pages/signupCustomer.dart';
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
         "/welcome": (context) => const Welcome(),
         "/login": (context) => const login(),
         "/forget_password": (context) => const forget_password(),
-        "/home_screen": (context) => const nav(),
+        "/home_screen": (context) => const navOwner(),
         "/welcomeRegestration": (context) => const WelcomeRegestration(),
         "/signupCustomer": (context) => const SignupCustomer(),
         "/signupHerfay": (context) => const SignupHerafy(),

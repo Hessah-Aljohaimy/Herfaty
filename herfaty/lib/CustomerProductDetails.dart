@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:herfaty/AddProductToCart.dart';
 import 'package:herfaty/Product1.dart';
 import 'package:herfaty/constants/color.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 //import 'package:herfaty/ProductDetailsBody.dart';
 
 class CustomerProdectDetails extends StatefulWidget {
@@ -30,193 +31,214 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
         quantity: 1,
         availableAmount: widget.product.quantity, //تحتاج تغيير
         price: widget.product.price);
+
+    num displayedQuantity = 1;
     //////////////////////////////////////////////////////////////////////////////////////
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: kPrimaryColor,
       appBar: productDetailsAppBar(context),
       //..............................................................................................................
-      body: SingleChildScrollView(
-        child: SizedBox(
-          height: size.height,
-          child: Column(
-            //crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                //to make the container covers the full width of the screen
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20 * 1.5,
-                ),
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(50),
-                    bottomRight: Radius.circular(50),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: SizedBox(
+            height: size.height,
+            child: Column(
+              //crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  //to make the container covers the full width of the screen
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20 * 1.5,
+                  ),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(50),
+                      bottomRight: Radius.circular(50),
+                    ),
+                  ),
+                  //==child of the container
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      //product image=====================================================================
+                      Center(
+                        child: ProductImage(
+                          size: size,
+                          image: widget.detailsImage,
+                        ),
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            widget.product.name,
+                            style: const TextStyle(
+                              fontSize: 24.0,
+                              fontWeight: FontWeight.w600,
+                              color: Color.fromARGB(255, 0, 0, 0),
+                            ),
+                          ),
+                          // product price======================================================================
+                          Text(
+                            ' ${widget.product.price} ريال',
+                            style: const TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.orange,
+                            ),
+                          ),
+                        ],
+                      ),
+                      //this sizebox is to add a space after the price
+                      const SizedBox(
+                        height: 20,
+                      ),
+                    ],
                   ),
                 ),
-                //==child of the container
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    //product image=====================================================================
-                    Center(
-                      child: ProductImage(
-                        size: size,
-                        image: widget.detailsImage,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      // product name==================================================================
+                //product description======================================================================
+                Container(
+                  width: double.infinity,
+                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 30,
+                  ),
+                  child: Expanded(
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
                       child: Text(
-                        widget.product.name,
+                        widget.product.description,
                         style: const TextStyle(
-                          fontSize: 24.0,
-                          fontWeight: FontWeight.w600,
-                          color: Color.fromARGB(255, 0, 0, 0),
+                          fontSize: 18.0,
+                          color: Colors.white,
                         ),
                       ),
                     ),
-                    // product price======================================================================
-                    Text(
-                      ' ${widget.product.price} ريال',
-                      style: const TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.orange,
+                  ),
+                ),
+                const Spacer(),
+                //(أضافة إلى السلة)============================================================//
+                //////////////////////////////////////////////////////////////////////////////////
+                /////=============================================================================
+                //////////////////////////////////////////////////////////////////////////////////
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      // زر اللإضافة للسلة-----------------------------------------
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Fluttertoast.showToast(
+                            msg: "تمت إضافة المنتج للسلة بنجاح",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 3,
+                            backgroundColor: Colors.white,
+                            textColor: Color.fromARGB(255, 26, 96, 91),
+                            fontSize: 18.0,
+                          );
+
+                          item.availableAmount -= 1;
+                          createCartItem(item);
+                          String idToBeUpdated = item.productId;
+
+                          //update available amount of the product in the product collection
+                          final updateAvailableAmount = FirebaseFirestore
+                              .instance
+                              .collection('Products')
+                              .doc("${idToBeUpdated}");
+                          updateAvailableAmount.update({'avalibleAmount': 20});
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 30,
+                            vertical: 6,
+                          ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0)),
+                        ),
+                        child: const Text(
+                          'أضف إلى السلة',
+                          style: TextStyle(
+                            fontSize: 22.0,
+                            fontWeight: FontWeight.w900,
+                            color: kPrimaryColor,
+                          ),
+                        ),
                       ),
                     ),
-                    //this sizebox is to add a space after the price
-                    const SizedBox(
-                      height: 20,
+
+                    ////////////////////////////////////////////////////////////////////////////////
+                    ///
+                    Row(
+                      //mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              setState(() {
+                                if (item.quantity > 1) {
+                                  var updaterAmount = (item.quantity) - 1;
+                                  FirebaseFirestore.instance
+                                      .collection('cart')
+                                      .doc(item.productId)
+                                      .update({"quantity": updaterAmount});
+                                } else {
+                                  //erro message no item less than 1
+                                }
+                              });
+                            },
+                            icon: Icon(
+                              Icons.remove_circle_outline,
+                              color: Colors.white,
+                              size: 35,
+                            )),
+                        Container(
+                            width: 44.0,
+                            height: 44.0,
+                            padding: EdgeInsets.only(top: 22.0),
+                            color: kPrimaryColor,
+                            child: TextField(
+                              enabled: false,
+                              textAlign: TextAlign.center,
+                              decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: '${item.quantity}',
+                                  hintStyle: const TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 25,
+                                      color:
+                                          Color.fromARGB(255, 255, 255, 255))),
+                            )),
+                        IconButton(
+                            onPressed: () {
+                              setState(() {
+                                if (item.quantity < item.availableAmount) {
+                                  var updaterAmount = (item.quantity) + 1;
+                                  FirebaseFirestore.instance
+                                      .collection('cart')
+                                      .doc(item.productId)
+                                      .update({"quantity": updaterAmount});
+                                }
+                              });
+                            },
+                            icon: Icon(
+                              Icons.add_circle_outline,
+                              color: Colors.white,
+                              size: 35,
+                            )),
+                      ],
                     ),
                   ],
                 ),
-              ),
-              //product description======================================================================
-              Container(
-                width: double.infinity,
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                padding: const EdgeInsets.symmetric(
-                  vertical: 10,
-                  horizontal: 30,
-                ),
-                child: SingleChildScrollView(
-                  child: Text(
-                    widget.product.description,
-                    style: const TextStyle(
-                      fontSize: 18.0,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-              const Spacer(),
-              //(أضافة إلى السلة)============================================================//
-              //////////////////////////////////////////////////////////////////////////////////
-              /////=============================================================================
-              //////////////////////////////////////////////////////////////////////////////////
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        item.availableAmount - 1;
-                        createCartItem(item);
-                        String idToBeUpdated = item.productId;
-
-                        //update available amount of the product in the product collection
-                        final updateAvailableAmount = FirebaseFirestore.instance
-                            .collection('Products')
-                            .doc("${idToBeUpdated}");
-                        updateAvailableAmount.update({'avalibleAmount': 20});
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 30,
-                          vertical: 6,
-                        ),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0)),
-                      ),
-                      child: const Text(
-                        'أضف إلى السلة',
-                        style: TextStyle(
-                          fontSize: 22.0,
-                          fontWeight: FontWeight.w900,
-                          color: kPrimaryColor,
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  ////////////////////////////////////////////////////////////////////////////////
-                  ///
-                  Row(
-                    //mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      IconButton(
-                          onPressed: () {
-                            setState(() {
-                              if (item.quantity > 1) {
-                                var updaterAmount = (item.quantity) - 1;
-                                FirebaseFirestore.instance
-                                    .collection('cart')
-                                    .doc(item.productId)
-                                    .update({"quantity": updaterAmount});
-                              } else {
-                                //erro message no item less than 1
-                              }
-                            });
-                          },
-                          icon: Icon(
-                            Icons.remove_circle_outline,
-                            color: Colors.white,
-                            size: 35,
-                          )),
-                      Container(
-                          width: 44.0,
-                          height: 44.0,
-                          padding: EdgeInsets.only(top: 22.0),
-                          color: kPrimaryColor,
-                          child: TextField(
-                            enabled: false,
-                            textAlign: TextAlign.center,
-                            decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: item.quantity.toString(),
-                                hintStyle: const TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 25,
-                                    color: Color.fromARGB(255, 255, 255, 255))),
-                          )),
-                      IconButton(
-                          onPressed: () {
-                            setState(() {
-                              if (item.quantity < item.availableAmount) {
-                                var updaterAmount = (item.quantity) + 1;
-                                FirebaseFirestore.instance
-                                    .collection('cart')
-                                    .doc(item.productId)
-                                    .update({"quantity": updaterAmount});
-                              }
-                            });
-                          },
-                          icon: Icon(
-                            Icons.add_circle_outline,
-                            color: Colors.white,
-                            size: 35,
-                          )),
-                    ],
-                  ),
-                ],
-              ),
-              const Spacer(),
-              const Spacer(),
-            ],
+                const Spacer(),
+                const Spacer(),
+              ],
+            ),
           ),
         ),
       ),
@@ -280,7 +302,7 @@ class ProductImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 20),
-      height: size.width * 0.8,
+      height: size.width * 0.7,
       color: const Color.fromARGB(255, 255, 255, 255),
       child: Stack(
         alignment: Alignment.bottomCenter,
@@ -288,14 +310,15 @@ class ProductImage extends StatelessWidget {
           Container(
             height: size.width * 0.7,
             width: size.width * 0.7,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
               color: Colors.white,
             ),
           ),
           Image.network(
             image,
-            height: size.width * 0.75,
-            width: size.width * 0.75,
+            height: size.width * 0.8,
+            width: size.width * 0.8,
             fit: BoxFit.cover,
           ),
         ],

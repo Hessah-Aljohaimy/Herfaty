@@ -196,7 +196,7 @@ class CustomerProductsList extends StatelessWidget {
         style: TextStyle(
           fontSize: 20.0,
           fontWeight: FontWeight.w600,
-          color: Color.fromARGB(255, 26, 96, 91),
+          color: kPrimaryColor,
         ),
       ),
       leading: IconButton(
