@@ -186,13 +186,13 @@ TextFormField reusableTextFieldForName(String text, IconData icon,
       if (value == null || value.isEmpty) {
         return "أدخل " + text;
       }
-      if (!RegExp(r"^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_]*$")
-              .hasMatch(value) &&
-          !isPasswordType) {
-        return 'أدخل اسم بلا أرقام ورموز';
+      if (!RegExp(
+              r"^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z- ][]*$")
+          .hasMatch(value)) {
+        return "أدخل اسم بلا أرقام ورموز";
       }
-      if (value.length <= 2) {
-        return 'أدخل اسم اكبر من حرفين';
+      if (value.length <= 2 || value.length <= 1) {
+        return "أدخل اسم اكبر من حرفين";
       }
 
       return null;
@@ -247,15 +247,14 @@ TextFormField reusableTextFieldForAge(String text, IconData icon,
       if (value == null || value.isEmpty) {
         return "أدخل " + text;
       }
-      if (!RegExp(r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
-              .hasMatch(value) &&
-          !isPasswordType) {
-        return 'أدخل بريد إلكتروني صحيح';
-      }
+      // if (!RegExp(r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
+      //         .hasMatch(value) ) {
+      //   return 'أدخل بريد إلكتروني صحيح';
+      // }
 
-      if (text == "كلمة المرور") {
-        if (value.length < 6) return "";
-      }
+      // if (text == "كلمة المرور") {
+      //   if (value.length < 6) return "";
+      // }
 
       return null;
     },

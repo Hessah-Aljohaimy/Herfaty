@@ -89,14 +89,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
                           "assets/images/HerfatyLogoCroped.png",
                           height: 100,
                         )),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Container(
-                            child: Image.asset(
-                          "assets/images/number1.png",
-                          height: 50,
-                        )),
+
                         SizedBox(
                           height: 30,
                         ),
@@ -109,8 +102,17 @@ class _SignupHerafyState extends State<SignupHerafy> {
                             color: Color.fromARGB(255, 26, 96, 91),
                           ),
                         ),
+
                         SizedBox(
-                          height: 20,
+                          height: 15,
+                        ),
+                        Container(
+                            child: Image.asset(
+                          "assets/images/number1.png",
+                          height: 50,
+                        )),
+                        SizedBox(
+                          height: 15,
                         ),
 
                         Text(
@@ -131,8 +133,8 @@ class _SignupHerafyState extends State<SignupHerafy> {
                           // height: 53,
                           // padding: EdgeInsets.symmetric(horizontal: 16),
                           padding: EdgeInsets.symmetric(horizontal: 60),
-                          child: reusableTextField("اسم الحرفي", Icons.person,
-                              false, _nameTextEditingController),
+                          child: reusableTextFieldForName("اسم الحرفي",
+                              Icons.person, false, _nameTextEditingController),
                         ),
 
                         SizedBox(
@@ -175,7 +177,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
                           height: 17,
                         ),
                         Container(
-                            width: 290,
+                            width: 320,
                             height: 53,
                             padding: EdgeInsets.symmetric(horizontal: 16),
                             child: Center(
@@ -251,6 +253,15 @@ class _SignupHerafyState extends State<SignupHerafy> {
                                   });
                                 } else {
                                   print("لم يتم اختيار تاريخ الميلاد");
+                                  Fluttertoast.showToast(
+                                    msg: "لم يتم اختيار تاريخ الميلاد  ",
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.CENTER,
+                                    timeInSecForIosWeb: 3,
+                                    backgroundColor: Colors.white,
+                                    textColor: Colors.red,
+                                    fontSize: 18.0,
+                                  );
                                 }
                               },
                             ))),
@@ -283,9 +294,19 @@ class _SignupHerafyState extends State<SignupHerafy> {
                             ],
                           ),
                         ),
+
                         SizedBox(
-                          height: 17,
+                          height: 15,
                         ),
+                        Container(
+                            child: Image.asset(
+                          "assets/images/number2.png",
+                          height: 50,
+                        )),
+                        SizedBox(
+                          height: 15,
+                        ),
+
                         Text(
                           "معلومات المتجر",
                           style: TextStyle(
