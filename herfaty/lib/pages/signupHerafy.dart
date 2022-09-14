@@ -76,408 +76,418 @@ class _SignupHerafyState extends State<SignupHerafy> {
                 // ),
                 SizedBox(
                   width: double.infinity,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: 70,
-                        ),
-
-                        Container(
-                            child: Image.asset(
-                          "assets/images/HerfatyLogoCroped.png",
-                          height: 100,
-                        )),
-
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Text(
-                          "تسجيل حساب جديد",
-                          style: TextStyle(
-                            fontSize: 35,
-                            fontFamily: "Tajawal",
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 26, 96, 91),
+                  child: Scrollbar(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 70,
                           ),
-                        ),
 
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Container(
-                            child: Image.asset(
-                          "assets/images/number1.png",
-                          height: 50,
-                        )),
-                        SizedBox(
-                          height: 15,
-                        ),
+                          Container(
+                              child: Image.asset(
+                            "assets/images/HerfatyLogoCroped.png",
+                            height: 100,
+                          )),
 
-                        Text(
-                          "معلومات الحرفي",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontFamily: "Tajawal",
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(248, 228, 175, 122),
+                          SizedBox(
+                            height: 30,
                           ),
-                        ),
-
-                        SizedBox(
-                          height: 27,
-                        ),
-                        Container(
-                          // width: 290,
-                          // height: 53,
-                          // padding: EdgeInsets.symmetric(horizontal: 16),
-                          padding: EdgeInsets.symmetric(horizontal: 60),
-                          child: reusableTextFieldForName("اسم الحرفي",
-                              Icons.person, false, _nameTextEditingController),
-                        ),
-
-                        SizedBox(
-                          height: 20,
-                        ),
-
-                        Container(
-                          // width: 290,
-                          // height: 53,
-                          // padding: EdgeInsets.symmetric(horizontal: 16),
-                          padding: EdgeInsets.symmetric(horizontal: 60),
-                          child: reusableTextField(
-                              "البريد الإلكتروني",
-                              Icons.email_rounded,
-                              false,
-                              _emailTextEditingController),
-                        ),
-
-                        SizedBox(
-                          height: 23,
-                        ),
-
-                        Container(
-                          // width: 290,
-                          // height: 53,
-                          // padding: EdgeInsets.symmetric(horizontal: 16),
-                          padding: EdgeInsets.symmetric(horizontal: 60),
-                          child: reusableTextField("كلمة المرور", Icons.lock,
-                              true, _passwordTextController),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.only(left: 85),
-                          child: Text(
-                            "* كلمه المرور يجب ان لا تقل عن 6 خانات",
+                          Text(
+                            "تسجيل حساب جديد",
                             style: TextStyle(
-                                color: Color.fromARGB(255, 235, 47, 26)),
+                              fontSize: 35,
+                              fontFamily: "Tajawal",
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 26, 96, 91),
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 17,
-                        ),
-                        Container(
-                            width: 320,
-                            height: 53,
-                            padding: EdgeInsets.symmetric(horizontal: 16),
-                            child: Center(
-                                child: TextFormField(
-                              controller: _BODController,
-                              //editing controller of this TextField
-                              decoration: InputDecoration(
-                                suffix: Icon(
-                                  Icons.calendar_today_rounded,
-                                  color: Color.fromARGB(255, 26, 96, 91),
-                                ),
-                                labelText: "تاريخ الميلاد",
-                                labelStyle: TextStyle(
-                                    color: Color.fromARGB(106, 26, 96, 91)),
-                                fillColor: Colors.white.withOpacity(0.3),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 26, 96, 91)),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      width: 2,
-                                      color: Color.fromARGB(255, 26, 96, 91)),
-                                ),
-                              ),
 
-                              readOnly:
-                                  true, //set it true, so that user will not able to edit text
-                              onTap: () async {
-                                DateTime? pickedDate = await showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(
-                                      2000), //DateTime.now() - not to allow to choose before today.
-                                  lastDate: DateTime(2101),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Container(
+                              child: Image.asset(
+                            "assets/images/number1.png",
+                            height: 50,
+                          )),
+                          SizedBox(
+                            height: 15,
+                          ),
 
-                                  builder: (context, child) {
-                                    return Theme(
-                                      data: Theme.of(context).copyWith(
-                                        colorScheme: ColorScheme.light(
-                                          primary:
-                                              Color(0xff51908E), // <-- SEE HERE
-                                          onPrimary:
-                                              Colors.white, // <-- SEE HERE
-                                          onSurface:
-                                              Colors.black, // <-- SEE HERE
-                                        ),
-                                        textButtonTheme: TextButtonThemeData(
-                                          style: TextButton.styleFrom(
+                          Text(
+                            "معلومات الحرفي",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontFamily: "Tajawal",
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(248, 228, 175, 122),
+                            ),
+                          ),
+
+                          SizedBox(
+                            height: 27,
+                          ),
+                          Container(
+                            // width: 290,
+                            // height: 53,
+                            // padding: EdgeInsets.symmetric(horizontal: 16),
+                            padding: EdgeInsets.symmetric(horizontal: 60),
+                            child: reusableTextFieldForName(
+                                "اسم الحرفي",
+                                Icons.person,
+                                false,
+                                _nameTextEditingController),
+                          ),
+
+                          SizedBox(
+                            height: 20,
+                          ),
+
+                          Container(
+                            // width: 290,
+                            // height: 53,
+                            // padding: EdgeInsets.symmetric(horizontal: 16),
+                            padding: EdgeInsets.symmetric(horizontal: 60),
+                            child: reusableTextField(
+                                "البريد الإلكتروني",
+                                Icons.email_rounded,
+                                false,
+                                _emailTextEditingController),
+                          ),
+
+                          SizedBox(
+                            height: 23,
+                          ),
+
+                          Container(
+                            // width: 290,
+                            // height: 53,
+                            // padding: EdgeInsets.symmetric(horizontal: 16),
+                            padding: EdgeInsets.symmetric(horizontal: 60),
+                            child: reusableTextField("كلمة المرور", Icons.lock,
+                                true, _passwordTextController),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.only(left: 85),
+                            child: Text(
+                              "* كلمه المرور يجب ان لا تقل عن 6 خانات",
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 235, 47, 26)),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 17,
+                          ),
+                          Container(
+                              width: 320,
+                              height: 53,
+                              padding: EdgeInsets.symmetric(horizontal: 16),
+                              child: Center(
+                                  child: TextFormField(
+                                controller: _BODController,
+                                //editing controller of this TextField
+                                decoration: InputDecoration(
+                                  suffix: Icon(
+                                    Icons.calendar_today_rounded,
+                                    color: Color.fromARGB(255, 26, 96, 91),
+                                  ),
+                                  labelText: "تاريخ الميلاد",
+                                  labelStyle: TextStyle(
+                                      color: Color.fromARGB(106, 26, 96, 91)),
+                                  fillColor: Colors.white.withOpacity(0.3),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromARGB(255, 26, 96, 91)),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 2,
+                                        color: Color.fromARGB(255, 26, 96, 91)),
+                                  ),
+                                ),
+
+                                readOnly:
+                                    true, //set it true, so that user will not able to edit text
+                                onTap: () async {
+                                  DateTime? pickedDate = await showDatePicker(
+                                    context: context,
+                                    initialDate: DateTime.now(),
+                                    firstDate: DateTime(
+                                        2000), //DateTime.now() - not to allow to choose before today.
+                                    lastDate: DateTime(2101),
+
+                                    builder: (context, child) {
+                                      return Theme(
+                                        data: Theme.of(context).copyWith(
+                                          colorScheme: ColorScheme.light(
                                             primary: Color(
-                                                0xff51908E), // button text color
+                                                0xff51908E), // <-- SEE HERE
+                                            onPrimary:
+                                                Colors.white, // <-- SEE HERE
+                                            onSurface:
+                                                Colors.black, // <-- SEE HERE
+                                          ),
+                                          textButtonTheme: TextButtonThemeData(
+                                            style: TextButton.styleFrom(
+                                              primary: Color(
+                                                  0xff51908E), // button text color
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      child: child!,
+                                        child: child!,
+                                      );
+                                    },
+                                  );
+
+                                  if (pickedDate != null) {
+                                    print(
+                                        pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                                    String formattedDate =
+                                        DateFormat('yyyy-MM-dd')
+                                            .format(pickedDate);
+                                    print(
+                                        formattedDate); //formatted date output using intl package =>  2021-03-16
+                                    //you can implement different kind of Date Format here according to your requirement
+
+                                    setState(() {
+                                      _BODController.text =
+                                          formattedDate; //set output date to TextField value.
+                                    });
+                                  } else {
+                                    print("لم يتم اختيار تاريخ الميلاد");
+                                    // Fluttertoast.showToast(
+                                    //   msg: "لم يتم اختيار تاريخ الميلاد  ",
+                                    //   toastLength: Toast.LENGTH_SHORT,
+                                    //   gravity: ToastGravity.CENTER,
+                                    //   timeInSecForIosWeb: 3,
+                                    //   backgroundColor: Colors.white,
+                                    //   textColor: Colors.red,
+                                    //   fontSize: 18.0,
+                                    // );
+                                  }
+                                },
+                              ))),
+                          SizedBox(
+                            height: 17,
+                          ),
+                          Container(
+                            // width: 290,
+                            // height: 53,
+                            // padding: EdgeInsets.symmetric(horizontal: 16),
+                            padding: EdgeInsets.symmetric(horizontal: 60),
+                            child: reusableTextFieldForPhone(
+                                "رقم الجوال",
+                                Icons.phone_android,
+                                false,
+                                _PhoneNumberTextEditingController),
+                          ),
+                          SizedBox(
+                            height: 17,
+                          ),
+                          SizedBox(
+                            width: 299,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                    child: Divider(
+                                  thickness: 2,
+                                  color: Color.fromARGB(255, 26, 96, 91),
+                                )),
+                              ],
+                            ),
+                          ),
+
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Container(
+                              child: Image.asset(
+                            "assets/images/number2.png",
+                            height: 50,
+                          )),
+                          SizedBox(
+                            height: 15,
+                          ),
+
+                          Text(
+                            "معلومات المتجر",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontFamily: "Tajawal",
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(248, 228, 175, 122),
+                            ),
+                          ),
+
+                          SizedBox(
+                            height: 27,
+                          ),
+
+                          Text(
+                            "أرفق صورة الشعار الخاصة بك",
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: "Tajawal",
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 26, 96, 91),
+                            ),
+                          ),
+                          imageProfile(),
+
+                          ////////////////////////////Importing Picture //////////////////////////////////
+                          SizedBox(
+                            height: 27,
+                          ),
+
+                          Container(
+                            // width: 290,
+                            // height: 53,
+                            padding: EdgeInsets.symmetric(horizontal: 60),
+                            child: reusableTextField("اسم المتجر", Icons.shop,
+                                false, _shopnameTextEditingController),
+                          ),
+
+                          SizedBox(
+                            height: 20,
+                          ),
+
+                          Container(
+                            // width: 290,
+                            // height: 53,
+                            padding: EdgeInsets.symmetric(horizontal: 60),
+                            child: reusableTextFieldDec(
+                                "وصف المتجر",
+                                Icons.shop_2,
+                                false,
+                                _shopdescriptionTextEditingController),
+                          ),
+
+                          SizedBox(
+                            height: 17,
+                          ),
+
+                          SizedBox(
+                            height: 17,
+                          ),
+                          Text(
+                            "هيا لتبدأ رحلتك!",
+                            style:
+                                TextStyle(fontFamily: 'Tajawal', fontSize: 18),
+                          ),
+                          SizedBox(
+                            height: 6,
+                          ),
+                          ElevatedButton(
+                            onPressed: () async {
+                              try {
+                                if (_formKey.currentState!.validate()) {
+                                  await FirebaseAuth.instance
+                                      .createUserWithEmailAndPassword(
+                                          email:
+                                              _emailTextEditingController.text,
+                                          password:
+                                              _passwordTextController.text)
+                                      .then((value) {
+                                    final shopowner = ShopOwner(
+                                        name: _nameTextEditingController.text,
+                                        email: _emailTextEditingController.text,
+                                        password: _passwordTextController.text,
+                                        DOB: _BODController.text,
+                                        phone_number:
+                                            _PhoneNumberTextEditingController
+                                                .text,
+                                        logo: _shoplogoEditingController.text,
+                                        shopname:
+                                            _shopnameTextEditingController.text,
+                                        shopdescription:
+                                            _shopdescriptionTextEditingController
+                                                .text);
+                                    Fluttertoast.showToast(
+                                      msg: "تم تسجيل الحساب بنجاح",
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.CENTER,
+                                      timeInSecForIosWeb: 3,
+                                      backgroundColor: Colors.white,
+                                      textColor:
+                                          Color.fromARGB(255, 26, 96, 91),
+                                      fontSize: 18.0,
                                     );
-                                  },
-                                );
-
-                                if (pickedDate != null) {
-                                  print(
-                                      pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
-                                  String formattedDate =
-                                      DateFormat('yyyy-MM-dd')
-                                          .format(pickedDate);
-                                  print(
-                                      formattedDate); //formatted date output using intl package =>  2021-03-16
-                                  //you can implement different kind of Date Format here according to your requirement
-
-                                  setState(() {
-                                    _BODController.text =
-                                        formattedDate; //set output date to TextField value.
+                                    createShopOwner(shopowner);
+                                    // Navigator.push(
+                                    //   context,
+                                    //   MaterialPageRoute(builder: (context) => const ownerBaseScreen()),
+                                    // );
                                   });
-                                } else {
-                                  print("لم يتم اختيار تاريخ الميلاد");
-                                  // Fluttertoast.showToast(
-                                  //   msg: "لم يتم اختيار تاريخ الميلاد  ",
-                                  //   toastLength: Toast.LENGTH_SHORT,
-                                  //   gravity: ToastGravity.CENTER,
-                                  //   timeInSecForIosWeb: 3,
-                                  //   backgroundColor: Colors.white,
-                                  //   textColor: Colors.red,
-                                  //   fontSize: 18.0,
-                                  // );
                                 }
-                              },
-                            ))),
-                        SizedBox(
-                          height: 17,
-                        ),
-                        Container(
-                          // width: 290,
-                          // height: 53,
-                          // padding: EdgeInsets.symmetric(horizontal: 16),
-                          padding: EdgeInsets.symmetric(horizontal: 60),
-                          child: reusableTextFieldForPhone(
-                              "رقم الجوال",
-                              Icons.phone_android,
-                              false,
-                              _PhoneNumberTextEditingController),
-                        ),
-                        SizedBox(
-                          height: 17,
-                        ),
-                        SizedBox(
-                          width: 299,
-                          child: Row(
+                              } on FirebaseAuthException catch (error) {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: Text("خطأ"),
+                                        content: Text(
+                                            'البريد الإلكتروني موجود مسبقا'),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            child: Text("حسنا"),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                          )
+                                        ],
+                                      );
+                                    });
+                              }
+                            },
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Color(0xff51908E)),
+                              padding: MaterialStateProperty.all(
+                                  EdgeInsets.symmetric(
+                                      horizontal: 90, vertical: 13)),
+                              shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(27))),
+                            ),
+                            child: Text(
+                              "تسجيل الحساب",
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: "Tajawal",
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 33,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Expanded(
-                                  child: Divider(
-                                thickness: 2,
-                                color: Color.fromARGB(255, 26, 96, 91),
-                              )),
+                              Text(
+                                "هل لديك حساب بالفعل؟ ",
+                                style: TextStyle(fontFamily: "Tajawal"),
+                              ),
+                              GestureDetector(
+                                  onTap: () {
+                                    Navigator.pushNamed(context, "/login");
+                                  },
+                                  child: Text(
+                                    "تسجيل الدخول ",
+                                    style: TextStyle(
+                                        fontFamily: "Tajawal",
+                                        decoration: TextDecoration.underline,
+                                        color:
+                                            Color.fromARGB(255, 53, 47, 244)),
+                                  )),
                             ],
                           ),
-                        ),
-
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Container(
-                            child: Image.asset(
-                          "assets/images/number2.png",
-                          height: 50,
-                        )),
-                        SizedBox(
-                          height: 15,
-                        ),
-
-                        Text(
-                          "معلومات المتجر",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontFamily: "Tajawal",
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(248, 228, 175, 122),
+                          SizedBox(
+                            height: 17,
                           ),
-                        ),
-
-                        SizedBox(
-                          height: 27,
-                        ),
-
-                        Text(
-                          "أرفق صورة الشعار الخاصة بك",
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontFamily: "Tajawal",
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 26, 96, 91),
-                          ),
-                        ),
-                        imageProfile(),
-
-////////////////////////////Importing Picture //////////////////////////////////
-                        SizedBox(
-                          height: 27,
-                        ),
-
-                        Container(
-                          // width: 290,
-                          // height: 53,
-                          padding: EdgeInsets.symmetric(horizontal: 60),
-                          child: reusableTextField("اسم المتجر", Icons.shop,
-                              false, _shopnameTextEditingController),
-                        ),
-
-                        SizedBox(
-                          height: 20,
-                        ),
-
-                        Container(
-                          // width: 290,
-                          // height: 53,
-                          padding: EdgeInsets.symmetric(horizontal: 60),
-                          child: reusableTextFieldDec(
-                              "وصف المتجر",
-                              Icons.shop_2,
-                              false,
-                              _shopdescriptionTextEditingController),
-                        ),
-
-                        SizedBox(
-                          height: 17,
-                        ),
-
-                        SizedBox(
-                          height: 17,
-                        ),
-                        Text(
-                          "هيا لتبدأ رحلتك!",
-                          style: TextStyle(fontFamily: 'Tajawal', fontSize: 18),
-                        ),
-                        SizedBox(
-                          height: 6,
-                        ),
-                        ElevatedButton(
-                          onPressed: () async {
-                            try {
-                              if (_formKey.currentState!.validate()) {
-                                await FirebaseAuth.instance
-                                    .createUserWithEmailAndPassword(
-                                        email: _emailTextEditingController.text,
-                                        password: _passwordTextController.text)
-                                    .then((value) {
-                                  final shopowner = ShopOwner(
-                                      name: _nameTextEditingController.text,
-                                      email: _emailTextEditingController.text,
-                                      password: _passwordTextController.text,
-                                      DOB: _BODController.text,
-                                      phone_number:
-                                          _PhoneNumberTextEditingController
-                                              .text,
-                                      logo: _shoplogoEditingController.text,
-                                      shopname:
-                                          _shopnameTextEditingController.text,
-                                      shopdescription:
-                                          _shopdescriptionTextEditingController
-                                              .text);
-                                  Fluttertoast.showToast(
-                                    msg: "تم تسجيل الحساب بنجاح",
-                                    toastLength: Toast.LENGTH_SHORT,
-                                    gravity: ToastGravity.CENTER,
-                                    timeInSecForIosWeb: 3,
-                                    backgroundColor: Colors.white,
-                                    textColor: Color.fromARGB(255, 26, 96, 91),
-                                    fontSize: 18.0,
-                                  );
-                                  createShopOwner(shopowner);
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(builder: (context) => const ownerBaseScreen()),
-                                  // );
-                                });
-                              }
-                            } on FirebaseAuthException catch (error) {
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: Text("خطأ"),
-                                      content:
-                                          Text('البريد الإلكتروني موجود مسبقا'),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          child: Text("حسنا"),
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                        )
-                                      ],
-                                    );
-                                  });
-                            }
-                          },
-                          style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Color(0xff51908E)),
-                            padding: MaterialStateProperty.all(
-                                EdgeInsets.symmetric(
-                                    horizontal: 90, vertical: 13)),
-                            shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(27))),
-                          ),
-                          child: Text(
-                            "تسجيل الحساب",
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontFamily: "Tajawal",
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 33,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "هل لديك حساب بالفعل؟ ",
-                              style: TextStyle(fontFamily: "Tajawal"),
-                            ),
-                            GestureDetector(
-                                onTap: () {
-                                  Navigator.pushNamed(context, "/login");
-                                },
-                                child: Text(
-                                  "تسجيل الدخول ",
-                                  style: TextStyle(
-                                      fontFamily: "Tajawal",
-                                      decoration: TextDecoration.underline,
-                                      color: Color.fromARGB(255, 53, 47, 244)),
-                                )),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 17,
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
