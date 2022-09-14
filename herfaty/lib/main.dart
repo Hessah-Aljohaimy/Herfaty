@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
         "/welcome": (context) => const Welcome(),
         "/login": (context) => const login(),
         "/forget_password": (context) => const forget_password(),
-        "/home_screen": (context) => const navOwner(),
+        "/home_screen": (context) => const nav(),
         "/welcomeRegestration": (context) => const WelcomeRegestration(),
         "/signupCustomer": (context) => const SignupCustomer(),
         "/signupHerfay": (context) => const SignupHerafy(),

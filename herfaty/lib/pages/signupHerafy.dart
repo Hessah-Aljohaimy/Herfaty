@@ -181,7 +181,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
                             height: 17,
                           ),
                           Container(
-                              width: 320,
+                              width: 295,
                               height: 53,
                               padding: EdgeInsets.symmetric(horizontal: 16),
                               child: Center(
