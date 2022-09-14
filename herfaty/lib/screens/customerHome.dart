@@ -6,6 +6,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../CustomerProductsList.dart';
+
 class customerHomeScreen extends StatefulWidget {
   const customerHomeScreen({Key? key}) : super(key: key);
 
@@ -191,9 +193,52 @@ class categories extends StatelessWidget {
                       mainAxisSpacing: 24,
                     ),
                     itemBuilder: (context, index) {
-                      return CategoryCard(
+                      return GestureDetector(
+                          child: CategoryCard(
+                            category: cItems[index],
+                          ),
+                          onTap: () {
+                            if (cItems[index].name == "فنون الورق والتلوين") {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const CustomerProductsList(
+                                            categoryName:
+                                                "فنون الورق والتلوين")),
+                              );
+                            }
+                            if (cItems[index].name == "الخرز والإكسسوار") {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const CustomerProductsList(
+                                            categoryName: "الخرز والإكسسوار")),
+                              );
+                            }
+                            if (cItems[index].name == "الفخاريات") {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const CustomerProductsList(
+                                            categoryName: "الفخاريات")),
+                              );
+                            }
+                            if (cItems[index].name == "الحياكة والتطريز") {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const CustomerProductsList(
+                                            categoryName: "الحياكة والتطريز")),
+                              );
+                            }
+                          });
+                      /*return CategoryCard(
                         category: cItems[index],
-                      );
+                      );*/
                     },
                     itemCount: cItems.length,
                   );

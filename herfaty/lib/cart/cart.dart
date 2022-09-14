@@ -92,8 +92,22 @@ class _CartState extends State<Cart> {
                                                         if (cItems[index]
                                                                 .quantity >
                                                             1) {
-                                                          cItems[index]
-                                                              .quantity--;
+                                                          var updaterAmount =
+                                                              (cItems[index]
+                                                                      .quantity) -
+                                                                  1;
+                                                          FirebaseFirestore
+                                                              .instance
+                                                              .collection(
+                                                                  'cart')
+                                                              .doc(cItems[index]
+                                                                  .docId)
+                                                              .update({
+                                                            "quantity":
+                                                                updaterAmount
+                                                          });
+                                                        } else {
+                                                          //erro message no item less than 1
                                                         }
                                                       });
                                                     },
@@ -132,7 +146,8 @@ class _CartState extends State<Cart> {
                                                                 .avalibleAmount) {
                                                           var updaterAmount =
                                                               (cItems[index]
-                                                                  .quantity);
+                                                                      .quantity) +
+                                                                  1;
                                                           FirebaseFirestore
                                                               .instance
                                                               .collection(
@@ -141,7 +156,7 @@ class _CartState extends State<Cart> {
                                                                   .docId)
                                                               .update({
                                                             "quantity":
-                                                                updaterAmount++
+                                                                updaterAmount
                                                           });
                                                         }
                                                       });
