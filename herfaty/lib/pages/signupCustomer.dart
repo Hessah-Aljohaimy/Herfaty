@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/pages/home_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:herfaty/pages/reusable_widgets.dart';
@@ -21,8 +22,6 @@ class _SignupCustomerState extends State<SignupCustomer> {
   TextEditingController _emailTextEditingController = TextEditingController();
   TextEditingController _nameTextEditingController = TextEditingController();
   @override
-
-
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -48,7 +47,7 @@ class _SignupCustomerState extends State<SignupCustomer> {
                   // Positioned(
                   //   bottom: 0,
                   //   right: 0,
-                    
+
                   //   child: Image.asset(
                   //     "assets/images/main_botomm.png",
                   //     width: 200,
@@ -69,9 +68,9 @@ class _SignupCustomerState extends State<SignupCustomer> {
                             "assets/images/HerfatyLogoCroped.png",
                             height: 100,
                           )),
-                           SizedBox(
-                        height: 30,
-                      ),
+                          SizedBox(
+                            height: 30,
+                          ),
                           Text(
                             "تسجيل حساب جديد",
                             style: TextStyle(
@@ -100,9 +99,9 @@ class _SignupCustomerState extends State<SignupCustomer> {
                           //////////////////Inputs Fields//////////////
 
                           Container(
-                             // width: 290,
+                            // width: 290,
                             // height: 53,
-  padding: EdgeInsets.symmetric(horizontal: 60),
+                            padding: EdgeInsets.symmetric(horizontal: 60),
                             // child: TextFormField (
                             //   validator: (value) => value.isEmpty?'ادخل اسم المشتري الثنائي':null,
 
@@ -119,8 +118,8 @@ class _SignupCustomerState extends State<SignupCustomer> {
                           Container(
                             // width: 290,
                             // height: 53,
-  padding: EdgeInsets.symmetric(horizontal: 60),
-                              child: reusableTextField(
+                            padding: EdgeInsets.symmetric(horizontal: 60),
+                            child: reusableTextField(
                                 "البريد الإلكتروني",
                                 Icons.email_rounded,
                                 false,
@@ -130,18 +129,20 @@ class _SignupCustomerState extends State<SignupCustomer> {
                             height: 23,
                           ),
                           Container(
-                           // width: 290,
+                            // width: 290,
                             // height: 53,
-  padding: EdgeInsets.symmetric(horizontal: 60),
+                            padding: EdgeInsets.symmetric(horizontal: 60),
                             child: reusableTextField("كلمة المرور", Icons.lock,
                                 true, _passwordTextController),
-                                
                           ),
-                                   Container(
-padding: const EdgeInsets.only(left:85),
-                                    child:
-                          Text("* كلمه المرور لا تقل عن 6 خانات", style: 
-                          TextStyle(color: Color.fromARGB(255, 164, 46, 46)),),),
+                          Container(
+                            padding: const EdgeInsets.only(left: 85),
+                            child: Text(
+                              "* كلمه المرور لا تقل عن 6 خانات",
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 164, 46, 46)),
+                            ),
+                          ),
                           SizedBox(
                             height: 23,
                           ),
@@ -154,44 +155,61 @@ padding: const EdgeInsets.only(left:85),
                           ElevatedButton(
                             onPressed: () async {
                               try {
-
                                 if (_formKey.currentState!.validate()) {
+                                  await FirebaseAuth.instance
+                                      .createUserWithEmailAndPassword(
+                                          email:
+                                              _emailTextEditingController.text,
+                                          password:
+                                              _passwordTextController.text)
+                                      .then((value) {
+                                    final customer = Customer(
+                                      name: _nameTextEditingController.text,
+                                      email: _emailTextEditingController.text,
+                                      password: _passwordTextController.text,
+                                    );
+                                    Fluttertoast.showToast(
+                                      msg: "تم تسجيل الحساب بنجاح",
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.CENTER,
+                                      timeInSecForIosWeb: 3,
+                                      backgroundColor: Colors.white,
+                                      textColor:
+                                          Color.fromARGB(255, 26, 96, 91),
+                                      fontSize: 18.0,
+                                    );
+                                    createCustomer(customer);
+                                    // Navigator.push(
+                                    //   context,
+                                    //   MaterialPageRoute(builder: (context) => const customerBaseScreen()),
+                                    // );
 
-  await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _emailTextEditingController.text, 
-    password: _passwordTextController.text)
-    .then((value) {
-         final customer = Customer(
-                            name: _nameTextEditingController.text,
-                            email: _emailTextEditingController.text,
-                            password: _passwordTextController.text,
-                          );
-                          createCustomer(customer);
-                     Navigator.pushNamed(context, "/home_screen");});
+                                    //  Navigator.pushNamed(context, "/home_screen");
+                                  });
                                 }
-} on FirebaseAuthException catch(error) {
-  showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text("خطأ"),
-              content: Text('البريد الإلكتروني موجود مسبقا'),
-              actions: <Widget>[
-                TextButton(
-                  child: Text("حسنا"),
-                  onPressed: () {
-                                       Navigator.of(context).pop();
-                  },
-                )
-              ],
-            );
-          });} 
-
-                  
-                              
+                              } on FirebaseAuthException catch (error) {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: Text("خطأ"),
+                                        content: Text(
+                                            'البريد الإلكتروني موجود مسبقا'),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            child: Text("حسنا"),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                          )
+                                        ],
+                                      );
+                                    });
+                              }
                             },
                             style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(
-                                 Color(0xff51908E)),
+                              backgroundColor:
+                                  MaterialStateProperty.all(Color(0xff51908E)),
                               padding: MaterialStateProperty.all(
                                   EdgeInsets.symmetric(
                                       horizontal: 90, vertical: 13)),
@@ -201,26 +219,37 @@ padding: const EdgeInsets.only(left:85),
                             ),
                             child: Text(
                               "تسجيل الحساب",
-                              style: TextStyle(fontSize: 14,fontFamily: "Tajawal",fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: "Tajawal",
+                                  fontWeight: FontWeight.bold),
                             ),
                           ),
                           SizedBox(
                             height: 33,
                           ),
-                           
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                           Text("هل لديك حساب بالفعل؟ ",style: TextStyle(fontFamily: "Tajawal"),),
-                          GestureDetector(
-                            onTap: (){ Navigator.pushNamed(context, "/login");},
-                            child: Text("تسجيل الدخول ", style: TextStyle(fontFamily: "Tajawal", decoration: TextDecoration.underline,color: Color.fromARGB(255, 53, 47, 244)),)),
 
-                         
-
-                          
-                        ],
-                      ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "هل لديك حساب بالفعل؟ ",
+                                style: TextStyle(fontFamily: "Tajawal"),
+                              ),
+                              GestureDetector(
+                                  onTap: () {
+                                    Navigator.pushNamed(context, "/login");
+                                  },
+                                  child: Text(
+                                    "تسجيل الدخول ",
+                                    style: TextStyle(
+                                        fontFamily: "Tajawal",
+                                        decoration: TextDecoration.underline,
+                                        color:
+                                            Color.fromARGB(255, 53, 47, 244)),
+                                  )),
+                            ],
+                          ),
                           SizedBox(
                             height: 17,
                           ),
@@ -252,19 +281,18 @@ padding: const EdgeInsets.only(left:85),
 }
 
 //Datebase
-  Future createCustomer(Customer customer) async {
-    final docCustomr = FirebaseFirestore.instance.collection('customers').doc();
+Future createCustomer(Customer customer) async {
+  final docCustomr = FirebaseFirestore.instance.collection('customers').doc();
 
-final FirebaseAuth auth = FirebaseAuth.instance;
+  final FirebaseAuth auth = FirebaseAuth.instance;
   final User? user = auth.currentUser;
   final uid = user!.uid;
   customer.id = uid;
 
-    final json = customer.toJson();
+  final json = customer.toJson();
 
-    await docCustomr.set(json);
-  }
-
+  await docCustomr.set(json);
+}
 
 //Database
 class Customer {
@@ -280,11 +308,10 @@ class Customer {
     required this.password,
   });
 
-  Map<String,dynamic> toJson()=>{
-'id':id,
-'name':name,
-'email':email,
-'password':password,};
-
-
-  }
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'email': email,
+        'password': password,
+      };
+}

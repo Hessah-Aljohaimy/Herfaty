@@ -319,8 +319,8 @@ TextFormField reusableTextFieldDec(String text, IconData icon,
       //             return 'أدخل بريد إلكتروني صحيح';
       //           }
 
-      if (text == "كلمة المرور") {
-        if (value.length < 6) return "أدخل كلمة مرور لا تقل عن 6 خانات";
+      if (value.length < 6) {
+        if (value.length < 6) return "أدخل وصف للمنتج لا يقل عن 6 خانات";
       }
 
       return null;
