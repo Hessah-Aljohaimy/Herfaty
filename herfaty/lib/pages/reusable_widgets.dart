@@ -57,7 +57,8 @@ TextFormField reusableTextField(String text, IconData icon, bool isPasswordType,
       if (!RegExp(r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
               .hasMatch(value) &&
           !isPasswordType &&
-          text == 'البريد الإلكتروني') {
+          text == 'البريد الإلكتروني' &&
+          value.contains(' ')) {
         return 'أدخل بريد إلكتروني صحيح';
       }
 
