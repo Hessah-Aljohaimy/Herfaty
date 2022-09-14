@@ -50,7 +50,10 @@ class Body extends StatelessWidget {
             children: [
               Text(
                 "تصنيفات المنتجات",
-                style: Theme.of(context).textTheme.bodyLarge,
+                style: TextStyle(
+                    color: kPrimaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18),
               ),
             ],
           ),
@@ -96,7 +99,9 @@ class CategoryCard extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Text(category.name),
+            Text(category.name,
+                style: TextStyle(
+                    color: kPrimaryColor, fontWeight: FontWeight.bold)),
             /*Text(
               "${category.noOfProducts.toString()} منتج",
               style: Theme.of(context).textTheme.bodySmall,
@@ -140,11 +145,11 @@ class AppBar extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "مرحباً\n ",
+                "مرحباً بكَ أيها المُشتَرٍي",
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 20),
+                    fontSize: 30),
               ),
 
               //profile icon
