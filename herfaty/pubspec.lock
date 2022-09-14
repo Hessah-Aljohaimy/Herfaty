@@ -57,6 +57,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.16.0"
+  counter_button:
+    dependency: "direct main"
+    description:
+      name: counter_button
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   cross_file:
     dependency: transitive
     description:

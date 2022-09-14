@@ -6,14 +6,15 @@ class Product {
   String? categoryName;
   String? image;
   int? avalibleAmount;
+  double? price;
 
-  Product({
-    this.name,
-    this.dsscription,
-    required this.categoryName,
-    this.image,
-    this.avalibleAmount,
-  });
+  Product(
+      {this.name,
+      this.dsscription,
+      required this.categoryName,
+      this.image,
+      this.avalibleAmount,
+      this.price});
 
   Map<String, dynamic> toMap() {
     return {
@@ -21,7 +22,8 @@ class Product {
       'dsscription': dsscription,
       'categoryName': categoryName,
       'image': image,
-      'avalibleAmount': avalibleAmount
+      'avalibleAmount': avalibleAmount,
+      'price': price
     };
   }
 }
