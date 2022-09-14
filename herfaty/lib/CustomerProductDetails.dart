@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:herfaty/AddProductToCart.dart';
 import 'package:herfaty/Product1.dart';
 import 'package:herfaty/constants/color.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 //import 'package:herfaty/ProductDetailsBody.dart';
 
 class CustomerProdectDetails extends StatefulWidget {
@@ -30,6 +31,8 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
         quantity: 1,
         availableAmount: widget.product.quantity, //تحتاج تغيير
         price: widget.product.price);
+
+    num displayedQuantity = 1;
     //////////////////////////////////////////////////////////////////////////////////////
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -126,9 +129,20 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Container(
+                      // زر اللإضافة للسلة-----------------------------------------
                       child: ElevatedButton(
                         onPressed: () {
-                          item.availableAmount - 1;
+                          Fluttertoast.showToast(
+                            msg: "تمت إضافة المنتج للسلة بنجاح",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 3,
+                            backgroundColor: Colors.white,
+                            textColor: Color.fromARGB(255, 26, 96, 91),
+                            fontSize: 18.0,
+                          );
+
+                          item.availableAmount -= 1;
                           createCartItem(item);
                           String idToBeUpdated = item.productId;
 
@@ -193,7 +207,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                               textAlign: TextAlign.center,
                               decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  hintText: item.quantity.toString(),
+                                  hintText: '${item.quantity}',
                                   hintStyle: const TextStyle(
                                       fontWeight: FontWeight.w700,
                                       fontSize: 25,
