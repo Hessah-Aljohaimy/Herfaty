@@ -258,8 +258,8 @@ try{
 
   
   // .then((value) {
-
- ShopOwnerIdsFromDB(userCredentia.user!.uid.toString());
+print('objectfuggrffffffffffffffffffff'+userCredentia.user!.uid);
+ ShopOwnerIdsFromDB(userCredentia.user!.uid);
 if(isShopOwner==true){
    Navigator.pushNamed(context, "/");
 }
@@ -410,8 +410,10 @@ print("Error hhhhhh");
 
   StreamBuilder<List<shopOwnerModel>> ShopOwnerIdsFromDB(String id) {
     return StreamBuilder<List<shopOwnerModel>>(
+      
                   stream: readShopOwner(),
                   builder: (context, snapshot) {
+                    print('sssssssssssssssssssssssssssssssss');
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Center(child: CircularProgressIndicator());
                     }
@@ -421,18 +423,19 @@ print("Error hhhhhh");
                       //هنا حالة النجاح في استرجاع البيانات...........................................
                       //String detailsImage = "";
                       final AllshopOwners = snapshot.data!.toList();
-                      
 
-print(AllshopOwners);
+
+
+print(AllshopOwners[5].id+"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
 
 
 print('tttttttttttttttttttttttt');
 for(int i=0;i<AllshopOwners.length ;i++){
-     if(id==AllshopOwners[i].shopOwnerId){
+     if(id==AllshopOwners[i].id){
          isShopOwner=true;
          break;
      }
-     
+     return  Text('');
 }
       
                      
