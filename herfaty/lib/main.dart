@@ -10,6 +10,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:herfaty/pages/signupCustomer.dart';
 import 'package:herfaty/pages/signupHerafy.dart';
 import 'package:herfaty/pages/welcomeRegestration.dart';
+import 'package:herfaty/screens/customer_base_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
         "/welcomeRegestration": (context) => const WelcomeRegestration(),
         "/signupCustomer": (context) => const SignupCustomer(),
         "/signupHerfay": (context) => const SignupHerafy(),
+        "/customer_base_screen": (context) => const customerBaseScreen(),
       },
     );
   }
