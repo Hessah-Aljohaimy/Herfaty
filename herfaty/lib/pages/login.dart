@@ -26,14 +26,16 @@ class login extends StatefulWidget {
 class _login extends State<login> {
  final _formKey = GlobalKey<FormState>();
 
+
 bool isShopOwner=false;
 // final List<shopOwnerModel> shopOwners =[];
 //  final FirebaseAuth auth="  ";
  TextEditingController _passwordTextController = TextEditingController();
   TextEditingController _emailTextController = TextEditingController();
-
+String OwnerId='';
   Stream<List<shopOwnerModel>> readShopOwner() => FirebaseFirestore.instance
       .collection('shop_owner')
+      .where( "id", isEqualTo: OwnerId)
       .snapshots()
       .map((snapshot) =>
           snapshot.docs.map((doc) => shopOwnerModel.fromJson(doc.data())).toList());
@@ -255,24 +257,58 @@ try{
                    UserCredential userCredentia =  await FirebaseAuth.instance
                             .signInWithEmailAndPassword(email: _emailTextController.text,
                           password: _passwordTextController.text);
+  OwnerId='';
+  OwnerId=userCredentia.user!.uid;
+  readShopOwner();
+  // .then((value) {
+print('objectfuggrffffffffffffffffffff'+OwnerId);
+
+
+try{
 
   
-  // .then((value) {
-print('objectfuggrffffffffffffffffffff'+userCredentia.user!.uid);
- ShopOwnerIdsFromDB(userCredentia.user!.uid);
-if(isShopOwner==true){
-   Navigator.pushNamed(context, "/");
+  print(readShopOwner().toString()[8]);
+if(readShopOwner().toList().toString()!=''){
+  print("Errrrrrrrrrrrrrrrrrrrrrrr");
+  OwnerId='';
+   Navigator.pushNamed(context, "/forget_password");
 }
-               else  {
+  else  {
+                print("hhhhhhhhhhhhhhhhhhhhhhh");
+                OwnerId='';
                      Navigator.pushNamed(context, '/welcomeRegestration');}
 
+}
+catch(e,stack){
+     Navigator.pushNamed(context, "/forget_password");
+
+}
+             
 
                   // }).onError((error, stackTrace) {
                   //   print("Error hhhhhh");
                   // }
                 
 }
-catch(e){
+catch(e, stack){
+  
+                            showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("خطأ"),
+              content: Text('البريد الإلكتروني أو كلمة المرور غير صحيح، حاول مجددا'),
+              actions: <Widget>[
+                TextButton(
+                  child: Text("حسنا"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            );
+          });
+                          
 print("Error hhhhhh");
 }                    
 
@@ -408,45 +444,6 @@ print("Error hhhhhh");
     );  
     }
 
-  StreamBuilder<List<shopOwnerModel>> ShopOwnerIdsFromDB(String id) {
-    return StreamBuilder<List<shopOwnerModel>>(
-      
-                  stream: readShopOwner(),
-                  builder: (context, snapshot) {
-                    print('sssssssssssssssssssssssssssssssss');
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-                    if (snapshot.hasError) {
-                      return Text('Something went wrong! ${snapshot.error}');
-                    } else if (snapshot.hasData) {
-                      //هنا حالة النجاح في استرجاع البيانات...........................................
-                      //String detailsImage = "";
-                      final AllshopOwners = snapshot.data!.toList();
-
-
-
-print(AllshopOwners[5].id+"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
-
-
-print('tttttttttttttttttttttttt');
-for(int i=0;i<AllshopOwners.length ;i++){
-     if(id==AllshopOwners[i].id){
-         isShopOwner=true;
-         break;
-     }
-     return  Text('');
-}
-      
-                     
-                      //..................................................................................
-                    } else {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-                 return Text('');
-                  },
-                );
-  }
 }
 
 String? validateEmail(String? formEmail){
