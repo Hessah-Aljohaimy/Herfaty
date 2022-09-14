@@ -104,12 +104,15 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                     vertical: 10,
                     horizontal: 30,
                   ),
-                  child: SingleChildScrollView(
-                    child: Text(
-                      widget.product.description,
-                      style: const TextStyle(
-                        fontSize: 18.0,
-                        color: Colors.white,
+                  child: Expanded(
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: Text(
+                        widget.product.description,
+                        style: const TextStyle(
+                          fontSize: 18.0,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
@@ -284,7 +287,7 @@ class ProductImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
+      margin: const EdgeInsets.symmetric(vertical: 20),
       height: size.width * 0.7,
       color: const Color.fromARGB(255, 255, 255, 255),
       child: Stack(
