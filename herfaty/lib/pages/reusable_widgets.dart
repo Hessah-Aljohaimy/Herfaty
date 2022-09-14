@@ -57,13 +57,12 @@ TextFormField reusableTextField(String text, IconData icon, bool isPasswordType,
       if (!RegExp(r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
               .hasMatch(value) &&
           !isPasswordType &&
-          text == 'البريد الإلكتروني' &&
-          value.contains(' ')) {
+          text == 'البريد الإلكتروني') {
         return 'أدخل بريد إلكتروني صحيح';
       }
 
       if (text == "كلمة المرور") {
-        if (value.length < 6) return "";
+        if (value.length < 6) return "ادخل كلمة مرور اكبر من 6 خانات";
       }
 
       return null;
@@ -191,8 +190,11 @@ TextFormField reusableTextFieldForName(String text, IconData icon,
           .hasMatch(value)) {
         return "أدخل اسم بلا أرقام ورموز";
       }
-      if (value.length <= 2 || value.length <= 1) {
+      if (value.length <= 2) {
         return "أدخل اسم اكبر من حرفين";
+      }
+      if (value.length <= 1) {
+        return "أدخل اسم مكون أكثر من حرف";
       }
 
       return null;

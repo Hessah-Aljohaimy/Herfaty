@@ -253,15 +253,15 @@ class _SignupHerafyState extends State<SignupHerafy> {
                                   });
                                 } else {
                                   print("لم يتم اختيار تاريخ الميلاد");
-                                  Fluttertoast.showToast(
-                                    msg: "لم يتم اختيار تاريخ الميلاد  ",
-                                    toastLength: Toast.LENGTH_SHORT,
-                                    gravity: ToastGravity.CENTER,
-                                    timeInSecForIosWeb: 3,
-                                    backgroundColor: Colors.white,
-                                    textColor: Colors.red,
-                                    fontSize: 18.0,
-                                  );
+                                  // Fluttertoast.showToast(
+                                  //   msg: "لم يتم اختيار تاريخ الميلاد  ",
+                                  //   toastLength: Toast.LENGTH_SHORT,
+                                  //   gravity: ToastGravity.CENTER,
+                                  //   timeInSecForIosWeb: 3,
+                                  //   backgroundColor: Colors.white,
+                                  //   textColor: Colors.red,
+                                  //   fontSize: 18.0,
+                                  // );
                                 }
                               },
                             ))),
