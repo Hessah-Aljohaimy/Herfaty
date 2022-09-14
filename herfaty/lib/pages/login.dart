@@ -22,14 +22,14 @@ class login extends StatefulWidget {
 class _login extends State<login> {
   final _formKey = GlobalKey<FormState>();
 
-
   bool isShopOwner = false;
 // final List<shopOwnerModel> shopOwners =[];
 //  final FirebaseAuth auth="  ";
   TextEditingController _passwordTextController = TextEditingController();
   TextEditingController _emailTextController = TextEditingController();
   String OwnerId = '';
-var myList = [];
+
+  var myList = [];
 //get all data in shop owner collection
   Stream<List<shopOwnerModel>> readShopOwner() => FirebaseFirestore.instance
       .collection('shop_owner')
@@ -75,70 +75,54 @@ var myList = [];
                                 fontWeight: FontWeight.bold,
                                 color: Color.fromARGB(255, 26, 96, 91)),
                           ),
-
                           SizedBox(
                             height: 10,
                           ),
-
-                          // SizedBox(
-                          //   height: 20,
-                          // ),
-
                           SizedBox(
                             height: 30,
                           ),
-
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 60),
                             child: reusableTextField("البريد الإلكتروني",
                                 Icons.email, false, _emailTextController),
                           ),
-
                           SizedBox(
                             height: 23,
                           ),
-
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 60),
                             child: reusableTextField("كلمة المرور", Icons.lock,
                                 true, _passwordTextController),
                           ),
-
                           SizedBox(
                             height: 17,
                           ),
-      StreamBuilder<List<shopOwnerModel>>(
-      stream: readShopOwner(),
-      builder: (context, snapshot) {
-        print('sssssssssssssssssssssssssssssssss');
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        if (snapshot.hasError) {
-          return Text('Something went wrong! ${snapshot.error}');
-        } else if (snapshot.hasData) {
-          //هنا حالة النجاح في استرجاع البيانات...........................................
-          //String detailsImage = "";
-          final AllshopOwners = snapshot.data!.toList();
+                          StreamBuilder<List<shopOwnerModel>>(
+                            stream: readShopOwner(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const Center(
+                                    child: CircularProgressIndicator());
+                              }
+                              if (snapshot.hasError) {
+                                return Text(
+                                    'Something went wrong! ${snapshot.error}');
+                              } else if (snapshot.hasData) {
+                                final AllshopOwners = snapshot.data!.toList();
 
-          print(OwnerId + "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+                                for (int i = 0; i < AllshopOwners.length; i++) {
+                                  myList.add(AllshopOwners[i].id);
+                                }
 
-          print('tttttttttttttttttttttttt');
-          for (int i = 0; i < AllshopOwners.length; i++) {
-      myList.add( AllshopOwners[i].id);
-                      print(myList[i]);
-
-         
-          }
-
-          //..................................................................................
-        } else {
-          return const Center(child: CircularProgressIndicator());
-        }
-        return Text('');
-      },
-    ),
-
+                                //..................................................................................
+                              } else {
+                                return const Center(
+                                    child: CircularProgressIndicator());
+                              }
+                              return Text('');
+                            },
+                          ),
                           ElevatedButton(
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
@@ -151,25 +135,19 @@ var myList = [];
                                                   _passwordTextController.text);
                                   OwnerId = '';
                                   OwnerId = userCredentia.user!.uid;
-                                
 
                                   print('objectfuggrffffffffffffffffffff' +
                                       OwnerId);
 
-
-
-for (var i = 0; i < myList.length; i++) {
-  if(myList[i]==OwnerId){
-    isShopOwner=true;
-    break;
-  }
-
-
-}
-
+                                  for (var i = 0; i < myList.length; i++) {
+                                    if (myList[i] == OwnerId) {
+                                      isShopOwner = true;
+                                      break;
+                                    }
+                                  }
 
                                   if (isShopOwner) {
-                                    isShopOwner=false;
+                                    isShopOwner = false;
                                     OwnerId = '';
                                     Navigator.pushNamed(
                                         context, "/forget_password");
@@ -217,49 +195,9 @@ for (var i = 0; i < myList.length; i++) {
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
-/*
-                          StreamBuilder<List<shopOwnerModel>>(
-                            stream: readShopOwner(),
-                            builder: (context, snapshot) {
-                              print('sssssssssssssssssssssssssssssssss');
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return const Center(
-                                    child: CircularProgressIndicator());
-                              }
-                              if (snapshot.hasError) {
-                                return Text(
-                                    'Something went wrong! ${snapshot.error}');
-                              } else if (snapshot.hasData) {
-                                //هنا حالة النجاح في استرجاع البيانات...........................................
-                                //String detailsImage = "";
-                                final AllshopOwners = snapshot.data!.toList();
-
-                                print(OwnerId +
-                                    "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
-
-                                print('tttttttttttttttttttttttt');
-                                for (int i = 0; i < AllshopOwners.length; i++) {
-                                  if (OwnerId == AllshopOwners[i].id) {
-                                    isShopOwner = true;
-                                    break;
-                                  }
-                                  return Text('');
-                                }
-
-                                //..................................................................................
-                              } else {
-                                return const Center(
-                                    child: CircularProgressIndicator());
-                              }
-                              return Text('');
-                            },
-                          ),*/
-
                           SizedBox(
                             height: 17,
                           ),
-
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -275,43 +213,15 @@ for (var i = 0; i < myList.length; i++) {
                                         fontFamily: "Tajawal",
                                         decoration: TextDecoration.underline),
                                   )),
-
                               Text(
                                 "",
                                 style: TextStyle(fontFamily: "Tajawal"),
                               ),
-
-                              //  GestureDetector(
-                              //       onTap: () {
-                              //         Navigator.pushNamed(context, "/login");
-                              //       },
-                              //       child: Text(
-                              //         "",
-                              //         style: TextStyle(fontFamily: "Tajawal"),
-                              //       ),
-                              //     ),
-                              //     TextButton(
-                              //       child: Text(
-                              //         "نسيت كلمة",
-                              //         style: TextStyle(
-                              //             decoration: TextDecoration.underline,
-                              //             fontFamily: "Tajawal",color:Color.fromARGB(255, 53, 47, 244)),
-                              //       ),
-                              //       onPressed: () {
-                              //         Navigator.push(
-                              //           context,
-                              //           MaterialPageRoute(
-                              //               builder: (context) =>
-                              //                   const forget_password()),
-                              //         );
-                              //       },
-                              //     ),
                             ],
                           ),
                           SizedBox(
                             height: 10,
                           ),
-
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -356,8 +266,6 @@ for (var i = 0; i < myList.length; i++) {
           )),
     );
   }
-
-  
 }
 
 String? validateEmail(String? formEmail) {
