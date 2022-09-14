@@ -2,9 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/constants/size.dart';
 import 'package:herfaty/models/ownerServices.dart';
+import 'package:herfaty/screens/owner_base_screen.dart';
 import 'package:herfaty/widgets/profile_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import 'ownerProductsCateg.dart';
 
 class ownerHomeScreen extends StatefulWidget {
   const ownerHomeScreen({Key? key}) : super(key: key);
@@ -188,9 +191,20 @@ class Services extends StatelessWidget {
                       mainAxisSpacing: 24,
                     ),
                     itemBuilder: (context, index) {
-                      return ownerServicesCard(
-                        ownerService: cItems[index],
-                      );
+                      return GestureDetector(
+                          child: ownerServicesCard(
+                            ownerService: cItems[index],
+                          ),
+                          onTap: () {
+                            if (cItems[index].name == "منتجاتي") {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const ownerProductsCategScreen()),
+                              );
+                            }
+                          });
                     },
                     itemCount: cItems.length,
                   );

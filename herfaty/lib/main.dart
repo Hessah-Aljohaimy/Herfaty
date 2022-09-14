@@ -32,9 +32,8 @@ class MyApp extends StatelessWidget {
         Locale('ar', 'AE'),
       ],
       debugShowCheckedModeBanner: false,
-      //home: const customerBaseScreen(),
-      home: const ownerBaseScreen(),
-      //home: const ownerProductsCategScreen(),
+      home: const customerBaseScreen(),
+      //home: const ownerBaseScreen(),
     );
   }
 }

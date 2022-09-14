@@ -1,10 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:herfaty/constants/color.dart';
+import 'package:herfaty/constants/icons.dart';
 import 'package:herfaty/constants/size.dart';
 import 'package:herfaty/models/Category.dart';
 import 'package:herfaty/widgets/profile_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import 'ownerHome.dart';
+import 'owner_base_screen.dart';
 
 class ownerProductsCategScreen extends StatefulWidget {
   const ownerProductsCategScreen({Key? key}) : super(key: key);
@@ -37,6 +41,7 @@ class _ownerProductsCategScreenState extends State<ownerProductsCategScreen> {
           extendedPadding: EdgeInsetsDirectional.only(start: 100.0, end: 100.0),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        //bottomNavigationBar: ,
       ),
     );
   }

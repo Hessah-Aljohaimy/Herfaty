@@ -1,14 +1,20 @@
 class CartModal {
+  String customerId = "";
+  String docId;
   String image = "";
   String name = "";
   num price = 0.0;
   int quantity = 0;
+  int avalibleAmount;
 
   CartModal(
-      {required this.image,
+      {required this.customerId,
+      required this.docId,
+      required this.image,
       required this.name,
       required this.price,
-      required this.quantity});
+      required this.quantity,
+      required this.avalibleAmount});
 
   /*
 
@@ -31,16 +37,22 @@ class CartModal {
 
 //like video
   Map<String, dynamic> toJson() => {
+        'docId': docId,
+        'customerId': customerId,
         'image': image,
         'name': name,
         'price': price,
         'quantity': quantity,
+        'avalibleAmount': avalibleAmount,
       };
 
   static CartModal fromJson(Map<String, dynamic> json) => CartModal(
+        customerId: json['customerId'],
+        docId: json['docId'],
         image: json['image'],
         name: json['name'],
         price: json['price'],
         quantity: json['quantity'],
+        avalibleAmount: json['avalibleAmount'],
       );
 }
