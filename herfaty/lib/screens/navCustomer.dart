@@ -35,7 +35,7 @@ class nav extends StatelessWidget {
       customerHomeScreen(),
       Cart(),
       customerHomeScreen(),
-      customerHomeScreen()
+      customerHomeScreen(),
     ];
   }
 

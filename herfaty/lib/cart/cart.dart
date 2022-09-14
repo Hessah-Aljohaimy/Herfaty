@@ -90,6 +90,25 @@ class _CartState extends State<Cart> {
                                                     onPressed: () {
                                                       setState(() {
                                                         if (cItems[index]
+                                                                .quantity ==
+                                                            1) {
+                                                          Container(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    left: 85),
+                                                            child: Text(
+                                                              "* كلمه المرور يجب ان لا تقل عن 6 خانات",
+                                                              style: TextStyle(
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          235,
+                                                                          47,
+                                                                          26)),
+                                                            ),
+                                                          );
+                                                        } else if (cItems[index]
                                                                 .quantity >
                                                             1) {
                                                           var updaterAmount =
@@ -106,8 +125,6 @@ class _CartState extends State<Cart> {
                                                             "quantity":
                                                                 updaterAmount
                                                           });
-                                                        } else {
-                                                          //erro message no item less than 1
                                                         }
                                                       });
                                                     },

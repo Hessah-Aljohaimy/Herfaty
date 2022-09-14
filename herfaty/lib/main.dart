@@ -1,15 +1,15 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
+import 'package:herfaty/pages/login.dart';
+import 'package:herfaty/pages/splash.dart';
+import 'package:herfaty/pages/welcome.dart';
+import 'package:herfaty/pages/forget_password.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:herfaty/screens/customerHome.dart';
 import 'package:herfaty/screens/navCustomer.dart';
-import 'package:herfaty/screens/navOwner.dart';
-import 'package:herfaty/screens/ownerProductsCateg.dart';
-import 'package:herfaty/screens/owner_base_screen.dart';
 import 'firebase_options.dart';
-import 'package:herfaty/screens/customer_base_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:herfaty/pages/signupCustomer.dart';
+import 'package:herfaty/pages/signupHerafy.dart';
+import 'package:herfaty/pages/welcomeRegestration.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,9 +20,8 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -32,14 +31,20 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: [
-        Locale('ar', 'AE'),
+        Locale("ar", "AE"), // English, no country code
       ],
-      debugShowCheckedModeBanner: false,
-      home: nav(),
-      //home: navOwner(),
-      //home: const customerHomeScreen(),
-      //home: const customerBaseScreen(),
-      //home: const ownerBaseScreen(),
+      locale: Locale("ar", "AE"),
+      initialRoute: "/",
+      routes: {
+        "/": (context) => const Splash(),
+        "/welcome": (context) => const Welcome(),
+        "/login": (context) => const login(),
+        "/forget_password": (context) => const forget_password(),
+        "/home_screen": (context) => const nav(),
+        "/welcomeRegestration": (context) => const WelcomeRegestration(),
+        "/signupCustomer": (context) => const SignupCustomer(),
+        "/signupHerfay": (context) => const SignupHerafy(),
+      },
     );
   }
 }
