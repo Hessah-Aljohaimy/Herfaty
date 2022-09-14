@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:herfaty/AddProduct.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/constants/icons.dart';
 import 'package:herfaty/constants/size.dart';
@@ -33,7 +34,10 @@ class _ownerProductsCategScreenState extends State<ownerProductsCategScreen> {
         ),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
-            // Add your onPressed code here!
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AddProduct()),
+            );
           },
           label: const Text('أضف منتج جديد'),
           icon: const Icon(Icons.add),
