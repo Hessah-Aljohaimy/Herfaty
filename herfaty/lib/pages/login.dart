@@ -3,30 +3,45 @@ import 'dart:math';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:herfaty/models/shopOwnerModel.dart';
 import 'package:herfaty/pages/reusable_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:herfaty/pages/forget_password.dart';
-
-
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:herfaty/screens/owner_base_screen.dart';
+import 'package:herfaty/models/shopOwnerModel.dart';
+import 'package:herfaty/screens/customer_base_screen.dart';
 
 class login extends StatefulWidget {
       const login({Key? key}) : super(key: key);
 
 
+
   @override
   State<login> createState() => _login();
+
+
 }
 
 class _login extends State<login> {
  final _formKey = GlobalKey<FormState>();
 
-
+bool isShopOwner=false;
+// final List<shopOwnerModel> shopOwners =[];
+//  final FirebaseAuth auth="  ";
  TextEditingController _passwordTextController = TextEditingController();
   TextEditingController _emailTextController = TextEditingController();
 
+  Stream<List<shopOwnerModel>> readShopOwner() => FirebaseFirestore.instance
+      .collection('shop_owner')
+      .snapshots()
+      .map((snapshot) =>
+          snapshot.docs.map((doc) => shopOwnerModel.fromJson(doc.data())).toList());
   @override
   Widget build(BuildContext context) {
+
+
+    
 return Form(
       
       key: _formKey,
@@ -43,6 +58,9 @@ return Form(
             width: double.infinity,
             child: Stack(
               children: <Widget>[
+
+
+                 
                 
                 SizedBox(
                   width: double.infinity,
@@ -229,47 +247,66 @@ return Form(
                         height: 17,
                       ),
                       ElevatedButton(
-                        onPressed: () {    
+                        onPressed: () async {    
                            if (_formKey.currentState!.validate()) {
 
  
-
-                            FirebaseAuth.instance
+try{
+                   UserCredential userCredentia =  await FirebaseAuth.instance
                             .signInWithEmailAndPassword(email: _emailTextController.text,
-                          password: _passwordTextController.text).catchError((err){
-                            showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text("خطأ"),
-              content: Text('البريد الإلكتروني أو كلمة المرور غير صحيح، حاول مجددا'),
-              actions: <Widget>[
-                TextButton(
-                  child: Text("حسنا"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                )
-              ],
-            );
-          });
-                          }
-                          )
-                      .then((value) {
-                     Navigator.pushNamed(context, "/home_screen");
-                  }).onError((error, stackTrace) {
-                    print("Error hhhhhh");
-                  });
+                          password: _passwordTextController.text);
+
+  
+  // .then((value) {
+
+ ShopOwnerIdsFromDB(userCredentia.user!.uid.toString());
+if(isShopOwner==true){
+   Navigator.pushNamed(context, "/");
+}
+               else  {
+                     Navigator.pushNamed(context, '/welcomeRegestration');}
+
+
+                  // }).onError((error, stackTrace) {
+                  //   print("Error hhhhhh");
+                  // }
+                
+}
+catch(e){
+print("Error hhhhhh");
+}                    
+
+
+          //                   showDialog(
+          // context: context,
+          // builder: (BuildContext context) {
+          //   return AlertDialog(
+          //     title: Text("خطأ"),
+          //     content: Text('البريد الإلكتروني أو كلمة المرور غير صحيح، حاول مجددا'),
+          //     actions: <Widget>[
+          //       TextButton(
+          //         child: Text("حسنا"),
+          //         onPressed: () {
+          //           Navigator.of(context).pop();
+          //         },
+          //       )
+          //     ],
+          //   );
+          // });
+                          
+                          
+                    
                   
                    }
                
-                         
+                      
                        
   
                            
                 // }   
                   },
-                        
+                  
+                      
                         style: ButtonStyle(
                           backgroundColor:
                               MaterialStateProperty.all(Color(0xff51908E)),
@@ -370,6 +407,43 @@ return Form(
       ),
     );  
     }
+
+  StreamBuilder<List<shopOwnerModel>> ShopOwnerIdsFromDB(String id) {
+    return StreamBuilder<List<shopOwnerModel>>(
+                  stream: readShopOwner(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    if (snapshot.hasError) {
+                      return Text('Something went wrong! ${snapshot.error}');
+                    } else if (snapshot.hasData) {
+                      //هنا حالة النجاح في استرجاع البيانات...........................................
+                      //String detailsImage = "";
+                      final AllshopOwners = snapshot.data!.toList();
+                      
+
+print(AllshopOwners);
+
+
+print('tttttttttttttttttttttttt');
+for(int i=0;i<AllshopOwners.length ;i++){
+     if(id==AllshopOwners[i].shopOwnerId){
+         isShopOwner=true;
+         break;
+     }
+     
+}
+      
+                     
+                      //..................................................................................
+                    } else {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                 return Text('');
+                  },
+                );
+  }
 }
 
 String? validateEmail(String? formEmail){
