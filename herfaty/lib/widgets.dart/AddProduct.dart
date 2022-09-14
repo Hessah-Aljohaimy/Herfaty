@@ -412,7 +412,7 @@ class _AddProductState extends State<AddProduct> {
                       const SnackBar(content: Text('الرجاء إرفاق صورة')));
                   _showMyDialog();
                 }*/
-                if (_formKey.currentState!.validate()) {
+                if (_formKey.currentState!.validate() && uploadImageUrl != "") {
                   String prodName = nameController.text;
                   String desc = descController.text;
                   int amount = int.parse(amountController.text);
@@ -431,10 +431,10 @@ class _AddProductState extends State<AddProduct> {
                     const SnackBar(content: Text('تم حفظ المنتج')),
                   );
                 }
-                nameController.clear();
+                /*   nameController.clear();
                 descController.clear();
                 amountController.clear();
-                priceController.clear();
+                priceController.clear();*/
               },
               child: Text(
                 "إضافة منتج",
@@ -548,3 +548,16 @@ class _AddProductState extends State<AddProduct> {
     print("uploaded:" + uploadImageUrl);
   }
 }
+
+/*Container(
+                        
+                        // decoration: BoxDecoration(
+                          
+                        //   color: Color.fromARGB(255, 114, 159, 160),
+                        //   borderRadius: BorderRadius.circular(66),
+                          
+                        // ),
+                      //  width: 290,
+                      //   height: 53,
+                        padding: EdgeInsets.symmetric(horizontal: 60),
+                        child:*/
