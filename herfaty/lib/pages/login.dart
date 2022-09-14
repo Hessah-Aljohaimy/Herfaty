@@ -22,13 +22,14 @@ class login extends StatefulWidget {
 class _login extends State<login> {
   final _formKey = GlobalKey<FormState>();
 
+
   bool isShopOwner = false;
 // final List<shopOwnerModel> shopOwners =[];
 //  final FirebaseAuth auth="  ";
   TextEditingController _passwordTextController = TextEditingController();
   TextEditingController _emailTextController = TextEditingController();
   String OwnerId = '';
-
+var myList = [];
 //get all data in shop owner collection
   Stream<List<shopOwnerModel>> readShopOwner() => FirebaseFirestore.instance
       .collection('shop_owner')
@@ -106,6 +107,37 @@ class _login extends State<login> {
                           SizedBox(
                             height: 17,
                           ),
+      StreamBuilder<List<shopOwnerModel>>(
+      stream: readShopOwner(),
+      builder: (context, snapshot) {
+        print('sssssssssssssssssssssssssssssssss');
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        if (snapshot.hasError) {
+          return Text('Something went wrong! ${snapshot.error}');
+        } else if (snapshot.hasData) {
+          //هنا حالة النجاح في استرجاع البيانات...........................................
+          //String detailsImage = "";
+          final AllshopOwners = snapshot.data!.toList();
+
+          print(OwnerId + "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+
+          print('tttttttttttttttttttttttt');
+          for (int i = 0; i < AllshopOwners.length; i++) {
+      myList.add( AllshopOwners[i].id);
+                      print(myList[i]);
+
+         
+          }
+
+          //..................................................................................
+        } else {
+          return const Center(child: CircularProgressIndicator());
+        }
+        return Text('');
+      },
+    ),
 
                           ElevatedButton(
                             onPressed: () async {
@@ -119,12 +151,25 @@ class _login extends State<login> {
                                                   _passwordTextController.text);
                                   OwnerId = '';
                                   OwnerId = userCredentia.user!.uid;
-                                  ShopOwnerIdsFromDB(OwnerId);
+                                
 
                                   print('objectfuggrffffffffffffffffffff' +
                                       OwnerId);
 
+
+
+for (var i = 0; i < myList.length; i++) {
+  if(myList[i]==OwnerId){
+    isShopOwner=true;
+    break;
+  }
+
+
+}
+
+
                                   if (isShopOwner) {
+                                    isShopOwner=false;
                                     OwnerId = '';
                                     Navigator.pushNamed(
                                         context, "/forget_password");
@@ -312,40 +357,7 @@ class _login extends State<login> {
     );
   }
 
-  StreamBuilder<List<shopOwnerModel>> ShopOwnerIdsFromDB(var OwnerId) {
-    return StreamBuilder<List<shopOwnerModel>>(
-      stream: readShopOwner(),
-      builder: (context, snapshot) {
-        print('sssssssssssssssssssssssssssssssss');
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        if (snapshot.hasError) {
-          return Text('Something went wrong! ${snapshot.error}');
-        } else if (snapshot.hasData) {
-          //هنا حالة النجاح في استرجاع البيانات...........................................
-          //String detailsImage = "";
-          final AllshopOwners = snapshot.data!.toList();
-
-          print(OwnerId + "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
-
-          print('tttttttttttttttttttttttt');
-          for (int i = 0; i < AllshopOwners.length; i++) {
-            if (OwnerId == AllshopOwners[i].id) {
-              isShopOwner = true;
-              break;
-            }
-            return Text('');
-          }
-
-          //..................................................................................
-        } else {
-          return const Center(child: CircularProgressIndicator());
-        }
-        return Text('');
-      },
-    );
-  }
+  
 }
 
 String? validateEmail(String? formEmail) {
