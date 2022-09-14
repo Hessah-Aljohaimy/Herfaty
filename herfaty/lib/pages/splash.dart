@@ -18,8 +18,8 @@ class _SplashState extends State<Splash> {
     super.initState();
     Timer(
         Duration(seconds: 3),
-        () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => Welcome())));
+        () => Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => Welcome())));
   }
 
   @override
@@ -48,7 +48,6 @@ class _SplashState extends State<Splash> {
           Center(
             child: Container(
               width: 300,
-
               child: Image.asset("assets/images/HerfatyLogoCroped.png"),
             ),
           ),
