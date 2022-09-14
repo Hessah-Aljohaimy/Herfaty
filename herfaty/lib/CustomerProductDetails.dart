@@ -32,7 +32,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
         availableAmount: widget.product.quantity, //تحتاج تغيير
         price: widget.product.price);
 
-    num displayedQuantity = 1;
+    num updatedQuantity = 1;
     //////////////////////////////////////////////////////////////////////////////////////
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -131,7 +131,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                     Container(
                       // زر اللإضافة للسلة-----------------------------------------
                       child: ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           Fluttertoast.showToast(
                             msg: "تمت إضافة المنتج للسلة بنجاح",
                             toastLength: Toast.LENGTH_SHORT,
@@ -141,8 +141,11 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                             textColor: Color.fromARGB(255, 26, 96, 91),
                             fontSize: 18.0,
                           );
+                          await Future.delayed(const Duration(seconds: 1), () {
+                            Navigator.pop(context);
+                          });
 
-                          item.availableAmount -= 1;
+                          item.availableAmount = item.availableAmount - 1;
                           createCartItem(item);
                           String idToBeUpdated = item.productId;
 
@@ -182,11 +185,11 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                             onPressed: () {
                               setState(() {
                                 if (item.quantity > 1) {
-                                  var updaterAmount = (item.quantity) - 1;
+                                  item.quantity = item.quantity - 1;
                                   FirebaseFirestore.instance
                                       .collection('cart')
                                       .doc(item.productId)
-                                      .update({"quantity": updaterAmount});
+                                      .update({"quantity": item.quantity});
                                 } else {
                                   //erro message no item less than 1
                                 }
@@ -218,11 +221,11 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                             onPressed: () {
                               setState(() {
                                 if (item.quantity < item.availableAmount) {
-                                  var updaterAmount = (item.quantity) + 1;
+                                  item.quantity = item.quantity + 1;
                                   FirebaseFirestore.instance
                                       .collection('cart')
                                       .doc(item.productId)
-                                      .update({"quantity": updaterAmount});
+                                      .update({"quantity": item.quantity});
                                 }
                               });
                             },
