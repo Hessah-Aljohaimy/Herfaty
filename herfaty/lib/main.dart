@@ -2,6 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:herfaty/screens/customerHome.dart';
+import 'package:herfaty/screens/navCustomer.dart';
+import 'package:herfaty/screens/navOwner.dart';
 import 'package:herfaty/screens/ownerProductsCateg.dart';
 import 'package:herfaty/screens/owner_base_screen.dart';
 import 'firebase_options.dart';
@@ -32,7 +35,10 @@ class MyApp extends StatelessWidget {
         Locale('ar', 'AE'),
       ],
       debugShowCheckedModeBanner: false,
-      home: const customerBaseScreen(),
+      home: nav(),
+      //home: navOwner(),
+      //home: const customerHomeScreen(),
+      //home: const customerBaseScreen(),
       //home: const ownerBaseScreen(),
     );
   }

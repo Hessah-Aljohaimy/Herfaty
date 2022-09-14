@@ -44,6 +44,7 @@ dependencies:
   firebase_auth: ^3.8.0
   firebase_storage: ^10.3.8
   google_fonts: ^3.0.1
+  persistent_bottom_nav_bar: any
 
 dev_dependencies:
   flutter_test:

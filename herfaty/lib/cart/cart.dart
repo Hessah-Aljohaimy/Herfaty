@@ -181,7 +181,7 @@ class _CartState extends State<Cart> {
                         elevation: 0.0,
                         color: Colors.white,
                         child: Container(
-                          height: 53,
+                          height: 59,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -192,16 +192,23 @@ class _CartState extends State<Cart> {
                                     color: Color(0xFF808080),
                                     height: 2.8,
                                   )),
-                              FloatingActionButton.extended(
-                                elevation: 0,
-                                onPressed: () {
-                                  // Add your onPressed code here!
-                                },
-                                label: const Text('دفع'),
-                                icon: const Icon(Icons.payment),
-                                backgroundColor: Color(0xff5596A5),
-                                extendedPadding: EdgeInsetsDirectional.all(50),
-                                shape: RoundedRectangleBorder(),
+                              SizedBox(
+                                height: 59,
+                                child: FloatingActionButton.extended(
+                                  elevation: 0,
+                                  onPressed: () {
+                                    // Add your onPressed code here!
+                                  },
+                                  label: const Text('دفع',
+                                      style: TextStyle(
+                                        fontSize: 20.0,
+                                      )),
+                                  icon: const Icon(Icons.payment),
+                                  backgroundColor: Color(0xff5596A5),
+                                  extendedPadding:
+                                      EdgeInsetsDirectional.all(50),
+                                  shape: RoundedRectangleBorder(),
+                                ),
                               ),
                             ],
                           ),

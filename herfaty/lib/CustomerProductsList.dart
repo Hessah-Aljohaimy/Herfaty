@@ -35,7 +35,7 @@ class CustomerProductsList extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: productsListAppBar(context),
-      bottomNavigationBar: navMethod(), // the new nav need tap change page
+      //bottomNavigationBar: navMethod(), // the new nav need tap change page
       //NavigationBar(), // the old nav
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       body: SafeArea(
@@ -98,6 +98,9 @@ class CustomerProductsList extends StatelessWidget {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   BottomNavigationBar navMethod() {
+    const List<Widget> _widgetOptions = <Widget>[];
+    int _selectedIndex = 0;
+
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       selectedItemColor: kPrimaryColor,
@@ -152,6 +155,7 @@ class CustomerProductsList extends StatelessWidget {
     );
   }
 
+/*
 //NvigationBar
   GNav NavigationBar() {
     return GNav(
@@ -180,7 +184,7 @@ class CustomerProductsList extends StatelessWidget {
         ),
       ],
     );
-  }
+  }*/
 
   //AppBar
   AppBar productsListAppBar(var context) {
@@ -209,3 +213,94 @@ class CustomerProductsList extends StatelessWidget {
     );
   }
 }
+
+/*
+
+class nav extends StatefulWidget {
+  const nav({Key? key}) : super(key: key);
+
+  @override
+  _navState createState() => _navState();
+}
+
+class _navState extends State<customerBaseScreen> {
+  int _selectedIndex = -1;
+
+  static const List<Widget> _widgetOptions = <Widget>[
+    customerHomeScreen(),
+    Cart(),
+    customerHomeScreen(),
+    customerHomeScreen(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      bottomNavigationBar: navMethod(),
+    );
+  }
+
+  BottomNavigationBar navMethod() {
+    return BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: kPrimaryColor,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        items: [
+          BottomNavigationBarItem(
+            activeIcon: Image.asset(
+              icFeatured,
+              height: kBottomNavigationBarItemSize,
+            ),
+            icon: Image.asset(
+              icFeaturedOutlined,
+              height: kBottomNavigationBarItemSize,
+            ),
+            label: "الرئيسية",
+          ),
+          BottomNavigationBarItem(
+            activeIcon: Image.asset(
+              icLearning,
+              height: kBottomNavigationBarItemSize,
+            ),
+            icon: Image.asset(
+              icLearningOutlined,
+              height: kBottomNavigationBarItemSize,
+            ),
+            label: "سلتي",
+          ),
+          BottomNavigationBarItem(
+            activeIcon: Image.asset(
+              icWishlist,
+              height: kBottomNavigationBarItemSize,
+            ),
+            icon: Image.asset(
+              icWishlistOutlined,
+              height: kBottomNavigationBarItemSize,
+            ),
+            label: "مفضلاتي",
+          ),
+          BottomNavigationBarItem(
+            activeIcon: Image.asset(
+              icSetting,
+              height: kBottomNavigationBarItemSize,
+            ),
+            icon: Image.asset(
+              icSettingOutlined,
+              height: kBottomNavigationBarItemSize,
+            ),
+            label: "تسجيل الخروج",
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        onTap: (int index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        });
+  }
+}
+*/
