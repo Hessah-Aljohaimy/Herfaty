@@ -63,10 +63,11 @@ class Body extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "تصنيفات المنتجات",
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
+              Text("تصنيفات المنتجات",
+                  style: TextStyle(
+                      color: kPrimaryColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18)),
             ],
           ),
         ),
@@ -111,7 +112,9 @@ class CategoryCard extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Text(category.name),
+            Text(category.name,
+                style: TextStyle(
+                    color: kPrimaryColor, fontWeight: FontWeight.bold)),
             /*Text(
               "${category.noOfProducts.toString()} منتج",
               style: Theme.of(context).textTheme.bodySmall,
@@ -157,7 +160,7 @@ class AppBar extends StatelessWidget {
             children: [
               // ignore: prefer_const_constructors
               Text(
-                "مرحباً\n ",
+                "مرحباً بكَ أيها الحِرَفِيّ \n قم بإختيار التصنيف لعرض منتجاتك  ",
                 // ignore: prefer_const_constructors
                 style: TextStyle(
                     color: Colors.white,

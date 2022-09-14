@@ -46,10 +46,11 @@ class Body extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "الصفحة الرئيسية ",
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
+              Text("الصفحة الرئيسية ",
+                  style: TextStyle(
+                      color: kPrimaryColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18)),
             ],
           ),
         ),
@@ -95,7 +96,9 @@ class ownerServicesCard extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Text(ownerService.name),
+            Text(ownerService.name,
+                style: TextStyle(
+                    color: kPrimaryColor, fontWeight: FontWeight.bold)),
           ],
         ),
       ),
@@ -137,13 +140,13 @@ class AppBar extends StatelessWidget {
             children: [
               // ignore: prefer_const_constructors
               Text(
-                "مرحباً\n ",
+                "مرحباً بكَ أيها الحِرَفِيّ",
                 // ignore: prefer_const_constructors
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 20),
-                textDirection: TextDirection.rtl,
+                    fontSize: 30),
+                //textDirection: TextDirection.rtl,
               ),
               /* profileButton(
                 icon: Icons.account_circle_sharp,
