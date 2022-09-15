@@ -43,6 +43,7 @@ class _ownerProductsCategScreenState extends State<ownerProductsCategScreen> {
           icon: const Icon(Icons.add),
           backgroundColor: Color(0xff51908E),
           extendedPadding: EdgeInsetsDirectional.only(start: 100.0, end: 100.0),
+          
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         //bottomNavigationBar: ,
@@ -58,6 +59,9 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+          SizedBox(
+                            height: 20,
+                          ),
         Padding(
           padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
           child: Row(
@@ -67,10 +71,14 @@ class Body extends StatelessWidget {
                   style: TextStyle(
                       color: kPrimaryColor,
                       fontWeight: FontWeight.bold,
-                      fontSize: 18)),
+                      fontSize: 22
+                      ,fontFamily: "Tajawal")),
             ],
           ),
         ),
+          SizedBox(
+                            height: 20,
+                          ),
       ],
     );
   }
@@ -114,7 +122,7 @@ class CategoryCard extends StatelessWidget {
             ),
             Text(category.name,
                 style: TextStyle(
-                    color: kPrimaryColor, fontWeight: FontWeight.bold)),
+                    color: kPrimaryColor, fontWeight: FontWeight.bold,fontFamily: "Tajawal",fontSize: 16)),
             /*Text(
               "${category.noOfProducts.toString()} منتج",
               style: Theme.of(context).textTheme.bodySmall,
@@ -154,6 +162,9 @@ class AppBar extends StatelessWidget {
       ),
       child: Column(
         children: [
+            SizedBox(
+                            height: 22,
+                          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -165,7 +176,8 @@ class AppBar extends StatelessWidget {
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 20),
+                    fontSize: 20
+                    ,fontFamily: "Tajawal"),
                 textDirection: TextDirection.rtl,
               ),
               /* profileButton(
