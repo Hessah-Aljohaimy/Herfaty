@@ -222,11 +222,21 @@ class _AddProductState extends State<AddProduct> {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'أدخل اسم المنتج';
+<<<<<<< HEAD
                     } else if (!RegExp(
                             r"^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z- ][]*$")
                         .hasMatch(value)) {
                       return "أدخل اسم بلا أرقام ورموز";
                     } else if (value.length < 2) {
+=======
+                    }
+                    if (!RegExp(
+                            r"^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z- ][]*$")
+                        .hasMatch(value)) {
+                      return "أدخل اسم بلا أرقام ورموز";
+                    }
+                    if (value.length < 2) {
+>>>>>>> final
                       return " أدخل اسم أكبر من أو يساوي حرفين ";
                     }
                     return null;
@@ -290,7 +300,12 @@ class _AddProductState extends State<AddProduct> {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'أدخل وصف المنتج';
+<<<<<<< HEAD
                     } else if (value.length < 2) {
+=======
+                    }
+                    if (value.length < 2) {
+>>>>>>> final
                       return " أدخل وصف أكبر من أو يساوي حرفين ";
                     }
                     return null;
@@ -346,9 +361,14 @@ class _AddProductState extends State<AddProduct> {
                   validator: (value) {
                     if (value == null || value.isEmpty)
                       return 'أدخل كمية المنتج';
+<<<<<<< HEAD
                     else if (int.parse(value) <= 0)
                       return "أدخل رقم أكبر من صفر";
                     else if (int.parse(value) > 15)
+=======
+                    if (int.parse(value) <= 0) return "أدخل رقم أكبر من صفر";
+                    if (int.parse(value) > 15)
+>>>>>>> final
                       return "أدخل رقم أصغر من أو يساوي 15";
                     else
                       return null;
@@ -441,7 +461,7 @@ class _AddProductState extends State<AddProduct> {
                     String prodName = nameController.text;
                     String desc = descController.text;
                     int amount = int.parse(amountController.text);
-                    double priceN = double.parse(amountController.text);
+                    double priceN = double.parse(priceController.text);
 
                     final productToBeAdded =
                         FirebaseFirestore.instance.collection('Products').doc();
@@ -471,8 +491,12 @@ class _AddProductState extends State<AddProduct> {
                     /*
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('تم حفظ المنتج')),
+<<<<<<< HEAD
                     );*/
 
+=======
+                    );
+>>>>>>> final
                   }
                   /*   nameController.clear();
                   descController.clear();
