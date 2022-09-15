@@ -18,10 +18,12 @@ class logOutButton extends StatelessWidget {
           ),
           onPressed: () async {
             FirebaseAuth.instance.signOut();
-            Navigator.pushReplacement(context,
+            Navigator.of(context, rootNavigator: true).pushReplacement(
+                MaterialPageRoute(builder: (context) => new Welcome()));
+            /*Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (BuildContext context) {
               return Welcome();
-            }));
+            }));*/
           },
           backgroundColor: kPrimaryColor),
     );
