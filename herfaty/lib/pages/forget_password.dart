@@ -21,6 +21,7 @@ Future resetPassword() async{
       try{
          if (_formKey.currentState!.validate()) {
       await  FirebaseAuth.instance.sendPasswordResetEmail(email: _emailTextController.text.trim());
+         _emailTextController.clear();
                         showDialog(
           context: context,
           builder: (BuildContext context) {
