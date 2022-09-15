@@ -140,8 +140,8 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.CENTER,
                             timeInSecForIosWeb: 3,
-                            backgroundColor: Colors.white,
-                            textColor: Color.fromARGB(255, 26, 96, 91),
+                            backgroundColor: Color.fromARGB(255, 26, 96, 91),
+                            textColor: Colors.white,
                             fontSize: 18.0,
                           );
                           await Future.delayed(const Duration(seconds: 1), () {

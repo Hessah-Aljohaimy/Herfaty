@@ -5,6 +5,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:herfaty/pages/reusable_widgets.dart';
 import 'package:herfaty/pages/login.dart';
+import 'package:herfaty/screens/customer_base_screen.dart';
+import 'package:herfaty/screens/navCustomer.dart';
 
 class SignupCustomer extends StatefulWidget {
   const SignupCustomer({super.key});
@@ -168,20 +170,21 @@ class _SignupCustomerState extends State<SignupCustomer> {
                                       password: _passwordTextController.text,
                                     );
                                     Fluttertoast.showToast(
-                                      msg: "تم تسجيل الحساب بنجاح",
+                                      msg: "تم تسجيل حسابك  بنجاح",
                                       toastLength: Toast.LENGTH_SHORT,
                                       gravity: ToastGravity.CENTER,
                                       timeInSecForIosWeb: 3,
-                                      backgroundColor: Colors.white,
-                                      textColor:
+                                      backgroundColor:
                                           Color.fromARGB(255, 26, 96, 91),
+                                      textColor: Colors.white,
                                       fontSize: 18.0,
                                     );
                                     createCustomer(customer);
-                                    // Navigator.push(
-                                    //   context,
-                                    //   MaterialPageRoute(builder: (context) => const customerBaseScreen()),
-                                    // );
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => nav()),
+                                    );
 
                                     //  Navigator.pushNamed(context, "/home_screen");
                                   });
