@@ -13,6 +13,7 @@ class logOutButton extends StatelessWidget {
     return Scaffold(
       appBar: DefaultAppBar(title: "تسجيل الخروج"),
       floatingActionButton: FloatingActionButton.extended(
+          heroTag: "btn1",
           label: Text(
             'تسجيل خروج',
           ),
