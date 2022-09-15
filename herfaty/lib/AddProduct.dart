@@ -61,15 +61,19 @@ class _AddProductState extends State<AddProduct> {
             //can doing scroll
 
             children: <Widget>[
+              SizedBox(
+                height: 10,
+              ),
               Container(
-                //margin: EdgeInsets.symmetric(horizontal: 100),
+                //margin: EdgeInsets.symmetric(horizontal: 200),
                 child: SizedBox(
-                  width: 400,
+                  width: 300,
                   height: 40,
                   child: ElevatedButton.icon(
                     onPressed: () async {
                       await _showMyDialog();
                     },
+
                     style: ElevatedButton.styleFrom(primary: kPrimaryColor),
                     icon: Icon(
                       // <-- Icon
@@ -85,6 +89,7 @@ class _AddProductState extends State<AddProduct> {
                   ),
                 ),
               ),
+
               SizedBox(
                 height: 20,
               ),
@@ -471,9 +476,9 @@ class _AddProductState extends State<AddProduct> {
                       Navigator.pop(context);
                     });
 
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('تم حفظ المنتج')),
-                    );
+                    // ScaffoldMessenger.of(context).showSnackBar(
+                    //   const SnackBar(content: Text('تم حفظ المنتج')),
+                    // );
                   }
                   /*   nameController.clear();
                   descController.clear();
