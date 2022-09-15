@@ -19,7 +19,7 @@ class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
     double total = 0;
-    double t;
+    double finaltotal;
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
@@ -50,7 +50,6 @@ class _CartState extends State<Cart> {
                               total = (cItems[index].price *
                                       cItems[index].quantity) +
                                   total;
-                              t = total;
                               /*final httpsReference = FirebaseStorage.instance
                                   .refFromURL(cItems[index].image);
                                   httpsReference.getDownloadURL().then(url => { 
@@ -83,7 +82,7 @@ class _CartState extends State<Cart> {
                                                 style:
                                                     TextStyle(fontSize: 16.0)),
                                             Text(
-                                                " ${cItems[index].price.toString()}ر.س"),
+                                                " ${cItems[index].price.toString()}ريال "),
                                             Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.start,
@@ -135,6 +134,11 @@ class _CartState extends State<Cart> {
                                                             "quantity":
                                                                 updaterAmount
                                                           });
+                                                          total = (cItems[index]
+                                                                      .price *
+                                                                  cItems[index]
+                                                                      .quantity) +
+                                                              total;
                                                         }
                                                       });
                                                     },
@@ -185,6 +189,11 @@ class _CartState extends State<Cart> {
                                                             "quantity":
                                                                 updaterAmount
                                                           });
+                                                          total = (cItems[index]
+                                                                      .price *
+                                                                  cItems[index]
+                                                                      .quantity) +
+                                                              total;
                                                         } else {
                                                           showDialog(
                                                               context: context,
@@ -223,6 +232,61 @@ class _CartState extends State<Cart> {
                                         ),
                                       ),
                                     ),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.white, // background
+                                      ),
+                                      onPressed: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                title: Text("حذف منتج"),
+                                                content: Text(
+                                                    'سيتم حذف هذا المنتج من سلتك'),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    child: Text("تراجع"),
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                  ),
+                                                  TextButton(
+                                                    child: Text("حذف",
+                                                        style: TextStyle(
+                                                          color: Colors.red,
+                                                        )),
+                                                    onPressed: () {
+                                                      final docUser =
+                                                          FirebaseFirestore
+                                                              .instance
+                                                              .collection(
+                                                                  'cart')
+                                                              .doc(cItems[index]
+                                                                  .docId);
+                                                      docUser.delete();
+                                                      total = total -
+                                                          (cItems[index].price *
+                                                              cItems[index]
+                                                                  .quantity);
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                  )
+                                                ],
+                                              );
+                                            });
+                                      },
+                                      child: Row(children: [
+                                        //Text('Delete'),
+                                        Icon(
+                                          Icons.delete,
+                                          color: kPrimaryColor,
+                                          semanticLabel: "Delete",
+                                        )
+                                      ]),
+                                    ),
                                   ],
                                 ),
                               );
@@ -237,7 +301,7 @@ class _CartState extends State<Cart> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(" المجموع : $total",
+                              Text(" المجموع : ${calculatTotal(cItems)} ريال",
                                   textAlign: TextAlign.right,
                                   style: TextStyle(
                                     fontSize: 20.0,
@@ -337,4 +401,12 @@ class ProductImage extends StatelessWidget {
       fit: BoxFit.cover,
     );
   }
+}
+
+num calculatTotal(var list) {
+  num finalTotal = 0;
+  for (int i = 0; i < list.length; i++) {
+    finalTotal += (list[i].price * list[i].quantity);
+  }
+  return finalTotal;
 }

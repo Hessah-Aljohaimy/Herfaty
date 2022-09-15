@@ -148,8 +148,10 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                             Navigator.pop(context);
                           });
 
-                          item.availableAmount = item.availableAmount - 1;
                           createCartItem(item);
+/*
+                          item.availableAmount = item.availableAmount - 1;
+                          
                           String idToBeUpdated = item.productId;
 
                           //update available amount of the product in the product collection
@@ -157,7 +159,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                               .instance
                               .collection('Products')
                               .doc("${idToBeUpdated}");
-                          updateAvailableAmount.update({'avalibleAmount': 20});
+                          updateAvailableAmount.update({'avalibleAmount': 20});*/
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
