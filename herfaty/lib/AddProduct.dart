@@ -222,7 +222,6 @@ class _AddProductState extends State<AddProduct> {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'أدخل اسم المنتج';
-
                     }
                     if (!RegExp(
                             r"^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z- ][]*$")
@@ -230,7 +229,6 @@ class _AddProductState extends State<AddProduct> {
                       return "أدخل اسم بلا أرقام ورموز";
                     }
                     if (value.length < 2) {
- 
                       return " أدخل اسم أكبر من أو يساوي حرفين ";
                     }
                     return null;
@@ -472,7 +470,7 @@ class _AddProductState extends State<AddProduct> {
                     await Future.delayed(const Duration(seconds: 1), () {
                       Navigator.pop(context);
                     });
-                
+
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('تم حفظ المنتج')),
                     );
