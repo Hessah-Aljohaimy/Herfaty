@@ -20,11 +20,7 @@ class Product {
 
   Map<String, dynamic> toMap(String id) {
     return {
-<<<<<<< HEAD
-      'id': this.id,
-=======
       'id': id,
->>>>>>> final
       'name': name,
       'dsscription': dsscription,
       'categoryName': categoryName,
