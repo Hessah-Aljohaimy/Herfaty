@@ -183,9 +183,8 @@ class _SignupHerafyState extends State<SignupHerafy> {
                             height: 17,
                           ),
                           Container(
-                              width: 295,
-                              height: 53,
-                              padding: EdgeInsets.symmetric(horizontal: 16),
+                            
+                              padding: EdgeInsets.symmetric(horizontal: 60),
                               child: Center(
                                   child: TextFormField(
                                 controller: _BODController,
@@ -204,6 +203,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
                                     color: Color.fromARGB(255, 26, 96, 91),
                                   ),
                                   labelText: "تاريخ الميلاد",
+                                  contentPadding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 23),
                                   labelStyle: TextStyle(
                                       color: Color.fromARGB(106, 26, 96, 91)),
                                   fillColor: Colors.white.withOpacity(0.3),
@@ -216,7 +216,17 @@ class _SignupHerafyState extends State<SignupHerafy> {
                                         width: 2,
                                         color: Color.fromARGB(255, 26, 96, 91)),
                                   ),
-                                ),
+                               errorStyle: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
+
+      errorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
+      ),
+
+      focusedErrorBorder: OutlineInputBorder(
+        borderSide:
+            BorderSide(width: 2, color: Color.fromARGB(255, 164, 46, 46)),
+      ),
+    ),
 
                                 readOnly:
                                     true, //set it true, so that user will not able to edit text
