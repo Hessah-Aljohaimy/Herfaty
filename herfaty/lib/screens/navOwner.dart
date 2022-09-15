@@ -1,10 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:herfaty/cart/cart.dart';
 import 'package:herfaty/constants/color.dart';
+import 'package:herfaty/pages/welcome.dart';
 import 'package:herfaty/screens/customerHome.dart';
 import 'package:herfaty/screens/ownerHome.dart';
+import 'package:herfaty/widgets/logOut.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class navOwner extends StatelessWidget {
@@ -35,7 +38,7 @@ class navOwner extends StatelessWidget {
   List<Widget> screens() {
     return [
       ownerHomeScreen(),
-      ownerHomeScreen(),
+      logOutButton(),
     ];
   }
 
@@ -43,12 +46,12 @@ class navOwner extends StatelessWidget {
     return [
       PersistentBottomNavBarItem(
           icon: const Icon(CupertinoIcons.home),
-          title: "الرئيسية",
+          title: "  الرئيسية",
           activeColorPrimary: kPrimaryColor.withOpacity(0.9),
           inactiveColorPrimary: CupertinoColors.systemGrey),
       PersistentBottomNavBarItem(
           icon: const Icon(CupertinoIcons.settings),
-          title: "الإعدادات",
+          title: "  الإعدادت ",
           activeColorPrimary: kPrimaryColor.withOpacity(0.9),
           inactiveColorPrimary: CupertinoColors.systemGrey),
     ];

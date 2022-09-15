@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:herfaty/cart/cart.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/screens/customerHome.dart';
+import 'package:herfaty/widgets/logOut.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class nav extends StatelessWidget {
@@ -36,7 +37,7 @@ class nav extends StatelessWidget {
       customerHomeScreen(),
       Cart(),
       customerHomeScreen(),
-      customerHomeScreen(),
+      logOutButton(),
     ];
   }
 
@@ -59,7 +60,7 @@ class nav extends StatelessWidget {
           inactiveColorPrimary: CupertinoColors.systemGrey),
       PersistentBottomNavBarItem(
           icon: const Icon(CupertinoIcons.settings),
-          title: "  الإعدادات",
+          title: "  الإعدادت",
           activeColorPrimary: kPrimaryColor.withOpacity(0.9),
           inactiveColorPrimary: CupertinoColors.systemGrey),
     ];

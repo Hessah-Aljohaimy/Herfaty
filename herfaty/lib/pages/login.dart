@@ -10,7 +10,6 @@ import 'package:herfaty/pages/forget_password.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:herfaty/screens/owner_base_screen.dart';
 import 'package:herfaty/models/shopOwnerModel.dart';
-import 'package:herfaty/screens/customer_base_screen.dart';
 
 class login extends StatefulWidget {
   const login({Key? key}) : super(key: key);
@@ -136,9 +135,6 @@ class _login extends State<login> {
                                   OwnerId = '';
                                   OwnerId = userCredentia.user!.uid;
 
-                                  print('objectfuggrffffffffffffffffffff' +
-                                      OwnerId);
-
                                   for (var i = 0; i < myList.length; i++) {
                                     if (myList[i] == OwnerId) {
                                       isShopOwner = true;
@@ -150,11 +146,11 @@ class _login extends State<login> {
                                     isShopOwner = false;
                                     OwnerId = '';
                                     Navigator.pushNamed(
-                                        context, "/forget_password");
+                                        context, "/home_screen_owner");
                                   } else {
                                     OwnerId = '';
                                     Navigator.pushNamed(
-                                        context, '/welcomeRegestration');
+                                        context, '/home_screen_customer');
                                   }
                                 } catch (e, stack) {
                                   showDialog(

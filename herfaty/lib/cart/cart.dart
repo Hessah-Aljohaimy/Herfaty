@@ -6,6 +6,8 @@ import 'package:herfaty/models/cartModal.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
+import '../pages/welcome.dart';
+
 class Cart extends StatefulWidget {
   const Cart({Key? key}) : super(key: key);
 
@@ -92,22 +94,30 @@ class _CartState extends State<Cart> {
                                                         if (cItems[index]
                                                                 .quantity ==
                                                             1) {
-                                                          Container(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .only(
-                                                                    left: 85),
-                                                            child: Text(
-                                                              "* كلمه المرور يجب ان لا تقل عن 6 خانات",
-                                                              style: TextStyle(
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          235,
-                                                                          47,
-                                                                          26)),
-                                                            ),
-                                                          );
+                                                          showDialog(
+                                                              context: context,
+                                                              builder:
+                                                                  (BuildContext
+                                                                      context) {
+                                                                return AlertDialog(
+                                                                  title: Text(
+                                                                      "خطأ"),
+                                                                  content: Text(
+                                                                      'أقل عدد للمنتج هو واحد'),
+                                                                  actions: <
+                                                                      Widget>[
+                                                                    TextButton(
+                                                                      child: Text(
+                                                                          "حسنا"),
+                                                                      onPressed:
+                                                                          () {
+                                                                        Navigator.of(context)
+                                                                            .pop();
+                                                                      },
+                                                                    )
+                                                                  ],
+                                                                );
+                                                              });
                                                         } else if (cItems[index]
                                                                 .quantity >
                                                             1) {
@@ -175,6 +185,31 @@ class _CartState extends State<Cart> {
                                                             "quantity":
                                                                 updaterAmount
                                                           });
+                                                        } else {
+                                                          showDialog(
+                                                              context: context,
+                                                              builder:
+                                                                  (BuildContext
+                                                                      context) {
+                                                                return AlertDialog(
+                                                                  title: Text(
+                                                                      "خطأ"),
+                                                                  content: Text(
+                                                                      'لا يوجد كمية متاحة من المنتج أكثر من ذلك'),
+                                                                  actions: <
+                                                                      Widget>[
+                                                                    TextButton(
+                                                                      child: Text(
+                                                                          "حسنا"),
+                                                                      onPressed:
+                                                                          () {
+                                                                        Navigator.of(context)
+                                                                            .pop();
+                                                                      },
+                                                                    )
+                                                                  ],
+                                                                );
+                                                              });
                                                         }
                                                       });
                                                     },
@@ -271,15 +306,14 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 //Stream firestore
 Stream<List<CartModal>> readCart() {
-  final user;
-  user = FirebaseAuth.instance.currentUser;
-
-  //final uid = user.uid;
   // final uid = user.getIdToken();
 
+  final user;
+  user = FirebaseAuth.instance.currentUser;
+  final uid = user.uid;
   return FirebaseFirestore.instance
       .collection('cart')
-      //.where("customerId", isEqualTo: uid)
+      .where("customerId", isEqualTo: uid)
       .snapshots()
       .map((snapshot) =>
           snapshot.docs.map((doc) => CartModal.fromJson(doc.data())).toList());

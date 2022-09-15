@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:herfaty/AddProductToCart.dart';
@@ -21,12 +22,14 @@ class CustomerProdectDetails extends StatefulWidget {
 class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
   @override
   Widget build(BuildContext context) {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
     //////////////////////////////////////////////////////////////////////////////////////////
     AddProductToCart item = AddProductToCart(
         name: widget.product.name,
         detailsImage: widget.detailsImage,
         productId: widget.product.id,
-        customerId: "customerId",
+        customerId: user!.uid,
         //هنا نحط ال ايدي حق الكستمر اللي يستعمل المتجر
         quantity: 1,
         availableAmount: widget.product.quantity, //تحتاج تغيير
