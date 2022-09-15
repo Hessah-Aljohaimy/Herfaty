@@ -94,7 +94,9 @@ class _AddProductState extends State<AddProduct> {
                   width: 200,
                   height: 200,
                 ),
-
+ SizedBox(
+                height: 20,
+              ),
               Row(
                 //
                 mainAxisAlignment:
@@ -103,7 +105,7 @@ class _AddProductState extends State<AddProduct> {
                   SizedBox(width: 20), // for space
                   Text(
                     'فئة المنتج',
-                    style: TextStyle(fontSize: 22, fontFamily: "Tajawal"),
+                    style: TextStyle(fontSize: 21, fontFamily: "Tajawal"),
                   ),
 
                   DropdownButton(
@@ -116,7 +118,7 @@ class _AddProductState extends State<AddProduct> {
                     icon: Icon(Icons.arrow_drop_down),
                     style: const TextStyle(
                         color: kPrimaryColor, //<-- SEE HERE
-                        fontSize: 20,
+                        fontSize: 19,
                         fontWeight: FontWeight.bold),
                     // Down Arrow Icon
                     // Array list of items
@@ -125,7 +127,7 @@ class _AddProductState extends State<AddProduct> {
                         value: items,
                         child: Text(
                           items,
-                          textAlign: TextAlign.right,
+                          
                         ),
                       );
                     }).toList(),
@@ -172,22 +174,26 @@ class _AddProductState extends State<AddProduct> {
               ),*/
 
               SizedBox(
-                height: 20,
+                height: 40,
               ),
-              TextFormField(
+              Container(
+                         padding: EdgeInsets.symmetric(horizontal: 40),
+              child: TextFormField(
                 controller: nameController,
-                textAlign: TextAlign.right, //right aligment
+              //right aligment
+              
                 decoration: InputDecoration(
+                  
                   border: InputBorder.none,
                   hintText: 'اسم المنتج',
-                  hintStyle: TextStyle(fontSize: 19),
-                  prefixIcon: Padding(
+                  hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
+                  suffixIcon: Padding(
                     padding: EdgeInsets.only(top: 15),
-                    child: Icon(
-                        Icons
-                            .production_quantity_limits_sharp, //sara rdits from here
-                        color: kPrimaryColor),
+                    
+                    child:   Icon(
+                        Icons.production_quantity_limits_sharp, color: kPrimaryColor),
                   ),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 23),
                   labelStyle:
                       TextStyle(color: kPrimaryColor, fontFamily: "Tajawal"),
                   // floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -226,6 +232,7 @@ class _AddProductState extends State<AddProduct> {
                   return null;
                 },
               ),
+          ),
               /*Container(
                 child: Text(
                   "اسم صحيح بلا أرقام ورموز",
@@ -237,7 +244,9 @@ class _AddProductState extends State<AddProduct> {
               SizedBox(
                 height: 20,
               ), //for space
-
+Container(
+                         padding: EdgeInsets.symmetric(horizontal: 40),
+              child:
               TextFormField(
                 maxLines: null,
                 keyboardType: TextInputType.multiline,
@@ -246,9 +255,12 @@ class _AddProductState extends State<AddProduct> {
                 maxLength: 300,
                 decoration: InputDecoration(
                   hintText: 'تفاصيل المنتج',
-                  hintStyle: TextStyle(fontSize: 19),
-                  prefixIcon: Padding(
+                                    contentPadding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 23),
+
+                  hintStyle: TextStyle(fontSize: 18,fontFamily: "Tajawal"),
+                  suffixIcon: Padding(
                     padding: EdgeInsets.only(top: 15),
+                    
                     child: Icon(Icons.description, //Sara edits
                         color: kPrimaryColor),
                   ),
@@ -284,11 +296,13 @@ class _AddProductState extends State<AddProduct> {
                   }
                   return null;
                 },
-              ),
+              ),),
               SizedBox(
                 height: 20,
               ),
-
+Container(
+                         padding: EdgeInsets.symmetric(horizontal: 40),
+              child:
               TextFormField(
                 controller: amountController,
                 keyboardType: TextInputType.number,
@@ -296,9 +310,10 @@ class _AddProductState extends State<AddProduct> {
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'الكمية المتاحة',
+                  contentPadding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 23),
 
-                  hintStyle: TextStyle(fontSize: 19),
-                  prefixIcon: Padding(
+                  hintStyle: TextStyle(fontSize: 18,fontFamily: "Tajawal"),
+                  suffixIcon: Padding(
                     padding: EdgeInsets.only(top: 15),
                     child: Icon(Icons.numbers,
                         //Sara edits
@@ -338,27 +353,31 @@ class _AddProductState extends State<AddProduct> {
                   else
                     return null;
                 },
-              ),
-              Container(
-                child: Text(
-                  "الكمية المتاحة يجب أن تكون بين 1-15",
-                  textAlign: TextAlign.right,
-                  style: TextStyle(color: Color.fromARGB(255, 235, 47, 26)),
-                ),
-              ),
-
+              ),),
+            Container(
+                            padding: const EdgeInsets.only(right: 41),
+                            child: Text(
+                              " *الكمية المتاحة يجب أن تكون بين 1-15",
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 235, 47, 26)),
+                            ),
+            ),
               SizedBox(
                 height: 20,
               ),
-
+Container(
+                         padding: EdgeInsets.symmetric(horizontal: 40),
+              child:
               TextFormField(
                 controller: priceController,
                 keyboardType: TextInputType.number,
                 textAlign: TextAlign.right,
                 decoration: InputDecoration(
                   hintText: 'السعر',
-                  hintStyle: TextStyle(fontSize: 19),
-                  prefixIcon: Padding(
+                                    contentPadding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 23),
+
+                  hintStyle: TextStyle(fontSize: 18,fontFamily: "Tajawal"),
+                 suffixIcon: Padding(
                     padding: EdgeInsets.only(top: 15),
                     child: Icon(Icons.attach_money_outlined,
                         //Sara edits
@@ -397,7 +416,7 @@ class _AddProductState extends State<AddProduct> {
                     return null;
                 },
               ),
-
+),
               SizedBox(
                 height: 20,
               ),
@@ -416,6 +435,7 @@ class _AddProductState extends State<AddProduct> {
                         const SnackBar(content: Text('الرجاء إرفاق صورة')));
                     _showMyDialog();
                   }*/
+               
                   if (_formKey.currentState!.validate() &&
                       uploadImageUrl != "") {
                     String prodName = nameController.text;
@@ -434,6 +454,7 @@ class _AddProductState extends State<AddProduct> {
                     await Firestore.saveProduct(product);
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('تم حفظ المنتج')),
+                       
                     );
                   }
                   /*   nameController.clear();
@@ -441,17 +462,24 @@ class _AddProductState extends State<AddProduct> {
                   amountController.clear();
                   priceController.clear();*/
                 },
-                child: Text(
-                  "إضافة منتج",
-                  style: TextStyle(fontSize: 22),
-                ),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(kPrimaryColor),
-                  padding: MaterialStateProperty.all(
-                      EdgeInsets.symmetric(horizontal: 90, vertical: 13)),
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(27))),
-                ),
+               style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Color(0xff51908E)),
+                                  
+                              padding: MaterialStateProperty.all(
+                                  EdgeInsets.symmetric(
+                                      horizontal: 40, vertical: 13)),
+                              shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(27))),
+                            ),
+                            child: Text(
+                              "إضافة منتج",
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: "Tajawal",
+                                  fontWeight: FontWeight.bold),
+                            ),
               ),
               /* child: Text("إضافة منتج"),
                 style: ElevatedButton.styleFrom(
@@ -464,20 +492,28 @@ class _AddProductState extends State<AddProduct> {
 
               ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
-                      Color.fromARGB(255, 167, 29, 29)),
-                  padding: MaterialStateProperty.all(
-                      EdgeInsets.symmetric(horizontal: 90, vertical: 13)),
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(27))),
-                ),
+                              backgroundColor:
+                                  MaterialStateProperty.all(Color.fromARGB(255, 167, 29, 29)),
+                                  
+                              padding: MaterialStateProperty.all(
+                                  EdgeInsets.symmetric(
+                                      horizontal: 40, vertical: 13)),
+                              shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(27))),
+                            ),
+                            child: Text(
+                              "إلغاء",
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: "Tajawal",
+                                  fontWeight: FontWeight.bold),
+                            ),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: Text(
-                  "إلغاء ",
-                  style: TextStyle(fontSize: 22),
-                ),
+                
+
               ),
               /* ElevatedButton(
                 style: ElevatedButton.styleFrom(primary: Colors.red),
