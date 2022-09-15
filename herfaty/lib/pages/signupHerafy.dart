@@ -567,15 +567,15 @@ class _SignupHerafyState extends State<SignupHerafy> {
               icon: Icon(Icons.camera),
               onPressed: () async {
                 // Capture a photo
-
-                final XFile? photo =
-                    await _picker.pickImage(source: ImageSource.camera);
-                try {
-                  final file = File(photo!.path);
-                  uploadImageToFirebaseStorage(file);
-                } catch (e) {
-                  print('error');
-                }
+                takePhoto(ImageSource.camera);
+                // final XFile? photo =
+                //     await _picker.pickImage(source: ImageSource.camera);
+                // try {
+                //   final file = File(photo!.path);
+                //   uploadImageToFirebaseStorage(file);
+                // } catch (e) {
+                //   print('error');
+                // }
 
                 Navigator.of(context).pop();
               },
@@ -584,15 +584,16 @@ class _SignupHerafyState extends State<SignupHerafy> {
             TextButton.icon(
               icon: Icon(Icons.image),
               onPressed: () async {
+                takePhoto(ImageSource.gallery);
                 // Pick an image
-                final XFile? photo =
-                    await _picker.pickImage(source: ImageSource.gallery);
-                try {
-                  final file = File(photo!.path);
-                  uploadImageToFirebaseStorage(file);
-                } catch (e) {
-                  print('error');
-                }
+                // final XFile? photo =
+                //     await _picker.pickImage(source: ImageSource.gallery);
+                // try {
+                //   final file = File(photo!.path);
+                //   uploadImageToFirebaseStorage(file);
+                // } catch (e) {
+                //   print('error');
+                // }
 
                 Navigator.of(context).pop();
               },
@@ -609,9 +610,25 @@ class _SignupHerafyState extends State<SignupHerafy> {
     final pickedFile = await _picker.getImage(
       source: source,
     );
+    try {
+      final file = File(_imageFile!.path);
+      uploadImageToFirebaseStorage(file);
+    } catch (e) {
+      print('error');
+    }
     setState(() {
       try {
         _imageFile = pickedFile!;
+        Fluttertoast.showToast(
+          msg: 'تمت إضافة الصورة بنجاح',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 3,
+          backgroundColor: Color.fromARGB(255, 26, 96, 91),
+          textColor: Colors.white,
+          fontSize: 18.0,
+        );
+        imageProfile();
       } catch (e) {
         Fluttertoast.showToast(
           msg: 'هناك مشكلة أعد ادخال الصوره مجددا',
