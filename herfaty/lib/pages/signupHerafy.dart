@@ -183,7 +183,6 @@ class _SignupHerafyState extends State<SignupHerafy> {
                             height: 17,
                           ),
                           Container(
-                            
                               padding: EdgeInsets.symmetric(horizontal: 60),
                               child: Center(
                                   child: TextFormField(
@@ -203,7 +202,8 @@ class _SignupHerafyState extends State<SignupHerafy> {
                                     color: Color.fromARGB(255, 26, 96, 91),
                                   ),
                                   labelText: "تاريخ الميلاد",
-                                  contentPadding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 23),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      vertical: 1.0, horizontal: 23),
                                   labelStyle: TextStyle(
                                       color: Color.fromARGB(106, 26, 96, 91)),
                                   fillColor: Colors.white.withOpacity(0.3),
@@ -216,17 +216,20 @@ class _SignupHerafyState extends State<SignupHerafy> {
                                         width: 2,
                                         color: Color.fromARGB(255, 26, 96, 91)),
                                   ),
-                               errorStyle: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
-
-      errorBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
-      ),
-
-      focusedErrorBorder: OutlineInputBorder(
-        borderSide:
-            BorderSide(width: 2, color: Color.fromARGB(255, 164, 46, 46)),
-      ),
-    ),
+                                  errorStyle: TextStyle(
+                                      color: Color.fromARGB(255, 164, 46, 46)),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color:
+                                            Color.fromARGB(255, 164, 46, 46)),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 2,
+                                        color:
+                                            Color.fromARGB(255, 164, 46, 46)),
+                                  ),
+                                ),
 
                                 readOnly:
                                     true, //set it true, so that user will not able to edit text
@@ -302,6 +305,14 @@ class _SignupHerafyState extends State<SignupHerafy> {
                                 Icons.phone_android,
                                 false,
                                 _PhoneNumberTextEditingController),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.only(left: 85),
+                            child: Text(
+                              "*رقم الجوال يجب أن يبدأ بـ(05) لعشرة أرقام",
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 235, 47, 26)),
+                            ),
                           ),
                           SizedBox(
                             height: 17,
