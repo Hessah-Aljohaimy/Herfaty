@@ -94,7 +94,7 @@ class _AddProductState extends State<AddProduct> {
                   width: 200,
                   height: 200,
                 ),
- SizedBox(
+              SizedBox(
                 height: 20,
               ),
               Row(
@@ -127,7 +127,6 @@ class _AddProductState extends State<AddProduct> {
                         value: items,
                         child: Text(
                           items,
-                          
                         ),
                       );
                     }).toList(),
@@ -177,62 +176,63 @@ class _AddProductState extends State<AddProduct> {
                 height: 40,
               ),
               Container(
-                         padding: EdgeInsets.symmetric(horizontal: 40),
-              child: TextFormField(
-                controller: nameController,
-              //right aligment
-              
-                decoration: InputDecoration(
-                  
-                  border: InputBorder.none,
-                  hintText: 'اسم المنتج',
-                  hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
-                  suffixIcon: Padding(
-                    padding: EdgeInsets.only(top: 15),
-                    
-                    child:   Icon(
-                        Icons.production_quantity_limits_sharp, color: kPrimaryColor),
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 23),
-                  labelStyle:
-                      TextStyle(color: kPrimaryColor, fontFamily: "Tajawal"),
-                  // floatingLabelBehavior: FloatingLabelBehavior.never,
-                  fillColor: Colors.white.withOpacity(0.3),
+                padding: EdgeInsets.symmetric(horizontal: 40),
+                child: TextFormField(
+                  controller: nameController,
+                  //right aligment
 
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: kPrimaryColor),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 2, color: kPrimaryColor),
-                  ),
-                  errorStyle:
-                      TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'اسم المنتج',
+                    hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
+                    suffixIcon: Padding(
+                      padding: EdgeInsets.only(top: 15),
+                      child: Icon(Icons.production_quantity_limits_sharp,
+                          color: kPrimaryColor),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 3.0, horizontal: 23),
+                    labelStyle:
+                        TextStyle(color: kPrimaryColor, fontFamily: "Tajawal"),
+                    // floatingLabelBehavior: FloatingLabelBehavior.never,
+                    fillColor: Colors.white.withOpacity(0.3),
 
-                  errorBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: kPrimaryColor),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 2, color: kPrimaryColor),
+                    ),
+                    errorStyle:
+                        TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
+
+                    errorBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
+                    ),
+
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 2, color: Color.fromARGB(255, 164, 46, 46)),
+                    ),
                   ),
 
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        width: 2, color: Color.fromARGB(255, 164, 46, 46)),
-                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'أدخل اسم المنتج';
+                    }
+                    if (!RegExp(
+                            r"^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z- ][]*$")
+                        .hasMatch(value)) {
+                      return "أدخل اسم بلا أرقام ورموز";
+                    }
+                    if (value.length < 2) {
+                      return " أدخل اسم أكبر من أو يساوي حرفين ";
+                    }
+                    return null;
+                  },
                 ),
-
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'أدخل اسم المنتج';
-                  } else if (!RegExp(
-                          r"^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z- ][]*$")
-                      .hasMatch(value)) {
-                    return "أدخل اسم بلا أرقام ورموز";
-                  } else if (value.length < 2) {
-                    return " أدخل اسم أكبر من أو يساوي حرفين ";
-                  }
-                  return null;
-                },
               ),
-          ),
               /*Container(
                 child: Text(
                   "اسم صحيح بلا أرقام ورموز",
@@ -244,179 +244,179 @@ class _AddProductState extends State<AddProduct> {
               SizedBox(
                 height: 20,
               ), //for space
-Container(
-                         padding: EdgeInsets.symmetric(horizontal: 40),
-              child:
-              TextFormField(
-                maxLines: null,
-                keyboardType: TextInputType.multiline,
-                controller: descController,
-                textAlign: TextAlign.right,
-                maxLength: 300,
-                decoration: InputDecoration(
-                  hintText: 'تفاصيل المنتج',
-                                    contentPadding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 23),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 40),
+                child: TextFormField(
+                  maxLines: null,
+                  keyboardType: TextInputType.multiline,
+                  controller: descController,
+                  textAlign: TextAlign.right,
+                  maxLength: 300,
+                  decoration: InputDecoration(
+                    hintText: 'تفاصيل المنتج',
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 3.0, horizontal: 23),
 
-                  hintStyle: TextStyle(fontSize: 18,fontFamily: "Tajawal"),
-                  suffixIcon: Padding(
-                    padding: EdgeInsets.only(top: 15),
-                    
-                    child: Icon(Icons.description, //Sara edits
-                        color: kPrimaryColor),
-                  ),
-                  labelStyle:
-                      TextStyle(color: kPrimaryColor, fontFamily: "Tajawal"),
-                  // floatingLabelBehavior: FloatingLabelBehavior.never,
-                  fillColor: Colors.white.withOpacity(0.3),
+                    hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
+                    suffixIcon: Padding(
+                      padding: EdgeInsets.only(top: 15),
+                      child: Icon(Icons.description, //Sara edits
+                          color: kPrimaryColor),
+                    ),
+                    labelStyle:
+                        TextStyle(color: kPrimaryColor, fontFamily: "Tajawal"),
+                    // floatingLabelBehavior: FloatingLabelBehavior.never,
+                    fillColor: Colors.white.withOpacity(0.3),
 
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: kPrimaryColor),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 2, color: kPrimaryColor),
-                  ),
-                  errorStyle:
-                      TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: kPrimaryColor),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 2, color: kPrimaryColor),
+                    ),
+                    errorStyle:
+                        TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
 
-                  errorBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
-                  ),
+                    errorBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
+                    ),
 
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        width: 2, color: Color.fromARGB(255, 164, 46, 46)),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 2, color: Color.fromARGB(255, 164, 46, 46)),
+                    ),
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'أدخل وصف المنتج';
+                    }
+                    if (value.length < 2) {
+                      return " أدخل وصف أكبر من أو يساوي حرفين ";
+                    }
+                    return null;
+                  },
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'أدخل وصف المنتج';
-                  } else if (value.length < 2) {
-                    return " أدخل وصف أكبر من أو يساوي حرفين ";
-                  }
-                  return null;
-                },
-              ),),
+              ),
               SizedBox(
                 height: 20,
               ),
-Container(
-                         padding: EdgeInsets.symmetric(horizontal: 40),
-              child:
-              TextFormField(
-                controller: amountController,
-                keyboardType: TextInputType.number,
-                textAlign: TextAlign.right,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'الكمية المتاحة',
-                  contentPadding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 23),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 40),
+                child: TextFormField(
+                  controller: amountController,
+                  keyboardType: TextInputType.number,
+                  textAlign: TextAlign.right,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'الكمية المتاحة',
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 3.0, horizontal: 23),
 
-                  hintStyle: TextStyle(fontSize: 18,fontFamily: "Tajawal"),
-                  suffixIcon: Padding(
-                    padding: EdgeInsets.only(top: 15),
-                    child: Icon(Icons.numbers,
-                        //Sara edits
-                        color: kPrimaryColor),
-                  ),
-                  labelStyle:
-                      TextStyle(color: kPrimaryColor, fontFamily: "Tajawal"),
-                  // floatingLabelBehavior: FloatingLabelBehavior.never,
-                  fillColor: Colors.white.withOpacity(0.3),
+                    hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
+                    suffixIcon: Padding(
+                      padding: EdgeInsets.only(top: 15),
+                      child: Icon(Icons.numbers,
+                          //Sara edits
+                          color: kPrimaryColor),
+                    ),
+                    labelStyle:
+                        TextStyle(color: kPrimaryColor, fontFamily: "Tajawal"),
+                    // floatingLabelBehavior: FloatingLabelBehavior.never,
+                    fillColor: Colors.white.withOpacity(0.3),
 
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: kPrimaryColor),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 2, color: kPrimaryColor),
-                  ),
-                  errorStyle:
-                      TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: kPrimaryColor),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 2, color: kPrimaryColor),
+                    ),
+                    errorStyle:
+                        TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
 
-                  errorBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
-                  ),
+                    errorBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
+                    ),
 
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        width: 2, color: Color.fromARGB(255, 164, 46, 46)),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 2, color: Color.fromARGB(255, 164, 46, 46)),
+                    ),
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty)
+                      return 'أدخل كمية المنتج';
+                    if (int.parse(value) <= 0) return "أدخل رقم أكبر من صفر";
+                    if (int.parse(value) > 15)
+                      return "أدخل رقم أصغر من أو يساوي 15";
+                    else
+                      return null;
+                  },
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty)
-                    return 'أدخل كمية المنتج';
-                  else if (int.parse(value) <= 0)
-                    return "أدخل رقم أكبر من صفر";
-                  else if (int.parse(value) > 15)
-                    return "أدخل رقم أصغر من أو يساوي 15";
-                  else
-                    return null;
-                },
-              ),),
-            Container(
-                            padding: const EdgeInsets.only(right: 41),
-                            child: Text(
-                              " *الكمية المتاحة يجب أن تكون بين 1-15",
-                              style: TextStyle(
-                                  color: Color.fromARGB(255, 235, 47, 26)),
-                            ),
-            ),
+              ),
+              Container(
+                padding: const EdgeInsets.only(right: 41),
+                child: Text(
+                  " *الكمية المتاحة يجب أن تكون بين 1-15",
+                  style: TextStyle(color: Color.fromARGB(255, 235, 47, 26)),
+                ),
+              ),
               SizedBox(
                 height: 20,
               ),
-Container(
-                         padding: EdgeInsets.symmetric(horizontal: 40),
-              child:
-              TextFormField(
-                controller: priceController,
-                keyboardType: TextInputType.number,
-                textAlign: TextAlign.right,
-                decoration: InputDecoration(
-                  hintText: 'السعر',
-                                    contentPadding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 23),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 40),
+                child: TextFormField(
+                  controller: priceController,
+                  keyboardType: TextInputType.number,
+                  textAlign: TextAlign.right,
+                  decoration: InputDecoration(
+                    hintText: 'السعر',
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 3.0, horizontal: 23),
 
-                  hintStyle: TextStyle(fontSize: 18,fontFamily: "Tajawal"),
-                 suffixIcon: Padding(
-                    padding: EdgeInsets.only(top: 15),
-                    child: Icon(Icons.attach_money_outlined,
-                        //Sara edits
-                        color: kPrimaryColor),
-                  ),
-                  labelStyle:
-                      TextStyle(color: kPrimaryColor, fontFamily: "Tajawal"),
-                  // floatingLabelBehavior: FloatingLabelBehavior.never,
-                  fillColor: Colors.white.withOpacity(0.3),
+                    hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
+                    suffixIcon: Padding(
+                      padding: EdgeInsets.only(top: 15),
+                      child: Icon(Icons.attach_money_outlined,
+                          //Sara edits
+                          color: kPrimaryColor),
+                    ),
+                    labelStyle:
+                        TextStyle(color: kPrimaryColor, fontFamily: "Tajawal"),
+                    // floatingLabelBehavior: FloatingLabelBehavior.never,
+                    fillColor: Colors.white.withOpacity(0.3),
 
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: kPrimaryColor),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 2, color: kPrimaryColor),
-                  ),
-                  errorStyle:
-                      TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: kPrimaryColor),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 2, color: kPrimaryColor),
+                    ),
+                    errorStyle:
+                        TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
 
-                  errorBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
-                  ),
+                    errorBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
+                    ),
 
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        width: 2, color: Color.fromARGB(255, 164, 46, 46)),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 2, color: Color.fromARGB(255, 164, 46, 46)),
+                    ),
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty)
+                      return 'أدخل السعر ';
+                    else if (int.parse(value!) <= 0)
+                      return "أدخل رقم أكبر من صفر";
+                    else
+                      return null;
+                  },
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty)
-                    return 'أدخل السعر ';
-                  else if (int.parse(value!) <= 0)
-                    return "أدخل رقم أكبر من صفر";
-                  else
-                    return null;
-                },
               ),
-),
               SizedBox(
                 height: 20,
               ),
@@ -435,13 +435,13 @@ Container(
                         const SnackBar(content: Text('الرجاء إرفاق صورة')));
                     _showMyDialog();
                   }*/
-               
+
                   if (_formKey.currentState!.validate() &&
                       uploadImageUrl != "") {
                     String prodName = nameController.text;
                     String desc = descController.text;
                     int amount = int.parse(amountController.text);
-                    double priceN = double.parse(amountController.text);
+                    double priceN = double.parse(priceController.text);
 
                     Product product = Product(
                         name: prodName,
@@ -454,7 +454,6 @@ Container(
                     await Firestore.saveProduct(product);
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('تم حفظ المنتج')),
-                       
                     );
                   }
                   /*   nameController.clear();
@@ -462,24 +461,20 @@ Container(
                   amountController.clear();
                   priceController.clear();*/
                 },
-               style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all(Color(0xff51908E)),
-                                  
-                              padding: MaterialStateProperty.all(
-                                  EdgeInsets.symmetric(
-                                      horizontal: 40, vertical: 13)),
-                              shape: MaterialStateProperty.all(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(27))),
-                            ),
-                            child: Text(
-                              "إضافة منتج",
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: "Tajawal",
-                                  fontWeight: FontWeight.bold),
-                            ),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Color(0xff51908E)),
+                  padding: MaterialStateProperty.all(
+                      EdgeInsets.symmetric(horizontal: 40, vertical: 13)),
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(27))),
+                ),
+                child: Text(
+                  "إضافة منتج",
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontFamily: "Tajawal",
+                      fontWeight: FontWeight.bold),
+                ),
               ),
               /* child: Text("إضافة منتج"),
                 style: ElevatedButton.styleFrom(
@@ -492,28 +487,23 @@ Container(
 
               ElevatedButton(
                 style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all(Color.fromARGB(255, 167, 29, 29)),
-                                  
-                              padding: MaterialStateProperty.all(
-                                  EdgeInsets.symmetric(
-                                      horizontal: 40, vertical: 13)),
-                              shape: MaterialStateProperty.all(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(27))),
-                            ),
-                            child: Text(
-                              "إلغاء",
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: "Tajawal",
-                                  fontWeight: FontWeight.bold),
-                            ),
+                  backgroundColor: MaterialStateProperty.all(
+                      Color.fromARGB(255, 167, 29, 29)),
+                  padding: MaterialStateProperty.all(
+                      EdgeInsets.symmetric(horizontal: 40, vertical: 13)),
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(27))),
+                ),
+                child: Text(
+                  "إلغاء",
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontFamily: "Tajawal",
+                      fontWeight: FontWeight.bold),
+                ),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                
-
               ),
               /* ElevatedButton(
                 style: ElevatedButton.styleFrom(primary: Colors.red),
