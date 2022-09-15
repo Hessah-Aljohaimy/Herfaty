@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/firestore/firestore.dart';
@@ -7,7 +9,6 @@ import 'package:herfaty/models/product.dart';
 import 'package:image_picker/image_picker.dart'; //there
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
-import 'package:image_picker/image_picker.dart';
 
 import 'constants/color.dart';
 
@@ -442,15 +443,19 @@ class _AddProductState extends State<AddProduct> {
                     int amount = int.parse(amountController.text);
                     double priceN = double.parse(amountController.text);
 
+                    final productToBeAdded =
+                        FirebaseFirestore.instance.collection('Products').doc();
                     Product product = Product(
+                        id: productToBeAdded.id,
                         name: prodName,
                         dsscription: desc,
                         avalibleAmount: amount,
                         image: uploadImageUrl,
                         categoryName: dropdownvalue,
                         price: priceN);
-
-                    await Firestore.saveProduct(product);
+                    final json = product.toJson();
+                    await productToBeAdded.set(json);
+                    //await Firestore.saveProduct(product);
                     Fluttertoast.showToast(
                       msg: "تمت إضافة المنتج بنجاح",
                       toastLength: Toast.LENGTH_SHORT,

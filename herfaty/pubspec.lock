@@ -488,6 +488,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.1"
+  style_random:
+    dependency: "direct main"
+    description:
+      name: style_random
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1+1"
   term_glyph:
     dependency: transitive
     description:

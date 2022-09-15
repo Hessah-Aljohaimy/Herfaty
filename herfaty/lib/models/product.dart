@@ -1,6 +1,7 @@
 import 'package:herfaty/models/category.dart';
 
 class Product {
+  String? id;
   String? name;
   String? dsscription;
   String? categoryName;
@@ -9,15 +10,17 @@ class Product {
   double? price;
 
   Product(
-      {this.name,
+      {this.id,
+      this.name,
       this.dsscription,
       required this.categoryName,
       this.image,
       this.avalibleAmount,
       this.price});
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toMap(String id) {
     return {
+      'id': this.id,
       'name': name,
       'dsscription': dsscription,
       'categoryName': categoryName,
@@ -25,5 +28,18 @@ class Product {
       'avalibleAmount': avalibleAmount,
       'price': price
     };
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['image'] = image;
+    data['id'] = this.id;
+    data['name'] = name;
+    data['dsscription'] = dsscription;
+    data['price'] = price;
+    data['avalibleAmount'] = avalibleAmount;
+    data['categoryName'] = categoryName;
+
+    return data;
   }
 }

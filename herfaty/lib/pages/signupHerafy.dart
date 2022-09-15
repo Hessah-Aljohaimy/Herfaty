@@ -419,9 +419,9 @@ class _SignupHerafyState extends State<SignupHerafy> {
                                       toastLength: Toast.LENGTH_SHORT,
                                       gravity: ToastGravity.CENTER,
                                       timeInSecForIosWeb: 3,
-                                      backgroundColor: Colors.white,
-                                      textColor:
+                                      backgroundColor:
                                           Color.fromARGB(255, 26, 96, 91),
+                                      textColor: Colors.white,
                                       fontSize: 18.0,
                                     );
                                     createShopOwner(shopowner);
