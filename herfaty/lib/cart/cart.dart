@@ -223,6 +223,57 @@ class _CartState extends State<Cart> {
                                         ),
                                       ),
                                     ),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.white, // background
+                                      ),
+                                      onPressed: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                title: Text("حذف منتج"),
+                                                content: Text(
+                                                    'سيتم حذف هذا المنتج من سلتك'),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    child: Text("تراجع"),
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                  ),
+                                                  TextButton(
+                                                    child: Text("حذف",
+                                                        style: TextStyle(
+                                                          color: Colors.red,
+                                                        )),
+                                                    onPressed: () {
+                                                      final docUser =
+                                                          FirebaseFirestore
+                                                              .instance
+                                                              .collection(
+                                                                  'cart')
+                                                              .doc(cItems[index]
+                                                                  .docId);
+                                                      docUser.delete();
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                  )
+                                                ],
+                                              );
+                                            });
+                                      },
+                                      child: Row(children: [
+                                        //Text('Delete'),
+                                        Icon(
+                                          Icons.delete,
+                                          color: kPrimaryColor,
+                                          semanticLabel: "Delete",
+                                        )
+                                      ]),
+                                    ),
                                   ],
                                 ),
                               );
