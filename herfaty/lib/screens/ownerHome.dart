@@ -40,7 +40,11 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+     
       children: [
+          SizedBox(
+                            height: 20,
+                          ),
         Padding(
           padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
           child: Row(
@@ -50,10 +54,14 @@ class Body extends StatelessWidget {
                   style: TextStyle(
                       color: kPrimaryColor,
                       fontWeight: FontWeight.bold,
-                      fontSize: 18)),
+                      fontSize: 22
+                       ,fontFamily: "Tajawal")),
             ],
           ),
         ),
+          SizedBox(
+                            height: 20,
+                          ),
       ],
     );
   }
@@ -70,8 +78,10 @@ class ownerServicesCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
+        
         // Within the SecondRoute widget
         padding: const EdgeInsets.all(10),
+
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
@@ -98,7 +108,7 @@ class ownerServicesCard extends StatelessWidget {
             ),
             Text(ownerService.name,
                 style: TextStyle(
-                    color: kPrimaryColor, fontWeight: FontWeight.bold)),
+                    color: kPrimaryColor, fontWeight: FontWeight.bold ,fontFamily: "Tajawal",fontSize: 16)),
           ],
         ),
       ),
@@ -134,10 +144,14 @@ class AppBar extends StatelessWidget {
       ),
       child: Column(
         children: [
+            SizedBox(
+                            height: 25,
+                          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              
               // ignore: prefer_const_constructors
               Text(
                 "مرحباً بكَ أيها الحِرَفِيّ",
@@ -145,7 +159,8 @@ class AppBar extends StatelessWidget {
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 30),
+                    fontSize: 25,
+                    fontFamily: "Tajawal"),
                 //textDirection: TextDirection.rtl,
               ),
               /* profileButton(
