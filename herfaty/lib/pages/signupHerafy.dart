@@ -3,6 +3,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/pages/login.dart';
 import 'package:herfaty/pages/reusable_widgets.dart';
 import 'package:herfaty/pages/welcomeRegestration.dart';
+import 'package:herfaty/screens/navOwner.dart';
+import 'package:herfaty/screens/owner_base_screen.dart';
 import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -187,6 +189,14 @@ class _SignupHerafyState extends State<SignupHerafy> {
                               child: Center(
                                   child: TextFormField(
                                 controller: _BODController,
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'أدخل تاريخ الميلاد';
+                                  } else {
+                                    return null;
+                                  }
+                                },
+
                                 //editing controller of this TextField
                                 decoration: InputDecoration(
                                   suffix: Icon(
@@ -405,7 +415,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
                                             _shopdescriptionTextEditingController
                                                 .text);
                                     Fluttertoast.showToast(
-                                      msg: "تم تسجيل الحساب بنجاح",
+                                      msg: "تم تسجيل حسابك  بنجاح",
                                       toastLength: Toast.LENGTH_SHORT,
                                       gravity: ToastGravity.CENTER,
                                       timeInSecForIosWeb: 3,
@@ -415,10 +425,12 @@ class _SignupHerafyState extends State<SignupHerafy> {
                                       fontSize: 18.0,
                                     );
                                     createShopOwner(shopowner);
-                                    // Navigator.push(
-                                    //   context,
-                                    //   MaterialPageRoute(builder: (context) => const ownerBaseScreen()),
-                                    // );
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const navOwner()),
+                                    );
                                   });
                                 }
                               } on FirebaseAuthException catch (error) {
