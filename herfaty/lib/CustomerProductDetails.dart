@@ -20,22 +20,13 @@ class CustomerProdectDetails extends StatefulWidget {
 }
 
 class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
+  int updatedQuantity = 1;
   @override
   Widget build(BuildContext context) {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     //////////////////////////////////////////////////////////////////////////////////////////
-    AddProductToCart item = AddProductToCart(
-        name: widget.product.name,
-        detailsImage: widget.detailsImage,
-        productId: widget.product.id,
-        customerId: user!.uid,
-        //هنا نحط ال ايدي حق الكستمر اللي يستعمل المتجر
-        quantity: 1,
-        availableAmount: widget.product.quantity, //تحتاج تغيير
-        price: widget.product.price);
 
-    num updatedQuantity = 1;
     //////////////////////////////////////////////////////////////////////////////////////
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -86,7 +77,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                           ),
                           // product price======================================================================
                           Text(
-                            ' ${widget.product.price} ريال',
+                            ' ${updatedQuantity * widget.product.price} ريال',
                             style: const TextStyle(
                               fontSize: 20.0,
                               fontWeight: FontWeight.w600,
@@ -135,6 +126,16 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                       // زر اللإضافة للسلة-----------------------------------------
                       child: ElevatedButton(
                         onPressed: () async {
+                          AddProductToCart item = AddProductToCart(
+                              name: widget.product.name,
+                              detailsImage: widget.detailsImage,
+                              productId: widget.product.id,
+                              customerId: user!.uid,
+                              //هنا نحط ال ايدي حق الكستمر اللي يستعمل المتجر
+                              quantity: updatedQuantity,
+                              availableAmount:
+                                  widget.product.quantity, //تحتاج تغيير
+                              price: widget.product.price);
                           Fluttertoast.showToast(
                             msg: "تمت إضافة المنتج للسلة بنجاح",
                             toastLength: Toast.LENGTH_SHORT,
@@ -189,14 +190,30 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                         IconButton(
                             onPressed: () {
                               setState(() {
-                                if (item.quantity > 1) {
-                                  item.quantity = item.quantity - 1;
+                                if (updatedQuantity > 1) {
+                                  updatedQuantity = updatedQuantity - 1;
                                   FirebaseFirestore.instance
                                       .collection('cart')
-                                      .doc(item.productId)
-                                      .update({"quantity": item.quantity});
+                                      .doc('${widget.product.id}')
+                                      .update({"quantity": updatedQuantity});
                                 } else {
-                                  //erro message no item less than 1
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text("خطأ"),
+                                          content:
+                                              Text('أقل عدد للمنتج هو واحد'),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              child: Text("حسنا"),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            )
+                                          ],
+                                        );
+                                      });
                                 }
                               });
                             },
@@ -215,7 +232,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                               textAlign: TextAlign.center,
                               decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  hintText: '${item.quantity}',
+                                  hintText: '${updatedQuantity}',
                                   hintStyle: const TextStyle(
                                       fontWeight: FontWeight.w700,
                                       fontSize: 25,
@@ -225,12 +242,30 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                         IconButton(
                             onPressed: () {
                               setState(() {
-                                if (item.quantity < item.availableAmount) {
-                                  item.quantity = item.quantity + 1;
+                                if (updatedQuantity < widget.product.quantity) {
+                                  updatedQuantity = updatedQuantity + 1;
                                   FirebaseFirestore.instance
                                       .collection('cart')
-                                      .doc(item.productId)
-                                      .update({"quantity": item.quantity});
+                                      .doc('${widget.product.id}')
+                                      .update({"quantity": updatedQuantity});
+                                } else {
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text("خطأ"),
+                                          content: Text(
+                                              'لا يوجد كمية متاحة من المنتج أكثر من ذلك'),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              child: Text("حسنا"),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            )
+                                          ],
+                                        );
+                                      });
                                 }
                               });
                             },
