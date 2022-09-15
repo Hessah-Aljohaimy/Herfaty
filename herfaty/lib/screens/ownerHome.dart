@@ -42,17 +42,12 @@ class Body extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          height: 20,
+          height: 10,
         ),
         Padding(
           padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                height: 20,
-              ),
-            ],
           ),
         ),
         SizedBox(
