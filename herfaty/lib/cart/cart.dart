@@ -83,7 +83,7 @@ class _CartState extends State<Cart> {
                                                 style:
                                                     TextStyle(fontSize: 16.0)),
                                             Text(
-                                                " ${cItems[index].price.toString()}ر.س"),
+                                                " ${cItems[index].price.toString()}ريال "),
                                             Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.start,
@@ -237,7 +237,7 @@ class _CartState extends State<Cart> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(" المجموع : $total",
+                              Text(" المجموع : $total ريال",
                                   textAlign: TextAlign.right,
                                   style: TextStyle(
                                     fontSize: 20.0,
