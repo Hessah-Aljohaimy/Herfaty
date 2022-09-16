@@ -137,11 +137,12 @@ class _SignupCustomerState extends State<SignupCustomer> {
                                 true, _passwordTextController),
                           ),
                           Container(
-                            padding: const EdgeInsets.only(left: 85),
+                            padding: const EdgeInsets.only(left: 110),
                             child: Text(
-                              "* كلمه المرور يجب ان لا تقل عن 6 خانات",
+                              " كلمه المرور يجب ان لا تقل عن 6 خانات",
                               style: TextStyle(
-                                  color: Color.fromARGB(255, 235, 47, 26)),
+                                  color: Color.fromARGB(255, 84, 84, 84),
+                                  fontSize: 13),
                             ),
                           ),
                           SizedBox(

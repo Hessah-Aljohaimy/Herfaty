@@ -172,11 +172,12 @@ class _SignupHerafyState extends State<SignupHerafy> {
                                 true, _passwordTextController),
                           ),
                           Container(
-                            padding: const EdgeInsets.only(left: 85),
+                            padding: const EdgeInsets.only(left: 110),
                             child: Text(
-                              "* كلمه المرور يجب ان لا تقل عن 6 خانات",
+                              " كلمه المرور يجب ان لا تقل عن 6 خانات",
                               style: TextStyle(
-                                  color: Color.fromARGB(255, 235, 47, 26)),
+                                  color: Color.fromARGB(255, 84, 84, 84),
+                                  fontSize: 13),
                             ),
                           ),
                           SizedBox(
@@ -307,11 +308,12 @@ class _SignupHerafyState extends State<SignupHerafy> {
                                 _PhoneNumberTextEditingController),
                           ),
                           Container(
-                            padding: const EdgeInsets.only(left: 85),
+                            padding: const EdgeInsets.only(left: 100),
                             child: Text(
-                              "*رقم الجوال يجب أن يبدأ بـ(05) لعشرة أرقام",
+                              "رقم الجوال يجب أن يبدأ بـ(05) لعشرة أرقام",
                               style: TextStyle(
-                                  color: Color.fromARGB(255, 235, 47, 26)),
+                                  color: Color.fromARGB(255, 86, 86, 86),
+                                  fontSize: 13),
                             ),
                           ),
                           SizedBox(
