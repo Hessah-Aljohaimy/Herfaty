@@ -6,6 +6,7 @@ import 'package:herfaty/AddProductToCart.dart';
 import 'package:herfaty/Product1.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:herfaty/widgets/ExpandedWidget.dart';
 //import 'package:herfaty/ProductDetailsBody.dart';
 
 class CustomerProdectDetails extends StatefulWidget {
@@ -57,7 +58,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      //product image=====================================================================
+                      // image=====================================================================
                       Center(
                         child: ProductImage(
                           size: size,
@@ -75,7 +76,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                               color: Color.fromARGB(255, 0, 0, 0),
                             ),
                           ),
-                          // product price======================================================================
+                          // price======================================================================
                           Text(
                             ' ${updatedQuantity * widget.product.price} ريال',
                             style: const TextStyle(
@@ -103,15 +104,17 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                   ),
                   child: Expanded(
                     child: SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
-                      child: Text(
-                        widget.product.description,
-                        style: const TextStyle(
-                          fontSize: 18.0,
-                          color: Colors.white,
+                        scrollDirection: Axis.vertical,
+                        child: ExpandedWidget(text: widget.product.description)
+
+                        // Text(
+                        //   widget.product.description,
+                        //   style: const TextStyle(
+                        //     fontSize: 18.0,
+                        //     color: Colors.white,
+                        //   ),
+                        // ),
                         ),
-                      ),
-                    ),
                   ),
                 ),
                 // const Spacer(),
@@ -227,8 +230,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                               customerId: user!.uid,
                               //هنا نحط ال ايدي حق الكستمر اللي يستعمل المتجر
                               quantity: updatedQuantity,
-                              availableAmount:
-                                  widget.product.quantity, //تحتاج تغيير
+                              availableAmount: widget.product.quantity,
                               price: widget.product.price);
                           Fluttertoast.showToast(
                             msg: "تمت إضافة المنتج للسلة بنجاح",
