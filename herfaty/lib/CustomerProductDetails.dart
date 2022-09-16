@@ -320,7 +320,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
       ),
       centerTitle: false,
       title: const Text(
-        " رجوع",
+        "",
         style: TextStyle(
           fontSize: 20.0,
           fontWeight: FontWeight.w600,
