@@ -114,74 +114,14 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                     ),
                   ),
                 ),
-                const Spacer(),
+                // const Spacer(),
                 //(أضافة إلى السلة)============================================================//
                 //////////////////////////////////////////////////////////////////////////////////
                 /////=============================================================================
                 //////////////////////////////////////////////////////////////////////////////////
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Container(
-                      // زر اللإضافة للسلة-----------------------------------------
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          AddProductToCart item = AddProductToCart(
-                              name: widget.product.name,
-                              detailsImage: widget.detailsImage,
-                              productId: widget.product.id,
-                              customerId: user!.uid,
-                              //هنا نحط ال ايدي حق الكستمر اللي يستعمل المتجر
-                              quantity: updatedQuantity,
-                              availableAmount:
-                                  widget.product.quantity, //تحتاج تغيير
-                              price: widget.product.price);
-                          Fluttertoast.showToast(
-                            msg: "تمت إضافة المنتج للسلة بنجاح",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.CENTER,
-                            timeInSecForIosWeb: 3,
-                            backgroundColor: Color.fromARGB(255, 26, 96, 91),
-                            textColor: Colors.white,
-                            fontSize: 18.0,
-                          );
-                          await Future.delayed(const Duration(seconds: 1), () {
-                            Navigator.pop(context);
-                          });
-
-                          createCartItem(item);
-/*
-                          item.availableAmount = item.availableAmount - 1;
-                          
-                          String idToBeUpdated = item.productId;
-
-                          //update available amount of the product in the product collection
-                          final updateAvailableAmount = FirebaseFirestore
-                              .instance
-                              .collection('Products')
-                              .doc("${idToBeUpdated}");
-                          updateAvailableAmount.update({'avalibleAmount': 20});*/
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 30,
-                            vertical: 6,
-                          ),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15.0)),
-                        ),
-                        child: const Text(
-                          'أضف إلى السلة',
-                          style: TextStyle(
-                            fontSize: 22.0,
-                            fontWeight: FontWeight.w900,
-                            color: kPrimaryColor,
-                          ),
-                        ),
-                      ),
-                    ),
-
                     ////////////////////////////////////////////////////////////////////////////////
                     ///
                     Row(
@@ -223,8 +163,8 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                               size: 35,
                             )),
                         Container(
-                            width: 44.0,
-                            height: 44.0,
+                            width: 37.0,
+                            height: 47.0,
                             padding: EdgeInsets.only(top: 22.0),
                             color: kPrimaryColor,
                             child: TextField(
@@ -275,6 +215,65 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                               size: 35,
                             )),
                       ],
+                    ),
+                    Container(
+                      // زر اللإضافة للسلة-----------------------------------------
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          AddProductToCart item = AddProductToCart(
+                              name: widget.product.name,
+                              detailsImage: widget.detailsImage,
+                              productId: widget.product.id,
+                              customerId: user!.uid,
+                              //هنا نحط ال ايدي حق الكستمر اللي يستعمل المتجر
+                              quantity: updatedQuantity,
+                              availableAmount:
+                                  widget.product.quantity, //تحتاج تغيير
+                              price: widget.product.price);
+                          Fluttertoast.showToast(
+                            msg: "تمت إضافة المنتج للسلة بنجاح",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 3,
+                            backgroundColor: Color.fromARGB(255, 26, 96, 91),
+                            textColor: Colors.white,
+                            fontSize: 18.0,
+                          );
+                          await Future.delayed(const Duration(seconds: 1), () {
+                            Navigator.pop(context);
+                          });
+
+                          createCartItem(item);
+/*
+                          item.availableAmount = item.availableAmount - 1;
+                          
+                          String idToBeUpdated = item.productId;
+
+                          //update available amount of the product in the product collection
+                          final updateAvailableAmount = FirebaseFirestore
+                              .instance
+                              .collection('Products')
+                              .doc("${idToBeUpdated}");
+                          updateAvailableAmount.update({'avalibleAmount': 20});*/
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 30,
+                            vertical: 6,
+                          ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25.0)),
+                        ),
+                        child: const Text(
+                          'أضف إلى السلة',
+                          style: TextStyle(
+                            fontSize: 22.0,
+                            fontWeight: FontWeight.w900,
+                            color: kPrimaryColor,
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
