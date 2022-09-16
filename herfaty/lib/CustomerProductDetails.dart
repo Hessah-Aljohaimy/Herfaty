@@ -105,16 +105,8 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                   child: Expanded(
                     child: SingleChildScrollView(
                         scrollDirection: Axis.vertical,
-                        child: ExpandedWidget(text: widget.product.description)
-
-                        // Text(
-                        //   widget.product.description,
-                        //   style: const TextStyle(
-                        //     fontSize: 18.0,
-                        //     color: Colors.white,
-                        //   ),
-                        // ),
-                        ),
+                        child:
+                            ExpandedWidget(text: widget.product.description)),
                   ),
                 ),
                 // const Spacer(),
