@@ -40,28 +40,19 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-     
       children: [
-          SizedBox(
-                            height: 20,
-                          ),
+        SizedBox(
+          height: 10,
+        ),
         Padding(
           padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("الصفحة الرئيسية ",
-                  style: TextStyle(
-                      color: kPrimaryColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 22
-                       ,fontFamily: "Tajawal")),
-            ],
           ),
         ),
-          SizedBox(
-                            height: 20,
-                          ),
+        SizedBox(
+          height: 20,
+        ),
       ],
     );
   }
@@ -78,7 +69,6 @@ class ownerServicesCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-        
         // Within the SecondRoute widget
         padding: const EdgeInsets.all(10),
 
@@ -108,7 +98,10 @@ class ownerServicesCard extends StatelessWidget {
             ),
             Text(ownerService.name,
                 style: TextStyle(
-                    color: kPrimaryColor, fontWeight: FontWeight.bold ,fontFamily: "Tajawal",fontSize: 16)),
+                    color: kPrimaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "Tajawal",
+                    fontSize: 16)),
           ],
         ),
       ),
@@ -144,14 +137,13 @@ class AppBar extends StatelessWidget {
       ),
       child: Column(
         children: [
-            SizedBox(
-                            height: 25,
-                          ),
+          SizedBox(
+            height: 25,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              
               // ignore: prefer_const_constructors
               Text(
                 "مرحباً بكَ أيها الحِرَفِيّ",
