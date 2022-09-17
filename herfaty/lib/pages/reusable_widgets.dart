@@ -190,11 +190,9 @@ TextFormField reusableTextFieldForName(String text, IconData icon,
           .hasMatch(value)) {
         return "أدخل اسم بلا أرقام ورموز";
       }
-      if (value.length <= 2) {
-        return "أدخل اسم اكبر من حرفين";
-      }
-      if (value.length <= 1) {
-        return "أدخل اسم مكون أكثر من حرف";
+
+      if (value.length >= 70) {
+        return "الاسم المدخل طويل جدا";
       }
 
       return null;
