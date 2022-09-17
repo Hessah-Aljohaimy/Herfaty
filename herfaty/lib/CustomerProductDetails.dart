@@ -148,24 +148,8 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                                         .doc('${widget.product.id}')
                                         .update({"quantity": updatedQuantity});
                                   } else {
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: Text("خطأ"),
-                                          content:
-                                              Text('أقل عدد للمنتج هو واحد'),
-                                          actions: <Widget>[
-                                            TextButton(
-                                              child: Text("حسنا"),
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                            )
-                                          ],
-                                        );
-                                      },
-                                    );
+                                    ShowDialogMethod(
+                                        context, "أقل عدد للمنتج هو واحد");
                                   }
                                 },
                               );
@@ -204,23 +188,8 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                                         .doc('${widget.product.id}')
                                         .update({"quantity": updatedQuantity});
                                   } else {
-                                    showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            title: Text("خطأ"),
-                                            content: Text(
-                                                'لا توجد كمية متاحة من المنتج أكثر من ذلك'),
-                                            actions: <Widget>[
-                                              TextButton(
-                                                child: Text("حسنا"),
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                              )
-                                            ],
-                                          );
-                                        });
+                                    ShowDialogMethod(context,
+                                        "لا توجد كمية متاحة من المنتج أكثر من ذلك");
                                   }
                                 },
                               );
@@ -299,6 +268,26 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<dynamic> ShowDialogMethod(BuildContext context, String textToBeShown) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("خطأ"),
+          content: Text(textToBeShown),
+          actions: <Widget>[
+            TextButton(
+              child: Text("حسنا"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      },
     );
   }
 

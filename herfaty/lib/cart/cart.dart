@@ -93,30 +93,9 @@ class _CartState extends State<Cart> {
                                                         if (cItems[index]
                                                                 .quantity ==
                                                             1) {
-                                                          showDialog(
-                                                              context: context,
-                                                              builder:
-                                                                  (BuildContext
-                                                                      context) {
-                                                                return AlertDialog(
-                                                                  title: Text(
-                                                                      "خطأ"),
-                                                                  content: Text(
-                                                                      'أقل عدد للمنتج هو واحد'),
-                                                                  actions: <
-                                                                      Widget>[
-                                                                    TextButton(
-                                                                      child: Text(
-                                                                          "حسنا"),
-                                                                      onPressed:
-                                                                          () {
-                                                                        Navigator.of(context)
-                                                                            .pop();
-                                                                      },
-                                                                    )
-                                                                  ],
-                                                                );
-                                                              });
+                                                          ShowDialogMethod(
+                                                              context,
+                                                              "أقل عدد للمنتج هو واحد");
                                                         } else if (cItems[index]
                                                                 .quantity >
                                                             1) {
@@ -195,30 +174,9 @@ class _CartState extends State<Cart> {
                                                                       .quantity) +
                                                               total;
                                                         } else {
-                                                          showDialog(
-                                                              context: context,
-                                                              builder:
-                                                                  (BuildContext
-                                                                      context) {
-                                                                return AlertDialog(
-                                                                  title: Text(
-                                                                      "خطأ"),
-                                                                  content: Text(
-                                                                      'لا يوجد كمية متاحة من المنتج أكثر من ذلك'),
-                                                                  actions: <
-                                                                      Widget>[
-                                                                    TextButton(
-                                                                      child: Text(
-                                                                          "حسنا"),
-                                                                      onPressed:
-                                                                          () {
-                                                                        Navigator.of(context)
-                                                                            .pop();
-                                                                      },
-                                                                    )
-                                                                  ],
-                                                                );
-                                                              });
+                                                          ShowDialogMethod(
+                                                              context,
+                                                              "لا توجد كمية متاحة من المنتج أكثر من ذلك");
                                                         }
                                                       });
                                                     },
@@ -409,4 +367,24 @@ num calculatTotal(var list) {
     finalTotal += (list[i].price * list[i].quantity);
   }
   return finalTotal;
+}
+
+Future<dynamic> ShowDialogMethod(BuildContext context, String textToBeShown) {
+  return showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("خطأ"),
+        content: Text(textToBeShown),
+        actions: <Widget>[
+          TextButton(
+            child: Text("حسنا"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          )
+        ],
+      );
+    },
+  );
 }
