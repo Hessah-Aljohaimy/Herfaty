@@ -28,7 +28,7 @@ Future resetPassword() async{
  Fluttertoast.showToast(
                                       msg: "تم إرسال رسالة إعادة تعيين كلمة المرور على بريدك الإلكتروني",
                                       toastLength: Toast.LENGTH_SHORT,
-                                      gravity: ToastGravity.BOTTOM,
+                                      gravity: ToastGravity.TOP,
                                       timeInSecForIosWeb: 3,
                                       backgroundColor:
                                             Color.fromARGB(255, 26, 96, 91),
@@ -62,7 +62,7 @@ Navigator.pushNamed(context, "/login");
  Fluttertoast.showToast(
                                       msg: "البريد الإلكتروني غير موجود",
                                       toastLength: Toast.LENGTH_SHORT,
-                                      gravity: ToastGravity.BOTTOM,
+                                      gravity: ToastGravity.TOP,
                                       timeInSecForIosWeb: 3,
                                       backgroundColor:
                                           Color.fromARGB(255, 156, 30, 21),
