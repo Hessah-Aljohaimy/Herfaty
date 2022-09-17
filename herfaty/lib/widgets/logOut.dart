@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:herfaty/main.dart';
-import 'package:herfaty/pages/welcome.dart';
+import 'package:herfaty/pages/login.dart';
 
 import '../constants/color.dart';
 
@@ -33,7 +33,7 @@ class logOutButton extends StatelessWidget {
                           FirebaseAuth.instance.signOut();
                           Navigator.of(context, rootNavigator: true)
                               .pushReplacement(MaterialPageRoute(
-                                  builder: (context) => new Welcome()));
+                                  builder: (context) => new login()));
                         },
                       ),
                       TextButton(

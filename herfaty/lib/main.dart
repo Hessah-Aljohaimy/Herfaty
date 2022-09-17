@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
       initialRoute: "/",
       routes: {
         "/": (context) => const Splash(),
-        "/welcome": (context) => const Welcome(),
+        // "/welcome": (context) => const Welcome(),
         "/login": (context) => const login(),
         "/forget_password": (context) => const forget_password(),
         "/home_screen_customer": (context) => const nav(),
