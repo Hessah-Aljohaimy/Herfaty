@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/pages/login.dart';
 import 'package:herfaty/pages/reusable_widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,42 +23,69 @@ Future resetPassword() async{
          if (_formKey.currentState!.validate()) {
       await  FirebaseAuth.instance.sendPasswordResetEmail(email: _emailTextController.text.trim());
          _emailTextController.clear();
-                        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text("إعادة تعيين كلمة المرور"),
-              content: Text('تم إرسال رسالة إعادة تعيين كلمة المرور إلى بريدك الإلكتروني'),
-              actions: <Widget>[
-                TextButton(
-                  child: Text("حسنا"),
-                  onPressed: () {
-                                       Navigator.of(context).pop();
-                  },
-                )
-              ],
-            );
-          }); }
+
+
+ Fluttertoast.showToast(
+                                      msg: "تم إرسال رسالة إعادة تعيين كلمة المرور على بريدك الإلكتروني",
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.BOTTOM,
+                                      timeInSecForIosWeb: 3,
+                                      backgroundColor:
+                                            Color.fromARGB(255, 26, 96, 91),
+                                      textColor: Colors.white,
+                                      fontSize: 18.0,
+                                    );
+Navigator.pushNamed(context, "/login");
+
+          //               showDialog(
+          // context: context,
+          // builder: (BuildContext context) {
+          //   return AlertDialog(
+          //     title: Text("إعادة تعيين كلمة المرور"),
+          //     content: Text('تم إرسال رسالة إعادة تعيين كلمة المرور إلى بريدك الإلكتروني'),
+          //     actions: <Widget>[
+          //       TextButton(
+          //         child: Text("حسنا"),
+          //         onPressed: () {
+          //                              Navigator.of(context).pop();
+          //         },
+          //       )
+          //     ],
+          //   );
+          // }); 
+          }
       }
       on FirebaseAuthException catch(e){
 
- showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-               title: Text("خطأ"),
-              content: Text('البريد الإلكتروني غير موجود'),
-              actions: <Widget>[
-                TextButton(
-                  child: Text("حسنا"),
-                  onPressed: () {
-                                       Navigator.of(context).pop();
-                  },
-                )
-              ],
-            );
-          }
-          );
+
+
+ Fluttertoast.showToast(
+                                      msg: "البريد الإلكتروني غير موجود",
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.BOTTOM,
+                                      timeInSecForIosWeb: 3,
+                                      backgroundColor:
+                                          Color.fromARGB(255, 156, 30, 21),
+                                      textColor: Colors.white,
+                                      fontSize: 18.0,
+                                    );
+//  showDialog(
+//           context: context,
+//           builder: (BuildContext context) {
+//             return AlertDialog(
+//                title: Text("خطأ"),
+//               content: Text('البريد الإلكتروني غير موجود'),
+//               actions: <Widget>[
+//                 TextButton(
+//                   child: Text("حسنا"),
+//                   onPressed: () {
+//                                        Navigator.of(context).pop();
+//                   },
+//                 )
+//               ],
+//             );
+//           }
+//           );
       }
     }
     

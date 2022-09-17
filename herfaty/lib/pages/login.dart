@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/models/shopOwnerModel.dart';
 import 'package:herfaty/pages/reusable_widgets.dart';
 import 'package:flutter/material.dart';
@@ -90,7 +91,7 @@ class _login extends State<login> {
                           ),
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 60),
-                            child: reusableTextField("كلمة المرور", Icons.lock,
+                            child:reusableTextFieldForLgin("كلمة المرور", Icons.lock,
                                 true, _passwordTextController),
                           ),
                           SizedBox(
@@ -159,23 +160,34 @@ class _login extends State<login> {
 
                                   }
                                 } catch (e, stack) {
-                                  showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: Text("خطأ"),
-                                          content: Text(
-                                              'البريد الإلكتروني أو كلمة المرور غير صحيح، حاول مجددا'),
-                                          actions: <Widget>[
-                                            TextButton(
-                                              child: Text("حسنا"),
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                            )
-                                          ],
-                                        );
-                                      });
+
+                                       Fluttertoast.showToast(
+                                      msg: "البريد الإلكتروني أو كلمة المرور غير صحيحه",
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.BOTTOM,
+                                      timeInSecForIosWeb: 3,
+                                      backgroundColor:
+                                          Color.fromARGB(255, 156, 30, 21),
+                                      textColor: Colors.white,
+                                      fontSize: 18.0,
+                                    );
+                                  // showDialog(
+                                  //     context: context,
+                                  //     builder: (BuildContext context) {
+                                  //       return AlertDialog(
+                                  //         title: Text("خطأ"),
+                                  //         content: Text(
+                                  //             'البريد الإلكتروني أو كلمة المرور غير صحيح، حاول مجددا'),
+                                  //         actions: <Widget>[
+                                  //           TextButton(
+                                  //             child: Text("حسنا"),
+                                  //             onPressed: () {
+                                  //               Navigator.of(context).pop();
+                                  //             },
+                                  //           )
+                                  //         ],
+                                  //       );
+                                  //     });
                                 }
                               }
                             },
