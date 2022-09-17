@@ -31,11 +31,12 @@ class _ExpandedWidgetState extends State<ExpandedWidget> {
 
   Container shortTextMethod() {
     return Container(
-      padding: EdgeInsets.only(bottom: 20),
+      padding: EdgeInsets.only(bottom: 17),
       child: Text(
         widget.text,
         style: TextStyle(
-          fontSize: 18.0,
+          fontSize: 18.5,
+          fontWeight: FontWeight.w700,
           color: Colors.white,
         ),
       ),
@@ -51,6 +52,7 @@ class _ExpandedWidgetState extends State<ExpandedWidget> {
             flag ? firstHalf : widget.text,
             style: TextStyle(
               fontSize: 18.0,
+              fontWeight: FontWeight.w500,
               color: Colors.white,
             ),
           ),

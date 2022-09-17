@@ -91,11 +91,11 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                                 ),
                               ),
                               Text(
-                                'الكمية المتوفرة: ${widget.product.quantity}',
+                                ' الكمية: ${widget.product.quantity} / ${updatedQuantity} ',
                                 style: const TextStyle(
                                   fontSize: 18.0,
                                   fontWeight: FontWeight.w600,
-                                  color: Color.fromARGB(255, 114, 111, 111),
+                                  color: Color.fromARGB(255, 86, 86, 86),
                                 ),
                               ),
                             ],
@@ -130,7 +130,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                 /////=============================================================================
                 //////////////////////////////////////////////////////////////////////////////////
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     ////////////////////////////////////////////////////////////////////////////////
                     ///
@@ -173,10 +173,10 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                             icon: Icon(
                               Icons.remove_circle_outline,
                               color: Colors.white,
-                              size: 35,
+                              size: 26,
                             )),
                         Container(
-                          width: 37.0,
+                          width: 28.0,
                           height: 47.0,
                           padding: EdgeInsets.only(top: 22.0),
                           color: kPrimaryColor,
@@ -188,7 +188,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                                 hintText: '${updatedQuantity}',
                                 hintStyle: const TextStyle(
                                     fontWeight: FontWeight.w700,
-                                    fontSize: 25,
+                                    fontSize: 24,
                                     color: Color.fromARGB(255, 255, 255, 255))),
                           ),
                         ),
@@ -228,7 +228,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                             icon: Icon(
                               Icons.add_circle_outline,
                               color: Colors.white,
-                              size: 35,
+                              size: 26,
                             )),
                       ],
                     ),
@@ -274,8 +274,8 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 30,
-                            vertical: 6,
+                            horizontal: 26,
+                            vertical: 3,
                           ),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(25.0)),
@@ -283,7 +283,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                         child: const Text(
                           'أضف إلى السلة',
                           style: TextStyle(
-                            fontSize: 22.0,
+                            fontSize: 20.0,
                             fontWeight: FontWeight.w900,
                             color: kPrimaryColor,
                           ),
