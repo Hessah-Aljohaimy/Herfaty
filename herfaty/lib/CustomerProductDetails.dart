@@ -7,7 +7,6 @@ import 'package:herfaty/Product1.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/widgets/ExpandedWidget.dart';
-//import 'package:herfaty/ProductDetailsBody.dart';
 
 class CustomerProdectDetails extends StatefulWidget {
   final Product1 product;
@@ -66,24 +65,40 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                         ),
                       ),
                       Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //For Column:
+                        // mainAxisAlignment = Vertical Axis
+                        // crossAxisAlignment = Horizontal Axis
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             widget.product.name,
                             style: const TextStyle(
-                              fontSize: 24.0,
+                              fontSize: 26.0,
                               fontWeight: FontWeight.w600,
                               color: Color.fromARGB(255, 0, 0, 0),
                             ),
                           ),
                           // price======================================================================
-                          Text(
-                            ' ${updatedQuantity * widget.product.price} ريال',
-                            style: const TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.orange,
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                ' ${updatedQuantity * widget.product.price} ريال',
+                                style: const TextStyle(
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.orange,
+                                ),
+                              ),
+                              Text(
+                                'الكمية المتوفرة: ${widget.product.quantity}',
+                                style: const TextStyle(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.w600,
+                                  color: Color.fromARGB(255, 114, 111, 111),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -124,15 +139,16 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                       children: [
                         IconButton(
                             onPressed: () {
-                              setState(() {
-                                if (updatedQuantity > 1) {
-                                  updatedQuantity = updatedQuantity - 1;
-                                  FirebaseFirestore.instance
-                                      .collection('cart')
-                                      .doc('${widget.product.id}')
-                                      .update({"quantity": updatedQuantity});
-                                } else {
-                                  showDialog(
+                              setState(
+                                () {
+                                  if (updatedQuantity > 1) {
+                                    updatedQuantity = updatedQuantity - 1;
+                                    FirebaseFirestore.instance
+                                        .collection('cart')
+                                        .doc('${widget.product.id}')
+                                        .update({"quantity": updatedQuantity});
+                                  } else {
+                                    showDialog(
                                       context: context,
                                       builder: (BuildContext context) {
                                         return AlertDialog(
@@ -148,9 +164,11 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                                             )
                                           ],
                                         );
-                                      });
-                                }
-                              });
+                                      },
+                                    );
+                                  }
+                                },
+                              );
                             },
                             icon: Icon(
                               Icons.remove_circle_outline,
@@ -158,51 +176,54 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                               size: 35,
                             )),
                         Container(
-                            width: 37.0,
-                            height: 47.0,
-                            padding: EdgeInsets.only(top: 22.0),
-                            color: kPrimaryColor,
-                            child: TextField(
-                              enabled: false,
-                              textAlign: TextAlign.center,
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: '${updatedQuantity}',
-                                  hintStyle: const TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 25,
-                                      color:
-                                          Color.fromARGB(255, 255, 255, 255))),
-                            )),
+                          width: 37.0,
+                          height: 47.0,
+                          padding: EdgeInsets.only(top: 22.0),
+                          color: kPrimaryColor,
+                          child: TextField(
+                            enabled: false,
+                            textAlign: TextAlign.center,
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: '${updatedQuantity}',
+                                hintStyle: const TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 25,
+                                    color: Color.fromARGB(255, 255, 255, 255))),
+                          ),
+                        ),
                         IconButton(
                             onPressed: () {
-                              setState(() {
-                                if (updatedQuantity < widget.product.quantity) {
-                                  updatedQuantity = updatedQuantity + 1;
-                                  FirebaseFirestore.instance
-                                      .collection('cart')
-                                      .doc('${widget.product.id}')
-                                      .update({"quantity": updatedQuantity});
-                                } else {
-                                  showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: Text("خطأ"),
-                                          content: Text(
-                                              'لا يوجد كمية متاحة من المنتج أكثر من ذلك'),
-                                          actions: <Widget>[
-                                            TextButton(
-                                              child: Text("حسنا"),
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                            )
-                                          ],
-                                        );
-                                      });
-                                }
-                              });
+                              setState(
+                                () {
+                                  if (updatedQuantity <
+                                      widget.product.quantity) {
+                                    updatedQuantity = updatedQuantity + 1;
+                                    FirebaseFirestore.instance
+                                        .collection('cart')
+                                        .doc('${widget.product.id}')
+                                        .update({"quantity": updatedQuantity});
+                                  } else {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: Text("خطأ"),
+                                            content: Text(
+                                                'لا توجد كمية متاحة من المنتج أكثر من ذلك'),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                child: Text("حسنا"),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                              )
+                                            ],
+                                          );
+                                        });
+                                  }
+                                },
+                              );
                             },
                             icon: Icon(
                               Icons.add_circle_outline,
@@ -286,7 +307,10 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
         .collection('cart')
         .doc("${cartItem.productId}");
     final json = cartItem.toJson();
-    await docCartItem.set(json);
+    await docCartItem.set(
+      json,
+      // SetOptions(merge: true)
+    );
   }
 
   Future updateProductAvailableAmount(AddProductToCart cartItem) async {
