@@ -292,9 +292,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
   }
 
   Future createCartItem(AddProductToCart cartItem) async {
-    final docCartItem = FirebaseFirestore.instance
-        .collection('cart')
-        .doc("${cartItem.productId}");
+    final docCartItem = FirebaseFirestore.instance.collection('cart').doc();
     final json = cartItem.toJson();
     await docCartItem.set(
       json,
