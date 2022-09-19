@@ -46,6 +46,7 @@ dependencies:
   image_picker: ^0.8.5+3
   persistent_bottom_nav_bar: any
   style_random: ^0.0.1+1
+  flutter_local_notifications:
 
 dev_dependencies:
   # The "flutter_lints" package below contains a set of recommended lints to
