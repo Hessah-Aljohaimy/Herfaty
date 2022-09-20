@@ -8,7 +8,8 @@ import 'package:herfaty/pages/welcome.dart';
 import 'package:herfaty/screens/customerHome.dart';
 import 'package:herfaty/screens/ownerHome.dart';
 import 'package:herfaty/widgets/logOut.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class navOwner extends StatelessWidget {
   const navOwner({super.key});

@@ -5,7 +5,8 @@ import 'package:herfaty/cart/cart.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/screens/customerHome.dart';
 import 'package:herfaty/widgets/logOut.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class nav extends StatelessWidget {
   const nav({super.key});

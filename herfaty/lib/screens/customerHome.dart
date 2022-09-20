@@ -7,8 +7,6 @@ import 'package:herfaty/widgets/profile_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-
 import '../CustomerProductsList.dart';
 
 class customerHomeScreen extends StatefulWidget {
@@ -43,31 +41,28 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-         SizedBox(
-                            height: 20,
-                          ),
+        SizedBox(
+          height: 20,
+        ),
         Padding(
           padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
-          
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              
               Text(
                 "تصنيفات المنتجات",
                 style: TextStyle(
                     color: kPrimaryColor,
                     fontWeight: FontWeight.bold,
-                    fontSize: 22
-                    ,fontFamily: "Tajawal"),
+                    fontSize: 22,
+                    fontFamily: "Tajawal"),
               ),
             ],
           ),
-          
         ),
-         SizedBox(
-                            height: 20,
-                          ),
+        SizedBox(
+          height: 20,
+        ),
       ],
     );
   }
@@ -111,7 +106,10 @@ class CategoryCard extends StatelessWidget {
             ),
             Text(category.name,
                 style: TextStyle(
-                    color: kPrimaryColor, fontWeight: FontWeight.bold  ,fontFamily: "Tajawal",fontSize: 16)),
+                    color: kPrimaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "Tajawal",
+                    fontSize: 16)),
             /*Text(
               "${category.noOfProducts.toString()} منتج",
               style: Theme.of(context).textTheme.bodySmall,
@@ -150,21 +148,20 @@ class AppBar extends StatelessWidget {
       ),
       child: Column(
         children: [
-           SizedBox(
-                            height: 25,
-                          ),
+          SizedBox(
+            height: 25,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              
               Text(
                 "مرحباً بكَ أيها المُشتَرٍي",
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 25
-                     ,fontFamily: "Tajawal"),
+                    fontSize: 25,
+                    fontFamily: "Tajawal"),
               ),
 
               //profile icon
