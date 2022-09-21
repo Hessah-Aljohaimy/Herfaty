@@ -34,31 +34,28 @@ class _notificationClassState extends State<notificationClass> {
 
   void listenToDB() {
     print("the notification form firestore method was called");
-    var orderStatus;
 
     CollectionReference reference =
         FirebaseFirestore.instance.collection('orders');
 
     reference.snapshots().listen((querySnapshot) {
-      querySnapshot.docChanges.forEach((change) async {
-        DocumentSnapshot documentSnapshot;
-        var a =
-            await FirebaseFirestore.instance.collection('orders').doc().get();
+      querySnapshot.docChanges.forEach((change) {
+        if (change.type == DocumentChangeType.added) {
+          for (var index = 0; index < querySnapshot.size; index++) {
+            var data = querySnapshot.docs.elementAt(index).data() as Map;
+            var notificationStatus = data["notification"];
+            var docId = data["docId"];
+            print(notificationStatus);
+            print(index);
 
-        if (a.exists) {
-          print("document exists");
-          reference.doc().get().then((value) {
-            documentSnapshot = value; // we get the document here
-            orderStatus = documentSnapshot['status'];
-          });
-          if (change.type == DocumentChangeType.added &&
-              orderStatus == "ready") {
-            print("true condition");
-            createNotification(
-                0, "a new order", "you have a new order, tap to view", "");
+            if (notificationStatus == "notPushed") {
+              print("pushinnnng الحمد لله ===========================");
+              createNotification(
+                  0, "a new order", "you have a new order, tap to view", "");
+              print(docId);
+              reference.doc('${docId}').update({"notification": "pushed"});
+            }
           }
-        } else {
-          print("document does not exist 000000000000000000000");
         }
       });
     });
