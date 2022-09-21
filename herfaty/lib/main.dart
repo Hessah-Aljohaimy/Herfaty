@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
       locale: Locale("ar", "AE"),
       initialRoute: "/",
       routes: {
-        "/": (context) => const notificationClass(),
+        "/": (context) => const Splash(),
         // "/welcome": (context) => const Welcome(),
         "/login": (context) => const login(),
         "/forget_password": (context) => const forget_password(),

@@ -54,35 +54,35 @@ class LocalNotificationService {
     );
   }
 
-  Future<void> showNotification({
-    required int id,
-    required String title,
-    required String body,
-  }) async {
-    final details = await _notificationDetails();
-    await _localNotificationService.show(id, title, body, details);
-  }
+  // Future<void> showNotification({
+  //   required int id,
+  //   required String title,
+  //   required String body,
+  // }) async {
+  //   final details = await _notificationDetails();
+  //   await _localNotificationService.show(id, title, body, details);
+  // }
 
-  Future<void> showScheduledNotification(
-      {required int id,
-      required String title,
-      required String body,
-      required int seconds}) async {
-    final details = await _notificationDetails();
-    await _localNotificationService.zonedSchedule(
-      id,
-      title,
-      body,
-      tz.TZDateTime.from(
-        DateTime.now().add(Duration(seconds: seconds)),
-        tz.local,
-      ),
-      details,
-      androidAllowWhileIdle: true,
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
-    );
-  }
+  // Future<void> showScheduledNotification(
+  //     {required int id,
+  //     required String title,
+  //     required String body,
+  //     required int seconds}) async {
+  //   final details = await _notificationDetails();
+  //   await _localNotificationService.zonedSchedule(
+  //     id,
+  //     title,
+  //     body,
+  //     tz.TZDateTime.from(
+  //       DateTime.now().add(Duration(seconds: seconds)),
+  //       tz.local,
+  //     ),
+  //     details,
+  //     androidAllowWhileIdle: true,
+  //     uiLocalNotificationDateInterpretation:
+  //         UILocalNotificationDateInterpretation.absoluteTime,
+  //   );
+  // }
 
   Future<void> showNotificationWithPayload(
       {required int id,

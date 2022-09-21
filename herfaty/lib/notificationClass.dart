@@ -47,11 +47,10 @@ class _notificationClassState extends State<notificationClass> {
             var docId = data["docId"];
             print(notificationStatus);
             print(index);
-
             if (notificationStatus == "notPushed") {
               print("pushinnnng الحمد لله ===========================");
-              createNotification(
-                  0, "a new order", "you have a new order, tap to view", "");
+              createNotification(0, "طلب جديد",
+                  "وصلك طلب جديد أيهاالحِرفيّ الصغير، اضغط لعرض الطلبات ", "");
               print(docId);
               reference.doc('${docId}').update({"notification": "pushed"});
             }
