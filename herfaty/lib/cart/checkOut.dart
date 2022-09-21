@@ -13,7 +13,7 @@ class checkOut extends StatelessWidget {
       children: [
         Text(
           ' Card Form ',
-          style: Theme.of(context).textTheme.headline1,
+          style: Theme.of(context).textTheme.headline5,
         ), // Text
         const SizedBox(height: 20),
         CardFormField(
