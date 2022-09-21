@@ -23,6 +23,8 @@ class SignupHerafy extends StatefulWidget {
 }
 
 class _SignupHerafyState extends State<SignupHerafy> {
+  DateTime todaysDate = DateTime.now();
+
   int currentStep = 0;
   List<GlobalKey<FormState>> formKeys = [
     GlobalKey<FormState>(),
@@ -211,7 +213,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
                             },
                           );
 
-                          if (pickedDate != null) {
+                          if (pickedDate != null && pickedDate != todaysDate) {
                             print(
                                 pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
                             String formattedDate =
@@ -338,7 +340,8 @@ class _SignupHerafyState extends State<SignupHerafy> {
                   ElevatedButton(
                     onPressed: () async {
                       try {
-                        if (_formKey.currentState!.validate()) {
+                        if (formKeys[0].currentState!.validate() &&
+                            formKeys[1].currentState!.validate()) {
                           await FirebaseAuth.instance
                               .createUserWithEmailAndPassword(
                                   email: _emailTextEditingController.text,
