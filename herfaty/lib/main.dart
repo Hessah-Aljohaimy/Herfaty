@@ -12,6 +12,8 @@ import 'package:herfaty/pages/signupCustomer.dart';
 import 'package:herfaty/pages/signupHerafy.dart';
 import 'package:herfaty/pages/welcomeRegestration.dart';
 import 'package:herfaty/screens/customer_base_screen.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:herfaty/notificationClass.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,7 +41,7 @@ class MyApp extends StatelessWidget {
       locale: Locale("ar", "AE"),
       initialRoute: "/",
       routes: {
-        "/": (context) => const Splash(),
+        "/": (context) => const notificationClass(),
         // "/welcome": (context) => const Welcome(),
         "/login": (context) => const login(),
         "/forget_password": (context) => const forget_password(),
