@@ -66,7 +66,7 @@ class _notificationClassState extends State<notificationClass> {
                           id: 0,
                           title: 'Notification Title',
                           body: 'Some body with payload',
-                          payload: 'payload navigation');
+                          payload: 'payload content');
                     },
                     child: const Text('Show Notification With Payload'),
                   ),
@@ -84,8 +84,7 @@ class _notificationClassState extends State<notificationClass> {
 
   void onNoticationListener(String? payload) {
     if (payload != null && payload.isNotEmpty) {
-      print('payload $payload');
-
+      print('payload: $payload');
       Navigator.push(
           context,
           MaterialPageRoute(
