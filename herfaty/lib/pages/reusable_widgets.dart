@@ -3,19 +3,14 @@ import 'package:flutter/material.dart';
 TextFormField reusableTextField(String text, IconData icon, bool isPasswordType,
     TextEditingController controller) {
   return TextFormField(
+    autovalidateMode: AutovalidateMode.onUserInteraction,
     controller: controller,
     obscureText: isPasswordType,
     enableSuggestions: !isPasswordType,
     autocorrect: !isPasswordType,
-    minLines: text == "وصف المتجر" ? 1 : 1,
-    maxLines: text == "وصف المتجر" ? 9 : 1,
-    // maxLength:text=="وصف المتجر"?140:1,
-// keyboardType:text=="وصف المتجر"?TextInputType.multiline: TextInputType.none,
-// keyboardType: text == "عمر الطفل"? TextInputType.number:TextInputType.none,
     keyboardType: isPasswordType
         ? TextInputType.visiblePassword
         : TextInputType.emailAddress,
-
     style: TextStyle(
         color: Color.fromARGB(255, 26, 96, 91), fontFamily: "Tajawal"),
     decoration: InputDecoration(
@@ -49,7 +44,6 @@ TextFormField reusableTextField(String text, IconData icon, bool isPasswordType,
             BorderSide(width: 2, color: Color.fromARGB(255, 164, 46, 46)),
       ),
     ),
-
     validator: (value) {
       if (value == null || value.isEmpty) {
         return "أدخل " + text;
@@ -70,20 +64,13 @@ TextFormField reusableTextField(String text, IconData icon, bool isPasswordType,
   );
 }
 
-TextFormField reusableTextFieldForPhone(String text, IconData icon,
-    bool isPasswordType, TextEditingController controller) {
+TextFormField reusableTextFieldForPhone(
+    String text, IconData icon, TextEditingController controller) {
   return TextFormField(
+    maxLength: 10,
+    autovalidateMode: AutovalidateMode.onUserInteraction,
     controller: controller,
-    obscureText: isPasswordType,
-    enableSuggestions: !isPasswordType,
-    autocorrect: !isPasswordType,
-    minLines: text == "وصف المتجر" ? 1 : 1,
-    maxLines: text == "وصف المتجر" ? 9 : 1,
-    // maxLength:text=="وصف المتجر"?140:1,
-// keyboardType:text=="وصف المتجر"?TextInputType.multiline: TextInputType.none,
-// keyboardType: text == "عمر الطفل"? TextInputType.number:TextInputType.none,
     keyboardType: TextInputType.phone,
-
     style: TextStyle(
         color: Color.fromARGB(255, 26, 96, 91), fontFamily: "Tajawal"),
     decoration: InputDecoration(
@@ -117,14 +104,12 @@ TextFormField reusableTextFieldForPhone(String text, IconData icon,
             BorderSide(width: 2, color: Color.fromARGB(255, 164, 46, 46)),
       ),
     ),
-
     validator: (value) {
       if (value == null || value.isEmpty) {
         return "أدخل " + text;
       }
       if (!RegExp(r"^(009665|9665|\+9665|05|5)(5|0|3|6|4|9|1|8|7)([0-9]{7})$")
-              .hasMatch(value) &&
-          !isPasswordType) {
+          .hasMatch(value)) {
         return 'أدخل رقم جوال صحيح';
       }
 
@@ -133,20 +118,15 @@ TextFormField reusableTextFieldForPhone(String text, IconData icon,
   );
 }
 
-TextFormField reusableTextFieldForName(String text, IconData icon,
-    bool isPasswordType, TextEditingController controller) {
+//////////////////////////////// Name Text Feild////////////////////////
+TextFormField reusableTextFieldForName(
+    String text, IconData icon, TextEditingController controller) {
   return TextFormField(
+    autovalidateMode: AutovalidateMode.onUserInteraction,
     controller: controller,
-    obscureText: isPasswordType,
-    enableSuggestions: !isPasswordType,
-    autocorrect: !isPasswordType,
-    minLines: text == "وصف المتجر" ? 1 : 1,
-    maxLines: text == "وصف المتجر" ? 9 : 1,
-    // maxLength:text=="وصف المتجر"?140:1,
-// keyboardType:text=="وصف المتجر"?TextInputType.multiline: TextInputType.none,
-// keyboardType: text == "عمر الطفل"? TextInputType.number:TextInputType.none,
+    minLines: text == "الاسم الثنائي" ? 1 : 1,
+    maxLength: 30,
     keyboardType: TextInputType.name,
-
     style: TextStyle(
         color: Color.fromARGB(255, 26, 96, 91), fontFamily: "Tajawal"),
     decoration: InputDecoration(
@@ -180,7 +160,6 @@ TextFormField reusableTextFieldForName(String text, IconData icon,
             BorderSide(width: 2, color: Color.fromARGB(255, 164, 46, 46)),
       ),
     ),
-
     validator: (value) {
       if (value == null || value.isEmpty) {
         return "أدخل " + text;
@@ -191,8 +170,8 @@ TextFormField reusableTextFieldForName(String text, IconData icon,
         return "أدخل اسم بلا أرقام ورموز";
       }
 
-      if (value.length >= 70) {
-        return "الاسم المدخل طويل جدا";
+      if (value.length >= 30) {
+        return " لايسمح بأكثر من 30 حرفا";
       }
 
       return null;
@@ -200,9 +179,68 @@ TextFormField reusableTextFieldForName(String text, IconData icon,
   );
 }
 
+/////////////////////////////////////// Shop name text field/////////////////////////////////////////////
+TextFormField reusableTextFieldForShopName(
+    String text, TextEditingController controller) {
+  return TextFormField(
+    autovalidateMode: AutovalidateMode.onUserInteraction,
+    controller: controller,
+    minLines: text == "الاسم الثنائي" ? 1 : 1,
+    maxLength: 30,
+    keyboardType: TextInputType.name,
+    style: TextStyle(
+        color: Color.fromARGB(255, 26, 96, 91), fontFamily: "Tajawal"),
+    decoration: InputDecoration(
+      contentPadding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 23),
+
+      labelText: text,
+      labelStyle: TextStyle(
+          color: Color.fromARGB(106, 26, 96, 91), fontFamily: "Tajawal"),
+      // floatingLabelBehavior: FloatingLabelBehavior.never,
+      fillColor: Colors.white.withOpacity(0.3),
+
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Color.fromARGB(255, 26, 96, 91)),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide:
+            BorderSide(width: 2, color: Color.fromARGB(255, 26, 96, 91)),
+      ),
+      errorStyle: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
+
+      errorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
+      ),
+
+      focusedErrorBorder: OutlineInputBorder(
+        borderSide:
+            BorderSide(width: 2, color: Color.fromARGB(255, 164, 46, 46)),
+      ),
+    ),
+    validator: (value) {
+      if (value == null || value.isEmpty) {
+        return "أدخل " + text;
+      }
+      if (!RegExp(
+              r"^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z- ][]*$")
+          .hasMatch(value)) {
+        return "أدخل اسم بلا أرقام ورموز";
+      }
+
+      if (value.length >= 30) {
+        return " لايسمح بأكثر من 30 حرفا";
+      }
+
+      return null;
+    },
+  );
+}
+
+/////////////////////////////////////Age ///////////////////////////
 TextFormField reusableTextFieldForAge(String text, IconData icon,
     bool isPasswordType, TextEditingController controller) {
   return TextFormField(
+    autovalidateMode: AutovalidateMode.onUserInteraction,
     controller: controller,
     obscureText: isPasswordType,
     enableSuggestions: !isPasswordType,
@@ -247,43 +285,25 @@ TextFormField reusableTextFieldForAge(String text, IconData icon,
       if (value == null || value.isEmpty) {
         return "أدخل " + text;
       }
-      // if (!RegExp(r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
-      //         .hasMatch(value) ) {
-      //   return 'أدخل بريد إلكتروني صحيح';
-      // }
-
-      // if (text == "كلمة المرور") {
-      //   if (value.length < 6) return "";
-      // }
 
       return null;
     },
   );
 }
 
-TextFormField reusableTextFieldDec(String text, IconData icon,
-    bool isPasswordType, TextEditingController controller) {
+//////////////////////////// Shop description Text form ////////////////////////////////
+TextFormField reusableTextFieldDec(
+    String text, TextEditingController controller) {
   return TextFormField(
+    autovalidateMode: AutovalidateMode.onUserInteraction,
     controller: controller,
-    obscureText: isPasswordType,
-    enableSuggestions: !isPasswordType,
-    autocorrect: !isPasswordType,
     minLines: text == "وصف المتجر" ? 1 : 1,
     maxLines: text == "وصف المتجر" ? 9 : 1,
     maxLength: 160,
-// keyboardType:text=="وصف المتجر"?TextInputType.multiline: TextInputType.none,
-// keyboardType: text == "عمر الطفل"? TextInputType.number:TextInputType.none,
-//keyboardType: isPasswordType ? TextInputType.visiblePassword : TextInputType.emailAddress,
-
     style: TextStyle(
         color: Color.fromARGB(255, 26, 96, 91), fontFamily: "Tajawal"),
     decoration: InputDecoration(
       contentPadding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 23),
-
-      suffix: Icon(
-        icon,
-        color: Color.fromARGB(255, 26, 96, 91),
-      ),
       labelText: text,
       labelStyle: TextStyle(
           color: Color.fromARGB(106, 26, 96, 91), fontFamily: "Tajawal"),
@@ -308,16 +328,10 @@ TextFormField reusableTextFieldDec(String text, IconData icon,
             BorderSide(width: 2, color: Color.fromARGB(255, 164, 46, 46)),
       ),
     ),
-
     validator: (value) {
       if (value == null || value.isEmpty) {
         return "أدخل " + text;
       }
-      //  if (!RegExp(
-      //                   r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
-      //               .hasMatch(value)&& !isPasswordType) {
-      //             return 'أدخل بريد إلكتروني صحيح';
-      //           }
 
       if (value.length < 6) {
         if (value.length < 6) return "أدخل وصف للمنتج لا يقل عن 6 خانات";

@@ -26,6 +26,7 @@ class _SignupCustomerState extends State<SignupCustomer> {
   @override
   Widget build(BuildContext context) {
     return Form(
+     // autovalidateMode: AutovalidateMode.onUserInteraction,
       key: _formKey,
       child: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -109,7 +110,6 @@ class _SignupCustomerState extends State<SignupCustomer> {
                             child: reusableTextFieldForName(
                                 " اسم المشتري الثنائي",
                                 Icons.person,
-                                false,
                                 _nameTextEditingController),
                           ),
 

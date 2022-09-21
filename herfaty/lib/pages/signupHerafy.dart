@@ -49,6 +49,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
   @override
   Widget build(BuildContext context) {
     return Form(
+      //autovalidateMode: AutovalidateMode.onUserInteraction,
       key: _formKey,
       child: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -136,11 +137,8 @@ class _SignupHerafyState extends State<SignupHerafy> {
                             // height: 53,
                             // padding: EdgeInsets.symmetric(horizontal: 16),
                             padding: EdgeInsets.symmetric(horizontal: 60),
-                            child: reusableTextFieldForName(
-                                "اسم الحرفي",
-                                Icons.person,
-                                false,
-                                _nameTextEditingController),
+                            child: reusableTextFieldForName("اسم الحرفي",
+                                Icons.person, _nameTextEditingController),
                           ),
 
                           SizedBox(
@@ -187,6 +185,8 @@ class _SignupHerafyState extends State<SignupHerafy> {
                               padding: EdgeInsets.symmetric(horizontal: 60),
                               child: Center(
                                   child: TextFormField(
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
                                 controller: _BODController,
                                 validator: (value) {
                                   if (value!.isEmpty) {
@@ -304,7 +304,6 @@ class _SignupHerafyState extends State<SignupHerafy> {
                             child: reusableTextFieldForPhone(
                                 "رقم الجوال",
                                 Icons.phone_android,
-                                false,
                                 _PhoneNumberTextEditingController),
                           ),
                           Container(
@@ -378,8 +377,8 @@ class _SignupHerafyState extends State<SignupHerafy> {
                             // width: 290,
                             // height: 53,
                             padding: EdgeInsets.symmetric(horizontal: 60),
-                            child: reusableTextField("اسم المتجر", Icons.shop,
-                                false, _shopnameTextEditingController),
+                            child: reusableTextFieldForShopName(
+                                "اسم المتجر", _shopnameTextEditingController),
                           ),
 
                           SizedBox(
@@ -390,10 +389,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
                             // width: 290,
                             // height: 53,
                             padding: EdgeInsets.symmetric(horizontal: 60),
-                            child: reusableTextFieldDec(
-                                "وصف المتجر",
-                                Icons.shop_2,
-                                false,
+                            child: reusableTextFieldDec("وصف المتجر",
                                 _shopdescriptionTextEditingController),
                           ),
 
