@@ -12,12 +12,18 @@ import 'package:herfaty/pages/signupCustomer.dart';
 import 'package:herfaty/pages/signupHerafy.dart';
 import 'package:herfaty/pages/welcomeRegestration.dart';
 import 'package:herfaty/screens/customer_base_screen.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
+
+import '.env';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  Stripe.publishableKey = stripePublishableKey;
+  await Stripe.instance.applySettings();
+
   runApp(const MyApp());
 }
 
