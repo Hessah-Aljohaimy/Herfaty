@@ -18,7 +18,6 @@ class _notificationClassState extends State<notificationClass> {
     service = LocalNotificationService();
     service.intialize();
     listenToNotification();
-
     super.initState();
   }
 
@@ -30,67 +29,37 @@ class _notificationClassState extends State<notificationClass> {
         title: const Text('Flutter Notification Demo'),
         centerTitle: true,
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Center(
-            child: SizedBox(
-              height: 300,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  const Text(
-                    'This is a demo of how to use local notifications in Flutter.',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  // ElevatedButton(
-                  //   onPressed: () async {
-                  //     await service.showNotification(
-                  //         id: 0,
-                  //         title: 'Notification Title',
-                  //         body: 'Some body simple');
-                  //   },
-                  //   child: const Text('Show Local Notification'),
-                  // ),
-                  // ElevatedButton(
-                  //   onPressed: () async {
-                  //     await service.showScheduledNotification(
-                  //       id: 0,
-                  //       title: 'Notification Title',
-                  //       body: 'Some body scheduled',
-                  //       seconds: 4,
-                  //     );
-                  //   },
-                  //   child: const Text('Show Scheduled Notification'),
-                  // ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      await service.showNotificationWithPayload(
-                          id: 0,
-                          title: 'Notification Title',
-                          body: 'Some body with payload',
-                          payload: 'payload content');
-                    },
-                    child: const Text('Show Notification With Payload'),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
     );
   }
 
   void listenToDB() {
     print("the notification form firestore method was called");
+    var orderStatus;
+
     CollectionReference reference =
         FirebaseFirestore.instance.collection('orders');
+
     reference.snapshots().listen((querySnapshot) {
-      querySnapshot.docChanges.forEach((change) {
-        createNotification(
-            0, "a new order", "you have a new order, tap to view", "");
+      querySnapshot.docChanges.forEach((change) async {
+        DocumentSnapshot documentSnapshot;
+        var a =
+            await FirebaseFirestore.instance.collection('orders').doc().get();
+
+        if (a.exists) {
+          print("document exists");
+          reference.doc().get().then((value) {
+            documentSnapshot = value; // we get the document here
+            orderStatus = documentSnapshot['status'];
+          });
+          if (change.type == DocumentChangeType.added &&
+              orderStatus == "ready") {
+            print("true condition");
+            createNotification(
+                0, "a new order", "you have a new order, tap to view", "");
+          }
+        } else {
+          print("document does not exist 000000000000000000000");
+        }
       });
     });
   }
