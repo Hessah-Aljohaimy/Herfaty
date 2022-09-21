@@ -26,7 +26,7 @@ class _SignupCustomerState extends State<SignupCustomer> {
   @override
   Widget build(BuildContext context) {
     return Form(
-     // autovalidateMode: AutovalidateMode.onUserInteraction,
+      // autovalidateMode: AutovalidateMode.onUserInteraction,
       key: _formKey,
       child: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -146,14 +146,9 @@ class _SignupCustomerState extends State<SignupCustomer> {
                             ),
                           ),
                           SizedBox(
-                            height: 23,
+                            height: 20,
                           ),
-                          SizedBox(
-                            height: 17,
-                          ),
-                          SizedBox(
-                            height: 17,
-                          ),
+
                           ElevatedButton(
                             onPressed: () async {
                               try {
@@ -229,7 +224,7 @@ class _SignupCustomerState extends State<SignupCustomer> {
                             ),
                           ),
                           SizedBox(
-                            height: 33,
+                            height: 23,
                           ),
 
                           Row(
