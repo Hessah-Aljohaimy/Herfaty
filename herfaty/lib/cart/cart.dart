@@ -528,13 +528,15 @@ class _CartState extends State<Cart> {
                   SizedBox(
                     height: 45,
                     child: FloatingActionButton.extended(
-                      heroTag: "btn ${Random().nextInt(10)}",
+                      heroTag: "btn ${Random().nextInt(100)}",
                       elevation: 0,
                       onPressed: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const checkOut()),
+                              builder: (context) => checkOut(
+                                  Items: cItems.toList(),
+                                  totalPrice: calculatTotal(cItems))),
                         );
                         // Add your onPressed code here!
                       },
