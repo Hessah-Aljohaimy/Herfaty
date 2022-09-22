@@ -50,11 +50,7 @@ dependencies:
   style_random: ^0.0.1+1
   flutter_bloc : ^8.0.1
   equatable : ^2.0.3
-  flutter_google_places_hoc081098: ^1.0.0-nullsafety.5
-  google_api_headers: ^1.1.1
-  google_maps_webservice: ^0.0.20-nullsafety.5
-  geocoding: ^2.0.1
-  google_maps_flutter: ^2.1.1
+  
 
 dev_dependencies:
   # The "flutter_lints" package below contains a set of recommended lints to

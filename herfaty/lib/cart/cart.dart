@@ -11,7 +11,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import "package:collection/collection.dart";
 
 import '../pages/welcome.dart';
-import 'beforeCheckOut.dart';
 
 class Cart extends StatefulWidget {
   const Cart({Key? key}) : super(key: key);
@@ -535,9 +534,7 @@ class _CartState extends State<Cart> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const beforeCheckOut()),
-
-
+                              builder: (context) => const checkOut()),
                         );
                         // Add your onPressed code here!
                       },

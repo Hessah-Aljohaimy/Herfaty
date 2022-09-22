@@ -13,7 +13,7 @@ import 'package:herfaty/pages/signupHerafy.dart';
 import 'package:herfaty/pages/welcomeRegestration.dart';
 import 'package:herfaty/screens/customer_base_screen.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:herfaty/cart/beforeCheckOut.dart';
+
 import '.env';
 
 void main() async {
@@ -55,7 +55,6 @@ class MyApp extends StatelessWidget {
         "/signupCustomer": (context) => const SignupCustomer(),
         "/signupHerfay": (context) => const SignupHerafy(),
         "/customer_base_screen": (context) => const customerBaseScreen(),
-         "/beforeCheckOut": (context) => const beforeCheckOut(),
       },
     );
   }
