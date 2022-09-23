@@ -9,7 +9,7 @@ import 'package:herfaty/models/cartModal.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import "package:collection/collection.dart";
-
+import 'package:herfaty/cart/payForm.dart';
 import '../pages/welcome.dart';
 
 class Cart extends StatefulWidget {
@@ -531,13 +531,19 @@ class _CartState extends State<Cart> {
                       heroTag: "btn ${Random().nextInt(100)}",
                       elevation: 0,
                       onPressed: () {
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => checkOut(
+                        //           Items: cItems.toList(),
+                        //           totalPrice: calculatTotal(cItems))),
+                        // );
+
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => checkOut(
-                                  Items: cItems.toList(),
-                                  totalPrice: calculatTotal(cItems))),
-                        );
+                              builder: (context) => payForm()
+                         ) );
                         // Add your onPressed code here!
                       },
                       label: const Text('دفع',

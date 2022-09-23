@@ -26,6 +26,7 @@ class checkOut extends StatelessWidget {
       child: Scaffold(
         appBar: DefaultAppBar(title: "إكمال عملية الدفع"),
         body: _buildList(Items),
+        
       ),
     ); // Column
   }
@@ -106,6 +107,10 @@ Widget _buildList(List<CartModal> list) {
     ],
   );
 }
+
+
+
+
 
 class ProductImage extends StatelessWidget {
   const ProductImage({
