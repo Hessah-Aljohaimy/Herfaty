@@ -983,6 +983,23 @@ class _SignupHerafyState extends State<SignupHerafy> {
     // ); //form
   }
 
+// initilazie Image Picker library
+  final ImagePicker _pickerr = ImagePicker();
+  var uploadImageUrl = ""; //image URL before choose pic
+// Firebase storage + ref for pic place
+  final storageRef = FirebaseStorage.instance.ref();
+
+  void uploadImageToFirebaseStorage(File file) async {
+    // Create a reference to 'images/mountains.jpg'
+    final imagesRef = storageRef
+        .child("shopOwnerLogos/${DateTime.now().millisecondsSinceEpoch}.png");
+    await imagesRef.putFile(file);
+
+    uploadImageUrl = await imagesRef.getDownloadURL();
+    //setState(() {});
+    print("uploaded:" + uploadImageUrl);
+  }
+
   Widget imageProfile() {
     return Center(
       child: Stack(children: <Widget>[
@@ -1079,7 +1096,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
 
 //logo
   void takePhoto(ImageSource source) async {
-    final pickedFile = await _picker.getImage(
+    final pickedFile = await _pickerr.getImage(
       source: source,
     );
     try {
@@ -1167,21 +1184,15 @@ class ShopOwner {
         'shopdescription': shopdescription,
         'shopname': shopname,
       };
-}
-
-// initilazie Image Picker library
-final ImagePicker _picker = ImagePicker();
-var uploadImageUrl = ""; //image URL before choose pic
-// Firebase storage + ref for pic place
-final storageRef = FirebaseStorage.instance.ref();
-
-void uploadImageToFirebaseStorage(File file) async {
-  // Create a reference to 'images/mountains.jpg'
-  final imagesRef = storageRef
-      .child("shopOwnerLogos/${DateTime.now().millisecondsSinceEpoch}.png");
-  await imagesRef.putFile(file);
-
-  uploadImageUrl = await imagesRef.getDownloadURL();
-  //setState(() {});
-  print("uploaded:" + uploadImageUrl);
+  static ShopOwner fromJson(Map<String, dynamic> json) => ShopOwner(
+        id: json['id'],
+        name: json['name'],
+        email: json['email'],
+        password: json['password'],
+        DOB: json['DOB'],
+        logo: json['logo'],
+        phone_number: json['phone_number'],
+        shopdescription: json['shopdescription'],
+        shopname: json['shopname'],
+      );
 }

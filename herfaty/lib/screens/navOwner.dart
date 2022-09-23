@@ -5,6 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:herfaty/cart/cart.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/pages/welcome.dart';
+import 'package:herfaty/profile%20screens/ShopOwnerProfile.dart';
 import 'package:herfaty/screens/customerHome.dart';
 import 'package:herfaty/screens/ownerHome.dart';
 import 'package:herfaty/widgets/logOut.dart';
@@ -37,10 +38,7 @@ class navOwner extends StatelessWidget {
   }
 
   List<Widget> screens() {
-    return [
-      ownerHomeScreen(),
-      logOutButton(),
-    ];
+    return [ownerHomeScreen(), logOutButton(), ShopOwnerProfile()];
   }
 
   List<PersistentBottomNavBarItem> navBarItems() {
@@ -53,6 +51,11 @@ class navOwner extends StatelessWidget {
       PersistentBottomNavBarItem(
           icon: const Icon(CupertinoIcons.settings),
           title: "  الإعدادت ",
+          activeColorPrimary: kPrimaryColor.withOpacity(0.9),
+          inactiveColorPrimary: CupertinoColors.systemGrey),
+      PersistentBottomNavBarItem(
+          icon: const Icon(CupertinoIcons.person),
+          title: "حسابي",
           activeColorPrimary: kPrimaryColor.withOpacity(0.9),
           inactiveColorPrimary: CupertinoColors.systemGrey),
     ];
