@@ -70,7 +70,7 @@ exports.StripePayEndpointMethodId = functions.https.onRequest ( async ( req , re
     });
 
 
-exports.StripePayEndpointMethodId = functions.https.onRequest(async (req, res) => {
+exports.StripePayEndpointIntentId = functions.https.onRequest(async (req, res) => {
     const {paymentIntentId} = req.body;
     try{
         if(paymentIntentId){
