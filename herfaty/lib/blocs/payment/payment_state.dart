@@ -20,7 +20,7 @@ PaymentState copyWith({
   CardFieldInputDetails? cardFieldInputDetails,
 })  {
   return PaymentState(
-status: status??this.status,
+status: status ?? this.status,
 cardFieldInputDetails: cardFieldInputDetails?? this.cardFieldInputDetails,
 
   );
