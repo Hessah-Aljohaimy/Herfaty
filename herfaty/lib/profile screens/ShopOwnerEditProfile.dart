@@ -16,21 +16,21 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("تعديل الحساب", style: TextStyle(color: kPrimaryColor)),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.logout, color: kPrimaryColor),
-          onPressed: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (BuildContext context) => login()));
-          },
+        appBar: AppBar(
+          title: Text("تعديل الحساب", style: TextStyle(color: kPrimaryColor)),
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          elevation: 0,
+          leading: IconButton(
+            icon: Icon(Icons.logout, color: kPrimaryColor),
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => login()));
+            },
+          ),
+          automaticallyImplyLeading: false,
+          iconTheme: IconThemeData(color: kPrimaryColor),
         ),
-        automaticallyImplyLeading: false,
-        iconTheme: IconThemeData(color: kPrimaryColor),
-      ),
-    );
+        body: Center(child: Text('Shop Owner Edit Profile page')));
   }
 }

@@ -15,6 +15,8 @@ import 'package:herfaty/profile%20screens/ShopOwnerEditProfile.dart';
 import 'package:herfaty/profile%20screens/show_alert_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../pages/welcome.dart';
+
 class ShopOwnerProfile extends StatefulWidget {
   const ShopOwnerProfile({super.key});
 
@@ -161,6 +163,8 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                   FocusScope.of(context).unfocus();
                 },
                 child: ListView(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
                   children: [
                     Expanded(
                       child: Container(
@@ -328,7 +332,14 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                           width: 10,
                         ),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ShopOwnerEditProfile()),
+                            );
+                          },
                           style: ButtonStyle(
                             backgroundColor:
                                 MaterialStateProperty.all(Color(0xff51908E)),
@@ -351,14 +362,40 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                           width: 10,
                         ),
                         ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
 // Diolog to enter the password
 
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const ShopOwnerEditProfile()),
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text("تنبيه"),
+                                  content: Text('سيتم حذف الحساب نهائيا'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: Text("حذف",
+                                          style: TextStyle(color: Colors.red)),
+                                      onPressed: () {
+//The logic of deleting an account
+
+                                        //Navigator.of(context).pop();
+                                        FirebaseAuth.instance.signOut();
+                                        Navigator.of(context,
+                                                rootNavigator: true)
+                                            .pushReplacement(MaterialPageRoute(
+                                                builder: (context) =>
+                                                    new Welcome()));
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: Text("تراجع"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    )
+                                  ],
+                                );
+                              },
                             );
                           },
                           style: ButtonStyle(

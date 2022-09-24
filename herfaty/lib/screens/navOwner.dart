@@ -9,6 +9,7 @@ import 'package:herfaty/profile%20screens/ShopOwnerProfile.dart';
 import 'package:herfaty/screens/customerHome.dart';
 import 'package:herfaty/screens/ownerHome.dart';
 import 'package:herfaty/widgets/logOut.dart';
+import 'package:herfaty/widgets/ownerSettings.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
@@ -38,7 +39,7 @@ class navOwner extends StatelessWidget {
   }
 
   List<Widget> screens() {
-    return [ownerHomeScreen(), logOutButton(), ShopOwnerProfile()];
+    return [ownerHomeScreen(), OwnerSettings(), ShopOwnerProfile()];
   }
 
   List<PersistentBottomNavBarItem> navBarItems() {

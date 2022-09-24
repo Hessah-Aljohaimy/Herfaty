@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:herfaty/main.dart';
+import 'package:herfaty/pages/login.dart';
 import 'package:herfaty/pages/welcome.dart';
+import 'package:herfaty/profile%20screens/CustomerEditProfile.dart';
 
 import '../constants/color.dart';
 import 'dart:io';
@@ -20,87 +22,199 @@ import 'package:image_picker/image_picker.dart';
 class logOutButton extends StatelessWidget {
   PickedFile? _imageFile;
 
-  final ImagePicker _picker = ImagePicker();
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  User? user;
+  var uid;
 
-  String? DOB = '';
-  String? email = '';
   String? id = '';
-  String? logo = '';
+  String? email = '';
   String? name = '';
   String? password = '';
-  String? phone_number = '';
-  String? shopdescription = '';
-  String? shopname = '';
 
-  // Future _getDataFromDatabase() async {
-  //   await FirebaseFirestore.instance
-  //       .collection("useres")
-  //       .doc(FirebaseAuth.instance.currentUser!.uid)
-  //       .get()
-  //       .then((snapshot) async {
-  //     if (snapshot.exists) {
-  //       setState(() {
-  //         DOB = snapshot.data()!["DOB"];
-  //         email = snapshot.data()!["email"];
-  //         id = snapshot.data()!["id"];
+  final CollectionReference customers =
+      FirebaseFirestore.instance.collection('customeres');
 
-  //         logo = snapshot.data()!["logo"];
-  //         name = snapshot.data()!["name"];
-  //         password = snapshot.data()!["password"];
-  //         phone_number = snapshot.data()!["phone_number"];
-  //         shopdescription = snapshot.data()!["shopdescription"];
-  //         shopname = snapshot.data()!["shopname"];
-  //       });
-  //     }
-  //   });
-  // }
+  get kPrimaryColor => null;
+
+  //Lists
+  final titles = [
+    'اسم المشتري',
+    'البريد الإلكتروني',
+    'كلمة المرور',
+  ];
+  final icons = [Icons.person, Icons.email_rounded, Icons.lock];
+
+  final ImagePicker _picker = ImagePicker();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: DefaultAppBar(title: "إعدادات الحساب"),
-      body: Text("معلوماتي "),
-      floatingActionButton: FloatingActionButton.extended(
-          heroTag: "btn1",
-          label: Text(
-            'تسجيل خروج',
-          ),
-          onPressed: () async {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: Text("تنبيه"),
-                    content: Text('سيتم تسجيل خروجك من الحساب'),
-                    actions: <Widget>[
-                      TextButton(
-                        child: Text("تسجيل خروج",
-                            style: TextStyle(color: Colors.red)),
-                        onPressed: () {
-                          //Navigator.of(context).pop();
-                          FirebaseAuth.instance.signOut();
-                          Navigator.of(context, rootNavigator: true)
-                              .pushReplacement(MaterialPageRoute(
-                                  builder: (context) => new Welcome()));
-                        },
-                      ),
-                      TextButton(
-                        child: Text("تراجع"),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      )
-                    ],
-                  );
-                });
+        appBar: AppBar(
+          title: Text("الإعدادات", style: TextStyle(color: kPrimaryColor)),
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          elevation: 0,
+          leading: IconButton(
+            icon: Icon(Icons.logout, color: kPrimaryColor),
+            onPressed: () async {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text("تنبيه"),
+                      content: Text('سيتم تسجيل خروجك من الحساب'),
+                      actions: <Widget>[
+                        TextButton(
+                          child: Text("تسجيل خروج",
+                              style: TextStyle(color: Colors.red)),
+                          onPressed: () {
+                            //Navigator.of(context).pop();
+                            FirebaseAuth.instance.signOut();
+                            Navigator.of(context, rootNavigator: true)
+                                .pushReplacement(MaterialPageRoute(
+                                    builder: (context) => new Welcome()));
+                          },
+                        ),
+                        TextButton(
+                          child: Text("تراجع"),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        )
+                      ],
+                    );
+                  });
 
-            /*Navigator.pushReplacement(context,
+              /*Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (BuildContext context) {
+              return Welcome();
+            }));*/
+            },
+          ),
+          automaticallyImplyLeading: false,
+          iconTheme: IconThemeData(color: kPrimaryColor),
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Row(
+                  children: [
+                    Text(
+                      "معلومات المشتري",
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 79, 75, 75),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 22),
+                    ),
+                    Icon(
+                      Icons.person,
+                      color: Color.fromARGB(255, 79, 75, 75),
+                      size: 28.0,
+                    )
+                  ],
+                ),
+                ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: titles.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        child: ListTile(
+                          title: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                titles[index],
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 20,
+                                    color: kPrimaryColor),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text('this is a test '),
+                            ],
+                          ),
+                          leading: Icon(
+                            icons[index],
+                            color: Color.fromARGB(248, 198, 149, 100),
+                          ),
+                        ),
+                      );
+                    }),
+                SizedBox(
+                  height: 5,
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 50,
+                    ),
+                    FloatingActionButton.extended(
+                        heroTag: "btn1",
+                        label: Text(
+                          'تعديل البيانات',
+                        ),
+                        onPressed: () async {
+                          Navigator.pushReplacement(context, MaterialPageRoute(
+                              builder: (BuildContext context) {
+                            return CustomerEditProfile();
+                          }));
+                        },
+                        backgroundColor: kPrimaryColor),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    FloatingActionButton.extended(
+                        heroTag: "btn1",
+                        label: Text(
+                          'حذف الحساب',
+                        ),
+                        onPressed: () async {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text("تنبيه"),
+                                  content: Text('سيتم حذف الحساب نهائيا'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: Text("حذف",
+                                          style: TextStyle(color: Colors.red)),
+                                      onPressed: () {
+//The logic of deleting an account
+
+                                        //Navigator.of(context).pop();
+                                        FirebaseAuth.instance.signOut();
+                                        Navigator.of(context,
+                                                rootNavigator: true)
+                                            .pushReplacement(MaterialPageRoute(
+                                                builder: (context) =>
+                                                    new Welcome()));
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: Text("تراجع"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    )
+                                  ],
+                                );
+                              });
+
+                          /*Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (BuildContext context) {
               return Welcome();
             }));*/
-          },
-          backgroundColor: kPrimaryColor),
-    );
+                        },
+                        backgroundColor: Color.fromARGB(255, 221, 112, 112)),
+                  ],
+                ),
+              ]),
+        ));
   }
 
   Widget imageProfile() {
@@ -266,4 +380,3 @@ class logOutButton extends StatelessWidget {
 //       iconTheme: IconThemeData(color: kPrimaryColor),
 //     );
 //   }
-
