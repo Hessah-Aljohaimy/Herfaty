@@ -1,6 +1,6 @@
 const functions = require("firebase-functions");
 
-const stripe = require('stripe') (functions.config( ).stripe.testkey )
+const stripe = require('stripe') (functions.config().stripe.testkey )
 
 const calculateOrderAmount = (items) => {
 
