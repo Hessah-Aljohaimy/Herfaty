@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:herfaty/blocs/blocs.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 class payForm extends StatefulWidget {
   const payForm({super.key});
@@ -29,20 +30,31 @@ class _payFormState extends State<payForm> {
             initialDetails: state.cardFieldInputDetails,
           );
           if (state.status == PaymentStatus.initial) {
+            print('dddddddddddddddddddddddd');
             return Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  Text(
+                    'بيانات البطاقة',
+                    style: TextStyle(
+                      fontSize: 23.0,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xff5596A5),
+                      fontFamily: "Tajawal",
+                    ),
+                  ), // Text
+                  SizedBox(
+                    height: 30,
+                  ),
+                  const SizedBox(height: 20),
                   CardFormField(
                     controller: controller,
                   ), // CardFormField
                   const SizedBox(height: 10),
                   ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Color(0xff51908E),
-                    ),
                     onPressed: () {
                       (controller.details.complete)
                           ? context.read<PaymentBloc>().add(
@@ -51,15 +63,32 @@ class _payFormState extends State<payForm> {
                                       email: 'auoosh2000@gmail.com'),
                                   items: [
                                     {'id': 0},
+                                    {'id': 1},
                                   ],
                                 ),
                               )
                           : ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
-                                  content: Text('لم تكمل تعبئة البيانات')),
+                                  content: Text('the form is not complete')),
                             );
+
+                      print('dddddddddddddddddddddddd');
                     },
-                    child: const Text('دفع'),
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(Color(0xff51908E)),
+                      padding: MaterialStateProperty.all(
+                          EdgeInsets.symmetric(horizontal: 45, vertical: 13)),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(27))),
+                    ),
+                    child: Text(
+                      "ادفع",
+                      style: TextStyle(
+                          fontSize: 19,
+                          fontFamily: "Tajawal",
+                          fontWeight: FontWeight.bold),
+                    ),
                   ), // ElevatedButton
                 ],
               ),

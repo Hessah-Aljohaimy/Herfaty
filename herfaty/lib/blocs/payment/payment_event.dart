@@ -8,11 +8,6 @@ abstract class PaymentEvent extends Equatable {
 }
 
 class PaymentStart extends PaymentEvent{
-
-
-
-
-
 }
 
 class PaymentCreateIntent extends PaymentEvent{
@@ -22,7 +17,8 @@ final BillingDetails billingDetails;
 final List<Map<String, dynamic>> items;
 
  const PaymentCreateIntent({
-  required this.billingDetails,required this.items
+  required this.billingDetails,
+  required this.items,
   
   });
 
@@ -32,13 +28,13 @@ final List<Map<String, dynamic>> items;
 
 class PaymentConfirmIntent extends PaymentEvent{
 
-final String clientSecert;
+   final String clientSecret;
 
-  const PaymentConfirmIntent({
-    required this.clientSecert
+const PaymentConfirmIntent({
+    required this.clientSecret
     });
  @override
-  List<Object> get props => [clientSecert];
+  List<Object> get props => [clientSecret];
 
   
 }

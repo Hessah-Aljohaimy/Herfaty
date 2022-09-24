@@ -22,20 +22,20 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
   }
   
 
-  void _onPaymentStart(PaymentStart event, Emitter<PaymentState> emit) {
+void _onPaymentStart(PaymentStart event, Emitter<PaymentState> emit) {
 
     emit(state.copyWith(status: PaymentStatus.initial));
   }
 
   void _onPaymentCreateIntent(PaymentCreateIntent event, Emitter<PaymentState> emit) async {
         emit(state.copyWith(status: PaymentStatus.loading));
-        final PaymentMethod = await Stripe.instance.createPaymentMethod( 
+        final paymentMethod = await Stripe.instance.createPaymentMethod( 
         PaymentMethodParams.card(paymentMethodData: PaymentMethodData(billingDetails: event.billingDetails),),
 
         );
    final paymentIntentResult = await _callPayEndpointMehodId(
     useStripeSdk:true,
-    PaymentMethodId:PaymentMethod.id,
+    paymentMethodId:paymentMethod.id,
 currency:'sr',
 items:event.items,
    );
@@ -48,16 +48,18 @@ items:event.items,
 
 
 
-   if(paymentIntentResult['clientSecert'] !=null && paymentIntentResult['requieresAction']==null  ){
+   if(paymentIntentResult['clientSecret'] != null && 
+   paymentIntentResult['requiresAction'] == null  ){
     print('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
     emit(state.copyWith(status: PaymentStatus.success));
    }
 
 
-   if(paymentIntentResult['clientSecert'] !=null && paymentIntentResult['requieresAction']==true  ){
+   if(paymentIntentResult['clientSecret'] !=null &&
+    paymentIntentResult['requiresAction'] == true  ){
 
-final String clientSecert=paymentIntentResult['clientSecert'];
-add(PaymentConfirmIntent(clientSecert: clientSecert));
+final String clientSecret=paymentIntentResult['clientSecret'];
+add(PaymentConfirmIntent(clientSecret: clientSecret));
 
    }
 
@@ -72,7 +74,7 @@ try {
   
 
 
-final paymentIntent=await Stripe.instance.handleNextAction(event.clientSecert);
+final paymentIntent=await Stripe.instance.handleNextAction(event.clientSecret);
 
 
 if(paymentIntent.status==PaymentIntentsStatus.RequiresConfirmation){
@@ -125,11 +127,11 @@ body: json.encode({
        return json.decode(response.body);
     }
 
-  Future<Map<String,dynamic>> _callPayEndpointMehodId({
+Future<Map<String,dynamic>> _callPayEndpointMehodId({
  required bool useStripeSdk,
- required String PaymentMethodId,
+ required String paymentMethodId,
  required String currency,
- List<Map<String,dynamic>>?items,
+ List<Map<String,dynamic>>? items,
 
 
   })  async {
@@ -141,10 +143,9 @@ headers: {'Content-Type':'application/json'},
 body: json.encode({
 
 'useStripeSdk':useStripeSdk,
-'PaymentMethodId':PaymentMethodId,
+'paymentMethodId':paymentMethodId,
 'currency':currency,
 'items':items,
-
 
 },),);
        return json.decode(response.body);
