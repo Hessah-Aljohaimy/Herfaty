@@ -16,124 +16,93 @@ class payForm extends StatefulWidget {
 class _payFormState extends State<payForm> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('paaaaaaaay')),
-      body: BlocBuilder<PaymentBloc, PaymentState>(
+    return Container(
+      margin: EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
+      padding: EdgeInsets.all(1.0),
+      decoration: BoxDecoration(
+        border: Border.all(color: Color(0xff51908E), width: 1),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: BlocBuilder<PaymentBloc, PaymentState>(
         builder: (context, state) {
- CardFormEditController   controller= CardFormEditController(
+          CardFormEditController controller = CardFormEditController(
+            initialDetails: state.cardFieldInputDetails,
+          );
+          if (state.status == PaymentStatus.initial) {
+            return Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  CardFormField(
+                    controller: controller,
+                  ), // CardFormField
+                  const SizedBox(height: 10),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xff51908E),
+                    ),
+                    onPressed: () {
+                      (controller.details.complete)
+                          ? context.read<PaymentBloc>().add(
+                                const PaymentCreateIntent(
+                                  billingDetails: BillingDetails(
+                                      email: 'auoosh2000@gmail.com'),
+                                  items: [
+                                    {'id': 0},
+                                  ],
+                                ),
+                              )
+                          : ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text('لم تكمل تعبئة البيانات')),
+                            );
+                    },
+                    child: const Text('دفع'),
+                  ), // ElevatedButton
+                ],
+              ),
+            );
+          }
 
-initialDetails: state.cardFieldInputDetails,
-
- );
-if(state.status == PaymentStatus.initial){
-
-          return Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+          if (state.status == PaymentStatus.success) {
+            print('sssssssssssssssssssssssssssssssssss');
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  ' Card Form ',
-                  style: Theme.of(context).textTheme.headline1,
-                ), // Text
-                const SizedBox(height: 20),
-                CardFormField(
-                  controller:controller,
-                ), // CardFormField
-                const SizedBox(height: 10),
+                const Text('success'),
+                const SizedBox(
+                  height: 10,
+                  width: double.infinity,
+                ),
                 ElevatedButton(
                   onPressed: () {
-                          
-                          (controller.details.complete)?
-                          context.read<PaymentBloc>().add(
-const PaymentCreateIntent(
-  billingDetails:  BillingDetails(email:'auoosh2000@gmail.com'),
-
-
- items: [
-  {'id':0},
-
-  ],),
-
-
-                          ):
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: 
-                            Text('the form is not complete')
-                            ),
-
-
-                          );
-
-
+                    context.read<PaymentBloc>().add(PaymentStart());
                   },
-                  child: const Text(' Pay'),
-                ), // ElevatedButton
+                  child: const Text('success'),
+                )
               ],
-            ),
-          ); }
-
-
-if(state.status==PaymentStatus.success){
-print('sssssssssssssssssssssssssssssssssss');
-return Column(
-  
-  mainAxisAlignment: MainAxisAlignment.center,
-children: [
-
-const Text('success'),
-const SizedBox(height: 10,
-width: double.infinity,),
-
-
-ElevatedButton(
-  onPressed: (){
-
-    context.read<PaymentBloc>().add(PaymentStart());
-  }
-
-
-, child:const Text('success'),)
-
-],
-
-      );
-
-
-
-
-}
-if(state.status==PaymentStatus.failure){
-
-
-  return Column(
-  mainAxisAlignment: MainAxisAlignment.center,
-children: [
-
-const Text('failure'),
-const SizedBox(height: 10,
-width: double.infinity,),
-
-
-ElevatedButton(
-  onPressed: (){
-
-    context.read<PaymentBloc>().add(PaymentStart());
-  }
-
-
-, child:const Text('try again'),)
-
-],
-
-      );
-
-
-}
-
-
-          else {
+            );
+          }
+          if (state.status == PaymentStatus.failure) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('failure'),
+                const SizedBox(
+                  height: 10,
+                  width: double.infinity,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    context.read<PaymentBloc>().add(PaymentStart());
+                  },
+                  child: const Text('try again'),
+                )
+              ],
+            );
+          } else {
             return const Center(child: CircularProgressIndicator());
           }
         },
