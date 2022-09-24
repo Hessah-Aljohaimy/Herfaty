@@ -1,4 +1,3 @@
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/pages/login.dart';
@@ -58,7 +57,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
   File? pickedImage1;
   final ImagePicker _picker = ImagePicker();
   bool showLocalImage = false;
-  DatabaseReference? userRef;
+
   ////////////////////// List Of Steps ////////////////////////
   List<Step> steps() => [
         Step(
@@ -1001,11 +1000,6 @@ class _SignupHerafyState extends State<SignupHerafy> {
     uploadImageUrl = await imagesRef.getDownloadURL();
     //setState(() {});
     print("uploaded:" + uploadImageUrl);
-
-    userRef = FirebaseDatabase.instance
-        .reference()
-        .child('shop_owner')
-        .child('SkYsGimdIoVGPNPmYVuiGeWLI1l2');
   }
 
   Widget imageProfile() {
