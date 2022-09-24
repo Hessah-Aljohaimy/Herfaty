@@ -145,18 +145,18 @@ class _login extends State<login> {
                                   if (isShopOwner) {
                                     isShopOwner = false;
                                     OwnerId = '';
-                                      _emailTextController.clear();
-                                      _passwordTextController.clear();
+                                    _emailTextController.clear();
+                                    _passwordTextController.clear();
                                     Navigator.pushNamed(
                                         context, "/home_screen_owner");
-                                      
+
+                                    ///home_screen_owner
                                   } else {
                                     OwnerId = '';
-                                      _emailTextController.clear();
-                                         _passwordTextController.clear();
+                                    _emailTextController.clear();
+                                    _passwordTextController.clear();
                                     Navigator.pushNamed(
                                         context, '/home_screen_customer');
-
                                   }
                                 } catch (e, stack) {
                                   showDialog(

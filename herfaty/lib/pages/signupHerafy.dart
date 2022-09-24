@@ -342,6 +342,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
                   ElevatedButton(
                     onPressed: () async {
                       try {
+                        //uploadImageUrl
                         if (formKeys[0].currentState!.validate() &&
                             formKeys[1].currentState!.validate()) {
                           await FirebaseAuth.instance

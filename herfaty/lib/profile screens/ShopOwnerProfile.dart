@@ -11,6 +11,8 @@ import 'package:herfaty/AddProduct.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/pages/login.dart';
 import 'package:herfaty/pages/signupHerafy.dart';
+import 'package:herfaty/profile%20screens/ShopOwnerEditProfile.dart';
+import 'package:herfaty/profile%20screens/show_alert_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ShopOwnerProfile extends StatefulWidget {
@@ -96,11 +98,12 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
             } else if (snapshot.hasData) {
               final shopowner = snapshot.data;
               return shopowner == null
-                  ? Center(child: Text('!لا توجد معلومات الحرفي'))
+                  ? const Center(child: Text('!لا توجد معلومات الحرفي'))
                   : buildOwner(shopowner);
             } else {
+              // ignore: prefer_const_constructors
               return Center(
-                child: CircularProgressIndicator(),
+                child: const CircularProgressIndicator(),
               );
             }
           }),
@@ -139,89 +142,8 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
           backgroundImage: _imageFile == null
               ? AssetImage("assets/images/Circular_Logo.png") as ImageProvider
               : FileImage(File(_imageFile!.path)),
-
-          // _imageFile.path
-          //
-          // ?  as ImageProvider
-          // :
         ),
-        // Positioned(
-        //   bottom: 15.0,
-        //   right: 10.0,
-        //   child: InkWell(
-        //     onTap: () {
-        //       showModalBottomSheet(
-        //         context: context,
-        //         builder: ((builder) => bottomSheet()),
-        //       );
-        //     },
-        //     child: Icon(
-        //       Icons.camera_alt,
-        //       color: Colors.teal,
-        //       size: 22.0,
-        //     ),
-        //   ),
-        // ),
       ]),
-    );
-  }
-
-  Widget bottomSheet() {
-    return Container(
-      height: 100.0,
-      width: MediaQuery.of(context).size.width,
-      margin: EdgeInsets.symmetric(
-        horizontal: 20,
-        vertical: 20,
-      ),
-      child: Column(
-        children: <Widget>[
-          Text(
-            "اختر صورة",
-            style: TextStyle(
-              fontSize: 20.0,
-            ),
-          ),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-            TextButton.icon(
-              icon: Icon(Icons.camera),
-              onPressed: () async {
-                // Capture a photo
-                takePhoto(ImageSource.camera);
-                // final XFile? photo =
-                //     await _picker.pickImage(source: ImageSource.camera);
-                // try {
-                //   final file = File(photo!.path);
-                //   uploadImageToFirebaseStorage(file);
-                // } catch (e) {
-                //   print('error');
-                // }
-
-                Navigator.of(context).pop();
-              },
-              label: Text("الكاميرا"),
-            ),
-            TextButton.icon(
-              icon: Icon(Icons.image),
-              onPressed: () async {
-                takePhoto(ImageSource.gallery);
-                // Pick an image
-                // final XFile? photo =
-                //     await _picker.pickImage(source: ImageSource.gallery);
-                // try {
-                //   final file = File(photo!.path);
-                //   uploadImageToFirebaseStorage(file);
-                // } catch (e) {
-                //   print('error');
-                // }
-
-                Navigator.of(context).pop();
-              },
-              label: Text("الصور"),
-            ),
-          ])
-        ],
-      ),
     );
   }
 
@@ -240,59 +162,6 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                 },
                 child: ListView(
                   children: [
-                    // Container(
-                    //   padding:
-                    //       const EdgeInsets.only(top: 50, left: 20, right: 20),
-                    //   height: 100,
-                    //   width: double.infinity,
-                    //   decoration: const BoxDecoration(
-                    //     borderRadius: BorderRadius.only(
-                    //       bottomLeft: Radius.circular(20),
-                    //       bottomRight: Radius.circular(20),
-                    //     ),
-                    //     color: Color.fromARGB(232, 238, 232, 182),
-                    //     gradient: LinearGradient(
-                    //       colors: [
-                    //         (Color.fromARGB(255, 81, 144, 142)),
-                    //         (Color.fromARGB(255, 85, 150, 165)),
-                    //       ],
-                    //       begin: Alignment.topCenter,
-                    //       end: Alignment.bottomCenter,
-                    //     ),
-                    //   ),
-                    //   child: Column(
-                    //     children: [
-                    //       SizedBox(
-                    //         height: 25,
-                    //       ),
-                    //       Row(
-                    //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //         crossAxisAlignment: CrossAxisAlignment.start,
-                    //         children: [
-                    //           // ignore: prefer_const_constructors
-                    //           Text(
-                    //             "مرحباً بكَ أيها الحِرَفِيّ",
-                    //             // ignore: prefer_const_constructors
-                    //             style: TextStyle(
-                    //                 color: Colors.white,
-                    //                 fontWeight: FontWeight.bold,
-                    //                 fontSize: 25,
-                    //                 fontFamily: "Tajawal"),
-                    //             //textDirection: TextDirection.rtl,
-                    //           ),
-                    //           /* profileButton(
-                    //   icon: Icons.account_circle_sharp,
-                    //   onPressed: () {},
-                    // ),*/
-                    //         ],
-                    //       ),
-                    //       const SizedBox(
-                    //         height: 15,
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
-
                     Expanded(
                       child: Container(
                         decoration: BoxDecoration(
@@ -306,13 +175,6 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                         child: Center(
                           child: Column(
                             children: [
-                              // Text(
-                              //   "معلومات حسابي",
-                              //   style: TextStyle(
-                              //       fontSize: 25,
-                              //       fontWeight: FontWeight.w800,
-                              //       color: Colors.black),
-                              // ),
                               imageProfile(),
                             ],
                           ),
@@ -489,7 +351,16 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                           width: 10,
                         ),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+// Diolog to enter the password
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ShopOwnerEditProfile()),
+                            );
+                          },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
                                 Color.fromARGB(255, 221, 112, 112)),
@@ -530,58 +401,27 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
   }
 
 //Read a single shop owner
-  Future<ShopOwner?> readShopOwner() async {
-    final docShopOwner =
-        FirebaseFirestore.instance.collection("shop_owner").doc(uid);
-  }
-
-//logo
-  void takePhoto(ImageSource source) async {
-    final pickedFile = await _picker.getImage(
-      source: source,
-    );
-    try {
-      final file = File(_imageFile!.path);
-      // uploadImageToFirebaseStorage(file);
-    } catch (e) {
-      print('error');
-    }
-    setState(() {
-      try {
-        _imageFile = pickedFile!;
-        Fluttertoast.showToast(
-          msg: 'تمت تعديل الصورة بنجاح',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 3,
-          backgroundColor: Color.fromARGB(255, 26, 96, 91),
-          textColor: Colors.white,
-          fontSize: 18.0,
-        );
-        imageProfile();
-      } catch (e) {
-        Fluttertoast.showToast(
-          msg: 'هناك مشكلة أعد ادخال الصوره مجددا',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 3,
-          backgroundColor: Colors.white,
-          textColor: Colors.red,
-          fontSize: 18.0,
-        );
-      }
-    });
-  }
+  // Future<ShopOwner?> readShopOwner() async {
+  //   final docShopOwner =
+  //       FirebaseFirestore.instance.collection("shop_owner").doc(uid);
+  // }
 
   // Future<String> getCurrentUID() async {
   //   return (await _firebaseAuth.currentUser!).uid;
+
   // }
+
+  // var userID;
 
   Future<ShopOwner?> readUser() async {
     //get a singal document
-    final docShopOwner = FirebaseFirestore.instance
-        .collection('shop_owner')
-        .doc('OxGPNWF9LWVspIVFwaBDhYXleX42');
+    final User? userSO = auth.currentUser;
+    final uid = userSO!.uid;
+    // userID = FirebaseAuth.instance.currentUser;
+    print(uid);
+
+    final docShopOwner =
+        FirebaseFirestore.instance.collection('shop_owner').doc(uid);
 
     final snapshot = await docShopOwner.get();
 
@@ -590,17 +430,72 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
     }
   }
 
-  // void uploadImageToFirebaseStorage(File file) async {
-  //   // Create a reference to 'images/mountains.jpg'
-  //   final imagesRef = storageRef
-  //       .child("shopOwnerLogos/${DateTime.now().millisecondsSinceEpoch}.png");
-  //   await imagesRef.putFile(file);
+  void showAlertDialog(BuildContext context) {
+    TextEditingController _checkPasslController = new TextEditingController();
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            child: Container(
+                height: 200,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    // final checkPasslField = TextFormField(
+                    TextField(
+                      controller: _checkPasslController,
+                      keyboardType: TextInputType.visiblePassword,
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                      decoration: InputDecoration(
+                        labelText: 'أدخل كلمة المرور لتعديل الحساب',
+                        labelStyle: TextStyle(
+                          color: Color(0xff51908E),
+                        ),
+                      ),
+                    ),
+                    TextButton(
+                      child: Text("تحقق"),
+                      onPressed: () {
+//check if it was correct
 
-  //   uploadImageUrl = await imagesRef.getDownloadURL();
-  //   //setState(() {});
-  //   print("uploaded:" + uploadImageUrl);
-  // }
+                        Navigator.of(context).pop();
+                      },
+                    )
+                  ],
+                )));
+      },
+
+      // return CustomAlertDialog(
+      //       content: Container(
+      //         width: MediaQuery.of(context).size.width / 1.3,
+      //         height: MediaQuery.of(context).size.height / 2.5,
+      //         decoration: new BoxDecoration(
+      //           shape: BoxShape.rectangle,
+      //           color: const Color(0xFFFFFF),
+      //           borderRadius: new BorderRadius.all(new Radius.circular(32.0)),
+      //         ),
+      //         child: //Contents here
+      //       ),
+      //     );
+    );
+  }
 }
+// void uploadImageToFirebaseStorage(File file) async {
+//   // Create a reference to 'images/mountains.jpg'
+//   final imagesRef = storageRef
+//       .child("shopOwnerLogos/${DateTime.now().millisecondsSinceEpoch}.png");
+//   await imagesRef.putFile(file);
+
+//   uploadImageUrl = await imagesRef.getDownloadURL();
+//   //setState(() {});
+//   print("uploaded:" + uploadImageUrl);
+// }
+
 // body: Container(
 //   child: Column(
 //     crossAxisAlignment: CrossAxisAlignment.center,

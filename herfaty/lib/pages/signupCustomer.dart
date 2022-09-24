@@ -312,4 +312,11 @@ class Customer {
         'email': email,
         'password': password,
       };
+
+  static Customer fromJson(Map<String, dynamic> json) => Customer(
+        id: json['id'],
+        name: json['name'],
+        email: json['email'],
+        password: json['password'],
+      );
 }
