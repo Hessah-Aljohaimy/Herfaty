@@ -33,6 +33,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_auth: ^3.8.0
   firebase_core: ^1.21.1
+  firebase_database: ^9.1.5
   firebase_storage: ^10.3.8
   flutter:
     sdk: flutter
@@ -48,19 +49,13 @@ dependencies:
   style_random: ^0.0.1+1
 
 dev_dependencies:
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
 flutter_icons:
- android: true
- ios: true
- image_path: "assets/images/AppIcon.png"
-
+  android: true
+  ios: true
+  image_path: "assets/images/AppIcon.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -228,231 +228,304 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
 //////////////////////////////////Building User Profile////////////////////////////////////////
   Widget buildOwner(ShopOwner so) {
     logo = so.logo;
-    return Container(
-      // padding: EdgeInsets.only(left: 16, top: 25, right: 16),
-      child: GestureDetector(
-          onTap: () {
-            FocusScope.of(context).unfocus();
-          },
-          child: ListView(
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(20),
-                            bottomRight: Radius.circular(20)),
-                        image: DecorationImage(
-                          image: AssetImage("assets/images/BG2.png"),
-                          fit: BoxFit.cover,
-                        )),
-                    child: Center(
-                      child: Column(
-                        children: [
-                          // Text(
-                          //   "معلومات حسابي",
-                          //   style: TextStyle(
-                          //       fontSize: 25,
-                          //       fontWeight: FontWeight.w800,
-                          //       color: Colors.black),
-                          // ),
-                          imageProfile(),
-                        ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            height: 500,
+            // padding: EdgeInsets.only(left: 16, top: 25, right: 16),
+            child: GestureDetector(
+                onTap: () {
+                  FocusScope.of(context).unfocus();
+                },
+                child: ListView(
+                  children: [
+                    // Container(
+                    //   padding:
+                    //       const EdgeInsets.only(top: 50, left: 20, right: 20),
+                    //   height: 100,
+                    //   width: double.infinity,
+                    //   decoration: const BoxDecoration(
+                    //     borderRadius: BorderRadius.only(
+                    //       bottomLeft: Radius.circular(20),
+                    //       bottomRight: Radius.circular(20),
+                    //     ),
+                    //     color: Color.fromARGB(232, 238, 232, 182),
+                    //     gradient: LinearGradient(
+                    //       colors: [
+                    //         (Color.fromARGB(255, 81, 144, 142)),
+                    //         (Color.fromARGB(255, 85, 150, 165)),
+                    //       ],
+                    //       begin: Alignment.topCenter,
+                    //       end: Alignment.bottomCenter,
+                    //     ),
+                    //   ),
+                    //   child: Column(
+                    //     children: [
+                    //       SizedBox(
+                    //         height: 25,
+                    //       ),
+                    //       Row(
+                    //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //         crossAxisAlignment: CrossAxisAlignment.start,
+                    //         children: [
+                    //           // ignore: prefer_const_constructors
+                    //           Text(
+                    //             "مرحباً بكَ أيها الحِرَفِيّ",
+                    //             // ignore: prefer_const_constructors
+                    //             style: TextStyle(
+                    //                 color: Colors.white,
+                    //                 fontWeight: FontWeight.bold,
+                    //                 fontSize: 25,
+                    //                 fontFamily: "Tajawal"),
+                    //             //textDirection: TextDirection.rtl,
+                    //           ),
+                    //           /* profileButton(
+                    //   icon: Icons.account_circle_sharp,
+                    //   onPressed: () {},
+                    // ),*/
+                    //         ],
+                    //       ),
+                    //       const SizedBox(
+                    //         height: 15,
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(20),
+                                bottomRight: Radius.circular(20)),
+                            image: DecorationImage(
+                              image: AssetImage("assets/images/BG2.png"),
+                              fit: BoxFit.cover,
+                            )),
+                        child: Center(
+                          child: Column(
+                            children: [
+                              // Text(
+                              //   "معلومات حسابي",
+                              //   style: TextStyle(
+                              //       fontSize: 25,
+                              //       fontWeight: FontWeight.w800,
+                              //       color: Colors.black),
+                              // ),
+                              imageProfile(),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-              ),
 
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                margin: const EdgeInsets.all(10.0),
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 255, 251, 245),
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                ),
-                child: SizedBox(
-                  height: 320,
-                  child: Column(
-                    children: [
-                      Expanded(
-                          child: Row(
-                        children: <Widget>[
-                          Text(
-                            "الاسم  ",
-                            style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w700,
-                                color: Color.fromARGB(255, 26, 96, 91)),
-                          ),
-                          Text(
-                            "  ${so.name}",
-                            style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black),
-                          )
-                        ],
-                      )),
-                      Expanded(
-                          child: Row(
-                        children: <Widget>[
-                          Text(
-                            "البريد الالكتروني",
-                            style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w700,
-                                color: Color.fromARGB(255, 26, 96, 91)),
-                          ),
-                          Text(
-                            "  ${so.email}",
-                            style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black),
-                          )
-                        ],
-                      )),
-                      Expanded(
-                          child: Row(
-                        children: <Widget>[
-                          Text(
-                            "تاريخ الميلاد",
-                            style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w700,
-                                color: Color.fromARGB(255, 26, 96, 91)),
-                          ),
-                          Text(
-                            "  ${so.DOB}",
-                            style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black),
-                          )
-                        ],
-                      )),
-                      Expanded(
-                          child: Row(
-                        children: <Widget>[
-                          Text(
-                            "رقم الجوال",
-                            style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w700,
-                                color: Color.fromARGB(255, 26, 96, 91)),
-                          ),
-                          Text(
-                            "  ${so.phone_number}",
-                            style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black),
-                          )
-                        ],
-                      )),
-                      Expanded(
-                          child: Row(
-                        children: <Widget>[
-                          Text(
-                            "اسم المتجر",
-                            style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w700,
-                                color: Color.fromARGB(255, 26, 96, 91)),
-                          ),
-                          Text(
-                            "  ${so.shopname}",
-                            style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black),
-                          )
-                        ],
-                      )),
-                      Expanded(
-                          child: Row(
-                        children: <Widget>[
-                          Text(
-                            "وصف المتجر",
-                            style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w700,
-                                color: Color.fromARGB(255, 26, 96, 91)),
-                          ),
-                          Text(
-                            "  ${so.shopdescription}",
-                            style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black),
-                          )
-                        ],
-                      )),
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Row(children: [
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Color(0xff51908E)),
-                      padding: MaterialStateProperty.all(
-                          EdgeInsets.symmetric(horizontal: 50, vertical: 13)),
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(27))),
+                    SizedBox(
+                      height: 10,
                     ),
-                    child: Text(
-                      " تعديل البيانات",
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontFamily: "Tajawal",
-                          fontWeight: FontWeight.bold),
+                    Container(
+                      margin: const EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 2,
+                            blurRadius: 7,
+                            offset: Offset(0, 3), // changes position of shadow
+                          ),
+                        ],
+                      ),
+                      child: SizedBox(
+                        height: 340,
+                        child: Column(
+                          children: [
+                            Expanded(
+                                child: Row(
+                              children: <Widget>[
+                                Text(
+                                  "الاسم  ",
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w700,
+                                      color: Color.fromARGB(255, 26, 96, 91)),
+                                ),
+                                Text(
+                                  "  ${so.name}",
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.black),
+                                )
+                              ],
+                            )),
+                            Expanded(
+                                child: Row(
+                              children: <Widget>[
+                                Text(
+                                  "البريد الالكتروني",
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w700,
+                                      color: Color.fromARGB(255, 26, 96, 91)),
+                                ),
+                                Text(
+                                  "  ${so.email}",
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.black),
+                                )
+                              ],
+                            )),
+                            Expanded(
+                                child: Row(
+                              children: <Widget>[
+                                Text(
+                                  "تاريخ الميلاد",
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w700,
+                                      color: Color.fromARGB(255, 26, 96, 91)),
+                                ),
+                                Text(
+                                  "  ${so.DOB}",
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.black),
+                                )
+                              ],
+                            )),
+                            Expanded(
+                                child: Row(
+                              children: <Widget>[
+                                Text(
+                                  "رقم الجوال",
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w700,
+                                      color: Color.fromARGB(255, 26, 96, 91)),
+                                ),
+                                Text(
+                                  "  ${so.phone_number}",
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.black),
+                                )
+                              ],
+                            )),
+                            Expanded(
+                                child: Row(
+                              children: <Widget>[
+                                Text(
+                                  "اسم المتجر",
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w700,
+                                      color: Color.fromARGB(255, 26, 96, 91)),
+                                ),
+                                Text(
+                                  "  ${so.shopname}",
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.black),
+                                )
+                              ],
+                            )),
+                            Expanded(
+                                child: Row(
+                              children: <Widget>[
+                                Text(
+                                  "وصف المتجر",
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w700,
+                                      color: Color.fromARGB(255, 26, 96, 91)),
+                                ),
+                                Text(
+                                  "  ${so.shopdescription}",
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.black),
+                                )
+                              ],
+                            )),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Color(0xff51908E)),
-                      padding: MaterialStateProperty.all(
-                          EdgeInsets.symmetric(horizontal: 50, vertical: 13)),
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(27))),
-                    ),
-                    child: Text(
-                      "حذف الحساب",
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontFamily: "Tajawal",
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ]),
-              )
-              // TextField(
-              //   decoration: InputDecoration(
-              //       labelText: 'الاسم',
-              //       floatingLabelBehavior: FloatingLabelBehavior.always,
-              //       hintText: so.name,
-              //       hintStyle: TextStyle(
-              //           fontSize: 20,
-              //           fontWeight: FontWeight.bold,
-              //           color: Color.fromARGB(148, 29, 29, 29))),
-              // ),
-              // Text(so.email)
-            ],
-          )),
+                    Expanded(
+                      child: Row(children: [
+                        SizedBox(
+                          width: 10,
+                        ),
+                        ElevatedButton(
+                          onPressed: () {},
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Color(0xff51908E)),
+                            padding: MaterialStateProperty.all(
+                                EdgeInsets.symmetric(
+                                    horizontal: 50, vertical: 13)),
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(27))),
+                          ),
+                          child: Text(
+                            " تعديل البيانات",
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: "Tajawal",
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        ElevatedButton(
+                          onPressed: () {},
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                Color.fromARGB(255, 221, 112, 112)),
+                            padding: MaterialStateProperty.all(
+                                EdgeInsets.symmetric(
+                                    horizontal: 50, vertical: 13)),
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(27))),
+                          ),
+                          child: Text(
+                            "حذف الحساب",
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: "Tajawal",
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ]),
+                    )
+                    // TextField(
+                    //   decoration: InputDecoration(
+                    //       labelText: 'الاسم',
+                    //       floatingLabelBehavior: FloatingLabelBehavior.always,
+                    //       hintText: so.name,
+                    //       hintStyle: TextStyle(
+                    //           fontSize: 20,
+                    //           fontWeight: FontWeight.bold,
+                    //           color: Color.fromARGB(148, 29, 29, 29))),
+                    // ),
+                    // Text(so.email)
+                  ],
+                )),
+          ),
+        ],
+      ),
     );
   }
 
@@ -508,7 +581,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
     //get a singal document
     final docShopOwner = FirebaseFirestore.instance
         .collection('shop_owner')
-        .doc('4qR9eel9BMuwWDInFYhL');
+        .doc('OxGPNWF9LWVspIVFwaBDhYXleX42');
 
     final snapshot = await docShopOwner.get();
 

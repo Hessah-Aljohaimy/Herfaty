@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/pages/login.dart';
@@ -54,8 +55,10 @@ class _SignupHerafyState extends State<SignupHerafy> {
       TextEditingController();
 
   PickedFile? _imageFile;
-
+  File? pickedImage1;
   final ImagePicker _picker = ImagePicker();
+  bool showLocalImage = false;
+  DatabaseReference? userRef;
   ////////////////////// List Of Steps ////////////////////////
   List<Step> steps() => [
         Step(
@@ -354,7 +357,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
                                 DOB: _BODController.text,
                                 phone_number:
                                     _PhoneNumberTextEditingController.text,
-                                logo: _shoplogoEditingController.text,
+                                logo: uploadImageUrl,
                                 shopname: _shopnameTextEditingController.text,
                                 shopdescription:
                                     _shopdescriptionTextEditingController.text);
@@ -998,6 +1001,11 @@ class _SignupHerafyState extends State<SignupHerafy> {
     uploadImageUrl = await imagesRef.getDownloadURL();
     //setState(() {});
     print("uploaded:" + uploadImageUrl);
+
+    userRef = FirebaseDatabase.instance
+        .reference()
+        .child('shop_owner')
+        .child('SkYsGimdIoVGPNPmYVuiGeWLI1l2');
   }
 
   Widget imageProfile() {
@@ -1005,9 +1013,9 @@ class _SignupHerafyState extends State<SignupHerafy> {
       child: Stack(children: <Widget>[
         CircleAvatar(
           radius: 80.0,
-          backgroundImage: _imageFile == null
+          backgroundImage: showLocalImage == false
               ? AssetImage("assets/images/Circular_Logo.png") as ImageProvider
-              : FileImage(File(_imageFile!.path)),
+              : FileImage(pickedImage1!) as ImageProvider,
 
           // _imageFile.path
           //
@@ -1096,6 +1104,11 @@ class _SignupHerafyState extends State<SignupHerafy> {
 
 //logo
   void takePhoto(ImageSource source) async {
+    XFile? file1 = await ImagePicker().pickImage(source: source);
+    if (file1 == null) return;
+
+    pickedImage1 = File(file1.path);
+    showLocalImage = true;
     final pickedFile = await _pickerr.getImage(
       source: source,
     );
@@ -1135,6 +1148,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
 
 //Datebase
 Future createShopOwner(ShopOwner shopowner) async {
+  String logourl = '';
   final docShopOWner =
       FirebaseFirestore.instance.collection('shop_owner').doc();
 
