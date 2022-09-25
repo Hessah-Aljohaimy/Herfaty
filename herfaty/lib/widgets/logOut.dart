@@ -123,11 +123,11 @@ class logOutButton extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [
+                  children: [
                     Text(
                       "معلومات المشتري",
                       style: TextStyle(
-                          color: Color.fromARGB(255, 79, 75, 75),
+                          color: kPrimaryColor,
                           fontWeight: FontWeight.bold,
                           fontSize: 22),
                     ),
@@ -182,7 +182,7 @@ class logOutButton extends StatelessWidget {
                           ),
                           leading: Icon(
                             icons[index],
-                            color: Color.fromARGB(248, 198, 149, 100),
+                            color: Color.fromARGB(255, 79, 75, 75),
                           ),
                         ),
                       );
@@ -280,7 +280,7 @@ class logOutButton extends StatelessWidget {
                 Align(
                   alignment: Alignment.bottomLeft,
                   child: Image.asset(
-                    "assets/images/fotterRound.png",
+                    "assets/images/footbg.png",
                     width: 200,
                   ),
                 ),
