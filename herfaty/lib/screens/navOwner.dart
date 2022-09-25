@@ -34,7 +34,11 @@ class _navOwnerState extends State<navOwner> {
 
   @override
   Widget build(BuildContext context) {
-    listenToDB();
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    String thisOwnerId = user!.uid;
+    listenToDB(thisOwnerId);
+    //---------------------------------------------------------------------------------------------------
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         localizationsDelegates: [
@@ -78,7 +82,7 @@ class _navOwnerState extends State<navOwner> {
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //Listen to changes in DB==============================
-  void listenToDB() {
+  void listenToDB(String thisOwnerId) {
     print("the notification form firestore method was called");
 
     CollectionReference reference =
@@ -91,14 +95,21 @@ class _navOwnerState extends State<navOwner> {
             var data = querySnapshot.docs.elementAt(index).data() as Map;
             var notificationStatus = data["notification"];
             var docId = data["docId"];
-            print(notificationStatus);
-            print(index);
-            if (notificationStatus == "notPushed") {
-              print("pushinnnng===========================");
-              createNotification(0, "طلب جديد",
-                  "وصلك طلب جديد أيهاالحِرفيّ الصغير! انقر لعرض الطلبات ", "");
-              print(docId);
-              reference.doc('${docId}').update({"notification": "pushed"});
+            var ownerId = data["shopOwnerId"];
+            //print(notificationStatus);
+            //print(index);
+            if (ownerId == thisOwnerId) {
+              print("-----------------------This owner id is:${ownerId}");
+              if (notificationStatus == "notPushed") {
+                print("pushinnnng===========================");
+                createNotification(
+                    0,
+                    "طلب جديد",
+                    "وصلك طلب جديد أيها الحِرفيّ الصغير! انقر لعرض الطلبات ",
+                    "");
+                print(docId);
+                reference.doc('${docId}').update({"notification": "pushed"});
+              }
             }
           }
         }

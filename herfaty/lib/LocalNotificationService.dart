@@ -2,6 +2,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
+import 'dart:io';
+import 'dart:ui';
 
 class LocalNotificationService {
   LocalNotificationService();
@@ -39,11 +41,17 @@ class LocalNotificationService {
 
   Future<NotificationDetails> _notificationDetails() async {
     const AndroidNotificationDetails androidNotificationDetails =
-        AndroidNotificationDetails('channel_id', 'channel_name',
-            channelDescription: 'description',
-            importance: Importance.max,
-            priority: Priority.max,
-            playSound: true);
+        AndroidNotificationDetails(
+      'channel_id',
+      'channel_name',
+      channelDescription: 'description',
+      importance: Importance.max,
+      priority: Priority.max,
+      playSound: true,
+      largeIcon: DrawableResourceAndroidBitmap('logo3'),
+      groupKey: 'com.example.flutter_push_notifications',
+      color: Color.fromARGB(255, 26, 96, 91), //color of the small icon
+    );
 
     const IOSNotificationDetails iosNotificationDetails =
         IOSNotificationDetails();
