@@ -15,20 +15,22 @@ part 'payment_state.dart';
 class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
   PaymentBloc() : super(const PaymentState()) {
     on<PaymentStart>(_onPaymentStart);
-        on<PaymentCreateIntent>(_onPaymentCreateIntent);
-
+    on<PaymentCreateIntent>(_onPaymentCreateIntent);
     on<PaymentConfirmIntent>(_onPaymentConfirmIntent);
 
   }
   
 
 void _onPaymentStart(PaymentStart event, Emitter<PaymentState> emit) {
-
-    emit(state.copyWith(status: PaymentStatus.initial));
+ print('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz');
+  emit(state.copyWith(status: PaymentStatus.initial));
   }
 
-  void _onPaymentCreateIntent(PaymentCreateIntent event, Emitter<PaymentState> emit) async {
-        emit(state.copyWith(status: PaymentStatus.loading));
+  void _onPaymentCreateIntent(PaymentCreateIntent event, Emitter<PaymentState> emit) 
+  async {
+     print('ccccccccccccccccccccccccccccccccc');
+    emit(state.copyWith(status: PaymentStatus.loading));
+       
         final paymentMethod = await Stripe.instance.createPaymentMethod( 
         PaymentMethodParams.card(paymentMethodData: PaymentMethodData(billingDetails: event.billingDetails),),
 
@@ -41,7 +43,7 @@ items:event.items,
    );
 
    if(paymentIntentResult['error'] !=null ){
-    print('dddddddddddddddddddddddddddddddddd');
+    print('xxxxxxxxxxxxxxxxxxxxxxxxxxxx');
     emit(state.copyWith(status: PaymentStatus.failure));
    }
 
@@ -83,8 +85,11 @@ Map<String,dynamic> results=await _callPayEndpointIntentId(paymentIntentId: paym
 
 
 if(results['error']  !=null){
+   print('eeeeeeeeeeeeeeeeeeeeeeeeeeee');
   emit(state.copyWith(status: PaymentStatus.failure));
 } else {
+      print('uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu');
+
   emit(state.copyWith(status: PaymentStatus.success));
 }
 
@@ -96,11 +101,6 @@ if(results['error']  !=null){
 } catch (e) {
   print(e);
     emit(state.copyWith(status: PaymentStatus.failure));
-
-
-
-
-
 }
 
 
