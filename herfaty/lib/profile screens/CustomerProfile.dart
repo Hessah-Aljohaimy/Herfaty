@@ -7,6 +7,7 @@ import 'package:herfaty/profile%20screens/CustomerEditProfile.dart';
 
 import '../pages/login.dart';
 import '../pages/signupCustomer.dart';
+import '../pages/welcome.dart';
 
 class CustomerProfile extends StatefulWidget {
   const CustomerProfile({super.key});
@@ -163,7 +164,13 @@ class _CustomerProfileState extends State<CustomerProfile> {
                                 width: 10,
                               ),
                               ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () async {
+                                  Navigator.pushReplacement(context,
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) {
+                                    return CustomerEditProfile();
+                                  }));
+                                },
                                 style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all(
                                       Color(0xff51908E)),
@@ -187,15 +194,46 @@ class _CustomerProfileState extends State<CustomerProfile> {
                                 width: 10,
                               ),
                               ElevatedButton(
-                                onPressed: () {
-// Diolog to enter the password
+                                onPressed: () async {
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text("تنبيه"),
+                                          content:
+                                              Text('سيتم حذف الحساب نهائيا'),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              child: Text("حذف",
+                                                  style: TextStyle(
+                                                      color: Colors.red)),
+                                              onPressed: () {
+//The logic of deleting an account
 
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const CustomerEditProfile()),
-                                  );
+                                                //Navigator.of(context).pop();
+                                                FirebaseAuth.instance.signOut();
+                                                Navigator.of(context,
+                                                        rootNavigator: true)
+                                                    .pushReplacement(
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                new Welcome()));
+                                              },
+                                            ),
+                                            TextButton(
+                                              child: Text("تراجع"),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            )
+                                          ],
+                                        );
+                                      });
+
+                                  /*Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (BuildContext context) {
+              return Welcome();
+            }));*/
                                 },
                                 style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all(
