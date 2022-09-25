@@ -99,7 +99,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
         child: Column(
           children: [
             Container(
-              height: 620,
+              height: 670,
               // padding: EdgeInsets.only(left: 16, top: 25, right: 16),
               child: GestureDetector(
                   onTap: () {
@@ -149,12 +149,17 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                           ],
                         ),
                         child: SizedBox(
-                          height: 340,
+                          height: 200,
                           child: Column(
                             children: [
                               Expanded(
                                   child: Row(
                                 children: <Widget>[
+                                  Icon(Icons.person,
+                                      color: Color.fromARGB(255, 94, 92, 92)),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
                                   Text(
                                     "الاسم  ",
                                     style: TextStyle(
@@ -176,6 +181,11 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                               Expanded(
                                   child: Row(
                                 children: <Widget>[
+                                  Icon(Icons.email_rounded,
+                                      color: Color.fromARGB(255, 94, 92, 92)),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
                                   Text(
                                     "البريد الالكتروني",
                                     style: TextStyle(
@@ -196,6 +206,11 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                               Expanded(
                                   child: Row(
                                 children: <Widget>[
+                                  Icon(Icons.date_range,
+                                      color: Color.fromARGB(255, 94, 92, 92)),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
                                   Text(
                                     "تاريخ الميلاد",
                                     style: TextStyle(
@@ -216,6 +231,11 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                               Expanded(
                                   child: Row(
                                 children: <Widget>[
+                                  Icon(Icons.phone_android,
+                                      color: Color.fromARGB(255, 94, 92, 92)),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
                                   Text(
                                     "رقم الجوال",
                                     style: TextStyle(
@@ -233,53 +253,131 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                   )
                                 ],
                               )),
-                              Expanded(
-                                  child: Row(
-                                children: <Widget>[
-                                  Text(
-                                    "اسم المتجر",
-                                    style: TextStyle(
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.w700,
-                                        color: Color.fromARGB(255, 26, 96, 91)),
-                                  ),
-                                  //${so.shopname}
-                                  Text(
-                                    " جرة",
-                                    style: TextStyle(
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.w400,
-                                        color: Colors.black),
-                                  )
-                                ],
-                              )),
-                              Expanded(
-                                  child: Row(
-                                children: <Widget>[
-                                  Text(
-                                    "وصف المتجر",
-                                    style: TextStyle(
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.w700,
-                                        color: Color.fromARGB(255, 26, 96, 91)),
-                                  ),
+                              // Expanded(
+                              //     child: Row(
+                              //   children: <Widget>[
+                              //     Text(
+                              //       "اسم المتجر",
+                              //       style: TextStyle(
+                              //           fontSize: 17,
+                              //           fontWeight: FontWeight.w700,
+                              //           color: Color.fromARGB(255, 26, 96, 91)),
+                              //     ),
+                              //     //${so.shopname}
+                              //     Text(
+                              //       " جرة",
+                              //       style: TextStyle(
+                              //           fontSize: 17,
+                              //           fontWeight: FontWeight.w400,
+                              //           color: Colors.black),
+                              //     )
+                              //   ],
+                              // )),
+                              // Expanded(
+                              //     child: Row(
+                              //   children: <Widget>[
+                              //     Text(
+                              //       "وصف المتجر",
+                              //       style: TextStyle(
+                              //           fontSize: 17,
+                              //           fontWeight: FontWeight.w700,
+                              //           color: Color.fromARGB(255, 26, 96, 91)),
+                              //     ),
 
-                                  // ${so.shopdescription}
-                                  Expanded(
-                                    child: Text(
-                                      "  متجر جرة متخصص في صناعة منتجات الفخار ",
-                                      style: TextStyle(
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w400,
-                                          color: Colors.black),
-                                    ),
-                                  )
-                                ],
-                              )),
+                              //     // ${so.shopdescription}
+                              //     Expanded(
+                              //       child: Text(
+                              //         "  متجر جرة متخصص في صناعة منتجات الفخار ",
+                              //         style: TextStyle(
+                              //             fontSize: 17,
+                              //             fontWeight: FontWeight.w400,
+                              //             color: Colors.black),
+                              //       ),
+                              //     )
+                              //   ],
+                              // )),
                             ],
                           ),
                         ),
                       ),
+
+                      Container(
+                        margin: const EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 255, 255, 255),
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 7,
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: SizedBox(
+                          height: 100,
+                          child: Column(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  "اسم المتجر",
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w700,
+                                      color: Color.fromARGB(255, 26, 96, 91)),
+                                ),
+                                //     //${so.shopname}
+                              ),
+                              Expanded(
+                                  child: Text(
+                                " جرة",
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.black),
+                              )),
+                              Expanded(
+                                child: Text(
+                                  "وصف المتجر",
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w700,
+                                      color: Color.fromARGB(255, 26, 96, 91)),
+                                ),
+
+                                //     // ${so.shopdescription}
+                                //     Expanded(
+                                //       child: Text(
+                                //         "  متجر جرة متخصص في صناعة منتجات الفخار ",
+                                //         style: TextStyle(
+                                //             fontSize: 17,
+                                //             fontWeight: FontWeight.w400,
+                                //             color: Colors.black),
+                                //       ),
+                                //     )
+                              ),
+                              Expanded(
+                                  child: Container(
+                                height: 120,
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black)),
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.vertical,
+                                  child: Center(
+                                      child: Text(
+                                    '  متجر جرة متخصص في صناعة منتجات الفخار منتجاتي تحتوي الاكواب و الصحون و الطلبات بحسب الطلب   ',
+                                    style: TextStyle(fontSize: 12),
+                                  )),
+                                ),
+                              ))
+                            ],
+                          ),
+                        ),
+                      ),
+
                       Expanded(
                         child: Row(children: [
                           SizedBox(
