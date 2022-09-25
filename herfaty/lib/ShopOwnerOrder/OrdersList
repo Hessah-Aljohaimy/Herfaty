@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MyApp());
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class OrderList extends StatelessWidget {
+  const OrderList({super.key});
 
   @override
+  @override
   Widget build(BuildContext context) {
-    const title = 'Basic List';
+    const title = 'قائمة الطلبات';
 
     return MaterialApp(
       title: title,
@@ -18,16 +17,16 @@ class MyApp extends StatelessWidget {
         body: ListView(
           children: const <Widget>[
             ListTile(
-              leading: Icon(Icons.map),
-              title: Text('Map'),
+              //leading: Icon(Icons.map),
+              title: Text('الطلب الأول'),
             ),
             ListTile(
-              leading: Icon(Icons.photo_album),
-              title: Text('Album'),
+              //leading: Icon(Icons.photo_album),
+              title: Text('الطلب الثاني'),
             ),
             ListTile(
-              leading: Icon(Icons.phone),
-              title: Text('Phone'),
+             // leading: Icon(Icons.phone),
+              title: Text('الطلب الثالث'),
             ),
           ],
         ),
