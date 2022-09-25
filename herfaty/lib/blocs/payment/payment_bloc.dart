@@ -36,11 +36,11 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
             PaymentMethodData(billingDetails: event.billingDetails),
       ),
     );
-    //print('----------------------------------- ${paymentMethod.id}');
+    print('----------------------------------- ${paymentMethod.id}');
     final paymentIntentResult = await _callPayEndpointMehodId(
       useStripeSdk: true,
       paymentMethodId: paymentMethod.id,
-      currency: '',
+      currency: 'us',
       items: event.items,
     );
     print('------------------------------------3');
