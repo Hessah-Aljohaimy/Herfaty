@@ -47,6 +47,10 @@ class _CartState extends State<Cart> {
               } else if (snapshot.hasData) {
                 final cItems = snapshot.data!.toList();
 
+                print("--------------------------------------");
+                print(cItems);
+                print("--------------------------------------");
+
                 final groupedList = groupingItems(cItems);
 
                 Size size = MediaQuery.of(context).size;
@@ -326,16 +330,16 @@ class _CartState extends State<Cart> {
     );
   }
 
-  Map<num, List<CartModal>> groupingItems(List<CartModal> cItems) {
+  Map<String, List<CartModal>> groupingItems(List<CartModal> cItems) {
     final groups = groupBy(cItems, (CartModal e) {
-      return e.price; // .shopName
+      return e.shopName; // .shopName
     });
     return groups;
   }
 
 //test
 
-  Column buildView(k, cItems, size) {
+  Column buildView(String k, cItems, size) {
     return Column(
       children: [
         //Container(
@@ -344,7 +348,7 @@ class _CartState extends State<Cart> {
         ExpansionTile(
           title: Text(
             //k, //ضعي اسم المتجر ثم شيلي الكومنت
-            "اسم المتجر",
+            "متجر $k",
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
@@ -574,7 +578,7 @@ class _CartState extends State<Cart> {
                           ),
                         );*/
                       },
-                      label: const Text('دفع',
+                      label: const Text('طلب',
                           style: TextStyle(
                             fontSize: 18.0,
                           )),

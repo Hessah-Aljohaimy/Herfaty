@@ -129,9 +129,13 @@ Widget _buildList(List<CartModal> list) {
     margin: EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
     padding: EdgeInsets.all(1.0),
     decoration: BoxDecoration(
-      border: Border.all(color: Color(0xff51908E), width: 1),
-      borderRadius: BorderRadius.circular(10),
-    ),
+        color: Colors.white,
+        border: Border.all(color: Color(0xff51908E), width: 1),
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+              color: Color(0xff51908E).withOpacity(0.9), offset: Offset(1, 1))
+        ]),
     child: ExpansionTile(
       title: Text(
         //k, //ضعي اسم المتجر ثم شيلي الكومنت
@@ -244,9 +248,13 @@ class _addState extends State<add> {
       margin: EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
       padding: EdgeInsets.all(5.0),
       decoration: BoxDecoration(
-        border: Border.all(color: Color(0xff51908E), width: 1),
-        borderRadius: BorderRadius.circular(10),
-      ),
+          color: Colors.white,
+          border: Border.all(color: Color(0xff51908E), width: 1),
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+                color: Color(0xff51908E).withOpacity(0.9), offset: Offset(1, 1))
+          ]),
       child: Row(
         children: [
           Expanded(

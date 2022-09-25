@@ -21,9 +21,13 @@ class _payFormState extends State<payForm> {
       margin: EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
       padding: EdgeInsets.all(1.0),
       decoration: BoxDecoration(
-        border: Border.all(color: Color(0xff51908E), width: 1),
-        borderRadius: BorderRadius.circular(10),
-      ),
+          color: Colors.white,
+          border: Border.all(color: Color(0xff51908E), width: 1),
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+                color: Color(0xff51908E).withOpacity(0.9), offset: Offset(1, 1))
+          ]),
       child: BlocBuilder<PaymentBloc, PaymentState>(
         builder: (context, state) {
           CardFormEditController controller = CardFormEditController(
