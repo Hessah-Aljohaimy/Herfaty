@@ -54,12 +54,13 @@ class logOutButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("الإعدادات", style: TextStyle(color: kPrimaryColor)),
+        title: Text("الإعدادات",
+            style: TextStyle(color: Color.fromARGB(255, 81, 144, 142))),
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.logout, color: kPrimaryColor),
+          icon: Icon(Icons.logout, color: Color.fromARGB(255, 81, 144, 142)),
           onPressed: () async {
             showDialog(
                 context: context,
@@ -127,13 +128,13 @@ class logOutButton extends StatelessWidget {
                     Text(
                       "معلومات المشتري",
                       style: TextStyle(
-                          color: kPrimaryColor,
+                          color: Color.fromARGB(255, 81, 144, 142),
                           fontWeight: FontWeight.bold,
                           fontSize: 22),
                     ),
                     Icon(
                       Icons.person,
-                      color: Color.fromARGB(255, 79, 75, 75),
+                      color: Color.fromARGB(255, 81, 144, 142),
                       size: 28.0,
                     )
                   ],
