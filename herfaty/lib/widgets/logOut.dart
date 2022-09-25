@@ -284,7 +284,7 @@ class logOutButton extends StatelessWidget {
                 Align(
                   alignment: Alignment.bottomLeft,
                   child: Image.asset(
-                    "assets/images/footbg.png",
+                    "assets/images/down.png",
                     width: 200,
                   ),
                 ),
