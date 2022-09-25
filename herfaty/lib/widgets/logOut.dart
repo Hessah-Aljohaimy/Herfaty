@@ -27,8 +27,6 @@ class logOutButton extends StatelessWidget {
   PickedFile? _imageFile;
 
   final FirebaseAuth auth = FirebaseAuth.instance;
-  User? user;
-  var uid;
 
   String? id = '';
   String? email = '';
@@ -49,6 +47,12 @@ class logOutButton extends StatelessWidget {
   final icons = [Icons.person, Icons.email_rounded, Icons.lock];
 
   final ImagePicker _picker = ImagePicker();
+  logOutButton() {
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+    print('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
+    print(uid);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,20 +103,19 @@ class logOutButton extends StatelessWidget {
         automaticallyImplyLeading: false,
         iconTheme: IconThemeData(color: kPrimaryColor),
       ),
-      // body: StreamBuilder(
-      //   stream: FirebaseFirestore.instance
-      //       .collection('customers')
-      //       .where("uid", isEqualTo: currentUser.currentUser!.uid)
-      //       .snapshots(),
-      //   builder: ((context, snapshot) {
-      //     if (snapshot.hasError) {
-      //       return Text('!هناك خطأ في استرجاع البيانات${snapshot.hasError}');
-      //     } else if (snapshot.hasData) {
-      //       final customer = snapshot.data;
+      // body: FutureBuilder<Customer?>(
+      //     future: readUser(),
+      //     builder: (context, snapshot) {
+      //       if (snapshot.hasError) {
+      //         return Text('!هناك خطأ في استرجاع البيانات${snapshot.hasError}');
+      //       } else if (snapshot.hasData) {
+      //         final customer = snapshot.data;
 
-      //       return customer == null
-      //           ? const Center(child: Text('!لا توجد معلومات الحرفي'))
-      //           :
+      //         return customer == null
+      //             ? Center(
+      //                 child: Text('لا يوجد مشتري حاليا'),
+      //               )
+      //             : body;
       body: SizedBox(
         height: 600,
         child: SingleChildScrollView(
@@ -289,6 +292,204 @@ class logOutButton extends StatelessWidget {
         ),
       ),
     );
+    // } else {
+    //   return Center(
+    //     child: const CircularProgressIndicator(),
+    //   );
+    // }
+    //       }),
+    // );
+
+    // body: StreamBuilder(
+    //   stream: FirebaseFirestore.instance
+    //       .collection('customers')
+    //       .where("uid", isEqualTo: currentUser.currentUser!.uid)
+    //       .snapshots(),
+    //   builder: ((context, snapshot) {
+    //     if (snapshot.hasError) {
+    //       return Text('!هناك خطأ في استرجاع البيانات${snapshot.hasError}');
+    //     } else if (snapshot.hasData) {
+    //       final customer = snapshot.data;
+
+    //       return customer == null
+    //           ? const Center(child: Text('!لا توجد معلومات الحرفي'))
+    //           :
+    // body: SizedBox(
+    //   height: 600,
+    //   child: SingleChildScrollView(
+    //     reverse: true,
+    //     child: Column(
+    //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //         crossAxisAlignment: CrossAxisAlignment.start,
+    //         children: <Widget>[
+    //           Row(
+    //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //             crossAxisAlignment: CrossAxisAlignment.center,
+    //             children: [
+    //               Text(
+    //                 "معلومات المشتري",
+    //                 style: TextStyle(
+    //                     color: Color.fromARGB(255, 81, 144, 142),
+    //                     fontWeight: FontWeight.bold,
+    //                     fontSize: 22),
+    //               ),
+    //               Icon(
+    //                 Icons.person,
+    //                 color: Color.fromARGB(255, 81, 144, 142),
+    //                 size: 28.0,
+    //               )
+    //             ],
+    //           ),
+    //           ListView.builder(
+    //               scrollDirection: Axis.vertical,
+    //               shrinkWrap: true,
+    //               itemCount: titles.length,
+    //               itemBuilder: (context, index) {
+    //                 return Card(
+    //                   child: ListTile(
+    //                     title: SizedBox(
+    //                       height: 60,
+    //                       child: SingleChildScrollView(
+    //                         reverse: true,
+    //                         child: Column(
+    //                           crossAxisAlignment: CrossAxisAlignment.start,
+    //                           children: [
+    //                             Text(
+    //                               titles[index],
+    //                               style: TextStyle(
+    //                                   fontWeight: FontWeight.w800,
+    //                                   fontSize: 20,
+    //                                   color: kPrimaryColor),
+    //                             ),
+    //                             const SizedBox(
+    //                               height: 5,
+    //                             ),
+    //                             if (titles[index] == 'اسم المشتري')
+    //                               Text('مشتري'),
+    //                             // Text('اختبار اسم المشتري' +
+    //                             //     snapshot.data!.docs[index]['name']
+    //                             //         .toString()),
+    //                             if (titles[index] == 'البريد الإلكتروني')
+    //                               Text('بريد'),
+    //                             // Text(index.toString()),
+    //                             // Text('اختبار االبريد الالكتروني' +
+    //                             //     snapshot.data!.docs[index]['email']
+    //                             //         .toString()),
+    //                             if (titles[index] == 'كلمة المرور')
+    //                               Text('******'),
+    //                             // int passwordlen =snapshot.data!.docs[index]['password'].lenght();
+    //                           ],
+    //                         ),
+    //                       ),
+    //                     ),
+    //                     leading: Icon(
+    //                       icons[index],
+    //                       color: Color.fromARGB(255, 79, 75, 75),
+    //                     ),
+    //                   ),
+    //                 );
+    //               }),
+    //           Row(
+    //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //               crossAxisAlignment: CrossAxisAlignment.center,
+    //               children: [
+    //                 ElevatedButton(
+    //                   onPressed: () async {
+    //                     Navigator.pushReplacement(context, MaterialPageRoute(
+    //                         builder: (BuildContext context) {
+    //                       return CustomerEditProfile();
+    //                     }));
+    //                   },
+    //                   style: ButtonStyle(
+    //                     backgroundColor:
+    //                         MaterialStateProperty.all(Color(0xff51908E)),
+    //                     padding: MaterialStateProperty.all(
+    //                         EdgeInsets.symmetric(
+    //                             horizontal: 50, vertical: 13)),
+    //                     shape: MaterialStateProperty.all(
+    //                         RoundedRectangleBorder(
+    //                             borderRadius: BorderRadius.circular(27))),
+    //                   ),
+    //                   child: const Text(
+    //                     " تعديل البيانات",
+    //                     style: TextStyle(
+    //                         fontSize: 14,
+    //                         fontFamily: "Tajawal",
+    //                         fontWeight: FontWeight.bold),
+    //                   ),
+    //                 ),
+    //                 // const SizedBox(
+    //                 //   width: 10,
+    //                 // ),
+    //                 ElevatedButton(
+    //                   onPressed: () async {
+    //                     showDialog(
+    //                         context: context,
+    //                         builder: (BuildContext context) {
+    //                           return AlertDialog(
+    //                             title: Text("تنبيه"),
+    //                             content: Text('سيتم حذف الحساب نهائيا'),
+    //                             actions: <Widget>[
+    //                               TextButton(
+    //                                 child: Text("حذف",
+    //                                     style: TextStyle(color: Colors.red)),
+    //                                 onPressed: () {
+    //                                   //The logic of deleting an account
+
+    //                                   //Navigator.of(context).pop();
+    //                                   FirebaseAuth.instance.signOut();
+    //                                   Navigator.of(context,
+    //                                           rootNavigator: true)
+    //                                       .pushReplacement(MaterialPageRoute(
+    //                                           builder: (context) =>
+    //                                               new Welcome()));
+    //                                 },
+    //                               ),
+    //                               TextButton(
+    //                                 child: Text("تراجع"),
+    //                                 onPressed: () {
+    //                                   Navigator.of(context).pop();
+    //                                 },
+    //                               )
+    //                             ],
+    //                           );
+    //                         });
+
+    //                     /*Navigator.pushReplacement(context,
+    //                                   MaterialPageRoute(builder: (BuildContext context) {
+    //                                 return Welcome();
+    //                               }));*/
+    //                   },
+    //                   style: ButtonStyle(
+    //                     backgroundColor: MaterialStateProperty.all(
+    //                         Color.fromARGB(255, 221, 112, 112)),
+    //                     padding: MaterialStateProperty.all(
+    //                         EdgeInsets.symmetric(
+    //                             horizontal: 50, vertical: 13)),
+    //                     shape: MaterialStateProperty.all(
+    //                         RoundedRectangleBorder(
+    //                             borderRadius: BorderRadius.circular(27))),
+    //                   ),
+    //                   child: Text(
+    //                     "حذف الحساب",
+    //                     style: TextStyle(
+    //                         fontSize: 14,
+    //                         fontFamily: "Tajawal",
+    //                         fontWeight: FontWeight.bold),
+    //                   ),
+    //                 ),
+    //               ]),
+    //           Align(
+    //             alignment: Alignment.bottomLeft,
+    //             child: Image.asset(
+    //               "assets/images/footbg.png",
+    //               width: 200,
+    //             ),
+    //           ),
+    //         ]),
+    //   ),
+    // ),
+    // );
     // : buildCustomer(customer, context);
     // } else {
     //   // ignore: prefer_const_constructors
@@ -425,17 +626,18 @@ class logOutButton extends StatelessWidget {
 }
 
 Future<Customer?> readUser() async {
-  // final User? user = auth.currentUser;
-  // final uid = user!.uid;
-  final uid = 'ahAHXEwM3xNJ738ZeiKEdvVNnn13';
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  final User? user = auth.currentUser;
+  final uid = user!.uid;
+
   print(uid);
 
-  final docCustomer =
-      FirebaseFirestore.instance.collection('customers').doc(uid);
-  final snapshot = await docCustomer.get();
-  if (snapshot.exists) {
-    return Customer.fromJson(snapshot.data()!);
-  }
+  // final docCustomer =
+  //     FirebaseFirestore.instance.collection('customers').doc(uid);
+  // final snapshot = await docCustomer.get();
+  // if (snapshot.exists) {
+  //   return Customer.fromJson(snapshot.data()!);
+  // }
 }
 
 Widget buildCustomer(Customer customer, BuildContext context) {
