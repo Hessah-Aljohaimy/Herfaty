@@ -41,16 +41,34 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_stripe: ^3.2.0
-  http: ^0.13.1
+  #http: ^0.13.1
   fluttertoast: ^8.0.9
   google_fonts: ^3.0.1
   google_nav_bar: ^5.0.6
   image_picker: ^0.8.5+3
   persistent_bottom_nav_bar: any
   style_random: ^0.0.1+1
-  flutter_bloc : ^8.0.1
+  flutter_bloc : any
   equatable : ^2.0.3
   status_change: ^2.0.0
+  
+  http: any
+
+  google_maps_place_picker: any
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  
+  
   
 
 dev_dependencies:

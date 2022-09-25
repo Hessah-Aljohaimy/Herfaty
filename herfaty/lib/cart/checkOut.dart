@@ -2,9 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:google_maps_place_picker/google_maps_place_picker.dart';
+import 'package:herfaty/cart/payForm.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/models/cartModal.dart';
 import 'package:status_change/status_change.dart';
+
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class checkOut extends StatelessWidget {
   List<CartModal> Items;
@@ -25,8 +29,75 @@ class checkOut extends StatelessWidget {
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
         appBar: DefaultAppBar(title: "إكمال عملية الدفع"),
-        body: _buildList(Items),
-        
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                height: 25,
+                width: double.infinity,
+                margin: EdgeInsets.only(top: 15.0, left: 10.0, right: 10.0),
+                child: Text(
+                  "ملخص الطلب",
+                  textAlign: TextAlign.right,
+                  style: TextStyle(
+                      color: Color(0xff5596A5),
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.italic,
+                      fontFamily: "Tajawal"),
+                ),
+              ),
+              _buildList(Items),
+              Container(
+                height: 25,
+                width: double.infinity,
+                margin: EdgeInsets.only(top: 20.0, left: 10.0, right: 10.0),
+                child: Text(
+                  "موقع التوصيل",
+                  textAlign: TextAlign.right,
+                  style: TextStyle(
+                      color: Color(0xff5596A5),
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.italic,
+                      fontFamily: "Tajawal"),
+                ),
+              ),
+              add(),
+              Container(
+                height: 25,
+                width: double.infinity,
+                margin: EdgeInsets.only(top: 20.0, left: 10.0, right: 10.0),
+                child: Text(
+                  "بيانات الدفع",
+                  textAlign: TextAlign.right,
+                  style: TextStyle(
+                      color: Color(0xff5596A5),
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.italic,
+                      fontFamily: "Tajawal"),
+                ),
+              ),
+              payForm(),
+              Container(
+                height: 35,
+                width: double.infinity,
+                color: Colors.white,
+                margin: EdgeInsets.only(top: 10.0, left: 8.0, right: 8.0),
+                padding: EdgeInsets.all(4.0),
+                child: Text("المجموع $totalPrice ريال",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Color(0xff5596A5),
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Tajawal",
+                    )),
+              ),
+            ],
+          ),
+        ),
       ),
     ); // Column
   }
@@ -53,64 +124,64 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-Widget _drawer(List<CartModal> data) {
-  return Drawer(
-      child: SafeArea(
-    child: SingleChildScrollView(),
-  ));
-}
-
 Widget _buildList(List<CartModal> list) {
-  return ExpansionTile(
-    title: Text(
-      //k, //ضعي اسم المتجر ثم شيلي الكومنت
-      "المنتجات المختارة من اسم المتجر",
-      style: TextStyle(
-          fontWeight: FontWeight.bold, fontSize: 20, color: Color(0xff5596A5)),
+  return Container(
+    margin: EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
+    padding: EdgeInsets.all(1.0),
+    decoration: BoxDecoration(
+      border: Border.all(color: Color(0xff51908E), width: 1),
+      borderRadius: BorderRadius.circular(10),
     ),
-    children: <Widget>[
-      Center(
-        child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: list.length,
-            itemBuilder: (context, index) {
-              return Container(
-                margin: EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-                padding: EdgeInsets.all(8.0),
-                decoration:
-                    BoxDecoration(border: Border.all(color: Color(0xFFF1F1F1))),
-                child: Row(
-                  children: [
-                    ProductImage(
-                      size: MediaQuery.of(context).size,
-                      image: list[index].image,
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(list[index].name,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(fontSize: 16.0)),
-                            Text(" ${list[index].price.toString()}ريال "),
-                          ],
+    child: ExpansionTile(
+      title: Text(
+        //k, //ضعي اسم المتجر ثم شيلي الكومنت
+        "اسم المتجر",
+        style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 15,
+            color: Color(0xff51908E)),
+      ),
+      children: <Widget>[
+        Center(
+          child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: list.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
+                  padding: EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Color(0xFFF1F1F1))),
+                  child: Row(
+                    children: [
+                      ProductImage(
+                        size: MediaQuery.of(context).size,
+                        image: list[index].image,
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(list[index].name,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(fontSize: 16.0)),
+                              Text(" ${list[index].price.toString()}ريال "),
+                              Text("الكمية ${list[index].quantity.toString()}"),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              );
-            }),
-      ),
-    ],
+                    ],
+                  ),
+                );
+              }),
+        ),
+      ],
+    ),
   );
 }
-
-
-
-
 
 class ProductImage extends StatelessWidget {
   const ProductImage({
@@ -128,6 +199,116 @@ class ProductImage extends StatelessWidget {
       height: 90.0,
       width: 90.0,
       fit: BoxFit.cover,
+    );
+  }
+}
+/*
+Widget adress() {
+  String msg = 'ادخل موقعك';
+  return Container(
+    margin: EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
+    padding: EdgeInsets.all(8.0),
+    decoration: BoxDecoration(border: Border.all(color: Color(0xFFF1F1F1))),
+    child: Row(
+      children: [
+        Text(
+          msg,
+          style: TextStyle(fontSize: 16),
+        ),
+        ElevatedButton(
+          child: Text(
+            "اضغط هنا لتحديد موقعك",
+            style: TextStyle(fontSize: 20),
+          ),
+          onPressed: _changeText,
+        )
+      ],
+    ),
+  );
+}*/
+
+class add extends StatefulWidget {
+  const add({Key? key}) : super(key: key);
+
+  @override
+  _addState createState() => _addState();
+}
+
+class _addState extends State<add> {
+  String msg = 'ادخل موقعك';
+  String msgButton = "اضغط هنا لتحديد موقعك";
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
+      padding: EdgeInsets.all(5.0),
+      decoration: BoxDecoration(
+        border: Border.all(color: Color(0xff51908E), width: 1),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: Text(
+                msg,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Color(0xff51908E),
+                  fontWeight: FontWeight.bold,
+                ),
+                overflow: TextOverflow.ellipsis,
+                softWrap: false,
+                maxLines: 5,
+              ),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(left: 8.0, top: 2.0, bottom: 2.0),
+            child: ElevatedButton(
+              child: Text(
+                msgButton,
+                style: TextStyle(fontSize: 15),
+              ),
+              onPressed: _changeText,
+              style: ElevatedButton.styleFrom(
+                  primary: Color(0xff51908E),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  fixedSize: Size(165, 35)),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  _changeText() {
+    final kInitialPosition = LatLng(24.575714, 46.830308);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PlacePicker(
+          apiKey:
+              "AIzaSyAwT-rSNhTijJZ2Op4IWMddDdLF0Dcq8-o", // Put YOUR OWN KEY here.
+          onPlacePicked: (result) {
+            print(result.formattedAddress);
+            Navigator.of(context).pop();
+            setState(() {
+              if (result.formattedAddress is Null) {
+                msg = 'ادخل الموقع';
+              } else {
+                msg = result.formattedAddress!;
+                msgButton = "تم تحديد الموقع";
+              }
+            });
+          },
+          initialPosition: kInitialPosition,
+          useCurrentLocation: true,
+        ),
+      ),
     );
   }
 }

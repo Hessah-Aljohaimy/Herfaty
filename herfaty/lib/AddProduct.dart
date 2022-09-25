@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/firestore/firestore.dart';
@@ -451,16 +452,30 @@ class _AddProductState extends State<AddProduct> {
                     int amount = int.parse(amountController.text);
                     double priceN = double.parse(priceController.text);
 
+                    /*
+
+                    final user;
+                    user = FirebaseAuth.instance.currentUser;
+                    final uid = user.uid;
+
+                    FirebaseFirestore.instance
+                        .collection("users")
+                        .where("email", isEqualTo: uid)
+                        .snapshots()
+                        .map((snapshot) =>
+                        snapshot.docs.map((doc) => CartModal.fromJson(doc.data())).toList());*/
+
                     final productToBeAdded =
                         FirebaseFirestore.instance.collection('Products').doc();
                     Product product = Product(
-                        id: productToBeAdded.id,
-                        name: prodName,
-                        dsscription: desc,
-                        avalibleAmount: amount,
-                        image: uploadImageUrl,
-                        categoryName: dropdownvalue,
-                        price: priceN);
+                      id: productToBeAdded.id,
+                      name: prodName,
+                      dsscription: desc,
+                      avalibleAmount: amount,
+                      image: uploadImageUrl,
+                      categoryName: dropdownvalue,
+                      price: priceN,
+                    );
                     final json = product.toJson();
                     await productToBeAdded.set(json);
                     //await Firestore.saveProduct(product);

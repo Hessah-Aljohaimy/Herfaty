@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_maps_place_picker/google_maps_place_picker.dart';
 import 'package:herfaty/cart/checkOut.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/models/cartModal.dart';
@@ -12,6 +13,8 @@ import "package:collection/collection.dart";
 import 'package:herfaty/cart/payForm.dart';
 import '../pages/welcome.dart';
 
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 class Cart extends StatefulWidget {
   const Cart({Key? key}) : super(key: key);
 
@@ -20,6 +23,8 @@ class Cart extends StatefulWidget {
 }
 
 class _CartState extends State<Cart> {
+  static final kInitialPosition = LatLng(-33.8567844, 151.213108);
+
   @override
   Widget build(BuildContext context) {
     double total = 0;
@@ -531,20 +536,43 @@ class _CartState extends State<Cart> {
                       heroTag: "btn ${Random().nextInt(100)}",
                       elevation: 0,
                       onPressed: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => checkOut(
-                        //           Items: cItems.toList(),
-                        //           totalPrice: calculatTotal(cItems))),
-                        // );
+                        //check out page
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => checkOut(
+                                  Items: cItems.toList(),
+                                  totalPrice: calculatTotal(cItems))),
+                        );
 
+                        // pay form page
+                        /*
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => payForm()
                          ) );
-                        // Add your onPressed code here!
+
+                         */
+
+                        //LOCATION PAGE
+                        /*Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PlacePicker(
+                              apiKey:
+                                  "AIzaSyAwT-rSNhTijJZ2Op4IWMddDdLF0Dcq8-o", // Put YOUR OWN KEY here.
+                              onPlacePicked: (result) {
+                                print("------------------------------");
+                                print(result.formattedAddress);
+                                print("------------------------------");
+                                Navigator.of(context).pop();
+                              },
+                              initialPosition: kInitialPosition,
+                              useCurrentLocation: true,
+                            ),
+                          ),
+                        );*/
                       },
                       label: const Text('دفع',
                           style: TextStyle(
