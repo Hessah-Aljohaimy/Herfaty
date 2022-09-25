@@ -167,12 +167,12 @@ class logOutButton extends StatelessWidget {
                                     height: 5,
                                   ),
                                   if (titles[index] == 'اسم المشتري')
-                                    Text('مشتري'),
+                                    Text('مها خالد'),
                                   // Text('اختبار اسم المشتري' +
                                   //     snapshot.data!.docs[index]['name']
                                   //         .toString()),
                                   if (titles[index] == 'البريد الإلكتروني')
-                                    Text('بريد'),
+                                    Text('mahaKahlid1@gmail.com'),
                                   // Text(index.toString()),
                                   // Text('اختبار االبريد الالكتروني' +
                                   //     snapshot.data!.docs[index]['email']
