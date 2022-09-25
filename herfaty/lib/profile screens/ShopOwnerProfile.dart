@@ -155,6 +155,11 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                               Expanded(
                                   child: Row(
                                 children: <Widget>[
+                                  Icon(Icons.person,
+                                      color: Color.fromARGB(255, 90, 90, 90)),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
                                   Text(
                                     "الاسم  ",
                                     style: TextStyle(
@@ -176,6 +181,11 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                               Expanded(
                                   child: Row(
                                 children: <Widget>[
+                                  Icon(Icons.email_rounded,
+                                      color: Color.fromARGB(255, 90, 90, 90)),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
                                   Text(
                                     "البريد الالكتروني",
                                     style: TextStyle(
@@ -196,6 +206,11 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                               Expanded(
                                   child: Row(
                                 children: <Widget>[
+                                  Icon(Icons.date_range,
+                                      color: Color.fromARGB(255, 90, 90, 90)),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
                                   Text(
                                     "تاريخ الميلاد",
                                     style: TextStyle(
@@ -216,6 +231,11 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                               Expanded(
                                   child: Row(
                                 children: <Widget>[
+                                  Icon(Icons.phone_android,
+                                      color: Color.fromARGB(255, 90, 90, 90)),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
                                   Text(
                                     "رقم الجوال",
                                     style: TextStyle(
@@ -224,6 +244,9 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                         color: Color.fromARGB(255, 26, 96, 91)),
                                   ),
                                   // ${so.phone_number}
+                                  SizedBox(
+                                    width: 5,
+                                  ),
                                   Text(
                                     "0550088000",
                                     style: TextStyle(
