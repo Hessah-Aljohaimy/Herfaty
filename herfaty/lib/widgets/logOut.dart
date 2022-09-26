@@ -128,425 +128,426 @@ class logOutButton extends StatelessWidget {
         automaticallyImplyLeading: false,
         iconTheme: IconThemeData(color: kPrimaryColor),
       ),
-      // body: FutureBuilder<Customer?>(
-      //     future: readUser(),
-      //     builder: (context, snapshot) {
-      //       if (snapshot.connectionState == ConnectionState.waiting) {
-      //         print('11111111111111111111111111111111111111');
-      //         return Center(child: CircularProgressIndicator());
-      //       }
+      body: FutureBuilder<Customer?>(
+          future: readUser(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              print('11111111111111111111111111111111111111');
+              return Center(child: CircularProgressIndicator());
+            }
 
-      //       if (snapshot.hasError) {
-      //         print('333333333333333333333333333333333333333333333');
-      //         return Center(
-      //             child: Text(
-      //                 '!هناك خطأ في استرجاع البيانات${snapshot.hasError}'));
-      //       }
+            if (snapshot.hasError) {
+              print('333333333333333333333333333333333333333333333');
+              return Center(
+                  child: Text(
+                      '!هناك خطأ في استرجاع البيانات${snapshot.hasError}'));
+            }
 
-      //       if (snapshot.hasData) {
-      //         print('4444444444444444444444444444444444444444');
+            if (snapshot.hasData) {
+              print('4444444444444444444444444444444444444444');
 
-      //         final customer = snapshot.data;
+              final customer = snapshot.data;
 
-      //         return customer == null
-      //             ? Center(
-      //                 child: Text('لا يوجد مشتري حاليا'),
-      //               )
-      //             : buildCustomer(customer, context);
-      //       }
-      //       if (!snapshot.hasData) {
-      //         print('2222222222222222222222222222222222222222222222');
-      //         return Center(child: Text('! خطأ في عرض البيانات '));
-      //       } else {
-      //         return Center(child: Text('! خطأ '));
-      //       }
-      //     }),
+              return customer == null
+                  ? Center(
+                      child: Text('لا يوجد مشتري حاليا'),
+                    )
+                  : buildCustomer(customer, context);
+            }
+            if (!snapshot.hasData) {
+              print('2222222222222222222222222222222222222222222222');
+              return Center(child: Text('! خطأ في عرض البيانات '));
+            } else {
+              return Center(child: Text('! خطأ '));
+            }
+          }),
 
 //////////////////////////////////SIZED BOX////////////////////////////
 
-      body: SizedBox(
-        height: 600,
-        child: SingleChildScrollView(
-          reverse: true,
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      "معلومات المشتري",
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 81, 144, 142),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 22),
-                    ),
-                    Icon(
-                      Icons.person,
-                      color: Color.fromARGB(255, 81, 144, 142),
-                      size: 28.0,
-                    )
-                  ],
-                ),
-                ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: titles.length,
-                    itemBuilder: (context, index) {
-                      return Card(
-                        child: ListTile(
-                          title: SizedBox(
-                            height: 60,
-                            child: SingleChildScrollView(
-                              reverse: true,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    titles[index],
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w800,
-                                        fontSize: 20,
-                                        color: kPrimaryColor),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  if (titles[index] == 'اسم المشتري')
-                                    Text('مها خالد'),
-                                  // Text('اختبار اسم المشتري' +
-                                  //     snapshot.data!.docs[index]['name']
-                                  //         .toString()),
-                                  if (titles[index] == 'البريد الإلكتروني')
-                                    Text('mahaKahlid1@gmail.com'),
-                                  // Text(index.toString()),
-                                  // Text('اختبار االبريد الالكتروني' +
-                                  //     snapshot.data!.docs[index]['email']
-                                  //         .toString()),
-                                  if (titles[index] == 'كلمة المرور')
-                                    Text('******'),
-                                  // int passwordlen =snapshot.data!.docs[index]['password'].lenght();
-                                ],
-                              ),
-                            ),
-                          ),
-                          leading: Icon(
-                            icons[index],
-                            color: Color.fromARGB(255, 79, 75, 75),
-                          ),
-                        ),
-                      );
-                    }),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () async {
-                          Navigator.pushReplacement(context, MaterialPageRoute(
-                              builder: (BuildContext context) {
-                            return CustomerEditProfile();
-                          }));
-                        },
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Color(0xff51908E)),
-                          padding: MaterialStateProperty.all(
-                              EdgeInsets.symmetric(
-                                  horizontal: 50, vertical: 13)),
-                          shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(27))),
-                        ),
-                        child: const Text(
-                          " تعديل البيانات",
-                          style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: "Tajawal",
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      // const SizedBox(
-                      //   width: 10,
-                      // ),
-                      ElevatedButton(
-                        onPressed: () async {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: Text("تنبيه"),
-                                  content: Text('سيتم حذف الحساب نهائيا'),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      child: Text("حذف",
-                                          style: TextStyle(color: Colors.red)),
-                                      onPressed: () {
-                                        //The logic of deleting an account
+      // body: SizedBox(
+      //   height: 600,
+      //   child: SingleChildScrollView(
+      //     reverse: true,
+      //     child: Column(
+      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //         crossAxisAlignment: CrossAxisAlignment.start,
+      //         children: <Widget>[
+      //           Row(
+      //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //             crossAxisAlignment: CrossAxisAlignment.center,
+      //             children: [
+      //               Text(
+      //                 "معلومات المشتري",
+      //                 style: TextStyle(
+      //                     color: Color.fromARGB(255, 81, 144, 142),
+      //                     fontWeight: FontWeight.bold,
+      //                     fontSize: 22),
+      //               ),
+      //               Icon(
+      //                 Icons.person,
+      //                 color: Color.fromARGB(255, 81, 144, 142),
+      //                 size: 28.0,
+      //               )
+      //             ],
+      //           ),
+      //           ListView.builder(
+      //               scrollDirection: Axis.vertical,
+      //               shrinkWrap: true,
+      //               itemCount: titles.length,
+      //               itemBuilder: (context, index) {
+      //                 return Card(
+      //                   child: ListTile(
+      //                     title: SizedBox(
+      //                       height: 60,
+      //                       child: SingleChildScrollView(
+      //                         reverse: true,
+      //                         child: Column(
+      //                           crossAxisAlignment: CrossAxisAlignment.start,
+      //                           children: [
+      //                             Text(
+      //                               titles[index],
+      //                               style: TextStyle(
+      //                                   fontWeight: FontWeight.w800,
+      //                                   fontSize: 20,
+      //                                   color: kPrimaryColor),
+      //                             ),
+      //                             const SizedBox(
+      //                               height: 5,
+      //                             ),
+      //                             if (titles[index] == 'اسم المشتري')
+      //                               Text('مها خالد'),
+      //                             // Text('اختبار اسم المشتري' +
+      //                             //     snapshot.data!.docs[index]['name']
+      //                             //         .toString()),
+      //                             if (titles[index] == 'البريد الإلكتروني')
+      //                               Text('mahaKahlid1@gmail.com'),
+      //                             // Text(index.toString()),
+      //                             // Text('اختبار االبريد الالكتروني' +
+      //                             //     snapshot.data!.docs[index]['email']
+      //                             //         .toString()),
+      //                             if (titles[index] == 'كلمة المرور')
+      //                               Text('******'),
+      //                             // int passwordlen =snapshot.data!.docs[index]['password'].lenght();
+      //                           ],
+      //                         ),
+      //                       ),
+      //                     ),
+      //                     leading: Icon(
+      //                       icons[index],
+      //                       color: Color.fromARGB(255, 79, 75, 75),
+      //                     ),
+      //                   ),
+      //                 );
+      //               }),
+      //           Row(
+      //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //               crossAxisAlignment: CrossAxisAlignment.center,
+      //               children: [
+      //                 ElevatedButton(
+      //                   onPressed: () async {
+      //                     Navigator.pushReplacement(context, MaterialPageRoute(
+      //                         builder: (BuildContext context) {
+      //                       return CustomerEditProfile();
+      //                     }));
+      //                   },
+      //                   style: ButtonStyle(
+      //                     backgroundColor:
+      //                         MaterialStateProperty.all(Color(0xff51908E)),
+      //                     padding: MaterialStateProperty.all(
+      //                         EdgeInsets.symmetric(
+      //                             horizontal: 50, vertical: 13)),
+      //                     shape: MaterialStateProperty.all(
+      //                         RoundedRectangleBorder(
+      //                             borderRadius: BorderRadius.circular(27))),
+      //                   ),
+      //                   child: const Text(
+      //                     " تعديل البيانات",
+      //                     style: TextStyle(
+      //                         fontSize: 14,
+      //                         fontFamily: "Tajawal",
+      //                         fontWeight: FontWeight.bold),
+      //                   ),
+      //                 ),
+      //                 // const SizedBox(
+      //                 //   width: 10,
+      //                 // ),
+      //                 ElevatedButton(
+      //                   onPressed: () async {
+      //                     showDialog(
+      //                         context: context,
+      //                         builder: (BuildContext context) {
+      //                           return AlertDialog(
+      //                             title: Text("تنبيه"),
+      //                             content: Text('سيتم حذف الحساب نهائيا'),
+      //                             actions: <Widget>[
+      //                               TextButton(
+      //                                 child: Text("حذف",
+      //                                     style: TextStyle(color: Colors.red)),
+      //                                 onPressed: () {
+      //                                   //The logic of deleting an account
 
-                                        //Navigator.of(context).pop();
-                                        FirebaseAuth.instance.signOut();
-                                        Navigator.of(context,
-                                                rootNavigator: true)
-                                            .pushReplacement(MaterialPageRoute(
-                                                builder: (context) =>
-                                                    new Welcome()));
-                                      },
-                                    ),
-                                    TextButton(
-                                      child: Text("تراجع"),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    )
-                                  ],
-                                );
-                              });
+      //                                   //Navigator.of(context).pop();
+      //                                   FirebaseAuth.instance.signOut();
+      //                                   Navigator.of(context,
+      //                                           rootNavigator: true)
+      //                                       .pushReplacement(MaterialPageRoute(
+      //                                           builder: (context) =>
+      //                                               new Welcome()));
+      //                                 },
+      //                               ),
+      //                               TextButton(
+      //                                 child: Text("تراجع"),
+      //                                 onPressed: () {
+      //                                   Navigator.of(context).pop();
+      //                                 },
+      //                               )
+      //                             ],
+      //                           );
+      //                         });
 
-                          /*Navigator.pushReplacement(context,
-                                        MaterialPageRoute(builder: (BuildContext context) {
-                                      return Welcome();
-                                    }));*/
-                        },
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              Color.fromARGB(255, 221, 112, 112)),
-                          padding: MaterialStateProperty.all(
-                              EdgeInsets.symmetric(
-                                  horizontal: 50, vertical: 13)),
-                          shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(27))),
-                        ),
-                        child: Text(
-                          "حذف الحساب",
-                          style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: "Tajawal",
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ]),
-                Align(
-                  alignment: Alignment.bottomLeft,
-                  child: Image.asset(
-                    "assets/images/down.png",
-                    width: 200,
-                  ),
-                ),
-              ]),
-        ),
-      ),
+      //                     /*Navigator.pushReplacement(context,
+      //                                   MaterialPageRoute(builder: (BuildContext context) {
+      //                                 return Welcome();
+      //                               }));*/
+      //                   },
+      //                   style: ButtonStyle(
+      //                     backgroundColor: MaterialStateProperty.all(
+      //                         Color.fromARGB(255, 221, 112, 112)),
+      //                     padding: MaterialStateProperty.all(
+      //                         EdgeInsets.symmetric(
+      //                             horizontal: 50, vertical: 13)),
+      //                     shape: MaterialStateProperty.all(
+      //                         RoundedRectangleBorder(
+      //                             borderRadius: BorderRadius.circular(27))),
+      //                   ),
+      //                   child: Text(
+      //                     "حذف الحساب",
+      //                     style: TextStyle(
+      //                         fontSize: 14,
+      //                         fontFamily: "Tajawal",
+      //                         fontWeight: FontWeight.bold),
+      //                   ),
+      //                 ),
+      //               ]),
+      //           Align(
+      //             alignment: Alignment.bottomLeft,
+      //             child: Image.asset(
+      //               "assets/images/down.png",
+      //               width: 200,
+      //             ),
+      //           ),
+      //         ]),
+      //   ),
+      // ),
+
+      // } else {
+      //   return Center(
+      //     child: const CircularProgressIndicator(),
+      //   );
+      // }
+      //       }),
+      // );
+
+      // body: StreamBuilder(
+      //   stream: FirebaseFirestore.instance
+      //       .collection('customers')
+      //       .where("uid", isEqualTo: currentUser.currentUser!.uid)
+      //       .snapshots(),
+      //   builder: ((context, snapshot) {
+      //     if (snapshot.hasError) {
+      //       return Center(child:Text('!هناك خطأ في استرجاع البيانات${snapshot.hasError}'),);
+      //     }else if(!snapshot.hasData){
+      //
+      //    //            return Center(child: Text('!لا توجد معلومات الحرفي'));
+
+      //
+      //
+      // }
+      //
+      //
+      // else if (snapshot.hasData) {
+      //       final customer = snapshot.data;
+
+      //       return customer == null
+      //           ? const Center(child: Text('!لا توجد معلومات الحرفي'))
+      //           :
+      // body: SizedBox(
+      //   height: 600,
+      //   child: SingleChildScrollView(
+      //     reverse: true,
+      //     child: Column(
+      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //         crossAxisAlignment: CrossAxisAlignment.start,
+      //         children: <Widget>[
+      //           Row(
+      //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //             crossAxisAlignment: CrossAxisAlignment.center,
+      //             children: [
+      //               Text(
+      //                 "معلومات المشتري",
+      //                 style: TextStyle(
+      //                     color: Color.fromARGB(255, 81, 144, 142),
+      //                     fontWeight: FontWeight.bold,
+      //                     fontSize: 22),
+      //               ),
+      //               Icon(
+      //                 Icons.person,
+      //                 color: Color.fromARGB(255, 81, 144, 142),
+      //                 size: 28.0,
+      //               )
+      //             ],
+      //           ),
+      //           ListView.builder(
+      //               scrollDirection: Axis.vertical,
+      //               shrinkWrap: true,
+      //               itemCount: titles.length,
+      //               itemBuilder: (context, index) {
+      //                 return Card(
+      //                   child: ListTile(
+      //                     title: SizedBox(
+      //                       height: 60,
+      //                       child: SingleChildScrollView(
+      //                         reverse: true,
+      //                         child: Column(
+      //                           crossAxisAlignment: CrossAxisAlignment.start,
+      //                           children: [
+      //                             Text(
+      //                               titles[index],
+      //                               style: TextStyle(
+      //                                   fontWeight: FontWeight.w800,
+      //                                   fontSize: 20,
+      //                                   color: kPrimaryColor),
+      //                             ),
+      //                             const SizedBox(
+      //                               height: 5,
+      //                             ),
+      //                             if (titles[index] == 'اسم المشتري')
+      //                               Text('مشتري'),
+      //                             // Text('اختبار اسم المشتري' +
+      //                             //     snapshot.data!.docs[index]['name']
+      //                             //         .toString()),
+      //                             if (titles[index] == 'البريد الإلكتروني')
+      //                               Text('بريد'),
+      //                             // Text(index.toString()),
+      //                             // Text('اختبار االبريد الالكتروني' +
+      //                             //     snapshot.data!.docs[index]['email']
+      //                             //         .toString()),
+      //                             if (titles[index] == 'كلمة المرور')
+      //                               Text('******'),
+      //                             // int passwordlen =snapshot.data!.docs[index]['password'].lenght();
+      //                           ],
+      //                         ),
+      //                       ),
+      //                     ),
+      //                     leading: Icon(
+      //                       icons[index],
+      //                       color: Color.fromARGB(255, 79, 75, 75),
+      //                     ),
+      //                   ),
+      //                 );
+      //               }),
+      //           Row(
+      //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //               crossAxisAlignment: CrossAxisAlignment.center,
+      //               children: [
+      //                 ElevatedButton(
+      //                   onPressed: () async {
+      //                     Navigator.pushReplacement(context, MaterialPageRoute(
+      //                         builder: (BuildContext context) {
+      //                       return CustomerEditProfile();
+      //                     }));
+      //                   },
+      //                   style: ButtonStyle(
+      //                     backgroundColor:
+      //                         MaterialStateProperty.all(Color(0xff51908E)),
+      //                     padding: MaterialStateProperty.all(
+      //                         EdgeInsets.symmetric(
+      //                             horizontal: 50, vertical: 13)),
+      //                     shape: MaterialStateProperty.all(
+      //                         RoundedRectangleBorder(
+      //                             borderRadius: BorderRadius.circular(27))),
+      //                   ),
+      //                   child: const Text(
+      //                     " تعديل البيانات",
+      //                     style: TextStyle(
+      //                         fontSize: 14,
+      //                         fontFamily: "Tajawal",
+      //                         fontWeight: FontWeight.bold),
+      //                   ),
+      //                 ),
+      //                 // const SizedBox(
+      //                 //   width: 10,
+      //                 // ),
+      //                 ElevatedButton(
+      //                   onPressed: () async {
+      //                     showDialog(
+      //                         context: context,
+      //                         builder: (BuildContext context) {
+      //                           return AlertDialog(
+      //                             title: Text("تنبيه"),
+      //                             content: Text('سيتم حذف الحساب نهائيا'),
+      //                             actions: <Widget>[
+      //                               TextButton(
+      //                                 child: Text("حذف",
+      //                                     style: TextStyle(color: Colors.red)),
+      //                                 onPressed: () {
+      //                                   //The logic of deleting an account
+
+      //                                   //Navigator.of(context).pop();
+      //                                   FirebaseAuth.instance.signOut();
+      //                                   Navigator.of(context,
+      //                                           rootNavigator: true)
+      //                                       .pushReplacement(MaterialPageRoute(
+      //                                           builder: (context) =>
+      //                                               new Welcome()));
+      //                                 },
+      //                               ),
+      //                               TextButton(
+      //                                 child: Text("تراجع"),
+      //                                 onPressed: () {
+      //                                   Navigator.of(context).pop();
+      //                                 },
+      //                               )
+      //                             ],
+      //                           );
+      //                         });
+
+      //                     /*Navigator.pushReplacement(context,
+      //                                   MaterialPageRoute(builder: (BuildContext context) {
+      //                                 return Welcome();
+      //                               }));*/
+      //                   },
+      //                   style: ButtonStyle(
+      //                     backgroundColor: MaterialStateProperty.all(
+      //                         Color.fromARGB(255, 221, 112, 112)),
+      //                     padding: MaterialStateProperty.all(
+      //                         EdgeInsets.symmetric(
+      //                             horizontal: 50, vertical: 13)),
+      //                     shape: MaterialStateProperty.all(
+      //                         RoundedRectangleBorder(
+      //                             borderRadius: BorderRadius.circular(27))),
+      //                   ),
+      //                   child: Text(
+      //                     "حذف الحساب",
+      //                     style: TextStyle(
+      //                         fontSize: 14,
+      //                         fontFamily: "Tajawal",
+      //                         fontWeight: FontWeight.bold),
+      //                   ),
+      //                 ),
+      //               ]),
+      //           Align(
+      //             alignment: Alignment.bottomLeft,
+      //             child: Image.asset(
+      //               "assets/images/footbg.png",
+      //               width: 200,
+      //             ),
+      //           ),
+      //         ]),
+      //   ),
+      // ),
+      // );
     );
-    // } else {
-    //   return Center(
-    //     child: const CircularProgressIndicator(),
-    //   );
-    // }
-    //       }),
-    // );
-
-    // body: StreamBuilder(
-    //   stream: FirebaseFirestore.instance
-    //       .collection('customers')
-    //       .where("uid", isEqualTo: currentUser.currentUser!.uid)
-    //       .snapshots(),
-    //   builder: ((context, snapshot) {
-    //     if (snapshot.hasError) {
-    //       return Center(child:Text('!هناك خطأ في استرجاع البيانات${snapshot.hasError}'),);
-    //     }else if(!snapshot.hasData){
-    //
-    //    //            return Center(child: Text('!لا توجد معلومات الحرفي'));
-
-    //
-    //
-    // }
-    //
-    //
-    // else if (snapshot.hasData) {
-    //       final customer = snapshot.data;
-
-    //       return customer == null
-    //           ? const Center(child: Text('!لا توجد معلومات الحرفي'))
-    //           :
-    // body: SizedBox(
-    //   height: 600,
-    //   child: SingleChildScrollView(
-    //     reverse: true,
-    //     child: Column(
-    //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //         crossAxisAlignment: CrossAxisAlignment.start,
-    //         children: <Widget>[
-    //           Row(
-    //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //             crossAxisAlignment: CrossAxisAlignment.center,
-    //             children: [
-    //               Text(
-    //                 "معلومات المشتري",
-    //                 style: TextStyle(
-    //                     color: Color.fromARGB(255, 81, 144, 142),
-    //                     fontWeight: FontWeight.bold,
-    //                     fontSize: 22),
-    //               ),
-    //               Icon(
-    //                 Icons.person,
-    //                 color: Color.fromARGB(255, 81, 144, 142),
-    //                 size: 28.0,
-    //               )
-    //             ],
-    //           ),
-    //           ListView.builder(
-    //               scrollDirection: Axis.vertical,
-    //               shrinkWrap: true,
-    //               itemCount: titles.length,
-    //               itemBuilder: (context, index) {
-    //                 return Card(
-    //                   child: ListTile(
-    //                     title: SizedBox(
-    //                       height: 60,
-    //                       child: SingleChildScrollView(
-    //                         reverse: true,
-    //                         child: Column(
-    //                           crossAxisAlignment: CrossAxisAlignment.start,
-    //                           children: [
-    //                             Text(
-    //                               titles[index],
-    //                               style: TextStyle(
-    //                                   fontWeight: FontWeight.w800,
-    //                                   fontSize: 20,
-    //                                   color: kPrimaryColor),
-    //                             ),
-    //                             const SizedBox(
-    //                               height: 5,
-    //                             ),
-    //                             if (titles[index] == 'اسم المشتري')
-    //                               Text('مشتري'),
-    //                             // Text('اختبار اسم المشتري' +
-    //                             //     snapshot.data!.docs[index]['name']
-    //                             //         .toString()),
-    //                             if (titles[index] == 'البريد الإلكتروني')
-    //                               Text('بريد'),
-    //                             // Text(index.toString()),
-    //                             // Text('اختبار االبريد الالكتروني' +
-    //                             //     snapshot.data!.docs[index]['email']
-    //                             //         .toString()),
-    //                             if (titles[index] == 'كلمة المرور')
-    //                               Text('******'),
-    //                             // int passwordlen =snapshot.data!.docs[index]['password'].lenght();
-    //                           ],
-    //                         ),
-    //                       ),
-    //                     ),
-    //                     leading: Icon(
-    //                       icons[index],
-    //                       color: Color.fromARGB(255, 79, 75, 75),
-    //                     ),
-    //                   ),
-    //                 );
-    //               }),
-    //           Row(
-    //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //               crossAxisAlignment: CrossAxisAlignment.center,
-    //               children: [
-    //                 ElevatedButton(
-    //                   onPressed: () async {
-    //                     Navigator.pushReplacement(context, MaterialPageRoute(
-    //                         builder: (BuildContext context) {
-    //                       return CustomerEditProfile();
-    //                     }));
-    //                   },
-    //                   style: ButtonStyle(
-    //                     backgroundColor:
-    //                         MaterialStateProperty.all(Color(0xff51908E)),
-    //                     padding: MaterialStateProperty.all(
-    //                         EdgeInsets.symmetric(
-    //                             horizontal: 50, vertical: 13)),
-    //                     shape: MaterialStateProperty.all(
-    //                         RoundedRectangleBorder(
-    //                             borderRadius: BorderRadius.circular(27))),
-    //                   ),
-    //                   child: const Text(
-    //                     " تعديل البيانات",
-    //                     style: TextStyle(
-    //                         fontSize: 14,
-    //                         fontFamily: "Tajawal",
-    //                         fontWeight: FontWeight.bold),
-    //                   ),
-    //                 ),
-    //                 // const SizedBox(
-    //                 //   width: 10,
-    //                 // ),
-    //                 ElevatedButton(
-    //                   onPressed: () async {
-    //                     showDialog(
-    //                         context: context,
-    //                         builder: (BuildContext context) {
-    //                           return AlertDialog(
-    //                             title: Text("تنبيه"),
-    //                             content: Text('سيتم حذف الحساب نهائيا'),
-    //                             actions: <Widget>[
-    //                               TextButton(
-    //                                 child: Text("حذف",
-    //                                     style: TextStyle(color: Colors.red)),
-    //                                 onPressed: () {
-    //                                   //The logic of deleting an account
-
-    //                                   //Navigator.of(context).pop();
-    //                                   FirebaseAuth.instance.signOut();
-    //                                   Navigator.of(context,
-    //                                           rootNavigator: true)
-    //                                       .pushReplacement(MaterialPageRoute(
-    //                                           builder: (context) =>
-    //                                               new Welcome()));
-    //                                 },
-    //                               ),
-    //                               TextButton(
-    //                                 child: Text("تراجع"),
-    //                                 onPressed: () {
-    //                                   Navigator.of(context).pop();
-    //                                 },
-    //                               )
-    //                             ],
-    //                           );
-    //                         });
-
-    //                     /*Navigator.pushReplacement(context,
-    //                                   MaterialPageRoute(builder: (BuildContext context) {
-    //                                 return Welcome();
-    //                               }));*/
-    //                   },
-    //                   style: ButtonStyle(
-    //                     backgroundColor: MaterialStateProperty.all(
-    //                         Color.fromARGB(255, 221, 112, 112)),
-    //                     padding: MaterialStateProperty.all(
-    //                         EdgeInsets.symmetric(
-    //                             horizontal: 50, vertical: 13)),
-    //                     shape: MaterialStateProperty.all(
-    //                         RoundedRectangleBorder(
-    //                             borderRadius: BorderRadius.circular(27))),
-    //                   ),
-    //                   child: Text(
-    //                     "حذف الحساب",
-    //                     style: TextStyle(
-    //                         fontSize: 14,
-    //                         fontFamily: "Tajawal",
-    //                         fontWeight: FontWeight.bold),
-    //                   ),
-    //                 ),
-    //               ]),
-    //           Align(
-    //             alignment: Alignment.bottomLeft,
-    //             child: Image.asset(
-    //               "assets/images/footbg.png",
-    //               width: 200,
-    //             ),
-    //           ),
-    //         ]),
-    //   ),
-    // ),
-    // );
   }
 
   //????????????????OLD CODE????????????????????????
@@ -700,18 +701,14 @@ Future<Customer?> readUser() async {
   final User? user = auth.currentUser;
   final uid = user!.uid;
   String DocId = uid;
-  DocumentSnapshot documentSnapshot;
-  await FirebaseFirestore.instance
-      .collection('customers')
-      .doc(DocId)
-      .get()
-      .then((value) {
-    documentSnapshot = value;
-    String name = documentSnapshot['name'];
 
-    // we get the document here
-    // name = documentSnapshot['quantity'];
-  });
+  // DocumentSnapshot documentSnapshot;
+  // await FirebaseFirestore.instance
+  //     .collection('customers')
+  //     .doc(DocId)
+  //     .get();
+  // we get the document here
+  // name = documentSnapshot['quantity'];
 
   // readDocument(uid);
   print(uid);
@@ -722,8 +719,8 @@ Future<Customer?> readUser() async {
   final snapshot = await docCustomer;
   if (snapshot.exists) {
     print("SSSSSSSSSSSSSSSSSSNNNNNNNNNNNNNNNNAAAAAAAAAAAAAAAAAAPPPPPPPPPPP");
-    return Customer.fromJson(snapshot.data()!);
   }
+  return Customer.fromJson(snapshot.data()!);
 }
 
 Widget buildCustomer(Customer customer, BuildContext context) {
