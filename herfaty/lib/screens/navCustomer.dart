@@ -60,8 +60,8 @@ class nav extends StatelessWidget {
           activeColorPrimary: kPrimaryColor.withOpacity(0.9),
           inactiveColorPrimary: CupertinoColors.systemGrey),
       PersistentBottomNavBarItem(
-          icon: const Icon(CupertinoIcons.settings),
-          title: "  الإعدادت",
+          icon: const Icon(CupertinoIcons.person),
+          title: "حسابي",
           activeColorPrimary: kPrimaryColor.withOpacity(0.9),
           inactiveColorPrimary: CupertinoColors.systemGrey),
     ];

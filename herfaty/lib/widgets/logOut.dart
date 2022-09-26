@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:herfaty/firestore/firestore.dart';
 import 'package:herfaty/main.dart';
 import 'package:herfaty/pages/login.dart';
 import 'package:herfaty/pages/welcome.dart';
@@ -20,8 +21,31 @@ import 'package:herfaty/pages/signupHerafy.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../pages/signupCustomer.dart';
+//Define snapshot
 
 class logOutButton extends StatelessWidget {
+//
+  late DocumentSnapshot snapshot;
+
+  getData() async {
+    //use a Async-await function to get the data
+    print("BBBBBBBBBBEGIningggggggggggggggggggggggg ");
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+
+    print(uid);
+
+    final docCustomer =
+        await FirebaseFirestore.instance.collection('customers').doc(uid).get();
+
+    final snapshot = await docCustomer;
+    if (snapshot.exists) {
+      print("SSSSSSSSSSSSSSSSSSNNNNNNNNNNNNNNNNAAAAAAAAAAAAAAAAAAPPPPPPPPPPP");
+      return Customer.fromJson(snapshot.data()!);
+    }
+  }
+
   final currentUser = FirebaseAuth.instance;
 
   PickedFile? _imageFile;
@@ -47,15 +71,16 @@ class logOutButton extends StatelessWidget {
   final icons = [Icons.person, Icons.email_rounded, Icons.lock];
 
   final ImagePicker _picker = ImagePicker();
-  logOutButton() {
-    final User? user = auth.currentUser;
-    final uid = user!.uid;
-    print('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
-    print(uid);
-  }
+  // logOutButton() {
+  //   final User? user = auth.currentUser;
+  //   final uid = user!.uid;
+  //   print('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
+  //   print(uid);
+  // }
 
   @override
   Widget build(BuildContext context) {
+    getData();
     return Scaffold(
       appBar: AppBar(
         title: Text("الإعدادات",
@@ -106,16 +131,39 @@ class logOutButton extends StatelessWidget {
       // body: FutureBuilder<Customer?>(
       //     future: readUser(),
       //     builder: (context, snapshot) {
+      //       if (snapshot.connectionState == ConnectionState.waiting) {
+      //         print('11111111111111111111111111111111111111');
+      //         return Center(child: CircularProgressIndicator());
+      //       }
+
       //       if (snapshot.hasError) {
-      //         return Text('!هناك خطأ في استرجاع البيانات${snapshot.hasError}');
-      //       } else if (snapshot.hasData) {
+      //         print('333333333333333333333333333333333333333333333');
+      //         return Center(
+      //             child: Text(
+      //                 '!هناك خطأ في استرجاع البيانات${snapshot.hasError}'));
+      //       }
+
+      //       if (snapshot.hasData) {
+      //         print('4444444444444444444444444444444444444444');
+
       //         final customer = snapshot.data;
 
       //         return customer == null
       //             ? Center(
       //                 child: Text('لا يوجد مشتري حاليا'),
       //               )
-      //             : body;
+      //             : buildCustomer(customer, context);
+      //       }
+      //       if (!snapshot.hasData) {
+      //         print('2222222222222222222222222222222222222222222222');
+      //         return Center(child: Text('! خطأ في عرض البيانات '));
+      //       } else {
+      //         return Center(child: Text('! خطأ '));
+      //       }
+      //     }),
+
+//////////////////////////////////SIZED BOX////////////////////////////
+
       body: SizedBox(
         height: 600,
         child: SingleChildScrollView(
@@ -307,8 +355,17 @@ class logOutButton extends StatelessWidget {
     //       .snapshots(),
     //   builder: ((context, snapshot) {
     //     if (snapshot.hasError) {
-    //       return Text('!هناك خطأ في استرجاع البيانات${snapshot.hasError}');
-    //     } else if (snapshot.hasData) {
+    //       return Center(child:Text('!هناك خطأ في استرجاع البيانات${snapshot.hasError}'),);
+    //     }else if(!snapshot.hasData){
+    //
+    //    //            return Center(child: Text('!لا توجد معلومات الحرفي'));
+
+    //
+    //
+    // }
+    //
+    //
+    // else if (snapshot.hasData) {
     //       final customer = snapshot.data;
 
     //       return customer == null
@@ -490,14 +547,9 @@ class logOutButton extends StatelessWidget {
     //   ),
     // ),
     // );
-    // : buildCustomer(customer, context);
-    // } else {
-    //   // ignore: prefer_const_constructors
-    //   return Center(
-    //     child: const CircularProgressIndicator(),
-    //   );
-    // }
   }
+
+  //????????????????OLD CODE????????????????????????
   //),
   // )
 
@@ -625,19 +677,53 @@ class logOutButton extends StatelessWidget {
   //   );
 }
 
+//////////////////////////////////SARAHS////////////////
+Future readDocument(String id) async {
+  String DocId = id;
+  DocumentSnapshot documentSnapshot;
+  await FirebaseFirestore.instance
+      .collection('customers')
+      .doc(DocId)
+      .get()
+      .then((value) {
+    documentSnapshot = value; // we get the document here
+    // name = documentSnapshot['quantity'];
+  });
+
+  //now you can access the document field value
+}
+/////////////////////////////
+
 Future<Customer?> readUser() async {
+  print("BBBBBBBBBBEGIningggggggggggggggggggggggg ");
   final FirebaseAuth auth = FirebaseAuth.instance;
   final User? user = auth.currentUser;
   final uid = user!.uid;
+  String DocId = uid;
+  DocumentSnapshot documentSnapshot;
+  await FirebaseFirestore.instance
+      .collection('customers')
+      .doc(DocId)
+      .get()
+      .then((value) {
+    documentSnapshot = value;
+    String name = documentSnapshot['name'];
 
+    // we get the document here
+    // name = documentSnapshot['quantity'];
+  });
+
+  // readDocument(uid);
   print(uid);
 
-  // final docCustomer =
-  //     FirebaseFirestore.instance.collection('customers').doc(uid);
-  // final snapshot = await docCustomer.get();
-  // if (snapshot.exists) {
-  //   return Customer.fromJson(snapshot.data()!);
-  // }
+  final docCustomer =
+      await FirebaseFirestore.instance.collection('customers').doc(uid).get();
+
+  final snapshot = await docCustomer;
+  if (snapshot.exists) {
+    print("SSSSSSSSSSSSSSSSSSNNNNNNNNNNNNNNNNAAAAAAAAAAAAAAAAAAPPPPPPPPPPP");
+    return Customer.fromJson(snapshot.data()!);
+  }
 }
 
 Widget buildCustomer(Customer customer, BuildContext context) {
@@ -859,41 +945,41 @@ Widget bottomSheet() {
 }
 
 //logo
-  // void takePhoto(ImageSource source) async {
-  //   final pickedFile = await _picker.getImage(
-  //     source: source,
-  //   );
-  //   try {
-  //     final file = File(_imageFile!.path);
-  //     uploadImageToFirebaseStorage(file);
-  //   } catch (e) {
-  //     print('error');
-  //   }
-  //   // setState(() {
-  //   try {
-  //     _imageFile = pickedFile!;
-  //     Fluttertoast.showToast(
-  //       msg: 'تمت تعديل الصورة بنجاح',
-  //       toastLength: Toast.LENGTH_SHORT,
-  //       gravity: ToastGravity.CENTER,
-  //       timeInSecForIosWeb: 3,
-  //       backgroundColor: Color.fromARGB(255, 26, 96, 91),
-  //       textColor: Colors.white,
-  //       fontSize: 18.0,
-  //     );
-  //     imageProfile();
-  //   } catch (e) {
-  //     Fluttertoast.showToast(
-  //       msg: 'هناك مشكلة أعد ادخال الصوره مجددا',
-  //       toastLength: Toast.LENGTH_SHORT,
-  //       gravity: ToastGravity.CENTER,
-  //       timeInSecForIosWeb: 3,
-  //       backgroundColor: Colors.white,
-  //       textColor: Colors.red,
-  //       fontSize: 18.0,
-  //     );
-  //   }
-  // });
+// void takePhoto(ImageSource source) async {
+//   final pickedFile = await _picker.getImage(
+//     source: source,
+//   );
+//   try {
+//     final file = File(_imageFile!.path);
+//     uploadImageToFirebaseStorage(file);
+//   } catch (e) {
+//     print('error');
+//   }
+//   // setState(() {
+//   try {
+//     _imageFile = pickedFile!;
+//     Fluttertoast.showToast(
+//       msg: 'تمت تعديل الصورة بنجاح',
+//       toastLength: Toast.LENGTH_SHORT,
+//       gravity: ToastGravity.CENTER,
+//       timeInSecForIosWeb: 3,
+//       backgroundColor: Color.fromARGB(255, 26, 96, 91),
+//       textColor: Colors.white,
+//       fontSize: 18.0,
+//     );
+//     imageProfile();
+//   } catch (e) {
+//     Fluttertoast.showToast(
+//       msg: 'هناك مشكلة أعد ادخال الصوره مجددا',
+//       toastLength: Toast.LENGTH_SHORT,
+//       gravity: ToastGravity.CENTER,
+//       timeInSecForIosWeb: 3,
+//       backgroundColor: Colors.white,
+//       textColor: Colors.red,
+//       fontSize: 18.0,
+//     );
+//   }
+// });
 //}
 
 //   void uploadImageToFirebaseStorage(File file) async {
