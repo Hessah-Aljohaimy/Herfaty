@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/firestore/firestore.dart';
@@ -47,6 +47,10 @@ class _AddProductState extends State<AddProduct> {
 
   @override
   Widget build(BuildContext context) {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    String thisOwnerId = user!.uid;
+    //////////////////////////////////////////////////////////////////////////////////////////
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(56.0),
@@ -460,7 +464,8 @@ class _AddProductState extends State<AddProduct> {
                         avalibleAmount: amount,
                         image: uploadImageUrl,
                         categoryName: dropdownvalue,
-                        price: priceN);
+                        price: priceN,
+                        shopOwnerId: thisOwnerId);
                     final json = product.toJson();
                     await productToBeAdded.set(json);
                     //await Firestore.saveProduct(product);
