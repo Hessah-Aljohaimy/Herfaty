@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:herfaty/AddProductToCart.dart';
-import 'package:herfaty/Product1.dart';
+import 'package:herfaty/CustomerProducts/AddProductToCart.dart';
+import 'package:herfaty/CustomerProducts/Product1.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/widgets/ExpandedWidget.dart';

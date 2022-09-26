@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:herfaty/CustomerProductDetails.dart';
+import 'package:herfaty/CustomerProducts/CustomerProductDetails.dart';
 import 'package:herfaty/constants/size.dart';
-import 'package:herfaty/productCard.dart';
+import 'package:herfaty/CustomerProducts/productCard.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:herfaty/Product1.dart';
 import 'package:herfaty/screens/customer_base_screen.dart';
 
-import 'constants/color.dart';
-import 'constants/icons.dart';
+import 'package:herfaty/constants/color.dart';
+import 'package:herfaty/constants/icons.dart';
 
 class CustomerProductsList extends StatelessWidget {
   String categoryName;

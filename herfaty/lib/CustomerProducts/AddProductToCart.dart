@@ -1,8 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:herfaty/Product1.dart';
-
 class AddProductToCart {
   String name;
   String detailsImage;

@@ -1,8 +1,5 @@
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/media_query.dart';
 import 'package:flutter/material.dart';
-import 'package:herfaty/Product1.dart';
+import 'package:herfaty/CustomerProducts/Product1.dart';
 
 class productCard extends StatelessWidget {
   const productCard({
