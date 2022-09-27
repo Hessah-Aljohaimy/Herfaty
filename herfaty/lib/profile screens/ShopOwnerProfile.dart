@@ -588,6 +588,16 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                     SizedBox(
                       height: 10,
                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: Text(
+                        "معلومات الحرفي",
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w900,
+                            color: Color.fromARGB(255, 26, 96, 91)),
+                      ),
+                    ),
                     Container(
                       margin: const EdgeInsets.all(10.0),
                       padding: const EdgeInsets.all(10),
@@ -611,16 +621,9 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 child: Row(
                               children: <Widget>[
                                 Icon(Icons.person,
-                                    color: Color.fromARGB(255, 94, 92, 92)),
+                                    color: Color.fromARGB(255, 39, 141, 134)),
                                 SizedBox(
                                   width: 10,
-                                ),
-                                Text(
-                                  "الاسم  ",
-                                  style: TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w700,
-                                      color: Color.fromARGB(255, 26, 96, 91)),
                                 ),
 
                                 ///${so.name}
@@ -637,17 +640,11 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 child: Row(
                               children: <Widget>[
                                 Icon(Icons.email_rounded,
-                                    color: Color.fromARGB(255, 94, 92, 92)),
+                                    color: Color.fromARGB(255, 39, 141, 134)),
                                 SizedBox(
                                   width: 10,
                                 ),
-                                Text(
-                                  "البريد الالكتروني",
-                                  style: TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w700,
-                                      color: Color.fromARGB(255, 26, 96, 91)),
-                                ),
+
                                 //${so.email}
                                 Text(
                                   "${shopowner.email}",
@@ -662,17 +659,11 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 child: Row(
                               children: <Widget>[
                                 Icon(Icons.date_range,
-                                    color: Color.fromARGB(255, 94, 92, 92)),
+                                    color: Color.fromARGB(255, 39, 141, 134)),
                                 SizedBox(
                                   width: 10,
                                 ),
-                                Text(
-                                  "تاريخ الميلاد",
-                                  style: TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w700,
-                                      color: Color.fromARGB(255, 26, 96, 91)),
-                                ),
+
                                 //${so.DOB}
                                 Text(
                                   " ${shopowner.DOB}",
@@ -687,17 +678,11 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 child: Row(
                               children: <Widget>[
                                 Icon(Icons.phone_android,
-                                    color: Color.fromARGB(255, 94, 92, 92)),
+                                    color: Color.fromARGB(255, 39, 141, 134)),
                                 SizedBox(
                                   width: 10,
                                 ),
-                                Text(
-                                  "رقم الجوال",
-                                  style: TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w700,
-                                      color: Color.fromARGB(255, 26, 96, 91)),
-                                ),
+
                                 // ${so.phone_number}
                                 Text(
                                   "${shopowner.phone_number}",
@@ -753,6 +738,16 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                             // )),
                           ],
                         ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: Text(
+                        "معلومات المتجر",
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w900,
+                            color: Color.fromARGB(255, 26, 96, 91)),
                       ),
                     ),
                     Container(
