@@ -52,7 +52,10 @@ class _SignupHerafyState extends State<SignupHerafy> {
 
   TextEditingController _shopdescriptionTextEditingController =
       TextEditingController();
-
+  final ImagePicker _pickerr = ImagePicker();
+  var uploadImageUrl = ""; //image URL before choose pic
+// Firebase storage + ref for pic place
+  final storageRef = FirebaseStorage.instance.ref();
   PickedFile? _imageFile;
   File? pickedImage1;
   final ImagePicker _picker = ImagePicker();
@@ -987,10 +990,6 @@ class _SignupHerafyState extends State<SignupHerafy> {
   }
 
 // initilazie Image Picker library
-  final ImagePicker _pickerr = ImagePicker();
-  var uploadImageUrl = ""; //image URL before choose pic
-// Firebase storage + ref for pic place
-  final storageRef = FirebaseStorage.instance.ref();
 
   void uploadImageToFirebaseStorage(File file) async {
     // Create a reference to 'images/mountains.jpg'
@@ -1060,14 +1059,6 @@ class _SignupHerafyState extends State<SignupHerafy> {
               onPressed: () async {
                 // Capture a photo
                 takePhoto(ImageSource.camera);
-                // final XFile? photo =
-                //     await _picker.pickImage(source: ImageSource.camera);
-                // try {
-                //   final file = File(photo!.path);
-                //   uploadImageToFirebaseStorage(file);
-                // } catch (e) {
-                //   print('error');
-                // }
 
                 Navigator.of(context).pop();
               },
@@ -1077,15 +1068,6 @@ class _SignupHerafyState extends State<SignupHerafy> {
               icon: Icon(Icons.image),
               onPressed: () async {
                 takePhoto(ImageSource.gallery);
-                // Pick an image
-                // final XFile? photo =
-                //     await _picker.pickImage(source: ImageSource.gallery);
-                // try {
-                //   final file = File(photo!.path);
-                //   uploadImageToFirebaseStorage(file);
-                // } catch (e) {
-                //   print('error');
-                // }
 
                 Navigator.of(context).pop();
               },
@@ -1102,20 +1084,14 @@ class _SignupHerafyState extends State<SignupHerafy> {
     XFile? file1 = await ImagePicker().pickImage(source: source);
     if (file1 == null) return;
 
-    pickedImage1 = File(file1.path);
-    showLocalImage = true;
-    final pickedFile = await _pickerr.getImage(
-      source: source,
-    );
-    try {
-      final file = File(_imageFile!.path);
-      uploadImageToFirebaseStorage(file);
-    } catch (e) {
-      print('error');
-    }
     setState(() {
       try {
-        _imageFile = pickedFile!;
+        pickedImage1 = File(file1.path);
+        showLocalImage = true;
+
+        uploadImageToFirebaseStorage(pickedImage1!);
+        uploadImageUrl = pickedImage1!.uri.toString();
+        print(uploadImageUrl);
         Fluttertoast.showToast(
           msg: 'تمت إضافة الصورة بنجاح',
           toastLength: Toast.LENGTH_SHORT,
@@ -1125,7 +1101,6 @@ class _SignupHerafyState extends State<SignupHerafy> {
           textColor: Colors.white,
           fontSize: 18.0,
         );
-        imageProfile();
       } catch (e) {
         Fluttertoast.showToast(
           msg: 'هناك مشكلة أعد ادخال الصوره مجددا',
@@ -1143,8 +1118,6 @@ class _SignupHerafyState extends State<SignupHerafy> {
 
 //Datebase
 Future createShopOwner(ShopOwner shopowner) async {
-  String logourl = '';
-
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   final User? user = auth.currentUser;

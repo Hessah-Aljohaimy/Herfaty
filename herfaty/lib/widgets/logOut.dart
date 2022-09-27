@@ -163,7 +163,7 @@ class logOutButton extends StatelessWidget {
 
                 final customer = snapshot.data;
                 return customer == null
-                    ? Center(child: Text('لا يوجد مشتري '))
+                    ? Center(child: Text('لا توجد معلومات المشتري!'))
                     : buildCustomer(customer, context);
               }
             }
@@ -171,7 +171,7 @@ class logOutButton extends StatelessWidget {
               print('2222222222222222222222222222222222222222222222');
               return Center(child: Text('! خطأ في عرض البيانات '));
             } else {
-              return Center(child: Text('! خطأ '));
+              return Center(child: Text('! هناك مشكلة ما حاول مجددا '));
             }
           }),
 
