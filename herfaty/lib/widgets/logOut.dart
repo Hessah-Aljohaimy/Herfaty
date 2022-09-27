@@ -95,7 +95,7 @@ class logOutButton extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("حسابي",
+        title: Text("الإعدادات",
             style: TextStyle(color: Color.fromARGB(255, 81, 144, 142))),
         centerTitle: true,
         backgroundColor: Colors.white,
@@ -141,10 +141,7 @@ class logOutButton extends StatelessWidget {
         iconTheme: IconThemeData(color: kPrimaryColor),
       ),
       body: FutureBuilder(
-          future:
-
-              // customersRef.get()
-              readUser(),
+          future: customersRef.get(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               print('11111111111111111111111111111111111111');
@@ -160,18 +157,13 @@ class logOutButton extends StatelessWidget {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasData) {
                 print('4444444444444444444444444444444444444444');
-
-                final customer = snapshot.data;
-                return customer == null
-                    ? Center(child: Text('لا توجد معلومات المشتري!'))
-                    : buildCustomer(customer, context);
               }
             }
             if (!snapshot.hasData) {
               print('2222222222222222222222222222222222222222222222');
               return Center(child: Text('! خطأ في عرض البيانات '));
             } else {
-              return Center(child: Text('! هناك مشكلة ما حاول مجددا '));
+              return Center(child: Text('! خطأ '));
             }
           }),
 
@@ -728,10 +720,11 @@ Future<Customer?> readUser() async {
 
   final docCustomer =
       await FirebaseFirestore.instance.collection('customers').doc(uid).get();
-  print('after the refrence');
-  if (docCustomer.exists) {
+
+  final snapshot = await docCustomer;
+  if (snapshot.exists) {
     print("SSSSSSSSSSSSSSSSSSNNNNNNNNNNNNNNNNAAAAAAAAAAAAAAAAAAPPPPPPPPPPP");
-    return Customer.fromJson(docCustomer.data()!);
+    return Customer.fromJson(snapshot.data()!);
   }
 }
 
