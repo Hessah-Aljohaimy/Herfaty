@@ -7,7 +7,6 @@
       "firebase-debug.log",
       "firebase-debug.*.log"
     ],
-    "predeploy": [
-    ]
+    "predeploy": []
   }
 }

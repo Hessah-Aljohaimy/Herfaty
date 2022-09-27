@@ -1,6 +1,5 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
+ import 'dart:io';
 import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -54,7 +53,7 @@ void _onPaymentStart(PaymentStart event, Emitter<PaymentState> emit) {
    final paymentIntentResult = await _callPayEndpointMehodId(
     useStripeSdk:true,
     paymentMethodId:paymentMethod.id,
-currency:'sr',
+currency:'usd',
 items:event.items,
    );
        
@@ -154,30 +153,28 @@ Future<Map<String,dynamic>> _callPayEndpointMehodId({
   })  async {
 
 
-
-
-final Url=Uri.parse('https://us-central1-herfaty-54792.cloudfunctions.net/StripePayEndpointMethodId');
+final Url=Uri.parse("https://us-central1-herfaty-54792.cloudfunctions.net/StripePayEndpointMethodId");
 
 final response=await http.post(
 Url,
-headers: {'Content-Type':'application/json'},
+headers: {"Content-Type":"application/json"},
 body: json.encode({
-'useStripeSdk':useStripeSdk,
-'paymentMethodId':paymentMethodId,
-'currency':currency,
-'items':items,
+"useStripeSdk":useStripeSdk,
+"paymentMethodId":paymentMethodId,
+"currency":currency,
+"items":items,
 
 },),);
 try{
-         json.decode(response.body );
+print(response.statusCode);
+           json.decode(response.body );
 }
-
 catch(e){
               print(e);
-
-
 }
-         return  json.decode(response.body );
+                return  json.decode(response.body );
+
+
 
     }
 }

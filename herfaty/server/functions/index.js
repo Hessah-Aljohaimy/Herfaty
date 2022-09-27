@@ -63,7 +63,7 @@ exports.StripePayEndpointMethodId = functions.https.onRequest (async ( req , res
             }
             return res.sendStatus(400)
 
-        }catch (e) {
+        }catch (e) {            
             return res.sendStatus ({erorr:e.message});
          }
 
