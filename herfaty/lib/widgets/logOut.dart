@@ -25,40 +25,48 @@ import '../pages/signupCustomer.dart';
 
 class logOutButton extends StatelessWidget {
 //
-  late DocumentSnapshot snapshot;
+  // late DocumentSnapshot snapshot;
 
-  getData() async {
-    //use a Async-await function to get the data
-    print("BBBBBBBBBBEGIningggggggggggggggggggggggg ");
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final User? user = auth.currentUser;
-    final uid = user!.uid;
+  // getData() async {
+  //   //use a Async-await function to get the data
+  //   print("BBBBBBBBBBEGIningggggggggggggggggggggggg ");
+  //   final FirebaseAuth auth = FirebaseAuth.instance;
+  //   final User? user = auth.currentUser;
+  //   final uid = user!.uid;
 
-    print(uid);
+  //   print(uid);
 
-    final docCustomer =
-        await FirebaseFirestore.instance.collection('customers').doc(uid).get();
+  //   final docCustomer =
+  //       await FirebaseFirestore.instance.collection('customers').doc(uid).get();
 
-    final snapshot = await docCustomer;
-    if (snapshot.exists) {
-      print("SSSSSSSSSSSSSSSSSSNNNNNNNNNNNNNNNNAAAAAAAAAAAAAAAAAAPPPPPPPPPPP");
-      return Customer.fromJson(snapshot.data()!);
-    }
-  }
+  //   final snapshot = await docCustomer;
+  //   if (snapshot.exists) {
+  //     print("SSSSSSSSSSSSSSSSSSNNNNNNNNNNNNNNNNAAAAAAAAAAAAAAAAAAPPPPPPPPPPP");
+  //     return Customer.fromJson(snapshot.data()!);
+  //   }
+  // }
 
-  final currentUser = FirebaseAuth.instance;
+  // final currentUser = FirebaseAuth.instance;
 
   PickedFile? _imageFile;
 
   final FirebaseAuth auth = FirebaseAuth.instance;
 
-  String? id = '';
-  String? email = '';
-  String? name = '';
-  String? password = '';
+  // String? id = '';
+  // String? email = '';
+  // String? name = '';
+  // String? password = '';
 
-  final CollectionReference customers =
-      FirebaseFirestore.instance.collection('customeres');
+  String getUD() {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+
+    return uid;
+  }
+
+  // DocumentReference customersRef =
+  //     FirebaseFirestore.instance.collection('customeres').doc();
 
   get kPrimaryColor => null;
 
@@ -80,10 +88,14 @@ class logOutButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    getData();
+    String uid = getUD();
+
+    DocumentReference customersRef =
+        FirebaseFirestore.instance.collection('customeres').doc(uid);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text("الإعدادات",
+        title: Text("حسابي",
             style: TextStyle(color: Color.fromARGB(255, 81, 144, 142))),
         centerTitle: true,
         backgroundColor: Colors.white,
@@ -128,9 +140,12 @@ class logOutButton extends StatelessWidget {
         automaticallyImplyLeading: false,
         iconTheme: IconThemeData(color: kPrimaryColor),
       ),
-      body: FutureBuilder<Customer?>(
-          future: readUser(),
-          builder: (context, snapshot) {
+      body: FutureBuilder(
+          future:
+
+              // customersRef.get()
+              readUser(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               print('11111111111111111111111111111111111111');
               return Center(child: CircularProgressIndicator());
@@ -142,17 +157,15 @@ class logOutButton extends StatelessWidget {
                   child: Text(
                       '!هناك خطأ في استرجاع البيانات${snapshot.hasError}'));
             }
+            if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasData) {
+                print('4444444444444444444444444444444444444444');
 
-            if (snapshot.hasData) {
-              print('4444444444444444444444444444444444444444');
-
-              final customer = snapshot.data;
-
-              return customer == null
-                  ? Center(
-                      child: Text('لا يوجد مشتري حاليا'),
-                    )
-                  : buildCustomer(customer, context);
+                final customer = snapshot.data;
+                return customer == null
+                    ? Center(child: Text('لا يوجد مشتري '))
+                    : buildCustomer(customer, context);
+              }
             }
             if (!snapshot.hasData) {
               print('2222222222222222222222222222222222222222222222');
@@ -715,12 +728,11 @@ Future<Customer?> readUser() async {
 
   final docCustomer =
       await FirebaseFirestore.instance.collection('customers').doc(uid).get();
-
-  final snapshot = await docCustomer;
-  if (snapshot.exists) {
+  print('after the refrence');
+  if (docCustomer.exists) {
     print("SSSSSSSSSSSSSSSSSSNNNNNNNNNNNNNNNNAAAAAAAAAAAAAAAAAAPPPPPPPPPPP");
+    return Customer.fromJson(docCustomer.data()!);
   }
-  return Customer.fromJson(snapshot.data()!);
 }
 
 Widget buildCustomer(Customer customer, BuildContext context) {

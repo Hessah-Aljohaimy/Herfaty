@@ -280,15 +280,14 @@ class _SignupCustomerState extends State<SignupCustomer> {
 
 //Datebase
 Future createCustomer(Customer customer) async {
-  final docCustomr = FirebaseFirestore.instance.collection('customers').doc();
-
   final FirebaseAuth auth = FirebaseAuth.instance;
   final User? user = auth.currentUser;
   final uid = user!.uid;
   customer.id = uid;
 
   final json = customer.toJson();
-
+  final docCustomr =
+      FirebaseFirestore.instance.collection('customers').doc(uid);
   await docCustomr.set(json);
 }
 

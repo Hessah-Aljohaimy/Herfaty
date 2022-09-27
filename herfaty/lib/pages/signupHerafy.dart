@@ -1144,8 +1144,6 @@ class _SignupHerafyState extends State<SignupHerafy> {
 //Datebase
 Future createShopOwner(ShopOwner shopowner) async {
   String logourl = '';
-  final docShopOWner =
-      FirebaseFirestore.instance.collection('shop_owner').doc();
 
   final FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -1154,7 +1152,8 @@ Future createShopOwner(ShopOwner shopowner) async {
   shopowner.id = uid;
 
   final json = shopowner.toJson();
-
+  final docShopOWner =
+      FirebaseFirestore.instance.collection('shop_owner').doc(uid);
   await docShopOWner.set(json);
 }
 
