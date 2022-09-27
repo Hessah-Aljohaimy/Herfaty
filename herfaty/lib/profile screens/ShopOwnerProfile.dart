@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -549,8 +550,8 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
   }
 
 //////////////////////////////////Building User Profile////////////////////////////////////////
-  Widget buildOwner(ShopOwner so) {
-    logo = so.logo;
+  Widget buildOwner(ShopOwner shopowner) {
+    logo = shopowner.logo;
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -572,8 +573,8 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 bottomLeft: Radius.circular(20),
                                 bottomRight: Radius.circular(20)),
                             image: DecorationImage(
-                              image: AssetImage("assets/images/BG2.png"),
-                              fit: BoxFit.cover,
+                              image: NetworkImage(
+                                  'https://firebasestorage.googleapis.com/v0/b/herfaty-54792.appspot.com/o/shopOwnerLogos%2F1664253385216.png?alt=media&token=8d2ad5e9-389e-47df-b7ab-1704fcce353f'),
                             )),
                         child: Center(
                           child: Column(
@@ -624,7 +625,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
 
                                 ///${so.name}
                                 Text(
-                                  " الحرفية",
+                                  " ${shopowner.name}",
                                   style: TextStyle(
                                       fontSize: 17,
                                       fontWeight: FontWeight.w400,
@@ -649,7 +650,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 ),
                                 //${so.email}
                                 Text(
-                                  "  example@gmail.com",
+                                  "${shopowner.email}",
                                   style: TextStyle(
                                       fontSize: 17,
                                       fontWeight: FontWeight.w400,
@@ -674,7 +675,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 ),
                                 //${so.DOB}
                                 Text(
-                                  " 2012-1-5",
+                                  " ${shopowner.DOB}",
                                   style: TextStyle(
                                       fontSize: 17,
                                       fontWeight: FontWeight.w400,
@@ -699,7 +700,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 ),
                                 // ${so.phone_number}
                                 Text(
-                                  "0550088000",
+                                  "${shopowner.phone_number}",
                                   style: TextStyle(
                                       fontSize: 17,
                                       fontWeight: FontWeight.w400,
@@ -785,7 +786,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                             ),
                             Expanded(
                                 child: Text(
-                              " جرة",
+                              " ${shopowner.shopname}",
                               style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.w400,
@@ -820,8 +821,8 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 scrollDirection: Axis.vertical,
                                 child: Center(
                                     child: Text(
-                                  '  متجر جرة متخصص في صناعة منتجات الفخار منتجاتي تحتوي الاكواب و الصحون و الطلبات بحسب الطلب   ',
-                                  style: TextStyle(fontSize: 12),
+                                  '${shopowner.shopdescription}',
+                                  style: TextStyle(fontSize: 15),
                                 )),
                               ),
                             ))
