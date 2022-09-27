@@ -147,7 +147,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
       child: Column(
         children: [
           Container(
-            height: 670,
+            height: 700,
             // padding: EdgeInsets.only(left: 16, top: 25, right: 16),
             child: GestureDetector(
                 onTap: () {

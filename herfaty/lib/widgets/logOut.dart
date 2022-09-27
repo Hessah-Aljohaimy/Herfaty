@@ -24,38 +24,9 @@ import '../pages/signupCustomer.dart';
 //Define snapshot
 
 class logOutButton extends StatelessWidget {
-//
-  // late DocumentSnapshot snapshot;
-
-  // getData() async {
-  //   //use a Async-await function to get the data
-  //   print("BBBBBBBBBBEGIningggggggggggggggggggggggg ");
-  //   final FirebaseAuth auth = FirebaseAuth.instance;
-  //   final User? user = auth.currentUser;
-  //   final uid = user!.uid;
-
-  //   print(uid);
-
-  //   final docCustomer =
-  //       await FirebaseFirestore.instance.collection('customers').doc(uid).get();
-
-  //   final snapshot = await docCustomer;
-  //   if (snapshot.exists) {
-  //     print("SSSSSSSSSSSSSSSSSSNNNNNNNNNNNNNNNNAAAAAAAAAAAAAAAAAAPPPPPPPPPPP");
-  //     return Customer.fromJson(snapshot.data()!);
-  //   }
-  // }
-
-  // final currentUser = FirebaseAuth.instance;
-
   PickedFile? _imageFile;
 
   final FirebaseAuth auth = FirebaseAuth.instance;
-
-  // String? id = '';
-  // String? email = '';
-  // String? name = '';
-  // String? password = '';
 
   String getUD() {
     final FirebaseAuth auth = FirebaseAuth.instance;
@@ -65,26 +36,9 @@ class logOutButton extends StatelessWidget {
     return uid;
   }
 
-  // DocumentReference customersRef =
-  //     FirebaseFirestore.instance.collection('customeres').doc();
-
   get kPrimaryColor => null;
 
-  //Lists
-  final titles = [
-    'اسم المشتري',
-    'البريد الإلكتروني',
-    'كلمة المرور',
-  ];
-  final icons = [Icons.person, Icons.email_rounded, Icons.lock];
-
   final ImagePicker _picker = ImagePicker();
-  // logOutButton() {
-  //   final User? user = auth.currentUser;
-  //   final uid = user!.uid;
-  //   print('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
-  //   print(uid);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -95,11 +49,12 @@ class logOutButton extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("الإعدادات",
+        title: Text("حسابي",
             style: TextStyle(color: Color.fromARGB(255, 81, 144, 142))),
         centerTitle: true,
         backgroundColor: Colors.white,
-        elevation: 0,
+        shadowColor: Color.fromARGB(255, 39, 141, 134),
+        elevation: 2,
         leading: IconButton(
           icon: Icon(Icons.logout, color: Color.fromARGB(255, 81, 144, 142)),
           onPressed: () async {
@@ -141,7 +96,7 @@ class logOutButton extends StatelessWidget {
         iconTheme: IconThemeData(color: kPrimaryColor),
       ),
       body: FutureBuilder(
-          future: customersRef.get(),
+          future: readUser(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               print('11111111111111111111111111111111111111');
@@ -157,13 +112,18 @@ class logOutButton extends StatelessWidget {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasData) {
                 print('4444444444444444444444444444444444444444');
+
+                final customer = snapshot.data;
+                return customer == null
+                    ? const Center(child: Text('!لا توجد معلومات المشتري '))
+                    : buildCustomer(customer, context);
               }
             }
             if (!snapshot.hasData) {
               print('2222222222222222222222222222222222222222222222');
               return Center(child: Text('! خطأ في عرض البيانات '));
             } else {
-              return Center(child: Text('! خطأ '));
+              return Center(child: Text("! هناك مشكلة ما حاول مجددا"));
             }
           }),
 
@@ -720,67 +680,100 @@ Future<Customer?> readUser() async {
 
   final docCustomer =
       await FirebaseFirestore.instance.collection('customers').doc(uid).get();
+  print('after the refrence');
 
-  final snapshot = await docCustomer;
-  if (snapshot.exists) {
+  if (docCustomer.exists) {
     print("SSSSSSSSSSSSSSSSSSNNNNNNNNNNNNNNNNAAAAAAAAAAAAAAAAAAPPPPPPPPPPP");
-    return Customer.fromJson(snapshot.data()!);
+    return Customer.fromJson(docCustomer.data()!);
   }
 }
 
 Widget buildCustomer(Customer customer, BuildContext context) {
+  //Lists
+  final titles = [
+    'اسم المشتري',
+    'البريد الإلكتروني',
+    'كلمة المرور',
+  ];
+  final icons = [Icons.person, Icons.email_rounded, Icons.lock];
+  int passlength = customer.password.length;
+  String passwordStar = '';
+
+  for (int i = 0; i < passlength; i++) {
+    passwordStar = passwordStar + '*';
+  }
   return SingleChildScrollView(
     child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Row(
-            children: [
-              Text(
-                "معلومات المشتري",
-                style: TextStyle(
-                    color: Color.fromARGB(255, 79, 75, 75),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22),
-              ),
-              Icon(
-                Icons.person,
-                color: Color.fromARGB(255, 79, 75, 75),
-                size: 28.0,
-              )
-            ],
+          SizedBox(
+            width: 600,
+            height: 100,
+            child: Image.asset(
+              'assets/images/customerBG.png',
+              fit: BoxFit.cover,
+            ),
           ),
-          // ListView.builder(
-          //     scrollDirection: Axis.vertical,
-          //     shrinkWrap: true,
-          //     itemCount: titles.length,
-          //     itemBuilder: (context, index) {
-          //       return Card(
-          //         child: ListTile(
-          //           title: Column(
-          //             crossAxisAlignment: CrossAxisAlignment.start,
-          //             children: [
-          //               Text(
-          //                 titles[index],
-          //                 style: TextStyle(
-          //                     fontWeight: FontWeight.w800,
-          //                     fontSize: 20,
-          //                     color: kPrimaryColor),
-          //               ),
-          //               SizedBox(
-          //                 height: 5,
-          //               ),
-          //               if (titles[index] == 'اسم المشتري')
-          //                 Text('اختبار اسم المشتري'),
-          //               // Text('this is a test '),
-          //             ],
-          //           ),
-          //           leading: Icon(
-          //             icons[index],
-          //             color: Color.fromARGB(248, 198, 149, 100),
-          //           ),
-          //         ),
-          //       );
-          //     }),
+          Text(
+            "معلومات المشتري",
+            style: TextStyle(
+                color: Color.fromARGB(255, 26, 96, 91),
+                fontWeight: FontWeight.bold,
+                fontSize: 22),
+          ),
+          Container(
+            margin: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 255, 255, 255),
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 2,
+                  blurRadius: 7,
+                  offset: Offset(0, 3), // changes position of shadow
+                ),
+              ],
+            ),
+            child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemCount: titles.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    child: ListTile(
+                      title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Text(
+                          //   titles[index],
+                          //   style: TextStyle(
+                          //       fontWeight: FontWeight.w800,
+                          //       fontSize: 20,
+                          //       color: kPrimaryColor),
+                          // ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          if (titles[index] == 'اسم المشتري')
+                            Text('${customer.name}'),
+
+                          if (titles[index] == 'البريد الإلكتروني')
+                            Text('${customer.email}'),
+
+                          if (titles[index] == 'كلمة المرور')
+                            Text(passwordStar),
+                        ],
+                      ),
+                      leading: Icon(
+                        icons[index],
+                        color: Color.fromARGB(255, 39, 141, 134),
+                      ),
+                    ),
+                  );
+                }),
+          ),
           SizedBox(
             height: 5,
           ),
