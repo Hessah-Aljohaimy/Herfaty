@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:js';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -77,6 +78,8 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
     });
   }
 
+  TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,7 +121,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
               final shopowner = snapshot.data;
               return shopowner == null
                   ? const Center(child: Text('!لا توجد معلومات الحرفي'))
-                  : buildOwner(shopowner);
+                  : buildOwner(shopowner, context);
             } else {
               return Text("! هناك مشكلة ما حاول مجددا");
             }
@@ -140,7 +143,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
   }
 
 //////////////////////////////////Building User Profile////////////////////////////////////////
-  Widget buildOwner(ShopOwner shopowner) {
+  Widget buildOwner(ShopOwner shopowner, BuildContext context) {
     logo = shopowner.logo;
     return SingleChildScrollView(
       physics: const NeverScrollableScrollPhysics(),
@@ -365,6 +368,9 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                         ),
                         ElevatedButton(
                           onPressed: () {
+                            showAlertDialog(context);
+                            // openPasswordDialog(context);
+
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -543,4 +549,23 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
 //   print("uploaded:" + uploadImageUrl);
 // }
 
+void openPasswordDialog(BuildContext context) {
+  showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+            title: Text("التحقق من الوصول"),
+            content: TextField(
+                decoration: InputDecoration(hintText: 'ادخل كلمة المرور')),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    submit(context);
+                  },
+                  child: Text('تحقق'))
+            ],
+          ));
+}
 
+void submit(BuildContext context) {
+  Navigator.of(context).pop();
+}
