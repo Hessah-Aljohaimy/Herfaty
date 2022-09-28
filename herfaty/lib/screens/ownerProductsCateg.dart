@@ -1,16 +1,14 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:herfaty/AddProduct.dart';
 import 'package:herfaty/OwnerProducts/OwnerProductsList.dart';
 import 'package:herfaty/constants/color.dart';
-import 'package:herfaty/constants/icons.dart';
+import 'package:herfaty/OwnerProducts/OwnerProductsList.dart';
 import 'package:herfaty/constants/size.dart';
 import 'package:herfaty/models/Category.dart';
-import 'package:herfaty/widgets/profile_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'ownerHome.dart';
-import 'owner_base_screen.dart';
 
 class ownerProductsCategScreen extends StatefulWidget {
   const ownerProductsCategScreen({Key? key}) : super(key: key);
@@ -172,7 +170,6 @@ class appBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // ignore: prefer_const_constructors
               Text(
                 "مرحباً بكَ أيها الحِرَفِيّ \n قم بإختيار التصنيف لعرض منتجاتك  ",
                 // ignore: prefer_const_constructors

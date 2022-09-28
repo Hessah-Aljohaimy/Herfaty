@@ -4,7 +4,7 @@ import 'package:herfaty/CustomerProducts/CustomerProductDetails.dart';
 import 'package:herfaty/constants/size.dart';
 import 'package:herfaty/CustomerProducts/productCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:herfaty/CustomerProducts/Product1.dart';
+import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/constants/icons.dart';
 
