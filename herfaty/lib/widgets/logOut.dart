@@ -50,7 +50,10 @@ class logOutButton extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("حسابي",
-            style: TextStyle(color: Color.fromARGB(255, 81, 144, 142))),
+            style: TextStyle(
+              color: Color.fromARGB(255, 81, 144, 142),
+              fontFamily: "Tajawal",
+            )),
         centerTitle: true,
         backgroundColor: Colors.white,
         shadowColor: Color.fromARGB(255, 39, 141, 134),
@@ -126,521 +129,8 @@ class logOutButton extends StatelessWidget {
               return Center(child: Text("! هناك مشكلة ما حاول مجددا"));
             }
           }),
-
-//////////////////////////////////SIZED BOX////////////////////////////
-
-      // body: SizedBox(
-      //   height: 600,
-      //   child: SingleChildScrollView(
-      //     reverse: true,
-      //     child: Column(
-      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //         crossAxisAlignment: CrossAxisAlignment.start,
-      //         children: <Widget>[
-      //           Row(
-      //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //             crossAxisAlignment: CrossAxisAlignment.center,
-      //             children: [
-      //               Text(
-      //                 "معلومات المشتري",
-      //                 style: TextStyle(
-      //                     color: Color.fromARGB(255, 81, 144, 142),
-      //                     fontWeight: FontWeight.bold,
-      //                     fontSize: 22),
-      //               ),
-      //               Icon(
-      //                 Icons.person,
-      //                 color: Color.fromARGB(255, 81, 144, 142),
-      //                 size: 28.0,
-      //               )
-      //             ],
-      //           ),
-      //           ListView.builder(
-      //               scrollDirection: Axis.vertical,
-      //               shrinkWrap: true,
-      //               itemCount: titles.length,
-      //               itemBuilder: (context, index) {
-      //                 return Card(
-      //                   child: ListTile(
-      //                     title: SizedBox(
-      //                       height: 60,
-      //                       child: SingleChildScrollView(
-      //                         reverse: true,
-      //                         child: Column(
-      //                           crossAxisAlignment: CrossAxisAlignment.start,
-      //                           children: [
-      //                             Text(
-      //                               titles[index],
-      //                               style: TextStyle(
-      //                                   fontWeight: FontWeight.w800,
-      //                                   fontSize: 20,
-      //                                   color: kPrimaryColor),
-      //                             ),
-      //                             const SizedBox(
-      //                               height: 5,
-      //                             ),
-      //                             if (titles[index] == 'اسم المشتري')
-      //                               Text('مها خالد'),
-      //                             // Text('اختبار اسم المشتري' +
-      //                             //     snapshot.data!.docs[index]['name']
-      //                             //         .toString()),
-      //                             if (titles[index] == 'البريد الإلكتروني')
-      //                               Text('mahaKahlid1@gmail.com'),
-      //                             // Text(index.toString()),
-      //                             // Text('اختبار االبريد الالكتروني' +
-      //                             //     snapshot.data!.docs[index]['email']
-      //                             //         .toString()),
-      //                             if (titles[index] == 'كلمة المرور')
-      //                               Text('******'),
-      //                             // int passwordlen =snapshot.data!.docs[index]['password'].lenght();
-      //                           ],
-      //                         ),
-      //                       ),
-      //                     ),
-      //                     leading: Icon(
-      //                       icons[index],
-      //                       color: Color.fromARGB(255, 79, 75, 75),
-      //                     ),
-      //                   ),
-      //                 );
-      //               }),
-      //           Row(
-      //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //               crossAxisAlignment: CrossAxisAlignment.center,
-      //               children: [
-      //                 ElevatedButton(
-      //                   onPressed: () async {
-      //                     Navigator.pushReplacement(context, MaterialPageRoute(
-      //                         builder: (BuildContext context) {
-      //                       return CustomerEditProfile();
-      //                     }));
-      //                   },
-      //                   style: ButtonStyle(
-      //                     backgroundColor:
-      //                         MaterialStateProperty.all(Color(0xff51908E)),
-      //                     padding: MaterialStateProperty.all(
-      //                         EdgeInsets.symmetric(
-      //                             horizontal: 50, vertical: 13)),
-      //                     shape: MaterialStateProperty.all(
-      //                         RoundedRectangleBorder(
-      //                             borderRadius: BorderRadius.circular(27))),
-      //                   ),
-      //                   child: const Text(
-      //                     " تعديل البيانات",
-      //                     style: TextStyle(
-      //                         fontSize: 14,
-      //                         fontFamily: "Tajawal",
-      //                         fontWeight: FontWeight.bold),
-      //                   ),
-      //                 ),
-      //                 // const SizedBox(
-      //                 //   width: 10,
-      //                 // ),
-      //                 ElevatedButton(
-      //                   onPressed: () async {
-      //                     showDialog(
-      //                         context: context,
-      //                         builder: (BuildContext context) {
-      //                           return AlertDialog(
-      //                             title: Text("تنبيه"),
-      //                             content: Text('سيتم حذف الحساب نهائيا'),
-      //                             actions: <Widget>[
-      //                               TextButton(
-      //                                 child: Text("حذف",
-      //                                     style: TextStyle(color: Colors.red)),
-      //                                 onPressed: () {
-      //                                   //The logic of deleting an account
-
-      //                                   //Navigator.of(context).pop();
-      //                                   FirebaseAuth.instance.signOut();
-      //                                   Navigator.of(context,
-      //                                           rootNavigator: true)
-      //                                       .pushReplacement(MaterialPageRoute(
-      //                                           builder: (context) =>
-      //                                               new Welcome()));
-      //                                 },
-      //                               ),
-      //                               TextButton(
-      //                                 child: Text("تراجع"),
-      //                                 onPressed: () {
-      //                                   Navigator.of(context).pop();
-      //                                 },
-      //                               )
-      //                             ],
-      //                           );
-      //                         });
-
-      //                     /*Navigator.pushReplacement(context,
-      //                                   MaterialPageRoute(builder: (BuildContext context) {
-      //                                 return Welcome();
-      //                               }));*/
-      //                   },
-      //                   style: ButtonStyle(
-      //                     backgroundColor: MaterialStateProperty.all(
-      //                         Color.fromARGB(255, 221, 112, 112)),
-      //                     padding: MaterialStateProperty.all(
-      //                         EdgeInsets.symmetric(
-      //                             horizontal: 50, vertical: 13)),
-      //                     shape: MaterialStateProperty.all(
-      //                         RoundedRectangleBorder(
-      //                             borderRadius: BorderRadius.circular(27))),
-      //                   ),
-      //                   child: Text(
-      //                     "حذف الحساب",
-      //                     style: TextStyle(
-      //                         fontSize: 14,
-      //                         fontFamily: "Tajawal",
-      //                         fontWeight: FontWeight.bold),
-      //                   ),
-      //                 ),
-      //               ]),
-      //           Align(
-      //             alignment: Alignment.bottomLeft,
-      //             child: Image.asset(
-      //               "assets/images/down.png",
-      //               width: 200,
-      //             ),
-      //           ),
-      //         ]),
-      //   ),
-      // ),
-
-      // } else {
-      //   return Center(
-      //     child: const CircularProgressIndicator(),
-      //   );
-      // }
-      //       }),
-      // );
-
-      // body: StreamBuilder(
-      //   stream: FirebaseFirestore.instance
-      //       .collection('customers')
-      //       .where("uid", isEqualTo: currentUser.currentUser!.uid)
-      //       .snapshots(),
-      //   builder: ((context, snapshot) {
-      //     if (snapshot.hasError) {
-      //       return Center(child:Text('!هناك خطأ في استرجاع البيانات${snapshot.hasError}'),);
-      //     }else if(!snapshot.hasData){
-      //
-      //    //            return Center(child: Text('!لا توجد معلومات الحرفي'));
-
-      //
-      //
-      // }
-      //
-      //
-      // else if (snapshot.hasData) {
-      //       final customer = snapshot.data;
-
-      //       return customer == null
-      //           ? const Center(child: Text('!لا توجد معلومات الحرفي'))
-      //           :
-      // body: SizedBox(
-      //   height: 600,
-      //   child: SingleChildScrollView(
-      //     reverse: true,
-      //     child: Column(
-      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //         crossAxisAlignment: CrossAxisAlignment.start,
-      //         children: <Widget>[
-      //           Row(
-      //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //             crossAxisAlignment: CrossAxisAlignment.center,
-      //             children: [
-      //               Text(
-      //                 "معلومات المشتري",
-      //                 style: TextStyle(
-      //                     color: Color.fromARGB(255, 81, 144, 142),
-      //                     fontWeight: FontWeight.bold,
-      //                     fontSize: 22),
-      //               ),
-      //               Icon(
-      //                 Icons.person,
-      //                 color: Color.fromARGB(255, 81, 144, 142),
-      //                 size: 28.0,
-      //               )
-      //             ],
-      //           ),
-      //           ListView.builder(
-      //               scrollDirection: Axis.vertical,
-      //               shrinkWrap: true,
-      //               itemCount: titles.length,
-      //               itemBuilder: (context, index) {
-      //                 return Card(
-      //                   child: ListTile(
-      //                     title: SizedBox(
-      //                       height: 60,
-      //                       child: SingleChildScrollView(
-      //                         reverse: true,
-      //                         child: Column(
-      //                           crossAxisAlignment: CrossAxisAlignment.start,
-      //                           children: [
-      //                             Text(
-      //                               titles[index],
-      //                               style: TextStyle(
-      //                                   fontWeight: FontWeight.w800,
-      //                                   fontSize: 20,
-      //                                   color: kPrimaryColor),
-      //                             ),
-      //                             const SizedBox(
-      //                               height: 5,
-      //                             ),
-      //                             if (titles[index] == 'اسم المشتري')
-      //                               Text('مشتري'),
-      //                             // Text('اختبار اسم المشتري' +
-      //                             //     snapshot.data!.docs[index]['name']
-      //                             //         .toString()),
-      //                             if (titles[index] == 'البريد الإلكتروني')
-      //                               Text('بريد'),
-      //                             // Text(index.toString()),
-      //                             // Text('اختبار االبريد الالكتروني' +
-      //                             //     snapshot.data!.docs[index]['email']
-      //                             //         .toString()),
-      //                             if (titles[index] == 'كلمة المرور')
-      //                               Text('******'),
-      //                             // int passwordlen =snapshot.data!.docs[index]['password'].lenght();
-      //                           ],
-      //                         ),
-      //                       ),
-      //                     ),
-      //                     leading: Icon(
-      //                       icons[index],
-      //                       color: Color.fromARGB(255, 79, 75, 75),
-      //                     ),
-      //                   ),
-      //                 );
-      //               }),
-      //           Row(
-      //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //               crossAxisAlignment: CrossAxisAlignment.center,
-      //               children: [
-      //                 ElevatedButton(
-      //                   onPressed: () async {
-      //                     Navigator.pushReplacement(context, MaterialPageRoute(
-      //                         builder: (BuildContext context) {
-      //                       return CustomerEditProfile();
-      //                     }));
-      //                   },
-      //                   style: ButtonStyle(
-      //                     backgroundColor:
-      //                         MaterialStateProperty.all(Color(0xff51908E)),
-      //                     padding: MaterialStateProperty.all(
-      //                         EdgeInsets.symmetric(
-      //                             horizontal: 50, vertical: 13)),
-      //                     shape: MaterialStateProperty.all(
-      //                         RoundedRectangleBorder(
-      //                             borderRadius: BorderRadius.circular(27))),
-      //                   ),
-      //                   child: const Text(
-      //                     " تعديل البيانات",
-      //                     style: TextStyle(
-      //                         fontSize: 14,
-      //                         fontFamily: "Tajawal",
-      //                         fontWeight: FontWeight.bold),
-      //                   ),
-      //                 ),
-      //                 // const SizedBox(
-      //                 //   width: 10,
-      //                 // ),
-      //                 ElevatedButton(
-      //                   onPressed: () async {
-      //                     showDialog(
-      //                         context: context,
-      //                         builder: (BuildContext context) {
-      //                           return AlertDialog(
-      //                             title: Text("تنبيه"),
-      //                             content: Text('سيتم حذف الحساب نهائيا'),
-      //                             actions: <Widget>[
-      //                               TextButton(
-      //                                 child: Text("حذف",
-      //                                     style: TextStyle(color: Colors.red)),
-      //                                 onPressed: () {
-      //                                   //The logic of deleting an account
-
-      //                                   //Navigator.of(context).pop();
-      //                                   FirebaseAuth.instance.signOut();
-      //                                   Navigator.of(context,
-      //                                           rootNavigator: true)
-      //                                       .pushReplacement(MaterialPageRoute(
-      //                                           builder: (context) =>
-      //                                               new Welcome()));
-      //                                 },
-      //                               ),
-      //                               TextButton(
-      //                                 child: Text("تراجع"),
-      //                                 onPressed: () {
-      //                                   Navigator.of(context).pop();
-      //                                 },
-      //                               )
-      //                             ],
-      //                           );
-      //                         });
-
-      //                     /*Navigator.pushReplacement(context,
-      //                                   MaterialPageRoute(builder: (BuildContext context) {
-      //                                 return Welcome();
-      //                               }));*/
-      //                   },
-      //                   style: ButtonStyle(
-      //                     backgroundColor: MaterialStateProperty.all(
-      //                         Color.fromARGB(255, 221, 112, 112)),
-      //                     padding: MaterialStateProperty.all(
-      //                         EdgeInsets.symmetric(
-      //                             horizontal: 50, vertical: 13)),
-      //                     shape: MaterialStateProperty.all(
-      //                         RoundedRectangleBorder(
-      //                             borderRadius: BorderRadius.circular(27))),
-      //                   ),
-      //                   child: Text(
-      //                     "حذف الحساب",
-      //                     style: TextStyle(
-      //                         fontSize: 14,
-      //                         fontFamily: "Tajawal",
-      //                         fontWeight: FontWeight.bold),
-      //                   ),
-      //                 ),
-      //               ]),
-      //           Align(
-      //             alignment: Alignment.bottomLeft,
-      //             child: Image.asset(
-      //               "assets/images/footbg.png",
-      //               width: 200,
-      //             ),
-      //           ),
-      //         ]),
-      //   ),
-      // ),
-      // );
     );
   }
-
-  //????????????????OLD CODE????????????????????????
-  //),
-  // )
-
-//         body: SingleChildScrollView(
-//           child: Column(
-//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//               children: <Widget>[
-//                 Row(
-//                   children: [
-//                     Text(
-//                       "معلومات المشتري",
-//                       style: TextStyle(
-//                           color: Color.fromARGB(255, 79, 75, 75),
-//                           fontWeight: FontWeight.bold,
-//                           fontSize: 22),
-//                     ),
-//                     Icon(
-//                       Icons.person,
-//                       color: Color.fromARGB(255, 79, 75, 75),
-//                       size: 28.0,
-//                     )
-//                   ],
-//                 ),
-//                 ListView.builder(
-//                     scrollDirection: Axis.vertical,
-//                     shrinkWrap: true,
-//                     itemCount: titles.length,
-//                     itemBuilder: (context, index) {
-//                       return Card(
-//                         child: ListTile(
-//                           title: Column(
-//                             crossAxisAlignment: CrossAxisAlignment.start,
-//                             children: [
-//                               Text(
-//                                 titles[index],
-//                                 style: TextStyle(
-//                                     fontWeight: FontWeight.w800,
-//                                     fontSize: 20,
-//                                     color: kPrimaryColor),
-//                               ),
-//                               SizedBox(
-//                                 height: 5,
-//                               ),
-//                               Text('this is a test '),
-//                             ],
-//                           ),
-//                           leading: Icon(
-//                             icons[index],
-//                             color: Color.fromARGB(248, 198, 149, 100),
-//                           ),
-//                         ),
-//                       );
-//                     }),
-//                 SizedBox(
-//                   height: 5,
-//                 ),
-//                 Row(
-//                   children: [
-//                     SizedBox(
-//                       width: 50,
-//                     ),
-//                     FloatingActionButton.extended(
-//                         heroTag: "btn1",
-//                         label: Text(
-//                           'تعديل البيانات',
-//                         ),
-//                         onPressed: () async {
-//                           Navigator.pushReplacement(context, MaterialPageRoute(
-//                               builder: (BuildContext context) {
-//                             return CustomerEditProfile();
-//                           }));
-//                         },
-//                         backgroundColor: kPrimaryColor),
-//                     SizedBox(
-//                       width: 10,
-//                     ),
-//                     FloatingActionButton.extended(
-//                         heroTag: "btn1",
-//                         label: Text(
-//                           'حذف الحساب',
-//                         ),
-//                         onPressed: () async {
-//                           showDialog(
-//                               context: context,
-//                               builder: (BuildContext context) {
-//                                 return AlertDialog(
-//                                   title: Text("تنبيه"),
-//                                   content: Text('سيتم حذف الحساب نهائيا'),
-//                                   actions: <Widget>[
-//                                     TextButton(
-//                                       child: Text("حذف",
-//                                           style: TextStyle(color: Colors.red)),
-//                                       onPressed: () {
-// //The logic of deleting an account
-
-//                                         //Navigator.of(context).pop();
-//                                         FirebaseAuth.instance.signOut();
-//                                         Navigator.of(context,
-//                                                 rootNavigator: true)
-//                                             .pushReplacement(MaterialPageRoute(
-//                                                 builder: (context) =>
-//                                                     new Welcome()));
-//                                       },
-//                                     ),
-//                                     TextButton(
-//                                       child: Text("تراجع"),
-//                                       onPressed: () {
-//                                         Navigator.of(context).pop();
-//                                       },
-//                                     )
-//                                   ],
-//                                 );
-//                               });
-
-//                           /*Navigator.pushReplacement(context,
-//                 MaterialPageRoute(builder: (BuildContext context) {
-//               return Welcome();
-//             }));*/
-//                         },
-//                         backgroundColor: Color.fromARGB(255, 221, 112, 112)),
-//                   ],
-//                 ),
-//               ]),
-//         ));
-  //   );
 }
 
 //////////////////////////////////SARAHS////////////////
@@ -653,7 +143,6 @@ Future readDocument(String id) async {
       .get()
       .then((value) {
     documentSnapshot = value; // we get the document here
-    // name = documentSnapshot['quantity'];
   });
 
   //now you can access the document field value
@@ -667,15 +156,6 @@ Future<Customer?> readUser() async {
   final uid = user!.uid;
   String DocId = uid;
 
-  // DocumentSnapshot documentSnapshot;
-  // await FirebaseFirestore.instance
-  //     .collection('customers')
-  //     .doc(DocId)
-  //     .get();
-  // we get the document here
-  // name = documentSnapshot['quantity'];
-
-  // readDocument(uid);
   print(uid);
 
   final docCustomer =
@@ -702,13 +182,13 @@ Widget buildCustomer(Customer customer, BuildContext context) {
   for (int i = 0; i < passlength; i++) {
     passwordStar = passwordStar + '*';
   }
- 
+
   return SingleChildScrollView(
     child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           SizedBox(
-            width: 600,
+            width: 630,
             height: 100,
             child: Image.asset(
               'assets/images/customerBG.png',
@@ -719,33 +199,42 @@ Widget buildCustomer(Customer customer, BuildContext context) {
             height: 20,
           ),
           Text(
-            "معلومات المشتري",
+            "بيانات المشتري",
             style: TextStyle(
-                color: Color.fromARGB(255, 26, 96, 91),
-                fontWeight: FontWeight.bold,
-                fontSize: 22),
+              color: Color.fromARGB(255, 26, 96, 91),
+              fontWeight: FontWeight.bold,
+              fontSize: 24,
+              fontFamily: "Tajawal",
+            ),
           ),
           Container(
+            height: 230,
             margin: const EdgeInsets.all(10.0),
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: Color.fromARGB(255, 255, 255, 255),
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 2,
-                  blurRadius: 7,
-                  offset: Offset(0, 3), // changes position of shadow
-                ),
-              ],
-            ),
+            padding: const EdgeInsets.all(15),
+            // decoration: BoxDecoration(
+            //   color: Color.fromARGB(255, 255, 255, 255),
+            //   borderRadius: BorderRadius.all(Radius.circular(20)),
+            //   boxShadow: [
+            //     BoxShadow(
+            //       color: Colors.grey.withOpacity(0.5),
+            //       spreadRadius: 2,
+            //       blurRadius: 7,
+            //       offset: Offset(0, 3), // changes position of shadow
+            //     ),
+            //   ],
+            // ),
             child: ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 itemCount: titles.length,
                 itemBuilder: (context, index) {
                   return Card(
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        color: Colors.grey.withOpacity(0.6),
+                      ),
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
                     child: ListTile(
                       title: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -758,22 +247,94 @@ Widget buildCustomer(Customer customer, BuildContext context) {
                           //       color: kPrimaryColor),
                           // ),
                           SizedBox(
-                            height: 5,
+                            height: 20,
                           ),
                           if (titles[index] == 'اسم المشتري')
-                            Text('${customer.name}'),
+                            Row(
+                              children: [
+                                Text(
+                                  'اسم المشتري ',
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 26, 96, 91),
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 17,
+                                    fontFamily: "Tajawal",
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  '${customer.name}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontFamily: "Tajawal",
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            ),
 
                           if (titles[index] == 'البريد الإلكتروني')
-                            Text('${customer.email}'),
+                            Row(
+                              children: [
+                                Text(
+                                  'البريد الإلكتروني ',
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 26, 96, 91),
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 17,
+                                    fontFamily: "Tajawal",
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  '${customer.email}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontFamily: "Tajawal",
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            ),
 
                           if (titles[index] == 'كلمة المرور')
-                            Text(passwordStar),
+                            Row(
+                              children: [
+                                Text(
+                                  'كلمة المرور',
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 26, 96, 91),
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 17,
+                                    fontFamily: "Tajawal",
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 10),
+                                  child: Text(
+                                    passwordStar,
+                                    style: TextStyle(
+                                      fontSize: 19,
+                                      fontFamily: "Tajawal",
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                         ],
                       ),
-                      leading: Icon(
-                        icons[index],
-                        color: Color.fromARGB(255, 39, 141, 134),
-                      ),
+                      // leading: Icon(
+                      //   icons[index],
+                      //   color: Color.fromARGB(255, 39, 141, 134),
+                      // ),
                     ),
                   );
                 }),
@@ -786,28 +347,47 @@ Widget buildCustomer(Customer customer, BuildContext context) {
               SizedBox(
                 width: 50,
               ),
-              FloatingActionButton.extended(
-                  heroTag: "btn1",
-                  label: Text(
-                    'تعديل البيانات',
+              Expanded(
+                child: Row(children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      // openPasswordDialog(context);
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CustomerEditProfile(
+                                  customer.name,
+                                  customer.email,
+                                  customer.password,
+                                  customer.id,
+                                )),
+                      );
+                    },
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(Color(0xff51908E)),
+                      padding: MaterialStateProperty.all(
+                          EdgeInsets.symmetric(horizontal: 35, vertical: 13)),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(27))),
+                    ),
+                    child: Text(
+                      " تعديل البيانات",
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontFamily: "Tajawal",
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
-                  onPressed: () async {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (BuildContext context) {
-                      return CustomerEditProfile();
-                    }));
-                  },
-                  backgroundColor: kPrimaryColor),
-              SizedBox(
-                width: 10,
-              ),
-              FloatingActionButton.extended(
-                  heroTag: "btn1",
-                  label: Text(
-                    'حذف الحساب',
+                  SizedBox(
+                    width: 10,
                   ),
-                  onPressed: () async {
-                    showDialog(
+                  ElevatedButton(
+                    onPressed: () async {
+// Diolog to enter the password
+
+                      showDialog(
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
@@ -819,6 +399,9 @@ Widget buildCustomer(Customer customer, BuildContext context) {
                                     style: TextStyle(color: Colors.red)),
                                 onPressed: () {
 //The logic of deleting an account
+                                  final docCus = FirebaseFirestore.instance
+                                      .collection('customers')
+                                      .doc();
 
                                   //Navigator.of(context).pop();
                                   FirebaseAuth.instance.signOut();
@@ -835,14 +418,27 @@ Widget buildCustomer(Customer customer, BuildContext context) {
                               )
                             ],
                           );
-                        });
-
-                    /*Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (BuildContext context) {
-              return Welcome();
-            }));*/
-                  },
-                  backgroundColor: Color.fromARGB(255, 221, 112, 112)),
+                        },
+                      );
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                          Color.fromARGB(255, 221, 112, 112)),
+                      padding: MaterialStateProperty.all(
+                          EdgeInsets.symmetric(horizontal: 35, vertical: 13)),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(27))),
+                    ),
+                    child: Text(
+                      "حذف الحساب",
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontFamily: "Tajawal",
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ]),
+              )
             ],
           ),
         ]),

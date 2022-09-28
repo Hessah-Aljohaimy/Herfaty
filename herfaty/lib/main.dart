@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
         "/signupHerfay": (context) => const SignupHerafy(),
         "/customer_base_screen": (context) => const customerBaseScreen(),
         "/ShopOwnerProfile": (context) => const ShopOwnerProfile(),
-        "/CustomerProfile": (context) => const CustomerProfile(),
+        // "/CustomerProfile": (context) => const CustomerProfile(),
       },
     );
   }

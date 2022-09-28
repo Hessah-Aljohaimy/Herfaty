@@ -166,7 +166,7 @@ class _SignupCustomerState extends State<SignupCustomer> {
                                       password: _passwordTextController.text,
                                     );
                                     Fluttertoast.showToast(
-                                      msg: "تم تسجيل حسابك  بنجاح",
+                                      msg: "تم تسجيل حسابك بنجاح",
                                       toastLength: Toast.LENGTH_SHORT,
                                       gravity: ToastGravity.CENTER,
                                       timeInSecForIosWeb: 3,
