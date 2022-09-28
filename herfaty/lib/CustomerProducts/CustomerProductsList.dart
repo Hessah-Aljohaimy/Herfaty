@@ -5,7 +5,7 @@ import 'package:herfaty/constants/size.dart';
 import 'package:herfaty/CustomerProducts/productCard.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:herfaty/CustomerProducts/Product1.dart';
+import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/screens/customer_base_screen.dart';
 
 import 'package:herfaty/constants/color.dart';
