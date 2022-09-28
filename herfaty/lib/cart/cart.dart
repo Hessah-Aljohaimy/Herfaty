@@ -541,6 +541,7 @@ class _CartState extends State<Cart> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => checkOut(
+                                  shopName: k,
                                   Items: cItems.toList(),
                                   totalPrice: calculatTotal(cItems))),
                         );
@@ -574,7 +575,7 @@ class _CartState extends State<Cart> {
                           ),
                         );*/
                       },
-                      label: const Text('طلب',
+                      label: const Text('إتمام الطلب',
                           style: TextStyle(
                             fontSize: 18.0,
                           )),

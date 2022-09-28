@@ -13,14 +13,16 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class checkOut extends StatelessWidget {
   List<CartModal> Items;
   num totalPrice;
+  String shopName;
 
   checkOut({
     Key? key,
     required Items,
     required totalPrice,
-    //required shopName,
+    required shopName,
   })  : this.Items = Items,
         this.totalPrice = totalPrice,
+        this.shopName = shopName,
         super(key: key);
 
   @override
@@ -47,7 +49,7 @@ class checkOut extends StatelessWidget {
                       fontFamily: "Tajawal"),
                 ),
               ),
-              _buildList(Items),
+              _buildList(Items, shopName),
               Container(
                 height: 25,
                 width: double.infinity,
@@ -124,7 +126,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-Widget _buildList(List<CartModal> list) {
+Widget _buildList(List<CartModal> list, String shopName) {
   return Container(
     margin: EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
     padding: EdgeInsets.all(1.0),
@@ -139,7 +141,7 @@ Widget _buildList(List<CartModal> list) {
     child: ExpansionTile(
       title: Text(
         //k, //ضعي اسم المتجر ثم شيلي الكومنت
-        "اسم المتجر",
+        shopName,
         style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 15,
