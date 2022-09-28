@@ -6,6 +6,7 @@ import 'package:herfaty/screens/owner_base_screen.dart';
 import 'package:herfaty/widgets/profile_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:herfaty/ShopOwnerOrder/OrdersList.dart';
 
 import 'ownerProductsCateg.dart';
 
@@ -212,6 +213,12 @@ class Services extends StatelessWidget {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                         const ownerProductsCategScreen()),
+                              );
+                            } else if (cItems[index].name == "طلبات متجري") {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const OrderList()),
                               );
                             }
                           });

@@ -1,20 +1,20 @@
 import 'package:flutter/services.dart';
 
 class orderModel {
-  String id;
-  late String title;
-  late String date;
-  late String Day;
+  String shopOwnerID;
+  late String customerID;
+  late String orderDate;
+  late String orderDay;
   late int qantity;
-  late double price;
+  late double totalPrice;
   late String image;
 
   orderModel(
-      {required this.id,
-      required this.title,
-      required this.date,
-      required this.Day,
+      {required this.shopOwnerID,
+      required this.customerID,
+      required this.orderDate,
+      required this.orderDay,
       required this.qantity,
-      required this.price,
+      required this.totalPrice,
       required this.image});
 }
