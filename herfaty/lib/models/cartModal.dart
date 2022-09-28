@@ -7,6 +7,7 @@ class CartModal {
   int quantity = 0;
   int avalibleAmount;
   String shopName = "";
+  String productId = "";
 
   CartModal(
       {required this.customerId,
@@ -16,7 +17,8 @@ class CartModal {
       required this.price,
       required this.quantity,
       required this.avalibleAmount,
-      required this.shopName});
+      required this.shopName,
+      required this.productId});
 
   /*
 
@@ -47,6 +49,7 @@ class CartModal {
         'quantity': quantity,
         'avalibleAmount': avalibleAmount,
         'shopName': shopName,
+        'productId': productId,
       };
 
   static CartModal fromJson(Map<String, dynamic> json) => CartModal(
@@ -58,5 +61,6 @@ class CartModal {
         quantity: json['quantity'],
         avalibleAmount: json['avalibleAmount'],
         shopName: json['shopName'],
+        productId: json['productId'],
       );
 }

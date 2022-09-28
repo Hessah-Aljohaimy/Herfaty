@@ -36,11 +36,12 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
             PaymentMethodData(billingDetails: event.billingDetails),
       ),
     );
-    //print('----------------------------------- ${paymentMethod.id}');
+    print('------------------------------------2');
+
     final paymentIntentResult = await _callPayEndpointMehodId(
       useStripeSdk: true,
       paymentMethodId: paymentMethod.id,
-      currency: '',
+      currency: 'usd',
       items: event.items,
     );
     print('------------------------------------3');
@@ -119,7 +120,7 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
     final response = await http.post(
       Url,
       headers: {'Content-Type': 'application/json'},
-      body: json.encode(
+      body: jsonEncode(
         {
           'useStripeSdk': useStripeSdk,
           'paymentMethodId': paymentMethodId,
@@ -128,6 +129,9 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
         },
       ),
     );
-    return json.decode(response.body);
+
+    return jsonDecode(response.body);
+
+    //return json.decode(response.body);
   }
 }

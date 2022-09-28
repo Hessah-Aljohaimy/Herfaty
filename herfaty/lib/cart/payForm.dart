@@ -7,6 +7,8 @@ import 'package:herfaty/blocs/blocs.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
+import 'package:herfaty/.env';
+
 class payForm extends StatefulWidget {
   const payForm({super.key});
 

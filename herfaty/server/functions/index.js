@@ -54,8 +54,8 @@ exports.StripePayEndpointMethodId = functions.https.onRequest (async ( req , res
                 confirm : true ,
                 confirmation_method : 'manual' ,
                 currency : currency ,
-                paymentmethod : paymentMethodId ,
-                use_stripe_skd : useStripeSdk ,
+                payment_method : paymentMethodId ,
+                use_stripe_sdk : useStripeSdk ,
             }
             const intent = await stripe.paymentIntents.create ( params ) ;
             console.log ('Intent: ${intent} heeeeeeeeeeeeeeeelllllllllooooooooo') ;

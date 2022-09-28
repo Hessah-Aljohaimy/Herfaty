@@ -47,10 +47,6 @@ class _CartState extends State<Cart> {
               } else if (snapshot.hasData) {
                 final cItems = snapshot.data!.toList();
 
-                print("--------------------------------------");
-                print(cItems);
-                print("--------------------------------------");
-
                 final groupedList = groupingItems(cItems);
 
                 Size size = MediaQuery.of(context).size;
