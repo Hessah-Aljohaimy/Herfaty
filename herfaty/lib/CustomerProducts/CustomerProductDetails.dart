@@ -70,12 +70,16 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                         // crossAxisAlignment = Horizontal Axis
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            widget.product.name,
-                            style: const TextStyle(
-                              fontSize: 26.0,
-                              fontWeight: FontWeight.w600,
-                              color: Color.fromARGB(255, 0, 0, 0),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 5),
+                            child: Text(
+                              widget.product.name,
+                              style: const TextStyle(
+                                fontSize: 26.0,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: "Tajawal",
+                                color: Color.fromARGB(255, 0, 0, 0),
+                              ),
                             ),
                           ),
                           // price======================================================================
@@ -87,6 +91,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                                 style: const TextStyle(
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.w600,
+                                  fontFamily: "Tajawal",
                                   color: Colors.orange,
                                 ),
                               ),
@@ -94,7 +99,8 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                                 ' الكمية: ${widget.product.quantity} / ${thisPageQuantity} ',
                                 style: const TextStyle(
                                   fontSize: 18.0,
-                                  fontWeight: FontWeight.w600,
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: "Tajawal",
                                   color: Color.fromARGB(255, 86, 86, 86),
                                 ),
                               ),
@@ -119,7 +125,9 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                   ),
                   child: SingleChildScrollView(
                       scrollDirection: Axis.vertical,
-                      child: ExpandedWidget(text: widget.product.description)),
+                      child: ExpandedWidget(
+                        text: widget.product.description,
+                      )),
                 ),
                 // const Spacer(),
                 //(أضافة إلى السلة)============================================================//
@@ -213,6 +221,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                       ],
                     ),
                     Container(
+                      //margin: EdgeInsets.only(top: 20.0),
                       // زر اللإضافة للسلة-----------------------------------------
                       child: ElevatedButton(
                         onPressed: () async {
@@ -272,9 +281,11 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 26,
-                            vertical: 3,
+                          padding: const EdgeInsets.only(
+                            right: 26,
+                            left: 26,
+                            top: 10,
+                            bottom: 5,
                           ),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(25.0)),
@@ -282,7 +293,8 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                         child: const Text(
                           'أضف إلى السلة',
                           style: TextStyle(
-                            fontSize: 20.0,
+                            fontSize: 18.0,
+                            fontFamily: "Tajawal",
                             fontWeight: FontWeight.w900,
                             color: kPrimaryColor,
                           ),

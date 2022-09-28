@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:herfaty/models/Product1.dart';
 
@@ -18,12 +20,23 @@ class productCard extends StatelessWidget {
     Size size =
         MediaQuery.of(context).size; //to get the width and height of the app
     return Container(
-      color: Colors.white,
+      decoration: BoxDecoration(
+        //color: const Color(0xFFFAF9F6),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(.2),
+            blurRadius: 5.0,
+            spreadRadius: .05,
+          ), //BoxShadow
+        ],
+      ),
       margin: const EdgeInsets.symmetric(
         horizontal: 20.0,
         vertical: 10.0,
       ),
-      height: 190,
+      height: 180,
       child: InkWell(
         onTap:
             press, // يعني ان المستخدم لما يضغط على الكارد تفتح معاه صفحة جديدة
@@ -33,16 +46,11 @@ class productCard extends StatelessWidget {
             Container(
               //(small box inside the Big box)
               padding: const EdgeInsets.only(top: 10),
-              height: size.height * 0.25,
+              height: 180,
               decoration: BoxDecoration(
-                color: const Color(0xFFFAF9F6),
-                borderRadius: BorderRadius.circular(22),
-                boxShadow: const [
-                  BoxShadow(
-                      offset: Offset(0, -10),
-                      blurRadius: 25,
-                      color: Colors.white),
-                ],
+                //color: const Color(0xFFFAF9F6),
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
               ),
             ),
             //*************************This part contains product photo:
@@ -50,20 +58,32 @@ class productCard extends StatelessWidget {
               top: 0,
               left: 0,
               child: Container(
-                margin: const EdgeInsets.symmetric(
-                  vertical: 15,
+                // margin: const EdgeInsets.symmetric(
+                //   vertical: 15,
+                // ),
+                // padding: const EdgeInsets.symmetric(
+                //   horizontal: 20,
+                // ),
+                height: 180,
+                width: 180,
+                decoration: BoxDecoration(
+                  border: Border.all(width: 0.1, color: Colors.white),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    bottomLeft: Radius.circular(20),
+                  ),
+                  //color: Color(0xFFFAF9F6),
+                  color: Colors.white,
                 ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                ),
-                height: 160,
-                width: 200,
-                decoration: const BoxDecoration(
-                  color: Color(0xFFFAF9F6),
-                ),
-                child: Image.network(
-                  product.image,
-                  fit: BoxFit.cover,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    bottomLeft: Radius.circular(20),
+                  ),
+                  child: Image.network(
+                    product.image,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
@@ -85,8 +105,9 @@ class productCard extends StatelessWidget {
                       child: Text(
                         product.name,
                         style: const TextStyle(
-                          fontSize: 23.0,
+                          fontSize: 20.0,
                           fontWeight: FontWeight.w600,
+                          fontFamily: "Tajawal",
                           color: Colors.black,
                         ),
                       ),
@@ -108,6 +129,7 @@ class productCard extends StatelessWidget {
                             style: const TextStyle(
                               fontSize: 20.0,
                               fontWeight: FontWeight.w400,
+                              fontFamily: "Tajawal",
                               color: Colors.orange,
                             ),
                           ),
