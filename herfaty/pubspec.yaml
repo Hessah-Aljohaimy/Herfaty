@@ -54,7 +54,8 @@ dependencies:
   
   http: ^0.13.5
   google_maps_place_picker: any
-
+  geolocator: any
+  geocoding: any
   
   
 

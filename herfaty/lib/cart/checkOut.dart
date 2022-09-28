@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_place_picker/google_maps_place_picker.dart';
 import 'package:herfaty/cart/payForm.dart';
 import 'package:herfaty/constants/color.dart';
@@ -122,6 +125,17 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       automaticallyImplyLeading: false,
       iconTheme: IconThemeData(color: kPrimaryColor),
+      leading: IconButton(
+        padding: EdgeInsets.only(right: 20),
+        icon: const Icon(
+          Icons.arrow_back, //سهم العودة
+          color: Color.fromARGB(255, 26, 96, 91),
+          size: 22.0,
+        ),
+        onPressed: () {
+          Navigator.pop(context);
+        },
+      ),
     );
   }
 }
@@ -243,6 +257,9 @@ class add extends StatefulWidget {
 class _addState extends State<add> {
   String msg = 'ادخل موقعك';
   String msgButton = "اضغط هنا لتحديد موقعك";
+  Color color = new Color(0xff51908E);
+  Color Tcolor = new Color.fromARGB(255, 255, 255, 255);
+  TextDecoration t = TextDecoration.none;
 
   @override
   Widget build(BuildContext context) {
@@ -251,11 +268,12 @@ class _addState extends State<add> {
       padding: EdgeInsets.all(5.0),
       decoration: BoxDecoration(
           color: Colors.white,
-          border: Border.all(color: Color(0xff51908E), width: 1),
+          border: Border.all(color: new Color(0xff51908E), width: 1),
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-                color: Color(0xff51908E).withOpacity(0.9), offset: Offset(1, 1))
+                color: new Color(0xff51908E).withOpacity(0.9),
+                offset: Offset(1, 1))
           ]),
       child: Row(
         children: [
@@ -266,7 +284,7 @@ class _addState extends State<add> {
                 msg,
                 style: TextStyle(
                   fontSize: 15,
-                  color: Color(0xff51908E),
+                  color: new Color(0xff51908E),
                   fontWeight: FontWeight.bold,
                 ),
                 overflow: TextOverflow.ellipsis,
@@ -280,11 +298,13 @@ class _addState extends State<add> {
             child: ElevatedButton(
               child: Text(
                 msgButton,
-                style: TextStyle(fontSize: 15),
+                style: TextStyle(fontSize: 15, color: Tcolor, decoration: t),
               ),
               onPressed: _changeText,
               style: ElevatedButton.styleFrom(
-                  primary: Color(0xff51908E),
+                  shadowColor: Colors.white,
+                  elevation: 0,
+                  primary: color,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   fixedSize: Size(165, 35)),
@@ -304,14 +324,17 @@ class _addState extends State<add> {
           apiKey:
               "AIzaSyAwT-rSNhTijJZ2Op4IWMddDdLF0Dcq8-o", // Put YOUR OWN KEY here.
           onPlacePicked: (result) {
-            print(result.formattedAddress);
+            //print(result.formattedAddress);
             Navigator.of(context).pop();
             setState(() {
               if (result.formattedAddress is Null) {
                 msg = 'ادخل الموقع';
               } else {
                 msg = result.formattedAddress!;
-                msgButton = "تم تحديد الموقع";
+                color = new Color.fromARGB(255, 255, 255, 255);
+                Tcolor = Color.fromARGB(255, 0, 0, 0);
+                t = TextDecoration.underline;
+                msgButton = "اضغط لتغيير الموقع";
               }
             });
           },

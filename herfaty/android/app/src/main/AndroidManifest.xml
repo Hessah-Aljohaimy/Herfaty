@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.herfaty">
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
    <application
         android:label="Herfaty"
         android:name="${applicationName}"
@@ -34,6 +35,7 @@
         
          <meta-data android:name="com.google.android.geo.API_KEY"
            android:value="AIzaSyAwT-rSNhTijJZ2Op4IWMddDdLF0Dcq8-o"/>
+        
     </application>
     
 </manifest>
