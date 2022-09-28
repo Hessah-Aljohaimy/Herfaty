@@ -44,24 +44,38 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
       currency: 'usd',
       items: event.items,
     );
-    print('------------------------------------3');
+    print(paymentIntentResult);
+    //print(paymentIntentResult['clientSecret']);
 
-    if (paymentIntentResult['error'] != null) {
+ //emit(state.copyWith(status: PaymentStatus.success));
+
+    if (paymentIntentResult['status'] =="succeeded") {
+      print('xxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+      emit(state.copyWith(status: PaymentStatus.success));
+    }
+
+    
+    if (paymentIntentResult['status'] =="failed") {
       print('xxxxxxxxxxxxxxxxxxxxxxxxxxxx');
       emit(state.copyWith(status: PaymentStatus.failure));
     }
 
-    if (paymentIntentResult['clientSecret'] != null &&
-        paymentIntentResult['requiresAction'] == null) {
+    if (paymentIntentResult['client_secret'] != null &&
+        paymentIntentResult['requires_action'] == null) {
       print('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
       emit(state.copyWith(status: PaymentStatus.success));
     }
 
     if (paymentIntentResult['clientSecret'] != null &&
-        paymentIntentResult['requiresAction'] == true) {
+        paymentIntentResult['requires_action'] == true) {
+                print('zzzzzzzzzzzzzzzzzzzzzzzzz');
+
       final String clientSecret = paymentIntentResult['clientSecret'];
       add(PaymentConfirmIntent(clientSecret: clientSecret));
     }
+
+          print('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq');
+
   }
 
   void _onPaymentConfirmIntent(
@@ -120,7 +134,7 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
     final response = await http.post(
       Url,
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode(
+      body: json.encode(
         {
           'useStripeSdk': useStripeSdk,
           'paymentMethodId': paymentMethodId,
@@ -129,8 +143,7 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
         },
       ),
     );
-
-    return jsonDecode(response.body);
+    return json.decode(response.body);
 
     //return json.decode(response.body);
   }
