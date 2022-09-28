@@ -139,7 +139,7 @@ Widget _buildList(List<CartModal> list) {
     child: ExpansionTile(
       title: Text(
         //k, //ضعي اسم المتجر ثم شيلي الكومنت
-        "اسم المتجر",
+      "اسم المتجر",
         style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 15,
