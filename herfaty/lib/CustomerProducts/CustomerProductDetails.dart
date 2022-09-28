@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -19,14 +21,13 @@ class CustomerProdectDetails extends StatefulWidget {
 }
 
 class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
-  int updatedQuantity = 1;
+  int thisPageQuantity = 1;
   @override
   Widget build(BuildContext context) {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
+    String thisCustomerId = user!.uid;
     //////////////////////////////////////////////////////////////////////////////////////////
-
-    //////////////////////////////////////////////////////////////////////////////////////
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: kPrimaryColor,
@@ -82,7 +83,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                ' ${updatedQuantity * widget.product.price} ريال',
+                                ' ${thisPageQuantity * widget.product.price} ريال',
                                 style: const TextStyle(
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.w600,
@@ -90,7 +91,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                                 ),
                               ),
                               Text(
-                                ' الكمية: ${widget.product.quantity} / ${updatedQuantity} ',
+                                ' الكمية: ${widget.product.quantity} / ${thisPageQuantity} ',
                                 style: const TextStyle(
                                   fontSize: 18.0,
                                   fontWeight: FontWeight.w600,
@@ -116,12 +117,9 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                     vertical: 10,
                     horizontal: 30,
                   ),
-                  child: Expanded(
-                    child: SingleChildScrollView(
-                        scrollDirection: Axis.vertical,
-                        child:
-                            ExpandedWidget(text: widget.product.description)),
-                  ),
+                  child: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: ExpandedWidget(text: widget.product.description)),
                 ),
                 // const Spacer(),
                 //(أضافة إلى السلة)============================================================//
@@ -137,27 +135,24 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                       //mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         IconButton(
-                            onPressed: () {
-                              setState(
-                                () {
-                                  if (updatedQuantity > 1) {
-                                    updatedQuantity = updatedQuantity - 1;
-                                    FirebaseFirestore.instance
-                                        .collection('cart')
-                                        .doc('${widget.product.id}')
-                                        .update({"quantity": updatedQuantity});
-                                  } else {
-                                    ShowDialogMethod(
-                                        context, "أقل عدد للمنتج هو واحد");
-                                  }
-                                },
-                              );
-                            },
-                            icon: Icon(
-                              Icons.remove_circle_outline,
-                              color: Colors.white,
-                              size: 26,
-                            )),
+                          icon: Icon(
+                            Icons.remove_circle_outline,
+                            color: Colors.white,
+                            size: 26,
+                          ),
+                          onPressed: () {
+                            setState(
+                              () {
+                                if (thisPageQuantity > 1) {
+                                  thisPageQuantity = thisPageQuantity - 1;
+                                } else {
+                                  ShowDialogMethod(
+                                      context, "أقل عدد للمنتج هو واحد");
+                                }
+                              },
+                            );
+                          },
+                        ),
                         Container(
                           width: 28.0,
                           height: 47.0,
@@ -168,7 +163,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                             textAlign: TextAlign.center,
                             decoration: InputDecoration(
                                 border: InputBorder.none,
-                                hintText: '${updatedQuantity}',
+                                hintText: '${thisPageQuantity}',
                                 hintStyle: const TextStyle(
                                     fontWeight: FontWeight.w700,
                                     fontSize: 24,
@@ -176,62 +171,98 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                           ),
                         ),
                         IconButton(
-                            onPressed: () {
-                              setState(
-                                () {
-                                  if (updatedQuantity <
+                          icon: Icon(
+                            Icons.add_circle_outline,
+                            color: Colors.white,
+                            size: 26,
+                          ),
+                          onPressed: () async {
+                            //get the existed quantity of the item if it is already exists in the cart
+                            int existedQuantity =
+                                await getQuantity(thisCustomerId);
+                            setState(
+                              () {
+                                /*if existed quantity is not zero, المنتج موجود سابقًا*/
+                                if (existedQuantity != 0) {
+                                  int totalQuantity =
+                                      thisPageQuantity + existedQuantity;
+                                  //-----------------------------------
+                                  if (totalQuantity < widget.product.quantity) {
+                                    thisPageQuantity = thisPageQuantity + 1;
+                                  } else {
+                                    ShowDialogMethod(context,
+                                        "توجد كمية مضافة مسبقًا من هذا المنتج في السلة! لا توجد كمية متاحة أكثر من ذلك");
+                                  }
+                                }
+
+                                //==================================================
+                                //else: item does not exists in the cart
+                                else {
+                                  if (thisPageQuantity <
                                       widget.product.quantity) {
-                                    updatedQuantity = updatedQuantity + 1;
-                                    FirebaseFirestore.instance
-                                        .collection('cart')
-                                        .doc('${widget.product.id}')
-                                        .update({"quantity": updatedQuantity});
+                                    thisPageQuantity = thisPageQuantity + 1;
                                   } else {
                                     ShowDialogMethod(context,
                                         "لا توجد كمية متاحة من المنتج أكثر من ذلك");
                                   }
-                                },
-                              );
-                            },
-                            icon: Icon(
-                              Icons.add_circle_outline,
-                              color: Colors.white,
-                              size: 26,
-                            )),
+                                }
+                              },
+                            );
+                          },
+                        ),
                       ],
                     ),
                     Container(
                       // زر اللإضافة للسلة-----------------------------------------
                       child: ElevatedButton(
                         onPressed: () async {
-                          AddProductToCart item = AddProductToCart(
-                              name: widget.product.name,
-                              detailsImage: widget.detailsImage,
-                              productId: widget.product.id,
-                              customerId: user!.uid,
-                              //هنا نحط ال ايدي حق الكستمر اللي يستعمل المتجر
-                              quantity: updatedQuantity,
-                              availableAmount: widget.product.quantity,
-                              price: widget.product.price);
-                          Fluttertoast.showToast(
-                            msg: "تمت إضافة المنتج للسلة بنجاح",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.CENTER,
-                            timeInSecForIosWeb: 3,
-                            backgroundColor: Color.fromARGB(255, 26, 96, 91),
-                            textColor: Colors.white,
-                            fontSize: 18.0,
-                          );
-                          await Future.delayed(const Duration(seconds: 1), () {
-                            Navigator.pop(context);
-                          });
+                          //get the existed quantity of the item if it is already exists in the cart
+                          int existedQuantity =
+                              await getQuantity(thisCustomerId);
 
-                          createCartItem(item);
-/*
+                          /*if existed quantity is not zero, this means the document already exists in the cart,
+                          and I need only to update its quantity. المنتج موجود سابقًا*/
+                          if (existedQuantity != 0) {
+                            int totalQuantity =
+                                thisPageQuantity + existedQuantity;
+                            print(
+                                "==========Add button says: item exists in the cart");
+                            if (totalQuantity <= widget.product.quantity) {
+                              //get the docId of the existed item, so that its quantity can be updated
+                              String existedDocId =
+                                  await getDocId(thisCustomerId);
+                              FirebaseFirestore.instance
+                                  .collection('cart')
+                                  .doc('${existedDocId}')
+                                  .update({
+                                "quantity": thisPageQuantity + existedQuantity
+                              });
+                              await showDoneToast(context);
+                            } else {
+                              ShowDialogMethod(context,
+                                  "توجد كمية مضافة مسبقًا من هذا المنتج في السلة! لا توجد كمية متاحة أكثر من ذلك");
+                            }
+                          } else {
+                            final productToBeAdded = FirebaseFirestore.instance
+                                .collection('cart')
+                                .doc();
+                            AddProductToCart item = AddProductToCart(
+                                name: widget.product.name,
+                                detailsImage: widget.detailsImage,
+                                docId: productToBeAdded.id,
+                                productId: widget.product.id,
+                                customerId: user.uid,
+                                quantity: existedQuantity + thisPageQuantity,
+                                //quantity: updatedQuantity,
+                                availableAmount: widget.product.quantity,
+                                price: widget.product.price);
+                            createCartItem(item);
+                            await showDoneToast(context);
+                          }
+
+                          /*
                           item.availableAmount = item.availableAmount - 1;
-                          
                           String idToBeUpdated = item.productId;
-
                           //update available amount of the product in the product collection
                           final updateAvailableAmount = FirebaseFirestore
                               .instance
@@ -270,6 +301,61 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
     );
   }
 
+  // Future updateProductAvailableAmount(AddProductToCart cartItem) async {
+  //   final docCartItem = FirebaseFirestore.instance
+  //       .collection('Products')
+  //       .doc("${cartItem.productId}")
+  //       .update({'avalibleAmount': cartItem.availableAmount});
+  // }
+//==========================================================================================
+  Future createCartItem(AddProductToCart cartItem) async {
+    final docCartItem =
+        FirebaseFirestore.instance.collection('cart').doc("${cartItem.docId}");
+    final json = cartItem.toJson();
+    await docCartItem.set(
+      json,
+      // SetOptions(merge: true)
+    );
+  }
+
+//========================================================================================
+  Future<int> getQuantity(String thisCustomerId) async {
+    int existedQuantity = 0;
+    print("==================this is get quantity method");
+    final cartDoc = await FirebaseFirestore.instance
+        .collection('cart')
+        .where("productId", isEqualTo: widget.product.id)
+        .where("customerId", isEqualTo: thisCustomerId)
+        .get();
+    if (cartDoc.size > 0) {
+      var data = cartDoc.docs.elementAt(0).data() as Map;
+      existedQuantity = data["quantity"];
+      print(
+          'Existed quantity is ${existedQuantity}============================');
+    }
+
+    return existedQuantity;
+  }
+
+//=======================================================================================
+  Future<String> getDocId(String thisCustomerId) async {
+    String existedDocId = "";
+    print("==================this is get docId method");
+    final cartDoc = await FirebaseFirestore.instance
+        .collection('cart')
+        .where("productId", isEqualTo: widget.product.id)
+        .where("customerId", isEqualTo: thisCustomerId)
+        .get();
+    if (cartDoc.size > 0) {
+      var data = cartDoc.docs.elementAt(0).data() as Map;
+      existedDocId = data["docId"];
+      print('Existed docId is ${existedDocId}============================');
+    }
+    return existedDocId;
+  }
+
+  //===============================================================================
+///////////////////////////////////////////////////////////////////////////////////
   Future<dynamic> ShowDialogMethod(BuildContext context, String textToBeShown) {
     return showDialog(
       context: context,
@@ -290,20 +376,20 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
     );
   }
 
-  Future createCartItem(AddProductToCart cartItem) async {
-    final docCartItem = FirebaseFirestore.instance.collection('cart').doc();
-    final json = cartItem.toJson();
-    await docCartItem.set(
-      json,
-      // SetOptions(merge: true)
+///////////////////////////////////////////////////////////////////////////////
+  Future<void> showDoneToast(BuildContext context) async {
+    Fluttertoast.showToast(
+      msg: "تمت إضافة المنتج للسلة بنجاح",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: 3,
+      backgroundColor: Color.fromARGB(255, 26, 96, 91),
+      textColor: Colors.white,
+      fontSize: 18.0,
     );
-  }
-
-  Future updateProductAvailableAmount(AddProductToCart cartItem) async {
-    final docCartItem = FirebaseFirestore.instance
-        .collection('Products')
-        .doc("${cartItem.productId}")
-        .update({'avalibleAmount': cartItem.availableAmount});
+    await Future.delayed(const Duration(seconds: 1), () {
+      Navigator.pop(context);
+    });
   }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -335,6 +421,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
   }
 }
 
+//////////////////////////////////////////////////////////////////////////////
 class ProductImage extends StatelessWidget {
   const ProductImage({
     Key? key,
