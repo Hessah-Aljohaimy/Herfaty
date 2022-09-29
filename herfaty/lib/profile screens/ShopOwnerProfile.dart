@@ -128,14 +128,18 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
     );
   }
 
-  Widget imageProfile() {
+  Widget imageProfile(String logo) {
+    print(logo);
     return Center(
       child: Stack(children: <Widget>[
         CircleAvatar(
           radius: 60.0,
-          backgroundImage: _imageFile == null
+          backgroundImage: logo == null
               ? AssetImage("assets/images/Circular_Logo.png") as ImageProvider
-              : FileImage(File(_imageFile!.path)),
+              : NetworkImage(logo),
+          //  _imageFile == null
+          //     ? AssetImage("assets/images/Circular_Logo.png") as ImageProvider
+          //     : FileImage(File(_imageFile!.path)),
         ),
       ]),
     );
@@ -143,18 +147,20 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
 
 //////////////////////////////////Building User Profile////////////////////////////////////////
   Widget buildOwner(ShopOwner shopowner, BuildContext context) {
-    logo = shopowner.logo;
-    return SingleChildScrollView(
-      physics: const NeverScrollableScrollPhysics(),
-      child: Column(
-        children: [
-          Container(
-            height: 700,
-            // padding: EdgeInsets.only(left: 16, top: 25, right: 16),
-            child: GestureDetector(
-                onTap: () {
-                  FocusScope.of(context).unfocus();
-                },
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+
+    return Container(
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            Container(
+                width: double.infinity,
+                height: 700,
+                // padding: EdgeInsets.only(left: 16, top: 25, right: 16),
+
                 child: ListView(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
@@ -171,7 +177,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                         child: Center(
                           child: Column(
                             children: [
-                              imageProfile(),
+                              imageProfile(shopowner.logo),
                             ],
                           ),
                         ),
@@ -314,11 +320,12 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                               child: Row(
                                 children: [
                                   Text(
-                                    "اسم المتجر",
+                                    " اسم المتجر ",
                                     style: TextStyle(
                                         fontSize: 17,
                                         fontWeight: FontWeight.w900,
-                                        color: Color.fromARGB(255, 26, 96, 91)),
+                                        color:
+                                            Color.fromARGB(255, 39, 141, 134)),
                                   ),
                                   SizedBox(
                                     width: 5,
@@ -334,19 +341,24 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                               ),
                             ),
                             Expanded(
-                              child: Text(
-                                "وصف المتجر",
-                                style: TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w700,
-                                    color: Color.fromARGB(255, 26, 96, 91)),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(right: 0, left: 290),
+                                child: Text(
+                                  "وصف المتجر",
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w900,
+                                      color: Color.fromARGB(255, 39, 141, 134)),
+                                ),
                               ),
                             ),
                             Expanded(
                                 child: Container(
                               height: 120,
                               decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.black)),
+                                  borderRadius: BorderRadius.circular(15),
+                                  border: Border.all(color: Color(0xff51908E))),
                               child: SingleChildScrollView(
                                 scrollDirection: Axis.vertical,
                                 child: Center(
@@ -400,7 +412,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                         ),
                         ElevatedButton(
                           onPressed: () async {
-// Diolog to enter the password
+                            // Diolog to enter the password
 
                             showDialog(
                               context: context,
@@ -413,9 +425,14 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                       child: Text("حذف",
                                           style: TextStyle(color: Colors.red)),
                                       onPressed: () {
-//The logic of deleting an account
-
+                                        //The logic of deleting an account
+                                        final docSO = FirebaseFirestore.instance
+                                            .collection('shop_owner')
+                                            .doc(uid);
                                         //Navigator.of(context).pop();
+
+                                        docSO.delete();
+
                                         FirebaseAuth.instance.signOut();
                                         Navigator.of(context,
                                                 rootNavigator: true)
@@ -457,8 +474,8 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                     )
                   ],
                 )),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

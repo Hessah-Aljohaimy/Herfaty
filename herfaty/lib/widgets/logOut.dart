@@ -182,7 +182,9 @@ Widget buildCustomer(Customer customer, BuildContext context) {
   for (int i = 0; i < passlength; i++) {
     passwordStar = passwordStar + '*';
   }
-
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  final User? user = auth.currentUser;
+  final uid = user!.uid;
   return SingleChildScrollView(
     child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -399,9 +401,11 @@ Widget buildCustomer(Customer customer, BuildContext context) {
                                     style: TextStyle(color: Colors.red)),
                                 onPressed: () {
 //The logic of deleting an account
+
                                   final docCus = FirebaseFirestore.instance
                                       .collection('customers')
-                                      .doc();
+                                      .doc(uid);
+                                  docCus.delete();
 
                                   //Navigator.of(context).pop();
                                   FirebaseAuth.instance.signOut();
