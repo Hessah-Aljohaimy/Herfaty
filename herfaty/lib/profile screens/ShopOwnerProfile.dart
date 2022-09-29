@@ -319,13 +319,13 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                         ],
                       ),
                       child: SizedBox(
-                        height: 100,
+                        height: 150,
                         child: Column(
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(right: 8),
                               child: Text(
-                                "معلومات المتجر",
+                                "بيانات المتجر",
                                 style: TextStyle(
                                     fontSize: 17,
                                     fontWeight: FontWeight.w900,

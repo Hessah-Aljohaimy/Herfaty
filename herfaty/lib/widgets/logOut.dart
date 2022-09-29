@@ -198,7 +198,7 @@ Widget buildCustomer(Customer customer, BuildContext context) {
             ),
           ),
           SizedBox(
-            height: 20,
+            height: 60,
           ),
           Text(
             "بيانات المشتري",
