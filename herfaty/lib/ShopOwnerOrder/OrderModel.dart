@@ -1,13 +1,13 @@
 import 'package:flutter/services.dart';
 
 class orderModel {
-  String shopOwnerID;
-  String customerID;
-  String image;
-  String orderDate;
-  String qantity;
-  String totalPrice;
-  String orderDay;
+  String shopOwnerID = "";
+  String customerID = "";
+  String image = "";
+  String orderDate = "";
+  String qantity = "";
+  String totalPrice = "";
+  String orderDay = "";
 
   orderModel({
     required this.shopOwnerID,
