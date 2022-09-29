@@ -1,5 +1,43 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:herfaty/constants/color.dart';
+
+class orderState {
+  //extends State<OrderList> {
+  CollectionReference referenceShopOwnerOrder =
+      FirebaseFirestore.instance.collection("ShopOwnerOrders");
+  late Stream<QuerySnapshot> streamOrder;
+
+  initState() {
+    //  super.initState();
+    streamOrder = referenceShopOwnerOrder.snapshots();
+  }
+
+  Widget build(BuildContext context) {
+    referenceShopOwnerOrder.get(); //give future
+    referenceShopOwnerOrder.snapshots(); // return stream
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("طلبات جديدة"),
+        actions: [],
+      ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: streamOrder,
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.hasError) {
+            return Center(child: Text(snapshot.error.toString()));
+          }
+
+          if (snapshot.connectionState == ConnectionState.active) {
+            //try to get data
+            QuerySnapshot querySnapshot = snapshot.data;
+          }
+          return Center(child: CircularProgressIndicator());
+        },
+      ),
+    );
+  }
+} // class
 
 class OrderList extends StatelessWidget {
   const OrderList({super.key});
@@ -12,6 +50,7 @@ class OrderList extends StatelessWidget {
     return MaterialApp(
       title: title,
       home: Scaffold(
+        backgroundColor: Colors.white,
         appBar: DefaultAppBar(title: "طلبات متجري"),
 
         //title: const Text(title),

@@ -10,8 +10,8 @@ class OrderServices {
         customerID: '2',
         orderDate: '2/2/1444',
         orderDay: "sunday",
-        qantity: 3,
-        totalPrice: 30,
+        qantity: '3',
+        totalPrice: '30',
         image: "a",
       ),
       new orderModel(
@@ -19,8 +19,8 @@ class OrderServices {
         customerID: '2',
         orderDate: '2/2/1444',
         orderDay: "sunday",
-        qantity: 3,
-        totalPrice: 30,
+        qantity: '3',
+        totalPrice: '30',
         image: "a",
       ),
     ];

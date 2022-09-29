@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:herfaty/ShopOwnerOrder/OrdersList.dart';
 
+import '../ShopOwnerOrder/list.dart';
 import 'ownerProductsCateg.dart';
 
 class ownerHomeScreen extends StatefulWidget {
@@ -217,8 +218,7 @@ class Services extends StatelessWidget {
                             } else if (cItems[index].name == "طلبات متجري") {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(
-                                    builder: (context) => const OrderList()),
+                                MaterialPageRoute(builder: (context) => list()),
                               );
                             }
                           });
