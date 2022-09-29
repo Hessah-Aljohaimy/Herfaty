@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +12,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 
 import 'constants/color.dart';
+import 'models/shopOwnerModel.dart';
 
 class AddProduct extends StatefulWidget {
   AddProduct({super.key});
@@ -48,6 +48,28 @@ class _AddProductState extends State<AddProduct> {
 
   @override
   Widget build(BuildContext context) {
+    //////////////////////////////////////////////////////////////////////////////////////////
+    ///
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    String thisOwnerId = user!.uid;
+    var shopNameData;
+
+    Stream<List<shopOwnerModel>> shopOwnerData() {
+      // final uid = user.getIdToken();
+
+      final user;
+      user = FirebaseAuth.instance.currentUser;
+      final uid = user.uid;
+      return FirebaseFirestore.instance
+          .collection('shop_owner')
+          .where('id', isEqualTo: uid)
+          .snapshots()
+          .map((snapshot) => snapshot.docs
+              .map((doc) => shopOwnerModel.fromJson(doc.data()))
+              .toList());
+    }
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(56.0),
@@ -91,6 +113,23 @@ class _AddProductState extends State<AddProduct> {
                   ),
                 ),
               ),
+              StreamBuilder<List<shopOwnerModel>>(
+                  stream: shopOwnerData(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    if (snapshot.hasError) {
+                      return Text('Something went wrong! ${snapshot.error}');
+                    } else if (snapshot.hasData) {
+                      final cItems = snapshot.data!.toList();
+
+                      for (int i = 0; i < cItems.length; i++) {
+                        shopNameData = cItems[i].shopname;
+                      }
+                    }
+                    return Text('');
+                  }),
 
               SizedBox(
                 height: 20,
@@ -468,14 +507,15 @@ class _AddProductState extends State<AddProduct> {
                     final productToBeAdded =
                         FirebaseFirestore.instance.collection('Products').doc();
                     Product product = Product(
-                      id: productToBeAdded.id,
-                      name: prodName,
-                      dsscription: desc,
-                      avalibleAmount: amount,
-                      image: uploadImageUrl,
-                      categoryName: dropdownvalue,
-                      price: priceN,
-                    );
+                        id: productToBeAdded.id,
+                        name: prodName,
+                        dsscription: desc,
+                        avalibleAmount: amount,
+                        image: uploadImageUrl,
+                        categoryName: dropdownvalue,
+                        price: priceN,
+                        shopOwnerId: thisOwnerId,
+                        shopName: shopNameData);
                     final json = product.toJson();
                     await productToBeAdded.set(json);
                     //await Firestore.saveProduct(product);

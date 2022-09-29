@@ -35,9 +35,11 @@ class _ExpandedWidgetState extends State<ExpandedWidget> {
       child: Text(
         widget.text,
         style: TextStyle(
-          fontSize: 18.5,
+          fontSize: 17,
+          height: 1.4,
           fontWeight: FontWeight.w700,
           color: Colors.white,
+          fontFamily: "Tajawal",
         ),
       ),
     );
@@ -51,8 +53,10 @@ class _ExpandedWidgetState extends State<ExpandedWidget> {
           Text(
             flag ? firstHalf : widget.text,
             style: TextStyle(
-              fontSize: 18.0,
+              fontSize: 17.0,
               fontWeight: FontWeight.w500,
+              height: 1.4,
+              fontFamily: "Tajawal",
               color: Colors.white,
             ),
           ),
@@ -71,7 +75,8 @@ class _ExpandedWidgetState extends State<ExpandedWidget> {
                 const Text(
                   "تكملة الوصف",
                   style: TextStyle(
-                    fontSize: 16.0,
+                    fontSize: 13.0,
+                    fontFamily: "Tajawal",
                     decoration: TextDecoration.underline,
                     fontWeight: FontWeight.w500,
                     color: Color.fromARGB(255, 0, 66, 116),

@@ -17,6 +17,8 @@ import 'package:herfaty/screens/customer_base_screen.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:herfaty/cart/payForm.dart';
 import '.env';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:herfaty/notificationClass.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

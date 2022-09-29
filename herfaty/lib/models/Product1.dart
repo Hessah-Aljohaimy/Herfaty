@@ -4,7 +4,12 @@ class Product1 {
   int quantity = 0;
   String id = "";
   num price = 0;
-  String categoryName = "", name = "", description = "", image = "";
+  String categoryName = "",
+      name = "",
+      description = "",
+      image = "",
+      shopOwnerId = "",
+      shopName = "";
 
   Product1({
     required this.id,
@@ -14,6 +19,8 @@ class Product1 {
     required this.name,
     required this.description,
     required this.image,
+    required this.shopOwnerId,
+    required this.shopName,
   });
 
   Product1.fromJson(Map<String, dynamic> json) {
@@ -24,6 +31,8 @@ class Product1 {
     name = json['name'];
     description = json['dsscription'];
     image = json['image'];
+    shopOwnerId = json['shopOwnerId'];
+    shopName = json['shopName'];
   }
   /*
   Map<String, dynamic> toJson() {

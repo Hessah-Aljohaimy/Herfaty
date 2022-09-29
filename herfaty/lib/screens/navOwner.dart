@@ -9,13 +9,36 @@ import 'package:herfaty/screens/customerHome.dart';
 import 'package:herfaty/screens/ownerHome.dart';
 import 'package:herfaty/widgets/logOut.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:herfaty/secondNotificationScreen.dart';
+import 'package:herfaty/LocalNotificationService.dart';
 
-class navOwner extends StatelessWidget {
+class navOwner extends StatefulWidget {
   const navOwner({super.key});
 
+  @override
+  State<navOwner> createState() => _navOwnerState();
+}
+
+class _navOwnerState extends State<navOwner> {
   // This widget is the root of your application.
+
+  late final LocalNotificationService service;
+  @override
+  void initState() {
+    service = LocalNotificationService();
+    service.intialize();
+    listenToNotification();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    String thisOwnerId = user!.uid;
+    listenToDB(thisOwnerId);
+    //---------------------------------------------------------------------------------------------------
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         localizationsDelegates: [
@@ -55,5 +78,68 @@ class navOwner extends StatelessWidget {
           activeColorPrimary: kPrimaryColor.withOpacity(0.9),
           inactiveColorPrimary: CupertinoColors.systemGrey),
     ];
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //Listen to changes in DB==============================
+  void listenToDB(String thisOwnerId) {
+    print("the notification form firestore method was called");
+
+    CollectionReference reference =
+        FirebaseFirestore.instance.collection('orders');
+
+    reference.snapshots().listen((querySnapshot) {
+      querySnapshot.docChanges.forEach((change) {
+        if (change.type == DocumentChangeType.added) {
+          for (var index = 0; index < querySnapshot.size; index++) {
+            var data = querySnapshot.docs.elementAt(index).data() as Map;
+            var notificationStatus = data["notification"];
+            var docId = data["docId"];
+            var ownerId = data["shopOwnerId"];
+            //print(notificationStatus);
+            //print(index);
+            if (ownerId == thisOwnerId) {
+              print("-----------------------This owner id is:${ownerId}");
+              if (notificationStatus == "notPushed") {
+                print("pushinnnng===========================");
+                createNotification(
+                    0,
+                    "طلب جديد",
+                    "وصلك طلب جديد أيها الحِرفيّ الصغير! انقر لعرض الطلبات ",
+                    "");
+                print(docId);
+                reference.doc('${docId}').update({"notification": "pushed"});
+              }
+            }
+          }
+        }
+      });
+    });
+  }
+
+  //Create notification=================================================
+  void createNotification(
+      int id, String title, String body, String payload) async {
+    await service.showNotificationWithPayload(
+        id: id,
+        title: title,
+        body: body,
+        //what should be the payload?
+        payload: 'payload content');
+  }
+
+  //Navigator push when cklicking on the notification(should open product list page)
+  void listenToNotification() =>
+      service.onNotificationClick.stream.listen(onNoticationListener);
+
+  void onNoticationListener(String? payload) {
+    if (payload != null && payload.isNotEmpty) {
+      print('payload: $payload');
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: ((context) =>
+                  secondNotificationScreen(payload: payload))));
+    }
   }
 }

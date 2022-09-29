@@ -49,6 +49,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
   @override
   Widget build(BuildContext context) {
     return Form(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       key: _formKey,
       child: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -139,7 +140,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
                             child: reusableTextFieldForName(
                                 "اسم الحرفي",
                                 Icons.person,
-                                false,
+                            
                                 _nameTextEditingController),
                           ),
 
@@ -187,6 +188,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
                               padding: EdgeInsets.symmetric(horizontal: 60),
                               child: Center(
                                   child: TextFormField(
+                                      autovalidateMode: AutovalidateMode.onUserInteraction,
                                 controller: _BODController,
                                 validator: (value) {
                                   if (value!.isEmpty) {
@@ -281,15 +283,15 @@ class _SignupHerafyState extends State<SignupHerafy> {
                                     });
                                   } else {
                                     print("لم يتم اختيار تاريخ الميلاد");
-                                    // Fluttertoast.showToast(
-                                    //   msg: "لم يتم اختيار تاريخ الميلاد  ",
-                                    //   toastLength: Toast.LENGTH_SHORT,
-                                    //   gravity: ToastGravity.CENTER,
-                                    //   timeInSecForIosWeb: 3,
-                                    //   backgroundColor: Colors.white,
-                                    //   textColor: Colors.red,
-                                    //   fontSize: 18.0,
-                                    // );
+                                    Fluttertoast.showToast(
+                                      msg: "لم يتم اختيار تاريخ الميلاد  ",
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.CENTER,
+                                      timeInSecForIosWeb: 3,
+                                      backgroundColor: Colors.white,
+                                      textColor: Colors.red,
+                                      fontSize: 18.0,
+                                    );
                                   }
                                 },
                               ))),
