@@ -1,22 +1,43 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:herfaty/blocs/blocs.dart';
+import 'package:herfaty/cart/cart.dart';
+import 'package:herfaty/cart/sucess.dart';
+import 'package:herfaty/models/cartModal.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 import 'package:herfaty/.env';
 
+import '../widgets/defaultButton.dart';
+import '../widgets/emptySection.dart';
+import '../widgets/subTitle.dart';
+/*
 class payForm extends StatefulWidget {
-  const payForm({super.key});
+  List<CartModal> Items;
+  payForm({Key? key, required Items})
+      : this.Items = Items,
+        super(key: key);
 
   @override
   State<payForm> createState() => _payFormState();
-}
+}*/
 
-class _payFormState extends State<payForm> {
+//class _payFormState extends State<payForm> {
+
+class payForm extends StatelessWidget {
+  List<CartModal> Items;
+
+  payForm({
+    Key? key,
+    required Items,
+  })  : this.Items = Items,
+        super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -102,8 +123,35 @@ class _payFormState extends State<payForm> {
           }
 
           if (state.status == PaymentStatus.success) {
+            finishOrder1();
             print('sssssssssssssssssssssssssssssssssss');
-            return Column(
+            return Container(
+              height: 400,
+              color: Colors.white,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  EmptySection(
+                    emptyImg: 'assets/images/success.gif',
+                    emptyMsg: 'عملية ناجحة',
+                  ),
+                  SubTitle(
+                    subTitleText: 'تمت عملية الدفع والطلب بنجاح',
+                  ),
+                  ElevatedButton(
+                    onPressed: () => finishOrder2(context),
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xff51908E),
+                        fixedSize: const Size(150, 50),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50))),
+                    child: Text("حسناً"),
+                  )
+                ],
+              ),
+            );
+
+            /*return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text('success'),
@@ -118,8 +166,9 @@ class _payFormState extends State<payForm> {
                   child: const Text('success'),
                 )
               ],
-            );
+            );*/
           }
+
           if (state.status == PaymentStatus.failure) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -131,7 +180,11 @@ class _payFormState extends State<payForm> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    context.read<PaymentBloc>().add(PaymentStart());
+                    //context.read<PaymentBloc>().add(PaymentStart());
+
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => Cart(),
+                    ));
                   },
                   child: const Text('try again'),
                 )
@@ -143,5 +196,19 @@ class _payFormState extends State<payForm> {
         },
       ),
     ); // Column
+  }
+
+  finishOrder1() async {
+    final _db = FirebaseFirestore.instance;
+
+    for (var i = 0; i < Items.length; i++) {
+      await _db.collection("cart").doc(Items[i].docId).delete();
+    }
+  }
+
+  finishOrder2(context) async {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => Cart(),
+    ));
   }
 }

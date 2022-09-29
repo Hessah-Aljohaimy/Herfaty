@@ -84,7 +84,7 @@ class checkOut extends StatelessWidget {
                       fontFamily: "Tajawal"),
                 ),
               ),
-              payForm(),
+              payForm(Items: Items),
               Container(
                 height: 35,
                 width: double.infinity,

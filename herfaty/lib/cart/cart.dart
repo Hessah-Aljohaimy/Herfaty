@@ -339,11 +339,12 @@ class _CartState extends State<Cart> {
     return Column(
       children: [
         Container(
-          margin: EdgeInsets.only(top: 20.0),
+          margin: EdgeInsets.all(5.0),
           decoration: BoxDecoration(
             //color: Colors.white,
-            border: Border.all(color: Color(0xff51908E), width: 1),
-            //borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: Color(0xff51908E), width: 2),
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(5.0), topLeft: Radius.circular(5.0)),
             /*boxShadow: [
                 BoxShadow(
                     color: Color(0xff51908E).withOpacity(0.9),
@@ -351,217 +352,230 @@ class _CartState extends State<Cart> {
               ]*/
           ),
           //height: 500,
-          child: ExpansionTile(
-            title: Text(
-              //k, //ضعي اسم المتجر ثم شيلي الكومنت
-              "متجر $k",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: Color(0xff5596A5)),
-            ),
-            children: <Widget>[
-              Center(
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: cItems.length,
-                    itemBuilder: (context, index) {
-                      /*final httpsReference = FirebaseStorage.instance
-                                  .refFromURL(cItems[index].image);
-                                  httpsReference.getDownloadURL().then(url => { 
-                                      targetImg.src = url; 
-                                    }); */
+          child: Column(
+            children: [
+              ExpansionTile(
+                initiallyExpanded: true,
+                title: Text(
+                  //k, //ضعي اسم المتجر ثم شيلي الكومنت
+                  "متجر $k",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Color(0xff5596A5)),
+                ),
+                children: <Widget>[
+                  Center(
+                    child: ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: cItems.length,
+                        itemBuilder: (context, index) {
+                          /*final httpsReference = FirebaseStorage.instance
+                                      .refFromURL(cItems[index].image);
+                                      httpsReference.getDownloadURL().then(url => { 
+                                          targetImg.src = url; 
+                                        }); */
 
-                      return Container(
-                        margin:
-                            EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-                        padding: EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Color(0xFFF1F1F1))),
-                        child: Row(
-                          children: [
-                            ProductImage(
-                              size: size,
-                              image: cItems[index].image,
-                            ),
-                            Expanded(
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(cItems[index].name,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(fontSize: 16.0)),
-                                    Text(
-                                        " ${cItems[index].price.toString()}ريال "),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                          return Container(
+                            margin: EdgeInsets.only(
+                                top: 8.0, left: 8.0, right: 8.0),
+                            padding: EdgeInsets.all(8.0),
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Color(0xFFF1F1F1))),
+                            child: Row(
+                              children: [
+                                ProductImage(
+                                  size: size,
+                                  image: cItems[index].image,
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        IconButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                if (cItems[index].quantity ==
-                                                    1) {
-                                                  ShowDialogMethod(context,
-                                                      "أقل عدد للمنتج هو واحد");
-                                                } else if (cItems[index]
-                                                        .quantity >
-                                                    1) {
-                                                  var updaterAmount =
-                                                      (cItems[index].quantity) -
-                                                          1;
-                                                  FirebaseFirestore.instance
-                                                      .collection('cart')
-                                                      .doc(cItems[index].docId)
-                                                      .update({
-                                                    "quantity": updaterAmount
+                                        Text(cItems[index].name,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(fontSize: 16.0)),
+                                        Text(
+                                            " ${cItems[index].price.toString()}ريال "),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            IconButton(
+                                                onPressed: () {
+                                                  setState(() {
+                                                    if (cItems[index]
+                                                            .quantity ==
+                                                        1) {
+                                                      ShowDialogMethod(context,
+                                                          "أقل عدد للمنتج هو واحد");
+                                                    } else if (cItems[index]
+                                                            .quantity >
+                                                        1) {
+                                                      var updaterAmount =
+                                                          (cItems[index]
+                                                                  .quantity) -
+                                                              1;
+                                                      FirebaseFirestore.instance
+                                                          .collection('cart')
+                                                          .doc(cItems[index]
+                                                              .docId)
+                                                          .update({
+                                                        "quantity":
+                                                            updaterAmount
+                                                      });
+                                                    }
                                                   });
-                                                }
-                                              });
-                                            },
-                                            icon: Icon(
-                                              Icons.remove_circle_outline,
-                                              color: kPrimaryColor,
-                                            )),
-                                        Container(
-                                            width: 44.0,
-                                            height: 44.0,
-                                            padding: EdgeInsets.only(top: 22.0),
-                                            color: Color(0xFFF1F1F1),
-                                            child: TextField(
-                                              enabled: false,
-                                              textAlign: TextAlign.center,
-                                              decoration: InputDecoration(
-                                                  border: InputBorder.none,
-                                                  hintText: cItems[index]
-                                                      .quantity
-                                                      .toString(),
-                                                  hintStyle: TextStyle(
-                                                      color:
-                                                          Color(0xFF303030))),
-                                            )),
-                                        IconButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                if (cItems[index].quantity <
-                                                    cItems[index]
-                                                        .avalibleAmount) {
-                                                  var updaterAmount =
-                                                      (cItems[index].quantity) +
-                                                          1;
-                                                  FirebaseFirestore.instance
-                                                      .collection('cart')
-                                                      .doc(cItems[index].docId)
-                                                      .update({
-                                                    "quantity": updaterAmount
+                                                },
+                                                icon: Icon(
+                                                  Icons.remove_circle_outline,
+                                                  color: kPrimaryColor,
+                                                )),
+                                            Container(
+                                                width: 44.0,
+                                                height: 44.0,
+                                                padding:
+                                                    EdgeInsets.only(top: 22.0),
+                                                color: Color(0xFFF1F1F1),
+                                                child: TextField(
+                                                  enabled: false,
+                                                  textAlign: TextAlign.center,
+                                                  decoration: InputDecoration(
+                                                      border: InputBorder.none,
+                                                      hintText: cItems[index]
+                                                          .quantity
+                                                          .toString(),
+                                                      hintStyle: TextStyle(
+                                                          color: Color(
+                                                              0xFF303030))),
+                                                )),
+                                            IconButton(
+                                                onPressed: () {
+                                                  setState(() {
+                                                    if (cItems[index].quantity <
+                                                        cItems[index]
+                                                            .avalibleAmount) {
+                                                      var updaterAmount =
+                                                          (cItems[index]
+                                                                  .quantity) +
+                                                              1;
+                                                      FirebaseFirestore.instance
+                                                          .collection('cart')
+                                                          .doc(cItems[index]
+                                                              .docId)
+                                                          .update({
+                                                        "quantity":
+                                                            updaterAmount
+                                                      });
+                                                    } else {
+                                                      ShowDialogMethod(context,
+                                                          "لا توجد كمية متاحة من المنتج أكثر من ذلك");
+                                                    }
                                                   });
-                                                } else {
-                                                  ShowDialogMethod(context,
-                                                      "لا توجد كمية متاحة من المنتج أكثر من ذلك");
-                                                }
-                                              });
-                                            },
-                                            icon: Icon(
-                                              Icons.add_circle_outline,
-                                              color: kPrimaryColor,
-                                            )),
+                                                },
+                                                icon: Icon(
+                                                  Icons.add_circle_outline,
+                                                  color: kPrimaryColor,
+                                                )),
+                                          ],
+                                        ),
                                       ],
                                     ),
-                                  ],
+                                  ),
                                 ),
-                              ),
-                            ),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.white, // background
-                              ),
-                              onPressed: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        title: Text("حذف منتج"),
-                                        content:
-                                            Text('سيتم حذف هذا المنتج من سلتك'),
-                                        actions: <Widget>[
-                                          TextButton(
-                                            child: Text("تراجع"),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                          ),
-                                          TextButton(
-                                            child: Text("حذف",
-                                                style: TextStyle(
-                                                  color: Colors.red,
-                                                )),
-                                            onPressed: () {
-                                              final docUser = FirebaseFirestore
-                                                  .instance
-                                                  .collection('cart')
-                                                  .doc(cItems[index].docId);
-                                              docUser.delete();
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Colors.white, // background
+                                  ),
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: Text("حذف منتج"),
+                                            content: Text(
+                                                'سيتم حذف هذا المنتج من سلتك'),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                child: Text("تراجع"),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                              TextButton(
+                                                child: Text("حذف",
+                                                    style: TextStyle(
+                                                      color: Colors.red,
+                                                    )),
+                                                onPressed: () {
+                                                  final docUser =
+                                                      FirebaseFirestore.instance
+                                                          .collection('cart')
+                                                          .doc(cItems[index]
+                                                              .docId);
+                                                  docUser.delete();
 
-                                              Navigator.of(context).pop();
-                                            },
-                                          )
-                                        ],
-                                      );
-                                    });
-                              },
-                              child: Row(children: [
-                                //Text('Delete'),
-                                Icon(
-                                  Icons.delete,
-                                  color: kPrimaryColor,
-                                  semanticLabel: "Delete",
-                                )
-                              ]),
+                                                  Navigator.of(context).pop();
+                                                },
+                                              )
+                                            ],
+                                          );
+                                        });
+                                  },
+                                  child: Row(children: [
+                                    //Text('Delete'),
+                                    Icon(
+                                      Icons.delete,
+                                      color: kPrimaryColor,
+                                      semanticLabel: "Delete",
+                                    )
+                                  ]),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      );
-                    }),
+                          );
+                        }),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
-        Material(
-            elevation: 0.0,
-            color: Colors.white,
-            child: Container(
-              height: 45,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(" المجموع : ${calculatTotal(cItems)} ريال",
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        color: Color(0xFF808080),
-                        height: 2,
-                      )),
-                  SizedBox(
+              Material(
+                  elevation: 0.0,
+                  color: Colors.white,
+                  child: Container(
                     height: 45,
-                    child: FloatingActionButton.extended(
-                      heroTag: "btn ${Random().nextInt(500)}",
-                      elevation: 0,
-                      onPressed: () {
-                        //check out page
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => checkOut(
-                                  shopName: k,
-                                  Items: cItems.toList(),
-                                  totalPrice: calculatTotal(cItems))),
-                        );
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(" المجموع : ${calculatTotal(cItems)} ريال",
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              color: Color(0xFF808080),
+                              height: 2,
+                            )),
+                        SizedBox(
+                          height: 45,
+                          child: FloatingActionButton.extended(
+                            heroTag: "btn ${Random().nextInt(500)}",
+                            elevation: 0,
+                            onPressed: () {
+                              //check out page
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => checkOut(
+                                        shopName: k,
+                                        Items: cItems.toList(),
+                                        totalPrice: calculatTotal(cItems))),
+                              );
 
-                        // pay form page
-                        /*
+                              // pay form page
+                              /*
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -570,8 +584,8 @@ class _CartState extends State<Cart> {
 
                          */
 
-                        //LOCATION PAGE
-                        /*Navigator.push(
+                              //LOCATION PAGE
+                              /*Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => PlacePicker(
@@ -588,24 +602,23 @@ class _CartState extends State<Cart> {
                             ),
                           ),
                         );*/
-                      },
-                      label: const Text('إتمام الطلب',
-                          style: TextStyle(
-                            fontSize: 18.0,
-                          )),
-                      icon: const Icon(Icons.payment),
-                      backgroundColor: Color(0xff5596A5),
-                      extendedPadding: EdgeInsetsDirectional.all(50),
-                      shape: RoundedRectangleBorder(),
+                            },
+                            label: const Text('إتمام الطلب',
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                )),
+                            icon: const Icon(Icons.payment),
+                            backgroundColor: Color(0xff5596A5),
+                            extendedPadding: EdgeInsetsDirectional.all(50),
+                            shape: RoundedRectangleBorder(),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
-              ),
-            )),
-        Container(
-          height: 2,
-          color: Color(0xff5596A5),
-        )
+                  )),
+            ],
+          ),
+        ),
       ],
     );
   }
