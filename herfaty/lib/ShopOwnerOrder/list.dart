@@ -50,7 +50,8 @@ class list extends StatelessWidget {
                       'orderDate': e['orderDate'],
                       'orderDay': e['orderDay'],
                       'shopOwnerID': e['shopOwnerID'],
-                      'qantity': e['qantity']
+                      'qantity': e['qantity'],
+                      'totalPrice': e['totalPrice'],
                     })
                 .toList();
 
