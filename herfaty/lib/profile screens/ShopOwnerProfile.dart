@@ -18,6 +18,7 @@ import 'package:herfaty/widgets/ownerSettings.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../pages/welcome.dart';
+import '../widgets/ExpandedWidget.dart';
 
 class ShopOwnerProfile extends StatefulWidget {
   const ShopOwnerProfile({super.key});
@@ -319,7 +320,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                         ],
                       ),
                       child: SizedBox(
-                        height: 160,
+                        height: 170,
                         child: Column(
                           children: [
                             Padding(
@@ -338,7 +339,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                   Text(
                                     " اسم المتجر ",
                                     style: TextStyle(
-                                        fontSize: 17,
+                                        fontSize: 15,
                                         fontWeight: FontWeight.w900,
                                         color:
                                             Color.fromARGB(255, 39, 141, 134)),
@@ -359,7 +360,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                             Expanded(
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.only(right: 0, left: 290),
+                                    const EdgeInsets.only(right: 0, left: 270),
                                 child: Text(
                                   "وصف المتجر",
                                   style: TextStyle(
@@ -369,23 +370,39 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 ),
                               ),
                             ),
-                            Expanded(
-                                child: Container(
-                              height: 130,
-                              width: double.infinity,
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  border: Border.all(
-                                      color:
-                                          Color.fromARGB(129, 81, 144, 142))),
-                              child: SingleChildScrollView(
-                                  scrollDirection: Axis.vertical,
-                                  child: Text(
-                                    '${shopowner.shopdescription}',
-                                    style: TextStyle(fontSize: 15),
-                                  )),
-                            ))
+                            // Expanded(
+                            //     child:
+                            //      Container(
+                            //   height: 130,
+                            //   width: 300,
+                            //   padding: const EdgeInsets.all(10),
+                            
+                            //   decoration: BoxDecoration(
+                            //       borderRadius: BorderRadius.circular(5),
+                            //       border: Border.all(
+                            //           color:
+                            //               Color.fromARGB(129, 81, 144, 142))),
+                            //   child: SingleChildScrollView(
+                            //       scrollDirection: Axis.vertical,
+                            //       child: Text(
+                            //         '${shopowner.shopdescription}',
+                            //         style: TextStyle(fontSize: 15),
+                            //       )),
+                            // ))
+                            Container(
+                  width: double.infinity,
+                  margin: const EdgeInsets.symmetric(vertical: 0),
+                  padding: const EdgeInsets.symmetric(
+                    // vertical: 10,
+                    // horizontal: 30,
+                  ),
+                  child: Expanded(
+                    child: SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child:
+                            ExpandedWidget(text: '${shopowner.shopdescription}')),
+                  ),
+                ),
                           ],
                         ),
                       ),

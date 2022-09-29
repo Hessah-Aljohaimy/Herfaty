@@ -36,7 +36,7 @@ class _ExpandedWidgetState extends State<ExpandedWidget> {
         widget.text,
         style: TextStyle(
           fontSize: 18.0,
-          color: Colors.white,
+          color: Color.fromARGB(255, 0, 0, 0),
         ),
       ),
     );
