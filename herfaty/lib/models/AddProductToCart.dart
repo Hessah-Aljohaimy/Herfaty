@@ -3,6 +3,8 @@ class AddProductToCart {
   String? detailsImage;
   String? productId;
   String? customerId;
+  String? shopOwnerId;
+  String? shopName;
   String? docId;
   int? quantity;
   int? availableAmount;
@@ -13,6 +15,8 @@ class AddProductToCart {
     required this.detailsImage,
     required this.productId,
     required this.customerId,
+    required this.shopOwnerId,
+    required this.shopName,
     required this.docId,
     required this.quantity,
     required this.availableAmount,
@@ -21,6 +25,8 @@ class AddProductToCart {
   AddProductToCart.fromJson(Map<String, dynamic> json) {
     detailsImage = json['image'];
     customerId = json['customerId'];
+    shopOwnerId = json['shopOwnerId'];
+    shopName = json['shopName'];
     productId = json['productId'];
     docId = json['docId'];
     name = json['name'];
@@ -38,6 +44,8 @@ class AddProductToCart {
     data['price'] = price;
     data['quantity'] = quantity;
     data['avalibleAmount'] = availableAmount;
+    data['shopOwnerId'] = shopOwnerId;
+    data['shopName'] = shopName;
 
     return data;
   }

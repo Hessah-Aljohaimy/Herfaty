@@ -261,6 +261,8 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                                 docId: productToBeAdded.id,
                                 productId: widget.product.id,
                                 customerId: user.uid,
+                                shopName: widget.product.shopName,
+                                shopOwnerId: widget.product.shopOwnerId,
                                 quantity: existedQuantity + thisPageQuantity,
                                 //quantity: updatedQuantity,
                                 availableAmount: widget.product.quantity,
