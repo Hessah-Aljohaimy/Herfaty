@@ -78,6 +78,14 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
     final docShopOwner =
         FirebaseFirestore.instance.collection('customers').doc(widget.uid);
 
+/** IconButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => ShopOwnerProfile()));
+            },
+            icon: Icon(Icons.arrow_forward),
+          ), */
+
     return Scaffold(
       appBar: AppBar(
         title: Text("تعديل الحساب", style: TextStyle(color: Color(0xff51908E))),

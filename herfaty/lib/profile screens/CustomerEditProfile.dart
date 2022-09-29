@@ -69,7 +69,13 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
           SizedBox(
             height: 20,
           ), */
-
+/*IconButton(
+          icon: Icon(Icons.logout, color: Color.fromARGB(255, 39, 141, 134)),
+          onPressed: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (BuildContext context) => login()));
+          },
+        ),*/
     return Scaffold(
       appBar: AppBar(
         title: Text("تعديل البيانات",
@@ -82,22 +88,22 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
         shadowColor: Color.fromARGB(255, 39, 141, 134),
         elevation: 3,
         leading: IconButton(
-          icon: Icon(Icons.logout, color: Color.fromARGB(255, 39, 141, 134)),
           onPressed: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (BuildContext context) => login()));
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (BuildContext context) => logOutButton()));
           },
+          icon: Icon(
+            Icons.arrow_back,
+            color: Color.fromARGB(255, 39, 141, 134),
+          ),
         ),
         actions: [
           IconButton(
+            icon: Icon(Icons.logout, color: Color.fromARGB(255, 39, 141, 134)),
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => logOutButton()));
+                  builder: (BuildContext context) => login()));
             },
-            icon: Icon(
-              Icons.arrow_forward,
-              color: Color.fromARGB(255, 39, 141, 134),
-            ),
           ),
         ],
         automaticallyImplyLeading: false,

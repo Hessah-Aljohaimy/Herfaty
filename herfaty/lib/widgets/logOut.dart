@@ -46,19 +46,8 @@ class logOutButton extends StatelessWidget {
 
     DocumentReference customersRef =
         FirebaseFirestore.instance.collection('customeres').doc(uid);
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("حسابي",
-            style: TextStyle(
-              color: Color.fromARGB(255, 81, 144, 142),
-              fontFamily: "Tajawal",
-            )),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        shadowColor: Color.fromARGB(255, 39, 141, 134),
-        elevation: 2,
-        leading: IconButton(
+/*  actions: [
+        IconButton(
           icon: Icon(Icons.logout, color: Color.fromARGB(255, 81, 144, 142)),
           onPressed: () async {
             showDialog(
@@ -95,6 +84,57 @@ class logOutButton extends StatelessWidget {
             }));*/
           },
         ),
+        ],*/
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("حسابي",
+            style: TextStyle(
+              color: Color.fromARGB(255, 81, 144, 142),
+              fontFamily: "Tajawal",
+            )),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        shadowColor: Color.fromARGB(255, 39, 141, 134),
+        elevation: 2,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.logout, color: Color.fromARGB(255, 81, 144, 142)),
+            onPressed: () async {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text("تنبيه"),
+                      content: Text('سيتم تسجيل خروجك من الحساب'),
+                      actions: <Widget>[
+                        TextButton(
+                          child: Text("تسجيل خروج",
+                              style: TextStyle(color: Colors.red)),
+                          onPressed: () {
+                            //Navigator.of(context).pop();
+                            FirebaseAuth.instance.signOut();
+                            Navigator.of(context, rootNavigator: true)
+                                .pushReplacement(MaterialPageRoute(
+                                    builder: (context) => new Welcome()));
+                          },
+                        ),
+                        TextButton(
+                          child: Text("تراجع"),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        )
+                      ],
+                    );
+                  });
+
+              /*Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (BuildContext context) {
+              return Welcome();
+            }));*/
+            },
+          ),
+        ],
         automaticallyImplyLeading: false,
         iconTheme: IconThemeData(color: kPrimaryColor),
       ),

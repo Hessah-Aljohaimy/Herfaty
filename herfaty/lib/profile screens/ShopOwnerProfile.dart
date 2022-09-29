@@ -319,7 +319,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                         ],
                       ),
                       child: SizedBox(
-                        height: 150,
+                        height: 160,
                         child: Column(
                           children: [
                             Padding(
@@ -371,18 +371,20 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                             ),
                             Expanded(
                                 child: Container(
-                              height: 125,
+                              height: 130,
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  border: Border.all(color: Color(0xff51908E))),
+                                  borderRadius: BorderRadius.circular(5),
+                                  border: Border.all(
+                                      color:
+                                          Color.fromARGB(129, 81, 144, 142))),
                               child: SingleChildScrollView(
-                                scrollDirection: Axis.vertical,
-                                child: Center(
-                                    child: Text(
-                                  '${shopowner.shopdescription}',
-                                  style: TextStyle(fontSize: 15),
-                                )),
-                              ),
+                                  scrollDirection: Axis.vertical,
+                                  child: Text(
+                                    '${shopowner.shopdescription}',
+                                    style: TextStyle(fontSize: 15),
+                                  )),
                             ))
                           ],
                         ),
