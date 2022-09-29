@@ -39,7 +39,11 @@ class navOwner extends StatelessWidget {
   }
 
   List<Widget> screens() {
-    return [ownerHomeScreen(), OwnerSettings(), ShopOwnerProfile()];
+    return [
+      ownerHomeScreen(),
+      //  OwnerSettings(),
+      ShopOwnerProfile()
+    ];
   }
 
   List<PersistentBottomNavBarItem> navBarItems() {
@@ -49,11 +53,11 @@ class navOwner extends StatelessWidget {
           title: "  الرئيسية",
           activeColorPrimary: kPrimaryColor.withOpacity(0.9),
           inactiveColorPrimary: CupertinoColors.systemGrey),
-      PersistentBottomNavBarItem(
-          icon: const Icon(CupertinoIcons.settings),
-          title: "  الإعدادت ",
-          activeColorPrimary: kPrimaryColor.withOpacity(0.9),
-          inactiveColorPrimary: CupertinoColors.systemGrey),
+      // PersistentBottomNavBarItem(
+      //     icon: const Icon(CupertinoIcons.settings),
+      //     title: "  الإعدادت ",
+      //     activeColorPrimary: kPrimaryColor.withOpacity(0.9),
+      //     inactiveColorPrimary: CupertinoColors.systemGrey),
       PersistentBottomNavBarItem(
           icon: const Icon(CupertinoIcons.person),
           title: "حسابي",

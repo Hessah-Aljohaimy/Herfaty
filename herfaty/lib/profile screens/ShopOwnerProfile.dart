@@ -14,6 +14,7 @@ import 'package:herfaty/pages/login.dart';
 import 'package:herfaty/pages/signupHerafy.dart';
 import 'package:herfaty/profile%20screens/ShopOwnerEditProfile.dart';
 import 'package:herfaty/profile%20screens/show_alert_dialog.dart';
+import 'package:herfaty/widgets/ownerSettings.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../pages/welcome.dart';
@@ -95,6 +96,15 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                 MaterialPageRoute(builder: (BuildContext context) => login()));
           },
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => OwnerSettings()));
+            },
+            icon: Icon(CupertinoIcons.settings),
+          ),
+        ],
         automaticallyImplyLeading: false,
         iconTheme: IconThemeData(color: kPrimaryColor),
       ),
@@ -152,15 +162,22 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
     final uid = user!.uid;
 
     return Container(
+      //#############################TEMP COLOR//////////////////////
+
+      height: double.infinity,
+      width: double.infinity,
       child: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
+            SizedBox(
+              height: 10,
+            ),
             Container(
-                width: double.infinity,
-                height: 700,
-                // padding: EdgeInsets.only(left: 16, top: 25, right: 16),
-
+              height: 600,
+              width: double.infinity,
+              child: SizedBox(
+                height: 500,
                 child: ListView(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
@@ -168,12 +185,9 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                     Expanded(
                       child: Container(
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(20),
-                                bottomRight: Radius.circular(20)),
                             image: DecorationImage(
-                              image: AssetImage('assets/images/BG2.png'),
-                            )),
+                          image: AssetImage('assets/images/BG2.png'),
+                        )),
                         child: Center(
                           child: Column(
                             children: [
@@ -184,19 +198,10 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                       ),
                     ),
                     SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8),
-                      child: Text(
-                        "معلومات الحرفي",
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w900,
-                            color: Color.fromARGB(255, 26, 96, 91)),
-                      ),
+                      height: 2,
                     ),
                     Container(
+                      width: 250,
                       margin: const EdgeInsets.all(10.0),
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
@@ -212,9 +217,20 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                         ],
                       ),
                       child: SizedBox(
-                        height: 200,
+                        height: 180,
+                        width: 250,
                         child: Column(
                           children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: Text(
+                                "معلومات الحرفي",
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w900,
+                                    color: Color.fromARGB(255, 26, 96, 91)),
+                              ),
+                            ),
                             Expanded(
                                 child: Row(
                               children: <Widget>[
@@ -226,7 +242,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 Text(
                                   " ${shopowner.name}",
                                   style: TextStyle(
-                                      fontSize: 17,
+                                      fontSize: 15,
                                       fontWeight: FontWeight.w400,
                                       color: Colors.black),
                                 )
@@ -243,7 +259,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 Text(
                                   "${shopowner.email}",
                                   style: TextStyle(
-                                      fontSize: 17,
+                                      fontSize: 15,
                                       fontWeight: FontWeight.w400,
                                       color: Colors.black),
                                 )
@@ -260,7 +276,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 Text(
                                   " ${shopowner.DOB}",
                                   style: TextStyle(
-                                      fontSize: 17,
+                                      fontSize: 15,
                                       fontWeight: FontWeight.w400,
                                       color: Colors.black),
                                 )
@@ -277,7 +293,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 Text(
                                   "${shopowner.phone_number}",
                                   style: TextStyle(
-                                      fontSize: 17,
+                                      fontSize: 15,
                                       fontWeight: FontWeight.w400,
                                       color: Colors.black),
                                 )
@@ -285,16 +301,6 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                             )),
                           ],
                         ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8),
-                      child: Text(
-                        "معلومات المتجر",
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w900,
-                            color: Color.fromARGB(255, 26, 96, 91)),
                       ),
                     ),
                     Container(
@@ -316,6 +322,16 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                         height: 100,
                         child: Column(
                           children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: Text(
+                                "معلومات المتجر",
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w900,
+                                    color: Color.fromARGB(255, 26, 96, 91)),
+                              ),
+                            ),
                             Expanded(
                               child: Row(
                                 children: [
@@ -333,7 +349,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                   Text(
                                     " ${shopowner.shopname}",
                                     style: TextStyle(
-                                        fontSize: 17,
+                                        fontSize: 15,
                                         fontWeight: FontWeight.w400,
                                         color: Colors.black),
                                   )
@@ -347,7 +363,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 child: Text(
                                   "وصف المتجر",
                                   style: TextStyle(
-                                      fontSize: 17,
+                                      fontSize: 15,
                                       fontWeight: FontWeight.w900,
                                       color: Color.fromARGB(255, 39, 141, 134)),
                                 ),
@@ -355,7 +371,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                             ),
                             Expanded(
                                 child: Container(
-                              height: 120,
+                              height: 125,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   border: Border.all(color: Color(0xff51908E))),
@@ -394,7 +410,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 MaterialStateProperty.all(Color(0xff51908E)),
                             padding: MaterialStateProperty.all(
                                 EdgeInsets.symmetric(
-                                    horizontal: 50, vertical: 13)),
+                                    horizontal: 45, vertical: 10)),
                             shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(27))),
@@ -457,7 +473,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 Color.fromARGB(255, 221, 112, 112)),
                             padding: MaterialStateProperty.all(
                                 EdgeInsets.symmetric(
-                                    horizontal: 50, vertical: 13)),
+                                    horizontal: 45, vertical: 10)),
                             shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(27))),
@@ -473,7 +489,9 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                       ]),
                     )
                   ],
-                )),
+                ),
+              ),
+            ),
           ],
         ),
       ),
