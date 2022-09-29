@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:herfaty/CustomerProducts/CustomerProductDetails.dart';
-import 'package:herfaty/constants/size.dart';
 import 'package:herfaty/CustomerProducts/productCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:herfaty/OwnerProducts/OwnerProductDetails.dart';
+import 'package:herfaty/OwnerProducts/productCard_Owner.dart';
 import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/constants/color.dart';
-import 'package:herfaty/constants/icons.dart';
 
 class OwnerProductsList extends StatelessWidget {
   String categoryName;
@@ -50,17 +50,16 @@ class OwnerProductsList extends StatelessWidget {
                         //هنا حالة النجاح في استرجاع البيانات...........................................
                         //String detailsImage = "";
                         final productItems = snapshot.data!.toList();
-
                         return ListView.builder(
                           itemCount: productItems.length,
-                          itemBuilder: (context, index) => productCard(
+                          itemBuilder: (context, index) => productCard_Owner(
                             itemIndex: index,
                             product: productItems[index],
                             press: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => CustomerProdectDetails(
+                                  builder: (context) => OwnerProdectDetails(
                                     // يرسل المعلومات لصفحة المنتج عشان يعرض التفاصيل
                                     detailsImage: productItems[index].image,
                                     product: productItems[index],
@@ -72,7 +71,9 @@ class OwnerProductsList extends StatelessWidget {
                         );
                         //..................................................................................
                       } else {
-                        return const Center(child: CircularProgressIndicator());
+                        return const Center(
+                          child: Text("لا توجد لديك منتجات ضمن هذه الفئة"),
+                        );
                       }
                     },
                   ),
@@ -108,6 +109,7 @@ class OwnerProductsList extends StatelessWidget {
         style: TextStyle(
           fontSize: 20.0,
           fontWeight: FontWeight.w600,
+          fontFamily: "Tajawal",
           color: kPrimaryColor,
         ),
       ),
@@ -120,7 +122,7 @@ class OwnerProductsList extends StatelessWidget {
         ),
         onPressed: () {
           Navigator.pop(context);
-        }, //نخليه يرجع لصفحة المنتجات اللي عند عائشة
+        },
       ),
     );
   }
