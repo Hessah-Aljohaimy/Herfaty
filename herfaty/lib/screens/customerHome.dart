@@ -39,31 +39,33 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 20,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "تصنيفات المنتجات",
-                style: TextStyle(
-                    color: kPrimaryColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22,
-                    fontFamily: "Tajawal"),
-              ),
-            ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          SizedBox(
+            height: 20,
           ),
-        ),
-        SizedBox(
-          height: 20,
-        ),
-      ],
+          Padding(
+            padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "تصنيفات المنتجات",
+                  style: TextStyle(
+                      color: kPrimaryColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22,
+                      fontFamily: "Tajawal"),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+        ],
+      ),
     );
   }
 }

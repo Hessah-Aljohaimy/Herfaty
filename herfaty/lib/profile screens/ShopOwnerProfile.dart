@@ -401,8 +401,16 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      const ShopOwnerEditProfile()),
+                                  builder: (context) => ShopOwnerEditProfile(
+                                      shopowner.name,
+                                      shopowner.email,
+                                      shopowner.password,
+                                      shopowner.DOB,
+                                      shopowner.phone_number,
+                                      shopowner.shopname,
+                                      shopowner.shopdescription,
+                                      shopowner.id,
+                                      shopowner.logo)),
                             );
                           },
                           style: ButtonStyle(
