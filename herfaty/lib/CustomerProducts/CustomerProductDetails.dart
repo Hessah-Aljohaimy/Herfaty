@@ -24,17 +24,14 @@ class CustomerProdectDetails extends StatefulWidget {
 class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
   late int thisPageQuantity;
   late bool isButtonsDisabled;
-  late String textInSubmissonButton;
   @override
   void initState() {
     if (widget.product.availableAmount == 0) {
       thisPageQuantity = 0;
       isButtonsDisabled = true;
-      textInSubmissonButton = "نفد المنتج";
     } else {
       thisPageQuantity = 1;
       isButtonsDisabled = false;
-      textInSubmissonButton = "أضف إلى السلة";
     }
     super.initState();
   }
@@ -60,10 +57,8 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                     if (updatedAvailabeAmount == 0) {
                       thisPageQuantity = 0;
                       isButtonsDisabled = true;
-                      textInSubmissonButton = "نفد المنتج";
                     } else {
                       thisPageQuantity = 1;
-                      textInSubmissonButton = "أضف إلى السلة";
                       isButtonsDisabled = false;
                     }
                   },
@@ -140,7 +135,9 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                ' ${thisPageQuantity * widget.product.price} ريال',
+                                isButtonsDisabled
+                                    ? "${widget.product.price} ريال"
+                                    : ' ${thisPageQuantity * widget.product.price} ريال',
                                 style: const TextStyle(
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.w600,
@@ -230,9 +227,10 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                                 border: InputBorder.none,
                                 hintText: '${thisPageQuantity}',
                                 hintStyle: const TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 24,
-                                    color: Color.fromARGB(255, 255, 255, 255))),
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 24,
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                )),
                           ),
                         ),
                         IconButton(
@@ -355,7 +353,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                               borderRadius: BorderRadius.circular(25.0)),
                         ),
                         child: Text(
-                          textInSubmissonButton,
+                          "أضف إلى السلة",
                           style: TextStyle(
                             fontSize: 18.0,
                             fontFamily: "Tajawal",
@@ -367,8 +365,25 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                     ),
                   ],
                 ),
-                const Spacer(),
-                const Spacer(),
+
+                isButtonsDisabled
+                    ? Container(
+                        padding: EdgeInsets.only(top: 25),
+                        child: Center(
+                          child: Text(
+                            ' هذا المنتج غير متوفر حاليًا ',
+                            style: const TextStyle(
+                              fontSize: 22.0,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: "Tajawal",
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      )
+                    : Text(
+                        '',
+                      ),
               ],
             ),
           ),
@@ -377,12 +392,6 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
     );
   }
 
-  // Future updateProductAvailableAmount(AddProductToCart cartItem) async {
-  //   final docCartItem = FirebaseFirestore.instance
-  //       .collection('Products')
-  //       .doc("${cartItem.productId}")
-  //       .update({'avalibleAmount': cartItem.availableAmount});
-  // }
 //==========================================================================================
   Future createCartItem(AddProductToCart cartItem) async {
     final docCartItem =
