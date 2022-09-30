@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -11,20 +13,8 @@ import 'package:herfaty/models/cartModal.dart';
 import 'package:herfaty/models/orderModel.dart';
 import '../widgets/emptySection.dart';
 import '../widgets/subTitle.dart';
-/*
+
 class payForm extends StatefulWidget {
-  List<CartModal> Items;
-  payForm({Key? key, required Items})
-      : this.Items = Items,
-        super(key: key);
-
-  @override
-  State<payForm> createState() => _payFormState();
-}*/
-
-//class _payFormState extends State<payForm> {
-
-class payForm extends StatelessWidget {
   List<CartModal> Items;
   dynamic app = DefaultAppBarPay(title: "إكمال عملية الطلب");
   String location;
@@ -47,18 +37,46 @@ class payForm extends StatelessWidget {
         super(key: key);
 
   @override
+  State<payForm> createState() => _payFormState();
+}
+
+class _payFormState extends State<payForm> {
+/*
+class payForm extends StatelessWidget {
+  List<CartModal> Items;
+  dynamic app = DefaultAppBarPay(title: "إكمال عملية الطلب");
+  String location;
+  String shopName;
+  num totalPrice;
+  String shopOwnerId;
+
+  payForm({
+    Key? key,
+    required Items,
+    required location,
+    required shopName,
+    required totalPrice,
+    required shopOwnerId,
+  })  : this.Items = Items,
+        this.location = location,
+        this.shopName = shopName,
+        this.totalPrice = totalPrice,
+        this.shopOwnerId = shopOwnerId,
+        super(key: key);*/
+
+  @override
   Widget build(BuildContext context) {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
 
-    Map<String, num> products = Map.fromIterable(Items,
+    Map<String, num> products = Map.fromIterable(widget.Items,
         key: (e) => e.productId, value: (e) => e.quantity);
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: Scaffold(
           resizeToAvoidBottomInset: true,
-          appBar: app,
+          appBar: widget.app,
           body: Container(
             height: double.infinity,
             decoration: BoxDecoration(
@@ -115,8 +133,6 @@ class payForm extends StatelessWidget {
                             const SizedBox(height: 10),
                             ElevatedButton(
                               onPressed: () {
-                                app =
-                                    const AppBarWithout(title: " معالجة الطلب");
                                 (controller.details.complete)
                                     ? context.read<PaymentBloc>().add(
                                           const PaymentCreateIntent(
@@ -160,7 +176,6 @@ class payForm extends StatelessWidget {
                     }
 
                     if (state.status == PaymentStatus.success) {
-                      app = const AppBarWithout(title: " تم الطلب");
                       final orderToBeAdded =
                           FirebaseFirestore.instance.collection('orders').doc();
 
@@ -169,11 +184,11 @@ class payForm extends StatelessWidget {
 
                       orderModal order = orderModal(
                           customerId: user!.uid,
-                          shopOwnerId: shopOwnerId,
+                          shopOwnerId: widget.shopOwnerId,
                           docId: orderToBeAdded.id,
-                          location: location,
-                          total: totalPrice,
-                          shopName: shopName,
+                          location: widget.location,
+                          total: widget.totalPrice,
+                          shopName: widget.shopName,
                           notification: 'notPushed',
                           status: 'New order',
                           products: products,
@@ -182,6 +197,7 @@ class payForm extends StatelessWidget {
                       createNewOrder(order);
                       deletFromCart();
                       updateProducts();
+
                       return Container(
                         height: 500,
                         margin:
@@ -236,6 +252,7 @@ class payForm extends StatelessWidget {
                       )
                     ],
                   );*/
+
                     }
 
                     if (state.status == PaymentStatus.failure) {
@@ -260,7 +277,14 @@ class payForm extends StatelessWidget {
                         ],
                       );
                     } else {
-                      app = const AppBarWithout(title: " معالجة الطلب");
+                      Timer(Duration(seconds: 0), () {
+                        // <-- Delay here
+                        setState(() {
+                          widget.app = AppBarWithout(
+                              title:
+                                  "إكمال عملية الطلب"); // <-- Code run after delay
+                        });
+                      });
                       return const Center(child: CircularProgressIndicator());
                     }
                   },
@@ -274,20 +298,21 @@ class payForm extends StatelessWidget {
   deletFromCart() async {
     final _db = FirebaseFirestore.instance;
 
-    for (var i = 0; i < Items.length; i++) {
-      await _db.collection("cart").doc(Items[i].docId).delete();
+    for (var i = 0; i < widget.Items.length; i++) {
+      await _db.collection("cart").doc(widget.Items[i].docId).delete();
     }
   }
 
   updateProducts() async {
     final _db = FirebaseFirestore.instance;
 
-    for (var i = 0; i < Items.length; i++) {
-      if (Items[i].quantity < Items[i].avalibleAmount) {
-        var updaterAmount = (Items[i].avalibleAmount) - (Items[i].quantity);
+    for (var i = 0; i < widget.Items.length; i++) {
+      if (widget.Items[i].quantity < widget.Items[i].avalibleAmount) {
+        var updaterAmount =
+            (widget.Items[i].avalibleAmount) - (widget.Items[i].quantity);
         FirebaseFirestore.instance
             .collection('Products')
-            .doc(Items[i].productId.trim())
+            .doc(widget.Items[i].productId.trim())
             .update({"avalibleAmount": updaterAmount});
       }
     }

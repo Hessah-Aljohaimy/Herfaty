@@ -97,18 +97,6 @@ class _CartState extends State<Cart> {
       children: [
         Container(
           margin: EdgeInsets.only(right: 8.0, left: 8.0, top: 10, bottom: 8.0),
-          /*  decoration: BoxDecoration(
-            //color: Colors.white,
-            border: Border.all(color: Color(0xff51908E), width: 2),
-            borderRadius: BorderRadius.only(
-                topRight: Radius.circular(5.0), topLeft: Radius.circular(5.0)),
-            
-            /*boxShadow: [
-                BoxShadow(
-                    color: Color(0xff51908E).withOpacity(0.9),
-                    offset: Offset(1, 1))
-              ]*/
-          ),*/
 
           decoration: BoxDecoration(
             color: Color.fromARGB(255, 255, 255, 255),
@@ -476,7 +464,7 @@ Future<dynamic> ShowDialogMethod(BuildContext context, String textToBeShown) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text("خطأ"),
+        title: Text("عفواً"),
         content: Text(textToBeShown),
         actions: <Widget>[
           TextButton(
