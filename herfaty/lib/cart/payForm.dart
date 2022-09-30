@@ -16,7 +16,7 @@ import '../widgets/subTitle.dart';
 
 class payForm extends StatefulWidget {
   List<CartModal> Items;
-  dynamic app = DefaultAppBarPay(title: "إكمال عملية الطلب");
+  dynamic app = DefaultAppBarPay(title: "الدفع");
   String location;
   String shopName;
   num totalPrice;
@@ -281,8 +281,7 @@ class payForm extends StatelessWidget {
                         // <-- Delay here
                         setState(() {
                           widget.app = AppBarWithout(
-                              title:
-                                  "إكمال عملية الطلب"); // <-- Code run after delay
+                              title: "الدفع"); // <-- Code run after delay
                         });
                       });
                       return const Center(child: CircularProgressIndicator());

@@ -321,7 +321,8 @@ class _CartState extends State<Cart> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(" المجموع : ${calculatTotal(cItems)} ريال",
+                        Text(
+                            " المجموع : ${calculatTotal(cItems).toStringAsFixed(2)} ريال",
                             textAlign: TextAlign.right,
                             style: TextStyle(
                               fontSize: 18.0,
@@ -344,35 +345,6 @@ class _CartState extends State<Cart> {
                                         Items: cItems.toList(),
                                         totalPrice: calculatTotal(cItems))),
                               );
-
-                              // pay form page
-                              /*
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => payForm()
-                         ) );
-
-                         */
-
-                              //LOCATION PAGE
-                              /*Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => PlacePicker(
-                              apiKey:
-                                  "AIzaSyAwT-rSNhTijJZ2Op4IWMddDdLF0Dcq8-o", // Put YOUR OWN KEY here.
-                              onPlacePicked: (result) {
-                                print("------------------------------");
-                                print(result.formattedAddress);
-                                print("------------------------------");
-                                Navigator.of(context).pop();
-                              },
-                              initialPosition: kInitialPosition,
-                              useCurrentLocation: true,
-                            ),
-                          ),
-                        );*/
                             },
                             label: const Text('إتمام الطلب',
                                 style: TextStyle(
