@@ -37,7 +37,7 @@ class _ExpandedWidgetState extends State<ExpandedWidget> {
         style: TextStyle(
           fontSize: 17,
           height: 1.4,
-          fontWeight: FontWeight.w700,
+          fontWeight: FontWeight.w500,
           color: Colors.white,
           fontFamily: "Tajawal",
         ),

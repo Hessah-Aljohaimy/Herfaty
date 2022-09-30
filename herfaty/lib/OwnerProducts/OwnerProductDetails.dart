@@ -137,123 +137,68 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   ////////////////////////////////////////////////////////////////////////////// Icons
                   children: [
-                    //للتعديل  icon
+                    ////////////////////////////////////////////////////////////////////////////// Buttons
                     Container(
-                      padding:
-                          EdgeInsets.only(top: 0, bottom: 6, left: 4, right: 5),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(30),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(.3),
-                            blurRadius: 5.0,
-                            spreadRadius: .1,
-                          ), //BoxShadow
-                        ],
-                      ),
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.edit_outlined,
-                          color: kPrimaryColor,
-                          size: 40,
-                        ),
+                      // زر التعديل
+                      child: ElevatedButton(
                         onPressed: () {
                           //هنا يكون كود تعديل المنتج
                         },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          padding: const EdgeInsets.only(
+                            right: 60,
+                            left: 60,
+                            top: 10,
+                            bottom: 5,
+                          ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25.0)),
+                        ),
+                        child: const Text(
+                          'تعديل',
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontFamily: "Tajawal",
+                            fontWeight: FontWeight.bold,
+                            color: kPrimaryColor,
+                          ),
+                        ),
                       ),
                     ),
-                    //...........................................................
-                    //للحذف  icon
+                    //...........................................................................................
                     Container(
-                      padding:
-                          EdgeInsets.only(top: 0, bottom: 7, left: 0, right: 8),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(30),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(.3),
-                            blurRadius: 5.0,
-                            spreadRadius: .1,
-                          ), //BoxShadow
-                        ],
-                      ),
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.delete_forever_outlined,
-                          color: Colors.red,
-                          size: 40,
-                        ),
+                      //margin: EdgeInsets.only(top: 20.0),
+                      // زر الحذف-----------------------------------------
+                      child: ElevatedButton(
                         onPressed: () {
                           //هنا يكون كود حذف المنتج
                         },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          padding: const EdgeInsets.only(
+                            right: 60,
+                            left: 60,
+                            top: 10,
+                            bottom: 5,
+                          ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25.0)),
+                        ),
+                        child: const Text(
+                          'حـذف',
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontFamily: "Tajawal",
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red,
+                          ),
+                        ),
                       ),
                     ),
-                    //////////////////////////////////////////////////////////////////////////////// Buttons
-                    // Container(
-                    //   // زر التعديل
-                    //   child: ElevatedButton(
-                    //     onPressed: () {
-                    //       //هنا يكون كود تعديل المنتج
-                    //     },
-                    //     style: ElevatedButton.styleFrom(
-                    //       backgroundColor: Colors.white,
-                    //       padding: const EdgeInsets.only(
-                    //         right: 26,
-                    //         left: 26,
-                    //         top: 10,
-                    //         bottom: 5,
-                    //       ),
-                    //       shape: RoundedRectangleBorder(
-                    //           borderRadius: BorderRadius.circular(25.0)),
-                    //     ),
-                    //     child: const Text(
-                    //       'تعديل',
-                    //       style: TextStyle(
-                    //         fontSize: 18.0,
-                    //         fontFamily: "Tajawal",
-                    //         fontWeight: FontWeight.w900,
-                    //         color: kPrimaryColor,
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-                    // //...........................................................................................
-                    // Container(
-                    //   //margin: EdgeInsets.only(top: 20.0),
-                    //   // زر الحذف-----------------------------------------
-                    //   child: ElevatedButton(
-                    //     onPressed: () {
-                    //       //هنا يكون كود حذف المنتج
-                    //     },
-                    //     style: ElevatedButton.styleFrom(
-                    //       backgroundColor: Colors.white,
-                    //       padding: const EdgeInsets.only(
-                    //         right: 26,
-                    //         left: 26,
-                    //         top: 10,
-                    //         bottom: 5,
-                    //       ),
-                    //       shape: RoundedRectangleBorder(
-                    //           borderRadius: BorderRadius.circular(25.0)),
-                    //     ),
-                    //     child: const Text(
-                    //       'حـذف',
-                    //       style: TextStyle(
-                    //         fontSize: 18.0,
-                    //         fontFamily: "Tajawal",
-                    //         fontWeight: FontWeight.w900,
-                    //         color: Colors.redAccent,
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-                    ////////////////////////////////////////////////////////////////////////////////////////
+                    //////////////////////////////////////////////////////////////////////////////////////
                   ],
                 ),
-                const Spacer(),
-                const Spacer(),
               ],
             ),
           ),
