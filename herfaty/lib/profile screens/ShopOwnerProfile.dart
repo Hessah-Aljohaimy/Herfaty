@@ -19,6 +19,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../pages/welcome.dart';
 import '../widgets/ExpandedWidget.dart';
+import '../widgets/ExpanededWidgetShop.dart';
 
 class ShopOwnerProfile extends StatefulWidget {
   const ShopOwnerProfile({super.key});
@@ -56,6 +57,8 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
   String? shopdescription = '';
   String? shopname = '';
 
+  get kPrimaryColor => null;
+
   Future _getDataFromDatabase() async {
     await FirebaseFirestore.instance
         .collection("useres")
@@ -80,12 +83,16 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
   }
 
   TextEditingController passwordController = TextEditingController();
-
+//    fontFamily: "Tajawal",
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("حسابي", style: TextStyle(color: kPrimaryColor)),
+        title: Text("حسابي",
+            style: TextStyle(
+              color: Color.fromARGB(255, 39, 141, 134),
+              fontFamily: "Tajawal",
+            )),
         centerTitle: true,
         backgroundColor: Colors.white,
         shadowColor: Color.fromARGB(255, 39, 141, 134),
@@ -144,7 +151,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
     return Center(
       child: Stack(children: <Widget>[
         CircleAvatar(
-          radius: 60.0,
+          radius: 54.0,
           backgroundImage: logo == null
               ? AssetImage("assets/images/Circular_Logo.png") as ImageProvider
               : NetworkImage(logo),
@@ -163,8 +170,6 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
     final uid = user!.uid;
 
     return Container(
-      //#############################TEMP COLOR//////////////////////
-
       height: double.infinity,
       width: double.infinity,
       child: SingleChildScrollView(
@@ -227,9 +232,11 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                               child: Text(
                                 "معلومات الحرفي",
                                 style: TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w900,
-                                    color: Color.fromARGB(255, 26, 96, 91)),
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color.fromARGB(255, 26, 96, 91),
+                                  fontFamily: "Tajawal",
+                                ),
                               ),
                             ),
                             Expanded(
@@ -320,7 +327,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                         ],
                       ),
                       child: SizedBox(
-                        height: 170,
+                        height: 160,
                         child: Column(
                           children: [
                             Padding(
@@ -329,9 +336,13 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 "بيانات المتجر",
                                 style: TextStyle(
                                     fontSize: 17,
-                                    fontWeight: FontWeight.w900,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: "Tajawal",
                                     color: Color.fromARGB(255, 26, 96, 91)),
                               ),
+                            ),
+                            SizedBox(
+                              height: 10,
                             ),
                             Expanded(
                               child: Row(
@@ -341,14 +352,17 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                     style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.w900,
+                                        fontFamily: "Tajawal",
                                         color:
                                             Color.fromARGB(255, 39, 141, 134)),
                                   ),
                                   SizedBox(
                                     width: 5,
                                   ),
+                                  /**hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh */
+                                  //
                                   Text(
-                                    " ${shopowner.shopname}",
+                                    "${shopowner.shopname}",
                                     style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.w400,
@@ -357,52 +371,40 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 ],
                               ),
                             ),
+                            SizedBox(
+                              height: 5,
+                            ),
                             Expanded(
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.only(right: 0, left: 270),
+                                    const EdgeInsets.only(right: 0, left: 280),
                                 child: Text(
                                   "وصف المتجر",
                                   style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w900,
+                                      fontFamily: "Tajawal",
                                       color: Color.fromARGB(255, 39, 141, 134)),
                                 ),
                               ),
                             ),
-                            // Expanded(
-                            //     child:
-                            //      Container(
-                            //   height: 130,
-                            //   width: 300,
-                            //   padding: const EdgeInsets.all(10),
-                            
-                            //   decoration: BoxDecoration(
-                            //       borderRadius: BorderRadius.circular(5),
-                            //       border: Border.all(
-                            //           color:
-                            //               Color.fromARGB(129, 81, 144, 142))),
-                            //   child: SingleChildScrollView(
-                            //       scrollDirection: Axis.vertical,
-                            //       child: Text(
-                            //         '${shopowner.shopdescription}',
-                            //         style: TextStyle(fontSize: 15),
-                            //       )),
-                            // ))
                             Container(
-                  width: double.infinity,
-                  margin: const EdgeInsets.symmetric(vertical: 0),
-                  padding: const EdgeInsets.symmetric(
-                    // vertical: 10,
-                    // horizontal: 30,
-                  ),
-                  child: Expanded(
-                    child: SingleChildScrollView(
-                        scrollDirection: Axis.vertical,
-                        child:
-                            ExpandedWidget(text: '${shopowner.shopdescription}')),
-                  ),
-                ),
+                              width: double.infinity,
+                              margin: const EdgeInsets.only(bottom: 18),
+                              padding: const EdgeInsets.symmetric(
+                                  // vertical: 10,
+                                  // horizontal: 30,
+                                  ),
+                              child: Expanded(
+                                child: SingleChildScrollView(
+                                    scrollDirection: Axis.vertical,
+                                    /*hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh*/
+                                    //${shopowner.shopdescription}
+                                    child: ExpandedWidgetShop(
+                                        text: '${shopowner.shopdescription}')),
+                                //
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -514,10 +516,13 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                           ),
                         ),
                       ]),
-                    )
+                    ),
                   ],
                 ),
               ),
+            ),
+            SizedBox(
+              height: 10,
             ),
           ],
         ),
