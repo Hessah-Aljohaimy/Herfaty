@@ -9,6 +9,7 @@ import 'package:herfaty/profile%20screens/CustomerProfile.dart';
 import 'package:herfaty/profile%20screens/ShopOwnerProfile.dart';
 import 'package:herfaty/screens/navCustomer.dart';
 import 'package:herfaty/screens/navOwner.dart';
+import 'package:herfaty/widgets/logOut.dart';
 import 'firebase_options.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:herfaty/pages/signupCustomer.dart';
@@ -55,6 +56,7 @@ class MyApp extends StatelessWidget {
         "/signupHerfay": (context) => const SignupHerafy(),
         "/customer_base_screen": (context) => const customerBaseScreen(),
         "/ShopOwnerProfile": (context) => const ShopOwnerProfile(),
+        "logOut": (context) => logOutButton(),
         // "/CustomerProfile": (context) => const CustomerProfile(),
       },
     );
