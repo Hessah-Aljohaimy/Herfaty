@@ -239,6 +239,7 @@ Widget _buildList(List<CartModal> list, String shopName) {
       children: <Widget>[
         Center(
           child: ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: list.length,
               itemBuilder: (context, index) {
@@ -314,7 +315,7 @@ class _addState extends State<add> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
+      margin: EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0, bottom: 8.0),
       padding: EdgeInsets.all(5.0),
       decoration: BoxDecoration(
         color: Color.fromARGB(255, 255, 255, 255),

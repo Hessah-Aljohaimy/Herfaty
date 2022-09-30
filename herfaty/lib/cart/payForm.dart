@@ -2,22 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:herfaty/blocs/blocs.dart';
 import 'package:herfaty/cart/cart.dart';
-import 'package:herfaty/cart/sucess.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/models/cartModal.dart';
 import 'package:herfaty/models/orderModel.dart';
-
-import 'package:herfaty/.env';
-
-import '../models/shopOwnerModel.dart';
-import '../widgets/defaultButton.dart';
 import '../widgets/emptySection.dart';
 import '../widgets/subTitle.dart';
 /*
@@ -35,7 +26,7 @@ class payForm extends StatefulWidget {
 
 class payForm extends StatelessWidget {
   List<CartModal> Items;
-  dynamic app = const DefaultAppBarPay(title: "إكمال عملية الطلب");
+  dynamic app = DefaultAppBarPay(title: "إكمال عملية الطلب");
   String location;
   String shopName;
   num totalPrice;
@@ -69,191 +60,212 @@ class payForm extends StatelessWidget {
           resizeToAvoidBottomInset: true,
           appBar: app,
           body: Container(
-            height: 600,
-            margin: EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
-            padding: EdgeInsets.all(1.0),
+            height: double.infinity,
             decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(color: Color(0xff51908E), width: 1),
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                      color: Color(0xff51908E).withOpacity(0.9),
-                      offset: Offset(1, 1))
-                ]),
-            child: BlocBuilder<PaymentBloc, PaymentState>(
-              builder: (context, state) {
-                CardFormEditController controller = CardFormEditController(
-                  initialDetails: state.cardFieldInputDetails,
-                );
-                if (state.status == PaymentStatus.initial) {
-                  return Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'بيانات البطاقة',
-                          style: TextStyle(
-                            fontSize: 23.0,
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xff51908E),
-                            fontFamily: "Tajawal",
-                          ),
-                        ), // Text
-                        SizedBox(
-                          height: 30,
-                        ),
-                        const SizedBox(height: 20),
-                        CardFormField(
-                          controller: controller,
-                        ), // CardFormField
-                        const SizedBox(height: 10),
-                        ElevatedButton(
-                          onPressed: () {
-                            app = const AppBarWithout(title: " معالجة الطلب");
-                            (controller.details.complete)
-                                ? context.read<PaymentBloc>().add(
-                                      const PaymentCreateIntent(
-                                        billingDetails: BillingDetails(
-                                            email: 'auoosh2000@gmail.com'),
-                                        items: [
-                                          {'id': 0},
-                                          {'id': 1},
-                                        ],
-                                      ),
-                                    )
-                                : ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content:
-                                            Text('the form is not complete')),
-                                  );
-                          },
-                          style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Color(0xff51908E)),
-                            padding: MaterialStateProperty.all(
-                                EdgeInsets.symmetric(
-                                    horizontal: 45, vertical: 13)),
-                            shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(27))),
-                          ),
-                          child: Text(
-                            "ادفع",
-                            style: TextStyle(
-                                fontSize: 19,
+                image: DecorationImage(
+              image: AssetImage('assets/images/cartBack1.png'),
+              fit: BoxFit.cover,
+            )),
+            child: SingleChildScrollView(
+              child: Container(
+                height: 500,
+                margin: EdgeInsets.only(top: 60.0, left: 8.0, right: 8.0),
+                padding: EdgeInsets.all(1.0),
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  border: Border.all(color: Color(0xff51908E), width: 2),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 2,
+                      blurRadius: 7,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: BlocBuilder<PaymentBloc, PaymentState>(
+                  builder: (context, state) {
+                    CardFormEditController controller = CardFormEditController(
+                      initialDetails: state.cardFieldInputDetails,
+                    );
+                    if (state.status == PaymentStatus.initial) {
+                      return Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'بيانات البطاقة',
+                              style: TextStyle(
+                                fontSize: 23.0,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xff51908E),
                                 fontFamily: "Tajawal",
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ), // ElevatedButton
-                      ],
-                    ),
-                  );
-                }
+                              ),
+                            ), // Text
+                            SizedBox(
+                              height: 50,
+                            ),
 
-                if (state.status == PaymentStatus.success) {
-                  app = const AppBarWithout(title: " تم الطلب");
-                  final orderToBeAdded =
-                      FirebaseFirestore.instance.collection('orders').doc();
-
-                  DateTime now = new DateTime.now();
-                  String date = "${now.year}-${now.month}-${now.day}";
-
-                  orderModal order = orderModal(
-                      customerId: user!.uid,
-                      shopOwnerId: shopOwnerId,
-                      docId: orderToBeAdded.id,
-                      location: location,
-                      total: totalPrice,
-                      shopName: shopName,
-                      notification: 'notPushed',
-                      status: 'New order',
-                      products: products,
-                      orderDate: date);
-
-                  createNewOrder(order);
-                  deletFromCart();
-                  updateProducts();
-                  return Container(
-                    height: 400,
-                    color: Colors.white,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        EmptySection(
-                          emptyImg: 'assets/images/success.gif',
-                          emptyMsg: 'عملية ناجحة',
+                            CardFormField(
+                              controller: controller,
+                            ), // CardFormField
+                            const SizedBox(height: 10),
+                            ElevatedButton(
+                              onPressed: () {
+                                app =
+                                    const AppBarWithout(title: " معالجة الطلب");
+                                (controller.details.complete)
+                                    ? context.read<PaymentBloc>().add(
+                                          const PaymentCreateIntent(
+                                            billingDetails: BillingDetails(
+                                                email: 'auoosh2000@gmail.com'),
+                                            items: [
+                                              {'id': 0},
+                                              {'id': 1},
+                                            ],
+                                          ),
+                                        )
+                                    : ScaffoldMessenger.of(context)
+                                        .showSnackBar(
+                                        const SnackBar(
+                                            content: Text(
+                                                'the form is not complete')),
+                                      );
+                              },
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                    Color(0xff51908E)),
+                                padding: MaterialStateProperty.all(
+                                    EdgeInsets.symmetric(
+                                        horizontal: 80, vertical: 10)),
+                                shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(5))),
+                              ),
+                              child: Text(
+                                "ادفع",
+                                style: TextStyle(
+                                    fontSize: 19,
+                                    fontFamily: "Tajawal",
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ), // ElevatedButton
+                          ],
                         ),
-                        SubTitle(
-                          subTitleText: 'تمت عملية الدفع والطلب بنجاح',
+                      );
+                    }
+
+                    if (state.status == PaymentStatus.success) {
+                      app = const AppBarWithout(title: " تم الطلب");
+                      final orderToBeAdded =
+                          FirebaseFirestore.instance.collection('orders').doc();
+
+                      DateTime now = new DateTime.now();
+                      String date = "${now.year}-${now.month}-${now.day}";
+
+                      orderModal order = orderModal(
+                          customerId: user!.uid,
+                          shopOwnerId: shopOwnerId,
+                          docId: orderToBeAdded.id,
+                          location: location,
+                          total: totalPrice,
+                          shopName: shopName,
+                          notification: 'notPushed',
+                          status: 'New order',
+                          products: products,
+                          orderDate: date);
+
+                      createNewOrder(order);
+                      deletFromCart();
+                      updateProducts();
+                      return Container(
+                        height: 500,
+                        margin:
+                            EdgeInsets.only(top: 60.0, left: 8.0, right: 8.0),
+                        padding: EdgeInsets.all(1.0),
+                        color: Colors.white,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            EmptySection(
+                              emptyImg: 'assets/images/success.gif',
+                              emptyMsg: 'عملية ناجحة',
+                            ),
+                            SubTitle(
+                              subTitleText: 'تمت عملية الدفع والطلب بنجاح',
+                            ),
+                            ElevatedButton(
+                              onPressed: () async => {
+                                state.status = PaymentStatus.initial,
+                                Navigator.of(context).pushAndRemoveUntil(
+                                    MaterialPageRoute(
+                                        builder: (context) => const Cart()),
+                                    ModalRoute.withName(
+                                        '/home_screen_customer'))
+
+                                //context.read<PaymentBloc>().add(PaymentStart()),
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Color(0xff51908E),
+                                  fixedSize: const Size(150, 50),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50))),
+                              child: Text("حسناً"),
+                            )
+                          ],
                         ),
-                        ElevatedButton(
-                          onPressed: () async => {
-                            state.status = PaymentStatus.initial,
-                            Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute(
-                                    builder: (context) => const Cart()),
-                                ModalRoute.withName('/home_screen_customer'))
+                      );
 
-                            //context.read<PaymentBloc>().add(PaymentStart()),
-                          },
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xff51908E),
-                              fixedSize: const Size(150, 50),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50))),
-                          child: Text("حسناً"),
-                        )
-                      ],
-                    ),
-                  );
-
-                  /*return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('success'),
-                  const SizedBox(
-                    height: 10,
-                    width: double.infinity,
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      context.read<PaymentBloc>().add(PaymentStart());
-                    },
-                    child: const Text('success'),
-                  )
-                ],
-              );*/
-                }
-
-                if (state.status == PaymentStatus.failure) {
-                  return Column(
+                      /*return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('failure'),
+                      const Text('success'),
                       const SizedBox(
                         height: 10,
                         width: double.infinity,
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          //context.read<PaymentBloc>().add(PaymentStart());
-
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => Cart(),
-                          ));
+                          context.read<PaymentBloc>().add(PaymentStart());
                         },
-                        child: const Text('try again'),
+                        child: const Text('success'),
                       )
                     ],
-                  );
-                } else {
-                  app = const AppBarWithout(title: " معالجة الطلب");
-                  return const Center(child: CircularProgressIndicator());
-                }
-              },
+                  );*/
+                    }
+
+                    if (state.status == PaymentStatus.failure) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text('failure'),
+                          const SizedBox(
+                            height: 10,
+                            width: double.infinity,
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              //context.read<PaymentBloc>().add(PaymentStart());
+
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => Cart(),
+                              ));
+                            },
+                            child: const Text('try again'),
+                          )
+                        ],
+                      );
+                    } else {
+                      app = const AppBarWithout(title: " معالجة الطلب");
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                  },
+                ),
+              ),
             ),
           ),
         )); // Column

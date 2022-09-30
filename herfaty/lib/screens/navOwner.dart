@@ -50,6 +50,7 @@ class _navOwnerState extends State<navOwner> {
           Locale('ar', 'AE'),
         ],
         home: Scaffold(
+          resizeToAvoidBottomInset: true,
           body: PersistentTabView(
             context,
             screens: screens(),
