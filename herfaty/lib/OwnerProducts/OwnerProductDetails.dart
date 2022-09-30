@@ -96,7 +96,7 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
                                 ),
                               ),
                               Text(
-                                ' الكمية: ${widget.product.quantity} ',
+                                ' الكمية: ${widget.product.availableAmount} ',
                                 style: const TextStyle(
                                   fontSize: 18.0,
                                   fontWeight: FontWeight.w500,

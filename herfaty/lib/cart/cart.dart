@@ -364,7 +364,7 @@ class ProductImage extends StatelessWidget {
 num calculatTotal(var list) {
   num finalTotal = 0;
   for (int i = 0; i < list.length; i++) {
-    finalTotal += (list[i].price * list[i].quantity);
+    finalTotal += (list[i].price * list[i].availableAmount);
   }
   return finalTotal;
 }
