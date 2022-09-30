@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/color.dart';
@@ -11,6 +12,8 @@ class list extends StatelessWidget {
   list({Key? key}) : super(key: key) {
     // _stream = _reference.snapshots();
   }
+
+  /*
   Stream<List<orderModal>> readPrpducts() => FirebaseFirestore.instance
       // final uid = user.getIdToken();
       .collection('orders')
@@ -23,7 +26,7 @@ class list extends StatelessWidget {
         //leading: CircleAvatar(child: Text('${orders.docId}')),
         title: Text(orderModel.docId),
         subtitle: Text('yes'),
-      );
+      );*/
   //CollectionReference _reference =
   // FirebaseFirestore.instance.collection('ShopOwnerOrders');
 
@@ -46,6 +49,77 @@ class list extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: DefaultAppBar(title: "طلبات متجري"),
+
+      body: StreamBuilder<List<OrderModel>>(
+          stream: readPrpducts(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Text("somting wrong \n ${snapshot.error}");
+            } else if (!snapshot.hasData) {
+              return Text("");
+            } else if (snapshot.hasData) {
+              final cItems = snapshot.data!.toList();
+              Size size = MediaQuery.of(context).size;
+
+              return Column(
+                children: [
+                  Container(
+                    height: 610,
+                    child: Center(
+                      child: ListView.builder(
+                          itemCount: cItems.length,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              margin: EdgeInsets.only(
+                                  top: 8.0, left: 8.0, right: 8.0),
+                              padding: EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Color(0xFFF1F1F1))),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                              //cItems[index].customerId,
+                                              "طلب رقم ${index + 1}",
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(fontSize: 16.0)),
+                                          Text(
+                                              "تاريح الطلب :${cItems[index].orderDate} "),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Color.fromARGB(
+                                          255, 81, 144, 142), // background
+                                    ),
+                                    onPressed: () {
+                                      //go to order deatils page
+                                    },
+                                    child: Text("تفاصيل الطلب"),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }),
+                    ),
+                  ),
+                ],
+              );
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
+          }),
+
+      /*
       body: StreamBuilder<List<orderModal>>(
           stream: readPrpducts(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -63,9 +137,9 @@ class list extends StatelessWidget {
           }),
     );
   }
-
-  //Check error
-  /* if (snapshot.hasError) {
+*/
+      //Check error
+      /* if (snapshot.hasError) {
             return Center(child: Text('Some error occurred ${snapshot.error}'));
           
 
@@ -125,7 +199,9 @@ class list extends StatelessWidget {
       ),*/
     );*/
 
-  // );
+      //
+    );
+  }
 }
 
 class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -147,4 +223,18 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
       iconTheme: IconThemeData(color: kPrimaryColor),
     );
   }
+}
+
+Stream<List<OrderModel>> readPrpducts() {
+  // final uid = user.getIdToken();
+
+  final user;
+  user = FirebaseAuth.instance.currentUser;
+  final uid = user.uid;
+  return FirebaseFirestore.instance
+      .collection('orders')
+      .where("shopOwnerId", isEqualTo: uid)
+      .snapshots()
+      .map((snapshot) =>
+          snapshot.docs.map((doc) => OrderModel.fromJson(doc.data())).toList());
 }
