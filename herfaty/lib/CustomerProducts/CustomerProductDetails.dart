@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:herfaty/cart/cart.dart';
 import 'package:herfaty/models/AddProductToCart.dart';
 import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/constants/color.dart';
@@ -21,9 +22,56 @@ class CustomerProdectDetails extends StatefulWidget {
 }
 
 class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
-  int thisPageQuantity = 1;
+  late int thisPageQuantity;
+  late bool isButtonsDisabled;
+  @override
+  void initState() {
+    if (widget.product.availableAmount == 0) {
+      thisPageQuantity = 0;
+      isButtonsDisabled = true;
+    } else {
+      thisPageQuantity = 1;
+      isButtonsDisabled = false;
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    //===============================================Listen To AvailableAmount Change From DB
+    CollectionReference reference =
+        FirebaseFirestore.instance.collection('Products');
+    reference.snapshots().listen((querySnapshot) {
+      querySnapshot.docChanges.forEach((change) {
+        if (change.type == DocumentChangeType.modified) {
+          for (var index = 0; index < querySnapshot.size; index++) {
+            var data = querySnapshot.docs.elementAt(index).data() as Map;
+            String productId = data["id"];
+            if (productId == widget.product.id) {
+              print("---------This productId is:${productId}");
+              int updatedAvailabeAmount = data["avalibleAmount"];
+              if (updatedAvailabeAmount != widget.product.availableAmount) {
+                setState(
+                  () {
+                    widget.product.availableAmount = updatedAvailabeAmount;
+                    if (updatedAvailabeAmount == 0) {
+                      thisPageQuantity = 0;
+                      isButtonsDisabled = true;
+                    } else {
+                      thisPageQuantity = 1;
+                      isButtonsDisabled = false;
+                    }
+                  },
+                );
+                ShowDialogMethod(
+                    context, "تم تحديث الكمية المتوفرة من هذا المنتج");
+              }
+            }
+          }
+        }
+      });
+    });
+    //==============================================================================
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     String thisCustomerId = user!.uid;
@@ -87,7 +135,9 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                ' ${thisPageQuantity * widget.product.price} ريال',
+                                isButtonsDisabled
+                                    ? "${widget.product.price} ريال"
+                                    : ' ${thisPageQuantity * widget.product.price} ريال',
                                 style: const TextStyle(
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.w600,
@@ -96,7 +146,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                                 ),
                               ),
                               Text(
-                                ' الكمية: ${widget.product.quantity} / ${thisPageQuantity} ',
+                                ' الكمية: ${widget.product.availableAmount} / ${thisPageQuantity} ',
                                 style: const TextStyle(
                                   fontSize: 18.0,
                                   fontWeight: FontWeight.w500,
@@ -145,21 +195,25 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                         IconButton(
                           icon: Icon(
                             Icons.remove_circle_outline,
-                            color: Colors.white,
+                            color: isButtonsDisabled
+                                ? Color.fromARGB(139, 158, 158, 158)
+                                : Colors.white,
                             size: 26,
                           ),
-                          onPressed: () {
-                            setState(
-                              () {
-                                if (thisPageQuantity > 1) {
-                                  thisPageQuantity = thisPageQuantity - 1;
-                                } else {
-                                  ShowDialogMethod(
-                                      context, "أقل عدد للمنتج هو واحد");
-                                }
-                              },
-                            );
-                          },
+                          onPressed: isButtonsDisabled
+                              ? null
+                              : () {
+                                  setState(
+                                    () {
+                                      if (thisPageQuantity > 1) {
+                                        thisPageQuantity = thisPageQuantity - 1;
+                                      } else {
+                                        ShowDialogMethod(
+                                            context, "أقل عدد للمنتج هو واحد");
+                                      }
+                                    },
+                                  );
+                                },
                         ),
                         Container(
                           width: 28.0,
@@ -173,50 +227,58 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                                 border: InputBorder.none,
                                 hintText: '${thisPageQuantity}',
                                 hintStyle: const TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 24,
-                                    color: Color.fromARGB(255, 255, 255, 255))),
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 24,
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                )),
                           ),
                         ),
                         IconButton(
                           icon: Icon(
                             Icons.add_circle_outline,
-                            color: Colors.white,
+                            color: isButtonsDisabled
+                                ? Color.fromARGB(139, 158, 158, 158)
+                                : Colors.white,
                             size: 26,
                           ),
-                          onPressed: () async {
-                            //get the existed quantity of the item if it is already exists in the cart
-                            int existedQuantity =
-                                await getQuantity(thisCustomerId);
-                            setState(
-                              () {
-                                /*if existed quantity is not zero, المنتج موجود سابقًا*/
-                                if (existedQuantity != 0) {
-                                  int totalQuantity =
-                                      thisPageQuantity + existedQuantity;
-                                  //-----------------------------------
-                                  if (totalQuantity < widget.product.quantity) {
-                                    thisPageQuantity = thisPageQuantity + 1;
-                                  } else {
-                                    ShowDialogMethod(context,
-                                        "توجد كمية مضافة مسبقًا من هذا المنتج في السلة! لا توجد كمية متاحة أكثر من ذلك");
-                                  }
-                                }
+                          onPressed: isButtonsDisabled
+                              ? null
+                              : () async {
+                                  //get the existed quantity of the item if it is already exists in the cart
+                                  int existedQuantity =
+                                      await getQuantity(thisCustomerId);
+                                  setState(
+                                    () {
+                                      /*if existed quantity is not zero, المنتج موجود سابقًا*/
+                                      if (existedQuantity != 0) {
+                                        int totalQuantity =
+                                            thisPageQuantity + existedQuantity;
+                                        //-----------------------------------
+                                        if (totalQuantity <
+                                            widget.product.availableAmount) {
+                                          thisPageQuantity =
+                                              thisPageQuantity + 1;
+                                        } else {
+                                          ShowDialogMethod(context,
+                                              "المنتج موجود لديك في السلة، لا توجد كمية متاحة أكثر من ذلك.");
+                                        }
+                                      }
 
-                                //==================================================
-                                //else: item does not exists in the cart
-                                else {
-                                  if (thisPageQuantity <
-                                      widget.product.quantity) {
-                                    thisPageQuantity = thisPageQuantity + 1;
-                                  } else {
-                                    ShowDialogMethod(context,
-                                        "لا توجد كمية متاحة من المنتج أكثر من ذلك");
-                                  }
-                                }
-                              },
-                            );
-                          },
+                                      //==================================================
+                                      //else: item does not exists in the cart
+                                      else {
+                                        if (thisPageQuantity <
+                                            widget.product.availableAmount) {
+                                          thisPageQuantity =
+                                              thisPageQuantity + 1;
+                                        } else {
+                                          ShowDialogMethod(context,
+                                              "لا توجد كمية متاحة من المنتج أكثر من ذلك");
+                                        }
+                                      }
+                                    },
+                                  );
+                                },
                         ),
                       ],
                     ),
@@ -224,63 +286,61 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                       //margin: EdgeInsets.only(top: 20.0),
                       // زر اللإضافة للسلة-----------------------------------------
                       child: ElevatedButton(
-                        onPressed: () async {
-                          //get the existed quantity of the item if it is already exists in the cart
-                          int existedQuantity =
-                              await getQuantity(thisCustomerId);
+                        onPressed: isButtonsDisabled
+                            ? null
+                            : () async {
+                                //get the existed quantity of the item if it is already exists in the cart
+                                int existedQuantity =
+                                    await getQuantity(thisCustomerId);
 
-                          /*if existed quantity is not zero, this means the document already exists in the cart,
+                                /*if existed quantity is not zero, this means the document already exists in the cart,
                           and I need only to update its quantity. المنتج موجود سابقًا*/
-                          if (existedQuantity != 0) {
-                            int totalQuantity =
-                                thisPageQuantity + existedQuantity;
-                            print(
-                                "==========Add button says: item exists in the cart");
-                            if (totalQuantity <= widget.product.quantity) {
-                              //get the docId of the existed item, so that its quantity can be updated
-                              String existedDocId =
-                                  await getDocId(thisCustomerId);
-                              FirebaseFirestore.instance
-                                  .collection('cart')
-                                  .doc('${existedDocId}')
-                                  .update({
-                                "quantity": thisPageQuantity + existedQuantity
-                              });
-                              await showDoneToast(context);
-                            } else {
-                              ShowDialogMethod(context,
-                                  "توجد كمية مضافة مسبقًا من هذا المنتج في السلة! لا توجد كمية متاحة أكثر من ذلك");
-                            }
-                          } else {
-                            final productToBeAdded = FirebaseFirestore.instance
-                                .collection('cart')
-                                .doc();
-                            AddProductToCart item = AddProductToCart(
-                                name: widget.product.name,
-                                detailsImage: widget.detailsImage,
-                                docId: productToBeAdded.id,
-                                productId: widget.product.id,
-                                customerId: user.uid,
-                                shopName: widget.product.shopName,
-                                shopOwnerId: widget.product.shopOwnerId,
-                                quantity: existedQuantity + thisPageQuantity,
-                                //quantity: updatedQuantity,
-                                availableAmount: widget.product.quantity,
-                                price: widget.product.price);
-                            createCartItem(item);
-                            await showDoneToast(context);
-                          }
-
-                          /*
-                          item.availableAmount = item.availableAmount - 1;
-                          String idToBeUpdated = item.productId;
-                          //update available amount of the product in the product collection
-                          final updateAvailableAmount = FirebaseFirestore
-                              .instance
-                              .collection('Products')
-                              .doc("${idToBeUpdated}");
-                          updateAvailableAmount.update({'avalibleAmount': 20});*/
-                        },
+                                if (existedQuantity != 0) {
+                                  int totalQuantity =
+                                      thisPageQuantity + existedQuantity;
+                                  print(
+                                      "==========Add button says: item exists in the cart");
+                                  if (totalQuantity <=
+                                      widget.product.availableAmount) {
+                                    //get the docId of the existed item, so that its quantity can be updated
+                                    String existedDocId =
+                                        await getDocId(thisCustomerId);
+                                    //update
+                                    FirebaseFirestore.instance
+                                        .collection('cart')
+                                        .doc('${existedDocId}')
+                                        .update({
+                                      "quantity":
+                                          thisPageQuantity + existedQuantity
+                                    });
+                                    await showDoneToast(context);
+                                  } else {
+                                    ShowDialogMethod(context,
+                                        "المنتج موجود لديك في السلة، لا توجد كمية متاحة أكثر من ذلك.");
+                                  }
+                                } else {
+                                  final productToBeAdded = FirebaseFirestore
+                                      .instance
+                                      .collection('cart')
+                                      .doc();
+                                  AddProductToCart item = AddProductToCart(
+                                      name: widget.product.name,
+                                      detailsImage: widget.detailsImage,
+                                      docId: productToBeAdded.id,
+                                      productId: widget.product.id,
+                                      customerId: user.uid,
+                                      shopName: widget.product.shopName,
+                                      shopOwnerId: widget.product.shopOwnerId,
+                                      quantity:
+                                          existedQuantity + thisPageQuantity,
+                                      //quantity: updatedQuantity,
+                                      availableAmount:
+                                          widget.product.availableAmount,
+                                      price: widget.product.price);
+                                  createCartItem(item);
+                                  await showDoneToast(context);
+                                }
+                              },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
                           padding: const EdgeInsets.only(
@@ -292,8 +352,8 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(25.0)),
                         ),
-                        child: const Text(
-                          'أضف إلى السلة',
+                        child: Text(
+                          "أضف إلى السلة",
                           style: TextStyle(
                             fontSize: 18.0,
                             fontFamily: "Tajawal",
@@ -305,8 +365,25 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                     ),
                   ],
                 ),
-                const Spacer(),
-                const Spacer(),
+
+                isButtonsDisabled
+                    ? Container(
+                        padding: EdgeInsets.only(top: 25),
+                        child: Center(
+                          child: Text(
+                            ' هذا المنتج غير متوفر حاليًا ',
+                            style: const TextStyle(
+                              fontSize: 22.0,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: "Tajawal",
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      )
+                    : Text(
+                        '',
+                      ),
               ],
             ),
           ),
@@ -315,12 +392,6 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
     );
   }
 
-  // Future updateProductAvailableAmount(AddProductToCart cartItem) async {
-  //   final docCartItem = FirebaseFirestore.instance
-  //       .collection('Products')
-  //       .doc("${cartItem.productId}")
-  //       .update({'avalibleAmount': cartItem.availableAmount});
-  // }
 //==========================================================================================
   Future createCartItem(AddProductToCart cartItem) async {
     final docCartItem =
@@ -369,17 +440,18 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
   }
 
   //===============================================================================
+
 ///////////////////////////////////////////////////////////////////////////////////
   Future<dynamic> ShowDialogMethod(BuildContext context, String textToBeShown) {
     return showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("خطأ"),
+          title: Text("عفوًا"),
           content: Text(textToBeShown),
           actions: <Widget>[
             TextButton(
-              child: Text("حسنا"),
+              child: Text("حسنًا"),
               onPressed: () {
                 Navigator.of(context).pop();
               },

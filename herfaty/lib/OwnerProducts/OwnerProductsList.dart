@@ -41,39 +41,54 @@ class OwnerProductsList extends StatelessWidget {
                   StreamBuilder<List<Product1>>(
                     stream: readPrpducts(thisOwnerId),
                     builder: (context, snapshot) {
+                      print("------------Waiting");
+
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(child: CircularProgressIndicator());
                       }
                       if (snapshot.hasError) {
                         return Text('Something went wrong! ${snapshot.error}');
-                      } else if (snapshot.hasData) {
+                      }
+                      if (snapshot.hasData) {
                         //هنا حالة النجاح في استرجاع البيانات...........................................
-                        //String detailsImage = "";
-                        final productItems = snapshot.data!.toList();
-                        return ListView.builder(
-                          itemCount: productItems.length,
-                          itemBuilder: (context, index) => productCard_Owner(
-                            itemIndex: index,
-                            product: productItems[index],
-                            press: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => OwnerProdectDetails(
-                                    // يرسل المعلومات لصفحة المنتج عشان يعرض التفاصيل
-                                    detailsImage: productItems[index].image,
-                                    product: productItems[index],
+                        final data = snapshot.data!;
+                        if (data.isEmpty) {
+                          return const Center(
+                            child: Text(
+                              'لا توجد لديك منتجات ضمن هذه الفئة',
+                              style: TextStyle(
+                                fontSize: 22.0,
+                                fontWeight: FontWeight.w600,
+                                fontFamily: "Tajawal",
+                                color: Colors.grey,
+                              ),
+                            ),
+                          );
+                        } else {
+                          final productItems = snapshot.data!.toList();
+                          return ListView.builder(
+                            itemCount: productItems.length,
+                            itemBuilder: (context, index) => productCard_Owner(
+                              itemIndex: index,
+                              product: productItems[index],
+                              press: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => OwnerProdectDetails(
+                                      // يرسل المعلومات لصفحة المنتج عشان يعرض التفاصيل
+                                      detailsImage: productItems[index].image,
+                                      product: productItems[index],
+                                    ),
                                   ),
-                                ),
-                              );
-                            },
-                          ),
-                        );
-                        //..................................................................................
+                                );
+                              },
+                            ),
+                          );
+                          //..................................................................................
+                        }
                       } else {
-                        return const Center(
-                          child: Text("لا توجد لديك منتجات ضمن هذه الفئة"),
-                        );
+                        return const Center(child: CircularProgressIndicator());
                       }
                     },
                   ),

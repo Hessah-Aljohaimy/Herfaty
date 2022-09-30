@@ -1,7 +1,7 @@
 //Shop owners can add a new product by specifying product category, name, photo, description and amount.  *title = name, category and amount isn't added here
 
 class Product1 {
-  int quantity = 0;
+  int availableAmount = 0;
   String id = "";
   num price = 0;
   String categoryName = "",
@@ -13,7 +13,7 @@ class Product1 {
 
   Product1({
     required this.id,
-    required this.quantity,
+    required this.availableAmount,
     required this.price,
     required this.categoryName,
     required this.name,
@@ -25,7 +25,7 @@ class Product1 {
 
   Product1.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    quantity = json['avalibleAmount'];
+    availableAmount = json['avalibleAmount'];
     price = json['price'];
     categoryName = json['categoryName'];
     name = json['name'];
