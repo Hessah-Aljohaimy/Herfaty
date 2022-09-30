@@ -1,31 +1,49 @@
-import 'package:flutter/services.dart';
+class OrderModel {
+  String customerId = "";
+  String shopOwnerId = "";
+  String docId;
+  String location = "";
+  num total = 0.0;
+  String shopName = "";
+  String notification = "notPushed";
+  String status = "New order";
+  String orderDate = "";
+  Map<String, num> products;
 
-class orderModel {
-  String shopOwnerID;
-  String customerID;
-  String image;
-  String orderDate;
-  String qantity;
-  String totalPrice;
-  String orderDay;
+  OrderModel(
+      {required this.customerId,
+      required this.shopOwnerId,
+      required this.docId,
+      required this.location,
+      required this.total,
+      required this.shopName,
+      required this.notification,
+      required this.status,
+      required this.orderDate,
+      required this.products});
 
-  orderModel({
-    required this.shopOwnerID,
-    required this.customerID,
-    required this.image,
-    required this.orderDate,
-    required this.qantity,
-    required this.totalPrice,
-    required this.orderDay,
-  });
+  Map<String, dynamic> toJson() => {
+        'docId': docId,
+        'customerId': customerId,
+        'shopOwnerId': shopOwnerId,
+        'location': location,
+        'total': total,
+        'shopName': shopName,
+        'notification': notification,
+        'status': status,
+        'orderDate': orderDate,
+        'products': products,
+      };
 
-  static orderModel fromJson(Map<String, dynamic> json) => orderModel(
-        shopOwnerID: json['ShopOwnerID'],
-        customerID: json['customerID'],
-        image: json['image'],
-        orderDate: json['orderDate'],
-        qantity: json['qantity'],
-        totalPrice: json['totalPrice'],
-        orderDay: json['orderDay'],
-      );
+  static OrderModel fromJson(Map<String, dynamic> json) => OrderModel(
+      customerId: json['customerId'],
+      docId: json['docId'],
+      shopOwnerId: json['shopOwnerId'],
+      location: json['location'],
+      total: json['total'],
+      shopName: json['shopName'],
+      notification: json['notification'],
+      status: json['status'],
+      orderDate: json['orderDate'],
+      products: json['products']);
 }
