@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'OrderModel.dart';
 
 class OrderServices {
-  static List<orderModel> getOrderList() {
+  /* static List<orderModel> getOrderList() {
     return [
       new orderModel(
         shopOwnerID: '1',
@@ -24,5 +24,5 @@ class OrderServices {
         image: "a",
       ),
     ];
-  }
+  }*/
 }

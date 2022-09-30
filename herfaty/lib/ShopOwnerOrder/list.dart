@@ -7,8 +7,13 @@ import 'orderDetails.dart';
 //import 'add_item.dart';
 
 class list extends StatelessWidget {
-  list({Key? key}) : super(key: key) {}
+  list({Key? key}) : super(key: key) {
+    // _stream = _reference.snapshots();
+  }
+  //CollectionReference _reference =
+  // FirebaseFirestore.instance.collection('ShopOwnerOrders');
 
+  late Stream<QuerySnapshot> _stream;
   Stream<List<orderModel>> readPrpducts() {
     // final uid = user.getIdToken();
 
