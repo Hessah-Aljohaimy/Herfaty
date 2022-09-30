@@ -17,7 +17,7 @@ class list extends StatelessWidget {
       //  .where("categoryName", isEqualTo: categoryName)
       .snapshots()
       .map((snapshot) =>
-          snapshot.docs.map((doc) => OrderModel.fromJson(doc.data())).toList());
+          snapshot.docs.map((doc) => orderModal.fromJson(doc.data())).toList());
 
   Widget buildUser(orderModal orderModel) => ListTile(
         //leading: CircleAvatar(child: Text('${orders.docId}')),
