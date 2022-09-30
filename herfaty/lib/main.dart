@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:herfaty/cart/cart.dart';
 import 'package:herfaty/pages/login.dart';
 import 'package:herfaty/pages/splash.dart';
 import 'package:herfaty/pages/welcome.dart';
@@ -61,7 +62,6 @@ class MyApp extends StatelessWidget {
           "/signupCustomer": (context) => const SignupCustomer(),
           "/signupHerfay": (context) => const SignupHerafy(),
           "/customer_base_screen": (context) => const customerBaseScreen(),
-          //"/payForm": (context) => const payForm(),
         },
       ),
     );

@@ -13,7 +13,7 @@ part 'payment_event.dart';
 part 'payment_state.dart';
 
 class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
-  PaymentBloc() : super(const PaymentState()) {
+  PaymentBloc() : super(PaymentState()) {
     on<PaymentStart>(_onPaymentStart);
     on<PaymentCreateIntent>(_onPaymentCreateIntent);
     on<PaymentConfirmIntent>(_onPaymentConfirmIntent);
@@ -47,15 +47,14 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
     print(paymentIntentResult);
     //print(paymentIntentResult['clientSecret']);
 
- //emit(state.copyWith(status: PaymentStatus.success));
+    //emit(state.copyWith(status: PaymentStatus.success));
 
-    if (paymentIntentResult['status'] =="succeeded") {
+    if (paymentIntentResult['status'] == "succeeded") {
       print('xxxxxxxxxxxxxxxxxxxxxxxxxxxx');
       emit(state.copyWith(status: PaymentStatus.success));
     }
 
-    
-    if (paymentIntentResult['status'] =="failed") {
+    if (paymentIntentResult['status'] == "failed") {
       print('xxxxxxxxxxxxxxxxxxxxxxxxxxxx');
       emit(state.copyWith(status: PaymentStatus.failure));
     }
@@ -68,14 +67,13 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
 
     if (paymentIntentResult['clientSecret'] != null &&
         paymentIntentResult['requires_action'] == true) {
-                print('zzzzzzzzzzzzzzzzzzzzzzzzz');
+      print('zzzzzzzzzzzzzzzzzzzzzzzzz');
 
       final String clientSecret = paymentIntentResult['clientSecret'];
       add(PaymentConfirmIntent(clientSecret: clientSecret));
     }
 
-          print('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq');
-
+    print('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq');
   }
 
   void _onPaymentConfirmIntent(

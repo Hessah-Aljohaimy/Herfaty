@@ -8,17 +8,20 @@ class CartModal {
   int avalibleAmount;
   String shopName = "";
   String productId = "";
+  String shopOwnerId = "";
 
-  CartModal(
-      {required this.customerId,
-      required this.docId,
-      required this.image,
-      required this.name,
-      required this.price,
-      required this.quantity,
-      required this.avalibleAmount,
-      required this.shopName,
-      required this.productId});
+  CartModal({
+    required this.customerId,
+    required this.docId,
+    required this.image,
+    required this.name,
+    required this.price,
+    required this.quantity,
+    required this.avalibleAmount,
+    required this.shopName,
+    required this.productId,
+    required this.shopOwnerId,
+  });
 
   /*
 
@@ -50,6 +53,7 @@ class CartModal {
         'avalibleAmount': avalibleAmount,
         'shopName': shopName,
         'productId': productId,
+        'shopOwnerId': shopOwnerId,
       };
 
   static CartModal fromJson(Map<String, dynamic> json) => CartModal(
@@ -62,5 +66,6 @@ class CartModal {
         avalibleAmount: json['avalibleAmount'],
         shopName: json['shopName'],
         productId: json['productId'],
+        shopOwnerId: json['shopOwnerId'],
       );
 }

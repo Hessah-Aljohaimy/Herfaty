@@ -5,10 +5,10 @@ class orderModal {
   String location = "";
   num total = 0.0;
   String shopName = "";
-  String productId = "";
   String notification = "notPushed";
   String status = "New order";
-  String cartDocId;
+  String orderDate = "";
+  Map<String, num> products;
 
   orderModal(
       {required this.customerId,
@@ -17,10 +17,10 @@ class orderModal {
       required this.location,
       required this.total,
       required this.shopName,
-      required this.productId,
       required this.notification,
       required this.status,
-      required this.cartDocId});
+      required this.orderDate,
+      required this.products});
 
   Map<String, dynamic> toJson() => {
         'docId': docId,
@@ -29,10 +29,10 @@ class orderModal {
         'location': location,
         'total': total,
         'shopName': shopName,
-        'productId': productId,
         'notification': notification,
         'status': status,
-        'cartDocId': cartDocId
+        'orderDate': orderDate,
+        'products': products,
       };
 
   static orderModal fromJson(Map<String, dynamic> json) => orderModal(
@@ -43,7 +43,7 @@ class orderModal {
       total: json['total'],
       shopName: json['shopName'],
       notification: json['notification'],
-      productId: json['productId'],
       status: json['status'],
-      cartDocId: json['cartDocId']);
+      orderDate: json['orderDate'],
+      products: json['products']);
 }

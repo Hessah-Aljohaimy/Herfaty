@@ -1,15 +1,15 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
+
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_place_picker/google_maps_place_picker.dart';
 import 'package:herfaty/cart/payForm.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/models/cartModal.dart';
-import 'package:status_change/status_change.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -27,78 +27,146 @@ class checkOut extends StatelessWidget {
         this.totalPrice = totalPrice,
         this.shopName = shopName,
         super(key: key);
+  var shopOwnerId;
 
   @override
   Widget build(BuildContext context) {
+    add.msg = 'ادخل موقعك';
+    _addState._changeFormat();
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
-        appBar: DefaultAppBar(title: "إكمال عملية الدفع"),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                height: 25,
-                width: double.infinity,
-                margin: EdgeInsets.only(top: 15.0, left: 10.0, right: 10.0),
-                child: Text(
-                  "ملخص الطلب",
-                  textAlign: TextAlign.right,
-                  style: TextStyle(
-                      color: Color(0xff5596A5),
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      fontStyle: FontStyle.italic,
-                      fontFamily: "Tajawal"),
-                ),
-              ),
-              _buildList(Items, shopName),
-              Container(
-                height: 25,
-                width: double.infinity,
-                margin: EdgeInsets.only(top: 20.0, left: 10.0, right: 10.0),
-                child: Text(
-                  "موقع التوصيل",
-                  textAlign: TextAlign.right,
-                  style: TextStyle(
-                      color: Color(0xff5596A5),
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      fontStyle: FontStyle.italic,
-                      fontFamily: "Tajawal"),
-                ),
-              ),
-              add(),
-              Container(
-                height: 25,
-                width: double.infinity,
-                margin: EdgeInsets.only(top: 20.0, left: 10.0, right: 10.0),
-                child: Text(
-                  "بيانات الدفع",
-                  textAlign: TextAlign.right,
-                  style: TextStyle(
-                      color: Color(0xff5596A5),
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      fontStyle: FontStyle.italic,
-                      fontFamily: "Tajawal"),
-                ),
-              ),
-              payForm(Items: Items),
-              Container(
-                height: 35,
-                width: double.infinity,
-                color: Colors.white,
-                margin: EdgeInsets.only(top: 10.0, left: 8.0, right: 8.0),
-                padding: EdgeInsets.all(4.0),
-                child: Text("المجموع $totalPrice ريال",
-                    textAlign: TextAlign.center,
+        appBar: DefaultAppBar(title: "إكمال عملية الطلب"),
+        body: Container(
+          height: double.infinity,
+          width: double.infinity,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+            image: AssetImage('assets/images/cartBack1.png'),
+            fit: BoxFit.cover,
+          )),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  height: 25,
+                  width: double.infinity,
+                  margin: EdgeInsets.only(top: 15.0, left: 10.0, right: 15.0),
+                  child: Text(
+                    "ملخص الطلب",
+                    textAlign: TextAlign.right,
                     style: TextStyle(
-                      color: Color(0xff5596A5),
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: "Tajawal",
-                    )),
+                        color: Color(0xff51908E),
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        //fontStyle: FontStyle.italic,
+                        fontFamily: "Tajawal"),
+                  ),
+                ),
+                _buildList(Items, shopName),
+                Container(
+                  height: 25,
+                  width: double.infinity,
+                  margin: EdgeInsets.only(top: 20.0, left: 10.0, right: 15.0),
+                  child: Text(
+                    "موقع التوصيل",
+                    textAlign: TextAlign.right,
+                    style: TextStyle(
+                        color: Color(0xff51908E),
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        //fontStyle: FontStyle.italic,
+                        fontFamily: "Tajawal"),
+                  ),
+                ),
+                add(),
+                /*Container(
+                  height: 25,
+                  width: double.infinity,
+                  margin: EdgeInsets.only(top: 20.0, left: 10.0, right: 10.0),
+                  child: Text(
+                    "بيانات الدفع",
+                    textAlign: TextAlign.right,
+                    style: TextStyle(
+                        color: Color(0xff51908E),
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        fontStyle: FontStyle.italic,
+                        fontFamily: "Tajawal"),
+                  ),
+                ),*/
+
+/*
+
+                FloatingActionButton.extended(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => payForm(Items: Items),
+                    ));
+
+                    // Add your onPressed code here!
+                  },
+                  label: const Text('الإكمال إلى الدفع'),
+                  icon: const Icon(Icons.payment),
+                  backgroundColor: Color(0xff51908E),
+                ),
+
+
+                */
+              ],
+            ),
+          ),
+        ),
+        bottomNavigationBar: Container(
+          //height: 35,
+          width: double.infinity,
+          color: Colors.white,
+          /* margin: EdgeInsets.only(
+            top: 10.0,
+          ),*/
+          padding: EdgeInsets.only(right: 10.0, left: 10.0, top: 5.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                  "المجموع: \n $totalPrice ريال \n ${totalPrice * 3.75} دولار  ",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Color(0xff51908E),
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "Tajawal",
+                  )),
+              ElevatedButton(
+                child: Text(
+                  'الإكمال إلى الدفع',
+                  style: TextStyle(fontSize: 15, color: Colors.white),
+                ),
+                onPressed: () {
+                  if (add.msg == 'ادخل موقعك') {
+                    ShowDialogMethod(context, "من فضلك قم بتحديد موقع التوصيل");
+                  } else {
+                    String loc = add.msg;
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => payForm(
+                        Items: Items,
+                        location: loc,
+                        shopName: shopName,
+                        totalPrice: totalPrice,
+                        shopOwnerId: Items[0].shopOwnerId,
+                      ),
+                    ));
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                    shadowColor: Colors.white,
+                    elevation: 0,
+                    primary: Color(0xff51908E),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    fixedSize: Size(180, 35)),
               ),
             ],
           ),
@@ -133,6 +201,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
           size: 22.0,
         ),
         onPressed: () {
+          add.msg = 'ادخل موقعك';
           Navigator.pop(context);
         },
       ),
@@ -143,16 +212,22 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
 Widget _buildList(List<CartModal> list, String shopName) {
   return Container(
     margin: EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
-    padding: EdgeInsets.all(1.0),
+    padding: EdgeInsets.only(bottom: 5.0),
     decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Color(0xff51908E), width: 1),
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-              color: Color(0xff51908E).withOpacity(0.9), offset: Offset(1, 1))
-        ]),
+      color: Color.fromARGB(255, 255, 255, 255),
+      border: Border.all(color: Color(0xff51908E), width: 2),
+      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.5),
+          spreadRadius: 2,
+          blurRadius: 7,
+          offset: Offset(0, 3), // changes position of shadow
+        ),
+      ],
+    ),
     child: ExpansionTile(
+      initiallyExpanded: true,
       title: Text(
         //k, //ضعي اسم المتجر ثم شيلي الكومنت
         shopName,
@@ -222,44 +297,19 @@ class ProductImage extends StatelessWidget {
     );
   }
 }
-/*
-Widget adress() {
-  String msg = 'ادخل موقعك';
-  return Container(
-    margin: EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-    padding: EdgeInsets.all(8.0),
-    decoration: BoxDecoration(border: Border.all(color: Color(0xFFF1F1F1))),
-    child: Row(
-      children: [
-        Text(
-          msg,
-          style: TextStyle(fontSize: 16),
-        ),
-        ElevatedButton(
-          child: Text(
-            "اضغط هنا لتحديد موقعك",
-            style: TextStyle(fontSize: 20),
-          ),
-          onPressed: _changeText,
-        )
-      ],
-    ),
-  );
-}*/
 
 class add extends StatefulWidget {
-  const add({Key? key}) : super(key: key);
-
+  static String msg = 'ادخل موقعك';
+  add({Key? key}) : super(key: key);
   @override
   _addState createState() => _addState();
 }
 
 class _addState extends State<add> {
-  String msg = 'ادخل موقعك';
-  String msgButton = "اضغط هنا لتحديد موقعك";
-  Color color = new Color(0xff51908E);
-  Color Tcolor = new Color.fromARGB(255, 255, 255, 255);
-  TextDecoration t = TextDecoration.none;
+  static String msgButton = "اضغط هنا لتحديد موقعك";
+  static Color color = new Color(0xff51908E);
+  static Color Tcolor = new Color.fromARGB(255, 255, 255, 255);
+  static TextDecoration t = TextDecoration.none;
 
   @override
   Widget build(BuildContext context) {
@@ -267,21 +317,25 @@ class _addState extends State<add> {
       margin: EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
       padding: EdgeInsets.all(5.0),
       decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: new Color(0xff51908E), width: 1),
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-                color: new Color(0xff51908E).withOpacity(0.9),
-                offset: Offset(1, 1))
-          ]),
+        color: Color.fromARGB(255, 255, 255, 255),
+        border: Border.all(color: Color(0xff51908E), width: 2),
+        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 2,
+            blurRadius: 7,
+            offset: Offset(0, 3), // changes position of shadow
+          ),
+        ],
+      ),
       child: Row(
         children: [
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(right: 8.0),
               child: Text(
-                msg,
+                add.msg,
                 style: TextStyle(
                   fontSize: 15,
                   color: new Color(0xff51908E),
@@ -328,9 +382,10 @@ class _addState extends State<add> {
             Navigator.of(context).pop();
             setState(() {
               if (result.formattedAddress is Null) {
-                msg = 'ادخل الموقع';
+                add.msg = 'ادخل الموقع';
               } else {
-                msg = result.formattedAddress!;
+                add.msg = result.formattedAddress!;
+                msgButton = "تم تحديد الموقع";
                 color = new Color.fromARGB(255, 255, 255, 255);
                 Tcolor = Color.fromARGB(255, 0, 0, 0);
                 t = TextDecoration.underline;
@@ -344,4 +399,31 @@ class _addState extends State<add> {
       ),
     );
   }
+
+  static _changeFormat() {
+    msgButton = "اضغط هنا لتحديد موقعك";
+    color = new Color(0xff51908E);
+    Tcolor = new Color.fromARGB(255, 255, 255, 255);
+    t = TextDecoration.none;
+  }
+}
+
+Future<dynamic> ShowDialogMethod(BuildContext context, String textToBeShown) {
+  return showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("عفواً"),
+        content: Text(textToBeShown),
+        actions: <Widget>[
+          TextButton(
+            child: Text("حسنا"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          )
+        ],
+      );
+    },
+  );
 }
