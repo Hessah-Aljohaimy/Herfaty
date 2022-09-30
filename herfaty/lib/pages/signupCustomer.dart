@@ -26,7 +26,7 @@ class _SignupCustomerState extends State<SignupCustomer> {
   @override
   Widget build(BuildContext context) {
     return Form(
-      autovalidateMode: AutovalidateMode.onUserInteraction,
+     // autovalidateMode: AutovalidateMode.onUserInteraction,
       key: _formKey,
       child: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -110,7 +110,6 @@ class _SignupCustomerState extends State<SignupCustomer> {
                             child: reusableTextFieldForName(
                                 " اسم المشتري الثنائي",
                                 Icons.person,
-                           
                                 _nameTextEditingController),
                           ),
 
@@ -147,14 +146,9 @@ class _SignupCustomerState extends State<SignupCustomer> {
                             ),
                           ),
                           SizedBox(
-                            height: 23,
+                            height: 20,
                           ),
-                          SizedBox(
-                            height: 17,
-                          ),
-                          SizedBox(
-                            height: 17,
-                          ),
+
                           ElevatedButton(
                             onPressed: () async {
                               try {
@@ -172,7 +166,7 @@ class _SignupCustomerState extends State<SignupCustomer> {
                                       password: _passwordTextController.text,
                                     );
                                     Fluttertoast.showToast(
-                                      msg: "تم تسجيل حسابك  بنجاح",
+                                      msg: "تم تسجيل حسابك بنجاح",
                                       toastLength: Toast.LENGTH_SHORT,
                                       gravity: ToastGravity.CENTER,
                                       timeInSecForIosWeb: 3,
@@ -230,7 +224,7 @@ class _SignupCustomerState extends State<SignupCustomer> {
                             ),
                           ),
                           SizedBox(
-                            height: 33,
+                            height: 23,
                           ),
 
                           Row(
@@ -286,15 +280,14 @@ class _SignupCustomerState extends State<SignupCustomer> {
 
 //Datebase
 Future createCustomer(Customer customer) async {
-  final docCustomr = FirebaseFirestore.instance.collection('customers').doc();
-
   final FirebaseAuth auth = FirebaseAuth.instance;
   final User? user = auth.currentUser;
   final uid = user!.uid;
   customer.id = uid;
 
   final json = customer.toJson();
-
+  final docCustomr =
+      FirebaseFirestore.instance.collection('customers').doc(uid);
   await docCustomr.set(json);
 }
 
@@ -318,4 +311,11 @@ class Customer {
         'email': email,
         'password': password,
       };
+
+  static Customer fromJson(Map<String, dynamic> json) => Customer(
+        id: json['id'],
+        name: json['name'],
+        email: json['email'],
+        password: json['password'],
+      );
 }

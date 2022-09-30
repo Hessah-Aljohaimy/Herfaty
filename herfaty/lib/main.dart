@@ -1,9 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:herfaty/pages/login.dart';
 import 'package:herfaty/pages/splash.dart';
 import 'package:herfaty/pages/welcome.dart';
 import 'package:herfaty/pages/forget_password.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:herfaty/profile%20screens/CustomerProfile.dart';
+import 'package:herfaty/profile%20screens/ShopOwnerProfile.dart';
 import 'package:herfaty/screens/navCustomer.dart';
 import 'package:herfaty/screens/navOwner.dart';
 import 'firebase_options.dart';
@@ -51,6 +54,8 @@ class MyApp extends StatelessWidget {
         "/signupCustomer": (context) => const SignupCustomer(),
         "/signupHerfay": (context) => const SignupHerafy(),
         "/customer_base_screen": (context) => const customerBaseScreen(),
+        "/ShopOwnerProfile": (context) => const ShopOwnerProfile(),
+        // "/CustomerProfile": (context) => const CustomerProfile(),
       },
     );
   }

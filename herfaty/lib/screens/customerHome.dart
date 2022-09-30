@@ -7,9 +7,7 @@ import 'package:herfaty/widgets/profile_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-
-import 'package:herfaty/CustomerProducts/CustomerProductsList.dart';
+import '../CustomerProducts/CustomerProductsList.dart';
 
 class customerHomeScreen extends StatefulWidget {
   const customerHomeScreen({Key? key}) : super(key: key);
