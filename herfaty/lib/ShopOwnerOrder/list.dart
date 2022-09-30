@@ -11,7 +11,7 @@ class list extends StatelessWidget {
   list({Key? key}) : super(key: key) {
     // _stream = _reference.snapshots();
   }
-  Stream<List<OrderModel>> readPrpducts() => FirebaseFirestore.instance
+  Stream<List<orderModal>> readPrpducts() => FirebaseFirestore.instance
       // final uid = user.getIdToken();
       .collection('orders')
       //  .where("categoryName", isEqualTo: categoryName)
@@ -19,7 +19,7 @@ class list extends StatelessWidget {
       .map((snapshot) =>
           snapshot.docs.map((doc) => OrderModel.fromJson(doc.data())).toList());
 
-  Widget buildUser(OrderModel orderModel) => ListTile(
+  Widget buildUser(orderModal orderModel) => ListTile(
         //leading: CircleAvatar(child: Text('${orders.docId}')),
         title: Text(orderModel.docId),
         subtitle: Text('yes'),
@@ -46,7 +46,7 @@ class list extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: DefaultAppBar(title: "طلبات متجري"),
-      body: StreamBuilder<List<OrderModel>>(
+      body: StreamBuilder<List<orderModal>>(
           stream: readPrpducts(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.hasError) {
