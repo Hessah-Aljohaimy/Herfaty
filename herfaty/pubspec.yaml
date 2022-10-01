@@ -41,18 +41,31 @@ dependencies:
   flutter_launcher_icons: ^0.10.0
   flutter_localizations:
     sdk: flutter
+  flutter_stripe: ^3.2.0
+  #http: ^0.13.1
   fluttertoast: ^8.0.9
   google_fonts: ^3.0.1
   google_nav_bar: ^5.0.6
   image_picker: ^0.8.5+3
   persistent_bottom_nav_bar: any
   style_random: ^0.0.1+1
+  flutter_bloc : any
+  equatable : ^2.0.3
+  status_change: ^2.0.0
+  
+  http: ^0.13.5
+  google_maps_place_picker: any
+  geolocator: any
+  geocoding: any
+  
+  
+
+  
   flutter_local_notifications: ^9.7.0
   timezone: ^0.8.0
   rxdart: ^0.27.4
   basic_utils: ^4.2.2
   path_provider: ^2.0.11
-  http: ^0.13.4
   flutter_native_timezone: ^2.0.0
 
 dev_dependencies:

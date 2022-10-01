@@ -48,27 +48,27 @@ class _AddProductState extends State<AddProduct> {
 
   @override
   Widget build(BuildContext context) {
-
     //////////////////////////////////////////////////////////////////////////////////////////
     ///
-       final FirebaseAuth auth = FirebaseAuth.instance;
+    final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     String thisOwnerId = user!.uid;
     var shopNameData;
 
-Stream<List<shopOwnerModel>> shopOwnerData() {
-  // final uid = user.getIdToken();
+    Stream<List<shopOwnerModel>> shopOwnerData() {
+      // final uid = user.getIdToken();
 
-  final user;
-  user = FirebaseAuth.instance.currentUser;
-  final uid = user.uid;
-  return FirebaseFirestore.instance
-      .collection('shop_owner')
-      .where('id', isEqualTo: uid)
-      .snapshots()
-      .map((snapshot) =>
-          snapshot.docs.map((doc) => shopOwnerModel.fromJson(doc.data())).toList());
-}
+      final user;
+      user = FirebaseAuth.instance.currentUser;
+      final uid = user.uid;
+      return FirebaseFirestore.instance
+          .collection('shop_owner')
+          .where('id', isEqualTo: uid)
+          .snapshots()
+          .map((snapshot) => snapshot.docs
+              .map((doc) => shopOwnerModel.fromJson(doc.data()))
+              .toList());
+    }
 
     return Scaffold(
       appBar: PreferredSize(
@@ -113,26 +113,23 @@ Stream<List<shopOwnerModel>> shopOwnerData() {
                   ),
                 ),
               ),
-StreamBuilder<List<shopOwnerModel>>(
-            stream: shopOwnerData(),
-          builder: (context, snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return const Center(
-                                    child: CircularProgressIndicator());
-                              }
-                              if (snapshot.hasError) {
-                                return Text(
-                                    'Something went wrong! ${snapshot.error}');
-                              } else if (snapshot.hasData) {
-                final cItems = snapshot.data!.toList();
+              StreamBuilder<List<shopOwnerModel>>(
+                  stream: shopOwnerData(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    if (snapshot.hasError) {
+                      return Text('Something went wrong! ${snapshot.error}');
+                    } else if (snapshot.hasData) {
+                      final cItems = snapshot.data!.toList();
 
-                                for (int i = 0; i < cItems.length; i++) {
-                             shopNameData=cItems[i].shopname;}
-               }
-                                             return Text('');
-
-  }),
+                      for (int i = 0; i < cItems.length; i++) {
+                        shopNameData = cItems[i].shopname;
+                      }
+                    }
+                    return Text('');
+                  }),
 
               SizedBox(
                 height: 20,
@@ -493,6 +490,19 @@ StreamBuilder<List<shopOwnerModel>>(
                     String desc = descController.text;
                     int amount = int.parse(amountController.text);
                     double priceN = double.parse(priceController.text);
+
+                    /*
+
+                    final user;
+                    user = FirebaseAuth.instance.currentUser;
+                    final uid = user.uid;
+
+                    FirebaseFirestore.instance
+                        .collection("users")
+                        .where("email", isEqualTo: uid)
+                        .snapshots()
+                        .map((snapshot) =>
+                        snapshot.docs.map((doc) => CartModal.fromJson(doc.data())).toList());*/
 
                     final productToBeAdded =
                         FirebaseFirestore.instance.collection('Products').doc();
