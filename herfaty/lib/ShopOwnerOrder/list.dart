@@ -232,7 +232,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 3,
       leading: IconButton(
         onPressed: () {
-          // Navigator.pushNamed(context, '/home_screen_owner');
+         // Navigator.pushNamed(context, '/home_screen_owner');
         },
         icon: Icon(Icons.arrow_back),
       ),
@@ -244,14 +244,29 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 Stream<List<OrderModel>> readPrpducts() {
   // final uid = user.getIdToken();
-
   final user;
   user = FirebaseAuth.instance.currentUser;
+  try{
   final uid = user.uid;
+  
+  
   return FirebaseFirestore.instance
       .collection('orders')
       .where("shopOwnerId", isEqualTo: uid)
       .snapshots()
       .map((snapshot) =>
           snapshot.docs.map((doc) => OrderModel.fromJson(doc.data())).toList());
-}
+  }
+  catch(e){
+
+
+ return FirebaseFirestore.instance
+      .collection('orders')
+      .snapshots()
+      .map((snapshot) =>
+          snapshot.docs.map((doc) => OrderModel.fromJson(doc.data())).toList());
+  }
+
+
+
+  }

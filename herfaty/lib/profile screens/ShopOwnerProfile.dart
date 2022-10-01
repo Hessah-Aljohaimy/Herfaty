@@ -266,7 +266,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                               child: Text(
                                 "معلومات الحرفي",
                                 style: TextStyle(
-                                  fontSize: 17,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.w700,
                                   color: Color.fromARGB(255, 26, 96, 91),
                                   fontFamily: "Tajawal",
@@ -284,9 +284,12 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 Text(
                                   " ${shopowner.name}",
                                   style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.w400,
-                                      color: Colors.black),
+                                      color: Colors.black,
+                                                    fontFamily: "Tajawal",
+
+),
                                 )
                               ],
                             )),
@@ -301,9 +304,11 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 Text(
                                   "${shopowner.email}",
                                   style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.w400,
-                                      color: Colors.black),
+                                      color: Colors.black,
+                                                                                          fontFamily: "Tajawal",
+),
                                 )
                               ],
                             )),
@@ -318,9 +323,11 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 Text(
                                   " ${shopowner.DOB}",
                                   style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.w400,
-                                      color: Colors.black),
+                                      color: Colors.black,
+                                                                                          fontFamily: "Tajawal",
+),
                                 )
                               ],
                             )),
@@ -335,9 +342,11 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 Text(
                                   "${shopowner.phone_number}",
                                   style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.w400,
-                                      color: Colors.black),
+                                      color: Colors.black,
+                                                                                          fontFamily: "Tajawal",
+),
                                 )
                               ],
                             )),
@@ -369,7 +378,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                               child: Text(
                                 "بيانات المتجر",
                                 style: TextStyle(
-                                    fontSize: 17,
+                                    fontSize: 20,
                                     fontWeight: FontWeight.w700,
                                     fontFamily: "Tajawal",
                                     color: Color.fromARGB(255, 26, 96, 91)),
@@ -384,7 +393,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                   Text(
                                     " اسم المتجر ",
                                     style: TextStyle(
-                                        fontSize: 15,
+                                        fontSize: 17,
                                         fontWeight: FontWeight.w900,
                                         fontFamily: "Tajawal",
                                         color:
@@ -398,7 +407,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                   Text(
                                     "${shopowner.shopname}",
                                     style: TextStyle(
-                                        fontSize: 15,
+                                        fontSize: 16,
                                         fontWeight: FontWeight.w400,
                                         color: Colors.black),
                                   )
@@ -406,25 +415,26 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                               ),
                             ),
                             SizedBox(
-                              height: 5,
+                              height: 6,
                             ),
                             Expanded(
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.only(right: 0, left: 280),
+                                    const EdgeInsets.only(right: 0, left: 245),
+                                    
                                 child: Text(
                                   "وصف المتجر",
                                   style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 17,
                                       fontWeight: FontWeight.w900,
                                       fontFamily: "Tajawal",
                                       color: Color.fromARGB(255, 39, 141, 134)),
                                 ),
                               ),
-                            ),
+                           ),
                             Container(
                               width: double.infinity,
-                              margin: const EdgeInsets.only(bottom: 18),
+                              margin: const EdgeInsets.only(bottom: 2),
                               padding: const EdgeInsets.symmetric(
                                   // vertical: 10,
                                   // horizontal: 30,
