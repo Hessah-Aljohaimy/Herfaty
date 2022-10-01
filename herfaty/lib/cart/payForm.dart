@@ -69,8 +69,10 @@ class payForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("class pay |||");
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
+    List<CartModal> pro = widget.Items;
 
     Map<String, num> products = Map.fromIterable(widget.Items,
         key: (e) => e.productId, value: (e) => e.quantity);
@@ -126,20 +128,20 @@ class payForm extends StatelessWidget {
                                 String product = data["id"];
 
                                 for (var index = 0;
-                                    index < widget.Items.length;
+                                    index < pro.length;
                                     index++) {
-                                  if (product ==
-                                      widget.Items[index].productId) {
-                                    print(widget.Items[index].docId);
+                                  print(
+                                      "-------------------happ in check out22222222 ${pro.length}");
+                                  if (product == pro[index].productId) {
                                     int updatedAvailabeAmount =
                                         data["avalibleAmount"];
                                     if (updatedAvailabeAmount !=
-                                        widget.Items[index].avalibleAmount) {
+                                        pro[index].avalibleAmount) {
                                       print(
                                           "-------------------happ in check out2");
                                       FirebaseFirestore.instance
                                           .collection('cart')
-                                          .doc(widget.Items[index].docId)
+                                          .doc(pro[index].docId)
                                           .update({
                                         "avalibleAmount": updatedAvailabeAmount
                                       });
@@ -148,7 +150,7 @@ class payForm extends StatelessWidget {
                                             "-------------------happ in check out4");
                                         FirebaseFirestore.instance
                                             .collection('cart')
-                                            .doc(widget.Items[index].docId)
+                                            .doc(pro[index].docId)
                                             .update({"quantity": 0});
                                         if (state.status ==
                                             PaymentStatus.initial) {
@@ -167,14 +169,14 @@ class payForm extends StatelessWidget {
                                           );
                                         }
                                       } else if (updatedAvailabeAmount <
-                                          widget.Items[index].quantity) {
+                                          pro[index].quantity) {
                                         print(
                                             "-------------------happ in check out3");
                                         if (state.status ==
                                             PaymentStatus.initial) {
                                           FirebaseFirestore.instance
                                               .collection('cart')
-                                              .doc(widget.Items[index].docId)
+                                              .doc(pro[index].docId)
                                               .update({
                                             "quantity": updatedAvailabeAmount
                                           });
@@ -244,6 +246,7 @@ class payForm extends StatelessWidget {
                                             content: Text(
                                                 'the form is not complete')),
                                       );
+                                print("-------------------تم الدفع");
                               },
                               style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all(
@@ -269,8 +272,14 @@ class payForm extends StatelessWidget {
                       );
                     }
 
+                    pro = [];
+
+                    // pro.removeRange(0, pro.length - 1);
+                    print(
+                        "after update items length ${pro.length}"); // <-- Code run after delay
+
                     if (state.status == PaymentStatus.success) {
-                      widget.Items = [];
+                      updateProducts();
 
                       final orderToBeAdded =
                           FirebaseFirestore.instance.collection('orders').doc();
@@ -292,11 +301,6 @@ class payForm extends StatelessWidget {
 
                       createNewOrder(order);
 
-                      Timer(Duration(seconds: 1), () {
-                        updateProducts();
-                        deletFromCart();
-                      });
-
                       return Container(
                         height: 500,
                         margin:
@@ -315,6 +319,7 @@ class payForm extends StatelessWidget {
                             ),
                             ElevatedButton(
                               onPressed: () async => {
+                                deletFromCart(),
                                 state.status = PaymentStatus.initial,
                                 Navigator.of(context).pushAndRemoveUntil(
                                     MaterialPageRoute(
@@ -402,19 +407,19 @@ class payForm extends StatelessWidget {
   deletFromCart() async {
     print("-------------enter");
     final _db = FirebaseFirestore.instance;
-    print("-------------enter ${widget.temp.length}");
 
     for (var i = 0; i < widget.temp.length; i++) {
       await _db.collection("cart").doc(widget.temp[i].docId).delete();
-      print("-------------enter1");
     }
+    print("-------------enter1");
   }
 
   updateProducts() async {
+    print("-------------start update");
     final _db = FirebaseFirestore.instance;
 
     for (var i = 0; i < widget.temp.length; i++) {
-      if (widget.temp[i].quantity < widget.temp[i].avalibleAmount) {
+      if (widget.temp[i].quantity <= widget.temp[i].avalibleAmount) {
         var updaterAmount =
             (widget.temp[i].avalibleAmount) - (widget.temp[i].quantity);
         FirebaseFirestore.instance
@@ -423,6 +428,7 @@ class payForm extends StatelessWidget {
             .update({"avalibleAmount": updaterAmount});
       }
     }
+    print("-------------finish update");
   }
 }
 
