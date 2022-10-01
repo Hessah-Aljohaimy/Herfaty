@@ -46,6 +46,7 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
     );
     print(paymentIntentResult);
     //print(paymentIntentResult['clientSecret']);
+      print('zzzzzzzzddzddzdzddzddzd');
 
     //emit(state.copyWith(status: PaymentStatus.success));
 

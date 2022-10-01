@@ -239,10 +239,10 @@ class payForm extends StatelessWidget {
                                           ),
                                         )
                                     : ScaffoldMessenger.of(context)
-                                        .showSnackBar(
+                                       .showSnackBar(
                                         const SnackBar(
                                             content: Text(
-                                                'the form is not complete')),
+                                                'اكمل تعبئه بيانات الدفع')),
                                       );
                               },
                               style: ButtonStyle(
@@ -291,12 +291,12 @@ class payForm extends StatelessWidget {
                           orderDate: date);
 
                       createNewOrder(order);
+//print('zzzzzzzvvvevevevvevevevvevv');
 
                       Timer(Duration(seconds: 1), () {
                         updateProducts();
                         deletFromCart();
                       });
-
                       return Container(
                         height: 500,
                         margin:
@@ -306,6 +306,7 @@ class payForm extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            
                             EmptySection(
                               emptyImg: 'assets/images/success.gif',
                               emptyMsg: 'عملية ناجحة',
@@ -313,15 +314,18 @@ class payForm extends StatelessWidget {
                             SubTitle(
                               subTitleText: 'تمت عملية الدفع والطلب بنجاح',
                             ),
+                            
                             ElevatedButton(
+                              
                               onPressed: () async => {
                                 state.status = PaymentStatus.initial,
+                                
                                 Navigator.of(context).pushAndRemoveUntil(
                                     MaterialPageRoute(
                                         builder: (context) => Cart()),
                                     ModalRoute.withName(
                                         '/home_screen_customer'))
-
+                                
                                 //context.read<PaymentBloc>().add(PaymentStart()),
                               },
                               style: ElevatedButton.styleFrom(

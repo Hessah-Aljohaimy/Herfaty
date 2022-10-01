@@ -387,7 +387,7 @@ Widget buildCustomer(Customer customer, BuildContext context) {
           Row(
             children: [
               SizedBox(
-                width: 50,
+                width: 26,
               ),
               Expanded(
                 child: Row(children: [
