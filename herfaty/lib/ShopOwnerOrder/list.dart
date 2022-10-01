@@ -89,9 +89,10 @@ class list extends StatelessWidget {
                                               //cItems[index].customerId,
                                               "طلب رقم ${index + 1}",
                                               overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(fontSize: 16.0)),
+                                              style: TextStyle(fontSize: 17.0,fontFamily: "Tajawal")),
+                                            
                                           Text(
-                                              "تاريح الطلب :${cItems[index].orderDate} "),
+                                              "تاريح الطلب :${cItems[index].orderDate} ",style: TextStyle(fontSize: 17.0,fontFamily: "Tajawal") ,),
                                         ],
                                       ),
                                     ),

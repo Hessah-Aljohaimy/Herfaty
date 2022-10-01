@@ -98,7 +98,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
         shadowColor: Color.fromARGB(255, 39, 141, 134),
         elevation: 2,
         leading: IconButton(
-          icon: Icon(Icons.logout, color: kPrimaryColor),
+          icon:  Icon(Icons.logout, color: Color.fromARGB(255, 81, 144, 142)),
           onPressed: () async {
               showDialog(
                   context: context,
@@ -144,7 +144,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (BuildContext context) => OwnerSettings()));
             },
-            icon: Icon(CupertinoIcons.settings),
+            icon: Icon(CupertinoIcons.settings, color: Color.fromARGB(255, 81, 144, 142)),
           ),
         ],
         automaticallyImplyLeading: false,

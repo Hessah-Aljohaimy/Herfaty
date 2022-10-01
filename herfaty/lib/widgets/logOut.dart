@@ -96,7 +96,7 @@ class logOutButton extends StatelessWidget {
         backgroundColor: Colors.white,
         shadowColor: Color.fromARGB(255, 39, 141, 134),
         elevation: 2,
-        actions: [
+        leading: 
           IconButton(
             icon: Icon(Icons.logout, color: Color.fromARGB(255, 81, 144, 142)),
             onPressed: () async {
@@ -134,7 +134,7 @@ class logOutButton extends StatelessWidget {
             }));*/
             },
           ),
-        ],
+        
         automaticallyImplyLeading: false,
         iconTheme: IconThemeData(color: kPrimaryColor),
       ),
