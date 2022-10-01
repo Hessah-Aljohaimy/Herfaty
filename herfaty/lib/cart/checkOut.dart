@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_place_picker/google_maps_place_picker.dart';
+import 'package:herfaty/cart/cart.dart';
 import 'package:herfaty/cart/payForm.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/models/cartModal.dart';
@@ -35,6 +37,54 @@ class checkOut extends StatelessWidget {
     _addState._changeFormat();
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
+
+    CollectionReference reference =
+        FirebaseFirestore.instance.collection('Products');
+    reference.snapshots().listen((querySnapshot) {
+      querySnapshot.docChanges.forEach((change) {
+        if (change.type == DocumentChangeType.modified) {
+          for (var i = 0; i < querySnapshot.size; i++) {
+            var data = querySnapshot.docs.elementAt(i).data() as Map;
+
+            String product = data["id"];
+
+            for (var index = 0; index < Items.length; i++) {
+              if (product == Items[index].productId) {
+                print("-------------------happ in check out");
+                print(Items[index].docId);
+                int updatedAvailabeAmount = data["avalibleAmount"];
+                if (updatedAvailabeAmount != Items[index].avalibleAmount) {
+                  print("-------------------happ in check out2");
+                  FirebaseFirestore.instance
+                      .collection('cart')
+                      .doc(Items[index].docId)
+                      .update({"avalibleAmount": updatedAvailabeAmount});
+                  if (updatedAvailabeAmount < Items[index].quantity) {
+                    print("-------------------happ in check out3");
+                    FirebaseFirestore.instance
+                        .collection('cart')
+                        .doc(Items[index].docId)
+                        .update({"quantity": updatedAvailabeAmount});
+                    ShowDialogMethod1(
+                        context, "بعض المنتجات قلت كميتها المتاحة يرجى التحقق");
+                  }
+                  if (Items[index].avalibleAmount == 0) {
+                    print("-------------------happ in check out4");
+                    FirebaseFirestore.instance
+                        .collection('cart')
+                        .doc(Items[index].docId)
+                        .update({"quantity": 0});
+                    ShowDialogMethod1(
+                        context, "بعض المنتجات لم تعد متاحة يرجى التحقق");
+                  }
+                }
+              }
+            }
+          }
+        }
+      });
+    });
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
@@ -429,6 +479,29 @@ Future<dynamic> ShowDialogMethod(BuildContext context, String textToBeShown) {
             child: Text("حسنا"),
             onPressed: () {
               Navigator.of(context).pop();
+            },
+          )
+        ],
+      );
+    },
+  );
+}
+
+Future<dynamic> ShowDialogMethod1(BuildContext context, String textToBeShown) {
+  return showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("عفواً"),
+        content: Text(textToBeShown),
+        actions: <Widget>[
+          TextButton(
+            child: Text("حسنا"),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Cart()),
+              );
             },
           )
         ],

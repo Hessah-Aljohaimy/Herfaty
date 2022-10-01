@@ -54,7 +54,7 @@ class _CartState extends State<Cart> {
 
                   for (int i = 0; i < cItems.length; i++) {
                     checkAmount(cItems[i].productId, cItems[i].docId,
-                        cItems[i].avalibleAmount);
+                        cItems[i].avalibleAmount, cItems[i].quantity);
                   }
 
                   final groupedList = groupingItems(cItems);
@@ -164,7 +164,8 @@ class _CartState extends State<Cart> {
                                               updatedAvailabeAmount
                                         });
                                         if (updatedAvailabeAmount <
-                                            cItems[index].quantity) {
+                                                cItems[index].quantity &&
+                                            updatedAvailabeAmount != 0) {
                                           FirebaseFirestore.instance
                                               .collection('cart')
                                               .doc(cItems[index].docId)
@@ -179,6 +180,13 @@ class _CartState extends State<Cart> {
                                               .collection('cart')
                                               .doc(cItems[index].docId)
                                               .update({"quantity": 0});
+                                        }
+                                        if (cItems[index].quantity == 0 &&
+                                            updatedAvailabeAmount > 0) {
+                                          FirebaseFirestore.instance
+                                              .collection('cart')
+                                              .doc(cItems[index].docId)
+                                              .update({"quantity": 1});
                                         }
                                       }
                                     }
@@ -543,7 +551,7 @@ Future<dynamic> ShowDialogMethod(BuildContext context, String textToBeShown) {
   );
 }
 
-Future<void> checkAmount(idP, idD, amount) async {
+Future<void> checkAmount(idP, idD, amount, quantity) async {
   var collection = FirebaseFirestore.instance.collection('Products');
   var docSnapshot = await collection.doc(idP).get();
   if (docSnapshot.exists) {
@@ -554,6 +562,26 @@ Future<void> checkAmount(idP, idD, amount) async {
           .collection('cart')
           .doc(idD)
           .update({"avalibleAmount": value});
+      if (value < quantity && value != 0) {
+        FirebaseFirestore.instance
+            .collection('cart')
+            .doc(idD)
+            .update({"quantity": value});
+        //ShowDialogMethod(context,
+        //"لم يعد يتوفر من منتج ${cItems[index].name} في متجر ${cItems[index].shopName} إلا $updatedAvailabeAmount");
+      }
+      if (value == 0) {
+        FirebaseFirestore.instance
+            .collection('cart')
+            .doc(idD)
+            .update({"quantity": 0});
+      }
+      if (quantity == 0 && value > 0) {
+        FirebaseFirestore.instance
+            .collection('cart')
+            .doc(idD)
+            .update({"quantity": 1});
+      }
     } // <-- The value you want to retrieve.
     //return value;
   }
