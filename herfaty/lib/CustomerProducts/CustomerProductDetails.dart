@@ -450,6 +450,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
   Future<dynamic> ShowDialogMethod(BuildContext context, String textToBeShown) {
     return showDialog(
       context: context,
+      //useRootNavigator: false,
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text("عفوًا"),

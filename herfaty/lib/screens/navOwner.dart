@@ -2,16 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:herfaty/cart/cart.dart';
 import 'package:herfaty/constants/color.dart';
-import 'package:herfaty/pages/welcome.dart';
 import 'package:herfaty/profile%20screens/ShopOwnerProfile.dart';
-import 'package:herfaty/screens/customerHome.dart';
 import 'package:herfaty/screens/ownerHome.dart';
-import 'package:herfaty/widgets/logOut.dart';
-
+import 'package:herfaty/ShopOwnerOrder/list.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:herfaty/secondNotificationScreen.dart';
 import 'package:herfaty/LocalNotificationService.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
@@ -145,10 +140,7 @@ class _navOwnerState extends State<navOwner> {
     if (payload != null && payload.isNotEmpty) {
       print('payload: $payload');
       Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: ((context) =>
-                  secondNotificationScreen(payload: payload))));
+          context, MaterialPageRoute(builder: ((context) => list())));
     }
   }
 }
