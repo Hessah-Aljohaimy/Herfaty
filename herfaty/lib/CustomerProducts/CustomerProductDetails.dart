@@ -50,18 +50,20 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
             if (productId == widget.product.id) {
               int updatedAvailabeAmount = data["avalibleAmount"];
               if (updatedAvailabeAmount != widget.product.availableAmount) {
-                setState(
-                  () {
-                    widget.product.availableAmount = updatedAvailabeAmount;
-                    if (updatedAvailabeAmount == 0) {
-                      thisPageQuantity = 0;
-                      isButtonsDisabled = true;
-                    } else {
-                      thisPageQuantity = 1;
-                      isButtonsDisabled = false;
-                    }
-                  },
-                );
+                if (mounted) {
+                  setState(
+                    () {
+                      widget.product.availableAmount = updatedAvailabeAmount;
+                      if (updatedAvailabeAmount == 0) {
+                        thisPageQuantity = 0;
+                        isButtonsDisabled = true;
+                      } else {
+                        thisPageQuantity = 1;
+                        isButtonsDisabled = false;
+                      }
+                    },
+                  );
+                }
                 ShowDialogMethod(
                     context, "تم تحديث الكمية المتوفرة من هذا المنتج");
               }
@@ -202,16 +204,19 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                           onPressed: isButtonsDisabled
                               ? null
                               : () {
-                                  setState(
-                                    () {
-                                      if (thisPageQuantity > 1) {
-                                        thisPageQuantity = thisPageQuantity - 1;
-                                      } else {
-                                        ShowDialogMethod(
-                                            context, "أقل عدد للمنتج هو واحد");
-                                      }
-                                    },
-                                  );
+                                  if (mounted) {
+                                    setState(
+                                      () {
+                                        if (thisPageQuantity > 1) {
+                                          thisPageQuantity =
+                                              thisPageQuantity - 1;
+                                        } else {
+                                          ShowDialogMethod(context,
+                                              "أقل عدد للمنتج هو واحد");
+                                        }
+                                      },
+                                    );
+                                  }
                                 },
                         ),
                         Container(
@@ -246,37 +251,39 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                                   //get the existed quantity of the item if it is already exists in the cart
                                   int existedQuantity =
                                       await getQuantity(thisCustomerId);
-                                  setState(
-                                    () {
-                                      /*if existed quantity is not zero, المنتج موجود سابقًا*/
-                                      if (existedQuantity != 0) {
-                                        int totalQuantity =
-                                            thisPageQuantity + existedQuantity;
-                                        //-----------------------------------
-                                        if (totalQuantity <
-                                            widget.product.availableAmount) {
-                                          thisPageQuantity =
-                                              thisPageQuantity + 1;
-                                        } else {
-                                          ShowDialogMethod(context,
-                                              "المنتج موجود لديك في السلة، لا توجد كمية متاحة أكثر من ذلك.");
+                                  if (mounted) {
+                                    setState(
+                                      () {
+                                        /*if existed quantity is not zero, المنتج موجود سابقًا*/
+                                        if (existedQuantity != 0) {
+                                          int totalQuantity = thisPageQuantity +
+                                              existedQuantity;
+                                          //-----------------------------------
+                                          if (totalQuantity <
+                                              widget.product.availableAmount) {
+                                            thisPageQuantity =
+                                                thisPageQuantity + 1;
+                                          } else {
+                                            ShowDialogMethod(context,
+                                                "المنتج موجود لديك في السلة، لا توجد كمية متاحة أكثر من ذلك.");
+                                          }
                                         }
-                                      }
 
-                                      //==================================================
-                                      //else: item does not exists in the cart
-                                      else {
-                                        if (thisPageQuantity <
-                                            widget.product.availableAmount) {
-                                          thisPageQuantity =
-                                              thisPageQuantity + 1;
-                                        } else {
-                                          ShowDialogMethod(context,
-                                              "لا توجد كمية متاحة من المنتج أكثر من ذلك");
+                                        //==================================================
+                                        //else: item does not exists in the cart
+                                        else {
+                                          if (thisPageQuantity <
+                                              widget.product.availableAmount) {
+                                            thisPageQuantity =
+                                                thisPageQuantity + 1;
+                                          } else {
+                                            ShowDialogMethod(context,
+                                                "لا توجد كمية متاحة من المنتج أكثر من ذلك");
+                                          }
                                         }
-                                      }
-                                    },
-                                  );
+                                      },
+                                    );
+                                  }
                                 },
                         ),
                       ],

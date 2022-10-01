@@ -37,7 +37,7 @@ class checkOut extends StatelessWidget {
     _addState._changeFormat();
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
-
+/*
     CollectionReference reference =
         FirebaseFirestore.instance.collection('Products');
     reference.snapshots().listen((querySnapshot) {
@@ -47,11 +47,9 @@ class checkOut extends StatelessWidget {
             var data = querySnapshot.docs.elementAt(i).data() as Map;
 
             String product = data["id"];
-            print("-------------------happ in check out0");
+
             for (var index = 0; index < Items.length; index++) {
-              print("-------------------happ in check out00");
               if (product == Items[index].productId) {
-                print("-------------------happ in check out");
                 print(Items[index].docId);
                 int updatedAvailabeAmount = data["avalibleAmount"];
                 if (updatedAvailabeAmount != Items[index].avalibleAmount) {
@@ -84,7 +82,7 @@ class checkOut extends StatelessWidget {
         }
       });
     });
-
+*/
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
@@ -207,6 +205,7 @@ class checkOut extends StatelessWidget {
                         shopName: shopName,
                         totalPrice: totalPrice,
                         shopOwnerId: Items[0].shopOwnerId,
+                        temp: Items,
                       ),
                     ));
                   }
@@ -465,26 +464,4 @@ class _addState extends State<add> {
     Tcolor = new Color.fromARGB(255, 255, 255, 255);
     t = TextDecoration.none;
   }
-}
-
-Future<dynamic> ShowDialogMethod1(BuildContext context, String textToBeShown) {
-  return showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text("عفواً"),
-        content: Text(textToBeShown),
-        actions: <Widget>[
-          TextButton(
-            child: Text("حسنا"),
-            onPressed: () {
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => Cart()),
-                  ModalRoute.withName('/home_screen_customer'));
-            },
-          )
-        ],
-      );
-    },
-  );
 }

@@ -16,6 +16,7 @@ class SubTitle extends StatelessWidget {
         subTitleText,
         textAlign: TextAlign.center,
         style: TextStyle(
+          fontFamily: "Tajawal",
           fontSize: 18.0,
           color: Color(0xFF808080),
         ),

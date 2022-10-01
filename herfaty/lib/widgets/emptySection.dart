@@ -25,6 +25,7 @@ class EmptySection extends StatelessWidget {
             child: Text(
               emptyMsg,
               style: TextStyle(
+                fontFamily: "Tajawal",
                 fontSize: 20.0,
                 color: Color(0xFF303030),
               ),

@@ -44,7 +44,7 @@ class _CartState extends State<Cart> {
                 if (snapshot.hasError) {
                   return Text("somting wrong \n ${snapshot.error}");
                 } else if (!snapshot.hasData) {
-                  return Text("No items on the cart yet");
+                  return Text("جاري التحميل");
                 } else if (snapshot.hasData) {
                   final cItems = snapshot.data!.toList();
 
@@ -154,6 +154,8 @@ class _CartState extends State<Cart> {
                                           data["avalibleAmount"];
                                       if (updatedAvailabeAmount !=
                                           cItems[index].avalibleAmount) {
+                                        print(
+                                            "------------------------------1");
                                         FirebaseFirestore.instance
                                             .collection('cart')
                                             .doc(cItems[index].docId)
@@ -162,6 +164,8 @@ class _CartState extends State<Cart> {
                                               updatedAvailabeAmount
                                         });
                                         if (updatedAvailabeAmount == 0) {
+                                          print(
+                                              "------------------------------2");
                                           FirebaseFirestore.instance
                                               .collection('cart')
                                               .doc(cItems[index].docId)
@@ -169,6 +173,8 @@ class _CartState extends State<Cart> {
                                         } else if (cItems[index].quantity ==
                                                 0 &&
                                             updatedAvailabeAmount > 0) {
+                                          print(
+                                              "------------------------------3");
                                           FirebaseFirestore.instance
                                               .collection('cart')
                                               .doc(cItems[index].docId)
@@ -176,6 +182,8 @@ class _CartState extends State<Cart> {
                                         } else if (updatedAvailabeAmount <
                                                 cItems[index].quantity &&
                                             updatedAvailabeAmount != 0) {
+                                          print(
+                                              "------------------------------4");
                                           FirebaseFirestore.instance
                                               .collection('cart')
                                               .doc(cItems[index].docId)
@@ -553,21 +561,25 @@ Future<void> checkAmount(idP, idD, amount, quantity) async {
     Map<String, dynamic>? data = docSnapshot.data();
     var value = data?['avalibleAmount'];
     if (value != amount) {
+      print("------------------------------5");
       FirebaseFirestore.instance
           .collection('cart')
           .doc(idD)
           .update({"avalibleAmount": value});
       if (value == 0) {
+        print("------------------------------6");
         FirebaseFirestore.instance
             .collection('cart')
             .doc(idD)
             .update({"quantity": 0});
       } else if (quantity == 0 && value > 0) {
+        print("------------------------------7");
         FirebaseFirestore.instance
             .collection('cart')
             .doc(idD)
             .update({"quantity": 1});
       } else if (value < quantity && value != 0) {
+        print("------------------------------8");
         FirebaseFirestore.instance
             .collection('cart')
             .doc(idD)

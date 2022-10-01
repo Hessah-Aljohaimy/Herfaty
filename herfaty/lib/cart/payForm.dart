@@ -16,6 +16,7 @@ import '../widgets/subTitle.dart';
 
 class payForm extends StatefulWidget {
   List<CartModal> Items;
+  List<CartModal> temp;
   dynamic app = DefaultAppBarPay(title: "الدفع");
   String location;
   String shopName;
@@ -29,7 +30,9 @@ class payForm extends StatefulWidget {
     required shopName,
     required totalPrice,
     required shopOwnerId,
-  })  : this.Items = Items,
+    required temp,
+  })  : this.temp = temp,
+        this.Items = Items,
         this.location = location,
         this.shopName = shopName,
         this.totalPrice = totalPrice,
@@ -108,6 +111,97 @@ class payForm extends StatelessWidget {
                       initialDetails: state.cardFieldInputDetails,
                     );
                     if (state.status == PaymentStatus.initial) {
+                      try {
+                        //------------------------------------------------
+                        CollectionReference reference =
+                            FirebaseFirestore.instance.collection('Products');
+                        reference.snapshots().listen((querySnapshot) {
+                          querySnapshot.docChanges.forEach((change) {
+                            if (change.type == DocumentChangeType.modified) {
+                              for (var i = 0; i < querySnapshot.size; i++) {
+                                var data = querySnapshot.docs
+                                    .elementAt(i)
+                                    .data() as Map;
+
+                                String product = data["id"];
+
+                                for (var index = 0;
+                                    index < widget.Items.length;
+                                    index++) {
+                                  if (product ==
+                                      widget.Items[index].productId) {
+                                    print(widget.Items[index].docId);
+                                    int updatedAvailabeAmount =
+                                        data["avalibleAmount"];
+                                    if (updatedAvailabeAmount !=
+                                        widget.Items[index].avalibleAmount) {
+                                      print(
+                                          "-------------------happ in check out2");
+                                      FirebaseFirestore.instance
+                                          .collection('cart')
+                                          .doc(widget.Items[index].docId)
+                                          .update({
+                                        "avalibleAmount": updatedAvailabeAmount
+                                      });
+                                      if (updatedAvailabeAmount == 0) {
+                                        print(
+                                            "-------------------happ in check out4");
+                                        FirebaseFirestore.instance
+                                            .collection('cart')
+                                            .doc(widget.Items[index].docId)
+                                            .update({"quantity": 0});
+                                        if (state.status ==
+                                            PaymentStatus.initial) {
+                                          Navigator.of(context)
+                                              .pushAndRemoveUntil(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          Cart()),
+                                                  (Route<dynamic> route) =>
+                                                      false);
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                                content:
+                                                    Text('نفذت بعض المنتجات')),
+                                          );
+                                        }
+                                      } else if (updatedAvailabeAmount <
+                                          widget.Items[index].quantity) {
+                                        print(
+                                            "-------------------happ in check out3");
+                                        if (state.status ==
+                                            PaymentStatus.initial) {
+                                          FirebaseFirestore.instance
+                                              .collection('cart')
+                                              .doc(widget.Items[index].docId)
+                                              .update({
+                                            "quantity": updatedAvailabeAmount
+                                          });
+                                          Navigator.of(context)
+                                              .pushNamedAndRemoveUntil(
+                                                  '/cart',
+                                                  (Route<dynamic> route) =>
+                                                      false);
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                                content: Text(
+                                                    'تغيرت كميات بعض المنتجات')),
+                                          );
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          });
+                        });
+                      } catch (e) {}
+
+                      //---------------------------------------------
+
                       return Padding(
                         padding: const EdgeInsets.all(20),
                         child: Column(
@@ -176,6 +270,8 @@ class payForm extends StatelessWidget {
                     }
 
                     if (state.status == PaymentStatus.success) {
+                      widget.Items = [];
+
                       final orderToBeAdded =
                           FirebaseFirestore.instance.collection('orders').doc();
 
@@ -195,8 +291,11 @@ class payForm extends StatelessWidget {
                           orderDate: date);
 
                       createNewOrder(order);
-                      deletFromCart();
-                      updateProducts();
+
+                      Timer(Duration(seconds: 1), () {
+                        updateProducts();
+                        deletFromCart();
+                      });
 
                       return Container(
                         height: 500,
@@ -230,7 +329,13 @@ class payForm extends StatelessWidget {
                                   fixedSize: const Size(150, 50),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(50))),
-                              child: Text("حسناً"),
+                              child: Text(
+                                "حسناً",
+                                style: TextStyle(
+                                    fontSize: 19,
+                                    fontFamily: "Tajawal",
+                                    fontWeight: FontWeight.bold),
+                              ),
                             )
                           ],
                         ),
@@ -295,23 +400,26 @@ class payForm extends StatelessWidget {
   }
 
   deletFromCart() async {
+    print("-------------enter");
     final _db = FirebaseFirestore.instance;
+    print("-------------enter ${widget.temp.length}");
 
-    for (var i = 0; i < widget.Items.length; i++) {
-      await _db.collection("cart").doc(widget.Items[i].docId).delete();
+    for (var i = 0; i < widget.temp.length; i++) {
+      await _db.collection("cart").doc(widget.temp[i].docId).delete();
+      print("-------------enter1");
     }
   }
 
   updateProducts() async {
     final _db = FirebaseFirestore.instance;
 
-    for (var i = 0; i < widget.Items.length; i++) {
-      if (widget.Items[i].quantity < widget.Items[i].avalibleAmount) {
+    for (var i = 0; i < widget.temp.length; i++) {
+      if (widget.temp[i].quantity < widget.temp[i].avalibleAmount) {
         var updaterAmount =
-            (widget.Items[i].avalibleAmount) - (widget.Items[i].quantity);
+            (widget.temp[i].avalibleAmount) - (widget.temp[i].quantity);
         FirebaseFirestore.instance
             .collection('Products')
-            .doc(widget.Items[i].productId.trim())
+            .doc(widget.temp[i].productId.trim())
             .update({"avalibleAmount": updaterAmount});
       }
     }
