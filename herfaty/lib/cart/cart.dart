@@ -415,14 +415,18 @@ class _CartState extends State<Cart> {
                                   list.removeAt(i);
                                 }
                               //check out page
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => checkOut(
-                                        shopName: k,
-                                        Items: list,
-                                        totalPrice: calculatTotal(list))),
-                              );
+                              if (list.length != 0) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => checkOut(
+                                          shopName: k,
+                                          Items: list,
+                                          totalPrice: calculatTotal(list))),
+                                );
+                              } else {
+                                ShowDialogMethod(context, " لقد نفذت المنتجات");
+                              }
                             },
                             label: Text(
                                 'إتمام الطلب (${calculatItems(cItems)})',
