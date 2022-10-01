@@ -67,8 +67,7 @@ class checkOut extends StatelessWidget {
                         .update({"quantity": updatedAvailabeAmount});
                     ShowDialogMethod1(
                         context, "بعض المنتجات قلت كميتها المتاحة يرجى التحقق");
-                  }
-                  if (Items[index].avalibleAmount == 0) {
+                  } else if (Items[index].avalibleAmount == 0) {
                     print("-------------------happ in check out4");
                     FirebaseFirestore.instance
                         .collection('cart')
@@ -465,26 +464,6 @@ class _addState extends State<add> {
     Tcolor = new Color.fromARGB(255, 255, 255, 255);
     t = TextDecoration.none;
   }
-}
-
-Future<dynamic> ShowDialogMethod(BuildContext context, String textToBeShown) {
-  return showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text("عفواً"),
-        content: Text(textToBeShown),
-        actions: <Widget>[
-          TextButton(
-            child: Text("حسنا"),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          )
-        ],
-      );
-    },
-  );
 }
 
 Future<dynamic> ShowDialogMethod1(BuildContext context, String textToBeShown) {

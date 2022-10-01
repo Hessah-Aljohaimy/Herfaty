@@ -10,8 +10,6 @@ import 'package:herfaty/models/cartModal.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import "package:collection/collection.dart";
-import 'package:herfaty/cart/payForm.dart';
-import '../pages/welcome.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -163,30 +161,28 @@ class _CartState extends State<Cart> {
                                           "avalibleAmount":
                                               updatedAvailabeAmount
                                         });
-                                        if (updatedAvailabeAmount <
-                                                cItems[index].quantity &&
-                                            cItems[index].avalibleAmount != 0) {
-                                          FirebaseFirestore.instance
-                                              .collection('cart')
-                                              .doc(cItems[index].docId)
-                                              .update({
-                                            "quantity": updatedAvailabeAmount
-                                          });
-                                          ShowDialogMethod(context,
-                                              "لم يعد يتوفر من منتج ${cItems[index].name} في متجر ${cItems[index].shopName} إلا $updatedAvailabeAmount");
-                                        }
-                                        if (cItems[index].avalibleAmount == 0) {
-                                          FirebaseFirestore.instance
-                                              .collection('cart')
-                                              .doc(cItems[index].docId)
-                                              .update({"quantity": 0});
-                                        }
                                         if (cItems[index].quantity == 0 &&
                                             updatedAvailabeAmount > 0) {
                                           FirebaseFirestore.instance
                                               .collection('cart')
                                               .doc(cItems[index].docId)
                                               .update({"quantity": 1});
+                                        } else if (updatedAvailabeAmount <
+                                                cItems[index].quantity &&
+                                            updatedAvailabeAmount != 0) {
+                                          FirebaseFirestore.instance
+                                              .collection('cart')
+                                              .doc(cItems[index].docId)
+                                              .update({
+                                            "quantity": updatedAvailabeAmount
+                                          });
+                                        } else if (cItems[index]
+                                                .avalibleAmount ==
+                                            0) {
+                                          FirebaseFirestore.instance
+                                              .collection('cart')
+                                              .doc(cItems[index].docId)
+                                              .update({"quantity": 0});
                                         }
                                       }
                                     }
@@ -562,25 +558,21 @@ Future<void> checkAmount(idP, idD, amount, quantity) async {
           .collection('cart')
           .doc(idD)
           .update({"avalibleAmount": value});
-      if (value < quantity && amount != 0) {
-        FirebaseFirestore.instance
-            .collection('cart')
-            .doc(idD)
-            .update({"quantity": value});
-        //ShowDialogMethod(context,
-        //"لم يعد يتوفر من منتج ${cItems[index].name} في متجر ${cItems[index].shopName} إلا $updatedAvailabeAmount");
-      }
-      if (amount == 0) {
-        FirebaseFirestore.instance
-            .collection('cart')
-            .doc(idD)
-            .update({"quantity": 0});
-      }
       if (quantity == 0 && value > 0) {
         FirebaseFirestore.instance
             .collection('cart')
             .doc(idD)
             .update({"quantity": 1});
+      } else if (value < quantity && amount != 0) {
+        FirebaseFirestore.instance
+            .collection('cart')
+            .doc(idD)
+            .update({"quantity": value});
+      } else if (amount == 0) {
+        FirebaseFirestore.instance
+            .collection('cart')
+            .doc(idD)
+            .update({"quantity": 0});
       }
     } // <-- The value you want to retrieve.
     //return value;
