@@ -16,7 +16,9 @@ import '../pages/welcome.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Cart extends StatefulWidget {
-  const Cart({Key? key}) : super(key: key);
+  bool sold = false;
+
+  Cart({Key? key, sold}) : super(key: key);
 
   @override
   _CartState createState() => _CartState();
@@ -27,16 +29,10 @@ class _CartState extends State<Cart> {
 
   @override
   Widget build(BuildContext context) {
-    double total = 0;
-    double finaltotal;
-
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
         appBar: DefaultAppBar(title: "سلتي"),
-
-        //test
-
         body: Container(
           height: double.infinity,
           decoration: BoxDecoration(
@@ -53,6 +49,13 @@ class _CartState extends State<Cart> {
                   return Text("No items on the cart yet");
                 } else if (snapshot.hasData) {
                   final cItems = snapshot.data!.toList();
+
+                  // check if available amount changed
+
+                  for (int i = 0; i < cItems.length; i++) {
+                    checkAmount(cItems[i].productId, cItems[i].docId,
+                        cItems[i].avalibleAmount);
+                  }
 
                   final groupedList = groupingItems(cItems);
 
@@ -72,13 +75,6 @@ class _CartState extends State<Cart> {
                 }
               }),
         ),
-
-        /*body: Column(
-          children: const [
-            //AppBarc(),
-            Bodyc(),
-          ],
-        ),*/
       ),
     );
   }
@@ -123,7 +119,8 @@ class _CartState extends State<Cart> {
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      color: Color(0xff5596A5)),
+                      color: Color(0xff5596A5),
+                      fontFamily: "Tajawal"),
                 ),
                 children: <Widget>[
                   Center(
@@ -134,6 +131,63 @@ class _CartState extends State<Cart> {
                           shrinkWrap: true,
                           itemCount: cItems.length,
                           itemBuilder: (context, index) {
+                            @override
+                            bool sold = false;
+                            //new-----------------------------------------------
+
+                            CollectionReference reference = FirebaseFirestore
+                                .instance
+                                .collection('Products');
+                            reference.snapshots().listen((querySnapshot) {
+                              querySnapshot.docChanges.forEach((change) {
+                                if (change.type ==
+                                    DocumentChangeType.modified) {
+                                  for (var i = 0; i < querySnapshot.size; i++) {
+                                    var data = querySnapshot.docs
+                                        .elementAt(i)
+                                        .data() as Map;
+
+                                    String product = data["id"];
+
+                                    if (product == cItems[index].productId) {
+                                      print("-------------------happ");
+                                      print(cItems[index].docId);
+                                      int updatedAvailabeAmount =
+                                          data["avalibleAmount"];
+                                      if (updatedAvailabeAmount !=
+                                          cItems[index].avalibleAmount) {
+                                        FirebaseFirestore.instance
+                                            .collection('cart')
+                                            .doc(cItems[index].docId)
+                                            .update({
+                                          "avalibleAmount":
+                                              updatedAvailabeAmount
+                                        });
+                                        if (updatedAvailabeAmount <
+                                            cItems[index].quantity) {
+                                          FirebaseFirestore.instance
+                                              .collection('cart')
+                                              .doc(cItems[index].docId)
+                                              .update({
+                                            "quantity": updatedAvailabeAmount
+                                          });
+                                          ShowDialogMethod(context,
+                                              "لم يعد يتوفر من منتج ${cItems[index].name} في متجر ${cItems[index].shopName} إلا $updatedAvailabeAmount");
+                                        }
+                                        if (cItems[index].avalibleAmount == 0) {
+                                          FirebaseFirestore.instance
+                                              .collection('cart')
+                                              .doc(cItems[index].docId)
+                                              .update({"quantity": 0});
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              });
+                            });
+                            //-------------------------------------------------------
+
                             return Container(
                               margin: EdgeInsets.only(
                                   top: 8.0, left: 8.0, right: 8.0),
@@ -167,6 +221,10 @@ class _CartState extends State<Cart> {
                                                   onPressed: () {
                                                     setState(() {
                                                       if (cItems[index]
+                                                              .quantity ==
+                                                          0) {
+                                                        null;
+                                                      } else if (cItems[index]
                                                               .quantity ==
                                                           1) {
                                                         ShowDialogMethod(
@@ -218,6 +276,10 @@ class _CartState extends State<Cart> {
                                                   onPressed: () {
                                                     setState(() {
                                                       if (cItems[index]
+                                                              .quantity ==
+                                                          0) {
+                                                        null;
+                                                      } else if (cItems[index]
                                                               .quantity <
                                                           cItems[index]
                                                               .avalibleAmount) {
@@ -247,6 +309,16 @@ class _CartState extends State<Cart> {
                                                   )),
                                             ],
                                           ),
+                                          if (cItems[index].quantity == 0)
+                                            Center(
+                                              child: Text(
+                                                  "عذراَ لقد نفذ هذ المنتج",
+                                                  style: TextStyle(
+                                                    color: Colors.red,
+                                                    fontSize: 14.0,
+                                                    fontWeight: FontWeight.bold,
+                                                  )),
+                                            ),
                                         ],
                                       ),
                                     ),
@@ -327,29 +399,35 @@ class _CartState extends State<Cart> {
                             style: TextStyle(
                               fontSize: 18.0,
                               color: Color(0xFF808080),
+                              fontFamily: "Tajawal",
                               height: 2,
                             )),
                         SizedBox(
-                          height: 45,
+                          height: 50,
                           width: 150,
                           child: FloatingActionButton.extended(
                             heroTag: "btn ${Random().nextInt(500)}",
                             elevation: 2,
                             onPressed: () {
+                              var list = cItems.toList();
+                              for (int i = 0; i < list.length; i++)
+                                if (list[i].quantity == 0) {
+                                  list.removeAt(i);
+                                }
                               //check out page
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => checkOut(
                                         shopName: k,
-                                        Items: cItems.toList(),
-                                        totalPrice: calculatTotal(cItems))),
+                                        Items: list,
+                                        totalPrice: calculatTotal(list))),
                               );
                             },
-                            label: const Text('إتمام الطلب',
+                            label: Text(
+                                'إتمام الطلب (${calculatItems(cItems)})',
                                 style: TextStyle(
-                                  fontSize: 18.0,
-                                )),
+                                    fontSize: 15.0, fontFamily: "Tajawal")),
                             //icon: const Icon(Icons.payment),
                             backgroundColor: Color(0xff51908E),
                             extendedPadding: EdgeInsetsDirectional.all(50),
@@ -365,6 +443,15 @@ class _CartState extends State<Cart> {
       ],
     );
   }
+
+  int calculatItems(cItems) {
+    var list = cItems.toList();
+    for (int i = 0; i < list.length; i++)
+      if (list[i].quantity == 0) {
+        list.removeAt(i);
+      }
+    return list.length;
+  }
 }
 
 class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -378,7 +465,8 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => Size.fromHeight(56.0);
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(title, style: TextStyle(color: kPrimaryColor)),
+      title: Text(title,
+          style: TextStyle(color: kPrimaryColor, fontFamily: "Tajawal")),
       centerTitle: true,
       backgroundColor: Colors.white,
       elevation: 0,
@@ -426,7 +514,7 @@ class ProductImage extends StatelessWidget {
 num calculatTotal(var list) {
   num finalTotal = 0;
   for (int i = 0; i < list.length; i++) {
-    finalTotal += (list[i].price * list[i].availableAmount);
+    finalTotal += (list[i].price * list[i].quantity);
   }
   return finalTotal;
 }
@@ -449,4 +537,20 @@ Future<dynamic> ShowDialogMethod(BuildContext context, String textToBeShown) {
       );
     },
   );
+}
+
+Future<void> checkAmount(idP, idD, amount) async {
+  var collection = FirebaseFirestore.instance.collection('Products');
+  var docSnapshot = await collection.doc(idP).get();
+  if (docSnapshot.exists) {
+    Map<String, dynamic>? data = docSnapshot.data();
+    var value = data?['avalibleAmount'];
+    if (value != amount) {
+      FirebaseFirestore.instance
+          .collection('cart')
+          .doc(idD)
+          .update({"avalibleAmount": value});
+    } // <-- The value you want to retrieve.
+    //return value;
+  }
 }

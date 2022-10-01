@@ -219,7 +219,7 @@ class payForm extends StatelessWidget {
                                 state.status = PaymentStatus.initial,
                                 Navigator.of(context).pushAndRemoveUntil(
                                     MaterialPageRoute(
-                                        builder: (context) => const Cart()),
+                                        builder: (context) => Cart()),
                                     ModalRoute.withName(
                                         '/home_screen_customer'))
 

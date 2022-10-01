@@ -142,7 +142,8 @@ class checkOut extends StatelessWidget {
               ElevatedButton(
                 child: Text(
                   'الإكمال إلى الدفع',
-                  style: TextStyle(fontSize: 15, color: Colors.white),
+                  style: TextStyle(
+                      fontSize: 15, color: Colors.white, fontFamily: "Tajawal"),
                 ),
                 onPressed: () {
                   if (add.msg == 'ادخل موقعك') {
@@ -187,7 +188,8 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => Size.fromHeight(56.0);
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(title, style: TextStyle(color: kPrimaryColor)),
+      title: Text(title,
+          style: TextStyle(color: kPrimaryColor, fontFamily: "Tajawal")),
       centerTitle: true,
       backgroundColor: Colors.white,
       elevation: 0,
@@ -234,7 +236,8 @@ Widget _buildList(List<CartModal> list, String shopName) {
         style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 15,
-            color: Color(0xff51908E)),
+            color: Color(0xff51908E),
+            fontFamily: "Tajawal"),
       ),
       children: <Widget>[
         Center(
@@ -341,6 +344,7 @@ class _addState extends State<add> {
                   fontSize: 15,
                   color: new Color(0xff51908E),
                   fontWeight: FontWeight.bold,
+                  fontFamily: "Tajawal",
                 ),
                 overflow: TextOverflow.ellipsis,
                 softWrap: false,
@@ -353,7 +357,11 @@ class _addState extends State<add> {
             child: ElevatedButton(
               child: Text(
                 msgButton,
-                style: TextStyle(fontSize: 15, color: Tcolor, decoration: t),
+                style: TextStyle(
+                    fontSize: 12.5,
+                    color: Tcolor,
+                    decoration: t,
+                    fontFamily: "Tajawal"),
               ),
               onPressed: _changeText,
               style: ElevatedButton.styleFrom(

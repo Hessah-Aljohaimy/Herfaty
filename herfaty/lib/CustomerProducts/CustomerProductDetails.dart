@@ -48,7 +48,6 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
             var data = querySnapshot.docs.elementAt(index).data() as Map;
             String productId = data["id"];
             if (productId == widget.product.id) {
-              print("---------This productId is:${productId}");
               int updatedAvailabeAmount = data["avalibleAmount"];
               if (updatedAvailabeAmount != widget.product.availableAmount) {
                 setState(
