@@ -99,9 +99,43 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
         elevation: 2,
         leading: IconButton(
           icon: Icon(Icons.logout, color: kPrimaryColor),
-          onPressed: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (BuildContext context) => login()));
+          onPressed: () async {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text("تنبيه"),
+                      content: Text('سيتم تسجيل خروجك من الحساب'),
+                      actions: <Widget>[
+                        TextButton(
+                          child: Text("تسجيل خروج",
+                              style: TextStyle(color: Colors.red)),
+                          onPressed: () {
+                            //Navigator.of(context).pop();
+                            FirebaseAuth.instance.signOut();
+                            Navigator.of(context, rootNavigator: true)
+                                .pushReplacement(MaterialPageRoute(
+                                    builder: (context) => new login()));
+                          },
+                        ),
+                        TextButton(
+                          child: Text("تراجع"),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        )
+                      ],
+                    );
+                  });
+
+              /*Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (BuildContext context) {
+              return Welcome();
+            }));*/
+            
+        
+        
+        
           },
         ),
         actions: [

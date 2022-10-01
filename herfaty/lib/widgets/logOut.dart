@@ -115,7 +115,7 @@ class logOutButton extends StatelessWidget {
                             FirebaseAuth.instance.signOut();
                             Navigator.of(context, rootNavigator: true)
                                 .pushReplacement(MaterialPageRoute(
-                                    builder: (context) => new Welcome()));
+                                    builder: (context) => new login()));
                           },
                         ),
                         TextButton(
