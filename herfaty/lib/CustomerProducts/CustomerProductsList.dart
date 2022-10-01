@@ -52,29 +52,46 @@ class CustomerProductsList extends StatelessWidget {
                       if (snapshot.hasError) {
                         return Text('Something went wrong! ${snapshot.error}');
                       } else if (snapshot.hasData) {
+                        final productItems = snapshot.data!.toList();
+                        final data = snapshot.data!;
+                        if (data.isEmpty) {
+                          return const Center(
+                            child: Text(
+                              'لا توجد منتجات ضمن هذه الفئة',
+                              style: TextStyle(
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.w600,
+                                fontFamily: "Tajawal",
+                                color: Colors.grey,
+                              ),
+                            ),
+                          );
+                        }
                         //هنا حالة النجاح في استرجاع البيانات...........................................
                         //String detailsImage = "";
-                        final productItems = snapshot.data!.toList();
 
-                        return ListView.builder(
-                          itemCount: productItems.length,
-                          itemBuilder: (context, index) => productCard(
-                            itemIndex: index,
-                            product: productItems[index],
-                            press: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => CustomerProdectDetails(
-                                    // يرسل المعلومات لصفحة المنتج عشان يعرض التفاصيل
-                                    detailsImage: productItems[index].image,
-                                    product: productItems[index],
+                        else {
+                          return ListView.builder(
+                            itemCount: productItems.length,
+                            itemBuilder: (context, index) => productCard(
+                              itemIndex: index,
+                              product: productItems[index],
+                              press: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        CustomerProdectDetails(
+                                      // يرسل المعلومات لصفحة المنتج عشان يعرض التفاصيل
+                                      detailsImage: productItems[index].image,
+                                      product: productItems[index],
+                                    ),
                                   ),
-                                ),
-                              );
-                            },
-                          ),
-                        );
+                                );
+                              },
+                            ),
+                          );
+                        }
                         //..................................................................................
                       } else {
                         return const Center(child: CircularProgressIndicator());

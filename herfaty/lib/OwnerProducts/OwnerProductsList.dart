@@ -57,7 +57,7 @@ class OwnerProductsList extends StatelessWidget {
                             child: Text(
                               'لا توجد لديك منتجات ضمن هذه الفئة',
                               style: TextStyle(
-                                fontSize: 22.0,
+                                fontSize: 18.0,
                                 fontWeight: FontWeight.w600,
                                 fontFamily: "Tajawal",
                                 color: Colors.grey,
