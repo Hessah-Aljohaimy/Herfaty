@@ -333,7 +333,6 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                                       shopOwnerId: widget.product.shopOwnerId,
                                       quantity:
                                           existedQuantity + thisPageQuantity,
-                                      //quantity: updatedQuantity,
                                       availableAmount:
                                           widget.product.availableAmount,
                                       price: widget.product.price);

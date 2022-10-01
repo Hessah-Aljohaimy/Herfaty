@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/models/Product1.dart';
 
 class productCard extends StatelessWidget {
@@ -117,12 +118,13 @@ class productCard extends StatelessWidget {
                     //const Spacer(),
                     //سعر المنتج وعلامة التفضيل===============================================================
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(
                             //vertical: 10,
                             right: 18,
-                            top: 18,
+                            //top: 6,
                           ),
                           child: Text(
                             ' ${product.price} ريال',
@@ -138,14 +140,14 @@ class productCard extends StatelessWidget {
                         //(أضافة إلى المفضلة )--------------------------
                         Padding(
                           padding: const EdgeInsets.only(
-                            right: 10,
-                            top: 18,
+                            //right: 10,
+                            left: 65,
                           ),
                           child: IconButton(
                             padding: EdgeInsets.only(right: 1),
                             icon: const Icon(
-                              Icons.favorite_border,
-                              color: Colors.red,
+                              Icons.favorite,
+                              color: Color.fromARGB(157, 158, 158, 158),
                               size: 35.0,
                             ),
                             onPressed: () {
@@ -154,6 +156,19 @@ class productCard extends StatelessWidget {
                           ),
                         ),
                       ],
+                    ),
+                    //اسم المتجر
+                    Padding(
+                      padding: EdgeInsets.only(right: 18, top: 6),
+                      child: Text(
+                        product.shopName,
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: "Tajawal",
+                          color: kPrimaryLight,
+                        ),
+                      ),
                     ),
                   ],
                 ),
