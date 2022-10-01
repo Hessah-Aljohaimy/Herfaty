@@ -141,7 +141,7 @@ class productCard extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(
                             //right: 10,
-                            left: 65,
+                            left: 60,
                           ),
                           child: IconButton(
                             padding: EdgeInsets.only(right: 1),
