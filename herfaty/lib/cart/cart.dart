@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_maps_place_picker/google_maps_place_picker.dart';
 import 'package:herfaty/cart/checkOut.dart';
 import 'package:herfaty/constants/color.dart';
@@ -360,6 +361,7 @@ class _CartState extends State<Cart> {
                                                     docUser.delete();
 
                                                     Navigator.of(context).pop();
+                                                    showDoneToast(context);
                                                   },
                                                 )
                                               ],
@@ -544,6 +546,22 @@ Future<dynamic> ShowDialogMethod(BuildContext context, String textToBeShown) {
       );
     },
   );
+}
+
+///////////////////////////////////////////////////////////////////////////////
+Future<void> showDoneToast(BuildContext context) async {
+  Fluttertoast.showToast(
+    msg: "تم حذف المنتج بنجاح",
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.CENTER,
+    timeInSecForIosWeb: 3,
+    backgroundColor: Color.fromARGB(255, 26, 96, 91),
+    textColor: Colors.white,
+    fontSize: 18.0,
+  );
+  await Future.delayed(const Duration(seconds: 1), () {
+    Navigator.pop(context);
+  });
 }
 
 Future<void> checkAmount(idP, idD, amount, quantity) async {
