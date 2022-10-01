@@ -165,7 +165,7 @@ class _CartState extends State<Cart> {
                                         });
                                         if (updatedAvailabeAmount <
                                                 cItems[index].quantity &&
-                                            updatedAvailabeAmount != 0) {
+                                            cItems[index].avalibleAmount != 0) {
                                           FirebaseFirestore.instance
                                               .collection('cart')
                                               .doc(cItems[index].docId)
@@ -562,7 +562,7 @@ Future<void> checkAmount(idP, idD, amount, quantity) async {
           .collection('cart')
           .doc(idD)
           .update({"avalibleAmount": value});
-      if (value < quantity && value != 0) {
+      if (value < quantity && amount != 0) {
         FirebaseFirestore.instance
             .collection('cart')
             .doc(idD)
@@ -570,7 +570,7 @@ Future<void> checkAmount(idP, idD, amount, quantity) async {
         //ShowDialogMethod(context,
         //"لم يعد يتوفر من منتج ${cItems[index].name} في متجر ${cItems[index].shopName} إلا $updatedAvailabeAmount");
       }
-      if (value == 0) {
+      if (amount == 0) {
         FirebaseFirestore.instance
             .collection('cart')
             .doc(idD)
