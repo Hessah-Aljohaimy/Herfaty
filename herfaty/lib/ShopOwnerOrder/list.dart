@@ -104,7 +104,12 @@ class list extends StatelessWidget {
                                     onPressed: () {
                                       //go to order deatils page
                                     },
-                                    child: Text("تفاصيل الطلب"),
+                                    child: Text(
+                                      "تفاصيل الطلب",
+                                      style: TextStyle(
+                                        fontFamily: "Tajawal",
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -215,12 +220,23 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => Size.fromHeight(56.0);
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(title, style: TextStyle(color: kPrimaryColor)),
+      title: Text("طلباتي",
+          style: TextStyle(
+            color: Color(0xff51908E),
+            fontFamily: "Tajawal",
+          )),
       centerTitle: true,
       backgroundColor: Colors.white,
-      elevation: 0,
+      shadowColor: Color.fromARGB(255, 39, 141, 134),
+      elevation: 3,
+      leading: IconButton(
+        onPressed: () {
+          // Navigator.pushNamed(context, '/home_screen_owner');
+        },
+        icon: Icon(Icons.arrow_back),
+      ),
       automaticallyImplyLeading: false,
-      iconTheme: IconThemeData(color: kPrimaryColor),
+      iconTheme: IconThemeData(color: Color(0xff51908E)),
     );
   }
 }
