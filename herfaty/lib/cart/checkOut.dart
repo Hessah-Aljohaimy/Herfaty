@@ -47,8 +47,9 @@ class checkOut extends StatelessWidget {
             var data = querySnapshot.docs.elementAt(i).data() as Map;
 
             String product = data["id"];
-
-            for (var index = 0; index < Items.length; i++) {
+            print("-------------------happ in check out0");
+            for (var index = 0; index < Items.length; index++) {
+              print("-------------------happ in check out00");
               if (product == Items[index].productId) {
                 print("-------------------happ in check out");
                 print(Items[index].docId);
@@ -59,15 +60,7 @@ class checkOut extends StatelessWidget {
                       .collection('cart')
                       .doc(Items[index].docId)
                       .update({"avalibleAmount": updatedAvailabeAmount});
-                  if (updatedAvailabeAmount < Items[index].quantity) {
-                    print("-------------------happ in check out3");
-                    FirebaseFirestore.instance
-                        .collection('cart')
-                        .doc(Items[index].docId)
-                        .update({"quantity": updatedAvailabeAmount});
-                    ShowDialogMethod1(
-                        context, "بعض المنتجات قلت كميتها المتاحة يرجى التحقق");
-                  } else if (Items[index].avalibleAmount == 0) {
+                  if (updatedAvailabeAmount == 0) {
                     print("-------------------happ in check out4");
                     FirebaseFirestore.instance
                         .collection('cart')
@@ -75,6 +68,14 @@ class checkOut extends StatelessWidget {
                         .update({"quantity": 0});
                     ShowDialogMethod1(
                         context, "بعض المنتجات لم تعد متاحة يرجى التحقق");
+                  } else if (updatedAvailabeAmount < Items[index].quantity) {
+                    print("-------------------happ in check out3");
+                    FirebaseFirestore.instance
+                        .collection('cart')
+                        .doc(Items[index].docId)
+                        .update({"quantity": updatedAvailabeAmount});
+                    ShowDialogMethod1(
+                        context, "بعض المنتجات قلت كميتها المتاحة يرجى التحقق");
                   }
                 }
               }
@@ -477,10 +478,9 @@ Future<dynamic> ShowDialogMethod1(BuildContext context, String textToBeShown) {
           TextButton(
             child: Text("حسنا"),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Cart()),
-              );
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => Cart()),
+                  ModalRoute.withName('/home_screen_customer'));
             },
           )
         ],

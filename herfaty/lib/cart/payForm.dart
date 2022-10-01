@@ -339,7 +339,8 @@ class DefaultAppBarPay extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => Size.fromHeight(56.0);
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(title, style: TextStyle(color: kPrimaryColor)),
+      title: Text(title,
+          style: TextStyle(color: kPrimaryColor, fontFamily: "Tajawal")),
       centerTitle: true,
       backgroundColor: Colors.white,
       elevation: 0,
@@ -372,7 +373,8 @@ class AppBarWithout extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(title, style: TextStyle(color: kPrimaryColor)),
+      title: Text(title,
+          style: TextStyle(color: kPrimaryColor, fontFamily: "Tajawal")),
       centerTitle: true,
       backgroundColor: Colors.white,
       elevation: 0,

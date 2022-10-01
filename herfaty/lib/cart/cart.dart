@@ -161,7 +161,13 @@ class _CartState extends State<Cart> {
                                           "avalibleAmount":
                                               updatedAvailabeAmount
                                         });
-                                        if (cItems[index].quantity == 0 &&
+                                        if (updatedAvailabeAmount == 0) {
+                                          FirebaseFirestore.instance
+                                              .collection('cart')
+                                              .doc(cItems[index].docId)
+                                              .update({"quantity": 0});
+                                        } else if (cItems[index].quantity ==
+                                                0 &&
                                             updatedAvailabeAmount > 0) {
                                           FirebaseFirestore.instance
                                               .collection('cart')
@@ -176,13 +182,6 @@ class _CartState extends State<Cart> {
                                               .update({
                                             "quantity": updatedAvailabeAmount
                                           });
-                                        } else if (cItems[index]
-                                                .avalibleAmount ==
-                                            0) {
-                                          FirebaseFirestore.instance
-                                              .collection('cart')
-                                              .doc(cItems[index].docId)
-                                              .update({"quantity": 0});
                                         }
                                       }
                                     }
@@ -558,21 +557,21 @@ Future<void> checkAmount(idP, idD, amount, quantity) async {
           .collection('cart')
           .doc(idD)
           .update({"avalibleAmount": value});
-      if (quantity == 0 && value > 0) {
-        FirebaseFirestore.instance
-            .collection('cart')
-            .doc(idD)
-            .update({"quantity": 1});
-      } else if (value < quantity && amount != 0) {
-        FirebaseFirestore.instance
-            .collection('cart')
-            .doc(idD)
-            .update({"quantity": value});
-      } else if (amount == 0) {
+      if (value == 0) {
         FirebaseFirestore.instance
             .collection('cart')
             .doc(idD)
             .update({"quantity": 0});
+      } else if (quantity == 0 && value > 0) {
+        FirebaseFirestore.instance
+            .collection('cart')
+            .doc(idD)
+            .update({"quantity": 1});
+      } else if (value < quantity && value != 0) {
+        FirebaseFirestore.instance
+            .collection('cart')
+            .doc(idD)
+            .update({"quantity": value});
       }
     } // <-- The value you want to retrieve.
     //return value;
