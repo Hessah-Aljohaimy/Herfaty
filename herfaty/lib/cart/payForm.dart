@@ -240,12 +240,14 @@ class payForm extends StatelessWidget {
                                             ],
                                           ),
                                         )
-                                    : ScaffoldMessenger.of(context)
-                                        .showSnackBar(
-                                        const SnackBar(
-                                            content: Text(
-                                                'اكمل تعبئه بيانات الدفع')),
-                                      );
+                                    :ShowDialogMethod(context, "من فضلك اكمل تعبئه بيانات الدفع");
+
+                                    // ScaffoldMessenger.of(context)
+                                    //     .showSnackBar(
+                                    //     const SnackBar(
+                                    //         content: Text(
+                                    //             'اكمل تعبئه بيانات الدفع')),
+                                    //   );
                                 print("-------------------تم الدفع");
                               },
                               style: ButtonStyle(
