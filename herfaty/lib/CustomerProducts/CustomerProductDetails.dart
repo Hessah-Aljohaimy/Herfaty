@@ -65,8 +65,8 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                     },
                   );
                 }
-                /*ShowDialogMethod(
-                    context, "تم تحديث الكمية المتوفرة من هذا المنتج");*/
+                ShowDialogMethod(
+                    context, "تم تحديث الكمية المتوفرة من هذا المنتج");
               }
             }
           }
