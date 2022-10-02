@@ -112,7 +112,7 @@ class logOutButton extends StatelessWidget {
                         onPressed: () {
                           FirebaseAuth.instance.signOut();
                           Navigator.of(context).pushNamedAndRemoveUntil(
-                              "/login", (Route<dynamic> route) => false);
+                              "/", (Route<dynamic> route) => false);
                           // Navigator.of(context, rootNavigator: true)
                           //     .pushReplacement(MaterialPageRoute(
                           //         builder: (context) => new login()));
@@ -225,171 +225,172 @@ Widget buildCustomer(Customer customer, BuildContext context) {
   final User? user = auth.currentUser;
   final uid = user!.uid;
   return SingleChildScrollView(
-    child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          SizedBox(
-            width: 630,
-            height: 100,
-            child: Image.asset(
-              'assets/images/customerBG.png',
-              fit: BoxFit.cover,
-            ),
-          ),
-          SizedBox(
-            height: 60,
-          ),
-          Text(
-            "بيانات المشتري",
-            style: TextStyle(
-              color: Color.fromARGB(255, 26, 96, 91),
-              fontWeight: FontWeight.bold,
-              fontSize: 24,
-              fontFamily: "Tajawal",
-            ),
-          ),
-          Container(
-            height: 230,
-            margin: const EdgeInsets.all(10.0),
-            padding: const EdgeInsets.all(15),
-            // decoration: BoxDecoration(
-            //   color: Color.fromARGB(255, 255, 255, 255),
-            //   borderRadius: BorderRadius.all(Radius.circular(20)),
-            //   boxShadow: [
-            //     BoxShadow(
-            //       color: Colors.grey.withOpacity(0.5),
-            //       spreadRadius: 2,
-            //       blurRadius: 7,
-            //       offset: Offset(0, 3), // changes position of shadow
-            //     ),
-            //   ],
-            // ),
-            child: ListView.builder(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemCount: titles.length,
-                itemBuilder: (context, index) {
-                  return Card(
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                        color: Colors.grey.withOpacity(0.6),
-                      ),
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    child: ListTile(
-                      title: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // Text(
-                          //   titles[index],
-                          //   style: TextStyle(
-                          //       fontWeight: FontWeight.w800,
-                          //       fontSize: 20,
-                          //       color: kPrimaryColor),
-                          // ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          if (titles[index] == 'اسم المشتري')
-                            Row(
-                              children: [
-                                Text(
-                                  'اسم المشتري ',
-                                  style: TextStyle(
-                                    color: Color.fromARGB(255, 26, 96, 91),
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 17,
-                                    fontFamily: "Tajawal",
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  '${customer.name}',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontFamily: "Tajawal",
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ],
-                            ),
-
-                          if (titles[index] == 'البريد الإلكتروني')
-                            Row(
-                              children: [
-                                Text(
-                                  'البريد الإلكتروني ',
-                                  style: TextStyle(
-                                    color: Color.fromARGB(255, 26, 96, 91),
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 17,
-                                    fontFamily: "Tajawal",
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  '${customer.email}',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontFamily: "Tajawal",
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ],
-                            ),
-
-                          if (titles[index] == 'كلمة المرور')
-                            Row(
-                              children: [
-                                Text(
-                                  'كلمة المرور',
-                                  style: TextStyle(
-                                    color: Color.fromARGB(255, 26, 96, 91),
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 17,
-                                    fontFamily: "Tajawal",
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 10),
-                                  child: Text(
-                                    passwordStar,
-                                    style: TextStyle(
-                                      fontSize: 19,
-                                      fontFamily: "Tajawal",
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                        ],
-                      ),
-                      // leading: Icon(
-                      //   icons[index],
-                      //   color: Color.fromARGB(255, 39, 141, 134),
+    child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <
+        Widget>[
+      SizedBox(
+        width: 630,
+        height: 100,
+        child: Image.asset(
+          'assets/images/customerBG.png',
+          fit: BoxFit.cover,
+        ),
+      ),
+      SizedBox(
+        height: 60,
+      ),
+      Text(
+        "بيانات المشتري",
+        style: TextStyle(
+          color: Color.fromARGB(255, 26, 96, 91),
+          fontWeight: FontWeight.bold,
+          fontSize: 24,
+          fontFamily: "Tajawal",
+        ),
+      ),
+      Container(
+        height: 230,
+        margin: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(15),
+        // decoration: BoxDecoration(
+        //   color: Color.fromARGB(255, 255, 255, 255),
+        //   borderRadius: BorderRadius.all(Radius.circular(20)),
+        //   boxShadow: [
+        //     BoxShadow(
+        //       color: Colors.grey.withOpacity(0.5),
+        //       spreadRadius: 2,
+        //       blurRadius: 7,
+        //       offset: Offset(0, 3), // changes position of shadow
+        //     ),
+        //   ],
+        // ),
+        child: ListView.builder(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            itemCount: titles.length,
+            itemBuilder: (context, index) {
+              return Card(
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                    color: Colors.grey.withOpacity(0.6),
+                  ),
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                child: ListTile(
+                  title: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Text(
+                      //   titles[index],
+                      //   style: TextStyle(
+                      //       fontWeight: FontWeight.w800,
+                      //       fontSize: 20,
+                      //       color: kPrimaryColor),
                       // ),
-                    ),
-                  );
-                }),
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Row(
-            children: [
-              SizedBox(
-                width: 26,
-              ),
-              Expanded(
-                child: Row(children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      if (titles[index] == 'اسم المشتري')
+                        Row(
+                          children: [
+                            Text(
+                              'اسم المشتري ',
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 26, 96, 91),
+                                fontWeight: FontWeight.w800,
+                                fontSize: 17,
+                                fontFamily: "Tajawal",
+                              ),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              '${customer.name}',
+                              style: TextStyle(
+                                fontSize: 19,
+                                fontFamily: "Tajawal",
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                      if (titles[index] == 'البريد الإلكتروني')
+                        Row(
+                          children: [
+                            Text(
+                              'البريد الإلكتروني ',
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 26, 96, 91),
+                                fontWeight: FontWeight.w800,
+                                fontSize: 17,
+                                fontFamily: "Tajawal",
+                              ),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              '${customer.email}',
+                              style: TextStyle(
+                                fontSize: 19,
+                                fontFamily: "Tajawal",
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                      if (titles[index] == 'كلمة المرور')
+                        Row(
+                          children: [
+                            Text(
+                              'كلمة المرور',
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 26, 96, 91),
+                                fontWeight: FontWeight.w800,
+                                fontSize: 17,
+                                fontFamily: "Tajawal",
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10),
+                              child: Text(
+                                passwordStar,
+                                style: TextStyle(
+                                  fontSize: 19,
+                                  fontFamily: "Tajawal",
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                    ],
+                  ),
+                  // leading: Icon(
+                  //   icons[index],
+                  //   color: Color.fromARGB(255, 39, 141, 134),
+                  // ),
+                ),
+              );
+            }),
+      ),
+      SizedBox(
+        height: 5,
+      ),
+      Row(
+        children: [
+          // SizedBox(
+          //   width: 26,
+          // ),
+          Expanded(
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
                   ElevatedButton(
                     onPressed: () {
                       // openPasswordDialog(context);
@@ -421,9 +422,9 @@ Widget buildCustomer(Customer customer, BuildContext context) {
                           fontWeight: FontWeight.bold),
                     ),
                   ),
-                  SizedBox(
-                    width: 10,
-                  ),
+                  // SizedBox(
+                  //   width: 10,
+                  // ),
                   ElevatedButton(
                     onPressed: () async {
 // Diolog to enter the password
@@ -481,9 +482,9 @@ Widget buildCustomer(Customer customer, BuildContext context) {
                     ),
                   ),
                 ]),
-              )
-            ],
-          ),
-        ]),
+          )
+        ],
+      ),
+    ]),
   );
 }
