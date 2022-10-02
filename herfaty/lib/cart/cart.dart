@@ -30,6 +30,7 @@ class _CartState extends State<Cart> {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: DefaultAppBar(title: "سلتي"),
         body: Container(
           height: double.infinity,
@@ -510,22 +511,20 @@ Stream<List<CartModal>> readCart() {
 
   final user;
   user = FirebaseAuth.instance.currentUser;
-  try{
-  final uid = user.uid;
-  return FirebaseFirestore.instance
-      .collection('cart')
-      .where("customerId", isEqualTo: uid)
-      .snapshots()
-      .map((snapshot) =>
-          snapshot.docs.map((doc) => CartModal.fromJson(doc.data())).toList());
-  }
-  catch(e){
-      return FirebaseFirestore.instance
-
-     .collection('cart')
-      .snapshots()
-      .map((snapshot) =>
-          snapshot.docs.map((doc) => CartModal.fromJson(doc.data())).toList());
+  try {
+    final uid = user.uid;
+    return FirebaseFirestore.instance
+        .collection('cart')
+        .where("customerId", isEqualTo: uid)
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => CartModal.fromJson(doc.data()))
+            .toList());
+  } catch (e) {
+    return FirebaseFirestore.instance.collection('cart').snapshots().map(
+        (snapshot) => snapshot.docs
+            .map((doc) => CartModal.fromJson(doc.data()))
+            .toList());
   }
 }
 

@@ -29,6 +29,7 @@ class CustomerProductsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Color.fromARGB(255, 250, 250, 250),
       appBar: productsListAppBar(context),
       //bottomNavigationBar: navMethod(), // the new nav need tap change page

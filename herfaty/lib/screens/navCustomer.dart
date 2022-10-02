@@ -25,6 +25,7 @@ class nav extends StatelessWidget {
           Locale('ar', 'AE'),
         ],
         home: Scaffold(
+          resizeToAvoidBottomInset: false,
           body: PersistentTabView(
             context,
             screens: screens(),

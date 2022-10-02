@@ -96,6 +96,7 @@ class checkOut extends StatelessWidget {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: DefaultAppBar(title: "إتمام عملية الطلب"),
         body: Container(
           height: double.infinity,

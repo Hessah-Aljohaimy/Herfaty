@@ -22,6 +22,7 @@ class _customerHomeScreenState extends State<customerHomeScreen> {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Column(
           children: const [
             AppBar(),

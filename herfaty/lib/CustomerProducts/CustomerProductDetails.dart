@@ -80,6 +80,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
     //////////////////////////////////////////////////////////////////////////////////////////
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: kPrimaryColor,
       appBar: productDetailsAppBar(context),
       //..............................................................................................................
