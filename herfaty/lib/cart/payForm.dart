@@ -80,7 +80,7 @@ class payForm extends StatelessWidget {
     return AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: Scaffold(
-          resizeToAvoidBottomInset: true,
+          resizeToAvoidBottomInset: false,
           appBar: widget.app,
           body: Container(
             height: double.infinity,
@@ -229,23 +229,27 @@ class payForm extends StatelessWidget {
                             const SizedBox(height: 10),
                             ElevatedButton(
                               onPressed: () {
-                                (controller.details.complete)
-                                    ? context.read<PaymentBloc>().add(
-                                          const PaymentCreateIntent(
-                                            billingDetails: BillingDetails(
-                                                email: 'auoosh2000@gmail.com'),
-                                            items: [
-                                              {'id': 0},
-                                              {'id': 1},
-                                            ],
-                                          ),
-                                        )
-                                    : ScaffoldMessenger.of(context)
-                                        .showSnackBar(
-                                        const SnackBar(
-                                            content: Text(
-                                                'اكمل تعبئه بيانات الدفع')),
+                                if (controller.details.complete) {
+                                  pro = [];
+                                  print("--------------here-${pro.length}");
+
+                                  context.read<PaymentBloc>().add(
+                                        const PaymentCreateIntent(
+                                          billingDetails: BillingDetails(
+                                              email: 'auoosh2000@gmail.com'),
+                                          items: [
+                                            {'id': 0},
+                                            {'id': 1},
+                                          ],
+                                        ),
                                       );
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content:
+                                            Text('اكمل تعبئه بيانات الدفع')),
+                                  );
+                                }
                                 print("-------------------تم الدفع");
                               },
                               style: ButtonStyle(

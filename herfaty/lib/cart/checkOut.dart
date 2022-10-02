@@ -36,7 +36,7 @@ class checkOut extends StatelessWidget {
     print("class checkout");
     add.msg = 'ادخل موقعك';
     _addState._changeFormat();
-
+/*
     CollectionReference reference =
         FirebaseFirestore.instance.collection('Products');
     reference.snapshots().listen((querySnapshot) {
@@ -92,7 +92,7 @@ class checkOut extends StatelessWidget {
         }
       });
     });
-
+*/
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
