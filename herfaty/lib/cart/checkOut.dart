@@ -188,7 +188,7 @@ class checkOut extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                  "المجموع: \n ${totalPrice.toStringAsFixed(2)} ريال \n ${(totalPrice * 3.75).toStringAsFixed(2)} دولار  ",
+                  "المجموع: \n ${totalPrice.toStringAsFixed(2)} ريال \n ${(totalPrice / 3.75).toStringAsFixed(2)} دولار  ",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Color(0xff51908E),
