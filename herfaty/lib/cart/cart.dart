@@ -391,7 +391,7 @@ class _CartState extends State<Cart> {
                                       //Text('Delete'),
                                       Icon(
                                         Icons.delete,
-                                        color: kPrimaryColor,
+                                        color: Color.fromARGB(255, 200, 34, 22),
                                         semanticLabel: "Delete",
                                       )
                                     ]),
