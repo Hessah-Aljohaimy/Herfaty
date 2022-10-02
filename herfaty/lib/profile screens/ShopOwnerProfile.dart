@@ -113,9 +113,11 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                         onPressed: () {
                           //Navigator.of(context).pop();
                           FirebaseAuth.instance.signOut();
-                          Navigator.of(context, rootNavigator: true)
-                              .pushReplacement(MaterialPageRoute(
-                                  builder: (context) => new login()));
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                              "/login", (Route<dynamic> route) => false);
+                          // Navigator.of(context, rootNavigator: true)
+                          //     .pushReplacement(MaterialPageRoute(
+                          //         builder: (context) => new login()));
                         },
                       ),
                       TextButton(
