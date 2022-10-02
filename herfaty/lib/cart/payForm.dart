@@ -230,6 +230,9 @@ class payForm extends StatelessWidget {
                             ElevatedButton(
                               onPressed: () {
                                 if (controller.details.complete) {
+                                  pro = [];
+                                  print("--------------here-${pro.length}");
+
                                   context.read<PaymentBloc>().add(
                                         const PaymentCreateIntent(
                                           billingDetails: BillingDetails(
@@ -241,18 +244,13 @@ class payForm extends StatelessWidget {
                                         ),
                                       );
                                 } else {
-                                  context.read<PaymentBloc>().add(
-                                        const PaymentCreateIntent(
-                                          billingDetails: BillingDetails(
-                                              email: 'auoosh2000@gmail.com'),
-                                          items: [
-                                            {'id': 0},
-                                            {'id': 1},
-                                          ],
-                                        ),
-                                      );
-                                  print("-------------------تم الدفع");
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content:
+                                            Text('اكمل تعبئه بيانات الدفع')),
+                                  );
                                 }
+                                print("-------------------تم الدفع");
                               },
                               style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all(
