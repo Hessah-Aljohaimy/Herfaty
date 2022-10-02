@@ -244,7 +244,7 @@ class payForm extends StatelessWidget {
                                         .showSnackBar(
                                         const SnackBar(
                                             content: Text(
-                                                'the form is not complete')),
+                                                'الرجاء اكمال بيانات الدفع')),
                                       );
                                 print("-------------------تم الدفع");
                               },
