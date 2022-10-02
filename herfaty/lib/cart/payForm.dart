@@ -374,25 +374,50 @@ class payForm extends StatelessWidget {
                     }
 
                     if (state.status == PaymentStatus.failure) {
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text('failure'),
-                          const SizedBox(
-                            height: 10,
-                            width: double.infinity,
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              //context.read<PaymentBloc>().add(PaymentStart());
+                      return Container(
+                        height: 500,
+                        margin:
+                            EdgeInsets.only(top: 60.0, left: 8.0, right: 8.0),
+                        padding: EdgeInsets.all(1.0),
+                        color: Colors.white,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            EmptySection(
+                              emptyImg: 'assets/icons/close.png',
+                              emptyMsg: '',
+                            ),
+                            SubTitle(
+                              subTitleText: 'فشلت عملية الدفع والطلب ',
+                            ),
+                            ElevatedButton(
+                              onPressed: () async => {
+                                
+                                state.status = PaymentStatus.initial,
 
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => Cart(),
-                              ));
-                            },
-                            child: const Text('try again'),
-                          )
-                        ],
+                                Navigator.of(context).pushAndRemoveUntil(
+                                    MaterialPageRoute(
+                                        builder: (context) => Cart()),
+                                    ModalRoute.withName(
+                                        '/home_screen_customer'))
+
+                                //context.read<PaymentBloc>().add(PaymentStart()),
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Color(0xff51908E),
+                                  fixedSize: const Size(150, 50),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50))),
+                              child: Text(
+                                "حسناً",
+                                style: TextStyle(
+                                    fontSize: 19,
+                                    fontFamily: "Tajawal",
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            )
+                          ],
+                        ),
                       );
                     } else {
                       Timer(Duration(seconds: 0), () {

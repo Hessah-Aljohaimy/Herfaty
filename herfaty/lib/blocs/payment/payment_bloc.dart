@@ -38,6 +38,8 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
     );
     print('------------------------------------2');
 
+
+try{
     final paymentIntentResult = await _callPayEndpointMehodId(
       useStripeSdk: true,
       paymentMethodId: paymentMethod.id,
@@ -75,8 +77,14 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
     }
 
     print('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq');
-  }
+  
+      }
+      catch(e){
+        print(e);
+          emit(state.copyWith(status: PaymentStatus.failure));
 
+      }
+      }
   void _onPaymentConfirmIntent(
       PaymentConfirmIntent event, Emitter<PaymentState> emit) async {
     try {
