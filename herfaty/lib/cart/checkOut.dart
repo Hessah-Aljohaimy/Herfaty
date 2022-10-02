@@ -416,10 +416,11 @@ class _addState extends State<add> {
               child: Text(
                 msgButton,
                 style: TextStyle(
-                    fontSize: 12.5,
-                    color: Tcolor,
-                    decoration: t,
-                    fontFamily: "Tajawal"),
+                  fontSize: 13,
+                  color: Tcolor,
+                  decoration: t,
+                  //fontFamily: "Tajawal"
+                ),
               ),
               onPressed: _changeText,
               style: ElevatedButton.styleFrom(
@@ -452,9 +453,9 @@ class _addState extends State<add> {
                 add.msg = 'ادخل الموقع';
               } else {
                 add.msg = result.formattedAddress!;
-                msgButton = "تم تحديد الموقع";
+                //msgButton = "تم تحديد الموقع";
                 color = new Color.fromARGB(255, 255, 255, 255);
-                Tcolor = Color.fromARGB(255, 0, 0, 0);
+                Tcolor = Color.fromARGB(255, 8, 24, 246);
                 t = TextDecoration.underline;
                 msgButton = "اضغط لتغيير الموقع";
               }
