@@ -38,6 +38,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
 
   @override
   Widget build(BuildContext context) {
+    print("class sara |||||");
     //===============================================Listen To AvailableAmount Change From DB
     CollectionReference reference =
         FirebaseFirestore.instance.collection('Products');
@@ -64,8 +65,8 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                     },
                   );
                 }
-                ShowDialogMethod(
-                    context, "تم تحديث الكمية المتوفرة من هذا المنتج");
+                /*ShowDialogMethod(
+                    context, "تم تحديث الكمية المتوفرة من هذا المنتج");*/
               }
             }
           }

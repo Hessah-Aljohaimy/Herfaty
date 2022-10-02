@@ -33,10 +33,10 @@ class checkOut extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("class checkout");
     add.msg = 'ادخل موقعك';
     _addState._changeFormat();
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final User? user = auth.currentUser;
+
 /*
     CollectionReference reference =
         FirebaseFirestore.instance.collection('Products');

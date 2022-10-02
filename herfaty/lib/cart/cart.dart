@@ -1,17 +1,15 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:google_maps_place_picker/google_maps_place_picker.dart';
 import 'package:herfaty/cart/checkOut.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/models/cartModal.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import "package:collection/collection.dart";
-
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Cart extends StatefulWidget {
@@ -28,6 +26,7 @@ class _CartState extends State<Cart> {
 
   @override
   Widget build(BuildContext context) {
+    print("class cart |||||");
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
@@ -85,8 +84,6 @@ class _CartState extends State<Cart> {
     return groups;
   }
 
-//test
-
   Column buildView(String k, cItems, size) {
     return Column(
       children: [
@@ -130,74 +127,74 @@ class _CartState extends State<Cart> {
                           shrinkWrap: true,
                           itemCount: cItems.length,
                           itemBuilder: (context, index) {
-                            @override
-                            bool sold = false;
                             //new-----------------------------------------------
+                            try {
+                              CollectionReference reference = FirebaseFirestore
+                                  .instance
+                                  .collection('Products');
+                              reference.snapshots().listen((querySnapshot) {
+                                querySnapshot.docChanges.forEach((change) {
+                                  if (change.type ==
+                                      DocumentChangeType.modified) {
+                                    for (var i = 0;
+                                        i < querySnapshot.size;
+                                        i++) {
+                                      var data = querySnapshot.docs
+                                          .elementAt(i)
+                                          .data() as Map;
 
-                            CollectionReference reference = FirebaseFirestore
-                                .instance
-                                .collection('Products');
-                            reference.snapshots().listen((querySnapshot) {
-                              querySnapshot.docChanges.forEach((change) {
-                                if (change.type ==
-                                    DocumentChangeType.modified) {
-                                  for (var i = 0; i < querySnapshot.size; i++) {
-                                    var data = querySnapshot.docs
-                                        .elementAt(i)
-                                        .data() as Map;
+                                      String product = data["id"];
 
-                                    String product = data["id"];
-
-                                    if (product == cItems[index].productId) {
-                                      print("-------------------happ");
-                                      print(cItems[index].docId);
-                                      int updatedAvailabeAmount =
-                                          data["avalibleAmount"];
-                                      if (updatedAvailabeAmount !=
-                                          cItems[index].avalibleAmount) {
-                                        print(
-                                            "------------------------------1");
-                                        FirebaseFirestore.instance
-                                            .collection('cart')
-                                            .doc(cItems[index].docId)
-                                            .update({
-                                          "avalibleAmount":
-                                              updatedAvailabeAmount
-                                        });
-                                        if (updatedAvailabeAmount == 0) {
+                                      if (product == cItems[index].productId) {
+                                        print("-------------------happ");
+                                        int updatedAvailabeAmount =
+                                            data["avalibleAmount"];
+                                        if (updatedAvailabeAmount !=
+                                            cItems[index].avalibleAmount) {
                                           print(
-                                              "------------------------------2");
-                                          FirebaseFirestore.instance
-                                              .collection('cart')
-                                              .doc(cItems[index].docId)
-                                              .update({"quantity": 0});
-                                        } else if (cItems[index].quantity ==
-                                                0 &&
-                                            updatedAvailabeAmount > 0) {
-                                          print(
-                                              "------------------------------3");
-                                          FirebaseFirestore.instance
-                                              .collection('cart')
-                                              .doc(cItems[index].docId)
-                                              .update({"quantity": 1});
-                                        } else if (updatedAvailabeAmount <
-                                                cItems[index].quantity &&
-                                            updatedAvailabeAmount != 0) {
-                                          print(
-                                              "------------------------------4");
+                                              "------------------------------1");
                                           FirebaseFirestore.instance
                                               .collection('cart')
                                               .doc(cItems[index].docId)
                                               .update({
-                                            "quantity": updatedAvailabeAmount
+                                            "avalibleAmount":
+                                                updatedAvailabeAmount
                                           });
+                                          if (updatedAvailabeAmount == 0) {
+                                            print(
+                                                "------------------------------2");
+                                            FirebaseFirestore.instance
+                                                .collection('cart')
+                                                .doc(cItems[index].docId)
+                                                .update({"quantity": 0});
+                                          } else if (cItems[index].quantity ==
+                                                  0 &&
+                                              updatedAvailabeAmount > 0) {
+                                            print(
+                                                "------------------------------3");
+                                            FirebaseFirestore.instance
+                                                .collection('cart')
+                                                .doc(cItems[index].docId)
+                                                .update({"quantity": 1});
+                                          } else if (updatedAvailabeAmount <
+                                                  cItems[index].quantity &&
+                                              updatedAvailabeAmount != 0) {
+                                            print(
+                                                "------------------------------4");
+                                            FirebaseFirestore.instance
+                                                .collection('cart')
+                                                .doc(cItems[index].docId)
+                                                .update({
+                                              "quantity": updatedAvailabeAmount
+                                            });
+                                          }
                                         }
                                       }
                                     }
                                   }
-                                }
+                                });
                               });
-                            });
+                            } catch (e) {}
                             //-------------------------------------------------------
 
                             return Container(
@@ -567,9 +564,12 @@ Future<void> showDoneToast(BuildContext context) async {
     textColor: Colors.white,
     fontSize: 18.0,
   );
-  await Future.delayed(const Duration(seconds: 1), () {
+
+  Timer(const Duration(seconds: 1), () {
     Navigator.pop(context);
   });
+
+  //Navigator.pop(context);
 }
 
 Future<void> checkAmount(idP, idD, amount, quantity) async {
