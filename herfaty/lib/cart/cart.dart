@@ -48,6 +48,20 @@ class _CartState extends State<Cart> {
                 } else if (snapshot.hasData) {
                   final cItems = snapshot.data!.toList();
 
+                  if (cItems.isEmpty) {
+                    return const Center(
+                      child: Text(
+                        'السلة فارغة',
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: "Tajawal",
+                          color: Colors.grey,
+                        ),
+                      ),
+                    );
+                  }
+
                   // check if available amount changed
 
                   for (int i = 0; i < cItems.length; i++) {
