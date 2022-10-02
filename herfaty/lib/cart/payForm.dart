@@ -241,7 +241,7 @@ class payForm extends StatelessWidget {
                                           ),
                                         )
                                     : ScaffoldMessenger.of(context)
-                                       .showSnackBar(
+                                        .showSnackBar(
                                         const SnackBar(
                                             content: Text(
                                                 'اكمل تعبئه بيانات الدفع')),
@@ -273,8 +273,15 @@ class payForm extends StatelessWidget {
                     }
 
                     if (state.status == PaymentStatus.success) {
-                      pro = [];
-                      updateProducts();
+                      Timer(Duration(seconds: 0), () {
+                        // <-- Delay here
+                        pro = [];
+                      });
+
+                      Timer(Duration(seconds: 2), () {
+                        // <-- Delay here
+                        updateProducts();
+                      });
 
                       final orderToBeAdded =
                           FirebaseFirestore.instance.collection('orders').doc();
@@ -306,7 +313,6 @@ class payForm extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            
                             EmptySection(
                               emptyImg: 'assets/images/success.gif',
                               emptyMsg: 'عملية ناجحة',
@@ -314,19 +320,17 @@ class payForm extends StatelessWidget {
                             SubTitle(
                               subTitleText: 'تمت عملية الدفع والطلب بنجاح',
                             ),
-                            
                             ElevatedButton(
-                              
                               onPressed: () async => {
                                 deletFromCart(),
                                 state.status = PaymentStatus.initial,
-                                
+
                                 Navigator.of(context).pushAndRemoveUntil(
                                     MaterialPageRoute(
                                         builder: (context) => Cart()),
                                     ModalRoute.withName(
                                         '/home_screen_customer'))
-                                
+
                                 //context.read<PaymentBloc>().add(PaymentStart()),
                               },
                               style: ElevatedButton.styleFrom(
