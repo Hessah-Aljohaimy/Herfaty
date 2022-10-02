@@ -67,7 +67,8 @@ class checkOut extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => Cart()),
                         (Route<dynamic> route) => false);
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('نفذت بعض المنتجات')),
+                      const SnackBar(
+                          content: Text('نفذت بعض المنتجات  يرجى التحقق')),
                     );
                   } else if (updatedAvailabeAmount < Items[index].quantity) {
                     print("-------------------happ in check out3");
