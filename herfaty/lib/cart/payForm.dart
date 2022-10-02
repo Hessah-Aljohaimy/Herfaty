@@ -152,22 +152,20 @@ class payForm extends StatelessWidget {
                                             .collection('cart')
                                             .doc(pro[index].docId)
                                             .update({"quantity": 0});
-                                        if (state.status ==
-                                            PaymentStatus.initial) {
-                                          Navigator.of(context)
-                                              .pushAndRemoveUntil(
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          Cart()),
-                                                  (Route<dynamic> route) =>
-                                                      false);
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            const SnackBar(
-                                                content:
-                                                    Text('نفذت بعض المنتجات')),
-                                          );
-                                        }
+
+                                        Navigator.of(context)
+                                            .pushAndRemoveUntil(
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        Cart()),
+                                                (Route<dynamic> route) =>
+                                                    false);
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                              content: Text(
+                                                  'نفذت بعض المنتجات يرجى التحقق')),
+                                        );
                                       } else if (updatedAvailabeAmount <
                                           pro[index].quantity) {
                                         print(
@@ -181,15 +179,17 @@ class payForm extends StatelessWidget {
                                             "quantity": updatedAvailabeAmount
                                           });
                                           Navigator.of(context)
-                                              .pushNamedAndRemoveUntil(
-                                                  '/cart',
+                                              .pushAndRemoveUntil(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          Cart()),
                                                   (Route<dynamic> route) =>
                                                       false);
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(
                                             const SnackBar(
                                                 content: Text(
-                                                    'تغيرت كميات بعض المنتجات')),
+                                                    ' قلت كميات بعض المنتجات يرجى التحقق')),
                                           );
                                         }
                                       }
@@ -272,13 +272,8 @@ class payForm extends StatelessWidget {
                       );
                     }
 
-                    pro = [];
-
-                    // pro.removeRange(0, pro.length - 1);
-                    print(
-                        "after update items length ${pro.length}"); // <-- Code run after delay
-
                     if (state.status == PaymentStatus.success) {
+                      pro = [];
                       updateProducts();
 
                       final orderToBeAdded =
