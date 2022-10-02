@@ -96,46 +96,42 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
         centerTitle: true,
         backgroundColor: Colors.white,
         shadowColor: Color.fromARGB(255, 39, 141, 134),
-        elevation: 2,
+        elevation: 0,
         leading: IconButton(
-          icon:  Icon(Icons.logout, color: Color.fromARGB(255, 81, 144, 142)),
+          icon: Icon(Icons.logout, color: Color.fromARGB(255, 81, 144, 142)),
           onPressed: () async {
-              showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text("تنبيه"),
-                      content: Text('سيتم تسجيل خروجك من الحساب'),
-                      actions: <Widget>[
-                        TextButton(
-                          child: Text("تسجيل خروج",
-                              style: TextStyle(color: Colors.red)),
-                          onPressed: () {
-                            //Navigator.of(context).pop();
-                            FirebaseAuth.instance.signOut();
-                            Navigator.of(context, rootNavigator: true)
-                                .pushReplacement(MaterialPageRoute(
-                                    builder: (context) => new login()));
-                          },
-                        ),
-                        TextButton(
-                          child: Text("تراجع"),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                        )
-                      ],
-                    );
-                  });
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text("تنبيه"),
+                    content: Text('سيتم تسجيل خروجك من الحساب'),
+                    actions: <Widget>[
+                      TextButton(
+                        child: Text("تسجيل خروج",
+                            style: TextStyle(color: Colors.red)),
+                        onPressed: () {
+                          //Navigator.of(context).pop();
+                          FirebaseAuth.instance.signOut();
+                          Navigator.of(context, rootNavigator: true)
+                              .pushReplacement(MaterialPageRoute(
+                                  builder: (context) => new login()));
+                        },
+                      ),
+                      TextButton(
+                        child: Text("تراجع"),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      )
+                    ],
+                  );
+                });
 
-              /*Navigator.pushReplacement(context,
+            /*Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (BuildContext context) {
               return Welcome();
             }));*/
-            
-        
-        
-        
           },
         ),
         actions: [
@@ -144,7 +140,8 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (BuildContext context) => OwnerSettings()));
             },
-            icon: Icon(CupertinoIcons.settings, color: Color.fromARGB(255, 81, 144, 142)),
+            icon: Icon(CupertinoIcons.settings,
+                color: Color.fromARGB(255, 81, 144, 142)),
           ),
         ],
         automaticallyImplyLeading: false,
@@ -284,12 +281,11 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 Text(
                                   " ${shopowner.name}",
                                   style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.black,
-                                                    fontFamily: "Tajawal",
-
-),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.black,
+                                    fontFamily: "Tajawal",
+                                  ),
                                 )
                               ],
                             )),
@@ -304,11 +300,11 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 Text(
                                   "${shopowner.email}",
                                   style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.black,
-                                                                                          fontFamily: "Tajawal",
-),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.black,
+                                    fontFamily: "Tajawal",
+                                  ),
                                 )
                               ],
                             )),
@@ -323,11 +319,11 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 Text(
                                   " ${shopowner.DOB}",
                                   style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.black,
-                                                                                          fontFamily: "Tajawal",
-),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.black,
+                                    fontFamily: "Tajawal",
+                                  ),
                                 )
                               ],
                             )),
@@ -342,11 +338,11 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 Text(
                                   "${shopowner.phone_number}",
                                   style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.black,
-                                                                                          fontFamily: "Tajawal",
-),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.black,
+                                    fontFamily: "Tajawal",
+                                  ),
                                 )
                               ],
                             )),
@@ -421,7 +417,6 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                               child: Padding(
                                 padding:
                                     const EdgeInsets.only(right: 0, left: 245),
-                                    
                                 child: Text(
                                   "وصف المتجر",
                                   style: TextStyle(
@@ -431,7 +426,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                       color: Color.fromARGB(255, 39, 141, 134)),
                                 ),
                               ),
-                           ),
+                            ),
                             Container(
                               width: double.infinity,
                               margin: const EdgeInsets.only(bottom: 2),
