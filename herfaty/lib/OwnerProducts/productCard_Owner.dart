@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/models/Product1.dart';
 
 class productCard_Owner extends StatelessWidget {
@@ -23,7 +24,9 @@ class productCard_Owner extends StatelessWidget {
       decoration: BoxDecoration(
         //color: const Color(0xFFFAF9F6),
         color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: kPrimaryLight),
+
+        borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(.2),
@@ -50,7 +53,7 @@ class productCard_Owner extends StatelessWidget {
               decoration: BoxDecoration(
                 //color: const Color(0xFFFAF9F6),
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(10),
               ),
             ),
             //*************************This part contains product photo:
@@ -69,16 +72,16 @@ class productCard_Owner extends StatelessWidget {
                 decoration: BoxDecoration(
                   border: Border.all(width: 0.1, color: Colors.white),
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    bottomLeft: Radius.circular(20),
+                    topLeft: Radius.circular(10),
+                    bottomLeft: Radius.circular(10),
                   ),
                   //color: Color(0xFFFAF9F6),
                   color: Colors.white,
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    bottomLeft: Radius.circular(20),
+                    topLeft: Radius.circular(10),
+                    bottomLeft: Radius.circular(10),
                   ),
                   child: Image.network(
                     product.image,

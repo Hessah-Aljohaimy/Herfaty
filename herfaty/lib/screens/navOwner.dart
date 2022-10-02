@@ -31,10 +31,10 @@ class _navOwnerState extends State<navOwner> {
 
   @override
   Widget build(BuildContext context) {
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final User? user = auth.currentUser;
-    String thisOwnerId = user!.uid;
-    listenToDB(thisOwnerId);
+    // final FirebaseAuth auth = FirebaseAuth.instance;
+    // final User? user = auth.currentUser;
+    // String thisOwnerId = user!.uid;
+    listenToDB();
     //---------------------------------------------------------------------------------------------------
     return MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -86,7 +86,7 @@ class _navOwnerState extends State<navOwner> {
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //Listen to changes in DB==============================
-  void listenToDB(String thisOwnerId) {
+  void listenToDB() {
     print("the notification form firestore method was called");
 
     CollectionReference reference =
@@ -96,6 +96,9 @@ class _navOwnerState extends State<navOwner> {
       querySnapshot.docChanges.forEach((change) {
         if (change.type == DocumentChangeType.added) {
           for (var index = 0; index < querySnapshot.size; index++) {
+             final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    String thisOwnerId = user!.uid;
             var data = querySnapshot.docs.elementAt(index).data() as Map;
             var notificationStatus = data["notification"];
             var docId = data["docId"];
