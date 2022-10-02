@@ -37,7 +37,6 @@ class checkOut extends StatelessWidget {
     add.msg = 'ادخل موقعك';
     _addState._changeFormat();
 
-/*
     CollectionReference reference =
         FirebaseFirestore.instance.collection('Products');
     reference.snapshots().listen((querySnapshot) {
@@ -64,16 +63,26 @@ class checkOut extends StatelessWidget {
                         .collection('cart')
                         .doc(Items[index].docId)
                         .update({"quantity": 0});
-                    ShowDialogMethod1(
-                        context, "بعض المنتجات لم تعد متاحة يرجى التحقق");
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(builder: (context) => Cart()),
+                        (Route<dynamic> route) => false);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('نفذت بعض المنتجات')),
+                    );
                   } else if (updatedAvailabeAmount < Items[index].quantity) {
                     print("-------------------happ in check out3");
                     FirebaseFirestore.instance
                         .collection('cart')
                         .doc(Items[index].docId)
                         .update({"quantity": updatedAvailabeAmount});
-                    ShowDialogMethod1(
-                        context, "بعض المنتجات قلت كميتها المتاحة يرجى التحقق");
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(builder: (context) => Cart()),
+                        (Route<dynamic> route) => false);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content: Text(
+                              "بعض المنتجات قلت كميتها المتاحة يرجى التحقق")),
+                    );
                   }
                 }
               }
@@ -82,7 +91,7 @@ class checkOut extends StatelessWidget {
         }
       });
     });
-*/
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
