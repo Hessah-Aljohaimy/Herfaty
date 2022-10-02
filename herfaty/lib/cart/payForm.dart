@@ -229,28 +229,30 @@ class payForm extends StatelessWidget {
                             const SizedBox(height: 10),
                             ElevatedButton(
                               onPressed: () {
-                                (controller.details.complete)
-                                    ? context.read<PaymentBloc>().add(
-                                          const PaymentCreateIntent(
-                                            billingDetails: BillingDetails(
-                                                email: 'auoosh2000@gmail.com'),
-                                            items: [
-                                              {'id': 0},
-                                              {'id': 1},
-                                            ],
-                                          ),
-                                        )
-                                    : context.read<PaymentBloc>().add(
-                                          const PaymentCreateIntent(
-                                            billingDetails: BillingDetails(
-                                                email: 'auoosh2000@gmail.com'),
-                                            items: [
-                                              {'id': 0},
-                                              {'id': 1},
-                                            ],
-                                          ),
-                                        );
-                                print("-------------------تم الدفع");
+                                if (controller.details.complete) {
+                                  context.read<PaymentBloc>().add(
+                                        const PaymentCreateIntent(
+                                          billingDetails: BillingDetails(
+                                              email: 'auoosh2000@gmail.com'),
+                                          items: [
+                                            {'id': 0},
+                                            {'id': 1},
+                                          ],
+                                        ),
+                                      );
+                                } else {
+                                  context.read<PaymentBloc>().add(
+                                        const PaymentCreateIntent(
+                                          billingDetails: BillingDetails(
+                                              email: 'auoosh2000@gmail.com'),
+                                          items: [
+                                            {'id': 0},
+                                            {'id': 1},
+                                          ],
+                                        ),
+                                      );
+                                  print("-------------------تم الدفع");
+                                }
                               },
                               style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all(
