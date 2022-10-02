@@ -451,112 +451,120 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                       ),
                     ),
                     Expanded(
-                      child: Row(children: [
-                        SizedBox(
-                          width: 10,
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            showAlertDialog(context);
-                            // openPasswordDialog(context);
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            // SizedBox(
+                            //   width: 10,
+                            // ),
+                            ElevatedButton(
+                              onPressed: () {
+                                showAlertDialog(context);
+                                // openPasswordDialog(context);
 
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ShopOwnerEditProfile(
-                                      shopowner.name,
-                                      shopowner.email,
-                                      shopowner.password,
-                                      shopowner.DOB,
-                                      shopowner.phone_number,
-                                      shopowner.shopname,
-                                      shopowner.shopdescription,
-                                      shopowner.id,
-                                      shopowner.logo)),
-                            );
-                          },
-                          style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Color(0xff51908E)),
-                            padding: MaterialStateProperty.all(
-                                EdgeInsets.symmetric(
-                                    horizontal: 45, vertical: 10)),
-                            shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(27))),
-                          ),
-                          child: Text(
-                            " تعديل البيانات",
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontFamily: "Tajawal",
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        ElevatedButton(
-                          onPressed: () async {
-                            // Diolog to enter the password
-
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: Text("تنبيه"),
-                                  content: Text('سيتم حذف الحساب نهائيا'),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      child: Text("حذف",
-                                          style: TextStyle(color: Colors.red)),
-                                      onPressed: () {
-                                        //The logic of deleting an account
-                                        final docSO = FirebaseFirestore.instance
-                                            .collection('shop_owner')
-                                            .doc(uid);
-                                        //Navigator.of(context).pop();
-
-                                        docSO.delete();
-
-                                        FirebaseAuth.instance.signOut();
-                                        Navigator.of(context,
-                                                rootNavigator: true)
-                                            .pushReplacement(MaterialPageRoute(
-                                                builder: (context) =>
-                                                    new Welcome()));
-                                      },
-                                    ),
-                                    TextButton(
-                                      child: Text("تراجع"),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    )
-                                  ],
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          ShopOwnerEditProfile(
+                                              shopowner.name,
+                                              shopowner.email,
+                                              shopowner.password,
+                                              shopowner.DOB,
+                                              shopowner.phone_number,
+                                              shopowner.shopname,
+                                              shopowner.shopdescription,
+                                              shopowner.id,
+                                              shopowner.logo)),
                                 );
                               },
-                            );
-                          },
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                                Color.fromARGB(255, 221, 112, 112)),
-                            padding: MaterialStateProperty.all(
-                                EdgeInsets.symmetric(
-                                    horizontal: 45, vertical: 10)),
-                            shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(27))),
-                          ),
-                          child: Text(
-                            "حذف الحساب",
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontFamily: "Tajawal",
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ]),
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                    Color(0xff51908E)),
+                                padding: MaterialStateProperty.all(
+                                    EdgeInsets.symmetric(
+                                        horizontal: 45, vertical: 10)),
+                                shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(27))),
+                              ),
+                              child: Text(
+                                " تعديل البيانات",
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: "Tajawal",
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            // SizedBox(
+                            //   width: 10,
+                            // ),
+                            ElevatedButton(
+                              onPressed: () async {
+                                // Diolog to enter the password
+
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text("تنبيه"),
+                                      content: Text('سيتم حذف الحساب نهائيا'),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: Text("حذف",
+                                              style:
+                                                  TextStyle(color: Colors.red)),
+                                          onPressed: () {
+                                            //The logic of deleting an account
+                                            final docSO = FirebaseFirestore
+                                                .instance
+                                                .collection('shop_owner')
+                                                .doc(uid);
+                                            //Navigator.of(context).pop();
+
+                                            docSO.delete();
+
+                                            FirebaseAuth.instance.signOut();
+                                            Navigator.of(context,
+                                                    rootNavigator: true)
+                                                .pushReplacement(
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            new Welcome()));
+                                          },
+                                        ),
+                                        TextButton(
+                                          child: Text("تراجع"),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        )
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                    Color.fromARGB(255, 221, 112, 112)),
+                                padding: MaterialStateProperty.all(
+                                    EdgeInsets.symmetric(
+                                        horizontal: 45, vertical: 10)),
+                                shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(27))),
+                              ),
+                              child: Text(
+                                "حذف الحساب",
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: "Tajawal",
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ]),
                     ),
                   ],
                 ),
