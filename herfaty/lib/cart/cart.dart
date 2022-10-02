@@ -510,6 +510,7 @@ Stream<List<CartModal>> readCart() {
 
   final user;
   user = FirebaseAuth.instance.currentUser;
+  try{
   final uid = user.uid;
   return FirebaseFirestore.instance
       .collection('cart')
@@ -517,6 +518,15 @@ Stream<List<CartModal>> readCart() {
       .snapshots()
       .map((snapshot) =>
           snapshot.docs.map((doc) => CartModal.fromJson(doc.data())).toList());
+  }
+  catch(e){
+      return FirebaseFirestore.instance
+
+     .collection('cart')
+      .snapshots()
+      .map((snapshot) =>
+          snapshot.docs.map((doc) => CartModal.fromJson(doc.data())).toList());
+  }
 }
 
 class ProductImage extends StatelessWidget {
