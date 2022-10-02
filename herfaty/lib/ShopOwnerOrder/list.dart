@@ -61,65 +61,85 @@ class list extends StatelessWidget {
               final cItems = snapshot.data!.toList();
               Size size = MediaQuery.of(context).size;
 
-              return Column(
-                children: [
-                  Container(
-                    height: 610,
-                    child: Center(
-                      child: ListView.builder(
-                          itemCount: cItems.length,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              margin: EdgeInsets.only(
-                                  top: 8.0, left: 8.0, right: 8.0),
-                              padding: EdgeInsets.all(8.0),
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Color(0xFFF1F1F1))),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                              //cItems[index].customerId,
-                                              "طلب رقم ${index + 1}",
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(fontSize: 17.0,fontFamily: "Tajawal")),
-                                            
-                                          Text(
-                                              "تاريح الطلب :${cItems[index].orderDate} ",style: TextStyle(fontSize: 17.0,fontFamily: "Tajawal") ,),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      primary: Color.fromARGB(
-                                          255, 81, 144, 142), // background
-                                    ),
-                                    onPressed: () {
-                                      //go to order deatils page
-                                    },
-                                    child: Text(
-                                      "تفاصيل الطلب",
-                                      style: TextStyle(
-                                        fontFamily: "Tajawal",
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          }),
+              if (cItems.isEmpty) {
+                return const Center(
+                  child: Text(
+                    ' لا يوجد طلبات',
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: "Tajawal",
+                      color: Colors.grey,
                     ),
                   ),
-                ],
-              );
+                );
+              } else {
+                return Column(
+                  children: [
+                    Container(
+                      height: 610,
+                      child: Center(
+                        child: ListView.builder(
+                            itemCount: cItems.length,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                margin: EdgeInsets.only(
+                                    top: 8.0, left: 8.0, right: 8.0),
+                                padding: EdgeInsets.all(8.0),
+                                decoration: BoxDecoration(
+                                    border:
+                                        Border.all(color: Color(0xFFF1F1F1))),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 8.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                                //cItems[index].customerId,
+                                                "طلب رقم ${index + 1}",
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                    fontSize: 17.0,
+                                                    fontFamily: "Tajawal")),
+                                            Text(
+                                              "تاريح الطلب :${cItems[index].orderDate} ",
+                                              style: TextStyle(
+                                                  fontSize: 17.0,
+                                                  fontFamily: "Tajawal"),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Color.fromARGB(
+                                            255, 81, 144, 142), // background
+                                      ),
+                                      onPressed: () {
+                                        //go to order deatils page
+                                      },
+                                      child: Text(
+                                        "تفاصيل الطلب",
+                                        style: TextStyle(
+                                          fontFamily: "Tajawal",
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }),
+                      ),
+                    ),
+                  ],
+                );
+              }
             } else {
               return Center(child: CircularProgressIndicator());
             }
@@ -232,7 +252,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 3,
       leading: IconButton(
         onPressed: () {
-         // Navigator.pushNamed(context, '/home_screen_owner');
+          // Navigator.pushNamed(context, '/home_screen_owner');
         },
         icon: Icon(Icons.arrow_back),
       ),
@@ -246,27 +266,20 @@ Stream<List<OrderModel>> readPrpducts() {
   // final uid = user.getIdToken();
   final user;
   user = FirebaseAuth.instance.currentUser;
-  try{
-  final uid = user.uid;
-  
-  
-  return FirebaseFirestore.instance
-      .collection('orders')
-      .where("shopOwnerId", isEqualTo: uid)
-      .snapshots()
-      .map((snapshot) =>
-          snapshot.docs.map((doc) => OrderModel.fromJson(doc.data())).toList());
+  try {
+    final uid = user.uid;
+
+    return FirebaseFirestore.instance
+        .collection('orders')
+        .where("shopOwnerId", isEqualTo: uid)
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => OrderModel.fromJson(doc.data()))
+            .toList());
+  } catch (e) {
+    return FirebaseFirestore.instance.collection('orders').snapshots().map(
+        (snapshot) => snapshot.docs
+            .map((doc) => OrderModel.fromJson(doc.data()))
+            .toList());
   }
-  catch(e){
-
-
- return FirebaseFirestore.instance
-      .collection('orders')
-      .snapshots()
-      .map((snapshot) =>
-          snapshot.docs.map((doc) => OrderModel.fromJson(doc.data())).toList());
-  }
-
-
-
-  }
+}
