@@ -229,27 +229,27 @@ class payForm extends StatelessWidget {
                             const SizedBox(height: 10),
                             ElevatedButton(
                               onPressed: () {
-                                if (controller.details.complete) {
-                                  pro = [];
-                                  print("--------------here-${pro.length}");
-
-                                  context.read<PaymentBloc>().add(
-                                        const PaymentCreateIntent(
-                                          billingDetails: BillingDetails(
-                                              email: 'auoosh2000@gmail.com'),
-                                          items: [
-                                            {'id': 0},
-                                            {'id': 1},
-                                          ],
-                                        ),
-                                      );
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content:
-                                            Text('اكمل تعبئه بيانات الدفع')),
-                                  );
-                                }
+                                (controller.details.complete)
+                                    ? context.read<PaymentBloc>().add(
+                                          const PaymentCreateIntent(
+                                            billingDetails: BillingDetails(
+                                                email: 'auoosh2000@gmail.com'),
+                                            items: [
+                                              {'id': 0},
+                                              {'id': 1},
+                                            ],
+                                          ),
+                                        )
+                                    : context.read<PaymentBloc>().add(
+                                          const PaymentCreateIntent(
+                                            billingDetails: BillingDetails(
+                                                email: 'auoosh2000@gmail.com'),
+                                            items: [
+                                              {'id': 0},
+                                              {'id': 1},
+                                            ],
+                                          ),
+                                        );
                                 print("-------------------تم الدفع");
                               },
                               style: ButtonStyle(
@@ -392,7 +392,6 @@ class payForm extends StatelessWidget {
                             ),
                             ElevatedButton(
                               onPressed: () async => {
-                                
                                 state.status = PaymentStatus.initial,
 
                                 Navigator.of(context).pushAndRemoveUntil(
