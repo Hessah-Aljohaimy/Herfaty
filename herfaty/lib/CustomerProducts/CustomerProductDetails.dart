@@ -501,7 +501,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
           Navigator.pop(context);
         },
       ),
-      centerTitle: false,
+      centerTitle: true,
       title: const Text(
         "",
         style: TextStyle(

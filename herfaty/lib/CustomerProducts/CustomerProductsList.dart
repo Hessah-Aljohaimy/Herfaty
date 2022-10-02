@@ -114,6 +114,7 @@ class CustomerProductsList extends StatelessWidget {
     return AppBar(
       elevation: 0,
       backgroundColor: Color.fromARGB(255, 250, 250, 250),
+      centerTitle: true,
       title: Text(
         categoryName,
         style: TextStyle(

@@ -249,10 +249,10 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       backgroundColor: Colors.white,
       shadowColor: Color.fromARGB(255, 39, 141, 134),
-      elevation: 3,
+      elevation: 0,
       leading: IconButton(
         onPressed: () {
-          // Navigator.pushNamed(context, '/home_screen_owner');
+          Navigator.pop(context);
         },
         icon: Icon(Icons.arrow_back),
       ),

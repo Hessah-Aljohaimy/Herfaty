@@ -119,6 +119,7 @@ class OwnerProductsList extends StatelessWidget {
     return AppBar(
       elevation: 0,
       backgroundColor: Colors.white,
+      centerTitle: true,
       title: Text(
         categoryName,
         style: TextStyle(

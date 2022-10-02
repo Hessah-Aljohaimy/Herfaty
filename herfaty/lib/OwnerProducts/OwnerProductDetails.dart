@@ -297,7 +297,7 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
           Navigator.pop(context);
         },
       ),
-      centerTitle: false,
+      centerTitle: true,
       title: const Text(
         "",
         style: TextStyle(
