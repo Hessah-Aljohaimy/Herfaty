@@ -96,12 +96,44 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
         centerTitle: true,
         backgroundColor: Colors.white,
         shadowColor: Color.fromARGB(255, 39, 141, 134),
-        elevation: 2,
+        elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.logout, color: kPrimaryColor),
-          onPressed: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (BuildContext context) => login()));
+          icon: Icon(Icons.logout, color: Color.fromARGB(255, 81, 144, 142)),
+          onPressed: () async {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text("تنبيه"),
+                    content: Text('سيتم تسجيل خروجك من الحساب'),
+                    actions: <Widget>[
+                      TextButton(
+                        child: Text("تسجيل خروج",
+                            style: TextStyle(color: Colors.red)),
+                        onPressed: () {
+                          //Navigator.of(context).pop();
+                          FirebaseAuth.instance.signOut();
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                              "/login", (Route<dynamic> route) => false);
+                          // Navigator.of(context, rootNavigator: true)
+                          //     .pushReplacement(MaterialPageRoute(
+                          //         builder: (context) => new login()));
+                        },
+                      ),
+                      TextButton(
+                        child: Text("تراجع"),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      )
+                    ],
+                  );
+                });
+
+            /*Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (BuildContext context) {
+              return Welcome();
+            }));*/
           },
         ),
         actions: [
@@ -110,7 +142,8 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (BuildContext context) => OwnerSettings()));
             },
-            icon: Icon(CupertinoIcons.settings),
+            icon: Icon(CupertinoIcons.settings,
+                color: Color.fromARGB(255, 81, 144, 142)),
           ),
         ],
         automaticallyImplyLeading: false,
@@ -236,7 +269,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                               child: Text(
                                 "معلومات الحرفي",
                                 style: TextStyle(
-                                  fontSize: 17,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.w700,
                                   color: Color.fromARGB(255, 26, 96, 91),
                                   fontFamily: "Tajawal",
@@ -254,9 +287,11 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 Text(
                                   " ${shopowner.name}",
                                   style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.black),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.black,
+                                    fontFamily: "Tajawal",
+                                  ),
                                 )
                               ],
                             )),
@@ -271,9 +306,11 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 Text(
                                   "${shopowner.email}",
                                   style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.black),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.black,
+                                    fontFamily: "Tajawal",
+                                  ),
                                 )
                               ],
                             )),
@@ -288,9 +325,11 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 Text(
                                   " ${shopowner.DOB}",
                                   style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.black),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.black,
+                                    fontFamily: "Tajawal",
+                                  ),
                                 )
                               ],
                             )),
@@ -305,9 +344,11 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 Text(
                                   "${shopowner.phone_number}",
                                   style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.black),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.black,
+                                    fontFamily: "Tajawal",
+                                  ),
                                 )
                               ],
                             )),
@@ -339,7 +380,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                               child: Text(
                                 "بيانات المتجر",
                                 style: TextStyle(
-                                    fontSize: 17,
+                                    fontSize: 20,
                                     fontWeight: FontWeight.w700,
                                     fontFamily: "Tajawal",
                                     color: Color.fromARGB(255, 26, 96, 91)),
@@ -354,7 +395,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                   Text(
                                     " اسم المتجر ",
                                     style: TextStyle(
-                                        fontSize: 15,
+                                        fontSize: 17,
                                         fontWeight: FontWeight.w900,
                                         fontFamily: "Tajawal",
                                         color:
@@ -368,7 +409,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                   Text(
                                     "${shopowner.shopname}",
                                     style: TextStyle(
-                                        fontSize: 15,
+                                        fontSize: 16,
                                         fontWeight: FontWeight.w400,
                                         color: Colors.black),
                                   )
@@ -376,16 +417,16 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                               ),
                             ),
                             SizedBox(
-                              height: 5,
+                              height: 6,
                             ),
                             Expanded(
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.only(right: 0, left: 280),
+                                    const EdgeInsets.only(right: 0, left: 245),
                                 child: Text(
                                   "وصف المتجر",
                                   style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 17,
                                       fontWeight: FontWeight.w900,
                                       fontFamily: "Tajawal",
                                       color: Color.fromARGB(255, 39, 141, 134)),
@@ -394,7 +435,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                             ),
                             Container(
                               width: double.infinity,
-                              margin: const EdgeInsets.only(bottom: 18),
+                              margin: const EdgeInsets.only(bottom: 2),
                               padding: const EdgeInsets.symmetric(
                                   // vertical: 10,
                                   // horizontal: 30,
@@ -414,6 +455,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                       ),
                     ),
                     Expanded(
+<<<<<<< HEAD
                       child: Center(
                         child: Row(children: [
                           SizedBox(
@@ -525,6 +567,122 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                           ),
                         ]),
                       ),
+=======
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            // SizedBox(
+                            //   width: 10,
+                            // ),
+                            ElevatedButton(
+                              onPressed: () {
+                                showAlertDialog(context);
+                                // openPasswordDialog(context);
+
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          ShopOwnerEditProfile(
+                                              shopowner.name,
+                                              shopowner.email,
+                                              shopowner.password,
+                                              shopowner.DOB,
+                                              shopowner.phone_number,
+                                              shopowner.shopname,
+                                              shopowner.shopdescription,
+                                              shopowner.id,
+                                              shopowner.logo)),
+                                );
+                              },
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                    Color(0xff51908E)),
+                                padding: MaterialStateProperty.all(
+                                    EdgeInsets.symmetric(
+                                        horizontal: 45, vertical: 10)),
+                                shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(27))),
+                              ),
+                              child: Text(
+                                " تعديل البيانات",
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: "Tajawal",
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            // SizedBox(
+                            //   width: 10,
+                            // ),
+                            ElevatedButton(
+                              onPressed: () async {
+                                // Diolog to enter the password
+
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text("تنبيه"),
+                                      content: Text('سيتم حذف الحساب نهائيا'),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: Text("حذف",
+                                              style:
+                                                  TextStyle(color: Colors.red)),
+                                          onPressed: () {
+                                            //The logic of deleting an account
+                                            final docSO = FirebaseFirestore
+                                                .instance
+                                                .collection('shop_owner')
+                                                .doc(uid);
+                                            //Navigator.of(context).pop();
+
+                                            docSO.delete();
+
+                                            FirebaseAuth.instance.signOut();
+                                            Navigator.of(context,
+                                                    rootNavigator: true)
+                                                .pushReplacement(
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            new Welcome()));
+                                          },
+                                        ),
+                                        TextButton(
+                                          child: Text("تراجع"),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        )
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                    Color.fromARGB(255, 221, 112, 112)),
+                                padding: MaterialStateProperty.all(
+                                    EdgeInsets.symmetric(
+                                        horizontal: 45, vertical: 10)),
+                                shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(27))),
+                              ),
+                              child: Text(
+                                "حذف الحساب",
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: "Tajawal",
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ]),
+>>>>>>> 0e6196d492e6858726c25c09a6acc3d065b8d74b
                     ),
                   ],
                 ),

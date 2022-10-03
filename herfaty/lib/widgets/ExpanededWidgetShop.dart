@@ -41,15 +41,16 @@ class _ExpandedWidgetShopState extends State<ExpandedWidgetShop> {
                 style: TextStyle(
                   fontFamily: "Tajawal",
                   fontSize: 15.0,
-                  color: Color.fromARGB(255, 0, 0, 0),
+                  color: Colors.black,
                 ),
               )
             : Text(
                 widget.text,
                 style: TextStyle(
                   fontFamily: "Tajawal",
-                  fontSize: 15.0,
-                  color: Color.fromARGB(255, 0, 0, 0),
+                  
+                  fontSize: 17.0,
+                  color: Colors.black,
                 ),
               ));
   }

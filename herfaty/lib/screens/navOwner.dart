@@ -2,16 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:herfaty/cart/cart.dart';
 import 'package:herfaty/constants/color.dart';
-import 'package:herfaty/pages/welcome.dart';
 import 'package:herfaty/profile%20screens/ShopOwnerProfile.dart';
-import 'package:herfaty/screens/customerHome.dart';
 import 'package:herfaty/screens/ownerHome.dart';
-import 'package:herfaty/widgets/logOut.dart';
-
+import 'package:herfaty/ShopOwnerOrder/list.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:herfaty/secondNotificationScreen.dart';
 import 'package:herfaty/LocalNotificationService.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
@@ -36,10 +31,10 @@ class _navOwnerState extends State<navOwner> {
 
   @override
   Widget build(BuildContext context) {
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final User? user = auth.currentUser;
-    String thisOwnerId = user!.uid;
-    listenToDB(thisOwnerId);
+    // final FirebaseAuth auth = FirebaseAuth.instance;
+    // final User? user = auth.currentUser;
+    // String thisOwnerId = user!.uid;
+    listenToDB();
     //---------------------------------------------------------------------------------------------------
     return MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -52,6 +47,7 @@ class _navOwnerState extends State<navOwner> {
           Locale('ar', 'AE'),
         ],
         home: Scaffold(
+          resizeToAvoidBottomInset: true,
           body: PersistentTabView(
             context,
             screens: screens(),
@@ -90,7 +86,7 @@ class _navOwnerState extends State<navOwner> {
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //Listen to changes in DB==============================
-  void listenToDB(String thisOwnerId) {
+  void listenToDB() {
     print("the notification form firestore method was called");
 
     CollectionReference reference =
@@ -100,6 +96,9 @@ class _navOwnerState extends State<navOwner> {
       querySnapshot.docChanges.forEach((change) {
         if (change.type == DocumentChangeType.added) {
           for (var index = 0; index < querySnapshot.size; index++) {
+             final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    String thisOwnerId = user!.uid;
             var data = querySnapshot.docs.elementAt(index).data() as Map;
             var notificationStatus = data["notification"];
             var docId = data["docId"];
@@ -144,10 +143,7 @@ class _navOwnerState extends State<navOwner> {
     if (payload != null && payload.isNotEmpty) {
       print('payload: $payload');
       Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: ((context) =>
-                  secondNotificationScreen(payload: payload))));
+          context, MaterialPageRoute(builder: ((context) => list())));
     }
   }
 }

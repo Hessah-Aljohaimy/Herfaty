@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:herfaty/CustomerProducts/CustomerProductDetails.dart';
@@ -30,73 +32,85 @@ class OwnerProductsList extends StatelessWidget {
       appBar: productsListAppBar(context),
       //..........................................................................................
       body: SafeArea(
-        child: Column(
-          children: [
-            //تبعد لي البوكس اللي يعرض المنتجات عن الشريط العلوي
-            const SizedBox(height: 15),
-            Expanded(
-              child: Stack(
-                children: [
-                  //This is to list all of our items fetched from the DB========================
-                  StreamBuilder<List<Product1>>(
-                    stream: readPrpducts(thisOwnerId),
-                    builder: (context, snapshot) {
-                      print("------------Waiting");
+        child: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+            image: AssetImage('assets/images/cartBack1.png'),
+            fit: BoxFit.cover,
+          )),
+          child: Column(
+            children: [
+              //تبعد لي البوكس اللي يعرض المنتجات عن الشريط العلوي
+              const SizedBox(height: 15),
+              Expanded(
+                child: Stack(
+                  children: [
+                    //This is to list all of our items fetched from the DB========================
+                    StreamBuilder<List<Product1>>(
+                      stream: readPrpducts(thisOwnerId),
+                      builder: (context, snapshot) {
+                        print("------------Waiting");
 
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                      if (snapshot.hasError) {
-                        return Text('Something went wrong! ${snapshot.error}');
-                      }
-                      if (snapshot.hasData) {
-                        //هنا حالة النجاح في استرجاع البيانات...........................................
-                        final data = snapshot.data!;
-                        if (data.isEmpty) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
                           return const Center(
-                            child: Text(
-                              'لا توجد لديك منتجات ضمن هذه الفئة',
-                              style: TextStyle(
-                                fontSize: 22.0,
-                                fontWeight: FontWeight.w600,
-                                fontFamily: "Tajawal",
-                                color: Colors.grey,
-                              ),
-                            ),
-                          );
-                        } else {
-                          final productItems = snapshot.data!.toList();
-                          return ListView.builder(
-                            itemCount: productItems.length,
-                            itemBuilder: (context, index) => productCard_Owner(
-                              itemIndex: index,
-                              product: productItems[index],
-                              press: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => OwnerProdectDetails(
-                                      // يرسل المعلومات لصفحة المنتج عشان يعرض التفاصيل
-                                      detailsImage: productItems[index].image,
-                                      product: productItems[index],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          );
-                          //..................................................................................
+                              child: CircularProgressIndicator());
                         }
-                      } else {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                    },
-                  ),
-                  //==================================================================================
-                ],
+                        if (snapshot.hasError) {
+                          return Text(
+                              'Something went wrong! ${snapshot.error}');
+                        }
+                        if (snapshot.hasData) {
+                          //هنا حالة النجاح في استرجاع البيانات...........................................
+                          final data = snapshot.data!;
+                          if (data.isEmpty) {
+                            return const Center(
+                              child: Text(
+                                'لا توجد لديك منتجات ضمن هذه الفئة',
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: "Tajawal",
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            );
+                          } else {
+                            final productItems = snapshot.data!.toList();
+                            return ListView.builder(
+                              itemCount: productItems.length,
+                              itemBuilder: (context, index) =>
+                                  productCard_Owner(
+                                itemIndex: index,
+                                product: productItems[index],
+                                press: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => OwnerProdectDetails(
+                                        // يرسل المعلومات لصفحة المنتج عشان يعرض التفاصيل
+                                        detailsImage: productItems[index].image,
+                                        product: productItems[index],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
+                            //..................................................................................
+                          }
+                        } else {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        }
+                      },
+                    ),
+                    //==================================================================================
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -119,6 +133,7 @@ class OwnerProductsList extends StatelessWidget {
     return AppBar(
       elevation: 0,
       backgroundColor: Colors.white,
+      centerTitle: true,
       title: Text(
         categoryName,
         style: TextStyle(

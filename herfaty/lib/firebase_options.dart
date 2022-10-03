@@ -65,7 +65,8 @@ class DefaultFirebaseOptions {
     projectId: 'herfaty-54792',
     databaseURL: 'https://herfaty-54792-default-rtdb.firebaseio.com',
     storageBucket: 'herfaty-54792.appspot.com',
-    iosClientId: '829924956073-3orfga3eg1nlcjv21fsdn4uhf4v4if2m.apps.googleusercontent.com',
+    iosClientId:
+        '829924956073-3orfga3eg1nlcjv21fsdn4uhf4v4if2m.apps.googleusercontent.com',
     iosBundleId: 'com.example.herfaty',
   );
 }
