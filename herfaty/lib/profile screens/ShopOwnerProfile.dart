@@ -147,7 +147,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
           ),
         ],
         automaticallyImplyLeading: false,
-        iconTheme: IconThemeData(color: kPrimaryColor),
+        iconTheme: IconThemeData(color: Color.fromARGB(255, 39, 141, 134)),
       ),
 
       ////////////////////////FUTURE BUILDER///////////////////////////////
@@ -184,13 +184,17 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
     return Center(
       child: Stack(children: <Widget>[
         CircleAvatar(
-          radius: 54.0,
-          backgroundImage: logo == null
-              ? AssetImage("assets/images/Circular_Logo.png") as ImageProvider
-              : NetworkImage(logo),
-          //  _imageFile == null
-          //     ? AssetImage("assets/images/Circular_Logo.png") as ImageProvider
-          //     : FileImage(File(_imageFile!.path)),
+          backgroundColor: Color.fromARGB(126, 39, 141, 134),
+          radius: 60.0,
+          child: CircleAvatar(
+            radius: 58.0,
+            backgroundImage: logo == null
+                ? AssetImage("assets/images/Circular_Logo.png") as ImageProvider
+                : NetworkImage(logo),
+            //  _imageFile == null
+            //     ? AssetImage("assets/images/Circular_Logo.png") as ImageProvider
+            //     : FileImage(File(_imageFile!.path)),
+          ),
         ),
       ]),
     );
@@ -451,6 +455,119 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                       ),
                     ),
                     Expanded(
+<<<<<<< HEAD
+                      child: Center(
+                        child: Row(children: [
+                          SizedBox(
+                            width: 20,
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              showAlertDialog(context);
+                              // openPasswordDialog(context);
+
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ShopOwnerEditProfile(
+                                        shopowner.name,
+                                        shopowner.email,
+                                        shopowner.password,
+                                        shopowner.DOB,
+                                        shopowner.phone_number,
+                                        shopowner.shopname,
+                                        shopowner.shopdescription,
+                                        shopowner.id,
+                                        shopowner.logo)),
+                              );
+                            },
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Color(0xff51908E)),
+                              padding: MaterialStateProperty.all(
+                                  EdgeInsets.symmetric(
+                                      horizontal: 45, vertical: 10)),
+                              shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(27))),
+                            ),
+                            child: Text(
+                              " تعديل البيانات",
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: "Tajawal",
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          ElevatedButton(
+                            onPressed: () async {
+                              // Diolog to enter the password
+
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text("تنبيه"),
+                                    content: Text('سيتم حذف الحساب نهائيا'),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: Text("حذف",
+                                            style:
+                                                TextStyle(color: Colors.red)),
+                                        onPressed: () {
+                                          //The logic of deleting an account
+                                          final docSO = FirebaseFirestore
+                                              .instance
+                                              .collection('shop_owner')
+                                              .doc(uid);
+                                          //Navigator.of(context).pop();
+
+                                          docSO.delete();
+
+                                          FirebaseAuth.instance.signOut();
+                                          Navigator.of(context,
+                                                  rootNavigator: true)
+                                              .pushReplacement(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          new Welcome()));
+                                        },
+                                      ),
+                                      TextButton(
+                                        child: Text("تراجع"),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      )
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(
+                                  Color.fromARGB(255, 221, 112, 112)),
+                              padding: MaterialStateProperty.all(
+                                  EdgeInsets.symmetric(
+                                      horizontal: 45, vertical: 10)),
+                              shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(27))),
+                            ),
+                            child: Text(
+                              "حذف الحساب",
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: "Tajawal",
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ]),
+                      ),
+=======
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -565,6 +682,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                               ),
                             ),
                           ]),
+>>>>>>> 0e6196d492e6858726c25c09a6acc3d065b8d74b
                     ),
                   ],
                 ),
