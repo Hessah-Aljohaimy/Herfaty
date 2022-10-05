@@ -238,17 +238,17 @@ Widget buildCustomer(Customer customer, BuildContext context) {
       SizedBox(
         height: 60,
       ),
-      Text(
-        "بيانات المشتري",
-        style: TextStyle(
-          color: Color.fromARGB(255, 26, 96, 91),
-          fontWeight: FontWeight.bold,
-          fontSize: 24,
-          fontFamily: "Tajawal",
-        ),
-      ),
+      // Text(
+      //   "بيانات المشتري",
+      //   style: TextStyle(
+      //     color: Color.fromARGB(255, 26, 96, 91),
+      //     fontWeight: FontWeight.bold,
+      //     fontSize: 24,
+      //     fontFamily: "Tajawal",
+      //   ),
+      // ),
       Container(
-        height: 230,
+        height: 260,
         margin: const EdgeInsets.all(10.0),
         padding: const EdgeInsets.all(15),
         // decoration: BoxDecoration(
@@ -266,7 +266,7 @@ Widget buildCustomer(Customer customer, BuildContext context) {
         child: ListView.builder(
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
-            itemCount: titles.length,
+            itemCount: 1,
             itemBuilder: (context, index) {
               return Card(
                 shape: RoundedRectangleBorder(
@@ -287,88 +287,104 @@ Widget buildCustomer(Customer customer, BuildContext context) {
                       //       color: kPrimaryColor),
                       // ),
                       SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
-                      if (titles[index] == 'اسم المشتري')
-                        Row(
-                          children: [
-                            Text(
-                              'اسم المشتري ',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 26, 96, 91),
-                                fontWeight: FontWeight.w800,
-                                fontSize: 17,
-                                fontFamily: "Tajawal",
-                              ),
+                      Center(
+                        child: Text(
+                          "بيانات المشتري",
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 26, 96, 91),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24,
+                            fontFamily: "Tajawal",
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 25,
+                      ),
+
+                      Row(
+                        children: [
+                          Text(
+                            'اسم المشتري ',
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 26, 96, 91),
+                              fontWeight: FontWeight.w800,
+                              fontSize: 17,
+                              fontFamily: "Tajawal",
                             ),
-                            SizedBox(
-                              width: 5,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            '${customer.name}',
+                            style: TextStyle(
+                              fontSize: 19,
+                              fontFamily: "Tajawal",
+                              fontWeight: FontWeight.w500,
                             ),
-                            Text(
-                              '${customer.name}',
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 35,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            'البريد الإلكتروني ',
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 26, 96, 91),
+                              fontWeight: FontWeight.w800,
+                              fontSize: 17,
+                              fontFamily: "Tajawal",
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            '${customer.email}',
+                            style: TextStyle(
+                              fontSize: 19,
+                              fontFamily: "Tajawal",
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 35,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            'كلمة المرور',
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 26, 96, 91),
+                              fontWeight: FontWeight.w800,
+                              fontSize: 17,
+                              fontFamily: "Tajawal",
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: Text(
+                              passwordStar,
                               style: TextStyle(
                                 fontSize: 19,
                                 fontFamily: "Tajawal",
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                          ],
-                        ),
-
-                      if (titles[index] == 'البريد الإلكتروني')
-                        Row(
-                          children: [
-                            Text(
-                              'البريد الإلكتروني ',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 26, 96, 91),
-                                fontWeight: FontWeight.w800,
-                                fontSize: 17,
-                                fontFamily: "Tajawal",
-                              ),
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              '${customer.email}',
-                              style: TextStyle(
-                                fontSize: 19,
-                                fontFamily: "Tajawal",
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
-
-                      if (titles[index] == 'كلمة المرور')
-                        Row(
-                          children: [
-                            Text(
-                              'كلمة المرور',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 26, 96, 91),
-                                fontWeight: FontWeight.w800,
-                                fontSize: 17,
-                                fontFamily: "Tajawal",
-                              ),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: Text(
-                                passwordStar,
-                                style: TextStyle(
-                                  fontSize: 19,
-                                  fontFamily: "Tajawal",
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                   // leading: Icon(
