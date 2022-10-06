@@ -29,11 +29,15 @@ class logOutButton extends StatelessWidget {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   String getUD() {
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final User? user = auth.currentUser;
-    final uid = user!.uid;
+    try {
+      final FirebaseAuth auth = FirebaseAuth.instance;
+      final User? user = auth.currentUser;
+      final uid = user!.uid;
 
-    return uid;
+      return uid;
+    } catch (e) {
+      return 'null';
+    }
   }
 
   get kPrimaryColor => null;
@@ -189,21 +193,25 @@ Future readDocument(String id) async {
 /////////////////////////////
 
 Future<Customer?> readUser() async {
-  print("BBBBBBBBBBEGIningggggggggggggggggggggggg ");
-  final FirebaseAuth auth = FirebaseAuth.instance;
-  final User? user = auth.currentUser;
-  final uid = user!.uid;
-  String DocId = uid;
+  try {
+    print("BBBBBBBBBBEGIningggggggggggggggggggggggg ");
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+    String DocId = uid;
 
-  print(uid);
+    print(uid);
 
-  final docCustomer =
-      await FirebaseFirestore.instance.collection('customers').doc(uid).get();
-  print('after the refrence');
+    final docCustomer =
+        await FirebaseFirestore.instance.collection('customers').doc(uid).get();
+    print('after the refrence');
 
-  if (docCustomer.exists) {
-    print("SSSSSSSSSSSSSSSSSSNNNNNNNNNNNNNNNNAAAAAAAAAAAAAAAAAAPPPPPPPPPPP");
-    return Customer.fromJson(docCustomer.data()!);
+    if (docCustomer.exists) {
+      print("SSSSSSSSSSSSSSSSSSNNNNNNNNNNNNNNNNAAAAAAAAAAAAAAAAAAPPPPPPPPPPP");
+      return Customer.fromJson(docCustomer.data()!);
+    }
+  } catch (e) {
+    return null;
   }
 }
 
