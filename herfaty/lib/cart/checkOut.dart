@@ -144,7 +144,7 @@ class checkOut extends StatelessWidget {
                   )),
               ElevatedButton(
                 child: Text(
-                  'الإكمال إلى الدفع',
+                  "اتمام الدفع",
                   style: TextStyle(
                       fontSize: 15, color: Colors.white, fontFamily: "Tajawal"),
                 ),
