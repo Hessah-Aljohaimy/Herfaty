@@ -48,7 +48,7 @@ class productCard_Owner extends StatelessWidget {
           children: [
             Container(
               //(small box inside the Big box)
-              padding: const EdgeInsets.only(top: 10),
+              //padding: const EdgeInsets.only(top: 10),
               height: 180,
               decoration: BoxDecoration(
                 //color: const Color(0xFFFAF9F6),
@@ -61,12 +61,6 @@ class productCard_Owner extends StatelessWidget {
               top: 0,
               left: 0,
               child: Container(
-                // margin: const EdgeInsets.symmetric(
-                //   vertical: 15,
-                // ),
-                // padding: const EdgeInsets.symmetric(
-                //   horizontal: 20,
-                // ),
                 height: 180,
                 width: 180,
                 decoration: BoxDecoration(
@@ -91,54 +85,50 @@ class productCard_Owner extends StatelessWidget {
               ),
             ),
 
-            //**********************This part contains product name and price
+            //********************This part contains product name, price and available amount
             Positioned(
-              bottom: 0,
-              right: 0,
+              top: 20,
+              right: 20,
               child: SizedBox(
                 height: 136,
                 //because our image is 200, so the siz of this box = width -200
                 width: size.width - 200,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    //product name=======================================================================
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Text(
-                        product.name,
-                        style: const TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: "Tajawal",
-                          color: Colors.black,
-                        ),
+                    //product name==============================================================
+                    Text(
+                      product.name,
+                      style: const TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: "Tajawal",
+                        color: Colors.black,
                       ),
                     ),
-                    //const Spacer(),
-                    //const Spacer(),
-                    //const Spacer(),
-                    //سعر المنتج وعلامة التفضيل===============================================================
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            //vertical: 10,
-                            right: 18,
-                            top: 18,
-                          ),
-                          child: Text(
-                            ' ${product.price} ريال',
-                            style: const TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: "Tajawal",
-                              color: Colors.orange,
-                            ),
-                          ),
-                        ),
-                      ],
+
+                    //product price==============================================================
+                    Text(
+                      ' ${product.price} ريال',
+                      style: const TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: "Tajawal",
+                        color: Colors.orange,
+                      ),
                     ),
+
+                    //product available amount ===================================================
+                    Text(
+                      ' الكمية: ${product.availableAmount}',
+                      style: const TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: "Tajawal",
+                        color: Color.fromARGB(180, 86, 86, 86),
+                      ),
+                    )
                   ],
                 ),
               ),
