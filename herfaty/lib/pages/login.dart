@@ -128,8 +128,7 @@ class _login extends State<login> {
                               if (_formKey.currentState!.validate()) {
                                 try {
                                   UserCredential userCredentia =
-                                      await FirebaseAuth.instance
-                                          .signInWithEmailAndPassword(
+                                      await FirebaseAuth.instance.signInWithEmailAndPassword(
                                               email: _emailTextController.text,
                                               password:
                                                   _passwordTextController.text);
@@ -143,7 +142,17 @@ class _login extends State<login> {
                                     }
                                   }
 
-                                  if (isShopOwner) {
+if(_emailTextController.text=='driver@gmail.com'){
+      OwnerId = '';
+                                    _emailTextController.clear();
+                                    _passwordTextController.clear();
+                                    Navigator.pushNamed(
+                                        context, '/');
+                                        
+                                        }
+
+
+                                 else if (isShopOwner) {
                                     isShopOwner = false;
                                     OwnerId = '';
                                     _emailTextController.clear();
