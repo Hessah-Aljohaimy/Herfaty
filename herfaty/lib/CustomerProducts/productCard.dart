@@ -60,12 +60,6 @@ class productCard extends StatelessWidget {
               top: 0,
               left: 0,
               child: Container(
-                // margin: const EdgeInsets.symmetric(
-                //   vertical: 15,
-                // ),
-                // padding: const EdgeInsets.symmetric(
-                //   horizontal: 20,
-                // ),
                 height: 180,
                 width: 180,
                 decoration: BoxDecoration(
@@ -90,91 +84,70 @@ class productCard extends StatelessWidget {
               ),
             ),
 
-            //**********************This part contains product name and price
+            //**********************This part contains product name, price and shop name
             Positioned(
-              bottom: 0,
-              right: 0,
+              top: 20,
+              right: 20,
               child: SizedBox(
                 height: 136,
                 //because our image is 200, so the siz of this box = width -200
                 width: size.width - 200,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    //product name=======================================================================
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Text(
-                        product.name,
-                        style: const TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: "Tajawal",
-                          color: Colors.black,
-                        ),
+                    //product name===========================================================
+                    Text(
+                      product.name,
+                      style: const TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: "Tajawal",
+                        color: Colors.black,
                       ),
                     ),
-                    //const Spacer(),
-                    //const Spacer(),
-                    //const Spacer(),
-                    //سعر المنتج وعلامة التفضيل===============================================================
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            //vertical: 10,
-                            right: 18,
-                            //top: 6,
-                          ),
-                          child: Text(
-                            ' ${product.price} ريال',
-                            style: const TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: "Tajawal",
-                              color: Colors.orange,
-                            ),
-                          ),
-                        ),
 
-                        //(أضافة إلى المفضلة )--------------------------
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            //right: 10,
-                            left: 30,
-                          ),
-                          child: IconButton(
-                            padding: EdgeInsets.only(right: 1),
-                            icon: const Icon(
-                              Icons.favorite,
-                              color: Color.fromARGB(157, 158, 158, 158),
-                              size: 35.0,
-                            ),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                        ),
-                      ],
+                    //سعر المنتج  ===========================================================
+                    Text(
+                      ' ${product.price} ريال',
+                      style: const TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: "Tajawal",
+                        color: Colors.orange,
+                      ),
                     ),
-                    //اسم المتجر
-                    Padding(
-                      padding: EdgeInsets.only(right: 18, top: 6),
-                      child: Text(
-                        product.shopName,
-                        style: const TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: "Tajawal",
-                          color: kPrimaryLight,
-                        ),
+                    //اسم المتجر  ===========================================================
+                    Text(
+                      product.shopName,
+                      style: const TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: "Tajawal",
+                        color: kPrimaryLight,
                       ),
                     ),
                   ],
                 ),
               ),
             ),
+            //**********************This part contains wish list icon
+            Positioned(
+              //top: 10,
+              left: 190,
+              bottom: 26,
+              child: IconButton(
+                //padding: EdgeInsets.only(right: 1),
+                icon: const Icon(
+                  Icons.favorite,
+                  color: Color.fromARGB(157, 158, 158, 158),
+                  size: 32.0,
+                ),
+                onPressed: () {
+                  //Navigator.pop(context);
+                },
+              ),
+            )
           ],
         ),
       ),
