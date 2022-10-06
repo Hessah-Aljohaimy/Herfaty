@@ -326,7 +326,8 @@ Widget _buildList(List<CartModal> list, String shopName) {
                               Text(list[index].name,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(fontSize: 16.0)),
-                              Text(" ${list[index].price.toString()}ريال "),
+                              Text(
+                                  " ${list[index].price.toString()}ريال لكل قطعة "),
                               Text("الكمية ${list[index].quantity.toString()}"),
                             ],
                           ),
