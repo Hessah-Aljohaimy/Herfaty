@@ -78,6 +78,11 @@ class list extends StatelessWidget {
                   children: [
                     Container(
                       height: 610,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                        image: AssetImage('assets/images/cartBack1.png'),
+                        fit: BoxFit.cover,
+                      )),
                       child: Center(
                         child: ListView.builder(
                             itemCount: cItems.length,
