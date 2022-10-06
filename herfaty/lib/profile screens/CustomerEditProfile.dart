@@ -87,7 +87,7 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
         backgroundColor: Colors.white,
         shadowColor: Color.fromARGB(255, 39, 141, 134),
         elevation: 3,
-        /*leading: IconButton(
+        leading: IconButton(
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (BuildContext context) => logOutButton()));
@@ -96,15 +96,15 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
             Icons.arrow_back,
             color: Color.fromARGB(255, 39, 141, 134),
           ),
-        ),*/
+        ),
         actions: [
-          /*IconButton(
+          IconButton(
             icon: Icon(Icons.logout, color: Color.fromARGB(255, 39, 141, 134)),
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (BuildContext context) => login()));
             },
-          ),*/
+          ),
         ],
         automaticallyImplyLeading: false,
         iconTheme: IconThemeData(color: kPrimaryColor),
