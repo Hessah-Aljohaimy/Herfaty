@@ -44,6 +44,8 @@ class payForm extends StatefulWidget {
 }
 
 class _payFormState extends State<payForm> {
+  bool checkDonePay = false;
+
 /*
 class payForm extends StatelessWidget {
   List<CartModal> Items;
@@ -114,92 +116,101 @@ class payForm extends StatelessWidget {
                     );
                     if (state.status == PaymentStatus.initial) {
                       try {
-                        //------------------------------------------------
-                        CollectionReference reference =
-                            FirebaseFirestore.instance.collection('Products');
-                        reference.snapshots().listen((querySnapshot) {
-                          querySnapshot.docChanges.forEach((change) {
-                            if (change.type == DocumentChangeType.modified) {
-                              for (var i = 0; i < querySnapshot.size; i++) {
-                                var data = querySnapshot.docs
-                                    .elementAt(i)
-                                    .data() as Map;
+                        if (state.status != PaymentStatus.success) {
+                          print("enter wrong");
+                          //------------------------------------------------
+                          CollectionReference reference =
+                              FirebaseFirestore.instance.collection('Products');
+                          reference.snapshots().listen((querySnapshot) {
+                            querySnapshot.docChanges.forEach((change) async {
+                              if (change.type == DocumentChangeType.modified &&
+                                  state.status != PaymentStatus.success) {
+                                for (var i = 0; i < querySnapshot.size; i++) {
+                                  var data = querySnapshot.docs
+                                      .elementAt(i)
+                                      .data() as Map;
 
-                                String product = data["id"];
+                                  String product = data["id"];
 
-                                for (var index = 0;
-                                    index < pro.length;
-                                    index++) {
-                                  print(
-                                      "-------------------happ in check out22222222 ${pro.length}");
-                                  if (product == pro[index].productId) {
-                                    int updatedAvailabeAmount =
-                                        data["avalibleAmount"];
-                                    if (updatedAvailabeAmount !=
-                                        pro[index].avalibleAmount) {
-                                      print(
-                                          "-------------------happ in check out2");
-                                      FirebaseFirestore.instance
-                                          .collection('cart')
-                                          .doc(pro[index].docId)
-                                          .update({
-                                        "avalibleAmount": updatedAvailabeAmount
-                                      });
-                                      if (updatedAvailabeAmount == 0) {
-                                        print(
-                                            "-------------------happ in check out4");
-                                        FirebaseFirestore.instance
-                                            .collection('cart')
-                                            .doc(pro[index].docId)
-                                            .update({"quantity": 0});
-
-                                        Navigator.of(context)
-                                            .pushAndRemoveUntil(
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        Cart()),
-                                                (Route<dynamic> route) =>
-                                                    false);
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          const SnackBar(
-                                              content: Text(
-                                                  'نفذت بعض المنتجات يرجى التحقق')),
-                                        );
-                                      } else if (updatedAvailabeAmount <
-                                          pro[index].quantity) {
-                                        print(
-                                            "-------------------happ in check out3");
-                                        if (state.status ==
-                                            PaymentStatus.initial) {
+                                  for (var index = 0;
+                                      index < pro.length;
+                                      index++) {
+                                    print(
+                                        "-------------------happ in check out22222222 ${pro.length}");
+                                    if (!checkDonePay) {
+                                      if (product == pro[index].productId) {
+                                        int updatedAvailabeAmount =
+                                            data["avalibleAmount"];
+                                        if (updatedAvailabeAmount !=
+                                            pro[index].avalibleAmount) {
+                                          print(
+                                              "-------------------happ in check out2");
                                           FirebaseFirestore.instance
                                               .collection('cart')
                                               .doc(pro[index].docId)
                                               .update({
-                                            "quantity": updatedAvailabeAmount
+                                            "avalibleAmount":
+                                                updatedAvailabeAmount
                                           });
-                                          Navigator.of(context)
-                                              .pushAndRemoveUntil(
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          Cart()),
-                                                  (Route<dynamic> route) =>
-                                                      false);
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            const SnackBar(
-                                                content: Text(
-                                                    ' قلت كميات بعض المنتجات يرجى التحقق')),
-                                          );
+                                          if (updatedAvailabeAmount == 0) {
+                                            print(
+                                                "-------------------happ in check out4");
+                                            FirebaseFirestore.instance
+                                                .collection('cart')
+                                                .doc(pro[index].docId)
+                                                .update({"quantity": 0});
+
+                                            Navigator.of(context)
+                                                .pushAndRemoveUntil(
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            Cart()),
+                                                    (Route<dynamic> route) =>
+                                                        false);
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              const SnackBar(
+                                                  content: Text(
+                                                      'نفذت بعض المنتجات يرجى التحقق')),
+                                            );
+                                          } else if (updatedAvailabeAmount <
+                                              pro[index].quantity) {
+                                            print(
+                                                "-------------------happ in check out3");
+
+                                            if (state.status !=
+                                                PaymentStatus.success) {
+                                              FirebaseFirestore.instance
+                                                  .collection('cart')
+                                                  .doc(pro[index].docId)
+                                                  .update({
+                                                "quantity":
+                                                    updatedAvailabeAmount
+                                              });
+                                              Navigator.of(context)
+                                                  .pushAndRemoveUntil(
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              Cart()),
+                                                      (Route<dynamic> route) =>
+                                                          false);
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                const SnackBar(
+                                                    content: Text(
+                                                        ' قلت كميات بعض المنتجات يرجى التحقق')),
+                                              );
+                                            }
+                                          }
                                         }
                                       }
                                     }
                                   }
                                 }
                               }
-                            }
+                            });
                           });
-                        });
+                        }
                       } catch (e) {}
 
                       //---------------------------------------------
@@ -228,11 +239,15 @@ class payForm extends StatelessWidget {
                             ), // CardFormField
                             const SizedBox(height: 10),
                             ElevatedButton(
-                              onPressed: () {
+                              onPressed: () async {
+                                checkDonePay = true;
                                 if (controller.details.complete) {
                                   print("-----------------comp-");
-                                  pro = [];
-                                  print("--------------here-${pro.length}");
+                                  setState(() {
+                                    pro = [];
+                                  });
+
+                                  print("--------------hero1-${pro.length}");
 
                                   context.read<PaymentBloc>().add(
                                         const PaymentCreateIntent(
@@ -278,15 +293,12 @@ class payForm extends StatelessWidget {
                     }
 
                     if (state.status == PaymentStatus.success) {
-                      Timer(Duration(seconds: 0), () {
-                        // <-- Delay here
-                        pro = [];
-                      });
+                      deletFromCart();
 
-                      Timer(Duration(seconds: 2), () {
-                        // <-- Delay here
-                        updateProducts();
-                      });
+                      pro = [];
+                      print("--------------hero2-${pro.length}");
+
+                      updateProducts();
 
                       final orderToBeAdded =
                           FirebaseFirestore.instance.collection('orders').doc();
@@ -326,8 +338,7 @@ class payForm extends StatelessWidget {
                               subTitleText: 'تمت عملية الدفع والطلب بنجاح',
                             ),
                             ElevatedButton(
-                              onPressed: () async => {
-                                deletFromCart(),
+                              onPressed: () => {
                                 state.status = PaymentStatus.initial,
 
                                 Navigator.of(context).pushAndRemoveUntil(
