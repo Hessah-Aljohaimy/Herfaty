@@ -100,6 +100,18 @@ class _CartState extends State<Cart> {
   }
 
   Column buildView(String k, cItems, size) {
+    List<CartModal> listUpdated = [];
+    List<CartModal> list = cItems;
+    print("hhhhhhhhhhhh${list.length}");
+    for (int i = 0; i < list.length; i++) {
+      print("qqqqqqqqqqqqqqq");
+      if (list[i].quantity != 0) {
+        print("ssssssssssss");
+        listUpdated.add(list[i]);
+      }
+    }
+    print("hhhhhhhhhhhh${list.length}");
+
     return Column(
       children: [
         Container(
@@ -434,27 +446,23 @@ class _CartState extends State<Cart> {
                             heroTag: "btn ${Random().nextInt(500)}",
                             elevation: 2,
                             onPressed: () {
-                              var list = cItems.toList();
-                              for (int i = 0; i < list.length; i++)
-                                if (list[i].quantity == 0) {
-                                  list.removeAt(i);
-                                }
                               //check out page
-                              if (list.length != 0) {
+                              if (listUpdated.length != 0) {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => checkOut(
                                           shopName: k,
-                                          Items: list,
-                                          totalPrice: calculatTotal(list))),
+                                          Items: listUpdated,
+                                          totalPrice:
+                                              calculatTotal(listUpdated))),
                                 );
                               } else {
                                 ShowDialogMethod(context, " لقد نفذت المنتجات");
                               }
                             },
                             label: Text(
-                                'إتمام الطلب (${calculatItems(cItems)})',
+                                'إتمام الطلب (${calculatItems(listUpdated)})',
                                 style: TextStyle(
                                     fontSize: 15.0, fontFamily: "Tajawal")),
                             //icon: const Icon(Icons.payment),

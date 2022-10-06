@@ -378,12 +378,12 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                         padding: EdgeInsets.only(top: 25),
                         child: Center(
                           child: Text(
-                            ' هذا المنتج غير متوفر حاليًا ',
+                            'هذا المنتج غير متوفر حاليًا',
                             style: const TextStyle(
                               fontSize: 22.0,
                               fontWeight: FontWeight.w600,
                               fontFamily: "Tajawal",
-                              color: Colors.white,
+                              color: Colors.redAccent,
                             ),
                           ),
                         ),
