@@ -114,12 +114,12 @@ class logOutButton extends StatelessWidget {
                         child: Text("تسجيل خروج",
                             style: TextStyle(color: Colors.red)),
                         onPressed: () {
-                          FirebaseAuth.instance.signOut();
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                              "/", (Route<dynamic> route) => false);
-                          // Navigator.of(context, rootNavigator: true)
-                          //     .pushReplacement(MaterialPageRoute(
-                          //         builder: (context) => new login()));
+                          // FirebaseAuth.instance.signOut();
+                          // Navigator.of(context).pushNamedAndRemoveUntil(
+                          //     "/", (Route<dynamic> route) => false);
+                          Navigator.of(context, rootNavigator: true)
+                              .pushReplacement(MaterialPageRoute(
+                                  builder: (context) => new login()));
                         },
                       ),
                       TextButton(
