@@ -100,7 +100,18 @@ class _CartState extends State<Cart> {
   }
 
   Column buildView(String k, cItems, size) {
-    var listUpdated = [];
+    List<CartModal> listUpdated = [];
+    List<CartModal> list = cItems;
+    print("hhhhhhhhhhhh${list.length}");
+    for (int i = 0; i < list.length; i++) {
+      print("qqqqqqqqqqqqqqq");
+      if (list[i].quantity != 0) {
+        print("ssssssssssss");
+        listUpdated.add(list[i]);
+      }
+    }
+    print("hhhhhhhhhhhh${list.length}");
+
     return Column(
       children: [
         Container(
@@ -435,17 +446,6 @@ class _CartState extends State<Cart> {
                             heroTag: "btn ${Random().nextInt(500)}",
                             elevation: 2,
                             onPressed: () {
-                              var list = cItems.toList();
-
-                              print("hhhhhhhhhhhh${list.length}");
-                              for (int i = 0; i < list.length; i++) {
-                                print("qqqqqqqqqqqqqqq");
-                                if (list[i].quantity != 0) {
-                                  print("ssssssssssss");
-                                  listUpdated.add(list[i]);
-                                }
-                              }
-                              print("hhhhhhhhhhhh${list.length}");
                               //check out page
                               if (listUpdated.length != 0) {
                                 Navigator.push(
