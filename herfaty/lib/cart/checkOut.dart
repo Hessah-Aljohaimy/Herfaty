@@ -36,63 +36,7 @@ class checkOut extends StatelessWidget {
     print("class checkout");
     add.msg = 'ادخل موقعك';
     _addState._changeFormat();
-/*
-    CollectionReference reference =
-        FirebaseFirestore.instance.collection('Products');
-    reference.snapshots().listen((querySnapshot) {
-      querySnapshot.docChanges.forEach((change) {
-        if (change.type == DocumentChangeType.modified) {
-          for (var i = 0; i < querySnapshot.size; i++) {
-            var data = querySnapshot.docs.elementAt(i).data() as Map;
 
-            String product = data["id"];
-
-            for (var index = 0; index < Items.length; index++) {
-              if (product == Items[index].productId) {
-                print(Items[index].docId);
-                int updatedAvailabeAmount = data["avalibleAmount"];
-                if (updatedAvailabeAmount != Items[index].avalibleAmount) {
-                  print("-------------------happ in check out2");
-                  FirebaseFirestore.instance
-                      .collection('cart')
-                      .doc(Items[index].docId)
-                      .update({"avalibleAmount": updatedAvailabeAmount});
-                  if (updatedAvailabeAmount == 0) {
-                    print("-------------------happ in check out4");
-                    FirebaseFirestore.instance
-                        .collection('cart')
-                        .doc(Items[index].docId)
-                        .update({"quantity": 0});
-                    Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(builder: (context) => Cart()),
-                        (Route<dynamic> route) => false);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                          content: Text('نفذت بعض المنتجات  يرجى التحقق')),
-                    );
-                  } else if (updatedAvailabeAmount < Items[index].quantity) {
-                    print("-------------------happ in check out3");
-                    FirebaseFirestore.instance
-                        .collection('cart')
-                        .doc(Items[index].docId)
-                        .update({"quantity": updatedAvailabeAmount});
-                    Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(builder: (context) => Cart()),
-                        (Route<dynamic> route) => false);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                          content: Text(
-                              "بعض المنتجات قلت كميتها المتاحة يرجى التحقق")),
-                    );
-                  }
-                }
-              }
-            }
-          }
-        }
-      });
-    });
-*/
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
