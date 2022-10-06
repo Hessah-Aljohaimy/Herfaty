@@ -22,6 +22,7 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:herfaty/cart/payForm.dart';
 import '.env';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:herfaty/pages/driverPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -64,6 +65,7 @@ class MyApp extends StatelessWidget {
           "/signupCustomer": (context) => const SignupCustomer(),
           "/signupHerfay": (context) => const SignupHerafy(),
           "/customer_base_screen": (context) => const customerBaseScreen(),
+          "/driverPage":(context) => driverPage(),
         },
       ),
     );
