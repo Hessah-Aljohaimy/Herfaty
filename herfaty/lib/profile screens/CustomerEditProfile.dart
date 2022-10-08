@@ -29,7 +29,6 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
         new TextEditingController()..text = widget.email;
     TextEditingController _nameTextEditingController =
         new TextEditingController()..text = widget.name;
-    ;
 
     final titles = [
       'اسم المشتري',

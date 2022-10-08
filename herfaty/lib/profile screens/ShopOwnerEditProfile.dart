@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:intl/src/intl/date_format.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
@@ -45,6 +45,8 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
   final storageRef = FirebaseStorage.instance.ref();
   PickedFile? _imageFile;
   File? pickedImage1;
+
+  DateTime todaysDate = DateTime.now();
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
@@ -108,7 +110,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
         child: SingleChildScrollView(
           child: SizedBox(
             width: 430,
-            height: 520,
+            height: 620,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -135,7 +137,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                 ),
                 Center(
                   child: Text(
-                    "تعديل بيانات المشتري",
+                    "تعديل بيانات الحرفي",
                     style: TextStyle(
                       color: Color.fromARGB(255, 26, 96, 91),
                       fontWeight: FontWeight.bold,
@@ -145,36 +147,159 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                   ),
                 ),
                 SizedBox(
-                  height: 35,
+                  height: 15,
                 ),
                 Container(
                   padding: EdgeInsets.only(left: 15, right: 15, top: 10),
-                  color: Colors.white,
                   width: 350,
                   child: reusableTextFieldShopOwner(
                       'اسم الحرفي', false, _nameTextEditingController),
                 ),
 
                 SizedBox(
-                  height: 20,
+                  height: 5,
                 ),
                 Container(
                   padding: EdgeInsets.only(left: 15, right: 15, top: 10),
-                  color: Colors.white,
                   width: 350,
                   child: reusableTextFieldShopOwner(
                       "البريد الإلكتروني", false, _emailTextEditingController),
                 ),
 
                 SizedBox(
-                  height: 20,
+                  height: 5,
                 ),
                 Container(
                   padding: EdgeInsets.only(left: 15, right: 15, top: 10),
-                  color: Colors.white,
                   width: 350,
                   child: reusableTextFieldShopOwner(
                       "كلمة المرور", true, _passwordTextController),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                // Container(
+                //   padding: EdgeInsets.only(left: 15, right: 15, top: 10),
+                //   width: 350,
+                //   child: reusableTextFieldShopOwner(
+                //       "تاريخ الميلاد", false, _passwordTextController),
+                // ),
+                Container(
+                    padding: EdgeInsets.symmetric(horizontal: 47),
+                    child: Center(
+                        child: TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      controller: _BODController,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'أدخل تاريخ الميلاد';
+                        } else {
+                          return null;
+                        }
+                      },
+
+                      //editing controller of this TextField
+                      decoration: InputDecoration(
+                        suffix: Icon(
+                          Icons.calendar_today_rounded,
+                          color: Color.fromARGB(188, 26, 96, 91),
+                        ),
+                        labelText: "تاريخ الميلاد",
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 1.0, horizontal: 23),
+                        labelStyle: TextStyle(
+                            color: Color.fromARGB(255, 26, 96, 91),
+                            fontFamily: "Tajawal",
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                        fillColor: Colors.white.withOpacity(0.3),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(188, 26, 96, 91),
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              width: 2, color: Color.fromARGB(255, 26, 96, 91)),
+                        ),
+                        errorStyle:
+                            TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Color.fromARGB(255, 164, 46, 46)),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              width: 2,
+                              color: Color.fromARGB(255, 164, 46, 46)),
+                        ),
+                      ),
+
+                      readOnly:
+                          true, //set it true, so that user will not able to edit text
+                      onTap: () async {
+                        DateTime? pickedDate = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(
+                              2000), //DateTime.now() - not to allow to choose before today.
+                          lastDate: DateTime(2101),
+
+                          builder: (context, child) {
+                            return Theme(
+                              data: Theme.of(context).copyWith(
+                                colorScheme: ColorScheme.light(
+                                  primary: Color(0xff51908E), // <-- SEE HERE
+                                  onPrimary: Colors.white, // <-- SEE HERE
+                                  onSurface: Colors.black, // <-- SEE HERE
+                                ),
+                                textButtonTheme: TextButtonThemeData(
+                                  style: TextButton.styleFrom(
+                                    primary:
+                                        Color(0xff51908E), // button text color
+                                  ),
+                                ),
+                              ),
+                              child: child!,
+                            );
+                          },
+                        );
+
+                        if (pickedDate != null && pickedDate != todaysDate) {
+                          print(
+                              pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                          String formattedDate =
+                              DateFormat('yyyy-MM-dd').format(pickedDate);
+                          print(
+                              formattedDate); //formatted date output using intl package =>  2021-03-16
+                          //you can implement different kind of Date Format here according to your requirement
+
+                          setState(() {
+                            _BODController.text =
+                                formattedDate; //set output date to TextField value.
+                          });
+                        } else {
+                          print("لم يتم اختيار تاريخ الميلاد");
+                          Fluttertoast.showToast(
+                            msg: "لم يتم اختيار تاريخ الميلاد  ",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 3,
+                            backgroundColor: Colors.white,
+                            textColor: Colors.red,
+                            fontSize: 18.0,
+                          );
+                        }
+                      },
+                    ))),
+                SizedBox(
+                  height: 5,
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 15, right: 15, top: 10),
+                  width: 350,
+                  child: reusableTextFieldShopOwner(
+                      "رقم الجوال", false, _PhoneNumberTextEditingController),
                 ),
 
                 // SizedBox(
@@ -242,7 +367,8 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                           'email': _emailTextEditingController.text,
                           'id': widget.uid,
                           'name': _nameTextEditingController.text,
-                          'password': _passwordTextController.text
+                          'password': _passwordTextController.text,
+                          'DOB': _BODController,
                         });
                         Fluttertoast.showToast(
                           msg: "تم تحديث حسابك بنجاح",
