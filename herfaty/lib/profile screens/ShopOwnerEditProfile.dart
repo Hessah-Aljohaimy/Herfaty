@@ -118,9 +118,10 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                     width: 320,
                     height: 100,
                     decoration: BoxDecoration(
+                        color: Colors.black,
                         image: DecorationImage(
-                      image: AssetImage('assets/images/BG2.png'),
-                    )),
+                          image: AssetImage('assets/images/BG2.png'),
+                        )),
                     child: Center(
                       child: Column(
                         children: [
@@ -142,9 +143,9 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                 //     ),
                 //   ),
                 // ),
-                SizedBox(
-                  height: 35,
-                ),
+                // SizedBox(
+                //   height: 35,
+                // ),
                 Container(
                   color: Colors.white,
                   width: 350,
@@ -366,8 +367,8 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
       keyboardType: isPasswordType
           ? TextInputType.visiblePassword
           : TextInputType.emailAddress,
-      style:
-          TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontFamily: "Tajawal"),
+      style: TextStyle(
+          color: Color.fromARGB(255, 90, 90, 90), fontFamily: "Tajawal"),
       decoration: InputDecoration(
         contentPadding:
             const EdgeInsets.symmetric(vertical: 1.0, horizontal: 25),
