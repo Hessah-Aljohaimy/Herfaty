@@ -464,23 +464,23 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              showAlertDialog(context);
+                              showAlertDialog(context, shopowner);
                               // openPasswordDialog(context);
 
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ShopOwnerEditProfile(
-                                        shopowner.name,
-                                        shopowner.email,
-                                        shopowner.password,
-                                        shopowner.DOB,
-                                        shopowner.phone_number,
-                                        shopowner.shopname,
-                                        shopowner.shopdescription,
-                                        shopowner.id,
-                                        shopowner.logo)),
-                              );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => ShopOwnerEditProfile(
+                              //           shopowner.name,
+                              //           shopowner.email,
+                              //           shopowner.password,
+                              //           shopowner.DOB,
+                              //           shopowner.phone_number,
+                              //           shopowner.shopname,
+                              //           shopowner.shopdescription,
+                              //           shopowner.id,
+                              //           shopowner.logo)),
+                              // );
                             },
                             style: ButtonStyle(
                               backgroundColor:
@@ -601,7 +601,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
     }
   }
 
-  void showAlertDialog(BuildContext context) {
+  void showAlertDialog(BuildContext context, ShopOwner shopowner) {
     TextEditingController _checkPasslController = new TextEditingController();
     showDialog(
       context: context,
@@ -616,6 +616,8 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     // final checkPasslField = TextFormField(
+
+                    Text("تحقق الوصول"),
                     TextField(
                       controller: _checkPasslController,
                       keyboardType: TextInputType.visiblePassword,
@@ -633,8 +635,24 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                       child: Text("تحقق"),
                       onPressed: () {
 //check if it was correct
-
-                        Navigator.of(context).pop();
+                        if (shopowner.password == _checkPasslController.text) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ShopOwnerEditProfile(
+                                    shopowner.name,
+                                    shopowner.email,
+                                    shopowner.password,
+                                    shopowner.DOB,
+                                    shopowner.phone_number,
+                                    shopowner.shopname,
+                                    shopowner.shopdescription,
+                                    shopowner.id,
+                                    shopowner.logo)),
+                          );
+                        } else {
+                          Navigator.of(context).pop();
+                        }
                       },
                     )
                   ],
