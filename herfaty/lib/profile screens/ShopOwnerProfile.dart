@@ -464,23 +464,23 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              showAlertDialog(context);
+                              showAlertDialog(context, shopowner);
                               // openPasswordDialog(context);
 
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ShopOwnerEditProfile(
-                                        shopowner.name,
-                                        shopowner.email,
-                                        shopowner.password,
-                                        shopowner.DOB,
-                                        shopowner.phone_number,
-                                        shopowner.shopname,
-                                        shopowner.shopdescription,
-                                        shopowner.id,
-                                        shopowner.logo)),
-                              );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => ShopOwnerEditProfile(
+                              //           shopowner.name,
+                              //           shopowner.email,
+                              //           shopowner.password,
+                              //           shopowner.DOB,
+                              //           shopowner.phone_number,
+                              //           shopowner.shopname,
+                              //           shopowner.shopdescription,
+                              //           shopowner.id,
+                              //           shopowner.logo)),
+                              // );
                             },
                             style: ButtonStyle(
                               backgroundColor:
@@ -507,46 +507,48 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                             onPressed: () async {
                               // Diolog to enter the password
 
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: Text("تنبيه"),
-                                    content: Text('سيتم حذف الحساب نهائيا'),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        child: Text("حذف",
-                                            style:
-                                                TextStyle(color: Colors.red)),
-                                        onPressed: () {
-                                          //The logic of deleting an account
-                                          final docSO = FirebaseFirestore
-                                              .instance
-                                              .collection('shop_owner')
-                                              .doc(uid);
-                                          //Navigator.of(context).pop();
+                              showAlertDialogDelete(context, shopowner);
 
-                                          docSO.delete();
+                              // showDialog(
+                              //   context: context,
+                              //   builder: (BuildContext context) {
+                              //     return AlertDialog(
+                              //       title: Text("تنبيه"),
+                              //       content: Text('سيتم حذف الحساب نهائيا'),
+                              //       actions: <Widget>[
+                              //         TextButton(
+                              //           child: Text("حذف",
+                              //               style:
+                              //                   TextStyle(color: Colors.red)),
+                              //           onPressed: () {
+                              //             //The logic of deleting an account
+                              //             final docSO = FirebaseFirestore
+                              //                 .instance
+                              //                 .collection('shop_owner')
+                              //                 .doc(uid);
+                              //             //Navigator.of(context).pop();
 
-                                          FirebaseAuth.instance.signOut();
-                                          Navigator.of(context,
-                                                  rootNavigator: true)
-                                              .pushReplacement(
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          new Welcome()));
-                                        },
-                                      ),
-                                      TextButton(
-                                        child: Text("تراجع"),
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                      )
-                                    ],
-                                  );
-                                },
-                              );
+                              //             docSO.delete();
+
+                              //             FirebaseAuth.instance.signOut();
+                              //             Navigator.of(context,
+                              //                     rootNavigator: true)
+                              //                 .pushReplacement(
+                              //                     MaterialPageRoute(
+                              //                         builder: (context) =>
+                              //                             new Welcome()));
+                              //           },
+                              //         ),
+                              //         TextButton(
+                              //           child: Text("تراجع"),
+                              //           onPressed: () {
+                              //             Navigator.of(context).pop();
+                              //           },
+                              //         )
+                              //       ],
+                              //     );
+                              //   },
+                              // );
                             },
                             style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all(
@@ -601,7 +603,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
     }
   }
 
-  void showAlertDialog(BuildContext context) {
+  void showAlertDialog(BuildContext context, ShopOwner shopowner) {
     TextEditingController _checkPasslController = new TextEditingController();
     showDialog(
       context: context,
@@ -610,14 +612,38 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             child: Container(
-                height: 200,
+                height: 220,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     // final checkPasslField = TextFormField(
+
+                    Center(
+                      child: Text(
+                        "إمكانية الوصول",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: Color.fromARGB(255, 26, 96, 91),
+                          fontFamily: "Tajawal",
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: Container(
+                        width: 160,
+                        height: 70,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                          image: AssetImage('assets/images/momPassword.png'),
+                        )),
+                      ),
+                    ),
+
                     TextField(
                       controller: _checkPasslController,
+                      obscureText: true,
                       keyboardType: TextInputType.visiblePassword,
                       style: TextStyle(
                         color: Colors.black,
@@ -625,7 +651,8 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                       decoration: InputDecoration(
                         labelText: 'أدخل كلمة المرور لتعديل الحساب',
                         labelStyle: TextStyle(
-                          color: Color(0xff51908E),
+                          color: Color.fromARGB(255, 90, 90, 90),
+                          fontSize: 15,
                         ),
                       ),
                     ),
@@ -633,8 +660,143 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                       child: Text("تحقق"),
                       onPressed: () {
 //check if it was correct
+                        if (shopowner.password == _checkPasslController.text) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ShopOwnerEditProfile(
+                                    shopowner.name,
+                                    shopowner.email,
+                                    shopowner.password,
+                                    shopowner.DOB,
+                                    shopowner.phone_number,
+                                    shopowner.shopname,
+                                    shopowner.shopdescription,
+                                    shopowner.id,
+                                    shopowner.logo)),
+                          );
+                        } else {
+                          Navigator.of(context).pop();
+                        }
+                      },
+                    )
+                  ],
+                )));
+      },
 
-                        Navigator.of(context).pop();
+      // return CustomAlertDialog(
+      //       content: Container(
+      //         width: MediaQuery.of(context).size.width / 1.3,
+      //         height: MediaQuery.of(context).size.height / 2.5,
+      //         decoration: new BoxDecoration(
+      //           shape: BoxShape.rectangle,
+      //           color: const Color(0xFFFFFF),
+      //           borderRadius: new BorderRadius.all(new Radius.circular(32.0)),
+      //         ),
+      //         child: //Contents here
+      //       ),
+      //     );
+    );
+  }
+
+  void showAlertDialogDelete(BuildContext context, ShopOwner shopowner) {
+    TextEditingController _checkPasslController = new TextEditingController();
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            child: Container(
+                height: 220,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    // final checkPasslField = TextFormField(
+
+                    Center(
+                      child: Text(
+                        "إمكانية الوصول",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: Color.fromARGB(255, 26, 96, 91),
+                          fontFamily: "Tajawal",
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: Container(
+                        width: 160,
+                        height: 70,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                          image: AssetImage('assets/images/momPassword.png'),
+                        )),
+                      ),
+                    ),
+
+                    TextField(
+                      controller: _checkPasslController,
+                      obscureText: true,
+                      keyboardType: TextInputType.visiblePassword,
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                      decoration: InputDecoration(
+                        labelText: 'أدخل كلمة المرور لحذف الحساب',
+                        labelStyle: TextStyle(
+                          color: Color.fromARGB(255, 90, 90, 90),
+                          fontSize: 15,
+                        ),
+                      ),
+                    ),
+                    TextButton(
+                      child: Text("تحقق"),
+                      onPressed: () {
+//check if it was correct
+                        if (shopowner.password == _checkPasslController.text) {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text("تنبيه"),
+                                content: Text('سيتم حذف الحساب نهائيا'),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: Text("حذف",
+                                        style: TextStyle(color: Colors.red)),
+                                    onPressed: () {
+                                      //The logic of deleting an account
+                                      final docSO = FirebaseFirestore.instance
+                                          .collection('shop_owner')
+                                          .doc(uid);
+                                      //Navigator.of(context).pop();
+
+                                      docSO.delete();
+
+                                      FirebaseAuth.instance.signOut();
+                                      Navigator.of(context, rootNavigator: true)
+                                          .pushReplacement(MaterialPageRoute(
+                                              builder: (context) =>
+                                                  new Welcome()));
+                                    },
+                                  ),
+                                  TextButton(
+                                    child: Text("تراجع"),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  )
+                                ],
+                              );
+                            },
+                          );
+                        } else {
+                          //error try again
+                          Navigator.of(context).pop();
+                        }
                       },
                     )
                   ],

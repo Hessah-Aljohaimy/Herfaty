@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:intl/src/intl/date_format.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
@@ -45,6 +45,8 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
   final storageRef = FirebaseStorage.instance.ref();
   PickedFile? _imageFile;
   File? pickedImage1;
+
+  DateTime todaysDate = DateTime.now();
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
@@ -107,84 +109,223 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
         key: _formKey,
         child: SingleChildScrollView(
           child: SizedBox(
-            width: 340,
-            height: 120,
+            width: 430,
+            height: 728,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Expanded(
+                SizedBox(
+                  height: 5,
+                ),
+                Center(
                   child: Container(
-                    width: 320,
-                    height: 100,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                      image: AssetImage('assets/images/BG2.png'),
-                    )),
+                    width: 120,
+                    height: 120,
+                    // decoration: BoxDecoration(
+                    //     color: Colors.black,
+                    //     image: DecorationImage(
+                    //       image: AssetImage('assets/images/BG2.png'),
+                    //     )),
                     child: Center(
-                      child: Column(
-                        children: [
-                          // imageProfile(shopowner.logo),
-                        ],
-                      ),
+                      child: imageProfile(widget.logo),
                     ),
                   ),
                 ),
-
-                // Center(
-                //   child: Text(
-                //     "تعديل بيانات المشتري",
-                //     style: TextStyle(
-                //       color: Color.fromARGB(255, 26, 96, 91),
-                //       fontWeight: FontWeight.bold,
-                //       fontSize: 20,
-                //       fontFamily: "Tajawal",
-                //     ),
-                //   ),
-                // ),
                 SizedBox(
-                  height: 35,
+                  height: 15,
+                ),
+                Center(
+                  child: Text(
+                    "تعديل بيانات الحرفي",
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 26, 96, 91),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      fontFamily: "Tajawal",
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
                 ),
                 Container(
-                  color: Colors.white,
+                  padding: EdgeInsets.only(left: 15, right: 15, top: 10),
                   width: 350,
                   child: reusableTextFieldShopOwner(
                       'اسم الحرفي', false, _nameTextEditingController),
                 ),
 
                 SizedBox(
-                  height: 20,
+                  height: 5,
                 ),
                 Container(
-                  color: Colors.white,
+                  padding: EdgeInsets.only(left: 15, right: 15, top: 10),
                   width: 350,
                   child: reusableTextFieldShopOwner(
                       "البريد الإلكتروني", false, _emailTextEditingController),
                 ),
 
                 SizedBox(
-                  height: 20,
+                  height: 5,
                 ),
                 Container(
-                  color: Colors.white,
+                  padding: EdgeInsets.only(left: 15, right: 15, top: 10),
                   width: 350,
                   child: reusableTextFieldShopOwner(
                       "كلمة المرور", true, _passwordTextController),
                 ),
-
                 SizedBox(
-                  height: 20,
+                  height: 10,
+                ),
+                // Container(
+                //   padding: EdgeInsets.only(left: 15, right: 15, top: 10),
+                //   width: 350,
+                //   child: reusableTextFieldShopOwner(
+                //       "تاريخ الميلاد", false, _passwordTextController),
+                // ),
+                Container(
+                    padding: EdgeInsets.symmetric(horizontal: 47),
+                    child: Center(
+                        child: TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      controller: _BODController,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'أدخل تاريخ الميلاد';
+                        } else {
+                          return null;
+                        }
+                      },
+
+                      //editing controller of this TextField
+                      decoration: InputDecoration(
+                        suffix: Icon(
+                          Icons.calendar_today_rounded,
+                          color: Color.fromARGB(188, 26, 96, 91),
+                        ),
+                        labelText: "تاريخ الميلاد",
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 1.0, horizontal: 23),
+                        labelStyle: TextStyle(
+                            color: Color.fromARGB(255, 26, 96, 91),
+                            fontFamily: "Tajawal",
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                        fillColor: Colors.white.withOpacity(0.3),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(188, 26, 96, 91),
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              width: 2, color: Color.fromARGB(255, 26, 96, 91)),
+                        ),
+                        errorStyle:
+                            TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Color.fromARGB(255, 164, 46, 46)),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              width: 2,
+                              color: Color.fromARGB(255, 164, 46, 46)),
+                        ),
+                      ),
+
+                      readOnly:
+                          true, //set it true, so that user will not able to edit text
+                      onTap: () async {
+                        DateTime? pickedDate = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(
+                              2000), //DateTime.now() - not to allow to choose before today.
+                          lastDate: DateTime(2101),
+
+                          builder: (context, child) {
+                            return Theme(
+                              data: Theme.of(context).copyWith(
+                                colorScheme: ColorScheme.light(
+                                  primary: Color(0xff51908E), // <-- SEE HERE
+                                  onPrimary: Colors.white, // <-- SEE HERE
+                                  onSurface: Colors.black, // <-- SEE HERE
+                                ),
+                                textButtonTheme: TextButtonThemeData(
+                                  style: TextButton.styleFrom(
+                                    primary:
+                                        Color(0xff51908E), // button text color
+                                  ),
+                                ),
+                              ),
+                              child: child!,
+                            );
+                          },
+                        );
+
+                        if (pickedDate != null && pickedDate != todaysDate) {
+                          print(
+                              pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                          String formattedDate =
+                              DateFormat('yyyy-MM-dd').format(pickedDate);
+                          print(
+                              formattedDate); //formatted date output using intl package =>  2021-03-16
+                          //you can implement different kind of Date Format here according to your requirement
+
+                          setState(() {
+                            _BODController.text =
+                                formattedDate; //set output date to TextField value.
+                          });
+                        } else {
+                          print("لم يتم اختيار تاريخ الميلاد");
+                          Fluttertoast.showToast(
+                            msg: "لم يتم اختيار تاريخ الميلاد  ",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 3,
+                            backgroundColor: Colors.white,
+                            textColor: Colors.red,
+                            fontSize: 18.0,
+                          );
+                        }
+                      },
+                    ))),
+                SizedBox(
+                  height: 5,
                 ),
                 Container(
-                  color: Colors.white,
+                  padding: EdgeInsets.only(left: 15, right: 15, top: 10),
                   width: 350,
                   child: reusableTextFieldShopOwner(
-                      "كلمة المرور", true, _passwordTextController),
+                      "رقم الجوال", false, _PhoneNumberTextEditingController),
                 ),
-
+                Container(
+                  padding: const EdgeInsets.only(left: 100),
+                  child: Text(
+                    "رقم الجوال يجب أن يبدأ بـ(05) لعشرة أرقام",
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 86, 86, 86), fontSize: 12),
+                  ),
+                ),
                 SizedBox(
-                  height: 20,
+                  height: 5,
                 ),
+                // Container(
+                //   padding: EdgeInsets.only(left: 15, right: 15, top: 10),
+                //   width: 350,
+                //   child: reusableTextFieldShopOwner(
+                //       "اسم المتجر", false, _shopnameTextEditingController),
+                // ),
+                // Container(
+                //   child: reusableTextFieldDec(
+                //       "وصف المتجر", _shopdescriptionTextEditingController),
+                // ),
+
+                // SizedBox(
+                //   height: 20,
+                // ),
 
                 // Container(
                 //   height: 48,
@@ -229,122 +370,117 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                 //                 itemBuilder: (context, index) {} ,
 
                 //             ),
-                SizedBox(
-                  height: 10,
-                ),
+
                 Row(
                   children: [
+                    // Expanded(
+                    //   child: Row(children: [
                     SizedBox(
                       width: 50,
                     ),
-                    Expanded(
-                      child: Row(children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            print(widget.uid);
-                            //update this spesific feild
-                            docShopOwner.update({
-                              'email': _emailTextEditingController.text,
-                              'id': widget.uid,
-                              'name': _nameTextEditingController.text,
-                              'password': _passwordTextController.text
-                            });
-                            Fluttertoast.showToast(
-                              msg: "تم تحديث حسابك بنجاح",
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.CENTER,
-                              timeInSecForIosWeb: 3,
-                              backgroundColor: Color.fromARGB(255, 26, 96, 91),
-                              textColor: Colors.white,
-                              fontSize: 18.0,
-                            );
-                            // openPasswordDialog(context);
+                    ElevatedButton(
+                      onPressed: () {
+                        print(widget.uid);
+                        //update this spesific feild
+                        docShopOwner.update({
+                          'email': _emailTextEditingController.text,
+                          'id': widget.uid,
+                          'name': _nameTextEditingController.text,
+                          'password': _passwordTextController.text,
+                          'DOB': _BODController,
+                        });
+                        Fluttertoast.showToast(
+                          msg: "تم تحديث حسابك بنجاح",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 3,
+                          backgroundColor: Color.fromARGB(255, 26, 96, 91),
+                          textColor: Colors.white,
+                          fontSize: 18.0,
+                        );
+                        // openPasswordDialog(context);
 
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //       builder: (context) => CustomerEditProfile(
-                            //           customer.name,
-                            //           customer.email,
-                            //           customer.password)),
-                            // );
-                          },
-                          style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Color(0xff51908E)),
-                            padding: MaterialStateProperty.all(
-                                EdgeInsets.symmetric(
-                                    horizontal: 55, vertical: 13)),
-                            shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(27))),
-                          ),
-                          child: Text(
-                            " حفظ ",
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontFamily: "Tajawal",
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        ElevatedButton(
-                          onPressed: () async {
-                            // Diolog to enter the password
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => CustomerEditProfile(
+                        //           customer.name,
+                        //           customer.email,
+                        //           customer.password)),
+                        // );
+                      },
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Color(0xff51908E)),
+                        padding: MaterialStateProperty.all(
+                            EdgeInsets.symmetric(horizontal: 55, vertical: 13)),
+                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(27))),
+                      ),
+                      child: Text(
+                        " حفظ ",
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: "Tajawal",
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    ElevatedButton(
+                      onPressed: () async {
+                        // Diolog to enter the password
 
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: Text("تنبيه"),
-                                  content: Text('سيتم إلغاء التعديلات'),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      child: Text("إلغاء",
-                                          style: TextStyle(color: Colors.red)),
-                                      onPressed: () {
-                                        //The logic of deleting an account
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text("تنبيه"),
+                              content: Text('سيتم إلغاء التعديلات'),
+                              actions: <Widget>[
+                                TextButton(
+                                  child: Text("إلغاء",
+                                      style: TextStyle(color: Colors.red)),
+                                  onPressed: () {
+                                    //The logic of deleting an account
 
-                                        //Navigator.of(context).pop();
-                                        // FirebaseAuth.instance.signOut();
-                                        // Navigator.of(context, rootNavigator: true)
-                                        //     .pushReplacement(MaterialPageRoute(
-                                        //         builder: (context) => new Welcome()));
-                                      },
-                                    ),
-                                    TextButton(
-                                      child: Text("تراجع"),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    )
-                                  ],
-                                );
-                              },
+                                    //Navigator.of(context).pop();
+                                    // FirebaseAuth.instance.signOut();
+                                    // Navigator.of(context, rootNavigator: true)
+                                    //     .pushReplacement(MaterialPageRoute(
+                                    //         builder: (context) => new Welcome()));
+                                  },
+                                ),
+                                TextButton(
+                                  child: Text("تراجع"),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                )
+                              ],
                             );
                           },
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                                Color.fromARGB(255, 221, 112, 112)),
-                            padding: MaterialStateProperty.all(
-                                EdgeInsets.symmetric(
-                                    horizontal: 55, vertical: 13)),
-                            shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(27))),
-                          ),
-                          child: Text(
-                            "إلغاء",
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontFamily: "Tajawal",
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ]),
-                    )
+                        );
+                      },
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                            Color.fromARGB(255, 221, 112, 112)),
+                        padding: MaterialStateProperty.all(
+                            EdgeInsets.symmetric(horizontal: 55, vertical: 13)),
+                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(27))),
+                      ),
+                      child: Text(
+                        "إلغاء",
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: "Tajawal",
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    //   ]),
+                    // )
                   ],
                 ),
               ],
@@ -366,8 +502,8 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
       keyboardType: isPasswordType
           ? TextInputType.visiblePassword
           : TextInputType.emailAddress,
-      style:
-          TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontFamily: "Tajawal"),
+      style: TextStyle(
+          color: Color.fromARGB(255, 90, 90, 90), fontFamily: "Tajawal"),
       decoration: InputDecoration(
         contentPadding:
             const EdgeInsets.symmetric(vertical: 1.0, horizontal: 25),
@@ -417,14 +553,14 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
     );
   }
 
-  Widget imageProfile() {
+  Widget imageProfile(String logo) {
     return Center(
       child: Stack(children: <Widget>[
         CircleAvatar(
           radius: 80.0,
-          backgroundImage: showLocalImage == false
+          backgroundImage: logo == null
               ? AssetImage("assets/images/Circular_Logo.png") as ImageProvider
-              : FileImage(pickedImage1!) as ImageProvider,
+              : NetworkImage(logo),
 
           // _imageFile.path
           //
@@ -444,7 +580,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
             child: Icon(
               Icons.camera_alt,
               color: Colors.teal,
-              size: 28.0,
+              size: 25.0,
             ),
           ),
         ),
@@ -527,5 +663,56 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
         );
       }
     });
+  }
+
+  //////////////////////////// Shop description Text form ////////////////////////////////
+  TextFormField reusableTextFieldDec(
+      String text, TextEditingController controller) {
+    return TextFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      controller: controller,
+      minLines: text == "وصف المتجر" ? 1 : 1,
+      maxLines: text == "وصف المتجر" ? 9 : 1,
+      maxLength: 160,
+      style: TextStyle(
+          color: Color.fromARGB(255, 90, 90, 90), fontFamily: "Tajawal"),
+      decoration: InputDecoration(
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 1.0, horizontal: 23),
+        labelText: text,
+        labelStyle: TextStyle(
+            color: Color.fromARGB(255, 26, 96, 91),
+            fontFamily: "Tajawal",
+            fontSize: 20,
+            fontWeight: FontWeight.bold),
+        fillColor: Colors.white.withOpacity(0.3),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Color.fromARGB(255, 26, 96, 91)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide:
+              BorderSide(width: 2, color: Color.fromARGB(255, 26, 96, 91)),
+        ),
+        errorStyle: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide:
+              BorderSide(width: 2, color: Color.fromARGB(255, 164, 46, 46)),
+        ),
+      ),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return "أدخل " + text;
+        }
+
+        if (value.length < 6) {
+          if (value.length < 6) return "أدخل وصف للمنتج لا يقل عن 6 خانات";
+        }
+
+        return null;
+      },
+    );
   }
 }
