@@ -171,12 +171,6 @@ class AppBarOD extends StatelessWidget {
                     content: Text('سيتم تغيير حالة الطلب إلى $newStatus'),
                     actions: <Widget>[
                       TextButton(
-                        child: Text("تراجع"),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      TextButton(
                         child: Text("تغيير",
                             style: TextStyle(
                               color: Color.fromARGB(255, 81, 144, 142),
@@ -204,7 +198,13 @@ class AppBarOD extends StatelessWidget {
 
                           //Navigator.pop(context);
                         },
-                      )
+                      ),
+                      TextButton(
+                        child: Text("تراجع"),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
                     ],
                   );
                 });
