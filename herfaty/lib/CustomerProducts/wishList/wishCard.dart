@@ -2,10 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:herfaty/constants/color.dart';
+import 'package:herfaty/models/AddProductToCart.dart';
 import 'package:herfaty/models/Product1.dart';
 
-class productCard extends StatelessWidget {
-  const productCard({
+class wishCard extends StatefulWidget {
+  const wishCard({
     Key? key,
     required this.itemIndex,
     required this.product,
@@ -13,9 +14,14 @@ class productCard extends StatelessWidget {
   }) : super(key: key);
 
   final int itemIndex;
-  final Product1 product;
+  final AddProductToCart product;
   final void Function() press;
 
+  @override
+  State<wishCard> createState() => _wishCardState();
+}
+
+class _wishCardState extends State<wishCard> {
   @override
   Widget build(BuildContext context) {
     Size size =
@@ -40,8 +46,8 @@ class productCard extends StatelessWidget {
       ),
       height: 180,
       child: InkWell(
-        onTap:
-            press, // يعني ان المستخدم لما يضغط على الكارد تفتح معاه صفحة جديدة
+        onTap: widget
+            .press, // يعني ان المستخدم لما يضغط على الكارد تفتح معاه صفحة جديدة
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
@@ -77,7 +83,7 @@ class productCard extends StatelessWidget {
                     bottomLeft: Radius.circular(10),
                   ),
                   child: Image.network(
-                    product.image,
+                    widget.product.detailsImage,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -98,7 +104,7 @@ class productCard extends StatelessWidget {
                   children: [
                     //product name===========================================================
                     Text(
-                      product.name,
+                      widget.product.name,
                       style: const TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.w600,
@@ -109,7 +115,7 @@ class productCard extends StatelessWidget {
 
                     //سعر المنتج  ===========================================================
                     Text(
-                      ' ${product.price} ريال',
+                      ' ${widget.product.price} ريال',
                       style: const TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.w400,
@@ -119,7 +125,7 @@ class productCard extends StatelessWidget {
                     ),
                     //اسم المتجر  ===========================================================
                     Text(
-                      product.shopName,
+                      widget.product.shopName,
                       style: const TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.w400,
