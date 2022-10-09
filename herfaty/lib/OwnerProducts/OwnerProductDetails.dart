@@ -172,7 +172,37 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
                       // زر الحذف-----------------------------------------
                       child: ElevatedButton(
                         onPressed: () {
-                          //هنا يكون كود حذف المنتج
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text("حذف منتج"),
+                                  content: Text('سيتم حذف هذا المنتج من سلتك'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: Text("تراجع"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: Text("حذف",
+                                          style: TextStyle(
+                                            color: Colors.red,
+                                          )),
+                                      onPressed: () {
+                                        FirebaseFirestore.instance
+                                            .collection('Products')
+                                            .doc('${widget.product.id}')
+                                            .delete();
+
+                                        Navigator.of(context).pop();
+                                        showDoneToast(context);
+                                      },
+                                    )
+                                  ],
+                                );
+                              });
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
