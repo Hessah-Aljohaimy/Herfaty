@@ -121,7 +121,14 @@ class driverPage  extends StatelessWidget {
                                           
                                            SizedBox(
                             height: 10,
-                          ),                                     
+                          ), 
+
+             Container(     
+
+      margin: const EdgeInsets.only(right: 50.0),
+
+child:
+                                                               
  ElevatedButton(
                                     
                                     style: ElevatedButton.styleFrom(
@@ -129,9 +136,12 @@ class driverPage  extends StatelessWidget {
                                           255, 81, 144, 142), 
                                           // background
                                     ),
+
                                     onPressed: () {
-                                      //go to order deatils page
-                                    },
+ 
+ updateDiliver(cItems[index].docId);
+ 
+                                     },
                                     child: Text(
                                       "تغيير الحالة إلى خارج للتوصيل",
                                       style: TextStyle(
@@ -139,12 +149,13 @@ class driverPage  extends StatelessWidget {
                                       ),
                                     ),
                                   ),
+                                      ),
                                         ],
                                       ),
                                     ),
                                     
                                   ),
-                                 
+                              
                                 ],
                                 
                               ),
@@ -162,8 +173,26 @@ class driverPage  extends StatelessWidget {
      
       ),
     );
+     
   }
+  
+  void updateDiliver(s) {
+
+
+      FirebaseFirestore.instance
+                                        .collection('orders')
+                                        .doc(s)
+                                        .update({
+                                      "status":
+                                          'خارج للتوصيل'
+                                    });
+
+
+  }
+ 
+
 }
+
 
 class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
