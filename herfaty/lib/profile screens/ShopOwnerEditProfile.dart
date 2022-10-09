@@ -110,7 +110,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
         child: SingleChildScrollView(
           child: SizedBox(
             width: 430,
-            height: 620,
+            height: 637,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -301,6 +301,23 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                   child: reusableTextFieldShopOwner(
                       "رقم الجوال", false, _PhoneNumberTextEditingController),
                 ),
+                Container(
+                  padding: const EdgeInsets.only(left: 100),
+                  child: Text(
+                    "رقم الجوال يجب أن يبدأ بـ(05) لعشرة أرقام",
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 86, 86, 86), fontSize: 12),
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 15, right: 15, top: 10),
+                  width: 350,
+                  child: reusableTextFieldShopOwner(
+                      "اسم المتجر", false, _shopnameTextEditingController),
+                ),
 
                 // SizedBox(
                 //   height: 20,
@@ -350,7 +367,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
 
                 //             ),
                 SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 Row(
                   children: [
