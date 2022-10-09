@@ -110,7 +110,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
         child: SingleChildScrollView(
           child: SizedBox(
             width: 430,
-            height: 637,
+            height: 728,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -147,7 +147,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                   ),
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 10,
                 ),
                 Container(
                   padding: EdgeInsets.only(left: 15, right: 15, top: 10),
@@ -312,12 +312,16 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                 SizedBox(
                   height: 5,
                 ),
-                Container(
-                  padding: EdgeInsets.only(left: 15, right: 15, top: 10),
-                  width: 350,
-                  child: reusableTextFieldShopOwner(
-                      "اسم المتجر", false, _shopnameTextEditingController),
-                ),
+                // Container(
+                //   padding: EdgeInsets.only(left: 15, right: 15, top: 10),
+                //   width: 350,
+                //   child: reusableTextFieldShopOwner(
+                //       "اسم المتجر", false, _shopnameTextEditingController),
+                // ),
+                // Container(
+                //   child: reusableTextFieldDec(
+                //       "وصف المتجر", _shopdescriptionTextEditingController),
+                // ),
 
                 // SizedBox(
                 //   height: 20,
@@ -366,9 +370,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                 //                 itemBuilder: (context, index) {} ,
 
                 //             ),
-                SizedBox(
-                  height: 20,
-                ),
+
                 Row(
                   children: [
                     // Expanded(
@@ -661,5 +663,56 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
         );
       }
     });
+  }
+
+  //////////////////////////// Shop description Text form ////////////////////////////////
+  TextFormField reusableTextFieldDec(
+      String text, TextEditingController controller) {
+    return TextFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      controller: controller,
+      minLines: text == "وصف المتجر" ? 1 : 1,
+      maxLines: text == "وصف المتجر" ? 9 : 1,
+      maxLength: 160,
+      style: TextStyle(
+          color: Color.fromARGB(255, 90, 90, 90), fontFamily: "Tajawal"),
+      decoration: InputDecoration(
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 1.0, horizontal: 23),
+        labelText: text,
+        labelStyle: TextStyle(
+            color: Color.fromARGB(255, 26, 96, 91),
+            fontFamily: "Tajawal",
+            fontSize: 20,
+            fontWeight: FontWeight.bold),
+        fillColor: Colors.white.withOpacity(0.3),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Color.fromARGB(255, 26, 96, 91)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide:
+              BorderSide(width: 2, color: Color.fromARGB(255, 26, 96, 91)),
+        ),
+        errorStyle: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide:
+              BorderSide(width: 2, color: Color.fromARGB(255, 164, 46, 46)),
+        ),
+      ),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return "أدخل " + text;
+        }
+
+        if (value.length < 6) {
+          if (value.length < 6) return "أدخل وصف للمنتج لا يقل عن 6 خانات";
+        }
+
+        return null;
+      },
+    );
   }
 }
