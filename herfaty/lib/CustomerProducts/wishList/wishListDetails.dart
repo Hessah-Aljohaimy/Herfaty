@@ -11,7 +11,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/widgets/ExpandedWidget.dart';
 
 class wishListDetails extends StatefulWidget {
-  final AddProductToCart product;
+  final CartAndWishListProduct product;
   String detailsImage;
 
   wishListDetails(
@@ -331,19 +331,21 @@ class _wishListDetailsState extends State<wishListDetails> {
                                       .instance
                                       .collection('cart')
                                       .doc();
-                                  AddProductToCart item = AddProductToCart(
-                                      name: widget.product.name,
-                                      detailsImage: widget.detailsImage,
-                                      docId: productToBeAdded.id,
-                                      productId: widget.product.productId,
-                                      customerId: user.uid,
-                                      shopName: widget.product.shopName,
-                                      shopOwnerId: widget.product.shopOwnerId,
-                                      quantity:
-                                          existedQuantity + thisPageQuantity,
-                                      availableAmount:
-                                          widget.product.availableAmount,
-                                      price: widget.product.price);
+                                  CartAndWishListProduct item =
+                                      CartAndWishListProduct(
+                                          name: widget.product.name,
+                                          detailsImage: widget.detailsImage,
+                                          docId: productToBeAdded.id,
+                                          productId: widget.product.productId,
+                                          customerId: user.uid,
+                                          shopName: widget.product.shopName,
+                                          shopOwnerId:
+                                              widget.product.shopOwnerId,
+                                          quantity: existedQuantity +
+                                              thisPageQuantity,
+                                          availableAmount:
+                                              widget.product.availableAmount,
+                                          price: widget.product.price);
                                   createCartItem(item);
                                   await showDoneToast(context);
                                 }
@@ -400,7 +402,7 @@ class _wishListDetailsState extends State<wishListDetails> {
   }
 
 //==========================================================================================
-  Future createCartItem(AddProductToCart cartItem) async {
+  Future createCartItem(CartAndWishListProduct cartItem) async {
     final docCartItem =
         FirebaseFirestore.instance.collection('cart').doc("${cartItem.docId}");
     final json = cartItem.toJson();

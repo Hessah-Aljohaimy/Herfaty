@@ -331,19 +331,21 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                                       .instance
                                       .collection('cart')
                                       .doc();
-                                  AddProductToCart item = AddProductToCart(
-                                      name: widget.product.name,
-                                      detailsImage: widget.detailsImage,
-                                      docId: productToBeAdded.id,
-                                      productId: widget.product.id,
-                                      customerId: user.uid,
-                                      shopName: widget.product.shopName,
-                                      shopOwnerId: widget.product.shopOwnerId,
-                                      quantity:
-                                          existedQuantity + thisPageQuantity,
-                                      availableAmount:
-                                          widget.product.availableAmount,
-                                      price: widget.product.price);
+                                  CartAndWishListProduct item =
+                                      CartAndWishListProduct(
+                                          name: widget.product.name,
+                                          detailsImage: widget.detailsImage,
+                                          docId: productToBeAdded.id,
+                                          productId: widget.product.id,
+                                          customerId: user.uid,
+                                          shopName: widget.product.shopName,
+                                          shopOwnerId:
+                                              widget.product.shopOwnerId,
+                                          quantity: existedQuantity +
+                                              thisPageQuantity,
+                                          availableAmount:
+                                              widget.product.availableAmount,
+                                          price: widget.product.price);
                                   createCartItem(item);
                                   await showDoneToast(context);
                                 }
@@ -400,7 +402,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
   }
 
 //==========================================================================================
-  Future createCartItem(AddProductToCart cartItem) async {
+  Future createCartItem(CartAndWishListProduct cartItem) async {
     final docCartItem =
         FirebaseFirestore.instance.collection('cart').doc("${cartItem.docId}");
     final json = cartItem.toJson();

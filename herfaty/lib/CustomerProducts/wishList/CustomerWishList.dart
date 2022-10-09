@@ -20,12 +20,11 @@ class CustomerWishList extends StatefulWidget {
 }
 
 class _CustomerWishListState extends State<CustomerWishList> {
-  Stream<List<AddProductToCart>> readPrpducts() => FirebaseFirestore.instance
-      .collection('wishList')
-      .snapshots()
-      .map((snapshot) => snapshot.docs
-          .map((doc) => AddProductToCart.fromJson(doc.data()))
-          .toList());
+  Stream<List<CartAndWishListProduct>> readPrpducts() =>
+      FirebaseFirestore.instance.collection('wishList').snapshots().map(
+          (snapshot) => snapshot.docs
+              .map((doc) => CartAndWishListProduct.fromJson(doc.data()))
+              .toList());
 
   //======================================================================================
   @override
@@ -52,7 +51,7 @@ class _CustomerWishListState extends State<CustomerWishList> {
                 child: Stack(
                   children: [
                     //This is to list all of our items fetched from the DB========================
-                    StreamBuilder<List<AddProductToCart>>(
+                    StreamBuilder<List<CartAndWishListProduct>>(
                       stream: readPrpducts(),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
@@ -135,17 +134,6 @@ class _CustomerWishListState extends State<CustomerWishList> {
           color: kPrimaryColor,
           fontFamily: "Tajawal",
         ),
-      ),
-      leading: IconButton(
-        padding: EdgeInsets.only(right: 20),
-        icon: const Icon(
-          Icons.arrow_back, //سهم العودة
-          color: Color.fromARGB(255, 26, 96, 91),
-          size: 22.0,
-        ),
-        onPressed: () {
-          Navigator.pop(context);
-        }, //نخليه يرجع لصفحة المنتجات اللي عند عائشة
       ),
     );
   }
