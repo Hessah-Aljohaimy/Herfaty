@@ -1,10 +1,13 @@
 // ignore_for_file: prefer_const_constructors
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/models/Product1.dart';
+import 'package:herfaty/models/AddProductToCart.dart';
 
-class productCard extends StatelessWidget {
+class productCard extends StatefulWidget {
   const productCard({
     Key? key,
     required this.itemIndex,
@@ -17,7 +20,24 @@ class productCard extends StatelessWidget {
   final void Function() press;
 
   @override
+  State<productCard> createState() => _productCardState();
+}
+
+class _productCardState extends State<productCard> {
+  late bool isFavourite;
+
+  @override
+  void initState() {
+    isFavourite = false;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    String thisCustomerId = user!.uid;
+    //-----------------------------------------------------------------
     Size size =
         MediaQuery.of(context).size; //to get the width and height of the app
     return Container(
@@ -40,8 +60,8 @@ class productCard extends StatelessWidget {
       ),
       height: 180,
       child: InkWell(
-        onTap:
-            press, // يعني ان المستخدم لما يضغط على الكارد تفتح معاه صفحة جديدة
+        onTap: widget
+            .press, // يعني ان المستخدم لما يضغط على الكارد تفتح معاه صفحة جديدة
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
@@ -77,7 +97,7 @@ class productCard extends StatelessWidget {
                     bottomLeft: Radius.circular(10),
                   ),
                   child: Image.network(
-                    product.image,
+                    widget.product.image,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -98,7 +118,7 @@ class productCard extends StatelessWidget {
                   children: [
                     //product name===========================================================
                     Text(
-                      product.name,
+                      widget.product.name,
                       style: const TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.w600,
@@ -109,7 +129,7 @@ class productCard extends StatelessWidget {
 
                     //سعر المنتج  ===========================================================
                     Text(
-                      ' ${product.price} ريال',
+                      ' ${widget.product.price} ريال',
                       style: const TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.w400,
@@ -119,7 +139,7 @@ class productCard extends StatelessWidget {
                     ),
                     //اسم المتجر  ===========================================================
                     Text(
-                      product.shopName,
+                      widget.product.shopName,
                       style: const TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.w400,
@@ -137,14 +157,48 @@ class productCard extends StatelessWidget {
               left: 190,
               bottom: 26,
               child: IconButton(
-                //padding: EdgeInsets.only(right: 1),
-                icon: const Icon(
+                icon: Icon(
                   Icons.favorite,
-                  color: Color.fromARGB(157, 158, 158, 158),
+                  color: isFavourite
+                      ? Colors.red
+                      : Color.fromARGB(157, 158, 158, 158),
                   size: 32.0,
                 ),
-                onPressed: () {
-                  //Navigator.pop(context);
+                onPressed: () async {
+                  setState(() {
+                    isFavourite = !isFavourite;
+                  });
+                  // اعتقد المفروض يكون من مودل برودكت ون
+
+                  /**
+                   * احتاج احتفظ باستمرار بالبرودكت اي دي عشان اقدر اضيفه واشيله من قائمة المفضلة
+                  ولازم اشيك لما اعرض ال قائمة حقت المنتجات هل البرودكت في المفضلة حقت هذا الكستمر أو لا عشان القلب اللي ينعرض له يكون احمر (وبرضو لما يضغط عليه لازم ينشال من المفضلة)
+
+                   */
+                  if (isFavourite == true) {
+                    final productToBeAdded =
+                        FirebaseFirestore.instance.collection('wishList').doc();
+                    AddProductToCart item = AddProductToCart(
+                        name: widget.product.name,
+                        detailsImage: widget.product.image,
+                        docId: productToBeAdded.id,
+                        productId: widget.product.id,
+                        customerId: user.uid,
+                        shopName: widget.product.shopName,
+                        shopOwnerId: widget.product.shopOwnerId,
+                        quantity: 1,
+                        availableAmount: widget.product.availableAmount,
+                        price: widget.product.price);
+                    createWishListItem(item);
+                  } else {
+                    //delete the product from the wish list
+                    String existedWishListDocId =
+                        await getDocId(thisCustomerId, widget.product.id);
+                    FirebaseFirestore.instance
+                        .collection('wishList')
+                        .doc('${existedWishListDocId}')
+                        .delete();
+                  }
                 },
               ),
             )
@@ -153,4 +207,32 @@ class productCard extends StatelessWidget {
       ),
     );
   }
+
+  //==========================================================================================
+  Future createWishListItem(AddProductToCart wishListItem) async {
+    final docCartItem = FirebaseFirestore.instance
+        .collection('wishList')
+        .doc("${wishListItem.docId}");
+    final json = wishListItem.toJson();
+    await docCartItem.set(
+      json,
+    );
+  }
+}
+
+//=======================================================================================
+Future<String> getDocId(String thisCustomerId, String thisproductId) async {
+  String DocId = "";
+  print("==================this is get docId method");
+  final wishListDoc = await FirebaseFirestore.instance
+      .collection('wishList')
+      .where("productId", isEqualTo: thisproductId)
+      .where("customerId", isEqualTo: thisCustomerId)
+      .get();
+  if (wishListDoc.size > 0) {
+    var data = wishListDoc.docs.elementAt(0).data() as Map;
+    DocId = data["docId"];
+    print('wish list docId is ${DocId}============================');
+  }
+  return DocId;
 }

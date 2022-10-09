@@ -148,7 +148,7 @@ class _SignupCustomerState extends State<SignupCustomer> {
                           SizedBox(
                             height: 20,
                           ),
-
+                              ////////////////// زر تسجيل الحساب ///////////////////
                           ElevatedButton(
                             onPressed: () async {
                               try {
@@ -223,6 +223,7 @@ class _SignupCustomerState extends State<SignupCustomer> {
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
+                          //////////////////تسجيل الحساب ////////////////////
                           SizedBox(
                             height: 23,
                           ),

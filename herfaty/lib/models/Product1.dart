@@ -34,16 +34,21 @@ class Product1 {
     shopOwnerId = json['shopOwnerId'];
     shopName = json['shopName'];
   }
-  /*
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['image'] = this.image;
-    data['name'] = this.name;
+    data['id'] = this.id;
+    data['avalibleAmount'] = this.availableAmount;
     data['price'] = this.price;
-    data['avalibleAmount'] = this.quantity;
+    data['categoryName'] = this.categoryName;
+    data['name'] = this.name;
     data['desscription'] = this.description;
+    data['image'] = this.image;
+    data['shopOwnerId'] = this.shopOwnerId;
+    data['shopName'] = this.shopName;
+
     return data;
-  } */
+  }
 }
 
 //temporarily list of used products 
