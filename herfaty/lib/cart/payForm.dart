@@ -314,7 +314,7 @@ class payForm extends StatelessWidget {
                           total: widget.totalPrice,
                           shopName: widget.shopName,
                           notification: 'notPushed',
-                          status: 'New order',
+                          status: 'طلب جديد',
                           products: products,
                           orderDate: date);
 

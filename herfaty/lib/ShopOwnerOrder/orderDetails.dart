@@ -49,16 +49,21 @@ class _orderDetailsState extends State<orderDetails> {
             image: AssetImage('assets/images/cartBack1.png'),
             fit: BoxFit.cover,
           )),
-          child: Column(
-            children: [
-              AppBarOD(
-                  date: widget.date,
-                  totalOrder: widget.totalOrder,
-                  status: widget.status,
-                  docID: widget.docID),
-              Body(),
-              ProductsD(products: widget.products),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                AppBarOD(
+                    date: widget.date,
+                    totalOrder: widget.totalOrder,
+                    status: widget.status,
+                    docID: widget.docID),
+                Body(),
+                ProductsD(products: widget.products),
+                SizedBox(
+                  height: 30,
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -192,7 +197,7 @@ class AppBarOD extends StatelessWidget {
                             fontSize: 18.0,
                           );
 
-                          Timer(const Duration(seconds: 1), () {
+                          Timer(const Duration(seconds: 0), () {
                             Navigator.pop(context1);
                           });
 
@@ -268,11 +273,20 @@ class ProductsD extends StatelessWidget {
                 } else if (snapshot.hasData) {
                   final PItem = snapshot.data!.toList();
 
+                  if (PItems.length != 0) {
+                    PItems = [];
+                  }
+
                   for (int i = 0; i < PItem.length; i++) {
                     products.forEach((key, value) {
-                      if (PItem[i].id == key) PItems.add(PItem[i]);
+                      if (PItem[i].id == key) {
+                        //if (!PItems.contains(PItem[i]))
+                        PItems.add(PItem[i]);
+                      }
                     });
                   }
+
+                  print("shoshoshsosho ${PItems.length}");
 
                   return Container(
                     margin: EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
@@ -293,7 +307,7 @@ class ProductsD extends StatelessWidget {
                     child: ExpansionTile(
                       initiallyExpanded: true,
                       title: Text(
-                        "المنتجات",
+                        "المنتجات المطلوبة",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
@@ -334,9 +348,9 @@ class ProductsD extends StatelessWidget {
                                                   style: TextStyle(
                                                       fontSize: 16.0)),
                                               Text(
-                                                  " ${PItems[index].price.toString()}ريال "),
+                                                  " السعر: ${PItems[index].price.toString()}ريال "),
                                               Text(
-                                                  "الكمية ${getQuantity(PItems[index].id)}"),
+                                                  "الكمية: ${getQuantity(PItems[index].id)}"),
                                             ],
                                           ),
                                         ),
