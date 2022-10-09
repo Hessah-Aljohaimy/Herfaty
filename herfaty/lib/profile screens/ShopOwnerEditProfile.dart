@@ -110,7 +110,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
         child: SingleChildScrollView(
           child: SizedBox(
             width: 430,
-            height: 728,
+            height: 750,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -132,20 +132,20 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 15,
-                ),
-                Center(
-                  child: Text(
-                    "تعديل بيانات الحرفي",
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 26, 96, 91),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      fontFamily: "Tajawal",
-                    ),
-                  ),
-                ),
+                // SizedBox(
+                //   height: 15,
+                // ),
+                // Center(
+                //   child: Text(
+                //     "تعديل بيانات الحرفي",
+                //     style: TextStyle(
+                //       color: Color.fromARGB(255, 26, 96, 91),
+                //       fontWeight: FontWeight.bold,
+                //       fontSize: 20,
+                //       fontFamily: "Tajawal",
+                //     ),
+                //   ),
+                // ),
                 SizedBox(
                   height: 10,
                 ),
@@ -312,16 +312,18 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                 SizedBox(
                   height: 5,
                 ),
-                // Container(
-                //   padding: EdgeInsets.only(left: 15, right: 15, top: 10),
-                //   width: 350,
-                //   child: reusableTextFieldShopOwner(
-                //       "اسم المتجر", false, _shopnameTextEditingController),
-                // ),
-                // Container(
-                //   child: reusableTextFieldDec(
-                //       "وصف المتجر", _shopdescriptionTextEditingController),
-                // ),
+                Container(
+                  padding: EdgeInsets.only(left: 15, right: 15, top: 10),
+                  width: 350,
+                  child: reusableTextFieldShopOwner(
+                      "اسم المتجر", false, _shopnameTextEditingController),
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 15, right: 15, top: 10),
+                  width: 350,
+                  child: reusableTextFieldDec(
+                      "وصف المتجر", _shopdescriptionTextEditingController),
+                ),
 
                 // SizedBox(
                 //   height: 20,
