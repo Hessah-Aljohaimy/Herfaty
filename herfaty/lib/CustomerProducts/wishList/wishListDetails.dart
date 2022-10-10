@@ -177,7 +177,7 @@ class _wishListDetailsState extends State<wishListDetails> {
                   child: SingleChildScrollView(
                       scrollDirection: Axis.vertical,
                       child: ExpandedWidget(
-                        text: "widget.product.description",
+                        text: widget.product.description,
                       )),
                 ),
                 // const Spacer(),
@@ -335,6 +335,7 @@ class _wishListDetailsState extends State<wishListDetails> {
                                       docId: productToBeAdded.id,
                                       productId: widget.product.productId,
                                       customerId: user.uid,
+                                      description: widget.product.description,
                                       shopName: widget.product.shopName,
                                       shopOwnerId: widget.product.shopOwnerId,
                                       quantity:

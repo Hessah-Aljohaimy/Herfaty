@@ -337,6 +337,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                                       docId: productToBeAdded.id,
                                       productId: widget.product.id,
                                       customerId: user.uid,
+                                      description: widget.product.description,
                                       shopName: widget.product.shopName,
                                       shopOwnerId: widget.product.shopOwnerId,
                                       quantity:
