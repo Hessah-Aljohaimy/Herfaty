@@ -193,10 +193,10 @@ class _SignupHerafyState extends State<SignupHerafy> {
                         onTap: () async {
                           DateTime? pickedDate = await showDatePicker(
                             context: context,
-                            initialDate: DateTime.now(),
+                            initialDate: DateTime(2007),
                             firstDate: DateTime(
-                                2000), //DateTime.now() - not to allow to choose before today.
-                            lastDate: DateTime(2101),
+                                2007), //DateTime.now() - not to allow to choose before today.
+                            lastDate: DateTime(2017),
 
                             builder: (context, child) {
                               return Theme(

@@ -116,7 +116,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 SizedBox(
-                  height: 5,
+                  height: 2,
                 ),
                 Center(
                   child: Container(
@@ -146,9 +146,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                 //     ),
                 //   ),
                 // ),
-                SizedBox(
-                  height: 10,
-                ),
+
                 Container(
                   padding: EdgeInsets.only(left: 15, right: 15, top: 10),
                   width: 350,
@@ -156,28 +154,19 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                       'اسم الحرفي', false, _nameTextEditingController),
                 ),
 
-                SizedBox(
-                  height: 5,
-                ),
+                // SizedBox(
+                //   height: 5,
+                // ),
                 Container(
                   padding: EdgeInsets.only(left: 15, right: 15, top: 10),
                   width: 350,
-                  child: reusableTextFieldShopOwner(
+                  child: reusableTextFieldCustomer(
                       "البريد الإلكتروني", false, _emailTextEditingController),
                 ),
 
-                SizedBox(
-                  height: 5,
-                ),
-                Container(
-                  padding: EdgeInsets.only(left: 15, right: 15, top: 10),
-                  width: 350,
-                  child: reusableTextFieldShopOwner(
-                      "كلمة المرور", true, _passwordTextController),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
+                // SizedBox(
+                //   height: 3,
+                // ),
                 // Container(
                 //   padding: EdgeInsets.only(left: 15, right: 15, top: 10),
                 //   width: 350,
@@ -240,10 +229,10 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                       onTap: () async {
                         DateTime? pickedDate = await showDatePicker(
                           context: context,
-                          initialDate: DateTime.now(),
+                          initialDate: DateTime(2007),
                           firstDate: DateTime(
-                              2000), //DateTime.now() - not to allow to choose before today.
-                          lastDate: DateTime(2101),
+                              2007), //DateTime.now() - not to allow to choose before today.
+                          lastDate: DateTime(2017),
 
                           builder: (context, child) {
                             return Theme(
@@ -292,26 +281,19 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                         }
                       },
                     ))),
-                SizedBox(
-                  height: 5,
-                ),
+                // SizedBox(
+                //   height: 5,
+                // ),
                 Container(
                   padding: EdgeInsets.only(left: 15, right: 15, top: 10),
                   width: 350,
                   child: reusableTextFieldShopOwner(
                       "رقم الجوال", false, _PhoneNumberTextEditingController),
                 ),
-                Container(
-                  padding: const EdgeInsets.only(left: 100),
-                  child: Text(
-                    "رقم الجوال يجب أن يبدأ بـ(05) لعشرة أرقام",
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 86, 86, 86), fontSize: 12),
-                  ),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
+
+                // SizedBox(
+                //   height: 5,
+                // ),
                 Container(
                   padding: EdgeInsets.only(left: 15, right: 15, top: 10),
                   width: 350,
@@ -485,6 +467,9 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                     // )
                   ],
                 ),
+                SizedBox(
+                  height: 20,
+                ),
               ],
             ),
           ),
@@ -559,19 +544,21 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
     return Center(
       child: Stack(children: <Widget>[
         CircleAvatar(
-          radius: 80.0,
-          backgroundImage: logo == null
-              ? AssetImage("assets/images/Circular_Logo.png") as ImageProvider
-              : NetworkImage(logo),
-
-          // _imageFile.path
-          //
-          // ?  as ImageProvider
-          // :
+          backgroundColor: Color.fromARGB(126, 39, 141, 134),
+          radius: 60.0,
+          child: CircleAvatar(
+            radius: 58.0,
+            backgroundImage: logo == null
+                ? AssetImage("assets/images/Circular_Logo.png") as ImageProvider
+                : NetworkImage(logo),
+            //  _imageFile == null
+            //     ? AssetImage("assets/images/Circular_Logo.png") as ImageProvider
+            //     : FileImage(File(_imageFile!.path)),
+          ),
         ),
         Positioned(
-          bottom: 20.0,
-          right: 20.0,
+          bottom: 12.0,
+          right: 15.0,
           child: InkWell(
             onTap: () {
               showModalBottomSheet(
@@ -679,8 +666,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
       style: TextStyle(
           color: Color.fromARGB(255, 90, 90, 90), fontFamily: "Tajawal"),
       decoration: InputDecoration(
-        contentPadding:
-            const EdgeInsets.symmetric(vertical: 1.0, horizontal: 23),
+        contentPadding: const EdgeInsets.all(12),
         labelText: text,
         labelStyle: TextStyle(
             color: Color.fromARGB(255, 26, 96, 91),
@@ -714,6 +700,69 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
         }
 
         return null;
+      },
+    );
+  }
+
+  TextFormField reusableTextFieldCustomer(
+      String text, bool isPasswordType, TextEditingController controller) {
+    return TextFormField(
+      enabled: false,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      controller: controller,
+      obscureText: isPasswordType,
+      enableSuggestions: !isPasswordType,
+      autocorrect: !isPasswordType,
+      keyboardType: isPasswordType
+          ? TextInputType.visiblePassword
+          : TextInputType.emailAddress,
+      style: TextStyle(
+          color: Color.fromARGB(255, 122, 122, 122), fontFamily: "Tajawal"),
+      decoration: InputDecoration(
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 1.0, horizontal: 25),
+        labelText: text,
+        labelStyle: TextStyle(
+            color: Color.fromARGB(255, 122, 122, 122),
+            fontFamily: "Tajawal",
+            fontSize: 20,
+            fontWeight: FontWeight.bold),
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        fillColor: Colors.white.withOpacity(0.3),
+        disabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Color.fromARGB(255, 122, 122, 122),
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(width: 2, color: Colors.blue),
+        ),
+        errorStyle: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide:
+              BorderSide(width: 3, color: Color.fromARGB(255, 164, 46, 46)),
+        ),
+      ),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return "أدخل " + text;
+        }
+        if (!RegExp(r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
+                .hasMatch(value) &&
+            !isPasswordType &&
+            text == 'البريد الإلكتروني') {
+          return 'أدخل بريد إلكتروني صحيح';
+        }
+
+        if (text == "كلمة المرور") {
+          if (value.length < 6) return "ادخل كلمة مرور اكبر من 6 خانات";
+        }
+        // if (text == "اسم المشتري")
+        //   maxLength:
+        //   30;
       },
     );
   }

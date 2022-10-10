@@ -115,12 +115,12 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
         key: _formKey,
         child: SingleChildScrollView(
           child: SizedBox(
-            height: 400,
+            height: 250,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 SizedBox(
-                  height: 35,
+                  height: 55,
                 ),
                 // Center(
                 //   child: Text(
@@ -133,23 +133,18 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
                 //     ),
                 //   ),
                 // ),
-                SizedBox(
-                  height: 35,
-                ),
+
                 Container(
                   color: Colors.white,
                   width: 350,
-                  child: reusableTextFieldCustomer(
+                  child: reusableTextFieldCustomerName(
                       'اسم المشتري', false, _nameTextEditingController),
                 ),
 
-                SizedBox(
-                  height: 20,
-                ),
-
-
 //Only view the email
-
+                SizedBox(
+                  height: 10,
+                ),
 
                 Container(
                   color: Colors.white,
@@ -158,9 +153,6 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
                       "البريد الإلكتروني", false, _emailTextEditingController),
                 ),
 
-                SizedBox(
-                  height: 20,
-                ),
                 // Container(
                 //   color: Colors.white,
                 //   width: 350,
@@ -175,10 +167,6 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
                 //         color: Color.fromARGB(255, 84, 84, 84), fontSize: 13),
                 //   ),
                 // ),
-
-                SizedBox(
-                  height: 20,
-                ),
 
                 // Container(
                 //   height: 48,
@@ -352,6 +340,7 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
   TextFormField reusableTextFieldCustomer(
       String text, bool isPasswordType, TextEditingController controller) {
     return TextFormField(
+      enabled: false,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: controller,
       obscureText: isPasswordType,
@@ -360,22 +349,22 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
       keyboardType: isPasswordType
           ? TextInputType.visiblePassword
           : TextInputType.emailAddress,
-      style:
-          TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontFamily: "Tajawal"),
+      style: TextStyle(
+          color: Color.fromARGB(255, 122, 122, 122), fontFamily: "Tajawal"),
       decoration: InputDecoration(
         contentPadding:
             const EdgeInsets.symmetric(vertical: 1.0, horizontal: 25),
         labelText: text,
         labelStyle: TextStyle(
-            color: Color.fromARGB(255, 26, 96, 91),
+            color: Color.fromARGB(255, 122, 122, 122),
             fontFamily: "Tajawal",
             fontSize: 20,
             fontWeight: FontWeight.bold),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         fillColor: Colors.white.withOpacity(0.3),
-        enabledBorder: OutlineInputBorder(
+        disabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Color.fromARGB(188, 26, 96, 91),
+            color: Color.fromARGB(255, 122, 122, 122),
           ),
         ),
         focusedBorder: OutlineInputBorder(
@@ -422,8 +411,8 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
       keyboardType: isPasswordType
           ? TextInputType.visiblePassword
           : TextInputType.emailAddress,
-      style:
-          TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontFamily: "Tajawal"),
+      style: TextStyle(
+          color: Color.fromARGB(255, 86, 86, 86), fontFamily: "Tajawal"),
       decoration: InputDecoration(
         contentPadding:
             const EdgeInsets.symmetric(vertical: 1.0, horizontal: 25),

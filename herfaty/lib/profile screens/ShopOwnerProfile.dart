@@ -12,6 +12,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/AddProduct.dart';
 import 'package:herfaty/constants/color.dart';
+import 'package:herfaty/main.dart';
 import 'package:herfaty/pages/login.dart';
 import 'package:herfaty/pages/signupHerafy.dart';
 import 'package:herfaty/profile%20screens/ShopOwnerEditProfile.dart';
@@ -641,44 +642,61 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                       ),
                     ),
 
-                    TextField(
-                      controller: _checkPasslController,
-                      obscureText: true,
-                      keyboardType: TextInputType.visiblePassword,
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
-                      decoration: InputDecoration(
-                        labelText: 'أدخل كلمة المرور لتعديل الحساب',
-                        labelStyle: TextStyle(
-                          color: Color.fromARGB(255, 90, 90, 90),
-                          fontSize: 15,
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: TextField(
+                        controller: _checkPasslController,
+                        obscureText: true,
+                        keyboardType: TextInputType.visiblePassword,
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                        decoration: InputDecoration(
+                          labelText: 'أدخل كلمة المرور لتعديل الحساب',
+                          labelStyle: TextStyle(
+                            color: Color.fromARGB(255, 90, 90, 90),
+                            fontSize: 15,
+                          ),
                         ),
                       ),
                     ),
-                    TextButton(
-                      child: Text("تحقق"),
-                      onPressed: () {
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                          child: Text("تحقق", style: TextStyle(fontSize: 16)),
+                          onPressed: () {
 //check if it was correct
-                        if (shopowner.password == _checkPasslController.text) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ShopOwnerEditProfile(
-                                    shopowner.name,
-                                    shopowner.email,
-                                    shopowner.password,
-                                    shopowner.DOB,
-                                    shopowner.phone_number,
-                                    shopowner.shopname,
-                                    shopowner.shopdescription,
-                                    shopowner.id,
-                                    shopowner.logo)),
-                          );
-                        } else {
-                          Navigator.of(context).pop();
-                        }
-                      },
+                            if (shopowner.password ==
+                                _checkPasslController.text) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ShopOwnerEditProfile(
+                                        shopowner.name,
+                                        shopowner.email,
+                                        shopowner.password,
+                                        shopowner.DOB,
+                                        shopowner.phone_number,
+                                        shopowner.shopname,
+                                        shopowner.shopdescription,
+                                        shopowner.id,
+                                        shopowner.logo)),
+                              );
+                            } else {
+                              Navigator.of(context).pop();
+                            }
+                          },
+                        ),
+                        TextButton(
+                          child: Text("إلغاء",
+                              style:
+                                  TextStyle(color: Colors.red, fontSize: 16)),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
                     )
                   ],
                 )));
@@ -737,67 +755,91 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                       ),
                     ),
 
-                    TextField(
-                      controller: _checkPasslController,
-                      obscureText: true,
-                      keyboardType: TextInputType.visiblePassword,
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
-                      decoration: InputDecoration(
-                        labelText: 'أدخل كلمة المرور لحذف الحساب',
-                        labelStyle: TextStyle(
-                          color: Color.fromARGB(255, 90, 90, 90),
-                          fontSize: 15,
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: TextField(
+                        controller: _checkPasslController,
+                        obscureText: true,
+                        keyboardType: TextInputType.visiblePassword,
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                        decoration: InputDecoration(
+                          labelText: 'أدخل كلمة المرور لحذف الحساب',
+                          labelStyle: TextStyle(
+                            color: Color.fromARGB(255, 90, 90, 90),
+                            fontSize: 15,
+                          ),
                         ),
                       ),
                     ),
-                    TextButton(
-                      child: Text("تحقق"),
-                      onPressed: () {
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                          child: Text("تحقق", style: TextStyle(fontSize: 16)),
+                          onPressed: () {
 //check if it was correct
-                        if (shopowner.password == _checkPasslController.text) {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: Text("تنبيه"),
-                                content: Text('سيتم حذف الحساب نهائيا'),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: Text("حذف",
-                                        style: TextStyle(color: Colors.red)),
-                                    onPressed: () {
-                                      //The logic of deleting an account
-                                      final docSO = FirebaseFirestore.instance
-                                          .collection('shop_owner')
-                                          .doc(uid);
-                                      //Navigator.of(context).pop();
+                            if (shopowner.password ==
+                                _checkPasslController.text) {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text("تنبيه"),
+                                    content: Text('سيتم حذف الحساب نهائيا'),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: Text(
+                                          "حذف",
+                                          style: TextStyle(
+                                              color: Colors.red, fontSize: 20),
+                                        ),
+                                        onPressed: () {
+                                          //The logic of deleting an account
+                                          final docSO = FirebaseFirestore
+                                              .instance
+                                              .collection('shop_owner')
+                                              .doc(uid);
+                                          //Navigator.of(context).pop();
 
-                                      docSO.delete();
+                                          docSO.delete();
 
-                                      FirebaseAuth.instance.signOut();
-                                      Navigator.of(context, rootNavigator: true)
-                                          .pushReplacement(MaterialPageRoute(
-                                              builder: (context) =>
-                                                  new Welcome()));
-                                    },
-                                  ),
-                                  TextButton(
-                                    child: Text("تراجع"),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  )
-                                ],
+                                          FirebaseAuth.instance.signOut();
+                                          Navigator.of(context,
+                                                  rootNavigator: true)
+                                              .pushReplacement(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          new Welcome()));
+                                        },
+                                      ),
+                                      TextButton(
+                                        child: Text("تراجع"),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      )
+                                    ],
+                                  );
+                                },
                               );
-                            },
-                          );
-                        } else {
-                          //error try again
-                          Navigator.of(context).pop();
-                        }
-                      },
+                            } else {
+                              //error try again
+                              Navigator.of(context).pop();
+                            }
+                          },
+                        ),
+                        TextButton(
+                          child: Text("إلغاء",
+                              style:
+                                  TextStyle(color: Colors.red, fontSize: 16)),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
                     )
                   ],
                 )));
