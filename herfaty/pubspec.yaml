@@ -52,7 +52,7 @@ dependencies:
   flutter_bloc : any
   equatable : ^2.0.3
   status_change: ^2.0.0
-  
+  url_launcher: ^6.0.17  
   http: ^0.13.5
   google_maps_place_picker: any
   geolocator: any

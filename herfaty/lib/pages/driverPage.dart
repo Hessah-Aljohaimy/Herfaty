@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../constants/color.dart';
 import 'package:herfaty/ShopOwnerOrder/OrderModel.dart';
+import 'package:herfaty/pages/DriverOrderDetails.dart';
 
 import 'login.dart';
 
@@ -18,8 +19,9 @@ class driverPage  extends StatelessWidget {
   Widget build(BuildContext context) {
     const title = 'قائمة الطلبات';
 
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.light,
+    return DefaultTabController(
+      initialIndex: 0,
+      length: 2,
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: DefaultAppBar(title: "طلبات التوصيل"),
@@ -102,23 +104,25 @@ class driverPage  extends StatelessWidget {
                                               255, 81, 144, 142), // background
                                         ),
                                         onPressed: () {
-                                          // Navigator.push(
-                                          //   context,
-                                          //   MaterialPageRoute(
-                                          //       builder: (context) =>
-                                          //           orderDetails(
-                                          //             date: cItems[index]
-                                          //                 .orderDate,
-                                          //             totalOrder:
-                                          //                 cItems[index].total,
-                                          //             docID:
-                                          //                 cItems[index].docId,
-                                          //             products: cItems[index]
-                                          //                 .products,
-                                          //             status:
-                                          //                 cItems[index].status,
-                                          //           )),
-                                          // );
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DriverOrderDetails(
+                                                      date: cItems[index]
+                                                          .orderDate,
+                                                      totalOrder:
+                                                          cItems[index].total,
+                                                      docID:
+                                                          cItems[index].docId,
+                                                      products: cItems[index]
+                                                          .products,
+                                                      status:
+                                                          cItems[index].status,
+                                                              location: cItems[index].location,
+                                          shopName:cItems[index].shopName,
+                                                    )),
+                                          );
                                           //go to order deatils page
                                         },
                                         child: Text(
@@ -217,23 +221,26 @@ class driverPage  extends StatelessWidget {
                                               255, 81, 144, 142), // background
                                         ),
                                         onPressed: () {
-                                          // Navigator.push(
-                                          //   context,
-                                          //   MaterialPageRoute(
-                                          //       builder: (context) =>
-                                          //           orderDetails(
-                                          //             date: cItems[index]
-                                          //                 .orderDate,
-                                          //             totalOrder:
-                                          //                 cItems[index].total,
-                                          //             docID:
-                                          //                 cItems[index].docId,
-                                          //             products: cItems[index]
-                                          //                 .products,
-                                          //             status:
-                                          //                 cItems[index].status,
-                                          //           )),
-                                          // );
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DriverOrderDetails(
+                                                      date: cItems[index]
+                                                          .orderDate,
+                                                      totalOrder:
+                                                          cItems[index].total,
+                                                      docID:
+                                                          cItems[index].docId,
+                                                      products: cItems[index]
+                                                          .products,
+                                                      status:
+                                                          cItems[index].status,
+                                                          location: cItems[index].location,
+                                          shopName:cItems[index].shopName,
+
+                                                    )),
+                                          );
                                           //go to order deatils page
                                         },
                                         child: Text(
@@ -349,7 +356,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
             text: "جاهز للتوصيل",
           ),
           Tab(
-            text: "خارج للنوصيل",
+            text: "خارج للتوصيل",
           ),
           //  Tab(
           //   text: "تم التوصيل",
@@ -377,7 +384,7 @@ Stream<List<OrderModel>> readPrpducts2() {
 
 
     return FirebaseFirestore.instance
-        .collection('orders').where("status", isEqualTo: 'خارخ للتوصيل')
+        .collection('orders').where("status", isEqualTo: 'خارج للتوصيل')
 
         .snapshots()
         .map((snapshot) => snapshot.docs
