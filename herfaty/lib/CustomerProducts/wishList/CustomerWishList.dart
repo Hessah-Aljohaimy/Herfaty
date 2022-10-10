@@ -20,11 +20,12 @@ class CustomerWishList extends StatefulWidget {
 }
 
 class _CustomerWishListState extends State<CustomerWishList> {
-  Stream<List<CartAndWishListProduct>> readPrpducts() =>
-      FirebaseFirestore.instance.collection('wishList').snapshots().map(
-          (snapshot) => snapshot.docs
-              .map((doc) => CartAndWishListProduct.fromJson(doc.data()))
-              .toList());
+  Stream<List<CartWishListProduct>> readPrpducts() => FirebaseFirestore.instance
+      .collection('wishList')
+      .snapshots()
+      .map((snapshot) => snapshot.docs
+          .map((doc) => CartWishListProduct.fromJson(doc.data()))
+          .toList());
 
   //======================================================================================
   @override
@@ -51,7 +52,7 @@ class _CustomerWishListState extends State<CustomerWishList> {
                 child: Stack(
                   children: [
                     //This is to list all of our items fetched from the DB========================
-                    StreamBuilder<List<CartAndWishListProduct>>(
+                    StreamBuilder<List<CartWishListProduct>>(
                       stream: readPrpducts(),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==

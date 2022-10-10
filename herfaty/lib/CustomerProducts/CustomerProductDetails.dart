@@ -331,8 +331,8 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                                       .instance
                                       .collection('cart')
                                       .doc();
-                                  CartAndWishListProduct item =
-                                      CartAndWishListProduct(
+                                  CartWishListProduct item =
+                                      CartWishListProduct(
                                           name: widget.product.name,
                                           detailsImage: widget.detailsImage,
                                           docId: productToBeAdded.id,
@@ -402,7 +402,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
   }
 
 //==========================================================================================
-  Future createCartItem(CartAndWishListProduct cartItem) async {
+  Future createCartItem(CartWishListProduct cartItem) async {
     final docCartItem =
         FirebaseFirestore.instance.collection('cart').doc("${cartItem.docId}");
     final json = cartItem.toJson();

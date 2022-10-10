@@ -15,7 +15,7 @@ class wishCard extends StatefulWidget {
   }) : super(key: key);
 
   final int itemIndex;
-  final CartAndWishListProduct product;
+  final CartWishListProduct product;
   final void Function() press;
 
   @override

@@ -11,7 +11,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/widgets/ExpandedWidget.dart';
 
 class wishListDetails extends StatefulWidget {
-  final CartAndWishListProduct product;
+  final CartWishListProduct product;
   String detailsImage;
 
   wishListDetails(
@@ -331,8 +331,8 @@ class _wishListDetailsState extends State<wishListDetails> {
                                       .instance
                                       .collection('cart')
                                       .doc();
-                                  CartAndWishListProduct item =
-                                      CartAndWishListProduct(
+                                  CartWishListProduct item =
+                                      CartWishListProduct(
                                           name: widget.product.name,
                                           detailsImage: widget.detailsImage,
                                           docId: productToBeAdded.id,
@@ -402,7 +402,7 @@ class _wishListDetailsState extends State<wishListDetails> {
   }
 
 //==========================================================================================
-  Future createCartItem(CartAndWishListProduct cartItem) async {
+  Future createCartItem(CartWishListProduct cartItem) async {
     final docCartItem =
         FirebaseFirestore.instance.collection('cart').doc("${cartItem.docId}");
     final json = cartItem.toJson();

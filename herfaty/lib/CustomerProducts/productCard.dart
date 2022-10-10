@@ -178,7 +178,7 @@ class _productCardState extends State<productCard> {
                   if (isFavourite == true) {
                     final productToBeAdded =
                         FirebaseFirestore.instance.collection('wishList').doc();
-                    CartAndWishListProduct item = CartAndWishListProduct(
+                    CartWishListProduct item = CartWishListProduct(
                         name: widget.product.name,
                         detailsImage: widget.product.image,
                         docId: productToBeAdded.id,
@@ -209,7 +209,7 @@ class _productCardState extends State<productCard> {
   }
 
   //==========================================================================================
-  Future createWishListItem(CartAndWishListProduct wishListItem) async {
+  Future createWishListItem(CartWishListProduct wishListItem) async {
     final docCartItem = FirebaseFirestore.instance
         .collection('wishList')
         .doc("${wishListItem.docId}");
