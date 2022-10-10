@@ -96,7 +96,7 @@ class _wishCardState extends State<wishCard> {
 
             //**********************This part contains product name, price and shop name
             Positioned(
-              top: 20,
+              top: 8,
               right: 20,
               child: SizedBox(
                 height: 136,
@@ -145,7 +145,7 @@ class _wishCardState extends State<wishCard> {
             Positioned(
               //top: 10,
               left: 190,
-              bottom: 26,
+              bottom: 8,
               child: IconButton(
                 //padding: EdgeInsets.only(right: 1),
                 icon: const Icon(
@@ -163,7 +163,21 @@ class _wishCardState extends State<wishCard> {
                       .delete();
                 },
               ),
-            )
+            ),
+            //**********************This part contains cart  icon
+            Positioned(
+              //top: 10,
+              left: 235,
+              bottom: 8,
+              child: IconButton(
+                icon: const Icon(
+                  Icons.shopping_cart,
+                  color: Color.fromARGB(157, 158, 158, 158),
+                  size: 32.0,
+                ),
+                onPressed: () async {},
+              ),
+            ),
           ],
         ),
       ),
