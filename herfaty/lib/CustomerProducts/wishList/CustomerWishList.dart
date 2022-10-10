@@ -6,7 +6,7 @@ import 'package:herfaty/CustomerProducts/productCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:herfaty/CustomerProducts/wishList/wishCard.dart';
 import 'package:herfaty/CustomerProducts/wishList/wishListDetails.dart';
-import 'package:herfaty/models/AddProductToCart.dart';
+import 'package:herfaty/models/CartWishListProduct.dart';
 import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/constants/color.dart';
 

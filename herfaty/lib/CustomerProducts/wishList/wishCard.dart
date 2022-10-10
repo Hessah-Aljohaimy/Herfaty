@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:herfaty/constants/color.dart';
-import 'package:herfaty/models/AddProductToCart.dart';
+import 'package:herfaty/models/CartWishListProduct.dart';
 import 'package:herfaty/models/Product1.dart';
 
 class wishCard extends StatefulWidget {
