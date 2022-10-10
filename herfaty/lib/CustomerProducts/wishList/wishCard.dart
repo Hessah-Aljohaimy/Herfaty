@@ -3,8 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:herfaty/constants/color.dart';
-import 'package:herfaty/models/CartWishListProduct.dart';
-import 'package:herfaty/models/Product1.dart';
+import 'package:herfaty/models/cart_wishlistModel.dart';
 
 class wishCard extends StatefulWidget {
   const wishCard({
@@ -15,7 +14,7 @@ class wishCard extends StatefulWidget {
   }) : super(key: key);
 
   final int itemIndex;
-  final CartWishListProduct product;
+  final cart_wishlistModel product;
   final void Function() press;
 
   @override
@@ -170,20 +169,20 @@ class _wishCardState extends State<wishCard> {
       ),
     );
   }
-}
 
-Future<String> getDocId(String thisCustomerId, String thisproductId) async {
-  String DocId = "";
-  print("==================this is get docId method");
-  final wishListDoc = await FirebaseFirestore.instance
-      .collection('wishList')
-      .where("productId", isEqualTo: thisproductId)
-      .where("customerId", isEqualTo: thisCustomerId)
-      .get();
-  if (wishListDoc.size > 0) {
-    var data = wishListDoc.docs.elementAt(0).data() as Map;
-    DocId = data["docId"];
-    print('wish list docId is ${DocId}============================');
+  Future<String> getDocId(String thisCustomerId, String thisproductId) async {
+    String DocId = "";
+    print("==================this is get docId method");
+    final wishListDoc = await FirebaseFirestore.instance
+        .collection('wishList')
+        .where("productId", isEqualTo: thisproductId)
+        .where("customerId", isEqualTo: thisCustomerId)
+        .get();
+    if (wishListDoc.size > 0) {
+      var data = wishListDoc.docs.elementAt(0).data() as Map;
+      DocId = data["docId"];
+      print('wish list docId is ${DocId}============================');
+    }
+    return DocId;
   }
-  return DocId;
 }

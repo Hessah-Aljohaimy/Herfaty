@@ -5,7 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/models/Product1.dart';
-import 'package:herfaty/models/CartWishListProduct.dart';
+import 'package:herfaty/models/cart_wishlistModel.dart';
 
 class productCard extends StatefulWidget {
   const productCard({
@@ -24,11 +24,15 @@ class productCard extends StatefulWidget {
 }
 
 class _productCardState extends State<productCard> {
-  late bool isFavourite;
+  bool isFavourite = false;
 
   @override
   void initState() {
-    isFavourite = false;
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    String thisCustomerId = user!.uid;
+    setIsFavourite(thisCustomerId, widget.product.id);
+    //isFavourite = false;
     super.initState();
   }
 
@@ -165,20 +169,12 @@ class _productCardState extends State<productCard> {
                   size: 32.0,
                 ),
                 onPressed: () async {
-                  setState(() {
-                    isFavourite = !isFavourite;
-                  });
-                  // اعتقد المفروض يكون من مودل برودكت ون
+                  if (isFavourite == false) {
+                    //المنتج غير موجود مسبقًا في قائمة المفضلات
 
-                  /**
-                   * احتاج احتفظ باستمرار بالبرودكت اي دي عشان اقدر اضيفه واشيله من قائمة المفضلة
-                  ولازم اشيك لما اعرض ال قائمة حقت المنتجات هل البرودكت في المفضلة حقت هذا الكستمر أو لا عشان القلب اللي ينعرض له يكون احمر (وبرضو لما يضغط عليه لازم ينشال من المفضلة)
-
-                   */
-                  if (isFavourite == true) {
                     final productToBeAdded =
                         FirebaseFirestore.instance.collection('wishList').doc();
-                    CartWishListProduct item = CartWishListProduct(
+                    cart_wishlistModel item = cart_wishlistModel(
                         name: widget.product.name,
                         detailsImage: widget.product.image,
                         docId: productToBeAdded.id,
@@ -199,6 +195,9 @@ class _productCardState extends State<productCard> {
                         .doc('${existedWishListDocId}')
                         .delete();
                   }
+                  setState(() {
+                    isFavourite = !isFavourite;
+                  });
                 },
               ),
             )
@@ -209,7 +208,7 @@ class _productCardState extends State<productCard> {
   }
 
   //==========================================================================================
-  Future createWishListItem(CartWishListProduct wishListItem) async {
+  Future createWishListItem(cart_wishlistModel wishListItem) async {
     final docCartItem = FirebaseFirestore.instance
         .collection('wishList')
         .doc("${wishListItem.docId}");
@@ -218,21 +217,38 @@ class _productCardState extends State<productCard> {
       json,
     );
   }
-}
 
-//=======================================================================================
-Future<String> getDocId(String thisCustomerId, String thisproductId) async {
-  String DocId = "";
-  print("==================this is get docId method");
-  final wishListDoc = await FirebaseFirestore.instance
-      .collection('wishList')
-      .where("productId", isEqualTo: thisproductId)
-      .where("customerId", isEqualTo: thisCustomerId)
-      .get();
-  if (wishListDoc.size > 0) {
-    var data = wishListDoc.docs.elementAt(0).data() as Map;
-    DocId = data["docId"];
-    print('wish list docId is ${DocId}============================');
+  //==========================================================================================
+  Future<void> setIsFavourite(
+      String thisCustomerId, String thisproductId) async {
+    String existedDocId = await getDocId(thisCustomerId, thisproductId);
+    if (existedDocId != "") {
+      setState(() {
+        isFavourite = true;
+      });
+    } else {
+      setState(() {
+        isFavourite = false;
+      });
+    }
   }
-  return DocId;
+
+  //=======================================================================================
+  Future<String> getDocId(String thisCustomerId, String thisproductId) async {
+    String DocId = "";
+    final wishListDoc = await FirebaseFirestore.instance
+        .collection('wishList')
+        .where("productId", isEqualTo: thisproductId)
+        .where("customerId", isEqualTo: thisCustomerId)
+        .get();
+    if (wishListDoc.size > 0) {
+      var data = wishListDoc.docs.elementAt(0).data() as Map;
+      DocId = data["docId"];
+      print('wish list docId is ${DocId}============================');
+    }
+    return DocId;
+  }
+
+//=============================================================================================
+
 }

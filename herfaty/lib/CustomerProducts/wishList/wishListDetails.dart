@@ -3,15 +3,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:herfaty/cart/cart.dart';
-import 'package:herfaty/models/CartWishListProduct.dart';
-import 'package:herfaty/models/Product1.dart';
+import 'package:herfaty/models/cart_wishlistModel.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/widgets/ExpandedWidget.dart';
 
 class wishListDetails extends StatefulWidget {
-  final CartWishListProduct product;
+  final cart_wishlistModel product;
   String detailsImage;
 
   wishListDetails(
@@ -331,21 +329,19 @@ class _wishListDetailsState extends State<wishListDetails> {
                                       .instance
                                       .collection('cart')
                                       .doc();
-                                  CartWishListProduct item =
-                                      CartWishListProduct(
-                                          name: widget.product.name,
-                                          detailsImage: widget.detailsImage,
-                                          docId: productToBeAdded.id,
-                                          productId: widget.product.productId,
-                                          customerId: user.uid,
-                                          shopName: widget.product.shopName,
-                                          shopOwnerId:
-                                              widget.product.shopOwnerId,
-                                          quantity: existedQuantity +
-                                              thisPageQuantity,
-                                          availableAmount:
-                                              widget.product.availableAmount,
-                                          price: widget.product.price);
+                                  cart_wishlistModel item = cart_wishlistModel(
+                                      name: widget.product.name,
+                                      detailsImage: widget.detailsImage,
+                                      docId: productToBeAdded.id,
+                                      productId: widget.product.productId,
+                                      customerId: user.uid,
+                                      shopName: widget.product.shopName,
+                                      shopOwnerId: widget.product.shopOwnerId,
+                                      quantity:
+                                          existedQuantity + thisPageQuantity,
+                                      availableAmount:
+                                          widget.product.availableAmount,
+                                      price: widget.product.price);
                                   createCartItem(item);
                                   await showDoneToast(context);
                                 }
@@ -402,7 +398,7 @@ class _wishListDetailsState extends State<wishListDetails> {
   }
 
 //==========================================================================================
-  Future createCartItem(CartWishListProduct cartItem) async {
+  Future createCartItem(cart_wishlistModel cartItem) async {
     final docCartItem =
         FirebaseFirestore.instance.collection('cart').doc("${cartItem.docId}");
     final json = cartItem.toJson();

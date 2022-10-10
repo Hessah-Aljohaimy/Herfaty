@@ -1,4 +1,4 @@
-class CartWishListProduct {
+class cart_wishlistModel {
   String name = "";
   String detailsImage = "";
   String productId = "";
@@ -10,7 +10,7 @@ class CartWishListProduct {
   int availableAmount = 0;
   num price = 0;
 
-  CartWishListProduct({
+  cart_wishlistModel({
     required this.name,
     required this.detailsImage,
     required this.productId,
@@ -22,7 +22,7 @@ class CartWishListProduct {
     required this.availableAmount,
     required this.price,
   });
-  CartWishListProduct.fromJson(Map<String, dynamic> json) {
+  cart_wishlistModel.fromJson(Map<String, dynamic> json) {
     detailsImage = json['image'];
     customerId = json['customerId'];
     shopOwnerId = json['shopOwnerId'];
