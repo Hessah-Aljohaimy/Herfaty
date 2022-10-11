@@ -29,44 +29,39 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  basic_utils: ^4.2.2
   cloud_firestore: ^3.4.7
   cupertino_icons: ^1.0.2
+  equatable: ^2.0.3
   firebase_auth: ^3.8.0
   firebase_core: ^1.21.1
   firebase_database: ^9.1.5
   firebase_storage: ^10.3.8
   flutter:
     sdk: flutter
+  flutter_bloc: any
   flutter_icons: ^1.1.0
   flutter_launcher_icons: ^0.10.0
+  flutter_local_notifications: ^9.7.0
   flutter_localizations:
     sdk: flutter
-  flutter_stripe: ^3.2.0
-  #http: ^0.13.1
-  fluttertoast: ^8.0.9
-  google_fonts: ^3.0.1
-  google_nav_bar: ^5.0.6
-  image_picker: ^0.8.5+3
-  persistent_bottom_nav_bar: any
-  style_random: ^0.0.1+1
-  flutter_bloc : any
-  equatable : ^2.0.3
-  status_change: ^2.0.0
-  
-  http: ^0.13.5
-  google_maps_place_picker: any
-  geolocator: any
-  geocoding: any
-  
-  
-
-  
-  flutter_local_notifications: ^9.7.0
-  timezone: ^0.8.0
-  rxdart: ^0.27.4
-  basic_utils: ^4.2.2
-  path_provider: ^2.0.11
   flutter_native_timezone: ^2.0.0
+  flutter_settings_screens: ^0.2.2+1
+  flutter_stripe: ^3.2.0
+  fluttertoast: ^8.0.9
+  geocoding: any
+  geolocator: any
+  google_fonts: ^3.0.1
+  google_maps_place_picker: any
+  google_nav_bar: ^5.0.6
+  http: ^0.13.5
+  image_picker: ^0.8.5+3
+  path_provider: ^2.0.11
+  persistent_bottom_nav_bar: any
+  rxdart: ^0.27.4
+  status_change: ^2.0.0
+  style_random: ^0.0.1+1
+  timezone: ^0.8.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0

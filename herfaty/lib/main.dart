@@ -1,3 +1,5 @@
+// @dart=2.9
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:herfaty/cart/cart.dart';
@@ -36,7 +38,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +67,7 @@ class MyApp extends StatelessWidget {
           "/signupCustomer": (context) => const SignupCustomer(),
           "/signupHerfay": (context) => const SignupHerafy(),
           "/customer_base_screen": (context) => const customerBaseScreen(),
-          "/driverPage":(context) => driverPage(),
+          "/driverPage": (context) => driverPage(),
         },
       ),
     );

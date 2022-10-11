@@ -110,7 +110,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
         child: SingleChildScrollView(
           child: SizedBox(
             width: 430,
-            height: 750,
+            height: 700,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -367,11 +367,10 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                         print(widget.uid);
                         //update this spesific feild
                         docShopOwner.update({
-                          'email': _emailTextEditingController.text,
                           'id': widget.uid,
                           'name': _nameTextEditingController.text,
-                          'password': _passwordTextController.text,
-                          'DOB': _BODController,
+                          'DOB': _BODController.text,
+                          // 'phone number': _phoneNumberEditingController.text,
                         });
                         Fluttertoast.showToast(
                           msg: "تم تحديث حسابك بنجاح",

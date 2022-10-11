@@ -100,45 +100,45 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
         backgroundColor: Colors.white,
         shadowColor: Color.fromARGB(255, 39, 141, 134),
         elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.logout, color: Color.fromARGB(255, 81, 144, 142)),
-          onPressed: () async {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: Text("تنبيه"),
-                    content: Text('سيتم تسجيل خروجك من الحساب'),
-                    actions: <Widget>[
-                      TextButton(
-                        child: Text("تسجيل خروج",
-                            style: TextStyle(color: Colors.red)),
-                        onPressed: () {
-                          //Navigator.of(context).pop();
-                          // FirebaseAuth.instance.signOut();
-                          // Navigator.of(context).pushNamedAndRemoveUntil(
-                          //     "/login", (Route<dynamic> route) => false);
-                          Navigator.of(context, rootNavigator: true)
-                              .pushReplacement(MaterialPageRoute(
-                                  builder: (context) => new login()));
-                        },
-                      ),
-                      TextButton(
-                        child: Text("تراجع"),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      )
-                    ],
-                  );
-                });
+        // leading: IconButton(
+        //   icon: Icon(Icons.logout, color: Color.fromARGB(255, 81, 144, 142)),
+        //   onPressed: () async {
+        //     showDialog(
+        //         context: context,
+        //         builder: (BuildContext context) {
+        //           return AlertDialog(
+        //             title: Text("تنبيه"),
+        //             content: Text('سيتم تسجيل خروجك من الحساب'),
+        //             actions: <Widget>[
+        //               TextButton(
+        //                 child: Text("تسجيل خروج",
+        //                     style: TextStyle(color: Colors.red)),
+        //                 onPressed: () {
+        //                   //Navigator.of(context).pop();
+        //                   // FirebaseAuth.instance.signOut();
+        //                   // Navigator.of(context).pushNamedAndRemoveUntil(
+        //                   //     "/login", (Route<dynamic> route) => false);
+        //                   Navigator.of(context, rootNavigator: true)
+        //                       .pushReplacement(MaterialPageRoute(
+        //                           builder: (context) => new login()));
+        //                 },
+        //               ),
+        //               TextButton(
+        //                 child: Text("تراجع"),
+        //                 onPressed: () {
+        //                   Navigator.of(context).pop();
+        //                 },
+        //               )
+        //             ],
+        //           );
+        //         });
 
-            /*Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (BuildContext context) {
-              return Welcome();
-            }));*/
-          },
-        ),
+        //     /*Navigator.pushReplacement(context,
+        //             MaterialPageRoute(builder: (BuildContext context) {
+        //       return Welcome();
+        //     }));*/
+        //   },
+        // ),
         actions: [
           IconButton(
             onPressed: () {
