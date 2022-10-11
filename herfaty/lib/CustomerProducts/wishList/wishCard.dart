@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:herfaty/constants/color.dart';
+import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/models/cart_wishlistModel.dart';
 
 class wishCard extends StatefulWidget {
@@ -14,7 +15,7 @@ class wishCard extends StatefulWidget {
   }) : super(key: key);
 
   final int itemIndex;
-  final cart_wishlistModel product;
+  final Product1 product;
   final void Function() press;
 
   @override
@@ -87,7 +88,7 @@ class _wishCardState extends State<wishCard> {
                     bottomLeft: Radius.circular(10),
                   ),
                   child: Image.network(
-                    widget.product.detailsImage,
+                    widget.product.image,
                     fit: BoxFit.cover,
                   ),
                 ),

@@ -48,7 +48,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
           for (var index = 0; index < querySnapshot.size; index++) {
             var data = querySnapshot.docs.elementAt(index).data() as Map;
             String productId = data["id"];
-            if (productId == widget.product.id) {
+            if (productId == widget.product.productId) {
               int updatedAvailabeAmount = data["avalibleAmount"];
               if (updatedAvailabeAmount != widget.product.availableAmount) {
                 if (mounted) {
@@ -335,7 +335,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                                       name: widget.product.name,
                                       detailsImage: widget.detailsImage,
                                       docId: productToBeAdded.id,
-                                      productId: widget.product.id,
+                                      productId: widget.product.productId,
                                       customerId: user.uid,
                                       description: widget.product.description,
                                       shopName: widget.product.shopName,
@@ -417,7 +417,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
     print("==================this is get quantity method");
     final cartDoc = await FirebaseFirestore.instance
         .collection('cart')
-        .where("productId", isEqualTo: widget.product.id)
+        .where("productId", isEqualTo: widget.product.productId)
         .where("customerId", isEqualTo: thisCustomerId)
         .get();
     if (cartDoc.size > 0) {
@@ -436,7 +436,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
     print("==================this is get docId method");
     final cartDoc = await FirebaseFirestore.instance
         .collection('cart')
-        .where("productId", isEqualTo: widget.product.id)
+        .where("productId", isEqualTo: widget.product.productId)
         .where("customerId", isEqualTo: thisCustomerId)
         .get();
     if (cartDoc.size > 0) {

@@ -2,9 +2,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:herfaty/CustomerProducts/CustomerProductDetails.dart';
 import 'package:herfaty/CustomerProducts/wishList/wishCard.dart';
-import 'package:herfaty/CustomerProducts/wishList/wishListDetails.dart';
-import 'package:herfaty/models/cart_wishlistModel.dart';
+import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/constants/color.dart';
 
 class CustomerWishList extends StatefulWidget {
@@ -42,7 +42,7 @@ class _CustomerWishListState extends State<CustomerWishList> {
                 child: Stack(
                   children: [
                     //This is to list all of our items fetched from the DB========================
-                    StreamBuilder<List<cart_wishlistModel>>(
+                    StreamBuilder<List<Product1>>(
                       stream: readPrpducts(thisCustomerId),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
@@ -80,10 +80,10 @@ class _CustomerWishListState extends State<CustomerWishList> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => wishListDetails(
+                                      builder: (context) =>
+                                          CustomerProdectDetails(
                                         // يرسل المعلومات لصفحة المنتج عشان يعرض التفاصيل
-                                        detailsImage:
-                                            productItems[index].detailsImage,
+                                        detailsImage: productItems[index].image,
                                         product: productItems[index],
                                       ),
                                     ),
@@ -111,13 +111,13 @@ class _CustomerWishListState extends State<CustomerWishList> {
   }
 
 //========================================================================================
-  Stream<List<cart_wishlistModel>> readPrpducts(String thisCustomerId) =>
+  Stream<List<Product1>> readPrpducts(String thisCustomerId) =>
       FirebaseFirestore.instance
           .collection('wishList')
           .where("customerId", isEqualTo: thisCustomerId)
           .snapshots()
           .map((snapshot) => snapshot.docs
-              .map((doc) => cart_wishlistModel.fromJson(doc.data()))
+              .map((doc) => Product1.fromJson2(doc.data()))
               .toList());
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////

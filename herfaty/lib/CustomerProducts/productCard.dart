@@ -31,7 +31,7 @@ class _productCardState extends State<productCard> {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     String thisCustomerId = user!.uid;
-    setIsFavourite(thisCustomerId, widget.product.id);
+    setIsFavourite(thisCustomerId, widget.product.productId);
     //isFavourite = false;
     super.initState();
   }
@@ -178,7 +178,7 @@ class _productCardState extends State<productCard> {
                         name: widget.product.name,
                         detailsImage: widget.product.image,
                         docId: productToBeAdded.id,
-                        productId: widget.product.id,
+                        productId: widget.product.productId,
                         customerId: user.uid,
                         description: widget.product.description,
                         shopName: widget.product.shopName,
@@ -189,8 +189,8 @@ class _productCardState extends State<productCard> {
                     createWishListItem(item);
                   } else {
                     //delete the product from the wish list
-                    String existedWishListDocId =
-                        await getDocId(thisCustomerId, widget.product.id);
+                    String existedWishListDocId = await getDocId(
+                        thisCustomerId, widget.product.productId);
                     FirebaseFirestore.instance
                         .collection('wishList')
                         .doc('${existedWishListDocId}')
