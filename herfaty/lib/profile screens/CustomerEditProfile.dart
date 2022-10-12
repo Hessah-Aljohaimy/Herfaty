@@ -96,15 +96,15 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
             color: Color.fromARGB(255, 39, 141, 134),
           ),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.logout, color: Color.fromARGB(255, 39, 141, 134)),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => login()));
-            },
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     icon: Icon(Icons.logout, color: Color.fromARGB(255, 39, 141, 134)),
+        //     onPressed: () {
+        //       Navigator.of(context).push(MaterialPageRoute(
+        //           builder: (BuildContext context) => login()));
+        //     },
+        //   ),
+        // ],
         automaticallyImplyLeading: false,
         iconTheme: IconThemeData(color: kPrimaryColor),
       ),

@@ -5,6 +5,7 @@ import 'package:herfaty/main.dart';
 import 'package:herfaty/pages/login.dart';
 import 'package:herfaty/pages/welcome.dart';
 import 'package:herfaty/profile%20screens/CustomerEditProfile.dart';
+import 'package:herfaty/widgets/customerSettings.dart';
 
 import '../constants/color.dart';
 import 'dart:io';
@@ -21,6 +22,7 @@ import 'package:herfaty/pages/signupHerafy.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../pages/signupCustomer.dart';
+import 'ownerSettings.dart';
 //Define snapshot
 
 class logOutButton extends StatelessWidget {
@@ -100,44 +102,54 @@ class logOutButton extends StatelessWidget {
         backgroundColor: Colors.white,
         shadowColor: Color.fromARGB(255, 39, 141, 134),
         elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.logout, color: Color.fromARGB(255, 81, 144, 142)),
-          onPressed: () async {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: Text("تنبيه"),
-                    content: Text('سيتم تسجيل خروجك من الحساب'),
-                    actions: <Widget>[
-                      TextButton(
-                        child: Text("تسجيل خروج",
-                            style: TextStyle(color: Colors.red)),
-                        onPressed: () {
-                          // FirebaseAuth.instance.signOut();
-                          // Navigator.of(context).pushNamedAndRemoveUntil(
-                          //     "/", (Route<dynamic> route) => false);
-                          Navigator.of(context, rootNavigator: true)
-                              .pushReplacement(MaterialPageRoute(
-                                  builder: (context) => new login()));
-                        },
-                      ),
-                      TextButton(
-                        child: Text("تراجع"),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      )
-                    ],
-                  );
-                });
+        // leading: IconButton(
+        //   icon: Icon(Icons.logout, color: Color.fromARGB(255, 81, 144, 142)),
+        //   onPressed: () async {
+        //     showDialog(
+        //         context: context,
+        //         builder: (BuildContext context) {
+        //           return AlertDialog(
+        //             title: Text("تنبيه"),
+        //             content: Text('سيتم تسجيل خروجك من الحساب'),
+        //             actions: <Widget>[
+        //               TextButton(
+        //                 child: Text("تسجيل خروج",
+        //                     style: TextStyle(color: Colors.red)),
+        //                 onPressed: () {
+        //                   // FirebaseAuth.instance.signOut();
+        //                   // Navigator.of(context).pushNamedAndRemoveUntil(
+        //                   //     "/", (Route<dynamic> route) => false);
+        //                   Navigator.of(context, rootNavigator: true)
+        //                       .pushReplacement(MaterialPageRoute(
+        //                           builder: (context) => new login()));
+        //                 },
+        //               ),
+        //               TextButton(
+        //                 child: Text("تراجع"),
+        //                 onPressed: () {
+        //                   Navigator.of(context).pop();
+        //                 },
+        //               )
+        //             ],
+        //           );
+        //         });
 
-            /*Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (BuildContext context) {
-              return Welcome();
-            }));*/
-          },
-        ),
+        //     /*Navigator.pushReplacement(context,
+        //             MaterialPageRoute(builder: (BuildContext context) {
+        //       return Welcome();
+        //     }));*/
+        //   },
+        // ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => CustomerSettings()));
+            },
+            icon: Icon(CupertinoIcons.settings,
+                color: Color.fromARGB(255, 81, 144, 142)),
+          ),
+        ],
         automaticallyImplyLeading: false,
         iconTheme: IconThemeData(color: kPrimaryColor),
       ),
@@ -366,33 +378,33 @@ Widget buildCustomer(Customer customer, BuildContext context) {
                       SizedBox(
                         height: 35,
                       ),
-                      Row(
-                        children: [
-                          Text(
-                            'كلمة المرور',
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 26, 96, 91),
-                              fontWeight: FontWeight.w800,
-                              fontSize: 17,
-                              fontFamily: "Tajawal",
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10),
-                            child: Text(
-                              passwordStar,
-                              style: TextStyle(
-                                fontSize: 19,
-                                fontFamily: "Tajawal",
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                      // Row(
+                      //   children: [
+                      //     Text(
+                      //       'كلمة المرور',
+                      //       style: TextStyle(
+                      //         color: Color.fromARGB(255, 26, 96, 91),
+                      //         fontWeight: FontWeight.w800,
+                      //         fontSize: 17,
+                      //         fontFamily: "Tajawal",
+                      //       ),
+                      //     ),
+                      //     SizedBox(
+                      //       width: 10,
+                      //     ),
+                      //     Padding(
+                      //       padding: const EdgeInsets.only(top: 10),
+                      //       child: Text(
+                      //         passwordStar,
+                      //         style: TextStyle(
+                      //           fontSize: 19,
+                      //           fontFamily: "Tajawal",
+                      //           fontWeight: FontWeight.w500,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
                     ],
                   ),
                   // leading: Icon(

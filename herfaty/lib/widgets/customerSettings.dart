@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
+import 'package:herfaty/pages/login.dart';
 import 'package:herfaty/profile%20screens/resetPassword.dart';
+import 'package:herfaty/widgets/logOut.dart';
+import 'package:herfaty/widgets/ownerSettings.dart';
 
-import '../pages/login.dart';
-import '../profile screens/ShopOwnerProfile.dart';
-
-class OwnerSettings extends StatefulWidget {
-  const OwnerSettings({super.key});
+class CustomerSettings extends StatefulWidget {
+  const CustomerSettings({super.key});
 
   @override
-  State<OwnerSettings> createState() => _OwnerSettingsState();
+  State<CustomerSettings> createState() => _CustomerSettingsState();
 }
 
-class _OwnerSettingsState extends State<OwnerSettings> {
+class _CustomerSettingsState extends State<CustomerSettings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +28,7 @@ class _OwnerSettingsState extends State<OwnerSettings> {
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => ShopOwnerProfile()));
+                builder: (BuildContext context) => logOutButton()));
           },
           icon: Icon(Icons.arrow_back),
         ),
@@ -51,16 +51,12 @@ class _OwnerSettingsState extends State<OwnerSettings> {
             ],
           )),
     );
-    // return SizedBox(
-    //     height: 200,
-    //     width: 200,
-    //     child: Container(child: Center(child: Text('Owner settings page'))));
   }
 
   Widget buildResetPassword() => SimpleSettingsTile(
         leading: IconWidget(
           icon: Icons.lock,
-          color: Color.fromARGB(126, 39, 141, 134),
+          color: Color(0xff51908E),
         ),
         title: 'إعادة تعيين كلمة المرور',
         subtitle: '',
@@ -115,26 +111,4 @@ class _OwnerSettingsState extends State<OwnerSettings> {
             }));*/
         },
       );
-}
-
-class IconWidget extends StatelessWidget {
-  final IconData icon;
-  final Color color;
-
-  const IconWidget({
-    Key? key,
-    required this.icon,
-    required this.color,
-  }) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(6),
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: color,
-      ),
-      child: Icon(icon, color: Colors.white),
-    );
-  }
 }
