@@ -46,11 +46,12 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
   PickedFile? _imageFile;
   File? pickedImage1;
 
-  DateTime todaysDate = DateTime.now();
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
-    TextEditingController _passwordTextController = new TextEditingController();
+    TextEditingController _passwordTextController = new TextEditingController()
+      ..text = widget.password;
+
     TextEditingController _emailTextEditingController =
         new TextEditingController()..text = widget.email;
     TextEditingController _nameTextEditingController =
@@ -58,7 +59,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
 
     TextEditingController _BODController = new TextEditingController()
       ..text = widget.DOB;
-    ;
+    DateTime _selectedDate;
     TextEditingController _PhoneNumberTextEditingController =
         new TextEditingController()..text = widget.phone_number;
 
@@ -76,9 +77,6 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
     for (int i = 0; i < passlength; i++) {
       passwordStar = passwordStar + '*';
     }
-
-    final docShopOwner =
-        FirebaseFirestore.instance.collection('customers').doc(widget.uid);
 
 /** IconButton(
             onPressed: () {
@@ -164,9 +162,9 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                       "البريد الإلكتروني", false, _emailTextEditingController),
                 ),
 
-                // SizedBox(
-                //   height: 3,
-                // ),
+                SizedBox(
+                  height: 3,
+                ),
                 // Container(
                 //   padding: EdgeInsets.only(left: 15, right: 15, top: 10),
                 //   width: 350,
@@ -174,9 +172,9 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                 //       "تاريخ الميلاد", false, _passwordTextController),
                 // ),
                 Container(
-                    padding: EdgeInsets.symmetric(horizontal: 47),
-                    child: Center(
-                        child: TextFormField(
+                  padding: EdgeInsets.symmetric(horizontal: 47),
+                  child: Center(
+                    child: TextFormField(
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       controller: _BODController,
                       validator: (value) {
@@ -225,7 +223,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                       ),
 
                       readOnly:
-                          true, //set it true, so that user will not able to edit text
+                          false, //set it true, so that user will not able to edit text
                       onTap: () async {
                         DateTime? pickedDate = await showDatePicker(
                           context: context,
@@ -254,33 +252,18 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                           },
                         );
 
-                        if (pickedDate != null && pickedDate != todaysDate) {
-                          print(
-                              pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
-                          String formattedDate =
-                              DateFormat('yyyy-MM-dd').format(pickedDate);
-                          print(
-                              formattedDate); //formatted date output using intl package =>  2021-03-16
-                          //you can implement different kind of Date Format here according to your requirement
-
-                          setState(() {
-                            _BODController.text =
-                                formattedDate; //set output date to TextField value.
-                          });
-                        } else {
-                          print("لم يتم اختيار تاريخ الميلاد");
-                          Fluttertoast.showToast(
-                            msg: "لم يتم اختيار تاريخ الميلاد  ",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.CENTER,
-                            timeInSecForIosWeb: 3,
-                            backgroundColor: Colors.white,
-                            textColor: Colors.red,
-                            fontSize: 18.0,
-                          );
-                        }
+                        print(
+                            pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                        String formattedDate =
+                            DateFormat('yyyy-MM-dd').format(pickedDate!);
+                        print(
+                            formattedDate); //formatted date output using intl package =>  2021-03-16
+                        //you can implement different kind of Date Format here according to your requirement
+                        _BODController..text = formattedDate;
                       },
-                    ))),
+                    ),
+                  ),
+                ),
                 // SizedBox(
                 //   height: 5,
                 // ),
@@ -364,13 +347,27 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                     ),
                     ElevatedButton(
                       onPressed: () {
+                        final docShopOwner = FirebaseFirestore.instance
+                            .collection('shop_owner')
+                            .doc(widget.uid);
+                        if (uploadImageUrl == "") {
+                          uploadImageUrl = widget.logo;
+                        }
+
                         print(widget.uid);
                         //update this spesific feild
                         docShopOwner.update({
-                          'id': widget.uid,
-                          'name': _nameTextEditingController.text,
                           'DOB': _BODController.text,
-                          // 'phone number': _phoneNumberEditingController.text,
+                          'email': widget.email,
+                          'id': widget.uid,
+                          'logo': uploadImageUrl,
+                          'name': _nameTextEditingController.text,
+                          'password': widget.password,
+                          'phone_number':
+                              _PhoneNumberTextEditingController.text,
+                          'shopdescription':
+                              _shopdescriptionTextEditingController.text,
+                          'shopname': _shopnameTextEditingController.text,
                         });
                         Fluttertoast.showToast(
                           msg: "تم تحديث حسابك بنجاح",
