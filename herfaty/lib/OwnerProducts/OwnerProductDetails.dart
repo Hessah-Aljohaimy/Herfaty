@@ -197,7 +197,7 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
                                             .delete();
 
                                         Navigator.of(context).pop();
-                                        showDoneToast(context);
+                                        showDoneDeleteToast(context);
                                       },
                                     )
                                   ],
@@ -292,6 +292,18 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
           ],
         );
       },
+    );
+  }
+
+  Future<void> showDoneDeleteToast(BuildContext context) async {
+    Fluttertoast.showToast(
+      msg: "تم حذف المنتج بنجاح",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: 3,
+      backgroundColor: Color.fromARGB(255, 26, 96, 91),
+      textColor: Colors.white,
+      fontSize: 18.0,
     );
   }
 
