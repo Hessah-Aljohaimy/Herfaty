@@ -259,13 +259,13 @@ class _wishCardState extends State<wishCard> {
   Future<String> getDocId(String thisCustomerId, String thisproductId,
       String collectionName) async {
     String docId = "";
-    final cartDoc = await FirebaseFirestore.instance
+    final Doc = await FirebaseFirestore.instance
         .collection(collectionName)
         .where("productId", isEqualTo: thisproductId)
         .where("customerId", isEqualTo: thisCustomerId)
         .get();
-    if (cartDoc.size > 0) {
-      var data = cartDoc.docs.elementAt(0).data() as Map;
+    if (Doc.size > 0) {
+      var data = Doc.docs.elementAt(0).data() as Map;
       docId = data["docId"];
       print(
           'existed ${collectionName} docId is ${docId}============================');
