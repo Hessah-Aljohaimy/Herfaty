@@ -10,14 +10,14 @@ import 'package:herfaty/cart/cart.dart';
 import '../constants/color.dart';
 import '../models/Product1.dart';
 
-class orderDetails extends StatefulWidget {
+class orderDetailsCustomer extends StatefulWidget {
   String date;
   num totalOrder;
   String docID;
   Map products;
   String status;
 
-  orderDetails(
+  orderDetailsCustomer(
       {Key? key,
       required date,
       required totalOrder,
@@ -32,10 +32,10 @@ class orderDetails extends StatefulWidget {
         super(key: key);
 
   @override
-  _orderDetailsState createState() => _orderDetailsState();
+  _orderDetailsCustomerState createState() => _orderDetailsCustomerState();
 }
 
-class _orderDetailsState extends State<orderDetails> {
+class _orderDetailsCustomerState extends State<orderDetailsCustomer> {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -91,12 +91,6 @@ class AppBarOD extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String newStatus = "";
-    if (status == "طلب جديد")
-      newStatus = "جاهز للتوصيل";
-    else if (status == "جاهز للتوصيل")
-      newStatus = "تم الشحن";
-    else if (status == "تم الشحن") newStatus = "تم شحن المنتج";
     return Container(
       margin: EdgeInsets.only(top: 10),
       padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 15),
@@ -110,92 +104,19 @@ class AppBarOD extends StatelessWidget {
         color: kPrimaryColor,
       ),
       child: Center(
-        child: Column(
-          children: [
-            Text(
-              " تاريخ الطلب: $date \n مجموع الطلب: $totalOrder ريال \n حالة الطلب: $status",
+        child: Text(
+          " تاريخ الطلب: $date \n مجموع الطلب: $totalOrder ريال \n حالة الطلب: $status",
 
-              style: TextStyle(
-                  //color: Color.fromARGB(255, 81, 144, 142),
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17,
-                  fontFamily: "Tajawal"),
-              //textDirection: TextDirection.rtl,
-            ),
-            Button(newStatus, docID, context),
-          ],
+          style: TextStyle(
+              //color: Color.fromARGB(255, 81, 144, 142),
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 17,
+              fontFamily: "Tajawal"),
+          //textDirection: TextDirection.rtl,
         ),
       ),
     );
-  }
-
-  Widget Button(newStatus, docID, context1) {
-    if (newStatus != "تم شحن المنتج") {
-      return Center(
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            //primary: Color.fromARGB(255, 81, 144, 142), // background
-            primary: Colors.white,
-          ),
-          onPressed: () {
-            showDialog(
-                context: context1,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: Text("تغيير حالة الطلب"),
-                    content: Text('سيتم تغيير حالة الطلب إلى $newStatus'),
-                    actions: <Widget>[
-                      TextButton(
-                        child: Text("تغيير",
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 81, 144, 142),
-                            )),
-                        onPressed: () {
-                          FirebaseFirestore.instance
-                              .collection('orders')
-                              .doc(docID)
-                              .update({"status": newStatus});
-                          Navigator.pop(context);
-
-                          Fluttertoast.showToast(
-                            msg: "تم تغيير حالة الطلب بنجاح",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.CENTER,
-                            timeInSecForIosWeb: 3,
-                            backgroundColor: Color.fromARGB(255, 26, 96, 91),
-                            textColor: Colors.white,
-                            fontSize: 18.0,
-                          );
-
-                          Timer(const Duration(seconds: 0), () {
-                            Navigator.pop(context1);
-                          });
-
-                          //Navigator.pop(context);
-                        },
-                      ),
-                      TextButton(
-                        child: Text("تراجع"),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  );
-                });
-          },
-          child: Text(
-            "تغيير حالة الطلب إلى $newStatus", //change depend on status
-            style: TextStyle(
-              fontFamily: "Tajawal",
-              color: Color.fromARGB(255, 81, 144, 142),
-            ),
-          ),
-        ),
-      );
-    } else
-      return Center();
   }
 }
 
@@ -278,7 +199,7 @@ class ProductsD extends StatelessWidget {
                     child: ExpansionTile(
                       initiallyExpanded: true,
                       title: Text(
-                        "المنتجات المطلوبة",
+                        "المُشتريات",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
