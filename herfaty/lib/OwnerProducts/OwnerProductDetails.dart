@@ -3,11 +3,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:herfaty/MangeProduct.dart/EditProduct.dart';
 import 'package:herfaty/models/AddProductToCart.dart';
 import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/widgets/ExpandedWidget.dart';
+
+import 'OwnerProductsList.dart';
 
 class OwnerProdectDetails extends StatefulWidget {
   final Product1 product;
@@ -22,6 +25,9 @@ class OwnerProdectDetails extends StatefulWidget {
 
 class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
   int thisPageQuantity = 1;
+  //Not Sure Getter-----------
+  //OwnerProductsList get categoryName => OwnerProductsList(categoryName: null,);
+  var categoryName = "";
   @override
   Widget build(BuildContext context) {
     final FirebaseAuth auth = FirebaseAuth.instance;
@@ -143,6 +149,17 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
                       child: ElevatedButton(
                         onPressed: () {
                           //هنا يكون كود تعديل المنتج
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EditProduct(
+                                    '${widget.product.availableAmount}',
+                                    categoryName,
+                                    widget.product.description,
+                                    widget.detailsImage,
+                                    widget.product.name,
+                                    ' ${thisPageQuantity * widget.product.price}')),
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
@@ -193,7 +210,7 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
                                       onPressed: () {
                                         FirebaseFirestore.instance
                                             .collection('Products')
-                                            .doc('${widget.product.id}')
+                                            .doc(widget.product.id)
                                             .delete();
 
                                         Navigator.of(context).pop();
