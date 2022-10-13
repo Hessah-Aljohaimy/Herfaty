@@ -32,6 +32,9 @@ class ShopOwnerProfile extends StatefulWidget {
 }
 
 class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
+  bool ishiddenpasswordedit = true;
+  bool ishiddenpassworddelete = true;
+
   final FirebaseAuth auth = FirebaseAuth.instance;
   User? user;
   var uid;
@@ -644,14 +647,22 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
 
                     Padding(
                       padding: const EdgeInsets.only(right: 10),
-                      child: TextField(
+                      child: TextFormField(
                         controller: _checkPasslController,
-                        obscureText: true,
+                        obscureText: ishiddenpasswordedit,
                         keyboardType: TextInputType.visiblePassword,
                         style: TextStyle(
                           color: Colors.black,
                         ),
                         decoration: InputDecoration(
+                          suffixIcon: InkWell(
+                            onTap: _togglePasswordViewedit,
+                            child: Icon(
+                              ishiddenpasswordedit
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                            ),
+                          ),
                           labelText: 'أدخل كلمة المرور لتعديل الحساب',
                           labelStyle: TextStyle(
                             color: Color.fromARGB(255, 90, 90, 90),
@@ -684,7 +695,17 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                         shopowner.logo)),
                               );
                             } else {
-                              Navigator.of(context).pop();
+                              Fluttertoast.showToast(
+                                msg: "كلمة المرور غير صحيحة",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 3,
+                                backgroundColor:
+                                    Color.fromARGB(255, 156, 30, 21),
+                                textColor: Colors.white,
+                                fontSize: 18.0,
+                              );
+                              // Navigator.of(context).pop();
                             }
                           },
                         ),
@@ -757,14 +778,22 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
 
                     Padding(
                       padding: const EdgeInsets.only(right: 10),
-                      child: TextField(
+                      child: TextFormField(
                         controller: _checkPasslController,
-                        obscureText: true,
+                        obscureText: ishiddenpassworddelete,
                         keyboardType: TextInputType.visiblePassword,
                         style: TextStyle(
                           color: Colors.black,
                         ),
                         decoration: InputDecoration(
+                          suffixIcon: InkWell(
+                            onTap: _togglePasswordViewdelete,
+                            child: Icon(
+                              ishiddenpassworddelete
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                            ),
+                          ),
                           labelText: 'أدخل كلمة المرور لحذف الحساب',
                           labelStyle: TextStyle(
                             color: Color.fromARGB(255, 90, 90, 90),
@@ -827,7 +856,17 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                               );
                             } else {
                               //error try again
-                              Navigator.of(context).pop();
+                              Fluttertoast.showToast(
+                                msg: "كلمة المرور غير صحيحة",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 3,
+                                backgroundColor:
+                                    Color.fromARGB(255, 156, 30, 21),
+                                textColor: Colors.white,
+                                fontSize: 18.0,
+                              );
+                              // Navigator.of(context).pop();
                             }
                           },
                         ),
@@ -858,6 +897,18 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
       //       ),
       //     );
     );
+  }
+
+  void _togglePasswordViewedit() {
+    setState(() {
+      ishiddenpasswordedit = !ishiddenpasswordedit;
+    });
+  }
+
+  void _togglePasswordViewdelete() {
+    setState(() {
+      ishiddenpassworddelete = !ishiddenpassworddelete;
+    });
   }
 }
 // void uploadImageToFirebaseStorage(File file) async {

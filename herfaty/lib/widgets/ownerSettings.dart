@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
-import 'package:herfaty/profile%20screens/resetPassword.dart';
+import 'package:herfaty/profile%20screens/resetPasswordOwner.dart';
 
 import '../pages/login.dart';
 import '../profile screens/ShopOwnerProfile.dart';
@@ -66,8 +66,8 @@ class _OwnerSettingsState extends State<OwnerSettings> {
         subtitle: '',
         child: Container(),
         onTap: () {
-          Navigator.of(context, rootNavigator: true)
-              .push(MaterialPageRoute(builder: (context) => ResetPassword()));
+          Navigator.of(context, rootNavigator: true).push(
+              MaterialPageRoute(builder: (context) => ResetPasswordOwner()));
         },
       );
 

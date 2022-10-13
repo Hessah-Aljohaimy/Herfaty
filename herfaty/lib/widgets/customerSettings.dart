@@ -4,9 +4,11 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 import 'package:herfaty/pages/login.dart';
-import 'package:herfaty/profile%20screens/resetPassword.dart';
+import 'package:herfaty/profile%20screens/resetPasswordOwner.dart';
 import 'package:herfaty/widgets/logOut.dart';
 import 'package:herfaty/widgets/ownerSettings.dart';
+
+import '../profile screens/resetPasswordCustomer.dart';
 
 class CustomerSettings extends StatefulWidget {
   const CustomerSettings({super.key});
@@ -40,31 +42,34 @@ class _CustomerSettingsState extends State<CustomerSettings> {
           width: 600,
           child: ListView(
             padding: EdgeInsets.all(24),
-            children: [
-              SettingsGroup(
-                title: "",
-                children: <Widget>[
-                  buildResetPassword(),
-                  buildLogout(),
-                ],
-              )
+            children: <Widget>[
+              buildResetPassword(),
+              buildLogout(),
             ],
           )),
     );
   }
 
-  Widget buildResetPassword() => SimpleSettingsTile(
-        leading: IconWidget(
-          icon: Icons.lock,
-          color: Color(0xff51908E),
-        ),
-        title: 'إعادة تعيين كلمة المرور',
-        subtitle: '',
-        child: Container(),
-        onTap: () {
-          Navigator.of(context, rootNavigator: true)
-              .push(MaterialPageRoute(builder: (context) => ResetPassword()));
-        },
+  Widget buildResetPassword() => TextButton(
+        child: Container(
+            child: Row(
+          children: [
+            IconWidget(
+              icon: Icons.lock,
+              color: Color(0xff51908E),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Text('إعادة تعيين كلمة المرور'),
+
+            // onTap: () {
+            //
+            // },
+          ],
+        )),
+        onPressed: () => Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => ResetPasswordCustomer())),
       );
 
   Widget buildLogout() => SimpleSettingsTile(

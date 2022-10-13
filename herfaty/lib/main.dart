@@ -10,7 +10,8 @@ import 'package:herfaty/pages/forget_password.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:herfaty/profile%20screens/ShopOwnerProfile.dart';
-import 'package:herfaty/profile%20screens/resetPassword.dart';
+import 'package:herfaty/profile%20screens/resetPasswordCustomer.dart';
+import 'package:herfaty/profile%20screens/resetPasswordOwner.dart';
 import 'package:herfaty/screens/navCustomer.dart';
 import 'package:herfaty/screens/navOwner.dart';
 import 'package:herfaty/widgets/customerSettings.dart';
@@ -76,7 +77,8 @@ class MyApp extends StatelessWidget {
           "/shopOwnerProfile": (context) => ShopOwnerProfile(),
           "/customerSettings": (context) => CustomerSettings(),
           "/ownerSettings": (context) => OwnerSettings(),
-          "/resetPassword": (context) => ResetPassword(),
+          "/resetPasswordCustomer": (context) => ResetPasswordCustomer(),
+          "/resetPasswordOwner": (context) => ResetPasswordOwner(),
         },
       ),
     );
