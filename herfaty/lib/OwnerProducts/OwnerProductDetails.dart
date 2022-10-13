@@ -194,7 +194,8 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
                               builder: (BuildContext context) {
                                 return AlertDialog(
                                   title: Text("حذف منتج"),
-                                  content: Text('سيتم حذف هذا المنتج من سلتك'),
+                                  content:
+                                      Text('سيتم حذف هذا المنتج من منتجاتك'),
                                   actions: <Widget>[
                                     TextButton(
                                       child: Text("تراجع"),
@@ -211,6 +212,7 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
                                         FirebaseFirestore.instance
                                             .collection('Products')
                                             .doc(widget.product.id)
+                                            //.doc(getDocId())
                                             .delete();
 
                                         Navigator.of(context).pop();

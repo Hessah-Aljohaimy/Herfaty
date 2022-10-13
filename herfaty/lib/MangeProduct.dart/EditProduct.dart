@@ -1,10 +1,9 @@
-import 'dart:html';
-
+import 'dart:io';
+import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:herfaty/OwnerProducts/OwnerProductsList.dart';
 import 'package:herfaty/firestore/firestore.dart';
 import 'package:herfaty/models/product.dart';
 import 'package:herfaty/screens/ownerProductsCateg.dart';
@@ -12,11 +11,12 @@ import 'package:image_picker/image_picker.dart'; //there
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 
+import '../OwnerProducts/OwnerProductsList.dart';
 import '../constants/color.dart';
 import '../models/shopOwnerModel.dart';
 
 //import 'constants/color.dart';
-//import 'models/shopOwnerModel.dart';
+//import 'package:herfaty/MangeProduct.dart/models/shopOwnerModel.dart';
 class EditProduct extends StatefulWidget {
   const EditProduct(
     this.avalibleAmount,
@@ -63,6 +63,8 @@ class _EditProduc extends State<EditProduct> {
   final storageRef = FirebaseStorage.instance.ref();
 
   Widget build(BuildContext context) {
+    //////////////////////////////////////////////////////////////////////////////////////////
+    ///
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     String thisOwnerId = user!.uid;
@@ -81,10 +83,15 @@ class _EditProduc extends State<EditProduct> {
           .map((snapshot) => snapshot.docs
               .map((doc) => shopOwnerModel.fromJson(doc.data()))
               .toList());
-    } //Stream
+    }
 
     return Scaffold(
-      appBar: DefaultAppBar(title: "تعديل المنتج "),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(56.0),
+        child: Container(
+          child: const DefaultAppBar(title: " إضافة منتج"),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -632,7 +639,7 @@ class _EditProduc extends State<EditProduct> {
         ),
       ),
     );
-  } //widget
+  }
 
   Future<void> _showMyDialog() async {
     return showDialog<void>(
@@ -672,7 +679,7 @@ class _EditProduc extends State<EditProduct> {
                 final XFile? photo =
                     await _picker.pickImage(source: ImageSource.camera);
 
-                // final file = File(photo!.path);
+                final file = File(photo!.path);
                 uploadImageToFirebaseStorage(file);
                 Navigator.of(context).pop();
               },
