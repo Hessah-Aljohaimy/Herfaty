@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/models/cart_wishlistModel.dart';
@@ -23,6 +24,17 @@ class wishCard extends StatefulWidget {
 }
 
 class _wishCardState extends State<wishCard> {
+  bool isInCart = false;
+
+  @override
+  void initState() {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    String thisCustomerId = user!.uid;
+    setIsInCart(thisCustomerId, widget.product.productId);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final FirebaseAuth auth = FirebaseAuth.instance;
@@ -97,7 +109,7 @@ class _wishCardState extends State<wishCard> {
 
             //**********************This part contains product name, price and shop name
             Positioned(
-              top: 8,
+              top: 5,
               right: 20,
               child: SizedBox(
                 height: 136,
@@ -146,7 +158,7 @@ class _wishCardState extends State<wishCard> {
             Positioned(
               //top: 10,
               left: 190,
-              bottom: 8,
+              bottom: 5,
               child: IconButton(
                 //padding: EdgeInsets.only(right: 1),
                 icon: const Icon(
@@ -156,8 +168,8 @@ class _wishCardState extends State<wishCard> {
                 ),
                 onPressed: () async {
                   //delete the product from the wish list
-                  String existedWishListDocId =
-                      await getDocId(thisCustomerId, widget.product.productId);
+                  String existedWishListDocId = await getDocId(
+                      thisCustomerId, widget.product.productId, "wishList");
                   FirebaseFirestore.instance
                       .collection('wishList')
                       .doc('${existedWishListDocId}')
@@ -165,18 +177,52 @@ class _wishCardState extends State<wishCard> {
                 },
               ),
             ),
-            //**********************This part contains cart  icon
+            //**********************This part contains cart icon
             Positioned(
               //top: 10,
               left: 235,
               bottom: 8,
               child: IconButton(
-                icon: const Icon(
+                icon: Icon(
                   Icons.shopping_cart,
-                  color: Color.fromARGB(157, 158, 158, 158),
+                  color: isInCart
+                      ? kPrimaryColor
+                      : Color.fromARGB(157, 158, 158, 158),
                   size: 32.0,
                 ),
-                onPressed: () async {},
+                onPressed: () async {
+                  if (isInCart == false) {
+                    //المنتج غير موجود مسبقًا في السلة
+
+                    final productToBeAdded =
+                        FirebaseFirestore.instance.collection('cart').doc();
+                    cart_wishlistModel item = cart_wishlistModel(
+                        name: widget.product.name,
+                        detailsImage: widget.product.image,
+                        docId: productToBeAdded.id,
+                        productId: widget.product.productId,
+                        customerId: user.uid,
+                        description: widget.product.description,
+                        shopName: widget.product.shopName,
+                        shopOwnerId: widget.product.shopOwnerId,
+                        quantity: 1,
+                        availableAmount: widget.product.availableAmount,
+                        price: widget.product.price);
+                    createCartItem(item);
+                    showDoneToast(context);
+                  } else {
+                    //delete the product from the cart
+                    String existedWishListDocId = await getDocId(
+                        thisCustomerId, widget.product.productId, "cart");
+                    FirebaseFirestore.instance
+                        .collection('cart')
+                        .doc('${existedWishListDocId}')
+                        .delete();
+                  }
+                  setState(() {
+                    isInCart = !isInCart;
+                  });
+                },
               ),
             ),
           ],
@@ -185,19 +231,61 @@ class _wishCardState extends State<wishCard> {
     );
   }
 
-  Future<String> getDocId(String thisCustomerId, String thisproductId) async {
-    String DocId = "";
-    print("==================this is get docId method");
-    final wishListDoc = await FirebaseFirestore.instance
-        .collection('wishList')
+  //==========================================================================================
+  Future createCartItem(cart_wishlistModel cartItem) async {
+    final docCartItem =
+        FirebaseFirestore.instance.collection('cart').doc("${cartItem.docId}");
+    final json = cartItem.toJson();
+    await docCartItem.set(
+      json,
+    );
+  }
+
+  //==========================================================================================
+  Future<void> setIsInCart(String thisCustomerId, String thisproductId) async {
+    String existedDocId = await getDocId(thisCustomerId, thisproductId, "cart");
+    if (existedDocId != "") {
+      setState(() {
+        isInCart = true;
+      });
+    } else {
+      setState(() {
+        isInCart = false;
+      });
+    }
+  }
+
+  //=======================================================================================
+  Future<String> getDocId(String thisCustomerId, String thisproductId,
+      String collectionName) async {
+    String docId = "";
+    final Doc = await FirebaseFirestore.instance
+        .collection(collectionName)
         .where("productId", isEqualTo: thisproductId)
         .where("customerId", isEqualTo: thisCustomerId)
         .get();
-    if (wishListDoc.size > 0) {
-      var data = wishListDoc.docs.elementAt(0).data() as Map;
-      DocId = data["docId"];
-      print('wish list docId is ${DocId}============================');
+    if (Doc.size > 0) {
+      var data = Doc.docs.elementAt(0).data() as Map;
+      docId = data["docId"];
+      print(
+          'existed ${collectionName} docId is ${docId}============================');
     }
-    return DocId;
+    return docId;
+  }
+
+  //=======================================================================================
+  Future<void> showDoneToast(BuildContext context) async {
+    Fluttertoast.showToast(
+      msg: "تمت إضافة المنتج للسلة بنجاح",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: 3,
+      backgroundColor: Color.fromARGB(255, 26, 96, 91),
+      textColor: Colors.white,
+      fontSize: 18.0,
+    );
+    // await Future.delayed(const Duration(seconds: 1), () {
+    //   //Navigator.pop(context);
+    // });
   }
 }
