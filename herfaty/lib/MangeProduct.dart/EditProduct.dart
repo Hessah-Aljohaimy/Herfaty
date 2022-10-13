@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/firestore/firestore.dart';
@@ -51,11 +52,11 @@ class _EditProduc extends State<EditProduct> {
   ];
 
 //Text controllers
-  var nameController = TextEditingController();
-  var descController = TextEditingController();
-  var amountController = TextEditingController();
+  late TextEditingController nameController = TextEditingController()
+    ..text = widget.name;
+  late var descController = TextEditingController()..text = widget.dsscription;
+  late var amountController = TextEditingController()..text = widget.price;
   var priceController = TextEditingController();
-
   // initilazie Image Picker library
   final ImagePicker _picker = ImagePicker();
   var uploadImageUrl = ""; //image URL before choose pic
@@ -160,7 +161,7 @@ class _EditProduc extends State<EditProduct> {
               SizedBox(
                 height: 20,
               ),
-              /*Row(
+              Row(
                 //
                 mainAxisAlignment:
                     MainAxisAlignment.spaceEvenly, //for right edge
@@ -202,7 +203,7 @@ class _EditProduc extends State<EditProduct> {
                     },
                   ),
                 ],
-              ),*/
+              ),
               /* DropdownButton(
                 // Initial Value
                 value: dropdownvalueNumber,
@@ -699,6 +700,12 @@ class _EditProduc extends State<EditProduct> {
     uploadImageUrl = await imagesRef.getDownloadURL();
     setState(() {});
     print("uploaded:" + uploadImageUrl);
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('nameController', nameController));
   }
 } //class
 
