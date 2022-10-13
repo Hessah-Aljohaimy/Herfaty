@@ -405,12 +405,8 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
     return TextFormField(
       autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: controller,
-      obscureText: isPasswordType,
-      enableSuggestions: !isPasswordType,
-      autocorrect: !isPasswordType,
-      keyboardType: isPasswordType
-          ? TextInputType.visiblePassword
-          : TextInputType.emailAddress,
+   
+      
       style: TextStyle(
           color: Color.fromARGB(255, 86, 86, 86), fontFamily: "Tajawal"),
       decoration: InputDecoration(
@@ -445,19 +441,10 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
         if (value == null || value.isEmpty) {
           return "أدخل " + text;
         }
-        if (!RegExp(r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
-                .hasMatch(value) &&
-            !isPasswordType &&
-            text == 'البريد الإلكتروني') {
-          return 'أدخل بريد إلكتروني صحيح';
-        }
-
-        if (text == "كلمة المرور") {
-          if (value.length < 6) return "ادخل كلمة مرور اكبر من 6 خانات";
-        }
-        // if (text == "اسم المشتري")
-        //   maxLength:
-        //   30;
+    
+        if (text == "اسم المشتري")
+          maxLength:
+          30;
       },
     );
   }
