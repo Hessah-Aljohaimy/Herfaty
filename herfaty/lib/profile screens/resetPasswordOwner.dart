@@ -34,7 +34,10 @@ class _ResetPasswordOwnerState extends State<ResetPasswordOwner> {
     return Scaffold(
       appBar: AppBar(
         title: Text("إعادة تعيين كلمة المرور",
-            style: TextStyle(color: Color(0xff51908E))),
+            style: TextStyle(
+              color: Color(0xff51908E),
+              fontFamily: "Tajawal",
+            )),
         centerTitle: true,
         backgroundColor: Colors.white,
         shadowColor: Color.fromARGB(255, 39, 141, 134),

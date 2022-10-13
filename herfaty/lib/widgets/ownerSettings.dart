@@ -20,7 +20,11 @@ class _OwnerSettingsState extends State<OwnerSettings> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("الإعدادات", style: TextStyle(color: Color(0xff51908E))),
+        title: Text("الإعدادات",
+            style: TextStyle(
+              color: Color(0xff51908E),
+              fontFamily: "Tajawal",
+            )),
         centerTitle: true,
         backgroundColor: Colors.white,
         shadowColor: Color(0xff51908E),
@@ -57,28 +61,73 @@ class _OwnerSettingsState extends State<OwnerSettings> {
     //     child: Container(child: Center(child: Text('Owner settings page'))));
   }
 
-  Widget buildResetPassword() => SimpleSettingsTile(
-        leading: IconWidget(
-          icon: Icons.lock,
-          color: Color.fromARGB(126, 39, 141, 134),
-        ),
-        title: 'إعادة تعيين كلمة المرور',
-        subtitle: '',
-        child: Container(),
-        onTap: () {
-          Navigator.of(context, rootNavigator: true).push(
-              MaterialPageRoute(builder: (context) => ResetPasswordOwner()));
-        },
-      );
+//=========================RESET PASSWORD===========================
+  Widget buildResetPassword() => TextButton(
+        child: Container(
+            child: Row(
+          children: [
+            IconWidget(
+              icon: Icons.lock,
+              color: Color(0xff51908E),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Text('إعادة تعيين كلمة المرور',
+                style: TextStyle(
+                    color: Color(0xff51908E),
+                    fontFamily: "Tajawal",
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16)),
 
-  Widget buildLogout() => SimpleSettingsTile(
-        leading: IconWidget(
-          icon: Icons.logout,
-          color: Color.fromARGB(255, 221, 112, 112),
+            // onTap: () {
+            //
+            // },
+            SizedBox(
+              width: 100,
+            ),
+            Container(
+              padding: EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+              ),
+              child: Icon(Icons.arrow_forward_ios, color: Color(0xff51908E)),
+            ),
+          ],
+        )),
+        onPressed: () => Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => ResetPasswordOwner())),
+      );
+//===================================LOGOUT===============================
+
+  Widget buildLogout() => TextButton(
+        // leading: IconWidget(
+        //   icon: Icons.logout,
+        //   color: Color.fromARGB(255, 221, 112, 112),
+        // ),
+        // title: 'تسجيل الخروج',
+        // subtitle: '',
+
+        child: Container(
+          child: Row(
+            children: [
+              IconWidget(
+                icon: Icons.logout,
+                color: Color.fromARGB(255, 221, 112, 112),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Text('تسجيل الخروج',
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 221, 112, 112),
+                      fontFamily: "Tajawal",
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16)),
+            ],
+          ),
         ),
-        title: 'تسجيل الخروج',
-        subtitle: '',
-        onTap: () async {
+        onPressed: () async {
           showDialog(
               context: context,
               builder: (BuildContext context) {
@@ -108,12 +157,8 @@ class _OwnerSettingsState extends State<OwnerSettings> {
                   ],
                 );
               });
-
-          /*Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (BuildContext context) {
-              return Welcome();
-            }));*/
         },
+        //==========================================================
       );
 }
 
