@@ -297,18 +297,19 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
                 ElevatedButton(
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      final docShopOwner = FirebaseFirestore.instance
-                          .collection('shop_owner')
+                      final docCustomer = FirebaseFirestore.instance
+                          .collection('customers')
                           .doc(uid);
                       // final docCustomer = FirebaseFirestore.instance
                       //     .collection('customers')
                       //     .doc(uid);
+                      FirebaseAuth.instance.currentUser
+                          ?.updatePassword(_newPasswordTextController1.text);
 
-                      if (docShopOwner != null) {
-                        docShopOwner.update({
-                          'password': _newPasswordTextController1.text,
-                        });
-                      }
+                      docCustomer.update({
+                        'password': _newPasswordTextController1.text,
+                      });
+
                       // if (docCustomer != null) {
                       //   docCustomer.update({
                       //     'password': _newPasswordTextController1.text,

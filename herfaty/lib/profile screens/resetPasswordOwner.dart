@@ -304,11 +304,12 @@ class _ResetPasswordOwnerState extends State<ResetPasswordOwner> {
                       //     .collection('customers')
                       //     .doc(uid);
 
-                      if (docShopOwner != null) {
-                        docShopOwner.update({
-                          'password': _newPasswordTextController1.text,
-                        });
-                      }
+                      FirebaseAuth.instance.currentUser
+                          ?.updatePassword(_newPasswordTextController1.text);
+                      docShopOwner.update({
+                        'password': _newPasswordTextController1.text,
+                      });
+
                       // if (docCustomer != null) {
                       //   docCustomer.update({
                       //     'password': _newPasswordTextController1.text,
