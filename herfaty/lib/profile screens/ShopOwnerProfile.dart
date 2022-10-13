@@ -651,18 +651,20 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                         controller: _checkPasslController,
                         obscureText: ishiddenpasswordedit,
                         keyboardType: TextInputType.visiblePassword,
+                        enableSuggestions: false,
+                        autocorrect: false,
                         style: TextStyle(
                           color: Colors.black,
                         ),
                         decoration: InputDecoration(
-                          suffixIcon: InkWell(
-                            onTap: _togglePasswordViewedit,
-                            child: Icon(
-                              ishiddenpasswordedit
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
-                            ),
-                          ),
+                          // suffixIcon: InkWell(
+                          //   onTap: _togglePasswordViewedit,
+                          //   child: Icon(
+                          //     ishiddenpasswordedit
+                          //         ? Icons.visibility
+                          //         : Icons.visibility_off,
+                          //   ),
+                          // ),
                           labelText: 'أدخل كلمة المرور لتعديل الحساب',
                           labelStyle: TextStyle(
                             color: Color.fromARGB(255, 90, 90, 90),
@@ -786,14 +788,14 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                           color: Colors.black,
                         ),
                         decoration: InputDecoration(
-                          suffixIcon: InkWell(
-                            onTap: _togglePasswordViewdelete,
-                            child: Icon(
-                              ishiddenpassworddelete
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
-                            ),
-                          ),
+                          // suffixIcon: InkWell(
+                          //   onTap: _togglePasswordViewdelete,
+                          //   child: Icon(
+                          //     ishiddenpassworddelete
+                          //         ? Icons.visibility
+                          //         : Icons.visibility_off,
+                          //   ),
+                          // ),
                           labelText: 'أدخل كلمة المرور لحذف الحساب',
                           labelStyle: TextStyle(
                             color: Color.fromARGB(255, 90, 90, 90),
@@ -922,23 +924,23 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
 //   print("uploaded:" + uploadImageUrl);
 // }
 
-void openPasswordDialog(BuildContext context) {
-  showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-            title: Text("التحقق من الوصول"),
-            content: TextField(
-                decoration: InputDecoration(hintText: 'ادخل كلمة المرور')),
-            actions: [
-              TextButton(
-                  onPressed: () {
-                    submit(context);
-                  },
-                  child: Text('تحقق'))
-            ],
-          ));
-}
+// void openPasswordDialog(BuildContext context) {
+//   showDialog(
+//       context: context,
+//       builder: (context) => AlertDialog(
+//             title: Text("التحقق من الوصول"),
+//             content: TextField(
+//                 decoration: InputDecoration(hintText: 'ادخل كلمة المرور')),
+//             actions: [
+//               TextButton(
+//                   onPressed: () {
+//                     submit(context);
+//                   },
+//                   child: Text('تحقق'))
+//             ],
+//           ));
+// }
 
-void submit(BuildContext context) {
-  Navigator.of(context).pop();
-}
+// void submit(BuildContext context) {
+//   Navigator.of(context).pop();
+// }

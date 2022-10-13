@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:herfaty/pages/signupCustomer.dart';
 import 'package:herfaty/widgets/customerSettings.dart';
 
 class ResetPasswordCustomer extends StatefulWidget {
@@ -17,6 +18,7 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
   bool ishiddenpasswordold = true;
   bool ishiddenpasswordnew1 = true;
   bool ishiddenpasswordnew2 = true;
+  late DocumentSnapshot snapshot; //Define snapshot
 
   TextEditingController _oldPasswordTextController =
       new TextEditingController();
@@ -28,9 +30,12 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
 
   @override
   Widget build(BuildContext context) {
+    getData();
     final FirebaseAuth auth = FirebaseAuth.instance;
-    final User? userSO = auth.currentUser;
-    final uid = userSO!.uid;
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+    // String oldpass = snapshot['password'].toString();
+    // print(oldpass);
     return Scaffold(
       appBar: AppBar(
         title: Text("إعادة تعيين كلمة المرور",
@@ -122,6 +127,12 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
                       if (value.length < 6)
                         return "ادخل كلمة مرور اكبر من 6 خانات";
                     },
+
+                    //is it the same as the old one ?
+
+                    // if(value){
+
+                    // }
                   ),
                 ),
                 SizedBox(
@@ -367,5 +378,15 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
     setState(() {
       ishiddenpasswordnew2 = !ishiddenpasswordnew2;
     });
+  }
+
+  void getData() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+    final data =
+        await FirebaseFirestore.instance.collection('customers').doc(uid).get();
+    print('after the refrence');
+    snapshot = data;
   }
 }
