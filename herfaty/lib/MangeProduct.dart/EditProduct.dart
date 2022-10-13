@@ -89,7 +89,7 @@ class _EditProduc extends State<EditProduct> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(56.0),
         child: Container(
-          child: const DefaultAppBar(title: " إضافة منتج"),
+          child: const DefaultAppBar(title: " تعديل المنتج "),
         ),
       ),
       body: Padding(
@@ -160,7 +160,7 @@ class _EditProduc extends State<EditProduct> {
               SizedBox(
                 height: 20,
               ),
-              Row(
+              /*Row(
                 //
                 mainAxisAlignment:
                     MainAxisAlignment.spaceEvenly, //for right edge
@@ -202,7 +202,7 @@ class _EditProduc extends State<EditProduct> {
                     },
                   ),
                 ],
-              ),
+              ),*/
               /* DropdownButton(
                 // Initial Value
                 value: dropdownvalueNumber,
@@ -418,13 +418,13 @@ class _EditProduc extends State<EditProduct> {
                   },
                 ),
               ),
-              Container(
+              /*  Container(
                 padding: const EdgeInsets.only(right: 41),
                 child: Text(
                   " *الكمية المتاحة يجب أن تكون بين 1-15",
-                  style: TextStyle(color: Color.fromARGB(255, 235, 47, 26)),
+                  style: TextStyle(color: gray),
                 ),
-              ),
+              ),*/
               SizedBox(
                 height: 20,
               ),
@@ -535,7 +535,7 @@ class _EditProduc extends State<EditProduct> {
                     await productToBeAdded.set(json);
                     //await Firestore.saveProduct(product);
                     Fluttertoast.showToast(
-                      msg: "تمت إضافة المنتج بنجاح",
+                      msg: "تم تعديل المنتج بنجاح",
                       toastLength: Toast.LENGTH_SHORT,
                       gravity: ToastGravity.CENTER,
                       timeInSecForIosWeb: 3,
@@ -564,7 +564,7 @@ class _EditProduc extends State<EditProduct> {
                       borderRadius: BorderRadius.circular(27))),
                 ),
                 child: Text(
-                  "إضافة منتج",
+                  "تعديل المنتج",
                   style: TextStyle(
                       fontSize: 14,
                       fontFamily: "Tajawal",
@@ -602,7 +602,7 @@ class _EditProduc extends State<EditProduct> {
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: Text("تنبيه"),
-                          content: Text('سيتم إلغاء إضافة هذا المنتج'),
+                          content: Text('سيتم إلغاء حفظ التعديلات'),
                           actions: <Widget>[
                             TextButton(
                               child: Text(" تأكيد",
