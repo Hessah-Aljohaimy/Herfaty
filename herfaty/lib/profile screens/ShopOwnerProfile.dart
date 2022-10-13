@@ -464,7 +464,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                       child: Center(
                         child: Row(children: [
                           SizedBox(
-                            width: 20,
+                            width: 14,
                           ),
                           ElevatedButton(
                             onPressed: () {
@@ -505,7 +505,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                             ),
                           ),
                           SizedBox(
-                            width: 10,
+                            width: 8,
                           ),
                           ElevatedButton(
                             onPressed: () async {
@@ -572,6 +572,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
+                              SizedBox(width: 2,)
                         ]),
                       ),
                     ),

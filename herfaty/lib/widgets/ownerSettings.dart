@@ -43,7 +43,7 @@ class _OwnerSettingsState extends State<OwnerSettings> {
           height: 200,
           width: 600,
           child: ListView(
-            padding: EdgeInsets.all(24),
+            padding: EdgeInsets.all(2),
             children: [
               SettingsGroup(
                 title: "",
