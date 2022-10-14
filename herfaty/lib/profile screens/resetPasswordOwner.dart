@@ -490,6 +490,7 @@ class _ResetPasswordOwnerState extends State<ResetPasswordOwner> {
   }
 
   Widget buildOwner(ShopOwner shopowner, BuildContext context) {
+    //get trying the edit
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     final uid = user!.uid;
