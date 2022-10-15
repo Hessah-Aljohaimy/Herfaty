@@ -23,6 +23,7 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
 
   @override
   Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
     TextEditingController _passwordTextController = new TextEditingController()
       ..text = widget.password;
     TextEditingController _emailTextEditingController =
@@ -50,7 +51,7 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
         FirebaseFirestore.instance.collection('customers').doc(widget.uid);
 
     print(widget.uid);
-    final _formKey = GlobalKey<FormState>();
+
     int passlength = widget.password.length;
     String passwordStar = '';
 
@@ -138,7 +139,7 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
                   color: Colors.white,
                   width: 350,
                   child: reusableTextFieldEditName(
-                      'اسم المشتري', false, _nameTextEditingController),
+                      'اسم المشتري', _nameTextEditingController),
                 ),
 
 //Only view the email
@@ -226,10 +227,10 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
                             print(widget.uid);
                             //update this spesific feild
                             docCustomer.update({
-                              'email': _emailTextEditingController.text,
+                              'email': widget.email,
                               'id': widget.uid,
                               'name': _nameTextEditingController.text,
-                              'password': _passwordTextController.text
+                              'password': widget.password,
                             });
                             Fluttertoast.showToast(
                               msg: "تم تحديث حسابك بنجاح",
@@ -287,7 +288,10 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
                                       child: Text("إلغاء",
                                           style: TextStyle(color: Colors.red)),
                                       onPressed: () {
-                                        //The logic of deleting an account
+                                        //The logic of cancle edits
+                                        _nameTextEditingController
+                                          ..text = widget.name;
+                                        Navigator.of(context).pop();
 
                                         //Navigator.of(context).pop();
                                         // FirebaseAuth.instance.signOut();
@@ -393,15 +397,12 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
         if (text == "كلمة المرور") {
           if (value.length < 6) return "ادخل كلمة مرور اكبر من 6 خانات";
         }
-        // if (text == "اسم المشتري")
-        //   maxLength:
-        //   30;
       },
     );
   }
 
   TextFormField reusableTextFieldEditName(
-      String text, bool isPasswordType, TextEditingController controller) {
+      String text, TextEditingController controller) {
     return TextFormField(
       autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: controller,
@@ -435,63 +436,12 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
               BorderSide(width: 3, color: Color.fromARGB(255, 164, 46, 46)),
         ),
       ),
+      maxLength: 30,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return "أدخل " + text;
         }
-
-        if (text == "اسم المشتري")
-          maxLength:
-          30;
       },
     );
   }
-
-  // TextFormField reusableTextFieldCustomerName(
-  //     String text, bool isPasswordType, TextEditingController controller) {
-  //   return TextFormField(
-  //     autovalidateMode: AutovalidateMode.onUserInteraction,
-  //     controller: controller,
-
-  //     style: TextStyle(
-  //         color: Color.fromARGB(255, 86, 86, 86), fontFamily: "Tajawal"),
-  //     decoration: InputDecoration(
-  //       contentPadding:
-  //           const EdgeInsets.symmetric(vertical: 1.0, horizontal: 25),
-  //       labelText: text,
-  //       labelStyle: TextStyle(
-  //           color: Color.fromARGB(255, 26, 96, 91),
-  //           fontFamily: "Tajawal",
-  //           fontSize: 20,
-  //           fontWeight: FontWeight.bold),
-  //       floatingLabelBehavior: FloatingLabelBehavior.always,
-  //       fillColor: Colors.white.withOpacity(0.3),
-  //       enabledBorder: OutlineInputBorder(
-  //         borderSide: BorderSide(
-  //           color: Color.fromARGB(188, 26, 96, 91),
-  //         ),
-  //       ),
-  //       focusedBorder: OutlineInputBorder(
-  //         borderSide: BorderSide(width: 2, color: Colors.blue),
-  //       ),
-  //       errorStyle: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
-  //       errorBorder: OutlineInputBorder(
-  //         borderSide: BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
-  //       ),
-  //       focusedErrorBorder: OutlineInputBorder(
-  //         borderSide:
-  //             BorderSide(width: 3, color: Color.fromARGB(255, 164, 46, 46)),
-  //       ),
-  //     ),
-  //     validator: (value) {
-  //       if (value == null || value.isEmpty) {
-  //         return "أدخل " + text;
-  //       }
-
-  //       if (text == "اسم المشتري")
-  //         maxLength:
-  //         30;
-  //     },
-  //   );
-  // }
 }

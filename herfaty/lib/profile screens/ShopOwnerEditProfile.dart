@@ -423,7 +423,18 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                                   child: Text("إلغاء",
                                       style: TextStyle(color: Colors.red)),
                                   onPressed: () {
-                                    //The logic of deleting an account
+                                    //The logic of cancle edits
+                                    imageProfile(widget.logo);
+                                    _nameTextEditingController
+                                      ..text = widget.name;
+                                    _BODController..text = widget.DOB;
+                                    _PhoneNumberTextEditingController
+                                      ..text = widget.phone_number;
+                                    _shopdescriptionTextEditingController
+                                      ..text = widget.shopdescription;
+                                    _shopnameTextEditingController
+                                      ..text = widget.shopname;
+                                    Navigator.of(context).pop();
 
                                     //Navigator.of(context).pop();
                                     // FirebaseAuth.instance.signOut();
