@@ -62,7 +62,7 @@ class _EditProduc extends State<EditProduct> {
   var uploadImageUrl = ""; //image URL before choose pic
   // Firebase storage + ref for pic place
   final storageRef = FirebaseStorage.instance.ref();
-
+// late final ownerProduct =FirebaseFirestore.instance.collection('Products').doc(widget.thisOwnerId);
   Widget build(BuildContext context) {
     //////////////////////////////////////////////////////////////////////////////////////////
     ///
@@ -70,7 +70,8 @@ class _EditProduc extends State<EditProduct> {
     final User? user = auth.currentUser;
     String thisOwnerId = user!.uid;
     var shopNameData;
-
+    late final ownerProduct =
+        FirebaseFirestore.instance.collection('Products').doc(thisOwnerId);
     Stream<List<shopOwnerModel>> shopOwnerData() {
       // final uid = user.getIdToken();
 
@@ -519,8 +520,8 @@ class _EditProduc extends State<EditProduct> {
                         .snapshots()
                         .map((snapshot) =>
                         snapshot.docs.map((doc) => CartModal.fromJson(doc.data())).toList());*/
-
-                    final productToBeAdded =
+//add code not coment you delete it before update
+                    /*final productToBeAdded =
                         FirebaseFirestore.instance.collection('Products').doc();
                     Product product = Product(
                         id: productToBeAdded.id,
@@ -533,8 +534,19 @@ class _EditProduc extends State<EditProduct> {
                         shopOwnerId: thisOwnerId,
                         shopName: shopNameData);
                     final json = product.toJson();
-                    await productToBeAdded.set(json);
+                    await productToBeAdded.set(json);*/
                     //await Firestore.saveProduct(product);
+                    ownerProduct.update({
+                      'avalibleAmount': amountController.text,
+                      'categoryName': dropdownvalue,
+                      'dsscription': descController.text,
+                      'id': ownerProduct.id,
+                      'image': uploadImageUrl,
+                      'name': nameController.text,
+                      'price': priceController.text,
+                      'shopName': shopNameData,
+                      'shopOwnerId': thisOwnerId
+                    });
                     Fluttertoast.showToast(
                       msg: "تم تعديل المنتج بنجاح",
                       toastLength: Toast.LENGTH_SHORT,
