@@ -137,7 +137,7 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
                 Container(
                   color: Colors.white,
                   width: 350,
-                  child: reusableTextFieldCustomerName(
+                  child: reusableTextFieldEditName(
                       'اسم المشتري', false, _nameTextEditingController),
                 ),
 
@@ -400,15 +400,13 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
     );
   }
 
-  TextFormField reusableTextFieldCustomerName(
+  TextFormField reusableTextFieldEditName(
       String text, bool isPasswordType, TextEditingController controller) {
     return TextFormField(
       autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: controller,
-   
-      
       style: TextStyle(
-          color: Color.fromARGB(255, 86, 86, 86), fontFamily: "Tajawal"),
+          color: Color.fromARGB(255, 90, 90, 90), fontFamily: "Tajawal"),
       decoration: InputDecoration(
         contentPadding:
             const EdgeInsets.symmetric(vertical: 1.0, horizontal: 25),
@@ -441,11 +439,59 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
         if (value == null || value.isEmpty) {
           return "أدخل " + text;
         }
-    
+
         if (text == "اسم المشتري")
           maxLength:
           30;
       },
     );
   }
+
+  // TextFormField reusableTextFieldCustomerName(
+  //     String text, bool isPasswordType, TextEditingController controller) {
+  //   return TextFormField(
+  //     autovalidateMode: AutovalidateMode.onUserInteraction,
+  //     controller: controller,
+
+  //     style: TextStyle(
+  //         color: Color.fromARGB(255, 86, 86, 86), fontFamily: "Tajawal"),
+  //     decoration: InputDecoration(
+  //       contentPadding:
+  //           const EdgeInsets.symmetric(vertical: 1.0, horizontal: 25),
+  //       labelText: text,
+  //       labelStyle: TextStyle(
+  //           color: Color.fromARGB(255, 26, 96, 91),
+  //           fontFamily: "Tajawal",
+  //           fontSize: 20,
+  //           fontWeight: FontWeight.bold),
+  //       floatingLabelBehavior: FloatingLabelBehavior.always,
+  //       fillColor: Colors.white.withOpacity(0.3),
+  //       enabledBorder: OutlineInputBorder(
+  //         borderSide: BorderSide(
+  //           color: Color.fromARGB(188, 26, 96, 91),
+  //         ),
+  //       ),
+  //       focusedBorder: OutlineInputBorder(
+  //         borderSide: BorderSide(width: 2, color: Colors.blue),
+  //       ),
+  //       errorStyle: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
+  //       errorBorder: OutlineInputBorder(
+  //         borderSide: BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
+  //       ),
+  //       focusedErrorBorder: OutlineInputBorder(
+  //         borderSide:
+  //             BorderSide(width: 3, color: Color.fromARGB(255, 164, 46, 46)),
+  //       ),
+  //     ),
+  //     validator: (value) {
+  //       if (value == null || value.isEmpty) {
+  //         return "أدخل " + text;
+  //       }
+
+  //       if (text == "اسم المشتري")
+  //         maxLength:
+  //         30;
+  //     },
+  //   );
+  // }
 }
