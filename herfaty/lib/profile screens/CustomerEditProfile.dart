@@ -20,10 +20,12 @@ class CustomerEditProfile extends StatefulWidget {
 
 class _CustomerEditProfileState extends State<CustomerEditProfile> {
   get kPrimaryColor => null;
+  final _formKey = new GlobalKey<FormState>();
+  String Oldname = '';
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
+    /// just  define _formkey with static final
     TextEditingController _passwordTextController = new TextEditingController()
       ..text = widget.password;
     TextEditingController _emailTextEditingController =
@@ -243,14 +245,11 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
                             );
                             // openPasswordDialog(context);
 
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //       builder: (context) => CustomerEditProfile(
-                            //           customer.name,
-                            //           customer.email,
-                            //           customer.password)),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => logOutButton()),
+                            );
                           },
                           style: ButtonStyle(
                             backgroundColor:
@@ -303,9 +302,14 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
                                     TextButton(
                                       child: Text("تراجع"),
                                       onPressed: () {
+                                        Oldname =
+                                            _nameTextEditingController.text;
+                                        _nameTextEditingController
+                                          ..text = Oldname;
+
                                         Navigator.of(context).pop();
                                       },
-                                    )
+                                    ),
                                   ],
                                 );
                               },

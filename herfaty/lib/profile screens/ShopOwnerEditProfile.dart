@@ -148,7 +148,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                 Container(
                   padding: EdgeInsets.only(left: 15, right: 15, top: 10),
                   width: 350,
-                  child: reusableTextFieldShopOwner(
+                  child: reusableTextFieldShopOwnerName(
                       'اسم الحرفي', false, _nameTextEditingController),
                 ),
 
@@ -163,7 +163,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                 ),
 
                 SizedBox(
-                  height: 3,
+                  height: 5,
                 ),
                 // Container(
                 //   padding: EdgeInsets.only(left: 15, right: 15, top: 10),
@@ -172,7 +172,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                 //       "تاريخ الميلاد", false, _passwordTextController),
                 // ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 47),
+                  padding: EdgeInsets.symmetric(horizontal: 44),
                   child: Center(
                     child: TextFormField(
                       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -280,7 +280,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                 Container(
                   padding: EdgeInsets.only(left: 15, right: 15, top: 10),
                   width: 350,
-                  child: reusableTextFieldShopOwner(
+                  child: reusableTextFieldShopOwnerName(
                       "اسم المتجر", false, _shopnameTextEditingController),
                 ),
                 Container(
@@ -383,10 +383,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                         // Navigator.push(
                         //   context,
                         //   MaterialPageRoute(
-                        //       builder: (context) => CustomerEditProfile(
-                        //           customer.name,
-                        //           customer.email,
-                        //           customer.password)),
+                        //       builder: (context) =>l
                         // );
                       },
                       style: ButtonStyle(
@@ -543,6 +540,50 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
         // if (text == "اسم المشتري")
         //   maxLength:
         //   30;
+      },
+    );
+  }
+
+  TextFormField reusableTextFieldShopOwnerName(
+      String text, bool isPasswordType, TextEditingController controller) {
+    return TextFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      controller: controller,
+      style: TextStyle(
+          color: Color.fromARGB(255, 90, 90, 90), fontFamily: "Tajawal"),
+      decoration: InputDecoration(
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 1.0, horizontal: 25),
+        labelText: text,
+        labelStyle: TextStyle(
+            color: Color.fromARGB(255, 26, 96, 91),
+            fontFamily: "Tajawal",
+            fontSize: 20,
+            fontWeight: FontWeight.bold),
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        fillColor: Colors.white.withOpacity(0.3),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Color.fromARGB(188, 26, 96, 91),
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(width: 2, color: Colors.blue),
+        ),
+        errorStyle: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide:
+              BorderSide(width: 3, color: Color.fromARGB(255, 164, 46, 46)),
+        ),
+      ),
+      maxLength: 30,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return "أدخل " + text;
+        }
       },
     );
   }
