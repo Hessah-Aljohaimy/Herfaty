@@ -49,34 +49,50 @@ class _productCardState extends State<productCard> {
         FirebaseFirestore.instance.collection('Products');
     reference.snapshots().listen((querySnapshot) {
       querySnapshot.docChanges.forEach((change) async {
-        if (change.type == DocumentChangeType.modified) {
-          for (var index = 0; index < querySnapshot.size; index++) {
-            var data = querySnapshot.docs.elementAt(index).data() as Map;
-            String productId = data["id"];
-            if (productId == widget.product.productId) {
-              int updatedAvailabeAmount = data["avalibleAmount"];
-              if (updatedAvailabeAmount != widget.product.availableAmount) {
-                if (mounted) {
-                  setState(
-                    () {
-                      widget.product.availableAmount = updatedAvailabeAmount;
-                      if (updatedAvailabeAmount == 0) {
-                        setState(() {
-                          isAvailable = false;
-                        });
-                        print("=======availableAmount became zero======= ");
-                      } else if (updatedAvailabeAmount != 0) {
-                        setState(() {
-                          isAvailable = true;
-                        });
-                        print(
-                            "=====availableAmount changed but not zero====== ");
-                      }
-                    },
-                  );
+        if (change.type == DocumentChangeType.modified &&
+            change.doc.id == widget.product.productId) {
+          var data =
+              querySnapshot.docs.elementAt(change.newIndex).data() as Map;
+          String updatedDescription = data["dsscription"];
+          int updatedAvailabeAmount = data["avalibleAmount"];
+          num updatedPrice = data["price"];
+          String updatedImage = data["image"];
+          String updatedName = data["name"];
+          //update
+          String existedWishListDocId =
+              await getWishListDocId(thisCustomerId, widget.product.productId);
+          FirebaseFirestore.instance
+              .collection('wishList')
+              .doc('${existedWishListDocId}')
+              .update({
+            "description": updatedDescription,
+            "availableAmount": updatedAvailabeAmount,
+            "price": updatedPrice,
+            "image": updatedImage,
+            "name": updatedName
+          });
+          if (mounted) {
+            setState(
+              () {
+                widget.product.availableAmount = updatedAvailabeAmount;
+                widget.product.name = updatedName;
+                widget.product.description = updatedDescription;
+                widget.product.price = updatedPrice;
+                widget.product.image = updatedImage;
+
+                if (updatedAvailabeAmount == 0) {
+                  setState(() {
+                    isAvailable = false;
+                  });
+                  print("=======availableAmount became zero");
+                } else if (updatedAvailabeAmount != 0) {
+                  setState(() {
+                    isAvailable = true;
+                  });
+                  print("=====availableAmount changed but not zero");
                 }
-              }
-            }
+              },
+            );
           }
         } else if (change.type == DocumentChangeType.removed) {
           //delete the product from the wish list, because it is no longer exists in the products list

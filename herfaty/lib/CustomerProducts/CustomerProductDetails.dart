@@ -536,14 +536,14 @@ class ProductImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 20),
-      height: size.width * 0.7,
+      height: size.width * 0.8,
       color: const Color.fromARGB(255, 255, 255, 255),
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
           Container(
-            height: size.width * 0.7,
-            width: size.width * 0.7,
+            height: size.width * 0.8,
+            width: size.width * 0.8,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(10)),
               color: Colors.white,
