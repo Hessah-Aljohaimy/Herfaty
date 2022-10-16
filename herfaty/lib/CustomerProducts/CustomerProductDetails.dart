@@ -43,31 +43,30 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
         FirebaseFirestore.instance.collection('Products');
     reference.snapshots().listen((querySnapshot) {
       querySnapshot.docChanges.forEach((change) {
-        if (change.type == DocumentChangeType.modified) {
-          for (var index = 0; index < querySnapshot.size; index++) {
-            var data = querySnapshot.docs.elementAt(index).data() as Map;
-            String productId = data["id"];
-            if (productId == widget.product.productId) {
-              int updatedAvailabeAmount = data["avalibleAmount"];
-              if (updatedAvailabeAmount != widget.product.availableAmount) {
-                if (mounted) {
-                  setState(
-                    () {
-                      widget.product.availableAmount = updatedAvailabeAmount;
-                      if (updatedAvailabeAmount == 0) {
-                        thisPageQuantity = 0;
-                        isButtonsDisabled = true;
-                      } else {
-                        thisPageQuantity = 1;
-                        isButtonsDisabled = false;
-                      }
-                    },
-                  );
-                }
-                /*ShowDialogMethod(
-                    context, "تم تحديث الكمية المتوفرة من هذا المنتج");*/
+        if (change.type == DocumentChangeType.modified &&
+            change.doc.id == widget.product.productId) {
+          var data =
+              querySnapshot.docs.elementAt(change.newIndex).data() as Map;
+          String updatedDescription = data["dsscription"];
+          int updatedAvailabeAmount = data["avalibleAmount"];
+          num updatedPrice = data["price"];
+          String updatedImage = data["image"];
+          String updatedName = data["name"];
+          if (mounted) {
+            setState(() {
+              widget.product.availableAmount = updatedAvailabeAmount;
+              widget.product.name = updatedName;
+              widget.product.description = updatedDescription;
+              widget.product.price = updatedPrice;
+              widget.product.image = updatedImage;
+              if (updatedAvailabeAmount == 0) {
+                thisPageQuantity = 0;
+                isButtonsDisabled = true;
+              } else {
+                thisPageQuantity = 1;
+                isButtonsDisabled = false;
               }
-            }
+            });
           }
         } else if (change.type == DocumentChangeType.removed) {
           if (change.doc.id == widget.product.productId) {

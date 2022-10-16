@@ -66,7 +66,7 @@ class _productCardState extends State<productCard> {
               .doc('${existedWishListDocId}')
               .update({
             "description": updatedDescription,
-            "availableAmount": updatedAvailabeAmount,
+            "avalibleAmount": updatedAvailabeAmount,
             "price": updatedPrice,
             "image": updatedImage,
             "name": updatedName
@@ -84,12 +84,10 @@ class _productCardState extends State<productCard> {
                   setState(() {
                     isAvailable = false;
                   });
-                  print("=======availableAmount became zero");
                 } else if (updatedAvailabeAmount != 0) {
                   setState(() {
                     isAvailable = true;
                   });
-                  print("=====availableAmount changed but not zero");
                 }
               },
             );
