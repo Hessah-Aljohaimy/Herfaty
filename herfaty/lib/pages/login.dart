@@ -145,17 +145,9 @@ class _login extends State<login> {
                                     }
                                   }
 
-if(_emailTextController.text=='driver@gmail.com'){
-      OwnerId = '';
-                                    _emailTextController.clear();
-                                    _passwordTextController.clear();
-                                    Navigator.pushNamed(
-                                        context, '/driverPage');
-                                        
-                                        }
 
 
-                                 else if (isShopOwner) {
+                                  if (isShopOwner) {
                                     isShopOwner = false;
                                     OwnerId = '';
                                     _emailTextController.clear();
