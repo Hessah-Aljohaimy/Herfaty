@@ -3,7 +3,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:herfaty/models/AddProductToCart.dart';
 import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -193,7 +192,7 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
                                       onPressed: () {
                                         FirebaseFirestore.instance
                                             .collection('Products')
-                                            .doc('${widget.product.id}')
+                                            .doc('${widget.product.productId}')
                                             .delete();
 
                                         Navigator.of(context).pop();
@@ -243,7 +242,7 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
     print("==================this is get quantity method");
     final cartDoc = await FirebaseFirestore.instance
         .collection('cart')
-        .where("productId", isEqualTo: widget.product.id)
+        .where("productId", isEqualTo: widget.product.productId)
         .where("customerId", isEqualTo: thisCustomerId)
         .get();
     if (cartDoc.size > 0) {
@@ -262,7 +261,7 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
     print("==================this is get docId method");
     final cartDoc = await FirebaseFirestore.instance
         .collection('cart')
-        .where("productId", isEqualTo: widget.product.id)
+        .where("productId", isEqualTo: widget.product.productId)
         .where("customerId", isEqualTo: thisCustomerId)
         .get();
     if (cartDoc.size > 0) {

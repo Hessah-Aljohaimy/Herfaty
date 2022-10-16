@@ -1,11 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/models/Product1.dart';
-import 'package:herfaty/models/AddProductToCart.dart';
+import 'package:herfaty/models/cart_wishlistModel.dart';
 
 class productCard extends StatefulWidget {
   const productCard({
@@ -24,11 +23,18 @@ class productCard extends StatefulWidget {
 }
 
 class _productCardState extends State<productCard> {
-  late bool isFavourite;
+  bool isFavourite = false;
+  bool isAvailable = true;
 
   @override
   void initState() {
-    isFavourite = false;
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    String thisCustomerId = user!.uid;
+    setIsFavourite(thisCustomerId, widget.product.productId);
+    if (widget.product.availableAmount == 0) {
+      isAvailable = false;
+    }
     super.initState();
   }
 
@@ -38,6 +44,69 @@ class _productCardState extends State<productCard> {
     final User? user = auth.currentUser;
     String thisCustomerId = user!.uid;
     //-----------------------------------------------------------------
+    //===============================================Listen To AvailableAmount Changes From DB
+    CollectionReference reference =
+        FirebaseFirestore.instance.collection('Products');
+    reference.snapshots().listen((querySnapshot) {
+      querySnapshot.docChanges.forEach((change) async {
+        if (change.type == DocumentChangeType.modified &&
+            change.doc.id == widget.product.productId) {
+          var data =
+              querySnapshot.docs.elementAt(change.newIndex).data() as Map;
+          String updatedDescription = data["dsscription"];
+          int updatedAvailabeAmount = data["avalibleAmount"];
+          num updatedPrice = data["price"];
+          String updatedImage = data["image"];
+          String updatedName = data["name"];
+          //update
+          String existedWishListDocId =
+              await getWishListDocId(thisCustomerId, widget.product.productId);
+          FirebaseFirestore.instance
+              .collection('wishList')
+              .doc('${existedWishListDocId}')
+              .update({
+            "description": updatedDescription,
+            "avalibleAmount": updatedAvailabeAmount,
+            "price": updatedPrice,
+            "image": updatedImage,
+            "name": updatedName
+          });
+          if (mounted) {
+            setState(
+              () {
+                widget.product.availableAmount = updatedAvailabeAmount;
+                widget.product.name = updatedName;
+                widget.product.description = updatedDescription;
+                widget.product.price = updatedPrice;
+                widget.product.image = updatedImage;
+
+                if (updatedAvailabeAmount == 0) {
+                  setState(() {
+                    isAvailable = false;
+                  });
+                } else if (updatedAvailabeAmount != 0) {
+                  setState(() {
+                    isAvailable = true;
+                  });
+                }
+              },
+            );
+          }
+        } else if (change.type == DocumentChangeType.removed) {
+          //delete the product from the wish list, because it is no longer exists in the products list
+          if (change.doc.id == widget.product.productId) {
+            String existedWishListDocId = await getWishListDocId(
+                thisCustomerId, widget.product.productId);
+            FirebaseFirestore.instance
+                .collection('wishList')
+                .doc('${existedWishListDocId}')
+                .delete();
+          }
+        }
+      });
+    });
+    //===================================================================================
+
     Size size =
         MediaQuery.of(context).size; //to get the width and height of the app
     return Container(
@@ -160,30 +229,22 @@ class _productCardState extends State<productCard> {
                 icon: Icon(
                   Icons.favorite,
                   color: isFavourite
-                      ? Colors.red
+                      ? Color.fromARGB(255, 206, 14, 0)
                       : Color.fromARGB(157, 158, 158, 158),
                   size: 32.0,
                 ),
                 onPressed: () async {
-                  setState(() {
-                    isFavourite = !isFavourite;
-                  });
-                  // اعتقد المفروض يكون من مودل برودكت ون
-
-                  /**
-                   * احتاج احتفظ باستمرار بالبرودكت اي دي عشان اقدر اضيفه واشيله من قائمة المفضلة
-                  ولازم اشيك لما اعرض ال قائمة حقت المنتجات هل البرودكت في المفضلة حقت هذا الكستمر أو لا عشان القلب اللي ينعرض له يكون احمر (وبرضو لما يضغط عليه لازم ينشال من المفضلة)
-
-                   */
-                  if (isFavourite == true) {
+                  if (isFavourite == false) {
+                    //المنتج غير موجود مسبقًا في قائمة المفضلة
                     final productToBeAdded =
                         FirebaseFirestore.instance.collection('wishList').doc();
-                    CartAndWishListProduct item = CartAndWishListProduct(
+                    cart_wishlistModel item = cart_wishlistModel(
                         name: widget.product.name,
                         detailsImage: widget.product.image,
                         docId: productToBeAdded.id,
-                        productId: widget.product.id,
+                        productId: widget.product.productId,
                         customerId: user.uid,
+                        description: widget.product.description,
                         shopName: widget.product.shopName,
                         shopOwnerId: widget.product.shopOwnerId,
                         quantity: 1,
@@ -192,16 +253,41 @@ class _productCardState extends State<productCard> {
                     createWishListItem(item);
                   } else {
                     //delete the product from the wish list
-                    String existedWishListDocId =
-                        await getDocId(thisCustomerId, widget.product.id);
+                    String existedWishListDocId = await getWishListDocId(
+                        thisCustomerId, widget.product.productId);
                     FirebaseFirestore.instance
                         .collection('wishList')
                         .doc('${existedWishListDocId}')
                         .delete();
                   }
+                  setState(() {
+                    isFavourite = !isFavourite;
+                  });
                 },
               ),
-            )
+            ),
+            //**********************This part if the available amount is zero
+            Positioned(
+                //top: 10,
+                //left: 235,
+                right: 60,
+                bottom: 6,
+                child: isAvailable
+                    ? Text("")
+                    : Container(
+                        padding: EdgeInsets.only(top: 25),
+                        child: Center(
+                          child: Text(
+                            '*غير متوفر',
+                            style: const TextStyle(
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.w600,
+                              //fontFamily: "Tajawal",
+                              color: Colors.red,
+                            ),
+                          ),
+                        ),
+                      )),
           ],
         ),
       ),
@@ -209,7 +295,7 @@ class _productCardState extends State<productCard> {
   }
 
   //==========================================================================================
-  Future createWishListItem(CartAndWishListProduct wishListItem) async {
+  Future createWishListItem(cart_wishlistModel wishListItem) async {
     final docCartItem = FirebaseFirestore.instance
         .collection('wishList')
         .doc("${wishListItem.docId}");
@@ -218,21 +304,39 @@ class _productCardState extends State<productCard> {
       json,
     );
   }
-}
 
-//=======================================================================================
-Future<String> getDocId(String thisCustomerId, String thisproductId) async {
-  String DocId = "";
-  print("==================this is get docId method");
-  final wishListDoc = await FirebaseFirestore.instance
-      .collection('wishList')
-      .where("productId", isEqualTo: thisproductId)
-      .where("customerId", isEqualTo: thisCustomerId)
-      .get();
-  if (wishListDoc.size > 0) {
-    var data = wishListDoc.docs.elementAt(0).data() as Map;
-    DocId = data["docId"];
-    print('wish list docId is ${DocId}============================');
+  //==========================================================================================
+  Future<void> setIsFavourite(
+      String thisCustomerId, String thisproductId) async {
+    String existedDocId = await getWishListDocId(thisCustomerId, thisproductId);
+    if (existedDocId != "") {
+      setState(() {
+        isFavourite = true;
+      });
+    } else {
+      setState(() {
+        isFavourite = false;
+      });
+    }
   }
-  return DocId;
+
+  //=======================================================================================
+  Future<String> getWishListDocId(
+      String thisCustomerId, String thisproductId) async {
+    String DocId = "";
+    final wishListDoc = await FirebaseFirestore.instance
+        .collection('wishList')
+        .where("productId", isEqualTo: thisproductId)
+        .where("customerId", isEqualTo: thisCustomerId)
+        .get();
+    if (wishListDoc.size > 0) {
+      var data = wishListDoc.docs.elementAt(0).data() as Map;
+      DocId = data["docId"];
+      print(
+          '================product with id ${thisproductId} is in the wishList, wishList docId is ${DocId}============');
+    }
+    return DocId;
+  }
+//=============================================================================================
+
 }
