@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/models/Product1.dart';
@@ -25,6 +24,8 @@ class productCard extends StatefulWidget {
 
 class _productCardState extends State<productCard> {
   bool isFavourite = false;
+  bool isAvailable = true;
+  bool isDeleted = false;
 
   @override
   void initState() {
@@ -32,6 +33,9 @@ class _productCardState extends State<productCard> {
     final User? user = auth.currentUser;
     String thisCustomerId = user!.uid;
     setIsFavourite(thisCustomerId, widget.product.productId);
+    if (widget.product.availableAmount == 0) {
+      isAvailable = false;
+    }
     super.initState();
   }
 
@@ -41,6 +45,55 @@ class _productCardState extends State<productCard> {
     final User? user = auth.currentUser;
     String thisCustomerId = user!.uid;
     //-----------------------------------------------------------------
+    //===============================================Listen To AvailableAmount Changes From DB
+    CollectionReference reference =
+        FirebaseFirestore.instance.collection('Products');
+    reference.snapshots().listen((querySnapshot) {
+      querySnapshot.docChanges.forEach((change) async {
+        if (change.type == DocumentChangeType.modified) {
+          for (var index = 0; index < querySnapshot.size; index++) {
+            var data = querySnapshot.docs.elementAt(index).data() as Map;
+            String productId = data["id"];
+            if (productId == widget.product.productId) {
+              int updatedAvailabeAmount = data["avalibleAmount"];
+              if (updatedAvailabeAmount != widget.product.availableAmount) {
+                if (mounted) {
+                  setState(
+                    () {
+                      widget.product.availableAmount = updatedAvailabeAmount;
+                      if (updatedAvailabeAmount == 0) {
+                        setState(() {
+                          isAvailable = false;
+                        });
+                        print("=======availableAmount became zero======= ");
+                      } else if (updatedAvailabeAmount != 0) {
+                        setState(() {
+                          isAvailable = true;
+                        });
+                        print(
+                            "=======availableAmount changed but not zero======= ");
+                      }
+                    },
+                  );
+                }
+              }
+            }
+          }
+        } else if (change.type == DocumentChangeType.removed) {
+          //delete the product from the wish list, because it is no longer exists in the products list
+          if (change.doc.id == widget.product.productId) {
+            String existedWishListDocId = await getWishListDocId(
+                thisCustomerId, widget.product.productId);
+            FirebaseFirestore.instance
+                .collection('wishList')
+                .doc('${existedWishListDocId}')
+                .delete();
+          }
+        }
+      });
+    });
+    //===================================================================================
+
     Size size =
         MediaQuery.of(context).size; //to get the width and height of the app
     return Container(
@@ -163,14 +216,13 @@ class _productCardState extends State<productCard> {
                 icon: Icon(
                   Icons.favorite,
                   color: isFavourite
-                      ? Colors.red
+                      ? Color.fromARGB(255, 206, 14, 0)
                       : Color.fromARGB(157, 158, 158, 158),
                   size: 32.0,
                 ),
                 onPressed: () async {
                   if (isFavourite == false) {
-                    //المنتج غير موجود مسبقًا في قائمة المفضلات
-
+                    //المنتج غير موجود مسبقًا في قائمة المفضلة
                     final productToBeAdded =
                         FirebaseFirestore.instance.collection('wishList').doc();
                     cart_wishlistModel item = cart_wishlistModel(
@@ -200,7 +252,29 @@ class _productCardState extends State<productCard> {
                   });
                 },
               ),
-            )
+            ),
+            //**********************This part if the available amount is zero
+            Positioned(
+                //top: 10,
+                //left: 235,
+                right: 60,
+                bottom: 6,
+                child: isAvailable
+                    ? Text("")
+                    : Container(
+                        padding: EdgeInsets.only(top: 25),
+                        child: Center(
+                          child: Text(
+                            '*غير متوفر',
+                            style: const TextStyle(
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.w600,
+                              //fontFamily: "Tajawal",
+                              color: Colors.red,
+                            ),
+                          ),
+                        ),
+                      )),
           ],
         ),
       ),
@@ -245,7 +319,8 @@ class _productCardState extends State<productCard> {
     if (wishListDoc.size > 0) {
       var data = wishListDoc.docs.elementAt(0).data() as Map;
       DocId = data["docId"];
-      print('wish list docId is ${DocId}============================');
+      print(
+          '================product with id ${thisproductId} is in the wishList, wishList docId is ${DocId}============');
     }
     return DocId;
   }

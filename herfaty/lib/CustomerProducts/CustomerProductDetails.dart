@@ -3,7 +3,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:herfaty/cart/cart.dart';
 import 'package:herfaty/models/cart_wishlistModel.dart';
 import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/constants/color.dart';
@@ -383,8 +382,8 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                             style: const TextStyle(
                               fontSize: 22.0,
                               fontWeight: FontWeight.w600,
-                              fontFamily: "Tajawal",
-                              color: Colors.redAccent,
+                              //fontFamily: "Tajawal",
+                              color: Colors.red,
                             ),
                           ),
                         ),

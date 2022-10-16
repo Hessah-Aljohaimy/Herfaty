@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:herfaty/CustomerProducts/CustomerProductDetails.dart';
-import 'package:herfaty/CustomerProducts/wishList/wishCard.dart';
+import 'package:herfaty/CustomerProducts/productCard.dart';
 import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/constants/color.dart';
 
@@ -73,7 +73,7 @@ class _CustomerWishListState extends State<CustomerWishList> {
                           else {
                             return ListView.builder(
                               itemCount: productItems.length,
-                              itemBuilder: (context, index) => wishCard(
+                              itemBuilder: (context, index) => productCard(
                                 itemIndex: index,
                                 product: productItems[index],
                                 press: () {
