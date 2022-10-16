@@ -69,6 +69,10 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
               }
             }
           }
+        } else if (change.type == DocumentChangeType.removed) {
+          if (change.doc.id == widget.product.productId) {
+            showToastMethod(context, "عذرًا، تم حذف المنتج من قبل المالك");
+          }
         }
       });
     });
@@ -320,7 +324,8 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                                       "quantity":
                                           thisPageQuantity + existedQuantity
                                     });
-                                    await showDoneToast(context);
+                                    await showToastMethod(context,
+                                        "تمت إضافة المنتج للسلة بنجاح");
                                   } else {
                                     ShowDialogMethod(context,
                                         "المنتج موجود لديك في السلة، لا توجد كمية متاحة أكثر من ذلك.");
@@ -345,7 +350,8 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                                           widget.product.availableAmount,
                                       price: widget.product.price);
                                   createCartItem(item);
-                                  await showDoneToast(context);
+                                  await showToastMethod(
+                                      context, "تمت إضافة المنتج للسلة بنجاح");
                                 }
                               },
                         style: ElevatedButton.styleFrom(
@@ -471,9 +477,10 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
   }
 
 ///////////////////////////////////////////////////////////////////////////////
-  Future<void> showDoneToast(BuildContext context) async {
+  Future<void> showToastMethod(
+      BuildContext context, String textToBeShown) async {
     Fluttertoast.showToast(
-      msg: "تمت إضافة المنتج للسلة بنجاح",
+      msg: textToBeShown,
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.CENTER,
       timeInSecForIosWeb: 3,

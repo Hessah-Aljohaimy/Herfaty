@@ -25,7 +25,6 @@ class productCard extends StatefulWidget {
 class _productCardState extends State<productCard> {
   bool isFavourite = false;
   bool isAvailable = true;
-  bool isDeleted = false;
 
   @override
   void initState() {
@@ -71,7 +70,7 @@ class _productCardState extends State<productCard> {
                           isAvailable = true;
                         });
                         print(
-                            "=======availableAmount changed but not zero======= ");
+                            "=====availableAmount changed but not zero====== ");
                       }
                     },
                   );
