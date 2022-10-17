@@ -42,21 +42,19 @@ class _orderDetailsCustomerState extends State<orderDetailsCustomer> {
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
         appBar: DefaultAppBarO(title: "تفاصيل الطلب"),
-        body: SingleChildScrollView(
-          child: Container(
-            height: 700,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-              image: AssetImage('assets/images/cartBack1.png'),
-              fit: BoxFit.cover,
-            )),
-            child: AppBarOD(
-                date: widget.date,
-                totalOrder: widget.totalOrder,
-                status: widget.status,
-                docID: widget.docID,
-                products: widget.products),
-          ),
+        body: Container(
+          height: 669,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+            image: AssetImage('assets/images/cartBack1.png'),
+            fit: BoxFit.cover,
+          )),
+          child: AppBarOD(
+              date: widget.date,
+              totalOrder: widget.totalOrder,
+              status: widget.status,
+              docID: widget.docID,
+              products: widget.products),
         ),
       ),
     );
@@ -88,7 +86,7 @@ class AppBarOD extends StatelessWidget {
   Widget build(BuildContext context) {
     Color color = Color(0xff4C8F2F);
     if (status == "تم التوصيل")
-      color = Color(0xfFf7DB86);
+      color = Color(0xfFF3CB4B);
     else if (status == "خارج للتوصيل") {
       color = Color(0xffF06676);
     }
@@ -247,114 +245,110 @@ class ProductsD extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Product1> PItems = [];
-    return SizedBox(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          StreamBuilder<List<Product1>>(
-              stream: readProductD(),
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  return Text('somting wrong \n ${snapshot.error}');
-                } else if (snapshot.hasData) {
-                  final PItem = snapshot.data!.toList();
+    return Align(
+      alignment: FractionalOffset.center,
+      child: StreamBuilder<List<Product1>>(
+          stream: readProductD(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Text('somting wrong \n ${snapshot.error}');
+            } else if (snapshot.hasData) {
+              final PItem = snapshot.data!.toList();
 
-                  if (PItems.length != 0) {
-                    PItems = [];
+              if (PItems.length != 0) {
+                PItems = [];
+              }
+
+              for (int i = 0; i < PItem.length; i++) {
+                print("shoshoshsosho11 ${PItem.length}");
+                for (var k in products.keys) {
+                  if (PItem[i].id == k) {
+                    //if (!PItems.contains(PItem[i]))
+                    PItems.add(PItem[i]);
                   }
-
-                  for (int i = 0; i < PItem.length; i++) {
-                    products.forEach((key, value) {
-                      if (PItem[i].id == key) {
-                        //if (!PItems.contains(PItem[i]))
-                        PItems.add(PItem[i]);
-                      }
-                    });
-                  }
-
-                  print("shoshoshsosho ${PItems.length}");
-
-                  return Container(
-                    margin: EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
-                    padding: EdgeInsets.only(bottom: 5.0),
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      border: Border.all(color: Color(0xff51908E), width: 2),
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 2,
-                          blurRadius: 7,
-                          offset: Offset(0, 3), // changes position of shadow
-                        ),
-                      ],
-                    ),
-                    child: ExpansionTile(
-                      initiallyExpanded: true,
-                      title: Text(
-                        "المُشتريات",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
-                            color: Color(0xff51908E),
-                            fontFamily: "Tajawal"),
-                      ),
-                      children: <Widget>[
-                        Center(
-                          child: ListView.builder(
-                              physics: NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount: PItems.length,
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  margin: EdgeInsets.only(
-                                      top: 8.0, left: 8.0, right: 8.0),
-                                  padding: EdgeInsets.all(8.0),
-                                  decoration: BoxDecoration(
-                                      border:
-                                          Border.all(color: Color(0xFFF1F1F1))),
-                                  child: Row(
-                                    children: [
-                                      ProductImage(
-                                        size: MediaQuery.of(context).size,
-                                        image: PItems[index].image,
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 8.0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(PItems[index].name,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: TextStyle(
-                                                      fontSize: 16.0)),
-                                              Text(
-                                                  " السعر: ${PItems[index].price.toString()}ريال "),
-                                              Text(
-                                                  "الكمية: ${getQuantity(PItems[index].id)}"),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              }),
-                        ),
-                      ],
-                    ),
-                  );
-                } else {
-                  return Center(child: Text("يتم التحميل"));
                 }
-              })
-        ],
-      ),
+              }
+
+              print("shoshoshsosho ${PItems.length}");
+
+              return Container(
+                //height: 500,
+                margin: EdgeInsets.only(top: 1.0, left: 8.0, right: 8.0),
+                //padding: EdgeInsets.only(bottom: 5.0),
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  border: Border.all(color: Color(0xff51908E), width: 2),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 2,
+                      blurRadius: 7,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: ExpansionTile(
+                  initiallyExpanded: true,
+                  title: Text(
+                    "المُشتريات (${PItems.length})",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        color: Color(0xff51908E),
+                        fontFamily: "Tajawal"),
+                  ),
+                  children: <Widget>[
+                    SizedBox(
+                      height: 433,
+                      child: ListView.builder(
+                          physics: ClampingScrollPhysics(),
+                          //shrinkWrap: true,
+                          itemCount: PItems.length,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              margin: EdgeInsets.only(
+                                  top: 8.0, left: 8.0, right: 8.0),
+                              padding: EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Color(0xFFF1F1F1))),
+                              child: Row(
+                                children: [
+                                  ProductImage(
+                                    size: MediaQuery.of(context).size,
+                                    image: PItems[index].image,
+                                  ),
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(PItems[index].name,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(fontSize: 16.0)),
+                                          Text(
+                                              " السعر: ${PItems[index].price.toString()}ريال "),
+                                          Text(
+                                              "الكمية: ${getQuantity(PItems[index].id)}"),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }),
+                    ),
+                  ],
+                ),
+              );
+            } else {
+              return Center(child: Text("يتم التحميل"));
+            }
+          }),
     );
   }
 
@@ -372,7 +366,7 @@ class ProductsD extends StatelessWidget {
 // Stream to reach collection
 
 Stream<List<Product1>> readProductD() => FirebaseFirestore.instance
-    .collection('Products')
+    .collection('OrdersProducts')
     .snapshots()
     .map((snapshot) =>
         snapshot.docs.map((doc) => Product1.fromJson(doc.data())).toList());
