@@ -42,28 +42,20 @@ class _orderDetailsCustomerState extends State<orderDetailsCustomer> {
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
         appBar: DefaultAppBarO(title: "تفاصيل الطلب"),
-        body: Container(
-          height: 700,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-            image: AssetImage('assets/images/cartBack1.png'),
-            fit: BoxFit.cover,
-          )),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                AppBarOD(
-                    date: widget.date,
-                    totalOrder: widget.totalOrder,
-                    status: widget.status,
-                    docID: widget.docID),
-                Body(),
-                ProductsD(products: widget.products),
-                SizedBox(
-                  height: 30,
-                )
-              ],
-            ),
+        body: SingleChildScrollView(
+          child: Container(
+            height: 700,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+              image: AssetImage('assets/images/cartBack1.png'),
+              fit: BoxFit.cover,
+            )),
+            child: AppBarOD(
+                date: widget.date,
+                totalOrder: widget.totalOrder,
+                status: widget.status,
+                docID: widget.docID,
+                products: widget.products),
           ),
         ),
       ),
@@ -76,6 +68,7 @@ class AppBarOD extends StatelessWidget {
   num totalOrder;
   String status;
   String docID;
+  Map products;
 
   AppBarOD({
     Key? key,
@@ -83,39 +76,140 @@ class AppBarOD extends StatelessWidget {
     required totalOrder,
     required status,
     required docID,
+    required products,
   })  : this.date = date,
         this.totalOrder = totalOrder,
         this.status = status,
         this.docID = docID,
+        this.products = products,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: 10),
-      padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 15),
-      //height: 100,
-      width: double.infinity,
-      decoration: const BoxDecoration(
-        /*borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(20),
-          bottomRight: Radius.circular(20),
-        ),*/
-        color: kPrimaryColor,
-      ),
-      child: Center(
-        child: Text(
-          " تاريخ الطلب: $date \n مجموع الطلب: $totalOrder ريال \n حالة الطلب: $status",
-
-          style: TextStyle(
-              //color: Color.fromARGB(255, 81, 144, 142),
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 17,
-              fontFamily: "Tajawal"),
-          //textDirection: TextDirection.rtl,
+    Color color = Color(0xff4C8F2F);
+    if (status == "تم التوصيل")
+      color = Color(0xfFf7DB86);
+    else if (status == "خارج للتوصيل") {
+      color = Color(0xffF06676);
+    }
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          padding:
+              const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 15),
+          //height: 100,
+          width: double.infinity,
+          decoration: const BoxDecoration(
+              /*borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20),
+            ),*/
+              //color: kPrimaryColor,
+              ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                " $date",
+                style: TextStyle(
+                    //letterSpacing: 2.0,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    fontFamily: "Tajawal"),
+              ),
+            ],
+          ),
         ),
-      ),
+        ProductsD(products: products),
+
+        //Body(),
+
+        Flexible(
+          child: Align(
+            alignment: FractionalOffset.bottomCenter,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                  height: 53,
+                  child: Container(
+                    padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                    margin: EdgeInsets.only(bottom: 5),
+                    //color: Colors.white,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      //border: Border.all(color: Colors.grey, width: 1),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1,
+                          blurRadius: 3,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Icon(
+                          Icons.circle_rounded,
+                          color: color,
+                          size: 25.0,
+                        ),
+                        Text(
+                          " $status",
+                          style: TextStyle(
+                              //color: Color.fromARGB(255, 81, 144, 142),
+                              color: color,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17,
+                              fontFamily: "Tajawal"),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(
+                      left: 8.0, right: 8.0, top: 12.0, bottom: 12.0),
+                  margin: EdgeInsets.only(
+                    top: 2,
+                  ),
+                  // color: Color.fromARGB(255, 81, 144, 142),
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 81, 144, 142),
+                    //border: Border.all(color: Colors.grey, width: 1),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 1,
+                        blurRadius: 3,
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "المبلغ الإجمالي: $totalOrder ريال",
+                        style: TextStyle(
+                            //color: Color.fromARGB(255, 81, 144, 142),
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
+                            fontFamily: "Tajawal"),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
