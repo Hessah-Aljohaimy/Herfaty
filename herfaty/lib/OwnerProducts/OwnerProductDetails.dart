@@ -158,6 +158,7 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
                                     widget.product.description,
                                     widget.detailsImage,
                                     widget.product.name,
+                                    widget.product.id,
                                     ' ${thisPageQuantity * widget.product.price}')),
                           );
                         },
@@ -324,7 +325,8 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
       fontSize: 18.0,
     );
     await Future.delayed(const Duration(seconds: 1), () {
-      Navigator.pop(context);
+      Navigator.of(context).pop();
+      Navigator.of(context).pop();
     });
   }
 

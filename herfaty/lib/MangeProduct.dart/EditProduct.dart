@@ -25,6 +25,7 @@ class EditProduct extends StatefulWidget {
     this.dsscription,
     this.image,
     this.name,
+    this.id,
     this.price,
   );
   final String avalibleAmount;
@@ -32,6 +33,7 @@ class EditProduct extends StatefulWidget {
   final String dsscription;
   final String image;
   final String name;
+  final String id;
   final String price;
 
   @override
@@ -55,11 +57,13 @@ class _EditProduc extends State<EditProduct> {
   late TextEditingController nameController = TextEditingController()
     ..text = widget.name;
   late var descController = TextEditingController()..text = widget.dsscription;
-  late var amountController = TextEditingController()..text = widget.price;
-  var priceController = TextEditingController();
+  late var amountController = TextEditingController()
+    ..text = widget.avalibleAmount;
+  late var priceController = TextEditingController()..text = widget.price;
+  late var newimage = widget.image;
   // initilazie Image Picker library
   final ImagePicker _picker = ImagePicker();
-  var uploadImageUrl = ""; //image URL before choose pic
+  late var uploadImageUrl = widget.image; //image URL before choose pic
   // Firebase storage + ref for pic place
   final storageRef = FirebaseStorage.instance.ref();
 // late final ownerProduct =FirebaseFirestore.instance.collection('Products').doc(widget.thisOwnerId);
@@ -71,7 +75,7 @@ class _EditProduc extends State<EditProduct> {
     String thisOwnerId = user!.uid;
     var shopNameData;
     late final ownerProduct =
-        FirebaseFirestore.instance.collection('Products').doc(thisOwnerId);
+        FirebaseFirestore.instance.collection('Products').doc(widget.id);
     Stream<List<shopOwnerModel>> shopOwnerData() {
       // final uid = user.getIdToken();
 
@@ -536,16 +540,19 @@ class _EditProduc extends State<EditProduct> {
                     final json = product.toJson();
                     await productToBeAdded.set(json);*/
                     //await Firestore.saveProduct(product);
+                    late final ownerProduct = FirebaseFirestore.instance
+                        .collection('Products')
+                        .doc(widget.id);
                     ownerProduct.update({
-                      'avalibleAmount': amountController.text,
-                      'categoryName': dropdownvalue,
-                      'dsscription': descController.text,
-                      'id': ownerProduct.id,
+                      'avalibleAmount': amountController,
+                      // 'categoryName': dropdownvalue,
+                      'dsscription': descController,
+                      // 'id': widget.id,
                       'image': uploadImageUrl,
-                      'name': nameController.text,
-                      'price': priceController.text,
-                      'shopName': shopNameData,
-                      'shopOwnerId': thisOwnerId
+                      'name': nameController,
+                      'price': priceController,
+                      // 'shopName': shopNameData,
+                      // 'shopOwnerId': thisOwnerId
                     });
                     Fluttertoast.showToast(
                       msg: "تم تعديل المنتج بنجاح",
