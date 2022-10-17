@@ -544,13 +544,13 @@ class _EditProduc extends State<EditProduct> {
                         .collection('Products')
                         .doc(widget.id);
                     ownerProduct.update({
-                      'avalibleAmount': amountController,
+                      'avalibleAmount': amountController.text,
                       // 'categoryName': dropdownvalue,
-                      'dsscription': descController,
+                      'dsscription': descController.text,
                       // 'id': widget.id,
                       'image': uploadImageUrl,
-                      'name': nameController,
-                      'price': priceController,
+                      'name': nameController.text,
+                      'price': priceController.text,
                       // 'shopName': shopNameData,
                       // 'shopOwnerId': thisOwnerId
                     });
