@@ -191,12 +191,18 @@ class _SignupHerafyState extends State<SignupHerafy> {
                         readOnly:
                             true, //set it true, so that user will not able to edit text
                         onTap: () async {
+                          var formatter = DateFormat('dd/MM/yyyy');
+
+                          DateTime today = DateTime.now();
+                          DateTime initYear = DateTime(today.year - 15, 1, 1);
+                          DateTime lastYear = DateTime(today.year - 5, 12, 31);
+
                           DateTime? pickedDate = await showDatePicker(
                             context: context,
-                            initialDate: DateTime(2007),
-                            firstDate: DateTime(
-                                2007), //DateTime.now() - not to allow to choose before today.
-                            lastDate: DateTime(2017),
+                            initialDate: initYear,
+                            firstDate:
+                                initYear, //DateTime.now() - not to allow to choose before today.
+                            lastDate: lastYear,
 
                             builder: (context, child) {
                               return Theme(

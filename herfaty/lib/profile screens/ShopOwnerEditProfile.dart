@@ -225,12 +225,18 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                       readOnly:
                           false, //set it true, so that user will not able to edit text
                       onTap: () async {
+                        var formatter = DateFormat('dd/MM/yyyy');
+
+                        DateTime today = DateTime.now();
+                        DateTime initYear = DateTime(today.year - 15, 1, 1);
+                        DateTime lastYear = DateTime(today.year - 5, 12, 31);
+
                         DateTime? pickedDate = await showDatePicker(
                           context: context,
-                          initialDate: DateTime(2007),
-                          firstDate: DateTime(
-                              2007), //DateTime.now() - not to allow to choose before today.
-                          lastDate: DateTime(2017),
+                          initialDate: initYear,
+                          firstDate:
+                              initYear, //DateTime.now() - not to allow to choose before today.
+                          lastDate: lastYear,
 
                           builder: (context, child) {
                             return Theme(
@@ -385,6 +391,11 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                         //   MaterialPageRoute(
                         //       builder: (context) =>l
                         // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ShopOwnerProfile()),
+                        );
                       },
                       style: ButtonStyle(
                         backgroundColor:
@@ -420,18 +431,24 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                                   child: Text("إلغاء",
                                       style: TextStyle(color: Colors.red)),
                                   onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ShopOwnerProfile()),
+                                    );
                                     //The logic of cancle edits
-                                    imageProfile(widget.logo);
-                                    _nameTextEditingController
-                                      ..text = widget.name;
-                                    _BODController..text = widget.DOB;
-                                    _PhoneNumberTextEditingController
-                                      ..text = widget.phone_number;
-                                    _shopdescriptionTextEditingController
-                                      ..text = widget.shopdescription;
-                                    _shopnameTextEditingController
-                                      ..text = widget.shopname;
-                                    Navigator.of(context).pop();
+                                    // imageProfile(widget.logo);
+                                    // _nameTextEditingController
+                                    //   ..text = widget.name;
+                                    // _BODController..text = widget.DOB;
+                                    // _PhoneNumberTextEditingController
+                                    //   ..text = widget.phone_number;
+                                    // _shopdescriptionTextEditingController
+                                    //   ..text = widget.shopdescription;
+                                    // _shopnameTextEditingController
+                                    //   ..text = widget.shopname;
+                                    // Navigator.of(context).pop();
 
                                     //Navigator.of(context).pop();
                                     // FirebaseAuth.instance.signOut();

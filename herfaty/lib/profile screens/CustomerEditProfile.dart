@@ -288,9 +288,15 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
                                           style: TextStyle(color: Colors.red)),
                                       onPressed: () {
                                         //The logic of cancle edits
-                                        _nameTextEditingController
-                                          ..text = widget.name;
-                                        Navigator.of(context).pop();
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  logOutButton()),
+                                        );
+                                        // _nameTextEditingController
+                                        //   ..text = widget.name;
+                                        // Navigator.of(context).pop();
 
                                         //Navigator.of(context).pop();
                                         // FirebaseAuth.instance.signOut();

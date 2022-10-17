@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:herfaty/firestore/firestore.dart';
 import 'package:herfaty/main.dart';
@@ -101,7 +102,7 @@ class logOutButton extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.white,
         shadowColor: Color.fromARGB(255, 39, 141, 134),
-        elevation: 0,
+        elevation: 3,
         // leading: IconButton(
         //   icon: Icon(Icons.logout, color: Color.fromARGB(255, 81, 144, 142)),
         //   onPressed: () async {
@@ -475,8 +476,10 @@ Widget buildCustomer(Customer customer, BuildContext context) {
                               TextButton(
                                 child: Text("حذف",
                                     style: TextStyle(color: Colors.red)),
-                                onPressed: () {
+                                onPressed: () async {
 //The logic of deleting an account
+                                  await user?.delete();
+                                  FirebaseAuth.instance.currentUser?.delete();
 
                                   final docCus = FirebaseFirestore.instance
                                       .collection('customers')
@@ -487,7 +490,7 @@ Widget buildCustomer(Customer customer, BuildContext context) {
                                   FirebaseAuth.instance.signOut();
                                   Navigator.of(context, rootNavigator: true)
                                       .pushReplacement(MaterialPageRoute(
-                                          builder: (context) => new Welcome()));
+                                          builder: (context) => new login()));
                                 },
                               ),
                               TextButton(
@@ -523,4 +526,33 @@ Widget buildCustomer(Customer customer, BuildContext context) {
       ),
     ]),
   );
+}
+
+class AuthService {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  // void deleteUser(String email, String password) async {
+  //   try {
+  //     User? user = await _auth.currentUser;
+  //     AuthCredential credentials =
+  //         EmailAuthProvider.credential(email: email, password: password);
+  //     print(user);
+
+  //     await user.reauthenticateWithCredential(credentials).then((value) {
+
+  //       value.user.delete().then((value) {
+  // Navigator.of(context, rootNavigator: true)
+  //                                     .pushReplacement(MaterialPageRoute(
+  //                                         builder: (context) => new login()));
+  //       }
+  //     }
+  //     await DatabaseService(uid: result.user.uid)
+  //         .deleteuser(); // called from database class
+  //     await result.user.delete();
+  //     return true;
+  //   } catch (e) {
+  //     print(e.toString());
+  //     return null;
+  //   }
+  // }
 }
