@@ -572,7 +572,9 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
-                              SizedBox(width: 2,)
+                          SizedBox(
+                            width: 2,
+                          )
                         ]),
                       ),
                     ),
@@ -828,7 +830,11 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                           style: TextStyle(
                                               color: Colors.red, fontSize: 20),
                                         ),
-                                        onPressed: () {
+                                        onPressed: () async {
+                                          var user = await _getFirebaseUser();
+
+                                          await user?.delete();
+
                                           //The logic of deleting an account
                                           final docSO = FirebaseFirestore
                                               .instance
@@ -912,6 +918,10 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
     setState(() {
       ishiddenpassworddelete = !ishiddenpassworddelete;
     });
+  }
+
+  Future<User?> _getFirebaseUser() async {
+    return FirebaseAuth.instance.currentUser;
   }
 }
 // void uploadImageToFirebaseStorage(File file) async {
