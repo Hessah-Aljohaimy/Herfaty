@@ -42,21 +42,19 @@ class _orderDetailsState extends State<orderDetails> {
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
         appBar: DefaultAppBarO(title: "تفاصيل الطلب"),
-        body: SingleChildScrollView(
-          child: Container(
-            height: 700,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-              image: AssetImage('assets/images/cartBack1.png'),
-              fit: BoxFit.cover,
-            )),
-            child: AppBarOD(
-                date: widget.date,
-                totalOrder: widget.totalOrder,
-                status: widget.status,
-                docID: widget.docID,
-                products: widget.products),
-          ),
+        body: Container(
+          height: 669,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+            image: AssetImage('assets/images/cartBack1.png'),
+            fit: BoxFit.cover,
+          )),
+          child: AppBarOD(
+              date: widget.date,
+              totalOrder: widget.totalOrder,
+              status: widget.status,
+              docID: widget.docID,
+              products: widget.products),
         ),
       ),
     );

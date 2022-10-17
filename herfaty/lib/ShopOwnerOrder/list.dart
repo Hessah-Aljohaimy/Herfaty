@@ -75,7 +75,7 @@ class list extends StatelessWidget {
                         Size size = MediaQuery.of(context).size;
 
                         cItems.sort((a, b) {
-                          return b.orderDate.compareTo(a.orderDate);
+                          return a.orderDate.compareTo(b.orderDate);
                         });
 
                         if (cItems.isEmpty) {
@@ -96,7 +96,10 @@ class list extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 return Container(
                                   margin: EdgeInsets.only(
-                                      top: 8.0, left: 8.0, right: 8.0),
+                                      top: 8.0,
+                                      left: 8.0,
+                                      right: 8.0,
+                                      bottom: 10),
                                   padding: EdgeInsets.all(8.0),
                                   decoration: BoxDecoration(
                                       color: Colors.white,
@@ -213,7 +216,10 @@ class list extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 return Container(
                                   margin: EdgeInsets.only(
-                                      top: 8.0, left: 8.0, right: 8.0),
+                                      top: 8.0,
+                                      left: 8.0,
+                                      right: 8.0,
+                                      bottom: 10),
                                   padding: EdgeInsets.all(8.0),
                                   decoration: BoxDecoration(
                                       color: Colors.white,
@@ -231,7 +237,7 @@ class list extends StatelessWidget {
                                             children: [
                                               Text(
                                                   //cItems[index].customerId,
-                                                  "طلب رقم ${index + 1}",
+                                                  "طلب رقم :${cItems[index].docId}",
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   style: TextStyle(

@@ -43,7 +43,7 @@ class listOrderCustomer extends StatelessWidget {
                         Size size = MediaQuery.of(context).size;
 
                         cItems.sort((a, b) {
-                          return b.orderDate.compareTo(a.orderDate);
+                          return a.orderDate.compareTo(b.orderDate);
                         });
 
                         if (cItems.isEmpty) {
@@ -63,13 +63,13 @@ class listOrderCustomer extends StatelessWidget {
                               itemCount: cItems.length,
                               itemBuilder: (context, index) {
                                 return Container(
-                                  margin: EdgeInsets.only(
-                                      top: 8.0, left: 8.0, right: 8.0),
-                                  padding: EdgeInsets.all(8.0),
+                                  margin: EdgeInsets.only(top: 8.0, bottom: 10),
+                                  padding: EdgeInsets.only(
+                                      top: 8.0, bottom: 8.0, right: 8.0),
                                   decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border:
-                                          Border.all(color: Color(0xFFF1F1F1))),
+                                    color: Colors.white,
+                                    // border: Border.all(color: kPrimaryColor)
+                                  ),
                                   child: Column(
                                     children: [
                                       Row(
@@ -85,17 +85,19 @@ class listOrderCustomer extends StatelessWidget {
                                                 children: [
                                                   Text(
                                                       //cItems[index].customerId,
-                                                      "طلب رقم ${cItems[index].docId}",
+                                                      "رقم الطلب : ${cItems[index].docId}",
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: TextStyle(
+                                                          color: kPrimaryColor,
                                                           fontSize: 17.0,
                                                           fontFamily:
                                                               "Tajawal")),
                                                   Text(
-                                                    "تاريح الطلب :${cItems[index].orderDate} ",
+                                                    "تاريخ الطلب : ${cItems[index].orderDate} ",
                                                     style: TextStyle(
                                                         fontSize: 17.0,
+                                                        color: kPrimaryColor,
                                                         fontFamily: "Tajawal"),
                                                   ),
                                                 ],
@@ -104,159 +106,197 @@ class listOrderCustomer extends StatelessWidget {
                                           ),
                                         ],
                                       ),
-                                      SizedBox(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
-                                          children: [
-                                            StreamBuilder<List<Product1>>(
-                                                stream: readProductD(),
-                                                builder: (context, snapshot) {
-                                                  if (snapshot.hasError) {
-                                                    return Text(
-                                                        'somting wrong \n ${snapshot.error}');
-                                                  } else if (snapshot.hasData) {
-                                                    List<Product1> PItems = [];
-                                                    Map products;
-                                                    products =
-                                                        cItems[index].products;
+                                      Row(
+                                        children: [
+                                          StreamBuilder<List<Product1>>(
+                                              stream: readProductD(),
+                                              builder: (context, snapshot) {
+                                                if (snapshot.hasError) {
+                                                  return Text(
+                                                      'somting wrong \n ${snapshot.error}');
+                                                } else if (snapshot.hasData) {
+                                                  List<Product1> PItems = [];
+                                                  Map products;
+                                                  products =
+                                                      cItems[index].products;
 
-                                                    final PItem =
-                                                        snapshot.data!.toList();
+                                                  final PItem =
+                                                      snapshot.data!.toList();
 
-                                                    if (PItems.length != 0) {
-                                                      PItems = [];
-                                                    }
-
-                                                    products
-                                                        .forEach((key, value) {
-                                                      for (int i = 0;
-                                                          i < PItem.length;
-                                                          i++) {
-                                                        if (PItem[i].id ==
-                                                            key) {
-                                                          //if (!PItems.contains(PItem[i]))
-                                                          PItems.add(PItem[i]);
-                                                        }
-                                                      }
-                                                    });
-
-                                                    return Container(
-                                                      width: 300,
-                                                      height: 150,
-                                                      margin: EdgeInsets.only(
-                                                          top: 1.0,
-                                                          left: 1.0,
-                                                          right: 1.0),
-                                                      padding: EdgeInsets.only(
-                                                          bottom: 5.0),
-                                                      /*decoration: BoxDecoration(
-                                                        color: Color.fromARGB(
-                                                            255, 255, 255, 255),
-                                                        border: Border.all(
-                                                            color: Color(
-                                                                0xff51908E),
-                                                            width: 2),
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    10.0)),
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color: Colors.grey
-                                                                .withOpacity(
-                                                                    0.5),
-                                                            spreadRadius: 2,
-                                                            blurRadius: 7,
-                                                            offset: Offset(0,
-                                                                3), // changes position of shadow
-                                                          ),
-                                                        ],
-                                                      ),*/
-                                                      child: Center(
-                                                        child: ListView.builder(
-                                                            scrollDirection:
-                                                                Axis.horizontal,
-                                                            //shrinkWrap: true,
-                                                            itemCount:
-                                                                PItems.length,
-                                                            itemBuilder:
-                                                                (context,
-                                                                    index) {
-                                                              return Container(
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                        top:
-                                                                            8.0,
-                                                                        left:
-                                                                            8.0,
-                                                                        right:
-                                                                            8.0),
-                                                                padding:
-                                                                    EdgeInsets
-                                                                        .all(
-                                                                            8.0),
-                                                                decoration: BoxDecoration(
-                                                                    border: Border.all(
-                                                                        color: Color(
-                                                                            0xFFF1F1F1))),
-                                                                child: Row(
-                                                                  children: [
-                                                                    ProductImage(
-                                                                      size: MediaQuery.of(
-                                                                              context)
-                                                                          .size,
-                                                                      image: PItems[
-                                                                              index]
-                                                                          .image,
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              );
-                                                            }),
-                                                      ),
-                                                    );
-                                                  } else {
-                                                    return Center(
-                                                        child: Text(
-                                                            "يتم التحميل"));
+                                                  if (PItems.length != 0) {
+                                                    PItems = [];
                                                   }
-                                                })
-                                          ],
-                                        ),
-                                      ),
 
-                                      //--------------------------------------
-                                      ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Color.fromARGB(
-                                              255, 81, 144, 142), // background
-                                        ),
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    orderDetailsCustomer(
-                                                      date: cItems[index]
-                                                          .orderDate,
-                                                      totalOrder:
-                                                          cItems[index].total,
-                                                      docID:
-                                                          cItems[index].docId,
-                                                      products: cItems[index]
-                                                          .products,
-                                                      status:
-                                                          cItems[index].status,
+                                                  products
+                                                      .forEach((key, value) {
+                                                    for (int i = 0;
+                                                        i < PItem.length;
+                                                        i++) {
+                                                      if (PItem[i].id == key) {
+                                                        //if (!PItems.contains(PItem[i]))
+                                                        PItems.add(PItem[i]);
+                                                      }
+                                                    }
+                                                  });
+
+                                                  return Container(
+                                                    width: 366,
+                                                    height: 150,
+                                                    margin: EdgeInsets.only(
+                                                        top: 5.0,
+                                                        right: 5.0,
+                                                        left: 5.0),
+                                                    padding: EdgeInsets.only(
+                                                        bottom: 5.0),
+                                                    decoration: BoxDecoration(
+                                                        border: Border(
+                                                      top: BorderSide(
+                                                          width: 1.0,
+                                                          color: kPrimaryColor),
+                                                      /*bottom: BorderSide(
+                                                          width: 1.0,
+                                                          color: Color.fromARGB(
+                                                              255, 0, 0, 0)),
+                                                      right: BorderSide(
+                                                          width: 1.0,
+                                                          color: Color.fromARGB(
+                                                              255, 0, 0, 0)),*/
                                                     )),
-                                          );
-                                          //go to order deatils page
-                                        },
-                                        child: Text(
-                                          "تفاصيل الطلب",
-                                          style: TextStyle(
-                                            fontFamily: "Tajawal",
-                                          ),
+                                                    /*decoration: BoxDecoration(
+                                                      color: Color.fromARGB(
+                                                          255, 255, 255, 255),
+                                                      border: Border.all(
+                                                          color: Color(
+                                                              0xff51908E),
+                                                          width: 2),
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0)),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.grey
+                                                              .withOpacity(
+                                                                  0.5),
+                                                          spreadRadius: 2,
+                                                          blurRadius: 7,
+                                                          offset: Offset(0,
+                                                              3), // changes position of shadow
+                                                        ),
+                                                      ],
+                                                    ),*/
+                                                    child: ListView.builder(
+                                                        scrollDirection:
+                                                            Axis.horizontal,
+                                                        //shrinkWrap: true,
+                                                        itemCount:
+                                                            PItems.length,
+                                                        itemBuilder:
+                                                            (context, index) {
+                                                          return Container(
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                                    top: 10.0,
+                                                                    left: 10.0),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                                    border:
+                                                                        Border(
+                                                              bottom: BorderSide(
+                                                                  width: 1.0,
+                                                                  color: Colors
+                                                                      .grey),
+                                                              top: BorderSide(
+                                                                  width: 1.0,
+                                                                  color: Colors
+                                                                      .grey),
+                                                              left: BorderSide(
+                                                                  width: 1.0,
+                                                                  color: Colors
+                                                                      .grey),
+                                                              right: BorderSide(
+                                                                  width: 1.0,
+                                                                  color: Colors
+                                                                      .grey),
+                                                            )),
+                                                            child: Row(
+                                                              children: [
+                                                                ProductImage(
+                                                                  size: MediaQuery.of(
+                                                                          context)
+                                                                      .size,
+                                                                  image: PItems[
+                                                                          index]
+                                                                      .image,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          );
+                                                        }),
+                                                  );
+                                                } else {
+                                                  return Center(
+                                                      child:
+                                                          Text("يتم التحميل"));
+                                                }
+                                              }),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 1,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                              "  عدد المنتجات ${cItems[index].products.length}",
+                                              style: TextStyle(
+                                                  fontFamily: "Tajawal",
+                                                  color: Colors.grey)),
+                                        ],
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 10),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                primary: Color.fromARGB(255, 81,
+                                                    144, 142), // background
+                                              ),
+                                              onPressed: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          orderDetailsCustomer(
+                                                            date: cItems[index]
+                                                                .orderDate,
+                                                            totalOrder:
+                                                                cItems[index]
+                                                                    .total,
+                                                            docID: cItems[index]
+                                                                .docId,
+                                                            products:
+                                                                cItems[index]
+                                                                    .products,
+                                                            status:
+                                                                cItems[index]
+                                                                    .status,
+                                                          )),
+                                                );
+                                                //go to order deatils page
+                                              },
+                                              child: Text(
+                                                "تفاصيل الطلب",
+                                                style: TextStyle(
+                                                  fontFamily: "Tajawal",
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
@@ -309,13 +349,13 @@ class listOrderCustomer extends StatelessWidget {
                               itemCount: cItems.length,
                               itemBuilder: (context, index) {
                                 return Container(
-                                  margin: EdgeInsets.only(
-                                      top: 8.0, left: 8.0, right: 8.0),
-                                  padding: EdgeInsets.all(8.0),
+                                  margin: EdgeInsets.only(top: 8.0, bottom: 10),
+                                  padding: EdgeInsets.only(
+                                      top: 8.0, bottom: 8.0, right: 8.0),
                                   decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border:
-                                          Border.all(color: Color(0xFFF1F1F1))),
+                                    color: Colors.white,
+                                    // border: Border.all(color: kPrimaryColor)
+                                  ),
                                   child: Column(
                                     children: [
                                       Row(
@@ -331,17 +371,19 @@ class listOrderCustomer extends StatelessWidget {
                                                 children: [
                                                   Text(
                                                       //cItems[index].customerId,
-                                                      "طلب رقم ${cItems[index].docId}",
+                                                      "رقم الطلب : ${cItems[index].docId}",
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: TextStyle(
+                                                          color: kPrimaryColor,
                                                           fontSize: 17.0,
                                                           fontFamily:
                                                               "Tajawal")),
                                                   Text(
-                                                    "تاريح الطلب :${cItems[index].orderDate} ",
+                                                    "تاريخ الطلب : ${cItems[index].orderDate} ",
                                                     style: TextStyle(
                                                         fontSize: 17.0,
+                                                        color: kPrimaryColor,
                                                         fontFamily: "Tajawal"),
                                                   ),
                                                 ],
@@ -384,14 +426,28 @@ class listOrderCustomer extends StatelessWidget {
                                                   });
 
                                                   return Container(
-                                                    width: 300,
+                                                    width: 366,
                                                     height: 150,
                                                     margin: EdgeInsets.only(
-                                                        top: 1.0,
-                                                        left: 1.0,
-                                                        right: 1.0),
+                                                        top: 5.0,
+                                                        right: 5.0,
+                                                        left: 5.0),
                                                     padding: EdgeInsets.only(
                                                         bottom: 5.0),
+                                                    decoration: BoxDecoration(
+                                                        border: Border(
+                                                      top: BorderSide(
+                                                          width: 1.0,
+                                                          color: kPrimaryColor),
+                                                      /*bottom: BorderSide(
+                                                          width: 1.0,
+                                                          color: Color.fromARGB(
+                                                              255, 0, 0, 0)),
+                                                      right: BorderSide(
+                                                          width: 1.0,
+                                                          color: Color.fromARGB(
+                                                              255, 0, 0, 0)),*/
+                                                    )),
                                                     /*decoration: BoxDecoration(
                                                       color: Color.fromARGB(
                                                           255, 255, 255, 255),
@@ -416,9 +472,6 @@ class listOrderCustomer extends StatelessWidget {
                                                       ],
                                                     ),*/
                                                     child: ListView.builder(
-                                                        physics:
-                                                            NeverScrollableScrollPhysics(),
-                                                        shrinkWrap: true,
                                                         scrollDirection:
                                                             Axis.horizontal,
                                                         //shrinkWrap: true,
@@ -429,16 +482,29 @@ class listOrderCustomer extends StatelessWidget {
                                                           return Container(
                                                             margin:
                                                                 EdgeInsets.only(
-                                                                    top: 8.0,
-                                                                    left: 1.0,
-                                                                    right: 1.0),
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    8.0),
-                                                            decoration: BoxDecoration(
-                                                                border: Border.all(
-                                                                    color: Color(
-                                                                        0xFFF1F1F1))),
+                                                                    top: 10.0,
+                                                                    left: 10.0),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                                    border:
+                                                                        Border(
+                                                              bottom: BorderSide(
+                                                                  width: 1.0,
+                                                                  color: Colors
+                                                                      .grey),
+                                                              top: BorderSide(
+                                                                  width: 1.0,
+                                                                  color: Colors
+                                                                      .grey),
+                                                              left: BorderSide(
+                                                                  width: 1.0,
+                                                                  color: Colors
+                                                                      .grey),
+                                                              right: BorderSide(
+                                                                  width: 1.0,
+                                                                  color: Colors
+                                                                      .grey),
+                                                            )),
                                                             child: Row(
                                                               children: [
                                                                 ProductImage(
@@ -462,36 +528,61 @@ class listOrderCustomer extends StatelessWidget {
                                               }),
                                         ],
                                       ),
-                                      ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Color.fromARGB(
-                                              255, 81, 144, 142), // background
-                                        ),
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    orderDetailsCustomer(
-                                                      date: cItems[index]
-                                                          .orderDate,
-                                                      totalOrder:
-                                                          cItems[index].total,
-                                                      docID:
-                                                          cItems[index].docId,
-                                                      products: cItems[index]
-                                                          .products,
-                                                      status:
-                                                          cItems[index].status,
-                                                    )),
-                                          );
-                                          //go to order deatils page
-                                        },
-                                        child: Text(
-                                          "تفاصيل الطلب",
-                                          style: TextStyle(
-                                            fontFamily: "Tajawal",
-                                          ),
+                                      SizedBox(
+                                        height: 1,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                              "  عدد المنتجات ${cItems[index].products.length}",
+                                              style: TextStyle(
+                                                  fontFamily: "Tajawal",
+                                                  color: Colors.grey)),
+                                        ],
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 10),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                primary: Color.fromARGB(255, 81,
+                                                    144, 142), // background
+                                              ),
+                                              onPressed: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          orderDetailsCustomer(
+                                                            date: cItems[index]
+                                                                .orderDate,
+                                                            totalOrder:
+                                                                cItems[index]
+                                                                    .total,
+                                                            docID: cItems[index]
+                                                                .docId,
+                                                            products:
+                                                                cItems[index]
+                                                                    .products,
+                                                            status:
+                                                                cItems[index]
+                                                                    .status,
+                                                          )),
+                                                );
+                                                //go to order deatils page
+                                              },
+                                              child: Text(
+                                                "تفاصيل الطلب",
+                                                style: TextStyle(
+                                                  fontFamily: "Tajawal",
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
@@ -544,13 +635,13 @@ class listOrderCustomer extends StatelessWidget {
                               itemCount: cItems.length,
                               itemBuilder: (context, index) {
                                 return Container(
-                                  margin: EdgeInsets.only(
-                                      top: 8.0, left: 8.0, right: 8.0),
-                                  padding: EdgeInsets.all(8.0),
+                                  margin: EdgeInsets.only(top: 8.0, bottom: 10),
+                                  padding: EdgeInsets.only(
+                                      top: 8.0, bottom: 8.0, right: 8.0),
                                   decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border:
-                                          Border.all(color: Color(0xFFF1F1F1))),
+                                    color: Colors.white,
+                                    // border: Border.all(color: kPrimaryColor)
+                                  ),
                                   child: Column(
                                     children: [
                                       Row(
@@ -566,17 +657,19 @@ class listOrderCustomer extends StatelessWidget {
                                                 children: [
                                                   Text(
                                                       //cItems[index].customerId,
-                                                      "طلب رقم ${cItems[index].docId}",
+                                                      "رقم الطلب : ${cItems[index].docId}",
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: TextStyle(
+                                                          color: kPrimaryColor,
                                                           fontSize: 17.0,
                                                           fontFamily:
                                                               "Tajawal")),
                                                   Text(
-                                                    "تاريح الطلب :${cItems[index].orderDate} ",
+                                                    "تاريخ الطلب : ${cItems[index].orderDate} ",
                                                     style: TextStyle(
                                                         fontSize: 17.0,
+                                                        color: kPrimaryColor,
                                                         fontFamily: "Tajawal"),
                                                   ),
                                                 ],
@@ -619,14 +712,28 @@ class listOrderCustomer extends StatelessWidget {
                                                   });
 
                                                   return Container(
-                                                    width: 300,
+                                                    width: 366,
                                                     height: 150,
                                                     margin: EdgeInsets.only(
-                                                        top: 1.0,
-                                                        left: 1.0,
-                                                        right: 1.0),
+                                                        top: 5.0,
+                                                        right: 5.0,
+                                                        left: 5.0),
                                                     padding: EdgeInsets.only(
                                                         bottom: 5.0),
+                                                    decoration: BoxDecoration(
+                                                        border: Border(
+                                                      top: BorderSide(
+                                                          width: 1.0,
+                                                          color: kPrimaryColor),
+                                                      /*bottom: BorderSide(
+                                                          width: 1.0,
+                                                          color: Color.fromARGB(
+                                                              255, 0, 0, 0)),
+                                                      right: BorderSide(
+                                                          width: 1.0,
+                                                          color: Color.fromARGB(
+                                                              255, 0, 0, 0)),*/
+                                                    )),
                                                     /*decoration: BoxDecoration(
                                                       color: Color.fromARGB(
                                                           255, 255, 255, 255),
@@ -651,9 +758,6 @@ class listOrderCustomer extends StatelessWidget {
                                                       ],
                                                     ),*/
                                                     child: ListView.builder(
-                                                        physics:
-                                                            NeverScrollableScrollPhysics(),
-                                                        shrinkWrap: true,
                                                         scrollDirection:
                                                             Axis.horizontal,
                                                         //shrinkWrap: true,
@@ -664,16 +768,29 @@ class listOrderCustomer extends StatelessWidget {
                                                           return Container(
                                                             margin:
                                                                 EdgeInsets.only(
-                                                                    top: 8.0,
-                                                                    left: 1.0,
-                                                                    right: 1.0),
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    8.0),
-                                                            decoration: BoxDecoration(
-                                                                border: Border.all(
-                                                                    color: Color(
-                                                                        0xFFF1F1F1))),
+                                                                    top: 10.0,
+                                                                    left: 10.0),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                                    border:
+                                                                        Border(
+                                                              bottom: BorderSide(
+                                                                  width: 1.0,
+                                                                  color: Colors
+                                                                      .grey),
+                                                              top: BorderSide(
+                                                                  width: 1.0,
+                                                                  color: Colors
+                                                                      .grey),
+                                                              left: BorderSide(
+                                                                  width: 1.0,
+                                                                  color: Colors
+                                                                      .grey),
+                                                              right: BorderSide(
+                                                                  width: 1.0,
+                                                                  color: Colors
+                                                                      .grey),
+                                                            )),
                                                             child: Row(
                                                               children: [
                                                                 ProductImage(
@@ -697,36 +814,61 @@ class listOrderCustomer extends StatelessWidget {
                                               }),
                                         ],
                                       ),
-                                      ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Color.fromARGB(
-                                              255, 81, 144, 142), // background
-                                        ),
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    orderDetailsCustomer(
-                                                      date: cItems[index]
-                                                          .orderDate,
-                                                      totalOrder:
-                                                          cItems[index].total,
-                                                      docID:
-                                                          cItems[index].docId,
-                                                      products: cItems[index]
-                                                          .products,
-                                                      status:
-                                                          cItems[index].status,
-                                                    )),
-                                          );
-                                          //go to order deatils page
-                                        },
-                                        child: Text(
-                                          "تفاصيل الطلب",
-                                          style: TextStyle(
-                                            fontFamily: "Tajawal",
-                                          ),
+                                      SizedBox(
+                                        height: 1,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                              "  عدد المنتجات ${cItems[index].products.length}",
+                                              style: TextStyle(
+                                                  fontFamily: "Tajawal",
+                                                  color: Colors.grey)),
+                                        ],
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 10),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                primary: Color.fromARGB(255, 81,
+                                                    144, 142), // background
+                                              ),
+                                              onPressed: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          orderDetailsCustomer(
+                                                            date: cItems[index]
+                                                                .orderDate,
+                                                            totalOrder:
+                                                                cItems[index]
+                                                                    .total,
+                                                            docID: cItems[index]
+                                                                .docId,
+                                                            products:
+                                                                cItems[index]
+                                                                    .products,
+                                                            status:
+                                                                cItems[index]
+                                                                    .status,
+                                                          )),
+                                                );
+                                                //go to order deatils page
+                                              },
+                                              child: Text(
+                                                "تفاصيل الطلب",
+                                                style: TextStyle(
+                                                  fontFamily: "Tajawal",
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
@@ -875,27 +1017,14 @@ class ProductImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 20),
-      height: size.width * 0.7,
+      // margin: const EdgeInsets.only(bottom: 10),
+      height: size.width,
       color: const Color.fromARGB(255, 255, 255, 255),
-      child: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          Container(
-            height: size.width * 0.2,
-            width: size.width * 0.2,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              color: Colors.white,
-            ),
-          ),
-          Image.network(
-            image,
-            height: size.width * 0.2,
-            width: size.width * 0.2,
-            fit: BoxFit.cover,
-          ),
-        ],
+      child: Image.network(
+        image,
+        height: size.width,
+        width: size.width * 0.25,
+        fit: BoxFit.cover,
       ),
     );
   }
