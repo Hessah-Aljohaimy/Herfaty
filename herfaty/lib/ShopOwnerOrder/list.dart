@@ -95,74 +95,92 @@ class list extends StatelessWidget {
                               itemCount: cItems.length,
                               itemBuilder: (context, index) {
                                 return Container(
-                                  margin: EdgeInsets.only(
-                                      top: 8.0,
-                                      left: 8.0,
-                                      right: 8.0,
-                                      bottom: 10),
-                                  padding: EdgeInsets.all(8.0),
+                                  margin: EdgeInsets.only(top: 8.0, bottom: 10),
+                                  padding: EdgeInsets.only(
+                                      top: 8.0, bottom: 8.0, right: 8.0),
                                   decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border:
-                                          Border.all(color: Color(0xFFF1F1F1))),
-                                  child: Row(
+                                    color: Colors.white,
+                                    // border: Border.all(color: kPrimaryColor)
+                                  ),
+                                  child: Column(
                                     children: [
-                                      Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 8.0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                  //cItems[index].customerId,
-                                                  "طلب رقم ${cItems[index].docId}",
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: TextStyle(
-                                                      fontSize: 17.0,
-                                                      fontFamily: "Tajawal")),
-                                              Text(
-                                                "تاريح الطلب :${cItems[index].orderDate} ",
-                                                style: TextStyle(
-                                                    fontSize: 17.0,
-                                                    fontFamily: "Tajawal"),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 8.0),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                      //cItems[index].customerId,
+                                                      "طلب رقم ${cItems[index].docId}",
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: TextStyle(
+                                                          color: kPrimaryColor,
+                                                          fontSize: 17.0,
+                                                          fontFamily:
+                                                              "Tajawal")),
+                                                  Text(
+                                                    "تاريح الطلب :${cItems[index].orderDate} ",
+                                                    style: TextStyle(
+                                                        color: kPrimaryColor,
+                                                        fontSize: 17.0,
+                                                        fontFamily: "Tajawal"),
+                                                  ),
+                                                ],
                                               ),
-                                            ],
+                                            ),
                                           ),
-                                        ),
+                                        ],
                                       ),
-                                      ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Color.fromARGB(
-                                              255, 81, 144, 142), // background
-                                        ),
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    orderDetails(
-                                                      date: cItems[index]
-                                                          .orderDate,
-                                                      totalOrder:
-                                                          cItems[index].total,
-                                                      docID:
-                                                          cItems[index].docId,
-                                                      products: cItems[index]
-                                                          .products,
-                                                      status:
-                                                          cItems[index].status,
-                                                    )),
-                                          );
-                                          //go to order deatils page
-                                        },
-                                        child: Text(
-                                          "تفاصيل الطلب",
-                                          style: TextStyle(
-                                            fontFamily: "Tajawal",
-                                          ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 10),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                primary: Color.fromARGB(255, 81,
+                                                    144, 142), // background
+                                              ),
+                                              onPressed: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          orderDetails(
+                                                            date: cItems[index]
+                                                                .orderDate,
+                                                            totalOrder:
+                                                                cItems[index]
+                                                                    .total,
+                                                            docID: cItems[index]
+                                                                .docId,
+                                                            products:
+                                                                cItems[index]
+                                                                    .products,
+                                                            status:
+                                                                cItems[index]
+                                                                    .status,
+                                                          )),
+                                                );
+                                                //go to order deatils page
+                                              },
+                                              child: Text(
+                                                "تفاصيل الطلب",
+                                                style: TextStyle(
+                                                  fontFamily: "Tajawal",
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
@@ -215,74 +233,92 @@ class list extends StatelessWidget {
                               itemCount: cItems.length,
                               itemBuilder: (context, index) {
                                 return Container(
-                                  margin: EdgeInsets.only(
-                                      top: 8.0,
-                                      left: 8.0,
-                                      right: 8.0,
-                                      bottom: 10),
-                                  padding: EdgeInsets.all(8.0),
+                                  margin: EdgeInsets.only(top: 8.0, bottom: 10),
+                                  padding: EdgeInsets.only(
+                                      top: 8.0, bottom: 8.0, right: 8.0),
                                   decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border:
-                                          Border.all(color: Color(0xFFF1F1F1))),
-                                  child: Row(
+                                    color: Colors.white,
+                                    // border: Border.all(color: kPrimaryColor)
+                                  ),
+                                  child: Column(
                                     children: [
-                                      Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 8.0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                  //cItems[index].customerId,
-                                                  "طلب رقم :${cItems[index].docId}",
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: TextStyle(
-                                                      fontSize: 17.0,
-                                                      fontFamily: "Tajawal")),
-                                              Text(
-                                                "تاريح الطلب :${cItems[index].orderDate} ",
-                                                style: TextStyle(
-                                                    fontSize: 17.0,
-                                                    fontFamily: "Tajawal"),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 8.0),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                      //cItems[index].customerId,
+                                                      "طلب رقم ${cItems[index].docId}",
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: TextStyle(
+                                                          color: kPrimaryColor,
+                                                          fontSize: 17.0,
+                                                          fontFamily:
+                                                              "Tajawal")),
+                                                  Text(
+                                                    "تاريح الطلب :${cItems[index].orderDate} ",
+                                                    style: TextStyle(
+                                                        color: kPrimaryColor,
+                                                        fontSize: 17.0,
+                                                        fontFamily: "Tajawal"),
+                                                  ),
+                                                ],
                                               ),
-                                            ],
+                                            ),
                                           ),
-                                        ),
+                                        ],
                                       ),
-                                      ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Color.fromARGB(
-                                              255, 81, 144, 142), // background
-                                        ),
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    orderDetails(
-                                                      date: cItems[index]
-                                                          .orderDate,
-                                                      totalOrder:
-                                                          cItems[index].total,
-                                                      docID:
-                                                          cItems[index].docId,
-                                                      products: cItems[index]
-                                                          .products,
-                                                      status:
-                                                          cItems[index].status,
-                                                    )),
-                                          );
-                                          //go to order deatils page
-                                        },
-                                        child: Text(
-                                          "تفاصيل الطلب",
-                                          style: TextStyle(
-                                            fontFamily: "Tajawal",
-                                          ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 10),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                primary: Color.fromARGB(255, 81,
+                                                    144, 142), // background
+                                              ),
+                                              onPressed: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          orderDetails(
+                                                            date: cItems[index]
+                                                                .orderDate,
+                                                            totalOrder:
+                                                                cItems[index]
+                                                                    .total,
+                                                            docID: cItems[index]
+                                                                .docId,
+                                                            products:
+                                                                cItems[index]
+                                                                    .products,
+                                                            status:
+                                                                cItems[index]
+                                                                    .status,
+                                                          )),
+                                                );
+                                                //go to order deatils page
+                                              },
+                                              child: Text(
+                                                "تفاصيل الطلب",
+                                                style: TextStyle(
+                                                  fontFamily: "Tajawal",
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],

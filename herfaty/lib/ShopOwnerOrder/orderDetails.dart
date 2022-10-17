@@ -170,7 +170,7 @@ class AppBarOD extends StatelessWidget {
                               fontFamily: "Tajawal"),
                         ),
                         Container(
-                            margin: EdgeInsets.only(right: 120),
+                            margin: EdgeInsets.only(right: 75),
                             child: Button(newStatus, docID, context)),
                       ],
                     ),
@@ -273,7 +273,7 @@ class AppBarOD extends StatelessWidget {
               });
         },
         child: Text(
-          " $newStatus", //change depend on status
+          " تغيير إلى $newStatus", //change depend on status
           style: TextStyle(
             fontFamily: "Tajawal",
             color: Colors.white,
