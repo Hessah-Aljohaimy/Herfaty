@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/models/cart_wishlistModel.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class productCard extends StatefulWidget {
   const productCard({
@@ -23,11 +24,15 @@ class productCard extends StatefulWidget {
 }
 
 class _productCardState extends State<productCard> {
+  late FToast fToast;
+
   bool isFavourite = false;
   bool isAvailable = true;
 
   @override
   void initState() {
+    fToast = FToast();
+    fToast.init(context);
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     String thisCustomerId = user!.uid;
@@ -95,14 +100,26 @@ class _productCardState extends State<productCard> {
         } else if (change.type == DocumentChangeType.removed) {
           //delete the product from the wish list, because it is no longer exists in the products list
           if (change.doc.id == widget.product.productId) {
+            print(
+                "Product with id ${widget.product.productId} has been deleted");
+
             String existedWishListDocId = await getWishListDocId(
                 thisCustomerId, widget.product.productId);
             FirebaseFirestore.instance
                 .collection('wishList')
                 .doc('${existedWishListDocId}')
                 .delete();
+
+            // showToastMethod(
+            //     context, "عذرًا، تم حذف بعض المنتجات من قبل المالك");
           }
         }
+        // //remove toast after one second because sometimes it runs into an infinite loop
+        // await Future.delayed(const Duration(seconds: 1), () {
+        //   Fluttertoast.cancel();
+        //   fToast.removeCustomToast();
+        //   fToast.removeQueuedCustomToasts();
+        // });
       });
     });
     //===================================================================================
@@ -251,7 +268,17 @@ class _productCardState extends State<productCard> {
                         availableAmount: widget.product.availableAmount,
                         price: widget.product.price);
                     createWishListItem(item);
+                    setState(() {
+                      isFavourite = !isFavourite;
+                    });
                   } else {
+                    //change state only if the card is called from productsList (because changing state in the wishList causes an error of changing the next card state also!, maybe because of the deletion of the item....)
+                    //if the customer id is empty this means the card is called from productsList
+                    if (widget.product.customerId == "") {
+                      setState(() {
+                        isFavourite = !isFavourite;
+                      });
+                    }
                     //delete the product from the wish list
                     String existedWishListDocId = await getWishListDocId(
                         thisCustomerId, widget.product.productId);
@@ -260,9 +287,6 @@ class _productCardState extends State<productCard> {
                         .doc('${existedWishListDocId}')
                         .delete();
                   }
-                  setState(() {
-                    isFavourite = !isFavourite;
-                  });
                 },
               ),
             ),
@@ -337,6 +361,19 @@ class _productCardState extends State<productCard> {
     }
     return DocId;
   }
-//=============================================================================================
 
+//=============================================================================================
+///////////////////////////////////////////////////////////////////////////////
+  Future<void> showToastMethod(
+      BuildContext context, String textToBeShown) async {
+    Fluttertoast.showToast(
+      msg: textToBeShown,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: 3,
+      backgroundColor: Color.fromARGB(255, 26, 96, 91),
+      textColor: Colors.white,
+      fontSize: 18.0,
+    );
+  }
 }

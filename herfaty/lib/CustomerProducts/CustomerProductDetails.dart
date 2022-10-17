@@ -70,7 +70,8 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
           }
         } else if (change.type == DocumentChangeType.removed) {
           if (change.doc.id == widget.product.productId) {
-            showToastMethod(context, "عذرًا، تم حذف المنتج من قبل المالك");
+            Navigator.pop(context);
+            //showToastMethod(context, "عذرًا، تم حذف المنتج من قبل المالك");
           }
         }
       });
