@@ -279,7 +279,7 @@ class ProductsD extends StatelessWidget {
 
                   for (int i = 0; i < PItem.length; i++) {
                     products.forEach((key, value) {
-                      if (PItem[i].productId == key) {
+                      if (PItem[i].id == key) {
                         //if (!PItems.contains(PItem[i]))
                         PItems.add(PItem[i]);
                       }
@@ -350,7 +350,7 @@ class ProductsD extends StatelessWidget {
                                               Text(
                                                   " السعر: ${PItems[index].price.toString()}ريال "),
                                               Text(
-                                                  "الكمية: ${getQuantity(PItems[index].productId)}"),
+                                                  "الكمية: ${getQuantity(PItems[index].id)}"),
                                             ],
                                           ),
                                         ),

@@ -1,14 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:herfaty/constants/color.dart';
-import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/models/AddProductToCart.dart';
+import 'package:herfaty/models/Product1.dart';
 
-class productCard extends StatefulWidget {
-  const productCard({
+class wishCard extends StatefulWidget {
+  const wishCard({
     Key? key,
     required this.itemIndex,
     required this.product,
@@ -16,28 +15,20 @@ class productCard extends StatefulWidget {
   }) : super(key: key);
 
   final int itemIndex;
-  final Product1 product;
+  final CartAndWishListProduct product;
   final void Function() press;
 
   @override
-  State<productCard> createState() => _productCardState();
+  State<wishCard> createState() => _wishCardState();
 }
 
-class _productCardState extends State<productCard> {
-  late bool isFavourite;
-
-  @override
-  void initState() {
-    isFavourite = false;
-    super.initState();
-  }
-
+class _wishCardState extends State<wishCard> {
   @override
   Widget build(BuildContext context) {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     String thisCustomerId = user!.uid;
-    //-----------------------------------------------------------------
+    //
     Size size =
         MediaQuery.of(context).size; //to get the width and height of the app
     return Container(
@@ -97,7 +88,7 @@ class _productCardState extends State<productCard> {
                     bottomLeft: Radius.circular(10),
                   ),
                   child: Image.network(
-                    widget.product.image,
+                    widget.product.detailsImage,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -157,48 +148,20 @@ class _productCardState extends State<productCard> {
               left: 190,
               bottom: 26,
               child: IconButton(
-                icon: Icon(
+                //padding: EdgeInsets.only(right: 1),
+                icon: const Icon(
                   Icons.favorite,
-                  color: isFavourite
-                      ? Colors.red
-                      : Color.fromARGB(157, 158, 158, 158),
+                  color: Colors.red,
                   size: 32.0,
                 ),
                 onPressed: () async {
-                  setState(() {
-                    isFavourite = !isFavourite;
-                  });
-                  // اعتقد المفروض يكون من مودل برودكت ون
-
-                  /**
-                   * احتاج احتفظ باستمرار بالبرودكت اي دي عشان اقدر اضيفه واشيله من قائمة المفضلة
-                  ولازم اشيك لما اعرض ال قائمة حقت المنتجات هل البرودكت في المفضلة حقت هذا الكستمر أو لا عشان القلب اللي ينعرض له يكون احمر (وبرضو لما يضغط عليه لازم ينشال من المفضلة)
-
-                   */
-                  if (isFavourite == true) {
-                    final productToBeAdded =
-                        FirebaseFirestore.instance.collection('wishList').doc();
-                    CartAndWishListProduct item = CartAndWishListProduct(
-                        name: widget.product.name,
-                        detailsImage: widget.product.image,
-                        docId: productToBeAdded.id,
-                        productId: widget.product.id,
-                        customerId: user.uid,
-                        shopName: widget.product.shopName,
-                        shopOwnerId: widget.product.shopOwnerId,
-                        quantity: 1,
-                        availableAmount: widget.product.availableAmount,
-                        price: widget.product.price);
-                    createWishListItem(item);
-                  } else {
-                    //delete the product from the wish list
-                    String existedWishListDocId =
-                        await getDocId(thisCustomerId, widget.product.id);
-                    FirebaseFirestore.instance
-                        .collection('wishList')
-                        .doc('${existedWishListDocId}')
-                        .delete();
-                  }
+                  //delete the product from the wish list
+                  String existedWishListDocId =
+                      await getDocId(thisCustomerId, widget.product.productId);
+                  FirebaseFirestore.instance
+                      .collection('wishList')
+                      .doc('${existedWishListDocId}')
+                      .delete();
                 },
               ),
             )
@@ -207,20 +170,8 @@ class _productCardState extends State<productCard> {
       ),
     );
   }
-
-  //==========================================================================================
-  Future createWishListItem(CartAndWishListProduct wishListItem) async {
-    final docCartItem = FirebaseFirestore.instance
-        .collection('wishList')
-        .doc("${wishListItem.docId}");
-    final json = wishListItem.toJson();
-    await docCartItem.set(
-      json,
-    );
-  }
 }
 
-//=======================================================================================
 Future<String> getDocId(String thisCustomerId, String thisproductId) async {
   String DocId = "";
   print("==================this is get docId method");

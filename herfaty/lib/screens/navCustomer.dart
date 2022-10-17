@@ -57,7 +57,7 @@ class nav extends StatelessWidget {
           activeColorPrimary: kPrimaryColor.withOpacity(0.9),
           inactiveColorPrimary: CupertinoColors.systemGrey),
       PersistentBottomNavBarItem(
-          icon: const Icon(CupertinoIcons.heart_fill),
+          icon: const Icon(CupertinoIcons.square_favorites),
           title: "  المفضلة",
           activeColorPrimary: kPrimaryColor.withOpacity(0.9),
           inactiveColorPrimary: CupertinoColors.systemGrey),
