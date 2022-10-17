@@ -7,7 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/constants/color.dart';
 
-class CustomerProductsList extends StatelessWidget {
+class CustomerProductsList extends StatefulWidget {
   String categoryName;
 
   CustomerProductsList({
@@ -15,12 +15,16 @@ class CustomerProductsList extends StatelessWidget {
     Key? key,
   })  : this.categoryName = categoryName,
         super(key: key);
-  //variable to store the category name from categories page
 
-  //  صفحة عائشة ترسل لي هنا اسم الفئة بناء عليه أعرض المنتجات
+  @override
+  State<CustomerProductsList> createState() => _CustomerProductsListState();
+}
+
+class _CustomerProductsListState extends State<CustomerProductsList> {
+  //variable to store the category name from categories page
   Stream<List<Product1>> readPrpducts() => FirebaseFirestore.instance
       .collection('Products')
-      .where("categoryName", isEqualTo: categoryName)
+      .where("categoryName", isEqualTo: widget.categoryName)
       .snapshots()
       .map((snapshot) =>
           snapshot.docs.map((doc) => Product1.fromJson(doc.data())).toList());
@@ -32,9 +36,7 @@ class CustomerProductsList extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       backgroundColor: Color.fromARGB(255, 250, 250, 250),
       appBar: productsListAppBar(context),
-      //bottomNavigationBar: navMethod(), // the new nav need tap change page
-      //NavigationBar(), // the old nav
-      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////////////////////////////////
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
@@ -128,7 +130,7 @@ class CustomerProductsList extends StatelessWidget {
       backgroundColor: Color.fromARGB(255, 250, 250, 250),
       centerTitle: true,
       title: Text(
-        categoryName,
+        widget.categoryName,
         style: TextStyle(
           fontSize: 20.0,
           fontWeight: FontWeight.w600,

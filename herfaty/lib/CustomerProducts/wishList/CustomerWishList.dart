@@ -1,12 +1,9 @@
 // ignore_for_file: prefer_const_constructors
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:herfaty/CustomerProducts/CustomerProductDetails.dart';
 import 'package:herfaty/CustomerProducts/productCard.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:herfaty/CustomerProducts/wishList/wishCard.dart';
-import 'package:herfaty/CustomerProducts/wishList/wishListDetails.dart';
-import 'package:herfaty/models/AddProductToCart.dart';
 import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/constants/color.dart';
 
@@ -20,22 +17,16 @@ class CustomerWishList extends StatefulWidget {
 }
 
 class _CustomerWishListState extends State<CustomerWishList> {
-  Stream<List<CartAndWishListProduct>> readPrpducts() =>
-      FirebaseFirestore.instance.collection('wishList').snapshots().map(
-          (snapshot) => snapshot.docs
-              .map((doc) => CartAndWishListProduct.fromJson(doc.data()))
-              .toList());
-
-  //======================================================================================
   @override
   Widget build(BuildContext context) {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    String thisCustomerId = user!.uid;
+    //====================================================================
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Color.fromARGB(255, 250, 250, 250),
-      appBar: productsListAppBar(context),
-      //bottomNavigationBar: navMethod(), // the new nav need tap change page
-      //NavigationBar(), // the old nav
-      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      appBar: wishListAppBar(context),
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
@@ -51,8 +42,8 @@ class _CustomerWishListState extends State<CustomerWishList> {
                 child: Stack(
                   children: [
                     //This is to list all of our items fetched from the DB========================
-                    StreamBuilder<List<CartAndWishListProduct>>(
-                      stream: readPrpducts(),
+                    StreamBuilder<List<Product1>>(
+                      stream: readPrpducts(thisCustomerId),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
@@ -82,17 +73,17 @@ class _CustomerWishListState extends State<CustomerWishList> {
                           else {
                             return ListView.builder(
                               itemCount: productItems.length,
-                              itemBuilder: (context, index) => wishCard(
+                              itemBuilder: (context, index) => productCard(
                                 itemIndex: index,
                                 product: productItems[index],
                                 press: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => wishListDetails(
+                                      builder: (context) =>
+                                          CustomerProdectDetails(
                                         // يرسل المعلومات لصفحة المنتج عشان يعرض التفاصيل
-                                        detailsImage:
-                                            productItems[index].detailsImage,
+                                        detailsImage: productItems[index].image,
                                         product: productItems[index],
                                       ),
                                     ),
@@ -119,9 +110,19 @@ class _CustomerWishListState extends State<CustomerWishList> {
     );
   }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//========================================================================================
+  Stream<List<Product1>> readPrpducts(String thisCustomerId) =>
+      FirebaseFirestore.instance
+          .collection('wishList')
+          .where("customerId", isEqualTo: thisCustomerId)
+          .snapshots()
+          .map((snapshot) => snapshot.docs
+              .map((doc) => Product1.fromJson2(doc.data()))
+              .toList());
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
   //AppBar
-  AppBar productsListAppBar(var context) {
+  AppBar wishListAppBar(var context) {
     return AppBar(
       elevation: 0,
       backgroundColor: Color.fromARGB(255, 250, 250, 250),
