@@ -25,10 +25,10 @@ class _AddProductState extends State<AddProduct> {
   final _formKey = GlobalKey<FormState>(); //To validate form
 
   // Initial Selected Value
-  String dropdownvalue = '  :اختر الفئة'; // default value
+  String dropdownvalue = 'فنون الورق والتلوين'; // default value
   // List of items in our dropdown menu
   var items = [
-    '  :اختر الفئة',
+    // '  :اختر الفئة',
     'فنون الورق والتلوين',
     'الخرز والإكسسوار',
     'الفخاريات',
@@ -142,7 +142,10 @@ class _AddProductState extends State<AddProduct> {
                   height: 20,
                 ),
                 if (uploadImageUrl.isEmpty)
-                  SizedBox()
+                  SizedBox(
+                    width: 200,
+                    height: 200,
+                  )
                 else
                   Image.network(
                     uploadImageUrl,
@@ -484,9 +487,9 @@ class _AddProductState extends State<AddProduct> {
                     if (uploadImageUrl.isEmpty)
                       ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('الرجاء إرفاق صورة')));
-                    if (dropdownvalue == '  :اختر الفئة')
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          content: Text('الرجاء إختيار الفئة ')));
+                    // if (dropdownvalue == '  :اختر الفئة')
+                    //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    //       content: Text('الرجاء إختيار الفئة ')));
                     /*if (uploadImageUrl.isEmpty &&
                       _formKey.currentState.validate()) {
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -495,8 +498,8 @@ class _AddProductState extends State<AddProduct> {
                   }*/
 
                     if (_formKey.currentState!.validate() &&
-                        uploadImageUrl != "" &&
-                        dropdownvalue != '  :اختر الفئة') {
+                        uploadImageUrl != "") {
+                      // &&dropdownvalue != '  :اختر الفئة'
                       String prodName = nameController.text;
                       String desc = descController.text;
                       int amount = int.parse(amountController.text);
@@ -575,7 +578,7 @@ class _AddProductState extends State<AddProduct> {
               ),*/
 
                 SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
 
                 ElevatedButton(
