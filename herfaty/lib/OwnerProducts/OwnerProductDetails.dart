@@ -217,6 +217,8 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
                                             .delete();
 
                                         showDoneDeleteToast(context);
+
+                                        Navigator.of(context).pop();
                                       },
                                     )
                                   ],
@@ -324,10 +326,14 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
       textColor: Colors.white,
       fontSize: 18.0,
     );
-    await Future.delayed(const Duration(seconds: 1), () {
-      Navigator.of(context).pop();
-      Navigator.of(context).pop();
-    });
+    /*await Future.delayed(const Duration(seconds: 1), () {
+      // Navigator.of(context, rootNavigator: false).pop();
+      //Navigator.pop(context, true);
+      {
+        Navigator.of(context).pop();
+        Navigator.of(context).pop();
+      }
+    });*/
   }
 
 ///////////////////////////////////////////////////////////////////////////////
