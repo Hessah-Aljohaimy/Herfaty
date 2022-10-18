@@ -16,8 +16,11 @@ class OwnerProdectDetails extends StatefulWidget {
   final Product1 product;
   String detailsImage;
 
-  OwnerProdectDetails(
-      {super.key, required this.product, required this.detailsImage});
+  OwnerProdectDetails({
+    super.key,
+    required this.product,
+    required this.detailsImage,
+  });
 
   @override
   State<OwnerProdectDetails> createState() => _OwnerProdectDetailsState();
@@ -159,6 +162,7 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
                                     widget.detailsImage,
                                     widget.product.name,
                                     widget.product.id,
+                                    widget.product.categoryName,
                                     ' ${thisPageQuantity * widget.product.price}')),
                           );
                         },
