@@ -1,11 +1,13 @@
 // ignore_for_file: prefer_const_constructors
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:herfaty/constants/color.dart';
+import 'package:herfaty/models/AddProductToCart.dart';
 import 'package:herfaty/models/Product1.dart';
 
-class productCard extends StatelessWidget {
-  const productCard({
+class wishCard extends StatefulWidget {
+  const wishCard({
     Key? key,
     required this.itemIndex,
     required this.product,
@@ -13,11 +15,20 @@ class productCard extends StatelessWidget {
   }) : super(key: key);
 
   final int itemIndex;
-  final Product1 product;
+  final CartAndWishListProduct product;
   final void Function() press;
 
   @override
+  State<wishCard> createState() => _wishCardState();
+}
+
+class _wishCardState extends State<wishCard> {
+  @override
   Widget build(BuildContext context) {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    String thisCustomerId = user!.uid;
+    //
     Size size =
         MediaQuery.of(context).size; //to get the width and height of the app
     return Container(
@@ -40,8 +51,8 @@ class productCard extends StatelessWidget {
       ),
       height: 180,
       child: InkWell(
-        onTap:
-            press, // يعني ان المستخدم لما يضغط على الكارد تفتح معاه صفحة جديدة
+        onTap: widget
+            .press, // يعني ان المستخدم لما يضغط على الكارد تفتح معاه صفحة جديدة
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
@@ -77,7 +88,7 @@ class productCard extends StatelessWidget {
                     bottomLeft: Radius.circular(10),
                   ),
                   child: Image.network(
-                    product.image,
+                    widget.product.detailsImage,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -98,7 +109,7 @@ class productCard extends StatelessWidget {
                   children: [
                     //product name===========================================================
                     Text(
-                      product.name,
+                      widget.product.name,
                       style: const TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.w600,
@@ -109,7 +120,7 @@ class productCard extends StatelessWidget {
 
                     //سعر المنتج  ===========================================================
                     Text(
-                      ' ${product.price} ريال',
+                      ' ${widget.product.price} ريال',
                       style: const TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.w400,
@@ -119,7 +130,7 @@ class productCard extends StatelessWidget {
                     ),
                     //اسم المتجر  ===========================================================
                     Text(
-                      product.shopName,
+                      widget.product.shopName,
                       style: const TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.w400,
@@ -143,8 +154,14 @@ class productCard extends StatelessWidget {
                   color: Colors.red,
                   size: 32.0,
                 ),
-                onPressed: () {
-                  //Navigator.pop(context);
+                onPressed: () async {
+                  //delete the product from the wish list
+                  String existedWishListDocId =
+                      await getDocId(thisCustomerId, widget.product.productId);
+                  FirebaseFirestore.instance
+                      .collection('wishList')
+                      .doc('${existedWishListDocId}')
+                      .delete();
                 },
               ),
             )
@@ -153,4 +170,20 @@ class productCard extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<String> getDocId(String thisCustomerId, String thisproductId) async {
+  String DocId = "";
+  print("==================this is get docId method");
+  final wishListDoc = await FirebaseFirestore.instance
+      .collection('wishList')
+      .where("productId", isEqualTo: thisproductId)
+      .where("customerId", isEqualTo: thisCustomerId)
+      .get();
+  if (wishListDoc.size > 0) {
+    var data = wishListDoc.docs.elementAt(0).data() as Map;
+    DocId = data["docId"];
+    print('wish list docId is ${DocId}============================');
+  }
+  return DocId;
 }

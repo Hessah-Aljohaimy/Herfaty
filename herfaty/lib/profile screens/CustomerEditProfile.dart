@@ -146,6 +146,11 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
                 SizedBox(
                   height: 20,
                 ),
+
+
+//Only view the email
+
+
                 Container(
                   color: Colors.white,
                   width: 350,
@@ -156,20 +161,20 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
                 SizedBox(
                   height: 20,
                 ),
-                Container(
-                  color: Colors.white,
-                  width: 350,
-                  child: reusableTextFieldCustomer(
-                      "كلمة المرور", true, _passwordTextController),
-                ),
-                Container(
-                  padding: const EdgeInsets.only(left: 110),
-                  child: Text(
-                    " كلمه المرور يجب ان لا تقل عن 6 خانات",
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 84, 84, 84), fontSize: 13),
-                  ),
-                ),
+                // Container(
+                //   color: Colors.white,
+                //   width: 350,
+                //   child: reusableTextFieldCustomer(
+                //       "كلمة المرور", true, _passwordTextController),
+                // ),
+                // Container(
+                //   padding: const EdgeInsets.only(left: 110),
+                //   child: Text(
+                //     " كلمه المرور يجب ان لا تقل عن 6 خانات",
+                //     style: TextStyle(
+                //         color: Color.fromARGB(255, 84, 84, 84), fontSize: 13),
+                //   ),
+                // ),
 
                 SizedBox(
                   height: 20,

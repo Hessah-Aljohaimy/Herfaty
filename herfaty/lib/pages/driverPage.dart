@@ -82,33 +82,84 @@ class driverPage  extends StatelessWidget {
                                               style: TextStyle(
                                                   fontSize: 17.0,
                                                   fontFamily: "Tajawal")),
+                                                    SizedBox(
+                            height: 10,
+                          ),
                                           Text(
                                             "تاريح الطلب :${cItems[index].orderDate} ",
                                             style: TextStyle(
                                                 fontSize: 17.0,
                                                 fontFamily: "Tajawal"),
                                           ),
-                                        ],
+                          SizedBox(
+                            height: 10,
+                          ),
+                                             Text(
+                                            "اسم المتجر :${cItems[index].shopName} ",
+                                            style: TextStyle(
+                                                fontSize: 17.0,
+                                                fontFamily: "Tajawal"),
+                                          ),
+                                                                    SizedBox(
+                            height: 10,
+                          ),
+                                      Text(
+                                            "موقع التوصيل :${cItems[index].location} ",
+                                            style: TextStyle(
+                                                fontSize: 17.0,
+                                                fontFamily: "Tajawal"),
+                                          ),
+                                                                    SizedBox(
+                            height: 10,
+                          ),
+                                    Text(
+                                            "حالة الطلب :${cItems[index].status} ",
+                                            style: TextStyle(
+                                                fontSize: 17.0,
+                                                fontFamily: "Tajawal"),
+                                          ),
+                                          
+                                           SizedBox(
+                            height: 10,
+                          ), 
+
+             Container(     
+
+      margin: const EdgeInsets.only(right: 50.0),
+
+child:
+                                                               
+ ElevatedButton(
+                                    
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Color.fromARGB(
+                                          255, 81, 144, 142), 
+                                          // background
+                                    ),
+
+                                    onPressed: () {
+ 
+ updateDiliver(cItems[index].docId);
+ 
+                                     },
+                                    child: Text(
+                                      "تغيير الحالة إلى خارج للتوصيل",
+                                      style: TextStyle(
+                                        fontFamily: "Tajawal",
                                       ),
                                     ),
                                   ),
-                                  // ElevatedButton(
-                                  //   style: ElevatedButton.styleFrom(
-                                  //     primary: Color.fromARGB(
-                                  //         255, 81, 144, 142), // background
-                                  //   ),
-                                  //   onPressed: () {
-                                  //     //go to order deatils page
-                                  //   },
-                                  //   child: Text(
-                                  //     "تفاصيل الطلب",
-                                  //     style: TextStyle(
-                                  //       fontFamily: "Tajawal",
-                                  //     ),
-                                  //   ),
-                                  // ),
+                                      ),
+                                        ],
+                                      ),
+                                    ),
+                                    
+                                  ),
+                              
                                 ],
+                                
                               ),
+                              
                             );
                           });
                     }
@@ -122,8 +173,26 @@ class driverPage  extends StatelessWidget {
      
       ),
     );
+     
   }
+  
+  void updateDiliver(s) {
+
+
+      FirebaseFirestore.instance
+                                        .collection('orders')
+                                        .doc(s)
+                                        .update({
+                                      "status":
+                                          'خارج للتوصيل'
+                                    });
+
+
+  }
+ 
+
 }
+
 
 class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -159,9 +228,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
                         child: Text("تسجيل خروج",
                             style: TextStyle(color: Colors.red)),
                         onPressed: () {
-                          // FirebaseAuth.instance.signOut();
-                          // Navigator.of(context).pushNamedAndRemoveUntil(
-                          //     "/", (Route<dynamic> route) => false);
+         
                           Navigator.of(context, rootNavigator: true)
                               .pushReplacement(MaterialPageRoute(
                                   builder: (context) => new login()));
@@ -177,10 +244,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
                   );
                 });
 
-            /*Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (BuildContext context) {
-              return Welcome();
-            }));*/
+      
           },
         ),
       automaticallyImplyLeading: false,
@@ -193,7 +257,8 @@ Stream<List<OrderModel>> readPrpducts() {
 
 
     return FirebaseFirestore.instance
-        .collection('orders')
+        .collection('orders').where("status", isEqualTo: 'جاهز للتوصيل')
+
         .snapshots()
         .map((snapshot) => snapshot.docs
             .map((doc) => OrderModel.fromJson(doc.data()))

@@ -3,18 +3,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:herfaty/MangeProduct.dart/EditProduct.dart';
 import 'package:herfaty/models/AddProductToCart.dart';
 import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/widgets/ExpandedWidget.dart';
 
+import 'OwnerProductsList.dart';
+
 class OwnerProdectDetails extends StatefulWidget {
   final Product1 product;
   String detailsImage;
 
-  OwnerProdectDetails(
-      {super.key, required this.product, required this.detailsImage});
+  OwnerProdectDetails({
+    super.key,
+    required this.product,
+    required this.detailsImage,
+  });
 
   @override
   State<OwnerProdectDetails> createState() => _OwnerProdectDetailsState();
@@ -22,6 +28,9 @@ class OwnerProdectDetails extends StatefulWidget {
 
 class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
   int thisPageQuantity = 1;
+  //Not Sure Getter-----------
+  //OwnerProductsList get categoryName => OwnerProductsList(categoryName: null,);
+  var categoryName = "";
   @override
   Widget build(BuildContext context) {
     final FirebaseAuth auth = FirebaseAuth.instance;
@@ -143,6 +152,19 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
                       child: ElevatedButton(
                         onPressed: () {
                           //هنا يكون كود تعديل المنتج
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EditProduct(
+                                    '${widget.product.availableAmount}',
+                                    categoryName,
+                                    widget.product.description,
+                                    widget.detailsImage,
+                                    widget.product.name,
+                                    widget.product.id,
+                                    widget.product.categoryName,
+                                    ' ${thisPageQuantity * widget.product.price}')),
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
@@ -172,7 +194,38 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
                       // زر الحذف-----------------------------------------
                       child: ElevatedButton(
                         onPressed: () {
-                          //هنا يكون كود حذف المنتج
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text("حذف منتج"),
+                                  content:
+                                      Text('سيتم حذف هذا المنتج من منتجاتك'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: Text("تراجع"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: Text("حذف",
+                                          style: TextStyle(
+                                            color: Colors.red,
+                                          )),
+                                      onPressed: () {
+                                        FirebaseFirestore.instance
+                                            .collection('Products')
+                                            .doc(widget.product.id)
+                                            //.doc(getDocId())
+                                            .delete();
+
+                                        showDoneDeleteToast(context);
+                                      },
+                                    )
+                                  ],
+                                );
+                              });
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
@@ -265,6 +318,31 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
     );
   }
 
+  Future<void> showDoneDeleteToast(BuildContext context) async {
+    Fluttertoast.showToast(
+      msg: "تم حذف المنتج بنجاح",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: 3,
+      backgroundColor: Color.fromARGB(255, 26, 96, 91),
+      textColor: Colors.white,
+      fontSize: 18.0,
+    );
+    await Future.delayed(const Duration(seconds: 1), () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                OwnerProductsList(categoryName: widget.product.categoryName)),
+      );
+      // Navigator.of(context, rootNavigator: false).pop();
+      //Navigator.pop(context, true);
+
+      // Navigator.of(context).pop();
+      // Navigator.of(context).pop();
+    });
+  }
+
 ///////////////////////////////////////////////////////////////////////////////
   Future<void> showDoneToast(BuildContext context) async {
     Fluttertoast.showToast(
@@ -276,9 +354,8 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
       textColor: Colors.white,
       fontSize: 18.0,
     );
-    await Future.delayed(const Duration(seconds: 1), () {
-      Navigator.pop(context);
-    });
+
+    Navigator.pop(context);
   }
 
 /////////////////////////////////////////////////////////////////////////////

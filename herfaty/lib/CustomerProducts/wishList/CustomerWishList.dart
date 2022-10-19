@@ -4,19 +4,27 @@ import 'package:flutter/material.dart';
 import 'package:herfaty/CustomerProducts/CustomerProductDetails.dart';
 import 'package:herfaty/CustomerProducts/productCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:herfaty/CustomerProducts/wishList/wishCard.dart';
+import 'package:herfaty/CustomerProducts/wishList/wishListDetails.dart';
+import 'package:herfaty/models/AddProductToCart.dart';
 import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/constants/color.dart';
 
-class CustomerWishList extends StatelessWidget {
+class CustomerWishList extends StatefulWidget {
   CustomerWishList({
     Key? key,
   }) : super(key: key);
 
-  Stream<List<Product1>> readPrpducts() => FirebaseFirestore.instance
-      .collection('wishList')
-      .snapshots()
-      .map((snapshot) =>
-          snapshot.docs.map((doc) => Product1.fromJson(doc.data())).toList());
+  @override
+  State<CustomerWishList> createState() => _CustomerWishListState();
+}
+
+class _CustomerWishListState extends State<CustomerWishList> {
+  Stream<List<CartAndWishListProduct>> readPrpducts() =>
+      FirebaseFirestore.instance.collection('wishList').snapshots().map(
+          (snapshot) => snapshot.docs
+              .map((doc) => CartAndWishListProduct.fromJson(doc.data()))
+              .toList());
 
   //======================================================================================
   @override
@@ -43,7 +51,7 @@ class CustomerWishList extends StatelessWidget {
                 child: Stack(
                   children: [
                     //This is to list all of our items fetched from the DB========================
-                    StreamBuilder<List<Product1>>(
+                    StreamBuilder<List<CartAndWishListProduct>>(
                       stream: readPrpducts(),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
@@ -74,17 +82,17 @@ class CustomerWishList extends StatelessWidget {
                           else {
                             return ListView.builder(
                               itemCount: productItems.length,
-                              itemBuilder: (context, index) => productCard(
+                              itemBuilder: (context, index) => wishCard(
                                 itemIndex: index,
                                 product: productItems[index],
                                 press: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) =>
-                                          CustomerProdectDetails(
+                                      builder: (context) => wishListDetails(
                                         // يرسل المعلومات لصفحة المنتج عشان يعرض التفاصيل
-                                        detailsImage: productItems[index].image,
+                                        detailsImage:
+                                            productItems[index].detailsImage,
                                         product: productItems[index],
                                       ),
                                     ),
@@ -126,17 +134,6 @@ class CustomerWishList extends StatelessWidget {
           color: kPrimaryColor,
           fontFamily: "Tajawal",
         ),
-      ),
-      leading: IconButton(
-        padding: EdgeInsets.only(right: 20),
-        icon: const Icon(
-          Icons.arrow_back, //سهم العودة
-          color: Color.fromARGB(255, 26, 96, 91),
-          size: 22.0,
-        ),
-        onPressed: () {
-          Navigator.pop(context);
-        }, //نخليه يرجع لصفحة المنتجات اللي عند عائشة
       ),
     );
   }

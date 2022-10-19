@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:intl/src/intl/date_format.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
+// import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -46,11 +46,12 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
   PickedFile? _imageFile;
   File? pickedImage1;
 
-  DateTime todaysDate = DateTime.now();
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
-    TextEditingController _passwordTextController = new TextEditingController();
+    TextEditingController _passwordTextController = new TextEditingController()
+      ..text = widget.password;
+
     TextEditingController _emailTextEditingController =
         new TextEditingController()..text = widget.email;
     TextEditingController _nameTextEditingController =
@@ -58,7 +59,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
 
     TextEditingController _BODController = new TextEditingController()
       ..text = widget.DOB;
-    ;
+    DateTime _selectedDate;
     TextEditingController _PhoneNumberTextEditingController =
         new TextEditingController()..text = widget.phone_number;
 
@@ -76,9 +77,6 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
     for (int i = 0; i < passlength; i++) {
       passwordStar = passwordStar + '*';
     }
-
-    final docShopOwner =
-        FirebaseFirestore.instance.collection('customers').doc(widget.uid);
 
 /** IconButton(
             onPressed: () {
@@ -110,13 +108,13 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
         child: SingleChildScrollView(
           child: SizedBox(
             width: 430,
-            height: 637,
+            height: 700,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 SizedBox(
-                  height: 5,
+                  height: 2,
                 ),
                 Center(
                   child: Container(
@@ -132,51 +130,40 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 15,
-                ),
-                Center(
-                  child: Text(
-                    "تعديل بيانات الحرفي",
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 26, 96, 91),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      fontFamily: "Tajawal",
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
+                // SizedBox(
+                //   height: 15,
+                // ),
+                // Center(
+                //   child: Text(
+                //     "تعديل بيانات الحرفي",
+                //     style: TextStyle(
+                //       color: Color.fromARGB(255, 26, 96, 91),
+                //       fontWeight: FontWeight.bold,
+                //       fontSize: 20,
+                //       fontFamily: "Tajawal",
+                //     ),
+                //   ),
+                // ),
+
                 Container(
                   padding: EdgeInsets.only(left: 15, right: 15, top: 10),
                   width: 350,
-                  child: reusableTextFieldShopOwner(
+                  child: reusableTextFieldShopOwnerName(
                       'اسم الحرفي', false, _nameTextEditingController),
                 ),
 
-                SizedBox(
-                  height: 5,
-                ),
+                // SizedBox(
+                //   height: 5,
+                // ),
                 Container(
                   padding: EdgeInsets.only(left: 15, right: 15, top: 10),
                   width: 350,
-                  child: reusableTextFieldShopOwner(
+                  child: reusableTextFieldCustomer(
                       "البريد الإلكتروني", false, _emailTextEditingController),
                 ),
 
                 SizedBox(
                   height: 5,
-                ),
-                Container(
-                  padding: EdgeInsets.only(left: 15, right: 15, top: 10),
-                  width: 350,
-                  child: reusableTextFieldShopOwner(
-                      "كلمة المرور", true, _passwordTextController),
-                ),
-                SizedBox(
-                  height: 10,
                 ),
                 // Container(
                 //   padding: EdgeInsets.only(left: 15, right: 15, top: 10),
@@ -185,9 +172,9 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                 //       "تاريخ الميلاد", false, _passwordTextController),
                 // ),
                 Container(
-                    padding: EdgeInsets.symmetric(horizontal: 47),
-                    child: Center(
-                        child: TextFormField(
+                  padding: EdgeInsets.symmetric(horizontal: 44),
+                  child: Center(
+                    child: TextFormField(
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       controller: _BODController,
                       validator: (value) {
@@ -236,14 +223,14 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                       ),
 
                       readOnly:
-                          true, //set it true, so that user will not able to edit text
+                          false, //set it true, so that user will not able to edit text
                       onTap: () async {
                         DateTime? pickedDate = await showDatePicker(
                           context: context,
-                          initialDate: DateTime.now(),
+                          initialDate: DateTime(2007),
                           firstDate: DateTime(
-                              2000), //DateTime.now() - not to allow to choose before today.
-                          lastDate: DateTime(2101),
+                              2007), //DateTime.now() - not to allow to choose before today.
+                          lastDate: DateTime(2017),
 
                           builder: (context, child) {
                             return Theme(
@@ -265,58 +252,42 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                           },
                         );
 
-                        if (pickedDate != null && pickedDate != todaysDate) {
-                          print(
-                              pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
-                          String formattedDate =
-                              DateFormat('yyyy-MM-dd').format(pickedDate);
-                          print(
-                              formattedDate); //formatted date output using intl package =>  2021-03-16
-                          //you can implement different kind of Date Format here according to your requirement
-
-                          setState(() {
-                            _BODController.text =
-                                formattedDate; //set output date to TextField value.
-                          });
-                        } else {
-                          print("لم يتم اختيار تاريخ الميلاد");
-                          Fluttertoast.showToast(
-                            msg: "لم يتم اختيار تاريخ الميلاد  ",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.CENTER,
-                            timeInSecForIosWeb: 3,
-                            backgroundColor: Colors.white,
-                            textColor: Colors.red,
-                            fontSize: 18.0,
-                          );
-                        }
+                        print(
+                            pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                        String formattedDate =
+                            DateFormat('yyyy-MM-dd').format(pickedDate!);
+                        print(
+                            formattedDate); //formatted date output using intl package =>  2021-03-16
+                        //you can implement different kind of Date Format here according to your requirement
+                        _BODController..text = formattedDate;
                       },
-                    ))),
-                SizedBox(
-                  height: 5,
+                    ),
+                  ),
                 ),
+                // SizedBox(
+                //   height: 5,
+                // ),
                 Container(
                   padding: EdgeInsets.only(left: 15, right: 15, top: 10),
                   width: 350,
                   child: reusableTextFieldShopOwner(
                       "رقم الجوال", false, _PhoneNumberTextEditingController),
                 ),
+
+                // SizedBox(
+                //   height: 5,
+                // ),
                 Container(
-                  padding: const EdgeInsets.only(left: 100),
-                  child: Text(
-                    "رقم الجوال يجب أن يبدأ بـ(05) لعشرة أرقام",
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 86, 86, 86), fontSize: 12),
-                  ),
-                ),
-                SizedBox(
-                  height: 5,
+                  padding: EdgeInsets.only(left: 15, right: 15, top: 10),
+                  width: 350,
+                  child: reusableTextFieldShopOwnerName(
+                      "اسم المتجر", false, _shopnameTextEditingController),
                 ),
                 Container(
                   padding: EdgeInsets.only(left: 15, right: 15, top: 10),
                   width: 350,
-                  child: reusableTextFieldShopOwner(
-                      "اسم المتجر", false, _shopnameTextEditingController),
+                  child: reusableTextFieldDec(
+                      "وصف المتجر", _shopdescriptionTextEditingController),
                 ),
 
                 // SizedBox(
@@ -366,9 +337,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                 //                 itemBuilder: (context, index) {} ,
 
                 //             ),
-                SizedBox(
-                  height: 20,
-                ),
+
                 Row(
                   children: [
                     // Expanded(
@@ -378,14 +347,27 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                     ),
                     ElevatedButton(
                       onPressed: () {
+                        final docShopOwner = FirebaseFirestore.instance
+                            .collection('shop_owner')
+                            .doc(widget.uid);
+                        if (uploadImageUrl == "") {
+                          uploadImageUrl = widget.logo;
+                        }
+
                         print(widget.uid);
                         //update this spesific feild
                         docShopOwner.update({
-                          'email': _emailTextEditingController.text,
+                          'DOB': _BODController.text,
+                          'email': widget.email,
                           'id': widget.uid,
+                          'logo': uploadImageUrl,
                           'name': _nameTextEditingController.text,
-                          'password': _passwordTextController.text,
-                          'DOB': _BODController,
+                          'password': widget.password,
+                          'phone_number':
+                              _PhoneNumberTextEditingController.text,
+                          'shopdescription':
+                              _shopdescriptionTextEditingController.text,
+                          'shopname': _shopnameTextEditingController.text,
                         });
                         Fluttertoast.showToast(
                           msg: "تم تحديث حسابك بنجاح",
@@ -401,10 +383,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                         // Navigator.push(
                         //   context,
                         //   MaterialPageRoute(
-                        //       builder: (context) => CustomerEditProfile(
-                        //           customer.name,
-                        //           customer.email,
-                        //           customer.password)),
+                        //       builder: (context) =>l
                         // );
                       },
                       style: ButtonStyle(
@@ -441,7 +420,18 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                                   child: Text("إلغاء",
                                       style: TextStyle(color: Colors.red)),
                                   onPressed: () {
-                                    //The logic of deleting an account
+                                    //The logic of cancle edits
+                                    imageProfile(widget.logo);
+                                    _nameTextEditingController
+                                      ..text = widget.name;
+                                    _BODController..text = widget.DOB;
+                                    _PhoneNumberTextEditingController
+                                      ..text = widget.phone_number;
+                                    _shopdescriptionTextEditingController
+                                      ..text = widget.shopdescription;
+                                    _shopnameTextEditingController
+                                      ..text = widget.shopname;
+                                    Navigator.of(context).pop();
 
                                     //Navigator.of(context).pop();
                                     // FirebaseAuth.instance.signOut();
@@ -480,6 +470,9 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                     //   ]),
                     // )
                   ],
+                ),
+                SizedBox(
+                  height: 20,
                 ),
               ],
             ),
@@ -551,23 +544,69 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
     );
   }
 
+  TextFormField reusableTextFieldShopOwnerName(
+      String text, bool isPasswordType, TextEditingController controller) {
+    return TextFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      controller: controller,
+      style: TextStyle(
+          color: Color.fromARGB(255, 90, 90, 90), fontFamily: "Tajawal"),
+      decoration: InputDecoration(
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 1.0, horizontal: 25),
+        labelText: text,
+        labelStyle: TextStyle(
+            color: Color.fromARGB(255, 26, 96, 91),
+            fontFamily: "Tajawal",
+            fontSize: 20,
+            fontWeight: FontWeight.bold),
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        fillColor: Colors.white.withOpacity(0.3),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Color.fromARGB(188, 26, 96, 91),
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(width: 2, color: Colors.blue),
+        ),
+        errorStyle: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide:
+              BorderSide(width: 3, color: Color.fromARGB(255, 164, 46, 46)),
+        ),
+      ),
+      maxLength: 30,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return "أدخل " + text;
+        }
+      },
+    );
+  }
+
   Widget imageProfile(String logo) {
     return Center(
       child: Stack(children: <Widget>[
         CircleAvatar(
-          radius: 80.0,
-          backgroundImage: logo == null
-              ? AssetImage("assets/images/Circular_Logo.png") as ImageProvider
-              : NetworkImage(logo),
-
-          // _imageFile.path
-          //
-          // ?  as ImageProvider
-          // :
+          backgroundColor: Color.fromARGB(126, 39, 141, 134),
+          radius: 60.0,
+          child: CircleAvatar(
+            radius: 58.0,
+            backgroundImage: logo == null
+                ? AssetImage("assets/images/Circular_Logo.png") as ImageProvider
+                : NetworkImage(logo),
+            //  _imageFile == null
+            //     ? AssetImage("assets/images/Circular_Logo.png") as ImageProvider
+            //     : FileImage(File(_imageFile!.path)),
+          ),
         ),
         Positioned(
-          bottom: 20.0,
-          right: 20.0,
+          bottom: 12.0,
+          right: 15.0,
           child: InkWell(
             onTap: () {
               showModalBottomSheet(
@@ -661,5 +700,118 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
         );
       }
     });
+  }
+
+  //////////////////////////// Shop description Text form ////////////////////////////////
+  TextFormField reusableTextFieldDec(
+      String text, TextEditingController controller) {
+    return TextFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      controller: controller,
+      minLines: text == "وصف المتجر" ? 1 : 1,
+      maxLines: text == "وصف المتجر" ? 9 : 1,
+      maxLength: 160,
+      style: TextStyle(
+          color: Color.fromARGB(255, 90, 90, 90), fontFamily: "Tajawal"),
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.all(12),
+        labelText: text,
+        labelStyle: TextStyle(
+            color: Color.fromARGB(255, 26, 96, 91),
+            fontFamily: "Tajawal",
+            fontSize: 20,
+            fontWeight: FontWeight.bold),
+        fillColor: Colors.white.withOpacity(0.3),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Color.fromARGB(255, 26, 96, 91)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide:
+              BorderSide(width: 2, color: Color.fromARGB(255, 26, 96, 91)),
+        ),
+        errorStyle: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide:
+              BorderSide(width: 2, color: Color.fromARGB(255, 164, 46, 46)),
+        ),
+      ),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return "أدخل " + text;
+        }
+
+        if (value.length < 6) {
+          if (value.length < 6) return "أدخل وصف للمنتج لا يقل عن 6 خانات";
+        }
+
+        return null;
+      },
+    );
+  }
+
+  TextFormField reusableTextFieldCustomer(
+      String text, bool isPasswordType, TextEditingController controller) {
+    return TextFormField(
+      enabled: false,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      controller: controller,
+      obscureText: isPasswordType,
+      enableSuggestions: !isPasswordType,
+      autocorrect: !isPasswordType,
+      keyboardType: isPasswordType
+          ? TextInputType.visiblePassword
+          : TextInputType.emailAddress,
+      style: TextStyle(
+          color: Color.fromARGB(255, 122, 122, 122), fontFamily: "Tajawal"),
+      decoration: InputDecoration(
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 1.0, horizontal: 25),
+        labelText: text,
+        labelStyle: TextStyle(
+            color: Color.fromARGB(255, 122, 122, 122),
+            fontFamily: "Tajawal",
+            fontSize: 20,
+            fontWeight: FontWeight.bold),
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        fillColor: Colors.white.withOpacity(0.3),
+        disabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Color.fromARGB(255, 122, 122, 122),
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(width: 2, color: Colors.blue),
+        ),
+        errorStyle: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide:
+              BorderSide(width: 3, color: Color.fromARGB(255, 164, 46, 46)),
+        ),
+      ),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return "أدخل " + text;
+        }
+        if (!RegExp(r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
+                .hasMatch(value) &&
+            !isPasswordType &&
+            text == 'البريد الإلكتروني') {
+          return 'أدخل بريد إلكتروني صحيح';
+        }
+
+        if (text == "كلمة المرور") {
+          if (value.length < 6) return "ادخل كلمة مرور اكبر من 6 خانات";
+        }
+        // if (text == "اسم المشتري")
+        //   maxLength:
+        //   30;
+      },
+    );
   }
 }

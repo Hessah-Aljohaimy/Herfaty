@@ -10,18 +10,18 @@ import 'package:herfaty/constants/color.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/widgets/ExpandedWidget.dart';
 
-class CustomerProdectDetails extends StatefulWidget {
-  final Product1 product;
+class wishListDetails extends StatefulWidget {
+  final CartAndWishListProduct product;
   String detailsImage;
 
-  CustomerProdectDetails(
+  wishListDetails(
       {super.key, required this.product, required this.detailsImage});
 
   @override
-  State<CustomerProdectDetails> createState() => _CustomerProdectDetailsState();
+  State<wishListDetails> createState() => _wishListDetailsState();
 }
 
-class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
+class _wishListDetailsState extends State<wishListDetails> {
   late int thisPageQuantity;
   late bool isButtonsDisabled;
   @override
@@ -48,7 +48,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
           for (var index = 0; index < querySnapshot.size; index++) {
             var data = querySnapshot.docs.elementAt(index).data() as Map;
             String productId = data["id"];
-            if (productId == widget.product.id) {
+            if (productId == widget.product.productId) {
               int updatedAvailabeAmount = data["avalibleAmount"];
               if (updatedAvailabeAmount != widget.product.availableAmount) {
                 if (mounted) {
@@ -179,7 +179,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                   child: SingleChildScrollView(
                       scrollDirection: Axis.vertical,
                       child: ExpandedWidget(
-                        text: widget.product.description,
+                        text: "widget.product.description",
                       )),
                 ),
                 // const Spacer(),
@@ -336,7 +336,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                                           name: widget.product.name,
                                           detailsImage: widget.detailsImage,
                                           docId: productToBeAdded.id,
-                                          productId: widget.product.id,
+                                          productId: widget.product.productId,
                                           customerId: user.uid,
                                           shopName: widget.product.shopName,
                                           shopOwnerId:
@@ -418,7 +418,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
     print("==================this is get quantity method");
     final cartDoc = await FirebaseFirestore.instance
         .collection('cart')
-        .where("productId", isEqualTo: widget.product.id)
+        .where("productId", isEqualTo: widget.product.productId)
         .where("customerId", isEqualTo: thisCustomerId)
         .get();
     if (cartDoc.size > 0) {
@@ -437,7 +437,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
     print("==================this is get docId method");
     final cartDoc = await FirebaseFirestore.instance
         .collection('cart')
-        .where("productId", isEqualTo: widget.product.id)
+        .where("productId", isEqualTo: widget.product.productId)
         .where("customerId", isEqualTo: thisCustomerId)
         .get();
     if (cartDoc.size > 0) {

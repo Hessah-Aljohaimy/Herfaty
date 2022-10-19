@@ -1,16 +1,16 @@
-class AddProductToCart {
-  String? name;
-  String? detailsImage;
-  String? productId;
-  String? customerId;
-  String? shopOwnerId;
-  String? shopName;
-  String? docId;
-  int? quantity;
-  int? availableAmount;
-  num? price;
+class CartAndWishListProduct {
+  String name = "";
+  String detailsImage = "";
+  String productId = "";
+  String customerId = "";
+  String shopOwnerId = "";
+  String shopName = "";
+  String docId = "";
+  int quantity = 1;
+  int availableAmount = 0;
+  num price = 0;
 
-  AddProductToCart({
+  CartAndWishListProduct({
     required this.name,
     required this.detailsImage,
     required this.productId,
@@ -22,7 +22,7 @@ class AddProductToCart {
     required this.availableAmount,
     required this.price,
   });
-  AddProductToCart.fromJson(Map<String, dynamic> json) {
+  CartAndWishListProduct.fromJson(Map<String, dynamic> json) {
     detailsImage = json['image'];
     customerId = json['customerId'];
     shopOwnerId = json['shopOwnerId'];
