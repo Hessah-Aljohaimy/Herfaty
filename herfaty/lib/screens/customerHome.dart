@@ -59,15 +59,6 @@ class Body extends StatelessWidget {
                     fontSize: 22,
                     fontFamily: "Tajawal"),
               ),
-              profileButton(
-                icon: Icons.favorite_border,
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => CustomerWishList()));
-                },
-              ),
             ],
           ),
         ),
@@ -159,9 +150,19 @@ class AppBar extends StatelessWidget {
       ),
       child: Column(
         children: [
-          SizedBox(
-            height: 25,
+          Align(
+            alignment: Alignment.topLeft,
+            child: profileButton(
+              icon: Icons.favorite_border,
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => CustomerWishList()));
+              },
+            ),
           ),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -11,16 +11,16 @@ class profileButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-        margin: EdgeInsets.only(left: 20),
-        height: 40,
-        width: 40,
+        //margin: EdgeInsets.only(left: 20),
+        height: 35,
+        width: 35,
         decoration: const BoxDecoration(
           shape: BoxShape.circle,
         ),
         child: Icon(
           icon,
-          color: kPrimaryColor,
-          size: 40,
+          color: Color.fromARGB(255, 206, 57, 46),
+          size: 35,
         ),
       ),
       onTap: onPressed,
