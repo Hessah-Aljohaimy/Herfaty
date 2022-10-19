@@ -97,6 +97,7 @@ class logOutButton extends StatelessWidget {
         ),
         ],*/
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text("حسابي",
             style: TextStyle(
