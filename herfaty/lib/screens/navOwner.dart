@@ -96,9 +96,9 @@ class _navOwnerState extends State<navOwner> {
       querySnapshot.docChanges.forEach((change) {
         if (change.type == DocumentChangeType.added) {
           for (var index = 0; index < querySnapshot.size; index++) {
-             final FirebaseAuth auth = FirebaseAuth.instance;
-    final User? user = auth.currentUser;
-    String thisOwnerId = user!.uid;
+            final FirebaseAuth auth = FirebaseAuth.instance;
+            final User? user = auth.currentUser;
+            String thisOwnerId = user!.uid;
             var data = querySnapshot.docs.elementAt(index).data() as Map;
             var notificationStatus = data["notification"];
             var docId = data["docId"];
@@ -143,7 +143,11 @@ class _navOwnerState extends State<navOwner> {
     if (payload != null && payload.isNotEmpty) {
       print('payload: $payload');
       Navigator.push(
-          context, MaterialPageRoute(builder: ((context) => list())));
+          context,
+          MaterialPageRoute(
+              builder: ((context) => list(
+                    selectedPage: 0,
+                  ))));
     }
   }
 }

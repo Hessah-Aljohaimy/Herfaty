@@ -43,7 +43,8 @@ class listOrderCustomer extends StatelessWidget {
                         Size size = MediaQuery.of(context).size;
 
                         cItems.sort((a, b) {
-                          return a.orderDate.compareTo(b.orderDate);
+                          return DateTime.parse(b.orderDate)
+                              .compareTo(DateTime.parse(a.orderDate));
                         });
 
                         if (cItems.isEmpty) {
@@ -69,6 +70,11 @@ class listOrderCustomer extends StatelessWidget {
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     // border: Border.all(color: kPrimaryColor)
+                                    border: Border(
+                                      top: BorderSide(color: Color(0xFFF1F1F1)),
+                                      bottom:
+                                          BorderSide(color: Color(0xFFF1F1F1)),
+                                    ),
                                   ),
                                   child: Column(
                                     children: [
@@ -329,7 +335,8 @@ class listOrderCustomer extends StatelessWidget {
                         Size size = MediaQuery.of(context).size;
 
                         cItems.sort((a, b) {
-                          return b.orderDate.compareTo(a.orderDate);
+                          return DateTime.parse(a.orderDate)
+                              .compareTo(DateTime.parse(b.orderDate));
                         });
 
                         if (cItems.isEmpty) {
@@ -355,6 +362,11 @@ class listOrderCustomer extends StatelessWidget {
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     // border: Border.all(color: kPrimaryColor)
+                                    border: Border(
+                                      top: BorderSide(color: Color(0xFFF1F1F1)),
+                                      bottom:
+                                          BorderSide(color: Color(0xFFF1F1F1)),
+                                    ),
                                   ),
                                   child: Column(
                                     children: [
@@ -615,7 +627,8 @@ class listOrderCustomer extends StatelessWidget {
                         Size size = MediaQuery.of(context).size;
 
                         cItems.sort((a, b) {
-                          return b.orderDate.compareTo(a.orderDate);
+                          return DateTime.parse(b.orderDate)
+                              .compareTo(DateTime.parse(a.orderDate));
                         });
 
                         if (cItems.isEmpty) {
@@ -641,6 +654,11 @@ class listOrderCustomer extends StatelessWidget {
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     // border: Border.all(color: kPrimaryColor)
+                                    border: Border(
+                                      top: BorderSide(color: Color(0xFFF1F1F1)),
+                                      bottom:
+                                          BorderSide(color: Color(0xFFF1F1F1)),
+                                    ),
                                   ),
                                   child: Column(
                                     children: [

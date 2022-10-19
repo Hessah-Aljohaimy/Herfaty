@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:herfaty/ShopOwnerOrder/list.dart';
 import 'package:herfaty/cart/cart.dart';
 
 import '../constants/color.dart';
@@ -91,6 +92,9 @@ class AppBarOD extends StatelessWidget {
     else if (status == "جاهز للتوصيل") {
       newStatus = "المنتج خارج للتوصيل";
       color = Color(0xffE87118);
+    } else if (status == "تم التوصيل") {
+      newStatus = "تم التوصيل";
+      color = Color(0xfFF3CB4B);
     }
 
     return Column(
@@ -219,7 +223,7 @@ class AppBarOD extends StatelessWidget {
   }
 
   Widget Button(newStatus, docID, context1) {
-    if (newStatus != "المنتج خارج للتوصيل") {
+    if (newStatus != "المنتج خارج للتوصيل" && newStatus != "تم التوصيل") {
       return ElevatedButton(
         style: ElevatedButton.styleFrom(
           //primary: Color.fromARGB(255, 81, 144, 142), // background
@@ -236,14 +240,29 @@ class AppBarOD extends StatelessWidget {
                     TextButton(
                       child: Text("تغيير",
                           style: TextStyle(
-                            color: Color.fromARGB(255, 81, 144, 142),
+                            color: Colors.red,
                           )),
                       onPressed: () {
                         FirebaseFirestore.instance
                             .collection('orders')
                             .doc(docID)
                             .update({"status": newStatus});
-                        Navigator.pop(context);
+                        if (newStatus == "جاهز للتوصيل") {
+                          print("-------------------)))))");
+                          Navigator.pop(context);
+                          Navigator.pop(context1);
+                          Navigator.pushReplacement<void, void>(
+                            context1,
+                            MaterialPageRoute<void>(
+                                builder: (BuildContext context) =>
+                                    list(selectedPage: 1)),
+                          );
+                          /*Navigator.push(
+                              context1,
+                              MaterialPageRoute(
+                                  builder: (context) => list(selectedPage: 1)));*/
+                        }
+                        //Navigator.pop(context);
 
                         Fluttertoast.showToast(
                           msg: "تم تغيير حالة الطلب بنجاح",
@@ -254,11 +273,11 @@ class AppBarOD extends StatelessWidget {
                           textColor: Colors.white,
                           fontSize: 18.0,
                         );
-
+/*
                         Timer(const Duration(seconds: 0), () {
                           Navigator.pop(context1);
                         });
-
+*/
                         //Navigator.pop(context);
                       },
                     ),
@@ -364,7 +383,7 @@ class ProductsD extends StatelessWidget {
                 child: ExpansionTile(
                   initiallyExpanded: true,
                   title: Text(
-                    "المُشتريات (${PItems.length})",
+                    "المُنتجات (${PItems.length})",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 15,

@@ -217,7 +217,10 @@ class Services extends StatelessWidget {
                             } else if (cItems[index].name == "طلبات متجري") {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => list()),
+                                MaterialPageRoute(
+                                    builder: (context) => list(
+                                          selectedPage: 0,
+                                        )),
                               );
                             }
                           });
