@@ -860,12 +860,20 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
 //               return Center();
 //            } });
 
+                                          final FirebaseAuth auth =
+                                              FirebaseAuth.instance;
+                                          final User? u = auth.currentUser;
+                                          final uid = u!.uid;
+
                                           FirebaseFirestore.instance
                                               .collection('Products')
                                               .get()
                                               .then((snapshot) {
                                             List<DocumentSnapshot> allDocs =
                                                 snapshot.docs;
+
+                                            print(
+                                                "************ ${allDocs.length}");
                                             List<DocumentSnapshot>
                                                 filteredDocs = allDocs
                                                     .where((document) =>
@@ -873,10 +881,14 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                                             'shopOwnerId'] ==
                                                         uid)
                                                     .toList();
+                                            print("************ ${uid}");
+                                            print("**************");
+                                            print(
+                                                "************ ${filteredDocs.length}");
 
                                             for (DocumentSnapshot ds
                                                 in filteredDocs) {
-                                              print(ds.id);
+                                              print("**********${ds.id}");
                                               FirebaseFirestore.instance
                                                   .collection('Products')
                                                   .doc(ds.id)
