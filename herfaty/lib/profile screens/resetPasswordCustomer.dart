@@ -36,6 +36,7 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
     final uid = user!.uid;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text("إعادة تعيين كلمة المرور",
             style: TextStyle(

@@ -79,6 +79,7 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
           },
         ),*/
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text("تعديل البيانات",
             style: TextStyle(

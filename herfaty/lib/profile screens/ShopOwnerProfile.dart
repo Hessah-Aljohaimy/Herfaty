@@ -95,6 +95,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text("حسابي",
             style: TextStyle(

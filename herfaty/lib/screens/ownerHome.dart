@@ -23,6 +23,7 @@ class _ownerHomeScreenState extends State<ownerHomeScreen> {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Column(
           children: const [
             AppBar(),
