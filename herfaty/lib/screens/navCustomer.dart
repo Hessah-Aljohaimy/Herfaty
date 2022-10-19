@@ -40,7 +40,7 @@ class nav extends StatelessWidget {
     return [
       customerHomeScreen(),
       Cart(),
-      CustomerWishList(),
+      listOrderCustomer(),
       logOutButton(),
     ];
   }
