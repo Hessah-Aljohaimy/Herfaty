@@ -872,8 +872,6 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                             List<DocumentSnapshot> allDocs =
                                                 snapshot.docs;
 
-                                            print(
-                                                "************ ${allDocs.length}");
                                             List<DocumentSnapshot>
                                                 filteredDocs = allDocs
                                                     .where((document) =>
@@ -881,16 +879,35 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                                             'shopOwnerId'] ==
                                                         uid)
                                                     .toList();
-                                            print("************ ${uid}");
-                                            print("**************");
-                                            print(
-                                                "************ ${filteredDocs.length}");
 
                                             for (DocumentSnapshot ds
                                                 in filteredDocs) {
-                                              print("**********${ds.id}");
                                               FirebaseFirestore.instance
                                                   .collection('Products')
+                                                  .doc(ds.id)
+                                                  .delete();
+                                            }
+                                          });
+
+                                          FirebaseFirestore.instance
+                                              .collection('wishList')
+                                              .get()
+                                              .then((snapshot) {
+                                            List<DocumentSnapshot> allDocs =
+                                                snapshot.docs;
+
+                                            List<DocumentSnapshot>
+                                                filteredDocs = allDocs
+                                                    .where((document) =>
+                                                        document[
+                                                            'shopOwnerId'] ==
+                                                        uid)
+                                                    .toList();
+
+                                            for (DocumentSnapshot ds
+                                                in filteredDocs) {
+                                              FirebaseFirestore.instance
+                                                  .collection('wishList')
                                                   .doc(ds.id)
                                                   .delete();
                                             }
