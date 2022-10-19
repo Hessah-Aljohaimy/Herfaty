@@ -150,7 +150,7 @@ class AppBar extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Align(
+          /* Align(
             alignment: Alignment.topLeft,
             child: profileButton(
               icon: Icons.favorite,
@@ -161,7 +161,7 @@ class AppBar extends StatelessWidget {
                         builder: (context) => CustomerWishList()));
               },
             ),
-          ),
+          ),*/
 
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
