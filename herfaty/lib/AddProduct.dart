@@ -413,8 +413,9 @@ class _AddProductState extends State<AddProduct> {
                     validator: (value) {
                       if (value == null || value.isEmpty)
                         return 'أدخل كمية المنتج';
-                      if (int.parse(value) <= 0) return "أدخل رقم أكبر من صفر";
-                      if (int.parse(value) > 15)
+                      if (double.parse(value) <= 0)
+                        return "أدخل رقم أكبر من صفر";
+                      if (double.parse(value) > 15)
                         return "أدخل رقم أصغر من أو يساوي 15";
                       else
                         return null;
