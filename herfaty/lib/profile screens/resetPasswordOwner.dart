@@ -536,9 +536,10 @@ class _ResetPasswordOwnerState extends State<ResetPasswordOwner> {
                         color: Color.fromARGB(188, 26, 96, 91),
                       ),
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(width: 2, color: Colors.blue),
-                    ),
+                     focusedBorder: OutlineInputBorder(
+          borderSide:
+              BorderSide(width: 2, color: Color.fromARGB(188, 26, 96, 91),),
+        ),
                     errorStyle:
                         TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
                     errorBorder: OutlineInputBorder(
@@ -555,6 +556,7 @@ class _ResetPasswordOwnerState extends State<ResetPasswordOwner> {
                         ishiddenpasswordold
                             ? Icons.visibility
                             : Icons.visibility_off,
+                            color: Color.fromARGB(255, 26, 96, 91),
                       ),
                     ),
                   ),
@@ -606,8 +608,9 @@ class _ResetPasswordOwnerState extends State<ResetPasswordOwner> {
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(width: 2, color: Colors.blue),
-                    ),
+          borderSide:
+              BorderSide(width: 2, color: Color.fromARGB(188, 26, 96, 91),),
+        ),
                     errorStyle:
                         TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
                     errorBorder: OutlineInputBorder(
@@ -624,6 +627,7 @@ class _ResetPasswordOwnerState extends State<ResetPasswordOwner> {
                         ishiddenpasswordnew1
                             ? Icons.visibility
                             : Icons.visibility_off,
+                            color: Color.fromARGB(255, 26, 96, 91),
                       ),
                     ),
                   ),
@@ -689,9 +693,10 @@ class _ResetPasswordOwnerState extends State<ResetPasswordOwner> {
                         color: Color.fromARGB(188, 26, 96, 91),
                       ),
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(width: 2, color: Colors.blue),
-                    ),
+                     focusedBorder: OutlineInputBorder(
+          borderSide:
+              BorderSide(width: 2, color: Color.fromARGB(188, 26, 96, 91),),
+        ),
                     errorStyle:
                         TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
                     errorBorder: OutlineInputBorder(
@@ -708,6 +713,7 @@ class _ResetPasswordOwnerState extends State<ResetPasswordOwner> {
                         ishiddenpasswordnew2
                             ? Icons.visibility
                             : Icons.visibility_off,
+                            color: Color.fromARGB(255, 26, 96, 91),
                       ),
                     ),
                   ),
