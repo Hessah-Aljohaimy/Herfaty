@@ -162,6 +162,32 @@ class _CartState extends State<Cart> {
                               reference.snapshots().listen((querySnapshot) {
                                 querySnapshot.docChanges.forEach((change) {
                                   if (change.type ==
+                                      DocumentChangeType.removed) {
+                                    for (var i = 0;
+                                        i < querySnapshot.size;
+                                        i++) {
+                                      var data = querySnapshot.docChanges;
+
+                                      for (var i = 0; i < data.length; i++) {
+                                        var product = data[i].doc.id;
+                                        if (product ==
+                                            cItems[index].productId) {
+                                          print("-----------enter $product");
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                                content: Text(
+                                                    'نعتذر بعض المتاجر قد اغلقت')),
+                                          );
+                                          FirebaseFirestore.instance
+                                              .collection('cart')
+                                              .doc(cItems[index].docId)
+                                              .delete();
+                                        }
+                                      }
+                                    }
+                                  }
+                                  if (change.type ==
                                       DocumentChangeType.modified) {
                                     for (var i = 0;
                                         i < querySnapshot.size;
@@ -606,6 +632,7 @@ Future<void> showDoneToast(BuildContext context) async {
 Future<void> checkAmount(idP, idD, amount, quantity) async {
   var collection = FirebaseFirestore.instance.collection('Products');
   var docSnapshot = await collection.doc(idP).get();
+
   if (docSnapshot.exists) {
     Map<String, dynamic>? data = docSnapshot.data();
     var value = data?['avalibleAmount'];
@@ -636,5 +663,6 @@ Future<void> checkAmount(idP, idD, amount, quantity) async {
       }
     } // <-- The value you want to retrieve.
     //return value;
-  }
+  } else
+    FirebaseFirestore.instance.collection('cart').doc(idD).delete();
 }

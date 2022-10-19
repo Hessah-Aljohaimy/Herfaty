@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:herfaty/constants/color.dart';
 
 class profileButton extends StatelessWidget {
   final IconData icon;
@@ -8,20 +9,21 @@ class profileButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 30,
-      width: 30,
-      decoration: const BoxDecoration(
-        shape: BoxShape.circle,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(1.0),
+    return GestureDetector(
+      child: Container(
+        //margin: EdgeInsets.only(left: 20),
+        height: 35,
+        width: 35,
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+        ),
         child: Icon(
           icon,
-          color: Colors.white,
-          size: 40,
+          color: Color.fromARGB(255, 198, 48, 37),
+          size: 35,
         ),
       ),
+      onTap: onPressed,
     );
   }
 }

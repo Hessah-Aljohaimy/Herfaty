@@ -121,19 +121,26 @@ class _CustomerWishListState extends State<CustomerWishList> {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //AppBar
+
   AppBar productsListAppBar(var context) {
     return AppBar(
-      elevation: 0,
-      backgroundColor: Color.fromARGB(255, 250, 250, 250),
+      title: Text("مفضلاتي",
+          style: TextStyle(color: kPrimaryColor, fontFamily: "Tajawal")),
       centerTitle: true,
-      title: Text(
-        "مفضلاتي",
-        style: TextStyle(
-          fontSize: 20.0,
-          fontWeight: FontWeight.w600,
-          color: kPrimaryColor,
-          fontFamily: "Tajawal",
+      backgroundColor: Colors.white,
+      elevation: 0,
+      automaticallyImplyLeading: false,
+      iconTheme: const IconThemeData(color: kPrimaryColor),
+      leading: IconButton(
+        padding: EdgeInsets.only(right: 20),
+        icon: const Icon(
+          Icons.arrow_back, //سهم العودة
+          color: Color.fromARGB(255, 26, 96, 91),
+          size: 22.0,
         ),
+        onPressed: () {
+          Navigator.pop(context);
+        },
       ),
     );
   }

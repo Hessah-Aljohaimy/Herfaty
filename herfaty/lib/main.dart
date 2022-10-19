@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
           "/signupCustomer": (context) => const SignupCustomer(),
           "/signupHerfay": (context) => const SignupHerafy(),
           "/customer_base_screen": (context) => const customerBaseScreen(),
-          "/driverPage":(context) => driverPage(),
+          "/driverPage": (context) => driverPage(),
         },
       ),
     );

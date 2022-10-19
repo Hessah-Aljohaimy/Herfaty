@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:herfaty/CustomerProducts/wishList/CustomerWishList.dart';
 import 'package:herfaty/cart/cart.dart';
 import 'package:herfaty/constants/color.dart';
+import 'package:herfaty/customerOrder/listOrderCustomer.dart';
 import 'package:herfaty/screens/customerHome.dart';
 import 'package:herfaty/widgets/logOut.dart';
 
@@ -39,7 +40,7 @@ class nav extends StatelessWidget {
     return [
       customerHomeScreen(),
       Cart(),
-      CustomerWishList(),
+      listOrderCustomer(),
       logOutButton(),
     ];
   }
@@ -58,7 +59,7 @@ class nav extends StatelessWidget {
           inactiveColorPrimary: CupertinoColors.systemGrey),
       PersistentBottomNavBarItem(
           icon: const Icon(CupertinoIcons.square_favorites),
-          title: "  المفضلة",
+          title: "  الطلبات",
           activeColorPrimary: kPrimaryColor.withOpacity(0.9),
           inactiveColorPrimary: CupertinoColors.systemGrey),
       PersistentBottomNavBarItem(

@@ -542,8 +542,30 @@ class _AddProductState extends State<AddProduct> {
                           price: priceN,
                           shopOwnerId: thisOwnerId,
                           shopName: shopNameData);
+
                       final json = product.toJson();
                       await productToBeAdded.set(json);
+
+                      //---------------------------- duplicate collection
+
+                      final productToBeAdded1 = FirebaseFirestore.instance
+                          .collection('OrdersProducts')
+                          .doc(productToBeAdded.id);
+                      Product product1 = Product(
+                          id: productToBeAdded.id,
+                          name: prodName,
+                          dsscription: desc,
+                          avalibleAmount: amount,
+                          image: uploadImageUrl,
+                          categoryName: dropdownvalue,
+                          price: priceN,
+                          shopOwnerId: thisOwnerId,
+                          shopName: shopNameData);
+
+                      final json1 = product1.toJson();
+                      await productToBeAdded1.set(json1);
+
+                      //------------------------------------
                       //await Firestore.saveProduct(product);
                       Fluttertoast.showToast(
                         msg: "تمت إضافة المنتج بنجاح",
