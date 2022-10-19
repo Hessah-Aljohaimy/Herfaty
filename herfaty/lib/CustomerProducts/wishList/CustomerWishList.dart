@@ -131,7 +131,7 @@ class _CustomerWishListState extends State<CustomerWishList> {
       elevation: 0,
       automaticallyImplyLeading: false,
       iconTheme: const IconThemeData(color: kPrimaryColor),
-      leading: IconButton(
+      /*leading: IconButton(
         padding: EdgeInsets.only(right: 20),
         icon: const Icon(
           Icons.arrow_back, //سهم العودة
@@ -141,7 +141,7 @@ class _CustomerWishListState extends State<CustomerWishList> {
         onPressed: () {
           Navigator.pop(context);
         },
-      ),
+      ),*/
     );
   }
 }

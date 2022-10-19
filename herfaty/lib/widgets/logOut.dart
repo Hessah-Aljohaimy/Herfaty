@@ -484,6 +484,11 @@ class logOutButton extends StatelessWidget {
                                   child: Text("حذف",
                                       style: TextStyle(color: Colors.red)),
                                   onPressed: () async {
+                                    final FirebaseAuth auth =
+                                        FirebaseAuth.instance;
+                                    final User? u = auth.currentUser;
+                                    final uid = u!.uid;
+
                                     String email = customer.email;
                                     String password = customer.password;
 
@@ -500,8 +505,49 @@ class logOutButton extends StatelessWidget {
 //
 //
 //
-                                    final CartDoc = FirebaseFirestore.instance
-                                        .collection('cart'); //
+                                    FirebaseFirestore.instance
+                                        .collection('cart')
+                                        .get()
+                                        .then((snapshot) {
+                                      List<DocumentSnapshot> allDocs =
+                                          snapshot.docs;
+
+                                      List<DocumentSnapshot> filteredDocs =
+                                          allDocs
+                                              .where((document) =>
+                                                  document['customerId'] == uid)
+                                              .toList();
+
+                                      for (DocumentSnapshot ds
+                                          in filteredDocs) {
+                                        FirebaseFirestore.instance
+                                            .collection('cart')
+                                            .doc(ds.id)
+                                            .delete();
+                                      }
+                                    });
+
+                                    FirebaseFirestore.instance
+                                        .collection('wishList')
+                                        .get()
+                                        .then((snapshot) {
+                                      List<DocumentSnapshot> allDocs =
+                                          snapshot.docs;
+
+                                      List<DocumentSnapshot> filteredDocs =
+                                          allDocs
+                                              .where((document) =>
+                                                  document['customerId'] == uid)
+                                              .toList();
+
+                                      for (DocumentSnapshot ds
+                                          in filteredDocs) {
+                                        FirebaseFirestore.instance
+                                            .collection('wishList')
+                                            .doc(ds.id)
+                                            .delete();
+                                      }
+                                    });
 
                                     // for (var doc in )
 //ing an account

@@ -163,6 +163,10 @@ class AppBar extends StatelessWidget {
             ),
           ),*/
 
+          const SizedBox(
+            height: 20,
+          ),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,

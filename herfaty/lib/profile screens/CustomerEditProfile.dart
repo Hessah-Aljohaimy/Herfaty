@@ -273,7 +273,7 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
 
                             showDialog(
                               context: context,
-                              builder: (BuildContext context) {
+                              builder: (BuildContext context1) {
                                 return AlertDialog(
                                   title: Text("تنبيه"),
                                   content: Text('سيتم إلغاء التعديلات'),
@@ -283,12 +283,14 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
                                           style: TextStyle(color: Colors.red)),
                                       onPressed: () {
                                         //The logic of cancle edits
-                                        Navigator.push(
+                                        Navigator.of(context1).pop();
+                                        Navigator.of(context).pop();
+                                        /* Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
                                                   logOutButton()),
-                                        );
+                                        );*/
                                         // _nameTextEditingController
                                         //   ..text = widget.name;
                                         // Navigator.of(context).pop();
@@ -308,7 +310,7 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
                                         _nameTextEditingController
                                           ..text = Oldname;
 
-                                        Navigator.of(context).pop();
+                                        Navigator.of(context1).pop();
                                       },
                                     ),
                                   ],

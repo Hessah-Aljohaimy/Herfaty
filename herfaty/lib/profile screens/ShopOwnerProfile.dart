@@ -1095,7 +1095,8 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 sh = ShopOwner.fromJson(docShopOwner.data()!);
                               }
                               if (sh!.password == _checkPasslController.text) {
-                                Navigator.of(context).push(MaterialPageRoute(
+                                Navigator.of(context).pop();
+                                Navigator.of(context1).push(MaterialPageRoute(
                                     builder: (BuildContext context) =>
                                         OwnerSettings()));
                               } else {
