@@ -568,16 +568,19 @@ class list extends StatelessWidget {
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: TextStyle(
-                                                          color:
-                                                              Color(0xfFF3CB4B),
+                                                          color: Color.fromARGB(
+                                                              255,
+                                                              48,
+                                                              137,
+                                                              162),
                                                           fontSize: 17.0,
                                                           fontFamily:
                                                               "Tajawal")),
                                                   Text(
                                                     "تاريخ الطلب : ${cItems[index].orderDate} ",
                                                     style: TextStyle(
-                                                        color:
-                                                            Color(0xfFF3CB4B),
+                                                        color: Color.fromARGB(
+                                                            255, 48, 137, 162),
                                                         fontSize: 17.0,
                                                         fontFamily: "Tajawal"),
                                                   ),
@@ -596,8 +599,11 @@ class list extends StatelessWidget {
                                           children: [
                                             ElevatedButton(
                                               style: ElevatedButton.styleFrom(
-                                                  primary: Color(
-                                                      0xfFF3CB4B) // background
+                                                  primary: Color.fromARGB(
+                                                      255,
+                                                      48,
+                                                      137,
+                                                      162) // background
                                                   ),
                                               onPressed: () {
                                                 Navigator.push(

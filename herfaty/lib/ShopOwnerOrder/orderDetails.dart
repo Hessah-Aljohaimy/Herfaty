@@ -94,7 +94,7 @@ class AppBarOD extends StatelessWidget {
       color = Color(0xffE87118);
     } else if (status == "تم التوصيل") {
       newStatus = "تم التوصيل";
-      color = Color(0xfFF3CB4B);
+      color = Color.fromARGB(255, 48, 137, 162);
     } else if (status == "خارج للتوصيل") {
       newStatus = "خارج للتوصيل";
       color = Color(0xffF06676);

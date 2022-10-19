@@ -86,7 +86,7 @@ class AppBarOD extends StatelessWidget {
   Widget build(BuildContext context) {
     Color color = Color(0xff4C8F2F);
     if (status == "تم التوصيل")
-      color = Color(0xfFF3CB4B);
+      color = Color.fromARGB(255, 48, 137, 162);
     else if (status == "خارج للتوصيل") {
       color = Color(0xffF06676);
     }

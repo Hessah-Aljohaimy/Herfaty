@@ -160,7 +160,8 @@ class listOrderCustomer extends StatelessWidget {
                                                         border: Border(
                                                       top: BorderSide(
                                                           width: 1.0,
-                                                          color: kPrimaryColor),
+                                                          color: Color(
+                                                              0xff4C8F2F)),
                                                       /*bottom: BorderSide(
                                                           width: 1.0,
                                                           color: Color.fromARGB(
@@ -454,7 +455,8 @@ class listOrderCustomer extends StatelessWidget {
                                                         border: Border(
                                                       top: BorderSide(
                                                           width: 1.0,
-                                                          color: kPrimaryColor),
+                                                          color: Color(
+                                                              0xffF06676)),
                                                       /*bottom: BorderSide(
                                                           width: 1.0,
                                                           color: Color.fromARGB(
@@ -683,8 +685,11 @@ class listOrderCustomer extends StatelessWidget {
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: TextStyle(
-                                                          color:
-                                                              Color(0xfFF3CB4B),
+                                                          color: Color.fromARGB(
+                                                              255,
+                                                              48,
+                                                              137,
+                                                              162),
                                                           fontSize: 17.0,
                                                           fontFamily:
                                                               "Tajawal")),
@@ -692,8 +697,8 @@ class listOrderCustomer extends StatelessWidget {
                                                     "تاريخ الطلب : ${cItems[index].orderDate} ",
                                                     style: TextStyle(
                                                         fontSize: 17.0,
-                                                        color:
-                                                            Color(0xfFF3CB4B),
+                                                        color: Color.fromARGB(
+                                                            255, 48, 137, 162),
                                                         fontFamily: "Tajawal"),
                                                   ),
                                                 ],
@@ -748,7 +753,11 @@ class listOrderCustomer extends StatelessWidget {
                                                         border: Border(
                                                       top: BorderSide(
                                                           width: 1.0,
-                                                          color: kPrimaryColor),
+                                                          color: Color.fromARGB(
+                                                              255,
+                                                              48,
+                                                              137,
+                                                              162)),
                                                       /*bottom: BorderSide(
                                                           width: 1.0,
                                                           color: Color.fromARGB(
@@ -859,8 +868,11 @@ class listOrderCustomer extends StatelessWidget {
                                           children: [
                                             ElevatedButton(
                                               style: ElevatedButton.styleFrom(
-                                                  primary: Color(
-                                                      0xfFF3CB4B) // background
+                                                  primary: Color.fromARGB(
+                                                      255,
+                                                      48,
+                                                      137,
+                                                      162) // background
                                                   ),
                                               onPressed: () {
                                                 Navigator.push(

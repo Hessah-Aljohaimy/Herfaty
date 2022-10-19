@@ -8,6 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../CustomerProducts/CustomerProductsList.dart';
+import '../CustomerProducts/wishList/CustomerWishList.dart';
 
 class customerHomeScreen extends StatefulWidget {
   const customerHomeScreen({Key? key}) : super(key: key);
@@ -57,6 +58,15 @@ class Body extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontSize: 22,
                     fontFamily: "Tajawal"),
+              ),
+              profileButton(
+                icon: Icons.favorite_border,
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => CustomerWishList()));
+                },
               ),
             ],
           ),
@@ -164,12 +174,6 @@ class AppBar extends StatelessWidget {
                     fontSize: 25,
                     fontFamily: "Tajawal"),
               ),
-
-              //profile icon
-              /*
-                icon: Icons.account_circle_sharp,
-                onPressed: () {},
-              */
             ],
           ),
 
