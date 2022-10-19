@@ -906,6 +906,30 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                           });
 
                                           FirebaseFirestore.instance
+                                              .collection('cart')
+                                              .get()
+                                              .then((snapshot) {
+                                            List<DocumentSnapshot> allDocs =
+                                                snapshot.docs;
+
+                                            List<DocumentSnapshot>
+                                                filteredDocs = allDocs
+                                                    .where((document) =>
+                                                        document[
+                                                            'shopOwnerId'] ==
+                                                        uid)
+                                                    .toList();
+
+                                            for (DocumentSnapshot ds
+                                                in filteredDocs) {
+                                              FirebaseFirestore.instance
+                                                  .collection('cart')
+                                                  .doc(ds.id)
+                                                  .delete();
+                                            }
+                                          });
+
+                                          FirebaseFirestore.instance
                                               .collection('wishList')
                                               .get()
                                               .then((snapshot) {
