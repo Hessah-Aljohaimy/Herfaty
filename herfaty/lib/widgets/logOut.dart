@@ -484,6 +484,18 @@ class logOutButton extends StatelessWidget {
                                   child: Text("حذف",
                                       style: TextStyle(color: Colors.red)),
                                   onPressed: () async {
+                                    String email = customer.email;
+                                    String password = customer.password;
+
+// Create a credential
+                                    AuthCredential credential =
+                                        EmailAuthProvider.credential(
+                                            email: email, password: password);
+
+// Reauthenticate
+                                    await FirebaseAuth.instance.currentUser!
+                                        .reauthenticateWithCredential(
+                                            credential);
 //The logic of delet
 //
 //

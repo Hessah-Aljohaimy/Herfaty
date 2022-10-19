@@ -866,6 +866,20 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                               FirebaseAuth.instance;
                                           final User? u = auth.currentUser;
                                           final uid = u!.uid;
+                                          String email = shopowner.email;
+                                          String password = shopowner.password;
+
+// Create a credential
+                                          AuthCredential credential =
+                                              EmailAuthProvider.credential(
+                                                  email: email,
+                                                  password: password);
+
+// Reauthenticate
+                                          await FirebaseAuth
+                                              .instance.currentUser!
+                                              .reauthenticateWithCredential(
+                                                  credential);
 
                                           FirebaseFirestore.instance
                                               .collection('Products')

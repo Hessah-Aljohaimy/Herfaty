@@ -750,6 +750,16 @@ class _ResetPasswordOwnerState extends State<ResetPasswordOwner> {
                     //     .collection('customers')
                     //     .doc(uid);
 
+                    String email = shopowner.email;
+                    String password = shopowner.password;
+
+// Create a credential
+                    AuthCredential credential = EmailAuthProvider.credential(
+                        email: email, password: password);
+
+// Reauthenticate
+                    await FirebaseAuth.instance.currentUser!
+                        .reauthenticateWithCredential(credential);
                     FirebaseAuth.instance.currentUser
                         ?.updatePassword(_newPasswordTextController1.text);
                     docShopOwner.update({
