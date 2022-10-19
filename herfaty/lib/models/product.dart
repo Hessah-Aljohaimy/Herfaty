@@ -7,7 +7,7 @@ class Product {
   String? categoryName;
   String? image;
   String? shopOwnerId;
-  int? avalibleAmount;
+  double? avalibleAmount;
   double? price;
   String? shopName;
 
@@ -20,8 +20,7 @@ class Product {
       this.avalibleAmount,
       this.price,
       this.shopOwnerId,
-      this.shopName
-      });
+      this.shopName});
   Map<String, dynamic> toMap(String id) {
     return {
       'id': id,
@@ -31,7 +30,7 @@ class Product {
       'image': image,
       'avalibleAmount': avalibleAmount,
       'price': price,
-      'shopName':shopName,
+      'shopName': shopName,
     };
   }
 
@@ -45,7 +44,7 @@ class Product {
     data['avalibleAmount'] = avalibleAmount;
     data['categoryName'] = categoryName;
     data['shopOwnerId'] = shopOwnerId;
-    data['shopName']=shopName;
+    data['shopName'] = shopName;
     return data;
   }
 }

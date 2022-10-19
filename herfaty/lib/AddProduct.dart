@@ -513,7 +513,7 @@ class _AddProductState extends State<AddProduct> {
                         dropdownvalue != '  اختر الفئة:') {
                       String prodName = nameController.text;
                       String desc = descController.text;
-                      int amount = int.parse(amountController.text);
+                      double amount = double.parse(amountController.text);
                       double priceN = double.parse(priceController.text);
 
                       /*
