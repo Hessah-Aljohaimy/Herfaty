@@ -6,7 +6,7 @@ import 'package:herfaty/pages/splash.dart';
 import 'package:herfaty/pages/welcome.dart';
 import 'package:herfaty/pages/forget_password.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:herfaty/profile%20screens/CustomerProfile.dart';
+//import 'package:herfaty/profile%20screens/CustomerProfile.dart';
 import 'package:herfaty/profile%20screens/ShopOwnerProfile.dart';
 import 'package:herfaty/screens/navCustomer.dart';
 import 'package:herfaty/screens/navOwner.dart';
