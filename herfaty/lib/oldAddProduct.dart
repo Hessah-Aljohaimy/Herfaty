@@ -510,7 +510,7 @@ class _AddProductState extends State<AddProduct> {
                         id: productToBeAdded.id,
                         name: prodName,
                         dsscription: desc,
-                        avalibleAmount: amount,
+                        avalibleAmount: amount.toInt(),
                         image: uploadImageUrl,
                         categoryName: dropdownvalue,
                         price: priceN,

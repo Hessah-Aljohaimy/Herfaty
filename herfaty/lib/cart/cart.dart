@@ -173,12 +173,6 @@ class _CartState extends State<Cart> {
                                         if (product ==
                                             cItems[index].productId) {
                                           print("-----------enter $product");
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            const SnackBar(
-                                                content: Text(
-                                                    'نعتذر بعض المتاجر قد اغلقت')),
-                                          );
                                           FirebaseFirestore.instance
                                               .collection('cart')
                                               .doc(cItems[index].docId)
@@ -663,6 +657,6 @@ Future<void> checkAmount(idP, idD, amount, quantity) async {
       }
     } // <-- The value you want to retrieve.
     //return value;
-  } else
-    FirebaseFirestore.instance.collection('cart').doc(idD).delete();
+  } // else
+  //FirebaseFirestore.instance.collection('cart').doc(idD).delete();
 }
