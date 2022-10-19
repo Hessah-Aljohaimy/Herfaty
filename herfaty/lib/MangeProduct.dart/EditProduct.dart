@@ -569,7 +569,7 @@ class _EditProduc extends State<EditProduct> {
                         uploadImageUrl != "") {
                       String prodName = nameController.text;
                       String desc = descController.text;
-                      double amount = double.parse(amountController.text);
+                      int amount = int.parse(amountController.text);
                       double price = double.parse(priceController.text);
 
                       /*
