@@ -527,7 +527,7 @@ class _EditProduc extends State<EditProduct> {
                       String prodName = nameController.text;
                       String desc = descController.text;
                       int amount = int.parse(amountController.text);
-                      double priceN = double.parse(priceController.text);
+                      double price = double.parse(priceController.text);
 
                       /*
 
@@ -561,13 +561,13 @@ class _EditProduc extends State<EditProduct> {
                           .collection('Products')
                           .doc(widget.id);
                       ownerProduct.update({
-                        'avalibleAmount': amountController.text,
+                        'avalibleAmount': amount,
                         'categoryName': dropdownvalue,
                         'dsscription': descController.text,
                         'id': widget.id,
                         'image': uploadImageUrl,
                         'name': nameController.text,
-                        'price': priceController.text,
+                        'price': price,
                         'shopName': shopNameData,
                         'shopOwnerId': thisOwnerId
                       });
