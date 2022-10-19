@@ -52,7 +52,7 @@ class list extends StatelessWidget {
 
     return DefaultTabController(
       initialIndex: selectedPage,
-      length: 3,
+      length: 4,
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: DefaultAppBar(title: "طلبات متجري"),
@@ -126,7 +126,7 @@ class list extends StatelessWidget {
                                                 children: [
                                                   Text(
                                                       //cItems[index].customerId,
-                                                      "طلب رقم ${cItems[index].docId}",
+                                                      "رقم الطلب : ${cItems[index].docId}",
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: TextStyle(
@@ -270,7 +270,151 @@ class list extends StatelessWidget {
                                                 children: [
                                                   Text(
                                                       //cItems[index].customerId,
-                                                      "طلب رقم ${cItems[index].docId}",
+                                                      "رقم الطلب : ${cItems[index].docId}",
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: TextStyle(
+                                                          color: kPrimaryColor,
+                                                          fontSize: 17.0,
+                                                          fontFamily:
+                                                              "Tajawal")),
+                                                  Text(
+                                                    "تاريخ الطلب :${cItems[index].orderDate} ",
+                                                    style: TextStyle(
+                                                        color: kPrimaryColor,
+                                                        fontSize: 17.0,
+                                                        fontFamily: "Tajawal"),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 10),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                primary: Color.fromARGB(255, 81,
+                                                    144, 142), // background
+                                              ),
+                                              onPressed: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          orderDetails(
+                                                            date: cItems[index]
+                                                                .orderDate,
+                                                            totalOrder:
+                                                                cItems[index]
+                                                                    .total,
+                                                            docID: cItems[index]
+                                                                .docId,
+                                                            products:
+                                                                cItems[index]
+                                                                    .products,
+                                                            status:
+                                                                cItems[index]
+                                                                    .status,
+                                                          )),
+                                                );
+                                                //go to order deatils page
+                                              },
+                                              child: Text(
+                                                "تفاصيل الطلب",
+                                                style: TextStyle(
+                                                  fontFamily: "Tajawal",
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              });
+                        }
+                      } else {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                    }),
+              ),
+            ),
+            SingleChildScrollView(
+              child: Container(
+                height: 630,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage('assets/images/cartBack1.png'),
+                        fit: BoxFit.cover)),
+                child: StreamBuilder<List<OrderModel>>(
+                    stream: readPrpducts4(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        return Text("somting wrong \n ${snapshot.error}");
+                      } else if (!snapshot.hasData) {
+                        return Text("");
+                      } else if (snapshot.hasData) {
+                        final cItems = snapshot.data!.toList();
+                        Size size = MediaQuery.of(context).size;
+
+                        cItems.sort((a, b) {
+                          return DateTime.parse(b.orderDate)
+                              .compareTo(DateTime.parse(a.orderDate));
+                        });
+
+                        if (cItems.isEmpty) {
+                          return const Center(
+                            child: Text(
+                              'لا يوجد طلبات خارجة للتوصيل',
+                              style: TextStyle(
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.w600,
+                                fontFamily: "Tajawal",
+                                color: Colors.grey,
+                              ),
+                            ),
+                          );
+                        } else {
+                          return ListView.builder(
+                              itemCount: cItems.length,
+                              itemBuilder: (context, index) {
+                                return Container(
+                                  margin: EdgeInsets.only(top: 8.0, bottom: 10),
+                                  padding: EdgeInsets.only(
+                                      top: 8.0, bottom: 8.0, right: 8.0),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    // border: Border.all(color: kPrimaryColor)
+                                    border: Border(
+                                      top: BorderSide(color: Color(0xFFF1F1F1)),
+                                      bottom:
+                                          BorderSide(color: Color(0xFFF1F1F1)),
+                                    ),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 8.0),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                      //cItems[index].customerId,
+                                                      "رقم الطلب : ${cItems[index].docId}",
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: TextStyle(
@@ -414,7 +558,7 @@ class list extends StatelessWidget {
                                                 children: [
                                                   Text(
                                                       //cItems[index].customerId,
-                                                      "طلب رقم ${cItems[index].docId}",
+                                                      "رقم الطلب : ${cItems[index].docId}",
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: TextStyle(
@@ -423,7 +567,7 @@ class list extends StatelessWidget {
                                                           fontFamily:
                                                               "Tajawal")),
                                                   Text(
-                                                    "تاريخ الطلب :${cItems[index].orderDate} ",
+                                                    "تاريخ الطلب : ${cItems[index].orderDate} ",
                                                     style: TextStyle(
                                                         color: kPrimaryColor,
                                                         fontSize: 17.0,
@@ -609,6 +753,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       iconTheme: IconThemeData(color: Color(0xff51908E)),
       bottom: const TabBar(
+        labelPadding: EdgeInsets.only(left: 2),
         indicatorColor: Color(0xff51908E),
         labelColor: Color(0xff51908E),
         tabs: <Widget>[
@@ -617,6 +762,9 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           Tab(
             text: "جاهز للتوصيل",
+          ),
+          Tab(
+            text: "خارج للتوصيل",
           ),
           Tab(
             text: "تم التوصيل",
@@ -684,6 +832,29 @@ Stream<List<OrderModel>> readPrpducts3() {
         .collection('orders')
         .where("shopOwnerId", isEqualTo: uid)
         .where("status", isEqualTo: "تم التوصيل")
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => OrderModel.fromJson(doc.data()))
+            .toList());
+  } catch (e) {
+    return FirebaseFirestore.instance.collection('orders').snapshots().map(
+        (snapshot) => snapshot.docs
+            .map((doc) => OrderModel.fromJson(doc.data()))
+            .toList());
+  }
+}
+
+Stream<List<OrderModel>> readPrpducts4() {
+  // final uid = user.getIdToken();
+  final user;
+  user = FirebaseAuth.instance.currentUser;
+  try {
+    final uid = user.uid;
+
+    return FirebaseFirestore.instance
+        .collection('orders')
+        .where("shopOwnerId", isEqualTo: uid)
+        .where("status", isEqualTo: "خارج للتوصيل")
         .snapshots()
         .map((snapshot) => snapshot.docs
             .map((doc) => OrderModel.fromJson(doc.data()))

@@ -95,6 +95,9 @@ class AppBarOD extends StatelessWidget {
     } else if (status == "تم التوصيل") {
       newStatus = "تم التوصيل";
       color = Color(0xfFF3CB4B);
+    } else if (status == "خارج للتوصيل") {
+      newStatus = "خارج للتوصيل";
+      color = Color(0xffF06676);
     }
 
     return Column(
@@ -223,7 +226,9 @@ class AppBarOD extends StatelessWidget {
   }
 
   Widget Button(newStatus, docID, context1) {
-    if (newStatus != "المنتج خارج للتوصيل" && newStatus != "تم التوصيل") {
+    if (newStatus != "المنتج خارج للتوصيل" &&
+        newStatus != "تم التوصيل" &&
+        newStatus != "خارج للتوصيل") {
       return ElevatedButton(
         style: ElevatedButton.styleFrom(
           //primary: Color.fromARGB(255, 81, 144, 142), // background
