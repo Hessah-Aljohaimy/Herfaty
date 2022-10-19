@@ -610,10 +610,10 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
     }
   }
 
-  void showAlertDialog(BuildContext context, ShopOwner shopowner) {
+  void showAlertDialog(BuildContext context1, ShopOwner shopowner) {
     TextEditingController _checkPasslController = new TextEditingController();
     showDialog(
-      context: context,
+      context: context1,
       builder: (BuildContext context) {
         return Dialog(
             shape:
@@ -685,8 +685,9 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
 //check if it was correct
                             if (shopowner.password ==
                                 _checkPasslController.text) {
+                              Navigator.of(context).pop();
                               Navigator.push(
-                                context,
+                                context1,
                                 MaterialPageRoute(
                                     builder: (context) => ShopOwnerEditProfile(
                                         shopowner.name,
@@ -831,32 +832,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                               color: Colors.red, fontSize: 20),
                                         ),
                                         onPressed: () async {
-
-
-
-
-//All the logics for deleting a profile for shop owner 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//All the logics for deleting a profile for shop owner
 
                                           var user = await _getFirebaseUser();
 

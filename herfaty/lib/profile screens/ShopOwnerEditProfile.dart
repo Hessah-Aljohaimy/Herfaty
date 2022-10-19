@@ -422,7 +422,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
 
                         showDialog(
                           context: context,
-                          builder: (BuildContext context) {
+                          builder: (BuildContext context1) {
                             return AlertDialog(
                               title: Text("تنبيه"),
                               content: Text('سيتم إلغاء التعديلات'),
@@ -431,12 +431,8 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                                   child: Text("إلغاء",
                                       style: TextStyle(color: Colors.red)),
                                   onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ShopOwnerProfile()),
-                                    );
+                                    Navigator.of(context1).pop();
+                                    Navigator.of(context).pop();
                                     //The logic of cancle edits
                                     // imageProfile(widget.logo);
                                     // _nameTextEditingController
@@ -460,7 +456,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                                 TextButton(
                                   child: Text("تراجع"),
                                   onPressed: () {
-                                    Navigator.of(context).pop();
+                                    Navigator.of(context1).pop();
                                   },
                                 )
                               ],
