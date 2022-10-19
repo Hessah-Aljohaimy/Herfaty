@@ -146,8 +146,9 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => OwnerSettings()));
+              showAlertDialogSettengs(context);
+              // Navigator.of(context).push(MaterialPageRoute(
+              //     builder: (BuildContext context) => OwnerSettings()));
             },
             icon: Icon(CupertinoIcons.settings,
                 color: Color.fromARGB(255, 81, 144, 142)),
@@ -959,6 +960,115 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                               );
                               // Navigator.of(context).pop();
                             }
+                          },
+                        ),
+                        TextButton(
+                          child: Text("إلغاء",
+                              style:
+                                  TextStyle(color: Colors.red, fontSize: 16)),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    )
+                  ],
+                )));
+      },
+
+      // return CustomAlertDialog(
+      //       content: Container(
+      //         width: MediaQuery.of(context).size.width / 1.3,
+      //         height: MediaQuery.of(context).size.height / 2.5,
+      //         decoration: new BoxDecoration(
+      //           shape: BoxShape.rectangle,
+      //           color: const Color(0xFFFFFF),
+      //           borderRadius: new BorderRadius.all(new Radius.circular(32.0)),
+      //         ),
+      //         child: //Contents here
+      //       ),
+      //     );
+    );
+  }
+
+  void showAlertDialogSettengs(BuildContext context1) {
+    TextEditingController _checkPasslController = new TextEditingController();
+
+    showDialog(
+      context: context1,
+      builder: (BuildContext context) {
+        return Dialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            child: Container(
+                height: 220,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    // final checkPasslField = TextFormField(
+
+                    Center(
+                      child: Text(
+                        "إمكانية الوصول",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: Color.fromARGB(255, 26, 96, 91),
+                          fontFamily: "Tajawal",
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: Container(
+                        width: 160,
+                        height: 70,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                          image: AssetImage('assets/images/momPassword.png'),
+                        )),
+                      ),
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: TextFormField(
+                        controller: _checkPasslController,
+                        obscureText: ishiddenpasswordedit,
+                        keyboardType: TextInputType.visiblePassword,
+                        enableSuggestions: false,
+                        autocorrect: false,
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                        decoration: InputDecoration(
+                          // suffixIcon: InkWell(
+                          //   onTap: _togglePasswordViewedit,
+                          //   child: Icon(
+                          //     ishiddenpasswordedit
+                          //         ? Icons.visibility
+                          //         : Icons.visibility_off,
+                          //   ),
+                          // ),
+                          labelText: 'أدخل كلمة المرور للدخول للإعدادات',
+                          labelStyle: TextStyle(
+                            color: Color.fromARGB(255, 90, 90, 90),
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                          child: Text("تحقق", style: TextStyle(fontSize: 16)),
+                          onPressed: () {
+//check if it was correct
+
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    OwnerSettings()));
                           },
                         ),
                         TextButton(
