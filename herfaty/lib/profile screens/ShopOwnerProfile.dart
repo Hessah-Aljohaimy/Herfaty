@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/AddProduct.dart';
 import 'package:herfaty/constants/color.dart';
+import 'package:herfaty/main.dart';
+import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/pages/login.dart';
 import 'package:herfaty/pages/signupHerafy.dart';
 import 'package:herfaty/profile%20screens/ShopOwnerEditProfile.dart';
@@ -31,6 +34,9 @@ class ShopOwnerProfile extends StatefulWidget {
 }
 
 class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
+  bool ishiddenpasswordedit = true;
+  bool ishiddenpassworddelete = true;
+
   final FirebaseAuth auth = FirebaseAuth.instance;
   User? user;
   var uid;
@@ -99,50 +105,51 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
         backgroundColor: Colors.white,
         shadowColor: Color.fromARGB(255, 39, 141, 134),
         elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.logout, color: Color.fromARGB(255, 81, 144, 142)),
-          onPressed: () async {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: Text("تنبيه"),
-                    content: Text('سيتم تسجيل خروجك من الحساب'),
-                    actions: <Widget>[
-                      TextButton(
-                        child: Text("تسجيل خروج",
-                            style: TextStyle(color: Colors.red)),
-                        onPressed: () {
-                          //Navigator.of(context).pop();
-                          // FirebaseAuth.instance.signOut();
-                          // Navigator.of(context).pushNamedAndRemoveUntil(
-                          //     "/login", (Route<dynamic> route) => false);
-                          Navigator.of(context, rootNavigator: true)
-                              .pushReplacement(MaterialPageRoute(
-                                  builder: (context) => new login()));
-                        },
-                      ),
-                      TextButton(
-                        child: Text("تراجع"),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      )
-                    ],
-                  );
-                });
+        // leading: IconButton(
+        //   icon: Icon(Icons.logout, color: Color.fromARGB(255, 81, 144, 142)),
+        //   onPressed: () async {
+        //     showDialog(
+        //         context: context,
+        //         builder: (BuildContext context) {
+        //           return AlertDialog(
+        //             title: Text("تنبيه"),
+        //             content: Text('سيتم تسجيل خروجك من الحساب'),
+        //             actions: <Widget>[
+        //               TextButton(
+        //                 child: Text("تسجيل خروج",
+        //                     style: TextStyle(color: Colors.red)),
+        //                 onPressed: () {
+        //                   //Navigator.of(context).pop();
+        //                   // FirebaseAuth.instance.signOut();
+        //                   // Navigator.of(context).pushNamedAndRemoveUntil(
+        //                   //     "/login", (Route<dynamic> route) => false);
+        //                   Navigator.of(context, rootNavigator: true)
+        //                       .pushReplacement(MaterialPageRoute(
+        //                           builder: (context) => new login()));
+        //                 },
+        //               ),
+        //               TextButton(
+        //                 child: Text("تراجع"),
+        //                 onPressed: () {
+        //                   Navigator.of(context).pop();
+        //                 },
+        //               )
+        //             ],
+        //           );
+        //         });
 
-            /*Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (BuildContext context) {
-              return Welcome();
-            }));*/
-          },
-        ),
+        //     /*Navigator.pushReplacement(context,
+        //             MaterialPageRoute(builder: (BuildContext context) {
+        //       return Welcome();
+        //     }));*/
+        //   },
+        // ),
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => OwnerSettings()));
+              showAlertDialogSettengs(context);
+              // Navigator.of(context).push(MaterialPageRoute(
+              //     builder: (BuildContext context) => OwnerSettings()));
             },
             icon: Icon(CupertinoIcons.settings,
                 color: Color.fromARGB(255, 81, 144, 142)),
@@ -460,7 +467,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                       child: Center(
                         child: Row(children: [
                           SizedBox(
-                            width: 20,
+                            width: 14,
                           ),
                           ElevatedButton(
                             onPressed: () {
@@ -501,7 +508,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                             ),
                           ),
                           SizedBox(
-                            width: 10,
+                            width: 8,
                           ),
                           ElevatedButton(
                             onPressed: () async {
@@ -568,6 +575,9 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
+                          SizedBox(
+                            width: 2,
+                          )
                         ]),
                       ),
                     ),
@@ -603,10 +613,10 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
     }
   }
 
-  void showAlertDialog(BuildContext context, ShopOwner shopowner) {
+  void showAlertDialog(BuildContext context1, ShopOwner shopowner) {
     TextEditingController _checkPasslController = new TextEditingController();
     showDialog(
-      context: context,
+      context: context1,
       builder: (BuildContext context) {
         return Dialog(
             shape:
@@ -641,44 +651,82 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                       ),
                     ),
 
-                    TextField(
-                      controller: _checkPasslController,
-                      obscureText: true,
-                      keyboardType: TextInputType.visiblePassword,
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
-                      decoration: InputDecoration(
-                        labelText: 'أدخل كلمة المرور لتعديل الحساب',
-                        labelStyle: TextStyle(
-                          color: Color.fromARGB(255, 90, 90, 90),
-                          fontSize: 15,
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: TextFormField(
+                        controller: _checkPasslController,
+                        obscureText: ishiddenpasswordedit,
+                        keyboardType: TextInputType.visiblePassword,
+                        enableSuggestions: false,
+                        autocorrect: false,
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                        decoration: InputDecoration(
+                          // suffixIcon: InkWell(
+                          //   onTap: _togglePasswordViewedit,
+                          //   child: Icon(
+                          //     ishiddenpasswordedit
+                          //         ? Icons.visibility
+                          //         : Icons.visibility_off,
+                          //   ),
+                          // ),
+                          labelText: 'أدخل كلمة المرور لتعديل الحساب',
+                          labelStyle: TextStyle(
+                            color: Color.fromARGB(255, 90, 90, 90),
+                            fontSize: 15,
+                          ),
                         ),
                       ),
                     ),
-                    TextButton(
-                      child: Text("تحقق"),
-                      onPressed: () {
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                          child: Text("تحقق", style: TextStyle(fontSize: 16)),
+                          onPressed: () {
 //check if it was correct
-                        if (shopowner.password == _checkPasslController.text) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ShopOwnerEditProfile(
-                                    shopowner.name,
-                                    shopowner.email,
-                                    shopowner.password,
-                                    shopowner.DOB,
-                                    shopowner.phone_number,
-                                    shopowner.shopname,
-                                    shopowner.shopdescription,
-                                    shopowner.id,
-                                    shopowner.logo)),
-                          );
-                        } else {
-                          Navigator.of(context).pop();
-                        }
-                      },
+                            if (shopowner.password ==
+                                _checkPasslController.text) {
+                              Navigator.of(context).pop();
+                              Navigator.push(
+                                context1,
+                                MaterialPageRoute(
+                                    builder: (context) => ShopOwnerEditProfile(
+                                        shopowner.name,
+                                        shopowner.email,
+                                        shopowner.password,
+                                        shopowner.DOB,
+                                        shopowner.phone_number,
+                                        shopowner.shopname,
+                                        shopowner.shopdescription,
+                                        shopowner.id,
+                                        shopowner.logo)),
+                              );
+                            } else {
+                              Fluttertoast.showToast(
+                                msg: "كلمة المرور غير صحيحة",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 3,
+                                backgroundColor:
+                                    Color.fromARGB(255, 156, 30, 21),
+                                textColor: Colors.white,
+                                fontSize: 18.0,
+                              );
+                              // Navigator.of(context).pop();
+                            }
+                          },
+                        ),
+                        TextButton(
+                          child: Text("إلغاء",
+                              style:
+                                  TextStyle(color: Colors.red, fontSize: 16)),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
                     )
                   ],
                 )));
@@ -737,67 +785,207 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                       ),
                     ),
 
-                    TextField(
-                      controller: _checkPasslController,
-                      obscureText: true,
-                      keyboardType: TextInputType.visiblePassword,
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
-                      decoration: InputDecoration(
-                        labelText: 'أدخل كلمة المرور لحذف الحساب',
-                        labelStyle: TextStyle(
-                          color: Color.fromARGB(255, 90, 90, 90),
-                          fontSize: 15,
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: TextFormField(
+                        controller: _checkPasslController,
+                        obscureText: ishiddenpassworddelete,
+                        keyboardType: TextInputType.visiblePassword,
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                        decoration: InputDecoration(
+                          // suffixIcon: InkWell(
+                          //   onTap: _togglePasswordViewdelete,
+                          //   child: Icon(
+                          //     ishiddenpassworddelete
+                          //         ? Icons.visibility
+                          //         : Icons.visibility_off,
+                          //   ),
+                          // ),
+                          labelText: 'أدخل كلمة المرور لحذف الحساب',
+                          labelStyle: TextStyle(
+                            color: Color.fromARGB(255, 90, 90, 90),
+                            fontSize: 15,
+                          ),
                         ),
                       ),
                     ),
-                    TextButton(
-                      child: Text("تحقق"),
-                      onPressed: () {
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                          child: Text("تحقق", style: TextStyle(fontSize: 16)),
+                          onPressed: () {
 //check if it was correct
-                        if (shopowner.password == _checkPasslController.text) {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: Text("تنبيه"),
-                                content: Text('سيتم حذف الحساب نهائيا'),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: Text("حذف",
-                                        style: TextStyle(color: Colors.red)),
-                                    onPressed: () {
-                                      //The logic of deleting an account
-                                      final docSO = FirebaseFirestore.instance
-                                          .collection('shop_owner')
-                                          .doc(uid);
-                                      //Navigator.of(context).pop();
+                            if (shopowner.password ==
+                                _checkPasslController.text) {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text("تنبيه"),
+                                    content: Text('سيتم حذف الحساب نهائيا'),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: Text(
+                                          "حذف",
+                                          style: TextStyle(
+                                              color: Colors.red, fontSize: 20),
+                                        ),
+                                        onPressed: () async {
+//All the logics for deleting a profile for shop owner
 
-                                      docSO.delete();
+// StreamBuilder<List<Product1>>(
+//           stream: readProducts(uid),
+//           builder: (context, snapshot) {
+//             if (snapshot.hasError) {
+//               return Text('somting wrong \n ${snapshot.error}');
+//             } else if (snapshot.hasData) {
+//               final products = snapshot.data!.toList();
 
-                                      FirebaseAuth.instance.signOut();
-                                      Navigator.of(context, rootNavigator: true)
-                                          .pushReplacement(MaterialPageRoute(
-                                              builder: (context) =>
-                                                  new Welcome()));
-                                    },
-                                  ),
-                                  TextButton(
-                                    child: Text("تراجع"),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  )
-                                ],
+//               for (int i = 0; i < products.length; i++) {
+
+//                   if (products[i].shopOwnerId == uid) {
+//                    FirebaseFirestore.instance
+//                    .collection('Products')
+//                    .doc(products[i].id)
+//                    .delete();
+
+//                   }
+
+//               }
+//     return Center();
+
+//             } else {
+//               return Center();
+//            } });
+
+                                          final FirebaseAuth auth =
+                                              FirebaseAuth.instance;
+                                          final User? u = auth.currentUser;
+                                          final uid = u!.uid;
+                                          String email = shopowner.email;
+                                          String password = shopowner.password;
+
+// Create a credential
+                                          AuthCredential credential =
+                                              EmailAuthProvider.credential(
+                                                  email: email,
+                                                  password: password);
+
+// Reauthenticate
+                                          await FirebaseAuth
+                                              .instance.currentUser!
+                                              .reauthenticateWithCredential(
+                                                  credential);
+
+                                          FirebaseFirestore.instance
+                                              .collection('Products')
+                                              .get()
+                                              .then((snapshot) {
+                                            List<DocumentSnapshot> allDocs =
+                                                snapshot.docs;
+
+                                            List<DocumentSnapshot>
+                                                filteredDocs = allDocs
+                                                    .where((document) =>
+                                                        document[
+                                                            'shopOwnerId'] ==
+                                                        uid)
+                                                    .toList();
+
+                                            for (DocumentSnapshot ds
+                                                in filteredDocs) {
+                                              FirebaseFirestore.instance
+                                                  .collection('Products')
+                                                  .doc(ds.id)
+                                                  .delete();
+                                            }
+                                          });
+
+                                          FirebaseFirestore.instance
+                                              .collection('wishList')
+                                              .get()
+                                              .then((snapshot) {
+                                            List<DocumentSnapshot> allDocs =
+                                                snapshot.docs;
+
+                                            List<DocumentSnapshot>
+                                                filteredDocs = allDocs
+                                                    .where((document) =>
+                                                        document[
+                                                            'shopOwnerId'] ==
+                                                        uid)
+                                                    .toList();
+
+                                            for (DocumentSnapshot ds
+                                                in filteredDocs) {
+                                              FirebaseFirestore.instance
+                                                  .collection('wishList')
+                                                  .doc(ds.id)
+                                                  .delete();
+                                            }
+                                          });
+
+                                          var user = await _getFirebaseUser();
+
+                                          await user?.delete();
+
+                                          //The logic of deleting an account
+                                          final docSO = FirebaseFirestore
+                                              .instance
+                                              .collection('shop_owner')
+                                              .doc(uid);
+                                          //Navigator.of(context).pop();
+
+                                          docSO.delete();
+
+                                          FirebaseAuth.instance.signOut();
+                                          Navigator.of(context,
+                                                  rootNavigator: true)
+                                              .pushReplacement(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          new login()));
+                                        },
+                                      ),
+                                      TextButton(
+                                        child: Text("تراجع"),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      )
+                                    ],
+                                  );
+                                },
                               );
-                            },
-                          );
-                        } else {
-                          //error try again
-                          Navigator.of(context).pop();
-                        }
-                      },
+                            } else {
+                              //error try again
+                              Fluttertoast.showToast(
+                                msg: "كلمة المرور غير صحيحة",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 3,
+                                backgroundColor:
+                                    Color.fromARGB(255, 156, 30, 21),
+                                textColor: Colors.white,
+                                fontSize: 18.0,
+                              );
+                              // Navigator.of(context).pop();
+                            }
+                          },
+                        ),
+                        TextButton(
+                          child: Text("إلغاء",
+                              style:
+                                  TextStyle(color: Colors.red, fontSize: 16)),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
                     )
                   ],
                 )));
@@ -817,6 +1005,158 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
       //     );
     );
   }
+
+  void showAlertDialogSettengs(BuildContext context1) {
+    TextEditingController _checkPasslController = new TextEditingController();
+
+    showDialog(
+      context: context1,
+      builder: (BuildContext context) {
+        return Dialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            child: Container(
+                height: 220,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    // final checkPasslField = TextFormField(
+
+                    Center(
+                      child: Text(
+                        "إمكانية الوصول",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: Color.fromARGB(255, 26, 96, 91),
+                          fontFamily: "Tajawal",
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: Container(
+                        width: 160,
+                        height: 70,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                          image: AssetImage('assets/images/momPassword.png'),
+                        )),
+                      ),
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: TextFormField(
+                        controller: _checkPasslController,
+                        obscureText: ishiddenpasswordedit,
+                        keyboardType: TextInputType.visiblePassword,
+                        enableSuggestions: false,
+                        autocorrect: false,
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                        decoration: InputDecoration(
+                          // suffixIcon: InkWell(
+                          //   onTap: _togglePasswordViewedit,
+                          //   child: Icon(
+                          //     ishiddenpasswordedit
+                          //         ? Icons.visibility
+                          //         : Icons.visibility_off,
+                          //   ),
+                          // ),
+                          labelText: 'أدخل كلمة المرور للدخول للإعدادات',
+                          labelStyle: TextStyle(
+                            color: Color.fromARGB(255, 90, 90, 90),
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                            child: Text("تحقق", style: TextStyle(fontSize: 16)),
+                            onPressed: () async {
+                              ShopOwner? sh;
+                              final FirebaseAuth auth = FirebaseAuth.instance;
+                              final User? userSO = auth.currentUser;
+                              final uid = userSO!.uid;
+                              // userID = FirebaseAuth.instance.currentUser;
+                              print(uid);
+
+                              final docShopOwner = await FirebaseFirestore
+                                  .instance
+                                  .collection('shop_owner')
+                                  .doc(uid)
+                                  .get();
+                              if (docShopOwner.exists) {
+                                sh = ShopOwner.fromJson(docShopOwner.data()!);
+                              }
+                              if (sh!.password == _checkPasslController.text) {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        OwnerSettings()));
+                              } else {
+                                Fluttertoast.showToast(
+                                  msg: "كلمة المرور غير صحيحة",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.CENTER,
+                                  timeInSecForIosWeb: 3,
+                                  backgroundColor:
+                                      Color.fromARGB(255, 156, 30, 21),
+                                  textColor: Colors.white,
+                                  fontSize: 18.0,
+                                );
+                              }
+
+//check if it was correct
+                            }),
+                        TextButton(
+                          child: Text("إلغاء",
+                              style:
+                                  TextStyle(color: Colors.red, fontSize: 16)),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    )
+                  ],
+                )));
+      },
+
+      // return CustomAlertDialog(
+      //       content: Container(
+      //         width: MediaQuery.of(context).size.width / 1.3,
+      //         height: MediaQuery.of(context).size.height / 2.5,
+      //         decoration: new BoxDecoration(
+      //           shape: BoxShape.rectangle,
+      //           color: const Color(0xFFFFFF),
+      //           borderRadius: new BorderRadius.all(new Radius.circular(32.0)),
+      //         ),
+      //         child: //Contents here
+      //       ),
+      //     );
+    );
+  }
+
+  void _togglePasswordViewedit() {
+    setState(() {
+      ishiddenpasswordedit = !ishiddenpasswordedit;
+    });
+  }
+
+  void _togglePasswordViewdelete() {
+    setState(() {
+      ishiddenpassworddelete = !ishiddenpassworddelete;
+    });
+  }
+
+  Future<User?> _getFirebaseUser() async {
+    return FirebaseAuth.instance.currentUser;
+  }
 }
 // void uploadImageToFirebaseStorage(File file) async {
 //   // Create a reference to 'images/mountains.jpg'
@@ -829,23 +1169,33 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
 //   print("uploaded:" + uploadImageUrl);
 // }
 
-void openPasswordDialog(BuildContext context) {
-  showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-            title: Text("التحقق من الوصول"),
-            content: TextField(
-                decoration: InputDecoration(hintText: 'ادخل كلمة المرور')),
-            actions: [
-              TextButton(
-                  onPressed: () {
-                    submit(context);
-                  },
-                  child: Text('تحقق'))
-            ],
-          ));
-}
+// void openPasswordDialog(BuildContext context) {
+//   showDialog(
+//       context: context,
+//       builder: (context) => AlertDialog(
+//             title: Text("التحقق من الوصول"),
+//             content: TextField(
+//                 decoration: InputDecoration(hintText: 'ادخل كلمة المرور')),
+//             actions: [
+//               TextButton(
+//                   onPressed: () {
+//                     submit(context);
+//                   },
+//                   child: Text('تحقق'))
+//             ],
+//           ));
+// }
 
-void submit(BuildContext context) {
-  Navigator.of(context).pop();
-}
+// void submit(BuildContext context) {
+//   Navigator.of(context).pop();
+// }
+// void readPrpducts(String thisOwnerId) {
+//   List<DocumentSnapshot> allDocs =
+//       FirebaseFirestore.instance.collection('Products');
+//   FirebaseFirestore.instance
+//       .collection('Products')
+//       .where("shopOwnerId", isEqualTo: thisOwnerId)
+//       .snapshots()
+//       .map((snapshot) =>
+//           snapshot.docs.map((doc) => Product1.fromJson(doc.data())).toList());
+// }

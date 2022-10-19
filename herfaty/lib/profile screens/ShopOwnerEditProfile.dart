@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:herfaty/screens/navOwner.dart';
 import 'package:intl/src/intl/date_format.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -96,7 +97,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => ShopOwnerProfile()));
+                builder: (BuildContext context) => navOwner()));
           },
           icon: Icon(Icons.arrow_back),
         ),
@@ -225,12 +226,18 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                       readOnly:
                           false, //set it true, so that user will not able to edit text
                       onTap: () async {
+                        var formatter = DateFormat('dd/MM/yyyy');
+
+                        DateTime today = DateTime.now();
+                        DateTime initYear = DateTime(today.year - 15, 1, 1);
+                        DateTime lastYear = DateTime(today.year - 5, 12, 31);
+
                         DateTime? pickedDate = await showDatePicker(
                           context: context,
-                          initialDate: DateTime(2007),
-                          firstDate: DateTime(
-                              2007), //DateTime.now() - not to allow to choose before today.
-                          lastDate: DateTime(2017),
+                          initialDate: initYear,
+                          firstDate:
+                              initYear, //DateTime.now() - not to allow to choose before today.
+                          lastDate: lastYear,
 
                           builder: (context, child) {
                             return Theme(
@@ -385,6 +392,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                         //   MaterialPageRoute(
                         //       builder: (context) =>l
                         // );
+                        Navigator.of(context).pop();
                       },
                       style: ButtonStyle(
                         backgroundColor:
@@ -411,7 +419,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
 
                         showDialog(
                           context: context,
-                          builder: (BuildContext context) {
+                          builder: (BuildContext context1) {
                             return AlertDialog(
                               title: Text("تنبيه"),
                               content: Text('سيتم إلغاء التعديلات'),
@@ -420,18 +428,20 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                                   child: Text("إلغاء",
                                       style: TextStyle(color: Colors.red)),
                                   onPressed: () {
-                                    //The logic of cancle edits
-                                    imageProfile(widget.logo);
-                                    _nameTextEditingController
-                                      ..text = widget.name;
-                                    _BODController..text = widget.DOB;
-                                    _PhoneNumberTextEditingController
-                                      ..text = widget.phone_number;
-                                    _shopdescriptionTextEditingController
-                                      ..text = widget.shopdescription;
-                                    _shopnameTextEditingController
-                                      ..text = widget.shopname;
+                                    Navigator.of(context1).pop();
                                     Navigator.of(context).pop();
+                                    //The logic of cancle edits
+                                    // imageProfile(widget.logo);
+                                    // _nameTextEditingController
+                                    //   ..text = widget.name;
+                                    // _BODController..text = widget.DOB;
+                                    // _PhoneNumberTextEditingController
+                                    //   ..text = widget.phone_number;
+                                    // _shopdescriptionTextEditingController
+                                    //   ..text = widget.shopdescription;
+                                    // _shopnameTextEditingController
+                                    //   ..text = widget.shopname;
+                                    // Navigator.of(context).pop();
 
                                     //Navigator.of(context).pop();
                                     // FirebaseAuth.instance.signOut();
@@ -443,7 +453,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                                 TextButton(
                                   child: Text("تراجع"),
                                   onPressed: () {
-                                    Navigator.of(context).pop();
+                                    Navigator.of(context1).pop();
                                   },
                                 )
                               ],
