@@ -13,6 +13,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/AddProduct.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/main.dart';
+import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/pages/login.dart';
 import 'package:herfaty/pages/signupHerafy.dart';
 import 'package:herfaty/profile%20screens/ShopOwnerEditProfile.dart';
@@ -834,6 +835,55 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                         onPressed: () async {
 //All the logics for deleting a profile for shop owner
 
+// StreamBuilder<List<Product1>>(
+//           stream: readProducts(uid),
+//           builder: (context, snapshot) {
+//             if (snapshot.hasError) {
+//               return Text('somting wrong \n ${snapshot.error}');
+//             } else if (snapshot.hasData) {
+//               final products = snapshot.data!.toList();
+
+//               for (int i = 0; i < products.length; i++) {
+
+//                   if (products[i].shopOwnerId == uid) {
+//                    FirebaseFirestore.instance
+//                    .collection('Products')
+//                    .doc(products[i].id)
+//                    .delete();
+
+//                   }
+
+//               }
+//     return Center();
+
+//             } else {
+//               return Center();
+//            } });
+
+                                          FirebaseFirestore.instance
+                                              .collection('Products')
+                                              .get()
+                                              .then((snapshot) {
+                                            List<DocumentSnapshot> allDocs =
+                                                snapshot.docs;
+                                            List<DocumentSnapshot>
+                                                filteredDocs = allDocs
+                                                    .where((document) =>
+                                                        document[
+                                                            'shopOwnerId'] ==
+                                                        uid)
+                                                    .toList();
+
+                                            for (DocumentSnapshot ds
+                                                in filteredDocs) {
+                                              print(ds.id);
+                                              FirebaseFirestore.instance
+                                                  .collection('Products')
+                                                  .doc(ds.id)
+                                                  .delete();
+                                            }
+                                          });
+
                                           var user = await _getFirebaseUser();
 
                                           await user?.delete();
@@ -957,4 +1007,14 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
 
 // void submit(BuildContext context) {
 //   Navigator.of(context).pop();
+// }
+// void readPrpducts(String thisOwnerId) {
+//   List<DocumentSnapshot> allDocs =
+//       FirebaseFirestore.instance.collection('Products');
+//   FirebaseFirestore.instance
+//       .collection('Products')
+//       .where("shopOwnerId", isEqualTo: thisOwnerId)
+//       .snapshots()
+//       .map((snapshot) =>
+//           snapshot.docs.map((doc) => Product1.fromJson(doc.data())).toList());
 // }

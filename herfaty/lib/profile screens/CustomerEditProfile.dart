@@ -244,12 +244,7 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
                               fontSize: 18.0,
                             );
                             // openPasswordDialog(context);
-
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => logOutButton()),
-                            );
+                            Navigator.of(context).pop();
                           },
                           style: ButtonStyle(
                             backgroundColor:
