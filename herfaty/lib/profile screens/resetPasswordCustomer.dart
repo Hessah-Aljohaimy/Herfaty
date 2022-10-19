@@ -18,7 +18,7 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
   bool ishiddenpasswordold = true;
   bool ishiddenpasswordnew1 = true;
   bool ishiddenpasswordnew2 = true;
-  DocumentSnapshot? snapshot; //Define snapshot
+  //Define snapshot
 
   TextEditingController _oldPasswordTextController =
       new TextEditingController();
@@ -30,17 +30,10 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
 
   @override
   Widget build(BuildContext context) {
-    getData();
+    // getData();
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     final uid = user!.uid;
-    try {
-      String oldpass = snapshot!['password'];
-      print(oldpass);
-    } catch (e) {
-      print("المشكلة");
-      print(e);
-    }
 
     return Scaffold(
       appBar: AppBar(
@@ -63,7 +56,7 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
         automaticallyImplyLeading: false,
         iconTheme: IconThemeData(color: Color(0xff51908E)),
       ),
-      body: FutureBuilder(
+      body: FutureBuilder<Customer?>(
           future: readUser(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -77,16 +70,16 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
                   child: Text(
                       '!هناك خطأ في استرجاع البيانات${snapshot.hasError}'));
             }
-            if (snapshot.connectionState == ConnectionState.done) {
-              if (snapshot.hasData) {
-                print('4444444444444444444444444444444444444444');
 
-                final customer = snapshot.data;
-                return customer == null
-                    ? const Center(child: Text('!لا توجد معلومات المشتري '))
-                    : buildCustomer(customer, context);
-              }
+            if (snapshot.hasData) {
+              print('4444444444444444444444444444444444444444');
+
+              final customer = snapshot.data;
+              return customer == null
+                  ? const Center(child: Text('!لا توجد معلومات المشتري '))
+                  : buildCustomer(customer, context);
             }
+
             if (!snapshot.hasData) {
               print('2222222222222222222222222222222222222222222222');
               return Center(child: Text('! خطأ في عرض البيانات '));
@@ -417,39 +410,22 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
     });
   }
 
-  void getData() async {
+  Future<Customer?> readUser() async {
+    print("BBBBBBBBBBEGIningggggggggggggggggggggggg ");
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     final uid = user!.uid;
-    final data =
+    String DocId = uid;
+
+    print(uid);
+
+    final docCustomer =
         await FirebaseFirestore.instance.collection('customers').doc(uid).get();
     print('after the refrence');
-    snapshot = data;
-  }
 
-  Future<Customer?> readUser() async {
-    try {
-      print("BBBBBBBBBBEGIningggggggggggggggggggggggg ");
-      final FirebaseAuth auth = FirebaseAuth.instance;
-      final User? user = auth.currentUser;
-      final uid = user!.uid;
-      String DocId = uid;
-
-      print(uid);
-
-      final docCustomer = await FirebaseFirestore.instance
-          .collection('customers')
-          .doc(uid)
-          .get();
-      print('after the refrence');
-
-      if (docCustomer.exists) {
-        print(
-            "SSSSSSSSSSSSSSSSSSNNNNNNNNNNNNNNNNAAAAAAAAAAAAAAAAAAPPPPPPPPPPP");
-        return Customer.fromJson(docCustomer.data()!);
-      }
-    } catch (e) {
-      return null;
+    if (docCustomer.exists) {
+      print("SSSSSSSSSSSSSSSSSSNNNNNNNNNNNNNNNNAAAAAAAAAAAAAAAAAAPPPPPPPPPPP");
+      return Customer.fromJson(docCustomer.data()!);
     }
   }
 
@@ -715,6 +691,18 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
                     // final docCustomer = FirebaseFirestore.instance
                     //     .collection('customers')
                     //     .doc(uid);
+
+                    String email = customer.email;
+                    String password = customer.password;
+
+// Create a credential
+                    AuthCredential credential = EmailAuthProvider.credential(
+                        email: email, password: password);
+
+// Reauthenticate
+                    await FirebaseAuth.instance.currentUser!
+                        .reauthenticateWithCredential(credential);
+
                     FirebaseAuth.instance.currentUser
                         ?.updatePassword(_newPasswordTextController1.text);
 
