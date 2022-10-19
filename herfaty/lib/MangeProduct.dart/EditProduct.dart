@@ -336,17 +336,16 @@ class _EditProduc extends State<EditProduct> {
                         return 'أدخل اسم المنتج';
                       }
 
-if (value.length < 2) {
+                      if (value.length < 2) {
                         return " أدخل اسم أكبر من أو يساوي حرفين ";
                       }
-       
 
                       if (!RegExp(
                               r"^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z- ][]*$")
                           .hasMatch(value)) {
                         return "أدخل اسم بلا أرقام ورموز";
                       }
-                      
+
                       return null;
                     },
                   ),
@@ -471,8 +470,9 @@ if (value.length < 2) {
                     validator: (value) {
                       if (value == null || value.isEmpty)
                         return 'أدخل كمية المنتج';
-                      if (int.parse(value) <= 0) return "أدخل رقم أكبر من صفر";
-                      if (int.parse(value) > 15)
+                      if (double.parse(value) <= 0)
+                        return "أدخل رقم أكبر من صفر";
+                      if (double.parse(value) > 15)
                         return "أدخل رقم أصغر من أو يساوي 15";
                       else
                         return null;
@@ -538,9 +538,9 @@ if (value.length < 2) {
                       if (value == null || value.isEmpty)
                         return 'أدخل السعر ';
                       else if (double.parse(value!) <= 0)
-                        return "أدخل رقم أكبر من صفر";
-                      else if (double.parse(value!) >= 500)
-                        return " أدخل رقم أصغر من 500 ";
+                        return "أدخل سعر أكبر من صفر";
+                      else if (double.parse(value!) > 500)
+                        return " أدخل سعر أقل من أو يساوي 500 ";
                       else
                         return null;
                     },
