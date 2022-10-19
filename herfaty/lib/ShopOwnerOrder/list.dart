@@ -130,14 +130,16 @@ class list extends StatelessWidget {
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: TextStyle(
-                                                          color: kPrimaryColor,
+                                                          color:
+                                                              Color(0xff4C8F2F),
                                                           fontSize: 17.0,
                                                           fontFamily:
                                                               "Tajawal")),
                                                   Text(
                                                     "تاريخ الطلب :${cItems[index].orderDate} ",
                                                     style: TextStyle(
-                                                        color: kPrimaryColor,
+                                                        color:
+                                                            Color(0xff4C8F2F),
                                                         fontSize: 17.0,
                                                         fontFamily: "Tajawal"),
                                                   ),
@@ -156,9 +158,9 @@ class list extends StatelessWidget {
                                           children: [
                                             ElevatedButton(
                                               style: ElevatedButton.styleFrom(
-                                                primary: Color.fromARGB(255, 81,
-                                                    144, 142), // background
-                                              ),
+                                                  primary: Color(
+                                                      0xff4C8F2F) // background
+                                                  ),
                                               onPressed: () {
                                                 Navigator.push(
                                                   context,
@@ -274,14 +276,16 @@ class list extends StatelessWidget {
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: TextStyle(
-                                                          color: kPrimaryColor,
+                                                          color:
+                                                              Color(0xffE87118),
                                                           fontSize: 17.0,
                                                           fontFamily:
                                                               "Tajawal")),
                                                   Text(
                                                     "تاريخ الطلب :${cItems[index].orderDate} ",
                                                     style: TextStyle(
-                                                        color: kPrimaryColor,
+                                                        color:
+                                                            Color(0xffE87118),
                                                         fontSize: 17.0,
                                                         fontFamily: "Tajawal"),
                                                   ),
@@ -300,9 +304,9 @@ class list extends StatelessWidget {
                                           children: [
                                             ElevatedButton(
                                               style: ElevatedButton.styleFrom(
-                                                primary: Color.fromARGB(255, 81,
-                                                    144, 142), // background
-                                              ),
+                                                  primary: Color(
+                                                      0xffE87118) // background
+                                                  ),
                                               onPressed: () {
                                                 Navigator.push(
                                                   context,
@@ -418,14 +422,16 @@ class list extends StatelessWidget {
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: TextStyle(
-                                                          color: kPrimaryColor,
+                                                          color:
+                                                              Color(0xffF06676),
                                                           fontSize: 17.0,
                                                           fontFamily:
                                                               "Tajawal")),
                                                   Text(
                                                     "تاريخ الطلب :${cItems[index].orderDate} ",
                                                     style: TextStyle(
-                                                        color: kPrimaryColor,
+                                                        color:
+                                                            Color(0xffF06676),
                                                         fontSize: 17.0,
                                                         fontFamily: "Tajawal"),
                                                   ),
@@ -444,9 +450,9 @@ class list extends StatelessWidget {
                                           children: [
                                             ElevatedButton(
                                               style: ElevatedButton.styleFrom(
-                                                primary: Color.fromARGB(255, 81,
-                                                    144, 142), // background
-                                              ),
+                                                  primary: Color(
+                                                      0xffF06676) // background
+                                                  ),
                                               onPressed: () {
                                                 Navigator.push(
                                                   context,
@@ -562,14 +568,16 @@ class list extends StatelessWidget {
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: TextStyle(
-                                                          color: kPrimaryColor,
+                                                          color:
+                                                              Color(0xfFF3CB4B),
                                                           fontSize: 17.0,
                                                           fontFamily:
                                                               "Tajawal")),
                                                   Text(
                                                     "تاريخ الطلب : ${cItems[index].orderDate} ",
                                                     style: TextStyle(
-                                                        color: kPrimaryColor,
+                                                        color:
+                                                            Color(0xfFF3CB4B),
                                                         fontSize: 17.0,
                                                         fontFamily: "Tajawal"),
                                                   ),
@@ -588,9 +596,9 @@ class list extends StatelessWidget {
                                           children: [
                                             ElevatedButton(
                                               style: ElevatedButton.styleFrom(
-                                                primary: Color.fromARGB(255, 81,
-                                                    144, 142), // background
-                                              ),
+                                                  primary: Color(
+                                                      0xfFF3CB4B) // background
+                                                  ),
                                               onPressed: () {
                                                 Navigator.push(
                                                   context,
