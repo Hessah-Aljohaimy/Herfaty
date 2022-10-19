@@ -1,13 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:herfaty/CustomerProducts/CustomerProductDetails.dart';
-import 'package:herfaty/CustomerProducts/productCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:herfaty/CustomerProducts/wishList/wishCard.dart';
 import 'package:herfaty/CustomerProducts/wishList/wishListDetails.dart';
-import 'package:herfaty/models/AddProductToCart.dart';
-import 'package:herfaty/models/Product1.dart';
+import 'package:herfaty/models/cart_wishlistModel.dart';
 import 'package:herfaty/constants/color.dart';
 
 class CustomerWishList extends StatefulWidget {
@@ -20,11 +17,12 @@ class CustomerWishList extends StatefulWidget {
 }
 
 class _CustomerWishListState extends State<CustomerWishList> {
-  Stream<List<CartAndWishListProduct>> readPrpducts() =>
-      FirebaseFirestore.instance.collection('wishList').snapshots().map(
-          (snapshot) => snapshot.docs
-              .map((doc) => CartAndWishListProduct.fromJson(doc.data()))
-              .toList());
+  Stream<List<cart_wishlistModel>> readPrpducts() => FirebaseFirestore.instance
+      .collection('wishList')
+      .snapshots()
+      .map((snapshot) => snapshot.docs
+          .map((doc) => cart_wishlistModel.fromJson(doc.data()))
+          .toList());
 
   //======================================================================================
   @override
@@ -51,7 +49,7 @@ class _CustomerWishListState extends State<CustomerWishList> {
                 child: Stack(
                   children: [
                     //This is to list all of our items fetched from the DB========================
-                    StreamBuilder<List<CartAndWishListProduct>>(
+                    StreamBuilder<List<cart_wishlistModel>>(
                       stream: readPrpducts(),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==

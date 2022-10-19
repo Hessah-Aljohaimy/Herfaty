@@ -5,7 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/models/Product1.dart';
-import 'package:herfaty/models/AddProductToCart.dart';
+import 'package:herfaty/models/cart_wishlistModel.dart';
 
 class productCard extends StatefulWidget {
   const productCard({
@@ -178,7 +178,7 @@ class _productCardState extends State<productCard> {
                   if (isFavourite == true) {
                     final productToBeAdded =
                         FirebaseFirestore.instance.collection('wishList').doc();
-                    CartAndWishListProduct item = CartAndWishListProduct(
+                    cart_wishlistModel item = cart_wishlistModel(
                         name: widget.product.name,
                         detailsImage: widget.product.image,
                         docId: productToBeAdded.id,
@@ -209,7 +209,7 @@ class _productCardState extends State<productCard> {
   }
 
   //==========================================================================================
-  Future createWishListItem(CartAndWishListProduct wishListItem) async {
+  Future createWishListItem(cart_wishlistModel wishListItem) async {
     final docCartItem = FirebaseFirestore.instance
         .collection('wishList')
         .doc("${wishListItem.docId}");

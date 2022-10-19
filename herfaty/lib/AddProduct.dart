@@ -413,9 +413,9 @@ class _AddProductState extends State<AddProduct> {
                     validator: (value) {
                       if (value == null || value.isEmpty)
                         return 'أدخل كمية المنتج';
-                      if (double.parse(value) <= 0)
+                      if (int.parse(value) <= 0)
                         return "أدخل رقم أكبر من صفر";
-                      if (double.parse(value) > 15)
+                      if (int.parse(value) > 15)
                         return "أدخل رقم أصغر من أو يساوي 15";
                       else
                         return null;
@@ -514,7 +514,7 @@ class _AddProductState extends State<AddProduct> {
                         dropdownvalue != '  اختر الفئة:') {
                       String prodName = nameController.text;
                       String desc = descController.text;
-                      double amount = double.parse(amountController.text);
+                      int amount = int.parse(amountController.text);
                       double priceN = double.parse(priceController.text);
 
                       /*

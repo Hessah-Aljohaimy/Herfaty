@@ -7,7 +7,7 @@ class Product {
   String? categoryName;
   String? image;
   String? shopOwnerId;
-  double? avalibleAmount;
+  int? avalibleAmount;
   double? price;
   String? shopName;
 
