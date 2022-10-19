@@ -153,7 +153,7 @@ class AppBar extends StatelessWidget {
           Align(
             alignment: Alignment.topLeft,
             child: profileButton(
-              icon: Icons.favorite_border,
+              icon: Icons.favorite,
               onPressed: () {
                 Navigator.push(
                     context,

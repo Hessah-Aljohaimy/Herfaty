@@ -19,7 +19,7 @@ class profileButton extends StatelessWidget {
         ),
         child: Icon(
           icon,
-          color: Color.fromARGB(255, 206, 57, 46),
+          color: Color.fromARGB(255, 198, 48, 37),
           size: 35,
         ),
       ),
