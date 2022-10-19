@@ -135,7 +135,7 @@ class _EditProduc extends State<EditProduct> {
                       ),
 
                       label: Text(
-                        'إرفاق صورة',
+                        'تغيير الصورة',
                         style: TextStyle(fontSize: 22, fontFamily: "Tajawal"),
                         //textAlign: TextAlign.right,
                       ), // <-- Text
@@ -160,19 +160,37 @@ class _EditProduc extends State<EditProduct> {
                       return Text('');
                     }),
 
-                SizedBox(
-                  height: 20,
-                ),
+                // SizedBox(
+                //   height: 20,
+                // ),
                 if (uploadImageUrl.isEmpty)
                   SizedBox(
                     width: 200,
                     height: 200,
                   )
                 else
-                  Image.network(
-                    uploadImageUrl,
-                    width: 1000,
+                  Container(
+                    width: 400,
                     height: 200,
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 0.1, color: Colors.white),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                      ),
+                      //color: Color(0xFFFAF9F6),
+                      color: Colors.white,
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                      ),
+                      child: Image.network(
+                        uploadImageUrl,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                 SizedBox(
                   height: 20,
@@ -552,7 +570,7 @@ if (value.length < 2) {
                         uploadImageUrl != "") {
                       String prodName = nameController.text;
                       String desc = descController.text;
-                      int amount = int.parse(amountController.text);
+                      double amount = double.parse(amountController.text);
                       double price = double.parse(priceController.text);
 
                       /*
