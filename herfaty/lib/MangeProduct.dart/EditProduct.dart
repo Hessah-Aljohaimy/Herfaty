@@ -5,7 +5,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:herfaty/OwnerProducts/OwnerProductDetails.dart';
 import 'package:herfaty/firestore/firestore.dart';
+import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/models/product.dart';
 import 'package:herfaty/screens/ownerProductsCateg.dart';
 import 'package:image_picker/image_picker.dart'; //there
@@ -495,7 +497,7 @@ class _EditProduc extends State<EditProduct> {
                         return 'أدخل السعر ';
                       else if (double.parse(value!) <= 0)
                         return "أدخل رقم أكبر من صفر";
-                      else if (double.parse(value!) > 500)
+                      else if (double.parse(value!) >= 500)
                         return " أدخل رقم أصغر من 500 ";
                       else
                         return null;
@@ -646,12 +648,16 @@ class _EditProduc extends State<EditProduct> {
                                 child: Text(" تأكيد",
                                     style: TextStyle(color: Colors.red)),
                                 onPressed: () {
-                                  Navigator.push(
+                                  Navigator.of(context).pop();
+                                  Navigator.of(context).pop();
+                                  /*Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const ownerProductsCategScreen()),
-                                  );
+                                            OwnerProdectDetails(
+                                                product: w,
+                                                detailsImage: uploadImageUrl)),
+                                  );*/
                                 },
                               ),
                               TextButton(
