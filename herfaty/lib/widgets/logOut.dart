@@ -484,24 +484,26 @@ class logOutButton extends StatelessWidget {
                                   child: Text("حذف",
                                       style: TextStyle(color: Colors.red)),
                                   onPressed: () async {
-//The logic of deleting an account
+//The logic of delet
+//
+//
+//
+                                    final CartDoc = FirebaseFirestore.instance
+                                        .collection('cart'); //
 
-                                    FirebaseFirestore.instance
-                                        .collection('cart')
-                                        .get()
-                                        .then((snapshot) {
-                                      List<DocumentSnapshot> allDocs =
-                                          snapshot.docs;
-                                      List<DocumentSnapshot> filteredDocs =
-                                          allDocs
-                                              .where((document) =>
-                                                  document['customerId'] == uid)
-                                              .toList();
-                                      for (DocumentSnapshot ds
-                                          in filteredDocs) {
-                                        ds.reference.delete();
-                                      }
-                                    });
+                                    // for (var doc in )
+//ing an account
+
+                                    //   List<DocumentSnapshot> filteredDocs =
+                                    //       allDocs
+                                    //           .where((document) =>
+                                    //               document['customerId'] == uid)
+                                    //           .toList();
+                                    //   for (DocumentSnapshot ds
+                                    //       in filteredDocs) {
+                                    //     ds.reference.delete();
+                                    //   }
+                                    // });
 
                                     // await user?.delete();
                                     // FirebaseAuth.instance.currentUser
@@ -589,4 +591,14 @@ class logOutButton extends StatelessWidget {
   Future<User?> _getFirebaseUser() async {
     return FirebaseAuth.instance.currentUser;
   }
+
+  // Future<String> getCartDocumentId(
+  //   Stirng thisCustomerID,
+  // ) async {
+  //   String DocId = "";
+  //   final cartDoc = await FirebaseFirestore.instance
+  //       .collection('cart')
+  //       .where("customerId", isEqualTo: thisCustomerID)
+  //       .get()
+
 }

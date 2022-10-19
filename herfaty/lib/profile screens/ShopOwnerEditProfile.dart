@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:herfaty/screens/navOwner.dart';
 import 'package:intl/src/intl/date_format.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -96,7 +97,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => ShopOwnerProfile()));
+                builder: (BuildContext context) => navOwner()));
           },
           icon: Icon(Icons.arrow_back),
         ),
@@ -391,11 +392,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                         //   MaterialPageRoute(
                         //       builder: (context) =>l
                         // );
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ShopOwnerProfile()),
-                        );
+                        Navigator.of(context).pop();
                       },
                       style: ButtonStyle(
                         backgroundColor:
@@ -431,12 +428,18 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                                   child: Text("إلغاء",
                                       style: TextStyle(color: Colors.red)),
                                   onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ShopOwnerProfile()),
-                                    );
+                                    //nav Owner
+
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                navOwner()));
+                                    // Navigator.push(
+                                    //   context,
+                                    //   MaterialPageRoute(
+                                    //       builder: (context) =>
+                                    //           ShopOwnerProfile()),
+                                    // );
                                     //The logic of cancle edits
                                     // imageProfile(widget.logo);
                                     // _nameTextEditingController
