@@ -40,6 +40,7 @@ class nav extends StatelessWidget {
     return [
       customerHomeScreen(),
       Cart(),
+      CustomerWishList(),
       listOrderCustomer(),
       logOutButton(),
     ];
@@ -55,6 +56,11 @@ class nav extends StatelessWidget {
       PersistentBottomNavBarItem(
           icon: const Icon(CupertinoIcons.cart),
           title: "  السلة",
+          activeColorPrimary: kPrimaryColor.withOpacity(0.9),
+          inactiveColorPrimary: CupertinoColors.systemGrey),
+      PersistentBottomNavBarItem(
+          icon: const Icon(Icons.favorite_border),
+          title: "  المفضلة",
           activeColorPrimary: kPrimaryColor.withOpacity(0.9),
           inactiveColorPrimary: CupertinoColors.systemGrey),
       PersistentBottomNavBarItem(
