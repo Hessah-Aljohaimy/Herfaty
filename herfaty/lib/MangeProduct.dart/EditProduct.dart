@@ -556,7 +556,7 @@ class _EditProduc extends State<EditProduct> {
                   height: 30,
                 ),
                 ElevatedButton(
-                  onPressed: () async {
+                  onPressed: () {
                     if (uploadImageUrl.isEmpty)
                       ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('الرجاء إرفاق صورة')));
@@ -603,20 +603,33 @@ class _EditProduc extends State<EditProduct> {
                     final json = product.toJson();
                     await productToBeAdded.set(json);*/
                       //await Firestore.saveProduct(product);
-                      late final ownerProduct = FirebaseFirestore.instance
+
+                      print("---------------****${widget.id}");
+                      FirebaseFirestore.instance
                           .collection('Products')
-                          .doc(widget.id);
-                      ownerProduct.update({
-                        'avalibleAmount': amount,
-                        'categoryName': dropdownvalue,
-                        'dsscription': descController.text,
-                        'id': widget.id,
-                        'image': uploadImageUrl,
-                        'name': nameController.text,
-                        'price': price,
-                        'shopName': shopNameData,
-                        'shopOwnerId': thisOwnerId
+                          .doc(widget.id)
+                          .update({
+                        "availableAmount": amount,
+                        "categoryName": dropdownvalue,
+                        "description": descController.text,
+                        "image": uploadImageUrl,
+                        "name": nameController.text,
+                        "price": price,
+                        "shopName": shopNameData,
+                        "shopOwnerId": thisOwnerId
                       });
+
+                      Product1 product = Product1(
+                          availableAmount: amount,
+                          categoryName: dropdownvalue,
+                          description: descController.text,
+                          id: widget.id,
+                          image: uploadImageUrl,
+                          name: nameController.text,
+                          price: price,
+                          shopName: shopNameData,
+                          shopOwnerId: thisOwnerId);
+
                       Fluttertoast.showToast(
                         msg: "تم تعديل المنتج بنجاح",
                         toastLength: Toast.LENGTH_SHORT,
@@ -626,8 +639,15 @@ class _EditProduc extends State<EditProduct> {
                         textColor: Colors.white,
                         fontSize: 18.0,
                       );
-                      await Future.delayed(const Duration(seconds: 1), () {
+                      Future.delayed(const Duration(seconds: 1), () {
                         Navigator.pop(context);
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => OwnerProdectDetails(
+                                  product: product,
+                                  detailsImage: uploadImageUrl)),
+                        );
                       });
 
                       // ScaffoldMessenger.of(context).showSnackBar(
