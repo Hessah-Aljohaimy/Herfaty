@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:herfaty/cart/cart.dart';
-import 'package:herfaty/models/AddProductToCart.dart';
+import 'package:herfaty/models/cart_wishlistModel.dart';
 import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -331,21 +331,19 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                                       .instance
                                       .collection('cart')
                                       .doc();
-                                  CartAndWishListProduct item =
-                                      CartAndWishListProduct(
-                                          name: widget.product.name,
-                                          detailsImage: widget.detailsImage,
-                                          docId: productToBeAdded.id,
-                                          productId: widget.product.id,
-                                          customerId: user.uid,
-                                          shopName: widget.product.shopName,
-                                          shopOwnerId:
-                                              widget.product.shopOwnerId,
-                                          quantity: existedQuantity +
-                                              thisPageQuantity,
-                                          availableAmount:
-                                              widget.product.availableAmount,
-                                          price: widget.product.price);
+                                  cart_wishlistModel item = cart_wishlistModel(
+                                      name: widget.product.name,
+                                      detailsImage: widget.detailsImage,
+                                      docId: productToBeAdded.id,
+                                      productId: widget.product.id,
+                                      customerId: user.uid,
+                                      shopName: widget.product.shopName,
+                                      shopOwnerId: widget.product.shopOwnerId,
+                                      quantity:
+                                          existedQuantity + thisPageQuantity,
+                                      availableAmount:
+                                          widget.product.availableAmount,
+                                      price: widget.product.price);
                                   createCartItem(item);
                                   await showDoneToast(context);
                                 }
@@ -402,7 +400,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
   }
 
 //==========================================================================================
-  Future createCartItem(CartAndWishListProduct cartItem) async {
+  Future createCartItem(cart_wishlistModel cartItem) async {
     final docCartItem =
         FirebaseFirestore.instance.collection('cart').doc("${cartItem.docId}");
     final json = cartItem.toJson();
