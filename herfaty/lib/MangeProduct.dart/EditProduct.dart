@@ -427,6 +427,9 @@ class _EditProduc extends State<EditProduct> {
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: amountController,
                     keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly,
+                    ],
                     textAlign: TextAlign.right,
                     decoration: InputDecoration(
                       border: InputBorder.none,
