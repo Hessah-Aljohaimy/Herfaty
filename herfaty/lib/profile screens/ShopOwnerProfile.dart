@@ -831,6 +831,33 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                               color: Colors.red, fontSize: 20),
                                         ),
                                         onPressed: () async {
+
+
+
+
+//All the logics for deleting a profile for shop owner 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                           var user = await _getFirebaseUser();
 
                                           await user?.delete();

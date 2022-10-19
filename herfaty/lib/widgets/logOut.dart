@@ -3,8 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
+import 'package:herfaty/cart/cart.dart';
 import 'package:herfaty/firestore/firestore.dart';
 import 'package:herfaty/main.dart';
+import 'package:herfaty/models/cartModal.dart';
 import 'package:herfaty/pages/login.dart';
 import 'package:herfaty/pages/welcome.dart';
 import 'package:herfaty/profile%20screens/CustomerEditProfile.dart';
@@ -483,9 +485,30 @@ class logOutButton extends StatelessWidget {
                                       style: TextStyle(color: Colors.red)),
                                   onPressed: () async {
 //The logic of deleting an account
+
+                                    FirebaseFirestore.instance
+                                        .collection('cart')
+                                        .get()
+                                        .then((snapshot) {
+                                      List<DocumentSnapshot> allDocs =
+                                          snapshot.docs;
+                                      List<DocumentSnapshot> filteredDocs =
+                                          allDocs
+                                              .where((document) =>
+                                                  document['customerId'] == uid)
+                                              .toList();
+                                      for (DocumentSnapshot ds
+                                          in filteredDocs) {
+                                        ds.reference.delete();
+                                      }
+                                    });
+
                                     // await user?.delete();
                                     // FirebaseAuth.instance.currentUser
                                     //     ?.delete();
+
+//All the logics for deleting a profile for shop owner
+
                                     var user = await _getFirebaseUser();
 
                                     await user?.delete();
@@ -495,7 +518,18 @@ class logOutButton extends StatelessWidget {
                                         .doc(uid);
                                     docCus.delete();
 
+                                    // final CustomerCart = FirebaseFirestore
+                                    //     .instance
+                                    //     .collection('orders')
+                                    //     .where("customerId", isEqualTo: uid)
+                                    //     .snapshots().map((snapshot) => snapshot.docs.map((doc) => CartModal.fromJson(doc.data()))).toList();
+
                                     //Navigator.of(context).pop();
+                                    // readCarts();
+
+//1 strem builder
+// StreamBuilder<List<CartModal>>(stream: ,builder: ,);
+
                                     FirebaseAuth.instance.signOut();
                                     Navigator.of(context, rootNavigator: true)
                                         .pushReplacement(MaterialPageRoute(
@@ -536,8 +570,23 @@ class logOutButton extends StatelessWidget {
       ]),
     );
   }
-}
 
-Future<User?> _getFirebaseUser() async {
-  return FirebaseAuth.instance.currentUser;
+  // Stream<List<Iterable<CartModal>>> readCarts() {
+  //   final user;
+  //   user = FirebaseAuth.instance.currentUser;
+  //   try {
+  //     final uid = user.uid;
+  //     return FirebaseFirestore.instance
+  //         .collection('orders')
+  //         .where("customerId", isEqualTo: uid)
+  //         .snapshots()
+  //         .map((snapshot) =>
+  //             snapshot.docs.map((doc) => CartModal.fromJson(doc.data())))
+  //         .toList();
+  //   } catch (e) {}
+  // }
+
+  Future<User?> _getFirebaseUser() async {
+    return FirebaseAuth.instance.currentUser;
+  }
 }
