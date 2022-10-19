@@ -96,13 +96,6 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
         backgroundColor: Colors.white,
         shadowColor: Color.fromARGB(255, 39, 141, 134),
         elevation: 3,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => navOwner()));
-          },
-          icon: Icon(Icons.arrow_back),
-        ),
         automaticallyImplyLeading: false,
         iconTheme: IconThemeData(color: Color(0xff51908E)),
       ),
