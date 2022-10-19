@@ -683,7 +683,7 @@ class _EditProduc extends State<EditProduct> {
                   onPressed: () {
                     showDialog(
                         context: context,
-                        builder: (BuildContext context) {
+                        builder: (BuildContext context1) {
                           return AlertDialog(
                             title: Text("تنبيه"),
                             content: Text('سيتم إلغاء حفظ التعديلات'),
@@ -692,7 +692,7 @@ class _EditProduc extends State<EditProduct> {
                                 child: Text(" تأكيد",
                                     style: TextStyle(color: Colors.red)),
                                 onPressed: () {
-                                  Navigator.of(context).pop();
+                                  Navigator.of(context1).pop();
                                   Navigator.of(context).pop();
                                   /*Navigator.push(
                                     context,
@@ -707,7 +707,7 @@ class _EditProduc extends State<EditProduct> {
                               TextButton(
                                 child: Text("تراجع"),
                                 onPressed: () {
-                                  Navigator.of(context).pop();
+                                  Navigator.of(context1).pop();
                                 },
                               )
                             ],
