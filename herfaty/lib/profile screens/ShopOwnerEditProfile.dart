@@ -89,7 +89,8 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("تعديل الحساب", style: TextStyle(color: Color(0xff51908E))),
+        title: Text("تعديل الحساب", style: TextStyle(color: Color(0xff51908E),            fontFamily: "Tajawal",
+)),
         centerTitle: true,
         backgroundColor: Colors.white,
         shadowColor: Color.fromARGB(255, 39, 141, 134),
@@ -164,7 +165,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                 ),
 
                 SizedBox(
-                  height: 5,
+                  height: 12,
                 ),
                 // Container(
                 //   padding: EdgeInsets.only(left: 15, right: 15, top: 10),
@@ -173,7 +174,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                 //       "تاريخ الميلاد", false, _passwordTextController),
                 // ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 44),
+                  padding: EdgeInsets.symmetric(horizontal: 33),
                   child: Center(
                     child: TextFormField(
                       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -271,9 +272,9 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                     ),
                   ),
                 ),
-                // SizedBox(
-                //   height: 5,
-                // ),
+                SizedBox(
+                  height: 5,
+                ),
                 Container(
                   padding: EdgeInsets.only(left: 15, right: 15, top: 10),
                   width: 350,
@@ -281,9 +282,9 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                       "رقم الجوال", false, _PhoneNumberTextEditingController),
                 ),
 
-                // SizedBox(
-                //   height: 5,
-                // ),
+                SizedBox(
+                  height: 5,
+                ),
                 Container(
                   padding: EdgeInsets.only(left: 15, right: 15, top: 10),
                   width: 350,
@@ -521,7 +522,8 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
           ),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(width: 2, color: Colors.blue),
+          borderSide:
+              BorderSide(width: 2, color: Color.fromARGB(188, 26, 96, 91),),
         ),
         errorStyle: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
         errorBorder: OutlineInputBorder(
@@ -576,8 +578,9 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
             color: Color.fromARGB(188, 26, 96, 91),
           ),
         ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(width: 2, color: Colors.blue),
+       focusedBorder: OutlineInputBorder(
+          borderSide:
+              BorderSide(width: 2, color: Color.fromARGB(188, 26, 96, 91),),
         ),
         errorStyle: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
         errorBorder: OutlineInputBorder(
@@ -732,11 +735,11 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
             fontWeight: FontWeight.bold),
         fillColor: Colors.white.withOpacity(0.3),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Color.fromARGB(255, 26, 96, 91)),
+          borderSide: BorderSide(color: Color.fromARGB(188, 26, 96, 91),),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide:
-              BorderSide(width: 2, color: Color.fromARGB(255, 26, 96, 91)),
+              BorderSide(width: 2, color: Color.fromARGB(188, 26, 96, 91),),
         ),
         errorStyle: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
         errorBorder: OutlineInputBorder(
