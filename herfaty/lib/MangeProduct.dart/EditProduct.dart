@@ -95,6 +95,7 @@ class _EditProduc extends State<EditProduct> {
     }
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(56.0),
         child: Container(
