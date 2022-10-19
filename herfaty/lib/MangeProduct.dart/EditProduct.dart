@@ -171,7 +171,7 @@ class _EditProduc extends State<EditProduct> {
                 else
                   Image.network(
                     uploadImageUrl,
-                    width: 200,
+                    width: 1000,
                     height: 200,
                   ),
                 SizedBox(
@@ -184,40 +184,51 @@ class _EditProduc extends State<EditProduct> {
                   children: [
                     SizedBox(width: 20), // for space
                     Text(
-                      'فئة المنتج',
-                      style: TextStyle(fontSize: 21, fontFamily: "Tajawal"),
-                    ),
-
-                    DropdownButton(
-                      // Initial Value
-                      value: dropdownvalue,
-                      underline: Container(
-                        height: 3,
-                        color: kPrimaryColor, //<-- SEE HERE
-                      ),
-                      icon: Icon(Icons.arrow_drop_down),
-                      style: const TextStyle(
-                          color: kPrimaryColor, //<-- SEE HERE
-                          fontSize: 19,
+                      "فئة المنتج:",
+                      style: TextStyle(
+                          fontSize: 21,
+                          fontFamily: "Tajawal",
+                          color: kPrimaryColor,
                           fontWeight: FontWeight.bold),
-                      // Down Arrow Icon
-                      // Array list of items
-                      items: items.map((String items) {
-                        return DropdownMenuItem(
-                          value: items,
-                          child: Text(
-                            items,
-                          ),
-                        );
-                      }).toList(),
-                      // After selecting the desired option,it will
-                      // change button value to selected value
+                      // (color: kPrimaryColor)
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(7),
+                      decoration: BoxDecoration(
+                        color: Colors.white, //<-- SEE HERE
+                      ),
+                      child: DropdownButton(
+                        // Initial Value
+                        value: dropdownvalue,
+                        underline: Container(
+                          height: 3,
+                          color: kPrimaryColor,
+                          //<-- SEE HERE
+                        ),
+                        icon: Icon(Icons.arrow_drop_down),
+                        style: const TextStyle(
+                            color: kPrimaryColor, //<-- SEE HERE
+                            fontSize: 19,
+                            fontWeight: FontWeight.bold),
+                        // Down Arrow Icon
+                        // Array list of items
+                        items: items.map((String items) {
+                          return DropdownMenuItem(
+                            value: items,
+                            child: Text(
+                              items,
+                            ),
+                          );
+                        }).toList(),
+                        // After selecting the desired option,it will
+                        // change button value to selected value
 
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          dropdownvalue = newValue!;
-                        });
-                      },
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            dropdownvalue = newValue!;
+                          });
+                        },
+                      ),
                     ),
                   ],
                 ),
@@ -261,6 +272,7 @@ class _EditProduc extends State<EditProduct> {
                   child: TextFormField(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: nameController,
+                    maxLength: 30,
                     //right aligment
 
                     decoration: InputDecoration(
@@ -277,7 +289,9 @@ class _EditProduc extends State<EditProduct> {
                       labelStyle: TextStyle(
                           color: kPrimaryColor, fontFamily: "Tajawal"),
                       // floatingLabelBehavior: FloatingLabelBehavior.never,
-                      fillColor: Colors.white.withOpacity(0.3),
+                      filled: true,
+
+                      fillColor: Colors.white,
 
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: kPrimaryColor),
@@ -349,7 +363,9 @@ class _EditProduc extends State<EditProduct> {
                       labelStyle: TextStyle(
                           color: kPrimaryColor, fontFamily: "Tajawal"),
                       // floatingLabelBehavior: FloatingLabelBehavior.never,
-                      fillColor: Colors.white.withOpacity(0.3),
+                      filled: true,
+
+                      fillColor: Colors.white,
 
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: kPrimaryColor),
@@ -407,7 +423,9 @@ class _EditProduc extends State<EditProduct> {
                       labelStyle: TextStyle(
                           color: kPrimaryColor, fontFamily: "Tajawal"),
                       // floatingLabelBehavior: FloatingLabelBehavior.never,
-                      fillColor: Colors.white.withOpacity(0.3),
+                      filled: true,
+
+                      fillColor: Colors.white,
 
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: kPrimaryColor),
@@ -471,7 +489,9 @@ class _EditProduc extends State<EditProduct> {
                       labelStyle: TextStyle(
                           color: kPrimaryColor, fontFamily: "Tajawal"),
                       // floatingLabelBehavior: FloatingLabelBehavior.never,
-                      fillColor: Colors.white.withOpacity(0.3),
+                      filled: true,
+
+                      fillColor: Colors.white,
 
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: kPrimaryColor),
