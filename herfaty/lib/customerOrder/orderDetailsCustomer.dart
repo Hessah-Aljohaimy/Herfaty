@@ -5,20 +5,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:herfaty/ShopOwnerOrder/list.dart';
 import 'package:herfaty/cart/cart.dart';
 
 import '../constants/color.dart';
 import '../models/Product1.dart';
 
-class orderDetails extends StatefulWidget {
+class orderDetailsCustomer extends StatefulWidget {
   String date;
   num totalOrder;
   String docID;
   Map products;
   String status;
 
-  orderDetails(
+  orderDetailsCustomer(
       {Key? key,
       required date,
       required totalOrder,
@@ -33,10 +32,10 @@ class orderDetails extends StatefulWidget {
         super(key: key);
 
   @override
-  _orderDetailsState createState() => _orderDetailsState();
+  _orderDetailsCustomerState createState() => _orderDetailsCustomerState();
 }
 
-class _orderDetailsState extends State<orderDetails> {
+class _orderDetailsCustomerState extends State<orderDetailsCustomer> {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -85,21 +84,12 @@ class AppBarOD extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String newStatus = "";
     Color color = Color(0xff4C8F2F);
-    if (status == "طلب جديد")
-      newStatus = "جاهز للتوصيل";
-    else if (status == "جاهز للتوصيل") {
-      newStatus = "المنتج خارج للتوصيل";
-      color = Color(0xffE87118);
-    } else if (status == "تم التوصيل") {
-      newStatus = "تم التوصيل";
+    if (status == "تم التوصيل")
       color = Color.fromARGB(255, 48, 137, 162);
-    } else if (status == "خارج للتوصيل") {
-      newStatus = "خارج للتوصيل";
+    else if (status == "خارج للتوصيل") {
       color = Color(0xffF06676);
     }
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -139,7 +129,6 @@ class AppBarOD extends StatelessWidget {
             alignment: FractionalOffset.bottomCenter,
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              //FlexFit.loose,
               children: [
                 SizedBox(
                   height: 53,
@@ -176,9 +165,6 @@ class AppBarOD extends StatelessWidget {
                               fontSize: 17,
                               fontFamily: "Tajawal"),
                         ),
-                        Container(
-                            margin: EdgeInsets.only(right: 75),
-                            child: Button(newStatus, docID, context)),
                       ],
                     ),
                   ),
@@ -223,89 +209,6 @@ class AppBarOD extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  Widget Button(newStatus, docID, context1) {
-    if (newStatus != "المنتج خارج للتوصيل" &&
-        newStatus != "تم التوصيل" &&
-        newStatus != "خارج للتوصيل") {
-      return ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          //primary: Color.fromARGB(255, 81, 144, 142), // background
-          primary: Color(0xffE87118),
-        ),
-        onPressed: () {
-          showDialog(
-              context: context1,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text("تغيير حالة الطلب"),
-                  content: Text('سيتم تغيير حالة الطلب إلى $newStatus'),
-                  actions: <Widget>[
-                    TextButton(
-                      child: Text("تغيير",
-                          style: TextStyle(
-                            color: Colors.red,
-                          )),
-                      onPressed: () {
-                        FirebaseFirestore.instance
-                            .collection('orders')
-                            .doc(docID)
-                            .update({"status": newStatus});
-                        if (newStatus == "جاهز للتوصيل") {
-                          print("-------------------)))))");
-                          Navigator.pop(context);
-                          Navigator.pop(context1);
-                          Navigator.pushReplacement<void, void>(
-                            context1,
-                            MaterialPageRoute<void>(
-                                builder: (BuildContext context) =>
-                                    list(selectedPage: 1)),
-                          );
-                          /*Navigator.push(
-                              context1,
-                              MaterialPageRoute(
-                                  builder: (context) => list(selectedPage: 1)));*/
-                        }
-                        //Navigator.pop(context);
-
-                        Fluttertoast.showToast(
-                          msg: "تم تغيير حالة الطلب بنجاح",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.CENTER,
-                          timeInSecForIosWeb: 3,
-                          backgroundColor: Color.fromARGB(255, 26, 96, 91),
-                          textColor: Colors.white,
-                          fontSize: 18.0,
-                        );
-/*
-                        Timer(const Duration(seconds: 0), () {
-                          Navigator.pop(context1);
-                        });
-*/
-                        //Navigator.pop(context);
-                      },
-                    ),
-                    TextButton(
-                      child: Text("تراجع"),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                  ],
-                );
-              });
-        },
-        child: Text(
-          " تغيير إلى $newStatus", //change depend on status
-          style: TextStyle(
-            fontFamily: "Tajawal",
-            color: Colors.white,
-          ),
-        ),
-      );
-    } else
-      return Center();
   }
 }
 
@@ -388,7 +291,7 @@ class ProductsD extends StatelessWidget {
                 child: ExpansionTile(
                   initiallyExpanded: true,
                   title: Text(
-                    "المُنتجات (${PItems.length})",
+                    "المُشتريات (${PItems.length})",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 15,

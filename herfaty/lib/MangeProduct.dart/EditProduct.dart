@@ -2,33 +2,54 @@ import 'dart:io';
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:herfaty/OwnerProducts/OwnerProductDetails.dart';
 import 'package:herfaty/firestore/firestore.dart';
+import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/models/product.dart';
 import 'package:herfaty/screens/ownerProductsCateg.dart';
 import 'package:image_picker/image_picker.dart'; //there
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
-//import'package:assets/images/productPic.png';
-import 'constants/color.dart';
-import 'models/shopOwnerModel.dart';
 
-class AddProduct extends StatefulWidget {
-  AddProduct({super.key});
+import '../OwnerProducts/OwnerProductsList.dart';
+import '../constants/color.dart';
+import '../models/shopOwnerModel.dart';
+
+//import 'constants/color.dart';
+//import 'package:herfaty/MangeProduct.dart/models/shopOwnerModel.dart';
+class EditProduct extends StatefulWidget {
+  const EditProduct(
+    this.avalibleAmount,
+    this.categoryName,
+    this.dsscription,
+    this.image,
+    this.name,
+    this.id,
+    this.CategoryName,
+    this.price,
+  );
+  final String avalibleAmount;
+  final String categoryName;
+  final String dsscription;
+  final String image;
+  final String name;
+  final String id;
+  final String CategoryName;
+  final String price;
 
   @override
-  State<AddProduct> createState() => _AddProductState();
+  State<EditProduct> createState() => _EditProduc();
 }
 
-class _AddProductState extends State<AddProduct> {
+class _EditProduc extends State<EditProduct> {
   final _formKey = GlobalKey<FormState>(); //To validate form
 
-  // Initial Selected Value
-  String dropdownvalue = '  اختر الفئة:'; // default value
+  late String dropdownvalue = widget.CategoryName; // default value
   // List of items in our dropdown menu
   var items = [
-    '  اختر الفئة:',
     'فنون الورق والتلوين',
     'الخرز والإكسسوار',
     'الفخاريات',
@@ -36,18 +57,19 @@ class _AddProductState extends State<AddProduct> {
   ];
 
 //Text controllers
-  var nameController = TextEditingController();
-  var descController = TextEditingController();
-  var amountController = TextEditingController();
-  var priceController = TextEditingController();
-
+  late TextEditingController nameController = TextEditingController()
+    ..text = widget.name;
+  late var descController = TextEditingController()..text = widget.dsscription;
+  late var amountController = TextEditingController()
+    ..text = widget.avalibleAmount;
+  late var priceController = TextEditingController()..text = widget.price;
+  late var newimage = widget.image;
   // initilazie Image Picker library
   final ImagePicker _picker = ImagePicker();
-  var uploadImageUrl = ""; //image URL before choose pic
+  late var uploadImageUrl = widget.image; //image URL before choose pic
   // Firebase storage + ref for pic place
   final storageRef = FirebaseStorage.instance.ref();
-
-  @override
+// late final ownerProduct =FirebaseFirestore.instance.collection('Products').doc(widget.thisOwnerId);
   Widget build(BuildContext context) {
     //////////////////////////////////////////////////////////////////////////////////////////
     ///
@@ -55,7 +77,8 @@ class _AddProductState extends State<AddProduct> {
     final User? user = auth.currentUser;
     String thisOwnerId = user!.uid;
     var shopNameData;
-
+    late final ownerProduct =
+        FirebaseFirestore.instance.collection('Products').doc(widget.id);
     Stream<List<shopOwnerModel>> shopOwnerData() {
       // final uid = user.getIdToken();
 
@@ -75,7 +98,7 @@ class _AddProductState extends State<AddProduct> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(56.0),
         child: Container(
-          child: const DefaultAppBar(title: " إضافة منتج"),
+          child: const DefaultAppBar(title: " تعديل المنتج "),
         ),
       ),
       body: Padding(
@@ -142,19 +165,13 @@ class _AddProductState extends State<AddProduct> {
                 ),
                 if (uploadImageUrl.isEmpty)
                   SizedBox(
-                    child: Container(
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage('assets\images\productPic.png'),
-                              fit: BoxFit.cover)),
-                      width: 200,
-                      height: 200,
-                    ),
+                    width: 200,
+                    height: 200,
                   )
                 else
                   Image.network(
                     uploadImageUrl,
-                    width: 200,
+                    width: 1000,
                     height: 200,
                   ),
                 SizedBox(
@@ -167,39 +184,51 @@ class _AddProductState extends State<AddProduct> {
                   children: [
                     SizedBox(width: 20), // for space
                     Text(
-                      'فئة المنتج',
-                      style: TextStyle(fontSize: 21, fontFamily: "Tajawal"),
-                    ),
-
-                    DropdownButton(
-                      // Initial Value
-                      value: dropdownvalue,
-                      underline: Container(
-                        height: 3,
-                        color: kPrimaryColor, //<-- SEE HERE
-                      ),
-                      icon: Icon(Icons.arrow_drop_down),
-                      style: const TextStyle(
-                          color: kPrimaryColor, //<-- SEE HERE
-                          fontSize: 19,
+                      "فئة المنتج:",
+                      style: TextStyle(
+                          fontSize: 21,
+                          fontFamily: "Tajawal",
+                          color: kPrimaryColor,
                           fontWeight: FontWeight.bold),
-                      // Down Arrow Icon
-                      // Array list of items
-                      items: items.map((String items) {
-                        return DropdownMenuItem(
-                          value: items,
-                          child: Text(
-                            items,
-                          ),
-                        );
-                      }).toList(),
-                      // After selecting the desired option,it will
-                      // change button value to selected value
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          dropdownvalue = newValue!;
-                        });
-                      },
+                      // (color: kPrimaryColor)
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(7),
+                      decoration: BoxDecoration(
+                        color: Colors.white, //<-- SEE HERE
+                      ),
+                      child: DropdownButton(
+                        // Initial Value
+                        value: dropdownvalue,
+                        underline: Container(
+                          height: 3,
+                          color: kPrimaryColor,
+                          //<-- SEE HERE
+                        ),
+                        icon: Icon(Icons.arrow_drop_down),
+                        style: const TextStyle(
+                            color: kPrimaryColor, //<-- SEE HERE
+                            fontSize: 19,
+                            fontWeight: FontWeight.bold),
+                        // Down Arrow Icon
+                        // Array list of items
+                        items: items.map((String items) {
+                          return DropdownMenuItem(
+                            value: items,
+                            child: Text(
+                              items,
+                            ),
+                          );
+                        }).toList(),
+                        // After selecting the desired option,it will
+                        // change button value to selected value
+
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            dropdownvalue = newValue!;
+                          });
+                        },
+                      ),
                     ),
                   ],
                 ),
@@ -243,6 +272,7 @@ class _AddProductState extends State<AddProduct> {
                   child: TextFormField(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: nameController,
+                    maxLength: 30,
                     //right aligment
 
                     decoration: InputDecoration(
@@ -259,7 +289,9 @@ class _AddProductState extends State<AddProduct> {
                       labelStyle: TextStyle(
                           color: kPrimaryColor, fontFamily: "Tajawal"),
                       // floatingLabelBehavior: FloatingLabelBehavior.never,
-                      fillColor: Colors.white.withOpacity(0.3),
+                      filled: true,
+
+                      fillColor: Colors.white,
 
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: kPrimaryColor),
@@ -331,7 +363,9 @@ class _AddProductState extends State<AddProduct> {
                       labelStyle: TextStyle(
                           color: kPrimaryColor, fontFamily: "Tajawal"),
                       // floatingLabelBehavior: FloatingLabelBehavior.never,
-                      fillColor: Colors.white.withOpacity(0.3),
+                      filled: true,
+
+                      fillColor: Colors.white,
 
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: kPrimaryColor),
@@ -389,7 +423,9 @@ class _AddProductState extends State<AddProduct> {
                       labelStyle: TextStyle(
                           color: kPrimaryColor, fontFamily: "Tajawal"),
                       // floatingLabelBehavior: FloatingLabelBehavior.never,
-                      fillColor: Colors.white.withOpacity(0.3),
+                      filled: true,
+
+                      fillColor: Colors.white,
 
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: kPrimaryColor),
@@ -421,11 +457,11 @@ class _AddProductState extends State<AddProduct> {
                     },
                   ),
                 ),
-                /* Container(
+                /*  Container(
                 padding: const EdgeInsets.only(right: 41),
                 child: Text(
                   " *الكمية المتاحة يجب أن تكون بين 1-15",
-                style: TextStyle(color: Color.fromARGB(255, 235, 47, 26)),
+                  style: TextStyle(color: gray),
                 ),
               ),*/
                 SizedBox(
@@ -453,7 +489,9 @@ class _AddProductState extends State<AddProduct> {
                       labelStyle: TextStyle(
                           color: kPrimaryColor, fontFamily: "Tajawal"),
                       // floatingLabelBehavior: FloatingLabelBehavior.never,
-                      fillColor: Colors.white.withOpacity(0.3),
+                      filled: true,
+
+                      fillColor: Colors.white,
 
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: kPrimaryColor),
@@ -479,7 +517,7 @@ class _AddProductState extends State<AddProduct> {
                         return 'أدخل السعر ';
                       else if (double.parse(value!) <= 0)
                         return "أدخل رقم أكبر من صفر";
-                      else if (double.parse(value!) > 500)
+                      else if (double.parse(value!) >= 500)
                         return " أدخل رقم أصغر من 500 ";
                       else
                         return null;
@@ -498,9 +536,7 @@ class _AddProductState extends State<AddProduct> {
                     if (uploadImageUrl.isEmpty)
                       ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('الرجاء إرفاق صورة')));
-                    if (dropdownvalue == '  اختر الفئة:')
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          content: Text('الرجاء إختيار الفئة ')));
+
                     /*if (uploadImageUrl.isEmpty &&
                       _formKey.currentState.validate()) {
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -509,12 +545,11 @@ class _AddProductState extends State<AddProduct> {
                   }*/
 
                     if (_formKey.currentState!.validate() &&
-                        uploadImageUrl != "" &&
-                        dropdownvalue != '  اختر الفئة:') {
+                        uploadImageUrl != "") {
                       String prodName = nameController.text;
                       String desc = descController.text;
                       int amount = int.parse(amountController.text);
-                      double priceN = double.parse(priceController.text);
+                      double price = double.parse(priceController.text);
 
                       /*
 
@@ -528,47 +563,38 @@ class _AddProductState extends State<AddProduct> {
                         .snapshots()
                         .map((snapshot) =>
                         snapshot.docs.map((doc) => CartModal.fromJson(doc.data())).toList());*/
-
-                      final productToBeAdded = FirebaseFirestore.instance
-                          .collection('Products')
-                          .doc();
-                      Product product = Product(
-                          id: productToBeAdded.id,
-                          name: prodName,
-                          dsscription: desc,
-                          avalibleAmount: amount,
-                          image: uploadImageUrl,
-                          categoryName: dropdownvalue,
-                          price: priceN,
-                          shopOwnerId: thisOwnerId,
-                          shopName: shopNameData);
-
-                      final json = product.toJson();
-                      await productToBeAdded.set(json);
-
-                      //---------------------------- duplicate collection
-
-                      final productToBeAdded1 = FirebaseFirestore.instance
-                          .collection('OrdersProducts')
-                          .doc(productToBeAdded.id);
-                      Product product1 = Product(
-                          id: productToBeAdded.id,
-                          name: prodName,
-                          dsscription: desc,
-                          avalibleAmount: amount,
-                          image: uploadImageUrl,
-                          categoryName: dropdownvalue,
-                          price: priceN,
-                          shopOwnerId: thisOwnerId,
-                          shopName: shopNameData);
-
-                      final json1 = product1.toJson();
-                      await productToBeAdded1.set(json1);
-
-                      //------------------------------------
+//add code not coment you delete it before update
+                      /*final productToBeAdded =
+                        FirebaseFirestore.instance.collection('Products').doc();
+                    Product product = Product(
+                        id: productToBeAdded.id,
+                        name: prodName,
+                        dsscription: desc,
+                        avalibleAmount: amount,
+                        image: uploadImageUrl,
+                        categoryName: dropdownvalue,
+                        price: priceN,
+                        shopOwnerId: thisOwnerId,
+                        shopName: shopNameData);
+                    final json = product.toJson();
+                    await productToBeAdded.set(json);*/
                       //await Firestore.saveProduct(product);
+                      late final ownerProduct = FirebaseFirestore.instance
+                          .collection('Products')
+                          .doc(widget.id);
+                      ownerProduct.update({
+                        'avalibleAmount': amount,
+                        'categoryName': dropdownvalue,
+                        'dsscription': descController.text,
+                        'id': widget.id,
+                        'image': uploadImageUrl,
+                        'name': nameController.text,
+                        'price': price,
+                        'shopName': shopNameData,
+                        'shopOwnerId': thisOwnerId
+                      });
                       Fluttertoast.showToast(
-                        msg: "تمت إضافة المنتج بنجاح",
+                        msg: "تم تعديل المنتج بنجاح",
                         toastLength: Toast.LENGTH_SHORT,
                         gravity: ToastGravity.CENTER,
                         timeInSecForIosWeb: 3,
@@ -598,7 +624,7 @@ class _AddProductState extends State<AddProduct> {
                         borderRadius: BorderRadius.circular(27))),
                   ),
                   child: Text(
-                    "إضافة منتج",
+                    "حفظ التعديلات ",
                     style: TextStyle(
                         fontSize: 14,
                         fontFamily: "Tajawal",
@@ -636,18 +662,22 @@ class _AddProductState extends State<AddProduct> {
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: Text("تنبيه"),
-                            content: Text('سيتم إلغاء إضافة هذا المنتج'),
+                            content: Text('سيتم إلغاء حفظ التعديلات'),
                             actions: <Widget>[
                               TextButton(
                                 child: Text(" تأكيد",
                                     style: TextStyle(color: Colors.red)),
                                 onPressed: () {
-                                  Navigator.push(
+                                  Navigator.of(context).pop();
+                                  Navigator.of(context).pop();
+                                  /*Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const ownerProductsCategScreen()),
-                                  );
+                                            OwnerProdectDetails(
+                                                product: w,
+                                                detailsImage: uploadImageUrl)),
+                                  );*/
                                 },
                               ),
                               TextButton(
@@ -673,7 +703,6 @@ class _AddProductState extends State<AddProduct> {
           ),
         ),
       ),
-      // ),
     );
   }
 
@@ -736,22 +765,15 @@ class _AddProductState extends State<AddProduct> {
     setState(() {});
     print("uploaded:" + uploadImageUrl);
   }
-}
 
-/*Container(
-                        
-                        // decoration: BoxDecoration(
-                          
-                        //   color: Color.fromARGB(255, 114, 159, 160),
-                        //   borderRadius: BorderRadius.circular(66),
-                          
-                        // ),
-                      //  width: 290,
-                      //   height: 53,
-                        padding: EdgeInsets.symmetric(horizontal: 60),
-                        child:*/
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('nameController', nameController));
+  }
+} //class
 
-class DefaultAppBar extends StatelessWidget {
+class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   const DefaultAppBar({
     Key? key,
@@ -759,6 +781,7 @@ class DefaultAppBar extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  Size get preferredSize => Size.fromHeight(56.0);
   Widget build(BuildContext context) {
     return AppBar(
       title: Text(title, style: TextStyle(color: kPrimaryColor)),
@@ -780,4 +803,21 @@ class DefaultAppBar extends StatelessWidget {
       iconTheme: IconThemeData(color: kPrimaryColor),
     );
   }
+
+  /* Future<int> getCategory(String thisCustomerId) async {
+    String CategoeyName;
+    final cartDoc = await FirebaseFirestore.instance
+        .collection('cart')
+        .where("productId", isEqualTo: widget.product.id)
+        .where("customerId", isEqualTo: thisCustomerId)
+        .get();
+    if (cartDoc.size > 0) {
+      var data = cartDoc.docs.elementAt(0).data() as Map;
+      existedQuantity = data["quantity"];
+      print(
+          'Existed quantity is ${existedQuantity}============================');
+    }
+
+    return existedQuantity;
+  }*/
 }
