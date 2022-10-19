@@ -1,3 +1,5 @@
+// @dart=2.9
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:herfaty/cart/cart.dart';
@@ -6,10 +8,15 @@ import 'package:herfaty/pages/splash.dart';
 import 'package:herfaty/pages/welcome.dart';
 import 'package:herfaty/pages/forget_password.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:herfaty/profile%20screens/CustomerProfile.dart';
+
 import 'package:herfaty/profile%20screens/ShopOwnerProfile.dart';
+import 'package:herfaty/profile%20screens/resetPasswordCustomer.dart';
+import 'package:herfaty/profile%20screens/resetPasswordOwner.dart';
 import 'package:herfaty/screens/navCustomer.dart';
 import 'package:herfaty/screens/navOwner.dart';
+import 'package:herfaty/widgets/customerSettings.dart';
+import 'package:herfaty/widgets/logOut.dart';
+import 'package:herfaty/widgets/ownerSettings.dart';
 import 'blocs/payment/payment_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'firebase_options.dart';
@@ -36,7 +43,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +73,12 @@ class MyApp extends StatelessWidget {
           "/signupHerfay": (context) => const SignupHerafy(),
           "/customer_base_screen": (context) => const customerBaseScreen(),
           "/driverPage": (context) => driverPage(),
+          "/logOut": (context) => logOutButton(),
+          "/shopOwnerProfile": (context) => ShopOwnerProfile(),
+          "/customerSettings": (context) => CustomerSettings(),
+          "/ownerSettings": (context) => OwnerSettings(),
+          "/resetPasswordCustomer": (context) => ResetPasswordCustomer(),
+          "/resetPasswordOwner": (context) => ResetPasswordOwner(),
         },
       ),
     );

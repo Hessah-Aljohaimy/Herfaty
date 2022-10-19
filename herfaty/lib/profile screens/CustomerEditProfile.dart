@@ -20,9 +20,12 @@ class CustomerEditProfile extends StatefulWidget {
 
 class _CustomerEditProfileState extends State<CustomerEditProfile> {
   get kPrimaryColor => null;
+  final _formKey = new GlobalKey<FormState>();
+  String Oldname = '';
 
   @override
   Widget build(BuildContext context) {
+    /// just  define _formkey with static final
     TextEditingController _passwordTextController = new TextEditingController()
       ..text = widget.password;
     TextEditingController _emailTextEditingController =
@@ -50,7 +53,7 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
         FirebaseFirestore.instance.collection('customers').doc(widget.uid);
 
     print(widget.uid);
-    final _formKey = GlobalKey<FormState>();
+
     int passlength = widget.password.length;
     String passwordStar = '';
 
@@ -96,15 +99,15 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
             color: Color.fromARGB(255, 39, 141, 134),
           ),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.logout, color: Color.fromARGB(255, 39, 141, 134)),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => login()));
-            },
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     icon: Icon(Icons.logout, color: Color.fromARGB(255, 39, 141, 134)),
+        //     onPressed: () {
+        //       Navigator.of(context).push(MaterialPageRoute(
+        //           builder: (BuildContext context) => login()));
+        //     },
+        //   ),
+        // ],
         automaticallyImplyLeading: false,
         iconTheme: IconThemeData(color: kPrimaryColor),
       ),
@@ -115,12 +118,12 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
         key: _formKey,
         child: SingleChildScrollView(
           child: SizedBox(
-            height: 400,
+            height: 250,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 SizedBox(
-                  height: 35,
+                  height: 55,
                 ),
                 // Center(
                 //   child: Text(
@@ -133,23 +136,18 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
                 //     ),
                 //   ),
                 // ),
-                SizedBox(
-                  height: 35,
-                ),
+
                 Container(
                   color: Colors.white,
                   width: 350,
-                  child: reusableTextFieldCustomer(
-                      'اسم المشتري', false, _nameTextEditingController),
+                  child: reusableTextFieldEditName(
+                      'اسم المشتري', _nameTextEditingController),
                 ),
-
-                SizedBox(
-                  height: 20,
-                ),
-
 
 //Only view the email
-
+                SizedBox(
+                  height: 10,
+                ),
 
                 Container(
                   color: Colors.white,
@@ -158,9 +156,6 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
                       "البريد الإلكتروني", false, _emailTextEditingController),
                 ),
 
-                SizedBox(
-                  height: 20,
-                ),
                 // Container(
                 //   color: Colors.white,
                 //   width: 350,
@@ -175,10 +170,6 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
                 //         color: Color.fromARGB(255, 84, 84, 84), fontSize: 13),
                 //   ),
                 // ),
-
-                SizedBox(
-                  height: 20,
-                ),
 
                 // Container(
                 //   height: 48,
@@ -238,10 +229,10 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
                             print(widget.uid);
                             //update this spesific feild
                             docCustomer.update({
-                              'email': _emailTextEditingController.text,
+                              'email': widget.email,
                               'id': widget.uid,
                               'name': _nameTextEditingController.text,
-                              'password': _passwordTextController.text
+                              'password': widget.password,
                             });
                             Fluttertoast.showToast(
                               msg: "تم تحديث حسابك بنجاح",
@@ -253,15 +244,7 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
                               fontSize: 18.0,
                             );
                             // openPasswordDialog(context);
-
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //       builder: (context) => CustomerEditProfile(
-                            //           customer.name,
-                            //           customer.email,
-                            //           customer.password)),
-                            // );
+                            Navigator.of(context).pop();
                           },
                           style: ButtonStyle(
                             backgroundColor:
@@ -299,7 +282,16 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
                                       child: Text("إلغاء",
                                           style: TextStyle(color: Colors.red)),
                                       onPressed: () {
-                                        //The logic of deleting an account
+                                        //The logic of cancle edits
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  logOutButton()),
+                                        );
+                                        // _nameTextEditingController
+                                        //   ..text = widget.name;
+                                        // Navigator.of(context).pop();
 
                                         //Navigator.of(context).pop();
                                         // FirebaseAuth.instance.signOut();
@@ -311,9 +303,14 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
                                     TextButton(
                                       child: Text("تراجع"),
                                       onPressed: () {
+                                        Oldname =
+                                            _nameTextEditingController.text;
+                                        _nameTextEditingController
+                                          ..text = Oldname;
+
                                         Navigator.of(context).pop();
                                       },
-                                    )
+                                    ),
                                   ],
                                 );
                               },
@@ -352,6 +349,7 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
   TextFormField reusableTextFieldCustomer(
       String text, bool isPasswordType, TextEditingController controller) {
     return TextFormField(
+      enabled: false,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: controller,
       obscureText: isPasswordType,
@@ -360,22 +358,22 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
       keyboardType: isPasswordType
           ? TextInputType.visiblePassword
           : TextInputType.emailAddress,
-      style:
-          TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontFamily: "Tajawal"),
+      style: TextStyle(
+          color: Color.fromARGB(255, 122, 122, 122), fontFamily: "Tajawal"),
       decoration: InputDecoration(
         contentPadding:
             const EdgeInsets.symmetric(vertical: 1.0, horizontal: 25),
         labelText: text,
         labelStyle: TextStyle(
-            color: Color.fromARGB(255, 26, 96, 91),
+            color: Color.fromARGB(255, 122, 122, 122),
             fontFamily: "Tajawal",
             fontSize: 20,
             fontWeight: FontWeight.bold),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         fillColor: Colors.white.withOpacity(0.3),
-        enabledBorder: OutlineInputBorder(
+        disabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Color.fromARGB(188, 26, 96, 91),
+            color: Color.fromARGB(255, 122, 122, 122),
           ),
         ),
         focusedBorder: OutlineInputBorder(
@@ -404,26 +402,17 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
         if (text == "كلمة المرور") {
           if (value.length < 6) return "ادخل كلمة مرور اكبر من 6 خانات";
         }
-        // if (text == "اسم المشتري")
-        //   maxLength:
-        //   30;
       },
     );
   }
 
-  TextFormField reusableTextFieldCustomerName(
-      String text, bool isPasswordType, TextEditingController controller) {
+  TextFormField reusableTextFieldEditName(
+      String text, TextEditingController controller) {
     return TextFormField(
       autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: controller,
-      obscureText: isPasswordType,
-      enableSuggestions: !isPasswordType,
-      autocorrect: !isPasswordType,
-      keyboardType: isPasswordType
-          ? TextInputType.visiblePassword
-          : TextInputType.emailAddress,
-      style:
-          TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontFamily: "Tajawal"),
+      style: TextStyle(
+          color: Color.fromARGB(255, 90, 90, 90), fontFamily: "Tajawal"),
       decoration: InputDecoration(
         contentPadding:
             const EdgeInsets.symmetric(vertical: 1.0, horizontal: 25),
@@ -452,23 +441,11 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
               BorderSide(width: 3, color: Color.fromARGB(255, 164, 46, 46)),
         ),
       ),
+      maxLength: 30,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return "أدخل " + text;
         }
-        if (!RegExp(r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
-                .hasMatch(value) &&
-            !isPasswordType &&
-            text == 'البريد الإلكتروني') {
-          return 'أدخل بريد إلكتروني صحيح';
-        }
-
-        if (text == "كلمة المرور") {
-          if (value.length < 6) return "ادخل كلمة مرور اكبر من 6 خانات";
-        }
-        // if (text == "اسم المشتري")
-        //   maxLength:
-        //   30;
       },
     );
   }
