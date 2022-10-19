@@ -317,14 +317,18 @@ class _EditProduc extends State<EditProduct> {
                       if (value == null || value.isEmpty) {
                         return 'أدخل اسم المنتج';
                       }
+
+if (value.length < 2) {
+                        return " أدخل اسم أكبر من أو يساوي حرفين ";
+                      }
+       
+
                       if (!RegExp(
                               r"^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z- ][]*$")
                           .hasMatch(value)) {
                         return "أدخل اسم بلا أرقام ورموز";
                       }
-                      if (value.length < 2) {
-                        return " أدخل اسم أكبر من أو يساوي حرفين ";
-                      }
+                      
                       return null;
                     },
                   ),
