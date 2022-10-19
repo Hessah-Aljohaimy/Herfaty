@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -1062,15 +1063,42 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         TextButton(
-                          child: Text("تحقق", style: TextStyle(fontSize: 16)),
-                          onPressed: () {
-//check if it was correct
+                            child: Text("تحقق", style: TextStyle(fontSize: 16)),
+                            onPressed: () async {
+                              ShopOwner? sh;
+                              final FirebaseAuth auth = FirebaseAuth.instance;
+                              final User? userSO = auth.currentUser;
+                              final uid = userSO!.uid;
+                              // userID = FirebaseAuth.instance.currentUser;
+                              print(uid);
 
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    OwnerSettings()));
-                          },
-                        ),
+                              final docShopOwner = await FirebaseFirestore
+                                  .instance
+                                  .collection('shop_owner')
+                                  .doc(uid)
+                                  .get();
+                              if (docShopOwner.exists) {
+                                sh = ShopOwner.fromJson(docShopOwner.data()!);
+                              }
+                              if (sh!.password == _checkPasslController.text) {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        OwnerSettings()));
+                              } else {
+                                Fluttertoast.showToast(
+                                  msg: "كلمة المرور غير صحيحة",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.CENTER,
+                                  timeInSecForIosWeb: 3,
+                                  backgroundColor:
+                                      Color.fromARGB(255, 156, 30, 21),
+                                  textColor: Colors.white,
+                                  fontSize: 18.0,
+                                );
+                              }
+
+//check if it was correct
+                            }),
                         TextButton(
                           child: Text("إلغاء",
                               style:
