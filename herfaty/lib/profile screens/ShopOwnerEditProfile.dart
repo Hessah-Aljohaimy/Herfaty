@@ -88,6 +88,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
           ), */
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text("تعديل الحساب", style: TextStyle(color: Color(0xff51908E))),
         centerTitle: true,
