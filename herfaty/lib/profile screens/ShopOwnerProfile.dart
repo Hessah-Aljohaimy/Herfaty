@@ -915,7 +915,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                               .pushReplacement(
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          new Welcome()));
+                                                          new login()));
                                         },
                                       ),
                                       TextButton(
