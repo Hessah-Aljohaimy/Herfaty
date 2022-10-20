@@ -411,7 +411,7 @@ class _EditProduc extends State<EditProduct> {
                       return 'أدخل وصف المنتج';
                     }
                     if (value.trim().length < 2) {
-                      return " أدخل وصف أكبر من أو يساوي حرفين ";
+                      return " أدخل وصف أكبر من حرف";
                     }
                     return null;
                   },
