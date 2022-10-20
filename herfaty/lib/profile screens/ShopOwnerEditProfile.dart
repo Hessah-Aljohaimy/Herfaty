@@ -386,10 +386,18 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                         );
                         // openPasswordDialog(context);
 
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ShopOwnerProfile()));
+                        Future.delayed(const Duration(seconds: 1), () {
+                          Navigator.pop(context);
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ShopOwnerProfile()));
+                        });
+
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => ShopOwnerProfile()));
                         //Navigator.of(context).pop();
                       },
                       style: ButtonStyle(

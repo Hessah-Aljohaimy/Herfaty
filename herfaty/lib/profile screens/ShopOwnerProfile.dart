@@ -886,9 +886,9 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                                         "طلب جديد")
                                                     .toList();
 
-                                                if(allDoc==null) {
-                                                  return Text('لا يوجد')
-                                                }   
+                                            // if(allDoc==null) {
+                                            //   return Text('لا يوجد')
+                                            // }
 
                                             // for (DocumentSnapshot ds
                                             //     in filteredDocs) {
