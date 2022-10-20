@@ -67,6 +67,10 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
                       '!هناك خطأ في استرجاع البيانات${snapshot.hasError}'));
             }
 
+            if (!snapshot.hasData) {
+              print('2222222222222222222222222222222222222222222222');
+              return Center(child: Text('! خطأ في عرض البيانات '));
+            }
             if (snapshot.hasData) {
               print('4444444444444444444444444444444444444444');
 
@@ -74,11 +78,6 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
               return customer == null
                   ? const Center(child: Text('!لا توجد معلومات المشتري '))
                   : buildCustomer(customer, context);
-            }
-
-            if (!snapshot.hasData) {
-              print('2222222222222222222222222222222222222222222222');
-              return Center(child: Text('! خطأ في عرض البيانات '));
             } else {
               return Center(child: Text("! هناك مشكلة ما حاول مجددا"));
             }
@@ -407,13 +406,13 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
   }
 
   Future<Customer?> readUser() async {
-    print("BBBBBBBBBBEGIningggggggggggggggggggggggg ");
+    print("go here ---------------------------");
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     final uid = user!.uid;
     String DocId = uid;
 
-    print(uid);
+    print("----------------------------$uid");
 
     final docCustomer =
         await FirebaseFirestore.instance.collection('customers').doc(uid).get();

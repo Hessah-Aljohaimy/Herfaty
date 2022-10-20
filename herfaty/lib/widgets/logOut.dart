@@ -30,9 +30,12 @@ import '../pages/signupCustomer.dart';
 import 'ownerSettings.dart';
 //Define snapshot
 
-class logOutButton extends StatelessWidget {
-  PickedFile? _imageFile;
+class logOutButton extends StatefulWidget {
+  @override
+  State<logOutButton> createState() => _logOutButtonState();
+}
 
+class _logOutButtonState extends State<logOutButton> {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   String getUD() {
@@ -207,6 +210,7 @@ class logOutButton extends StatelessWidget {
 
     //now you can access the document field value
   }
+
 /////////////////////////////
 
   Future<Customer?> readUser() async {
@@ -633,31 +637,7 @@ class logOutButton extends StatelessWidget {
   }
 
   // Stream<List<Iterable<CartModal>>> readCarts() {
-  //   final user;
-  //   user = FirebaseAuth.instance.currentUser;
-  //   try {
-  //     final uid = user.uid;
-  //     return FirebaseFirestore.instance
-  //         .collection('orders')
-  //         .where("customerId", isEqualTo: uid)
-  //         .snapshots()
-  //         .map((snapshot) =>
-  //             snapshot.docs.map((doc) => CartModal.fromJson(doc.data())))
-  //         .toList();
-  //   } catch (e) {}
-  // }
-
   Future<User?> _getFirebaseUser() async {
     return FirebaseAuth.instance.currentUser;
   }
-
-  // Future<String> getCartDocumentId(
-  //   Stirng thisCustomerID,
-  // ) async {
-  //   String DocId = "";
-  //   final cartDoc = await FirebaseFirestore.instance
-  //       .collection('cart')
-  //       .where("customerId", isEqualTo: thisCustomerID)
-  //       .get()
-
 }

@@ -45,7 +45,7 @@ class _CustomerSettingsState extends State<CustomerSettings> {
           height: 200,
           width: 600,
           child: ListView(
-             padding: EdgeInsets.all(2),
+            padding: EdgeInsets.all(2),
             children: <Widget>[
               buildResetPassword(),
               buildLogout(),

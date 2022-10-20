@@ -57,10 +57,6 @@ class _ResetPasswordOwnerState extends State<ResetPasswordOwner> {
       body: FutureBuilder<ShopOwner?>(
           future: readUser(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              print('11111111111111111111111111111111111111');
-              return Center(child: CircularProgressIndicator());
-            }
             if (snapshot.hasError) {
               print('2222222222222222222222222222222222222222222222');
               return Text('!هناك خطأ في استرجاع البيانات${snapshot.hasError}');
@@ -75,6 +71,9 @@ class _ResetPasswordOwnerState extends State<ResetPasswordOwner> {
               return shopowner == null
                   ? const Center(child: Text('!لا توجد معلومات الحرفي'))
                   : buildOwner(shopowner, context);
+            } else if (snapshot.connectionState == ConnectionState.waiting) {
+              print('11111111111111111111111111111111111111');
+              return Center(child: CircularProgressIndicator());
             } else {
               return Text("! هناك مشكلة ما حاول مجددا");
             }
@@ -486,6 +485,7 @@ class _ResetPasswordOwnerState extends State<ResetPasswordOwner> {
         .get();
     print('after the refrence');
     if (docShopOwner.exists) {
+      print("BBBBBBBBBBEGIningggggggggggggggggggggggg ");
       return ShopOwner.fromJson(docShopOwner.data()!);
     }
   }
