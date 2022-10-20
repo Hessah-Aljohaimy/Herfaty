@@ -78,6 +78,9 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
               return customer == null
                   ? const Center(child: Text('!لا توجد معلومات المشتري '))
                   : buildCustomer(customer, context);
+            } else if (snapshot.connectionState == ConnectionState.waiting) {
+              print('11111111111111111111111111111111111111');
+              return Center(child: CircularProgressIndicator());
             } else {
               return Center(child: Text("! هناك مشكلة ما حاول مجددا"));
             }
