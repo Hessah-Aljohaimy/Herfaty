@@ -60,11 +60,6 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
       body: FutureBuilder<Customer?>(
           future: readUser(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              print('11111111111111111111111111111111111111');
-              return Center(child: CircularProgressIndicator());
-            }
-
             if (snapshot.hasError) {
               print('333333333333333333333333333333333333333333333');
               return Center(
