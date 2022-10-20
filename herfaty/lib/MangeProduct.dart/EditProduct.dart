@@ -337,6 +337,8 @@ class _EditProduc extends State<EditProduct> {
                         return 'أدخل اسم المنتج';
                       }
 
+
+
                       if (value.length < 2) {
                         return " أدخل اسم أكبر من أو يساوي حرفين ";
                       }
@@ -413,7 +415,7 @@ class _EditProduc extends State<EditProduct> {
                         return 'أدخل وصف المنتج';
                       }
                       if (value.length < 2) {
-                        return " أدخل وصف أكبر من أو يساوي حرفين ";
+                        return " أدخل وصف أكبر من حرف ";
                       }
                       return null;
                     },
