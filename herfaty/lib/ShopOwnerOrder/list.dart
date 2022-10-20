@@ -370,8 +370,8 @@ class list extends StatelessWidget {
                         Size size = MediaQuery.of(context).size;
 
                         cItems.sort((a, b) {
-                          return DateTime.parse(b.orderDate)
-                              .compareTo(DateTime.parse(a.orderDate));
+                          return DateTime.parse(a.orderDate)
+                              .compareTo(DateTime.parse(b.orderDate));
                         });
 
                         if (cItems.isEmpty) {
