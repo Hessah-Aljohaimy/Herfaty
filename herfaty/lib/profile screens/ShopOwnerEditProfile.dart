@@ -49,29 +49,43 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
 
   final _formKey = GlobalKey<FormState>();
 
+  TextEditingController _passwordTextController = TextEditingController();
+
+  TextEditingController _emailTextEditingController = TextEditingController();
+  TextEditingController _nameTextEditingController = TextEditingController();
+
+  TextEditingController _BODController = TextEditingController();
+
+  TextEditingController _PhoneNumberTextEditingController =
+      TextEditingController();
+
+  TextEditingController _shopnameTextEditingController =
+      TextEditingController();
+  TextEditingController _shoplogoEditingController = TextEditingController();
+
+  TextEditingController _shopdescriptionTextEditingController =
+      TextEditingController();
+  @override
+  void initState() {
+    _passwordTextController.text = widget.password;
+
+    _emailTextEditingController.text = widget.email;
+    _nameTextEditingController.text = widget.name;
+
+    _BODController.text = widget.DOB;
+
+    _PhoneNumberTextEditingController.text = widget.phone_number;
+
+    _shopnameTextEditingController.text = widget.shopname;
+    _shoplogoEditingController.text = widget.logo;
+
+    _shopdescriptionTextEditingController.text = widget.shopdescription;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController _passwordTextController = new TextEditingController()
-      ..text = widget.password;
-
-    TextEditingController _emailTextEditingController =
-        new TextEditingController()..text = widget.email;
-    TextEditingController _nameTextEditingController =
-        new TextEditingController()..text = widget.name;
-
-    TextEditingController _BODController = new TextEditingController()
-      ..text = widget.DOB;
     DateTime _selectedDate;
-    TextEditingController _PhoneNumberTextEditingController =
-        new TextEditingController()..text = widget.phone_number;
-
-    TextEditingController _shopnameTextEditingController =
-        new TextEditingController()..text = widget.shopname;
-    TextEditingController _shoplogoEditingController =
-        new TextEditingController()..text = widget.logo;
-
-    TextEditingController _shopdescriptionTextEditingController =
-        new TextEditingController()..text = widget.shopdescription;
 
     int passlength = widget.password.length;
     String passwordStar = '';
