@@ -169,7 +169,7 @@ class _EditProduc extends State<EditProduct> {
               else
                 Container(
                   width: 400,
-                  height: 200,
+                  height: 300,
                   margin: EdgeInsets.symmetric(horizontal: 16),
                   decoration: BoxDecoration(
                     border: Border.all(width: 0.1, color: Colors.white),
@@ -298,13 +298,16 @@ class _EditProduc extends State<EditProduct> {
                     hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
                     suffixIcon: Padding(
                       padding: EdgeInsets.only(top: 15),
-                      child: Icon(Icons.production_quantity_limits_sharp,
-                          color: kPrimaryColor),
+                      
                     ),
+                        labelText: 'اسم المنتج',
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 3.0, horizontal: 23),
-                    labelStyle:
-                        TextStyle(color: kPrimaryColor, fontFamily: "Tajawal"),
+                      labelStyle: TextStyle(
+                        color: Color.fromARGB(255, 26, 96, 91),
+                        fontFamily: "Tajawal",
+                        fontSize: 19,
+                        fontWeight: FontWeight.bold),
                     // floatingLabelBehavior: FloatingLabelBehavior.never,
                     filled: true,
 
@@ -377,11 +380,15 @@ class _EditProduc extends State<EditProduct> {
                     hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
                     suffixIcon: Padding(
                       padding: EdgeInsets.only(top: 15),
-                      child: Icon(Icons.description, //Sara edits
-                          color: kPrimaryColor),
+                     
                     ),
-                    labelStyle:
-                        TextStyle(color: kPrimaryColor, fontFamily: "Tajawal"),
+                 labelText: 'تفاصيل المنتج',
+                   
+                      labelStyle: TextStyle(
+                        color: Color.fromARGB(255, 26, 96, 91),
+                        fontFamily: "Tajawal",
+                        fontSize: 19,
+                        fontWeight: FontWeight.bold),
                     // floatingLabelBehavior: FloatingLabelBehavior.never,
                     filled: true,
 
@@ -439,12 +446,15 @@ class _EditProduc extends State<EditProduct> {
                     hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
                     suffixIcon: Padding(
                       padding: EdgeInsets.only(top: 15),
-                      child: Icon(Icons.numbers,
-                          //Sara edits
-                          color: kPrimaryColor),
+
                     ),
-                    labelStyle:
-                        TextStyle(color: kPrimaryColor, fontFamily: "Tajawal"),
+                  labelText: 'الكمية المتاحة',
+                   
+                      labelStyle: TextStyle(
+                        color: Color.fromARGB(255, 26, 96, 91),
+                        fontFamily: "Tajawal",
+                        fontSize: 19,
+                        fontWeight: FontWeight.bold),
                     // floatingLabelBehavior: FloatingLabelBehavior.never,
                     filled: true,
 
@@ -505,12 +515,14 @@ class _EditProduc extends State<EditProduct> {
                     hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
                     suffixIcon: Padding(
                       padding: EdgeInsets.only(top: 15),
-                      child: Icon(Icons.money,
-                          //Sara edits
-                          color: kPrimaryColor),
+                     
                     ),
-                    labelStyle:
-                        TextStyle(color: kPrimaryColor, fontFamily: "Tajawal"),
+                 labelText: 'سعر المنتج',
+                      labelStyle: TextStyle(
+                        color: Color.fromARGB(255, 26, 96, 91),
+                        fontFamily: "Tajawal",
+                        fontSize: 19,
+                        fontWeight: FontWeight.bold),
                     // floatingLabelBehavior: FloatingLabelBehavior.never,
                     filled: true,
 
@@ -536,6 +548,9 @@ class _EditProduc extends State<EditProduct> {
                     ),
                   ),
                   validator: (value) {
+
+
+
                     if (value == null || value.isEmpty)
                       return 'أدخل السعر ';
                     else if (double.parse(value!) <= 0)
@@ -544,6 +559,10 @@ class _EditProduc extends State<EditProduct> {
                       return " أدخل سعر أقل من أو يساوي 500 ";
                     else
                       return null;
+
+
+
+                      
                   },
                 ),
               ),
@@ -552,11 +571,17 @@ class _EditProduc extends State<EditProduct> {
               ),
 
               SizedBox(
-                height: 30,
+                height: 25,
               ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 16),
-                child: ElevatedButton(
+                 Row(
+                  children: [
+                    SizedBox(
+                      width: 38,
+                    ),
+                Expanded(
+                      child: Row(children: [
+                        
+                 ElevatedButton(
                   onPressed: () {
                     if (uploadImageUrl.isEmpty)
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -660,43 +685,46 @@ class _EditProduc extends State<EditProduct> {
                   amountController.clear();
                   priceController.clear();*/
                   },
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(Color(0xff51908E)),
-                    padding: MaterialStateProperty.all(
-                        EdgeInsets.symmetric(horizontal: 40, vertical: 13)),
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(27))),
-                  ),
+                   style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Color(0xff51908E)),
+                            padding: MaterialStateProperty.all(
+                                EdgeInsets.symmetric(
+                                    horizontal: 40, vertical: 13)),
+                                    
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(27))),
+                          ),
                   child: Text(
                     "حفظ التعديلات ",
                     style: TextStyle(
                         fontSize: 14,
                         fontFamily: "Tajawal",
                         fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
+                      ),
+                        ),
+                   
               /* child: Text("إضافة منتج"),
               style: ElevatedButton.styleFrom(
                   primary: Color.fromARGB(255, 26, 96, 91)),
             ),*/
 
               SizedBox(
-                height: 10,
-              ),
-
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 16),
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
-                        Color.fromARGB(255, 167, 29, 29)),
-                    padding: MaterialStateProperty.all(
-                        EdgeInsets.symmetric(horizontal: 40, vertical: 13)),
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(27))),
-                  ),
+                      width: 12,
+                    ),
+              
+                 ElevatedButton(
+                style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                Color.fromARGB(255, 221, 112, 112)),
+                            padding: MaterialStateProperty.all(
+                                EdgeInsets.symmetric(
+                                    horizontal: 40, vertical: 13)),
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(27))),
+                          ),
                   child: Text(
                     "إلغاء",
                     style: TextStyle(
@@ -739,6 +767,18 @@ class _EditProduc extends State<EditProduct> {
                         });
                   },
                 ),
+             
+
+
+              ]),
+                    )
+                  ],
+                ),
+
+
+
+                SizedBox(
+                height: 20,
               ),
               /* ElevatedButton(
               style: ElevatedButton.styleFrom(primary: Colors.red),
