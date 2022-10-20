@@ -370,8 +370,9 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
             color: Color.fromARGB(255, 122, 122, 122),
           ),
         ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(width: 2, color: Colors.blue),
+         focusedBorder: OutlineInputBorder(
+          borderSide:
+              BorderSide(width: 2, color: Color.fromARGB(188, 26, 96, 91),),
         ),
         errorStyle: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
         errorBorder: OutlineInputBorder(
@@ -424,7 +425,8 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
           ),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(width: 2, color: Colors.blue),
+          borderSide:
+              BorderSide(width: 2, color: Color.fromARGB(188, 26, 96, 91),),
         ),
         errorStyle: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
         errorBorder: OutlineInputBorder(
