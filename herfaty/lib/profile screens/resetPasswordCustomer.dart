@@ -36,7 +36,7 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
     final uid = user!.uid;
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      //resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text("إعادة تعيين كلمة المرور",
             style: TextStyle(
@@ -476,10 +476,12 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
                         color: Color.fromARGB(188, 26, 96, 91),
                       ),
                     ),
-                     focusedBorder: OutlineInputBorder(
-          borderSide:
-              BorderSide(width: 2, color: Color.fromARGB(188, 26, 96, 91),),
-        ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 2,
+                        color: Color.fromARGB(188, 26, 96, 91),
+                      ),
+                    ),
                     errorStyle:
                         TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
                     errorBorder: OutlineInputBorder(
@@ -496,7 +498,7 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
                         ishiddenpasswordold
                             ? Icons.visibility
                             : Icons.visibility_off,
-                            color: Color.fromARGB(255, 26, 96, 91),
+                        color: Color.fromARGB(255, 26, 96, 91),
                       ),
                     ),
                   ),
@@ -550,9 +552,11 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
-          borderSide:
-              BorderSide(width: 2, color: Color.fromARGB(188, 26, 96, 91),),
-        ),
+                      borderSide: BorderSide(
+                        width: 2,
+                        color: Color.fromARGB(188, 26, 96, 91),
+                      ),
+                    ),
                     errorStyle:
                         TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
                     errorBorder: OutlineInputBorder(
@@ -569,7 +573,7 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
                         ishiddenpasswordnew1
                             ? Icons.visibility
                             : Icons.visibility_off,
-                             color: Color.fromARGB(255, 26, 96, 91),
+                        color: Color.fromARGB(255, 26, 96, 91),
                       ),
                     ),
                   ),
@@ -635,10 +639,12 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
                         color: Color.fromARGB(188, 26, 96, 91),
                       ),
                     ),
-                     focusedBorder: OutlineInputBorder(
-          borderSide:
-              BorderSide(width: 2, color: Color.fromARGB(188, 26, 96, 91),),
-        ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 2,
+                        color: Color.fromARGB(188, 26, 96, 91),
+                      ),
+                    ),
                     errorStyle:
                         TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
                     errorBorder: OutlineInputBorder(
@@ -655,7 +661,7 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
                         ishiddenpasswordnew2
                             ? Icons.visibility
                             : Icons.visibility_off,
-                             color: Color.fromARGB(255, 26, 96, 91),
+                        color: Color.fromARGB(255, 26, 96, 91),
                       ),
                     ),
                   ),

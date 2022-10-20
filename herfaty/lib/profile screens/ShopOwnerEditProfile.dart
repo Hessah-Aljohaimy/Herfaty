@@ -47,9 +47,10 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
   PickedFile? _imageFile;
   File? pickedImage1;
 
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
     TextEditingController _passwordTextController = new TextEditingController()
       ..text = widget.password;
 
@@ -88,10 +89,13 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
           ), */
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      //resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text("تعديل الحساب", style: TextStyle(color: Color(0xff51908E),            fontFamily: "Tajawal",
-)),
+        title: Text("تعديل الحساب",
+            style: TextStyle(
+              color: Color(0xff51908E),
+              fontFamily: "Tajawal",
+            )),
         centerTitle: true,
         backgroundColor: Colors.white,
         shadowColor: Color.fromARGB(255, 39, 141, 134),
@@ -516,8 +520,10 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
           ),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide:
-              BorderSide(width: 2, color: Color.fromARGB(188, 26, 96, 91),),
+          borderSide: BorderSide(
+            width: 2,
+            color: Color.fromARGB(188, 26, 96, 91),
+          ),
         ),
         errorStyle: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
         errorBorder: OutlineInputBorder(
@@ -572,9 +578,11 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
             color: Color.fromARGB(188, 26, 96, 91),
           ),
         ),
-       focusedBorder: OutlineInputBorder(
-          borderSide:
-              BorderSide(width: 2, color: Color.fromARGB(188, 26, 96, 91),),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            width: 2,
+            color: Color.fromARGB(188, 26, 96, 91),
+          ),
         ),
         errorStyle: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
         errorBorder: OutlineInputBorder(
@@ -729,11 +737,15 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
             fontWeight: FontWeight.bold),
         fillColor: Colors.white.withOpacity(0.3),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Color.fromARGB(188, 26, 96, 91),),
+          borderSide: BorderSide(
+            color: Color.fromARGB(188, 26, 96, 91),
+          ),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide:
-              BorderSide(width: 2, color: Color.fromARGB(188, 26, 96, 91),),
+          borderSide: BorderSide(
+            width: 2,
+            color: Color.fromARGB(188, 26, 96, 91),
+          ),
         ),
         errorStyle: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
         errorBorder: OutlineInputBorder(

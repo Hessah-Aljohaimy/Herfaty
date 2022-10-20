@@ -79,7 +79,7 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
           },
         ),*/
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      // resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text("تعديل البيانات",
             style: TextStyle(
@@ -370,9 +370,11 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
             color: Color.fromARGB(255, 122, 122, 122),
           ),
         ),
-         focusedBorder: OutlineInputBorder(
-          borderSide:
-              BorderSide(width: 2, color: Color.fromARGB(188, 26, 96, 91),),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            width: 2,
+            color: Color.fromARGB(188, 26, 96, 91),
+          ),
         ),
         errorStyle: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
         errorBorder: OutlineInputBorder(
@@ -425,8 +427,10 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
           ),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide:
-              BorderSide(width: 2, color: Color.fromARGB(188, 26, 96, 91),),
+          borderSide: BorderSide(
+            width: 2,
+            color: Color.fromARGB(188, 26, 96, 91),
+          ),
         ),
         errorStyle: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
         errorBorder: OutlineInputBorder(
