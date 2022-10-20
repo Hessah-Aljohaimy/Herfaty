@@ -30,10 +30,10 @@ import '../pages/signupCustomer.dart';
 import 'ownerSettings.dart';
 //Define snapshot
 
-class logOutButton extends StatefulWidget {
-  @override
-  State<logOutButton> createState() => _logOutButtonState();
-}
+class logOutButton extends StatelessWidget {
+
+  PickedFile? _imageFile;
+  
 
 class _logOutButtonState extends State<logOutButton> {
   final FirebaseAuth auth = FirebaseAuth.instance;
@@ -639,5 +639,12 @@ class _logOutButtonState extends State<logOutButton> {
   // Stream<List<Iterable<CartModal>>> readCarts() {
   Future<User?> _getFirebaseUser() async {
     return FirebaseAuth.instance.currentUser;
+  }
+}
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    throw UnimplementedError();
   }
 }

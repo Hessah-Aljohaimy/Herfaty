@@ -225,7 +225,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                       readOnly:
                           false, //set it true, so that user will not able to edit text
                       onTap: () async {
-                        var formatter = DateFormat('dd/MM/yyyy');
+                        // var formatter = DateFormat('dd/MM/yyyy');
 
                         DateTime today = DateTime.now();
                         DateTime initYear = DateTime(today.year - 15, 1, 1);
@@ -265,7 +265,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                         print(
                             formattedDate); //formatted date output using intl package =>  2021-03-16
                         //you can implement different kind of Date Format here according to your requirement
-                        _BODController..text = formattedDate;
+                        _BODController.text = formattedDate;
                       },
                     ),
                   ),

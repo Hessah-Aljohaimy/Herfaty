@@ -567,8 +567,6 @@ class _ResetPasswordOwnerState extends State<ResetPasswordOwner> {
                       return "أدخل " + 'كلمة المرور القديمة';
                     }
 
-                    if (value.length < 6)
-                      return "ادخل كلمة مرور اكبر من 6 خانات";
                     if (value != oldpass) {
                       return "كلمة المرور لا تطابق كلمة المرور المسجلة مسبقا ";
                     }

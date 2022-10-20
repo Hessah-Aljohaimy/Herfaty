@@ -861,12 +861,41 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
 
 //             } else {
 //               return Center();
+
 //            } });
 
                                           final FirebaseAuth auth =
                                               FirebaseAuth.instance;
                                           final User? u = auth.currentUser;
                                           final uid = u!.uid;
+                                          FirebaseFirestore.instance
+                                              .collection('orders')
+                                              .get()
+                                              .then((snapshot) {
+                                            List<DocumentSnapshot> allDocs =
+                                                snapshot.docs;
+
+                                            List<DocumentSnapshot>
+                                                filteredDocs = allDocs
+                                                    .where((document) =>
+                                                        document[
+                                                            'shopOwnerId'] ==
+                                                        uid)
+                                                    .where((document) =>
+                                                        document['status'] ==
+                                                        "طلب جديد")
+                                                    .toList();
+
+                                                if(allDoc==null) {
+                                                  return Text('لا يوجد')
+                                                }   
+
+                                            // for (DocumentSnapshot ds
+                                            //     in filteredDocs) {
+
+                                            // }
+                                          });
+
                                           String email = shopowner.email;
                                           String password = shopowner.password;
 

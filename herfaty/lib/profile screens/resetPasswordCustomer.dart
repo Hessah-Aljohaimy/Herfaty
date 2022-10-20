@@ -20,12 +20,9 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
   bool ishiddenpasswordnew2 = true;
   //Define snapshot
 
-  TextEditingController _oldPasswordTextController =
-      new TextEditingController();
-  TextEditingController _newPasswordTextController1 =
-      new TextEditingController();
-  TextEditingController _newPasswordTextController2 =
-      new TextEditingController();
+  TextEditingController _oldPasswordTextController = TextEditingController();
+  TextEditingController _newPasswordTextController1 = TextEditingController();
+  TextEditingController _newPasswordTextController2 = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -66,6 +63,10 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
                   child: Text(
                       '!هناك خطأ في استرجاع البيانات${snapshot.hasError}'));
             }
+            if (!snapshot.hasData) {
+              print('2222222222222222222222222222222222222222222222');
+              return Center(child: Text('! خطأ في عرض البيانات '));
+            }
 
             if (!snapshot.hasData) {
               print('2222222222222222222222222222222222222222222222');
@@ -78,9 +79,6 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
               return customer == null
                   ? const Center(child: Text('!لا توجد معلومات المشتري '))
                   : buildCustomer(customer, context);
-            } else if (snapshot.connectionState == ConnectionState.waiting) {
-              print('11111111111111111111111111111111111111');
-              return Center(child: CircularProgressIndicator());
             } else {
               return Center(child: Text("! هناك مشكلة ما حاول مجددا"));
             }
@@ -413,7 +411,6 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     final uid = user!.uid;
-    String DocId = uid;
 
     print("----------------------------$uid");
 
@@ -504,8 +501,6 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
                       return "أدخل " + 'كلمة المرور القديمة';
                     }
 
-                    // if (value.length < 6)
-                    //   return "ادخل كلمة مرور اكبر من 6 خانات";
                     if (value != oldpass) {
                       return "كلمة المرور لا تطابق كلمة المرور المسجلة مسبقا ";
                     }
@@ -694,6 +689,8 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
               ),
               ElevatedButton(
                 onPressed: () async {
+                  FocusScope.of(context).unfocus();
+                  FocusScope.of(context).requestFocus(new FocusNode());
                   if (_formKey.currentState!.validate()) {
                     final docCustomer = FirebaseFirestore.instance
                         .collection('customers')
