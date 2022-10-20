@@ -95,470 +95,468 @@ class _EditProduc extends State<EditProduct> {
     }
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(56.0),
         child: Container(
           child: const DefaultAppBar(title: " تعديل المنتج "),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/images/cartBack1.png'),
-                  fit: BoxFit.cover)),
-          child: Form(
-            key: _formKey,
-            child: ListView(
-              //can doing scroll
+      body: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/images/cartBack1.png'),
+                fit: BoxFit.cover)),
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            //can doing scroll
 
-              children: <Widget>[
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  //margin: EdgeInsets.symmetric(horizontal: 200),
-                  child: SizedBox(
-                    width: 300,
-                    height: 40,
-                    child: ElevatedButton.icon(
-                      onPressed: () async {
-                        await _showMyDialog();
-                      },
-
-                      style: ElevatedButton.styleFrom(primary: kPrimaryColor),
-                      icon: Icon(
-                        // <-- Icon
-                        Icons.image,
-                        size: 24.0,
-                      ),
-
-                      label: Text(
-                        'تغيير الصورة',
-                        style: TextStyle(fontSize: 22, fontFamily: "Tajawal"),
-                        //textAlign: TextAlign.right,
-                      ), // <-- Text
-                    ),
-                  ),
-                ),
-                StreamBuilder<List<shopOwnerModel>>(
-                    stream: shopOwnerData(),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                      if (snapshot.hasError) {
-                        return Text('Something went wrong! ${snapshot.error}');
-                      } else if (snapshot.hasData) {
-                        final cItems = snapshot.data!.toList();
-
-                        for (int i = 0; i < cItems.length; i++) {
-                          shopNameData = cItems[i].shopname;
-                        }
-                      }
-                      return Text('');
-                    }),
-
-                // SizedBox(
-                //   height: 20,
-                // ),
-                if (uploadImageUrl.isEmpty)
-                  SizedBox(
-                    width: 200,
-                    height: 200,
-                  )
-                else
-                  Container(
-                    width: 400,
-                    height: 200,
-                    decoration: BoxDecoration(
-                      border: Border.all(width: 0.1, color: Colors.white),
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        bottomLeft: Radius.circular(10),
-                      ),
-                      //color: Color(0xFFFAF9F6),
-                      color: Colors.white,
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        bottomLeft: Radius.circular(10),
-                      ),
-                      child: Image.network(
-                        uploadImageUrl,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  //
-                  mainAxisAlignment:
-                      MainAxisAlignment.spaceEvenly, //for right edge
-                  children: [
-                    SizedBox(width: 20), // for space
-                    Text(
-                      "فئة المنتج:",
-                      style: TextStyle(
-                          fontSize: 21,
-                          fontFamily: "Tajawal",
-                          color: kPrimaryColor,
-                          fontWeight: FontWeight.bold),
-                      // (color: kPrimaryColor)
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(7),
-                      decoration: BoxDecoration(
-                        color: Colors.white, //<-- SEE HERE
-                      ),
-                      child: DropdownButton(
-                        // Initial Value
-                        value: dropdownvalue,
-                        underline: Container(
-                          height: 3,
-                          color: kPrimaryColor,
-                          //<-- SEE HERE
-                        ),
-                        icon: Icon(Icons.arrow_drop_down),
-                        style: const TextStyle(
-                            color: kPrimaryColor, //<-- SEE HERE
-                            fontSize: 19,
-                            fontWeight: FontWeight.bold),
-                        // Down Arrow Icon
-                        // Array list of items
-                        items: items.map((String items) {
-                          return DropdownMenuItem(
-                            value: items,
-                            child: Text(
-                              items,
-                            ),
-                          );
-                        }).toList(),
-                        // After selecting the desired option,it will
-                        // change button value to selected value
-
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            dropdownvalue = newValue!;
-                          });
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-                /* DropdownButton(
-                // Initial Value
-                value: dropdownvalueNumber,
-                underline: Container(
-                  height: 3,
-                  color: Color.fromARGB(255, 26, 96, 91), //<-- SEE HERE
-                ),
-                icon: Icon(Icons.arrow_drop_down),
-                style: const TextStyle(
-                    color: Color.fromARGB(255, 26, 96, 91), //<-- SEE HERE
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
-                // Down Arrow Icon
-                // Array list of items
-                items: numberitems.map((var items) {
-                  return DropdownMenuItem(
-                    value: items,
-                    child: Text(
-                      items,
-                      textAlign: TextAlign.right,
-                    ),
-                  );
-                }).toList(),
-                // After selecting the desired option,it will
-                // change button value to selected value
-                onChanged: (var? newValue) {
-                  setState(() {
-                    dropdownvalueNumber = newValue!;
-                  });
-                },
-              ),*/
-
-                SizedBox(
+            children: <Widget>[
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 16),
+                child: SizedBox(
+                  width: 300,
                   height: 40,
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 40),
-                  child: TextFormField(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    controller: nameController,
-                    maxLength: 30,
-                    //right aligment
+                  child: ElevatedButton.icon(
+                    onPressed: () async {
+                      await _showMyDialog();
+                    },
 
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'اسم المنتج',
-                      hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
-                      suffixIcon: Padding(
-                        padding: EdgeInsets.only(top: 15),
-                        child: Icon(Icons.production_quantity_limits_sharp,
-                            color: kPrimaryColor),
-                      ),
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 3.0, horizontal: 23),
-                      labelStyle: TextStyle(
-                          color: kPrimaryColor, fontFamily: "Tajawal"),
-                      // floatingLabelBehavior: FloatingLabelBehavior.never,
-                      filled: true,
-
-                      fillColor: Colors.white,
-
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: kPrimaryColor),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 2, color: kPrimaryColor),
-                      ),
-                      errorStyle:
-                          TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
-
-                      errorBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
-                      ),
-
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            width: 2, color: Color.fromARGB(255, 164, 46, 46)),
-                      ),
+                    style: ElevatedButton.styleFrom(primary: kPrimaryColor),
+                    icon: Icon(
+                      // <-- Icon
+                      Icons.image,
+                      size: 24.0,
                     ),
 
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'أدخل اسم المنتج';
-                      }
-
-
-
-                      if (value.length < 2) {
-                        return " أدخل اسم أكبر من أو يساوي حرفين ";
-                      }
-
-                      if (!RegExp(
-                              r"^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z- ][]*$")
-                          .hasMatch(value)) {
-                        return "أدخل اسم بلا أرقام ورموز";
-                      }
-
-                      return null;
-                    },
+                    label: Text(
+                      'تغيير الصورة',
+                      style: TextStyle(fontSize: 22, fontFamily: "Tajawal"),
+                      //textAlign: TextAlign.right,
+                    ), // <-- Text
                   ),
                 ),
-                /*Container(
-                child: Text(
-                  "اسم صحيح بلا أرقام ورموز",
+              ),
+              StreamBuilder<List<shopOwnerModel>>(
+                  stream: shopOwnerData(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    if (snapshot.hasError) {
+                      return Text('Something went wrong! ${snapshot.error}');
+                    } else if (snapshot.hasData) {
+                      final cItems = snapshot.data!.toList();
+
+                      for (int i = 0; i < cItems.length; i++) {
+                        shopNameData = cItems[i].shopname;
+                      }
+                    }
+                    return Text('');
+                  }),
+
+              // SizedBox(
+              //   height: 20,
+              // ),
+              if (uploadImageUrl.isEmpty)
+                SizedBox(
+                  width: 200,
+                  height: 200,
+                )
+              else
+                Container(
+                  width: 400,
+                  height: 200,
+                  margin: EdgeInsets.symmetric(horizontal: 16),
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 0.1, color: Colors.white),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomLeft: Radius.circular(10),
+                    ),
+                    //color: Color(0xFFFAF9F6),
+                    color: Colors.white,
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomLeft: Radius.circular(10),
+                    ),
+                    child: Image.network(
+                      uploadImageUrl,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                //
+                mainAxisAlignment:
+                    MainAxisAlignment.spaceEvenly, //for right edge
+                children: [
+                  SizedBox(width: 20), // for space
+                  Text(
+                    "فئة المنتج:",
+                    style: TextStyle(
+                        fontSize: 21,
+                        fontFamily: "Tajawal",
+                        color: kPrimaryColor,
+                        fontWeight: FontWeight.bold),
+                    // (color: kPrimaryColor)
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(7),
+                    decoration: BoxDecoration(
+                      color: Colors.white, //<-- SEE HERE
+                    ),
+                    child: DropdownButton(
+                      // Initial Value
+                      value: dropdownvalue,
+                      underline: Container(
+                        height: 3,
+                        color: kPrimaryColor,
+                        //<-- SEE HERE
+                      ),
+                      icon: Icon(Icons.arrow_drop_down),
+                      style: const TextStyle(
+                          color: kPrimaryColor, //<-- SEE HERE
+                          fontSize: 19,
+                          fontWeight: FontWeight.bold),
+                      // Down Arrow Icon
+                      // Array list of items
+                      items: items.map((String items) {
+                        return DropdownMenuItem(
+                          value: items,
+                          child: Text(
+                            items,
+                          ),
+                        );
+                      }).toList(),
+                      // After selecting the desired option,it will
+                      // change button value to selected value
+
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          dropdownvalue = newValue!;
+                        });
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              /* DropdownButton(
+              // Initial Value
+              value: dropdownvalueNumber,
+              underline: Container(
+                height: 3,
+                color: Color.fromARGB(255, 26, 96, 91), //<-- SEE HERE
+              ),
+              icon: Icon(Icons.arrow_drop_down),
+              style: const TextStyle(
+                  color: Color.fromARGB(255, 26, 96, 91), //<-- SEE HERE
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
+              // Down Arrow Icon
+              // Array list of items
+              items: numberitems.map((var items) {
+                return DropdownMenuItem(
+                  value: items,
+                  child: Text(
+                    items,
+                    textAlign: TextAlign.right,
+                  ),
+                );
+              }).toList(),
+              // After selecting the desired option,it will
+              // change button value to selected value
+              onChanged: (var? newValue) {
+                setState(() {
+                  dropdownvalueNumber = newValue!;
+                });
+              },
+            ),*/
+
+              SizedBox(
+                height: 40,
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 40),
+                child: TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  controller: nameController,
+                  maxLength: 30,
+                  //right aligment
+
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'اسم المنتج',
+                    hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
+                    suffixIcon: Padding(
+                      padding: EdgeInsets.only(top: 15),
+                      child: Icon(Icons.production_quantity_limits_sharp,
+                          color: kPrimaryColor),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 3.0, horizontal: 23),
+                    labelStyle:
+                        TextStyle(color: kPrimaryColor, fontFamily: "Tajawal"),
+                    // floatingLabelBehavior: FloatingLabelBehavior.never,
+                    filled: true,
+
+                    fillColor: Colors.white,
+
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: kPrimaryColor),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 2, color: kPrimaryColor),
+                    ),
+                    errorStyle:
+                        TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
+
+                    errorBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
+                    ),
+
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 2, color: Color.fromARGB(255, 164, 46, 46)),
+                    ),
+                  ),
+
+                  validator: (value) {
+                    if (value!.trim() == null || value.trim().isEmpty) {
+                      return 'أدخل اسم المنتج';
+                    }
+
+                    if (value.trim().length < 2) {
+                      return " أدخل اسم أكبر من أو يساوي حرفين ";
+                    }
+
+                    if (!RegExp(
+                            r"^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z- ][]*$")
+                        .hasMatch(value)) {
+                      return "أدخل اسم بلا أرقام ورموز";
+                    }
+
+                    return null;
+                  },
+                ),
+              ),
+              /*Container(
+              child: Text(
+                "اسم صحيح بلا أرقام ورموز",
+                textAlign: TextAlign.right,
+                style: TextStyle(color: Color.fromARGB(255, 235, 47, 26)),
+              ),
+            ),*/
+
+              SizedBox(
+                height: 20,
+              ), //for space
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 40),
+                child: TextFormField(
+                  maxLines: null,
+                  keyboardType: TextInputType.multiline,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  controller: descController,
                   textAlign: TextAlign.right,
-                  style: TextStyle(color: Color.fromARGB(255, 235, 47, 26)),
-                ),
-              ),*/
+                  maxLength: 300,
+                  decoration: InputDecoration(
+                    hintText: 'تفاصيل المنتج',
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 3.0, horizontal: 23),
 
-                SizedBox(
-                  height: 20,
-                ), //for space
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 40),
-                  child: TextFormField(
-                    maxLines: null,
-                    keyboardType: TextInputType.multiline,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    controller: descController,
-                    textAlign: TextAlign.right,
-                    maxLength: 300,
-                    decoration: InputDecoration(
-                      hintText: 'تفاصيل المنتج',
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 3.0, horizontal: 23),
-
-                      hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
-                      suffixIcon: Padding(
-                        padding: EdgeInsets.only(top: 15),
-                        child: Icon(Icons.description, //Sara edits
-                            color: kPrimaryColor),
-                      ),
-                      labelStyle: TextStyle(
-                          color: kPrimaryColor, fontFamily: "Tajawal"),
-                      // floatingLabelBehavior: FloatingLabelBehavior.never,
-                      filled: true,
-
-                      fillColor: Colors.white,
-
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: kPrimaryColor),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 2, color: kPrimaryColor),
-                      ),
-                      errorStyle:
-                          TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
-
-                      errorBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
-                      ),
-
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            width: 2, color: Color.fromARGB(255, 164, 46, 46)),
-                      ),
+                    hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
+                    suffixIcon: Padding(
+                      padding: EdgeInsets.only(top: 15),
+                      child: Icon(Icons.description, //Sara edits
+                          color: kPrimaryColor),
                     ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'أدخل وصف المنتج';
-                      }
-                      if (value.length < 2) {
-                        return " أدخل وصف أكبر من حرف ";
-                      }
+                    labelStyle:
+                        TextStyle(color: kPrimaryColor, fontFamily: "Tajawal"),
+                    // floatingLabelBehavior: FloatingLabelBehavior.never,
+                    filled: true,
+
+                    fillColor: Colors.white,
+
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: kPrimaryColor),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 2, color: kPrimaryColor),
+                    ),
+                    errorStyle:
+                        TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
+
+                    errorBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
+                    ),
+
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 2, color: Color.fromARGB(255, 164, 46, 46)),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value!.trim() == null || value.trim().isEmpty) {
+                      return 'أدخل وصف المنتج';
+                    }
+                    if (value.trim().length < 2) {
+                      return " أدخل وصف أكبر من حرف";
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 40),
+                child: TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  controller: amountController,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly,
+                  ],
+                  textAlign: TextAlign.right,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'الكمية المتاحة',
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 3.0, horizontal: 23),
+
+                    hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
+                    suffixIcon: Padding(
+                      padding: EdgeInsets.only(top: 15),
+                      child: Icon(Icons.numbers,
+                          //Sara edits
+                          color: kPrimaryColor),
+                    ),
+                    labelStyle:
+                        TextStyle(color: kPrimaryColor, fontFamily: "Tajawal"),
+                    // floatingLabelBehavior: FloatingLabelBehavior.never,
+                    filled: true,
+
+                    fillColor: Colors.white,
+
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: kPrimaryColor),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 2, color: kPrimaryColor),
+                    ),
+                    errorStyle:
+                        TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
+
+                    errorBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
+                    ),
+
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 2, color: Color.fromARGB(255, 164, 46, 46)),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty)
+                      return 'أدخل كمية المنتج';
+                    if (int.parse(value) <= 0) return "أدخل رقم أكبر من صفر";
+                    if (int.parse(value) > 15)
+                      return "أدخل رقم أصغر من أو يساوي 15";
+                    else
                       return null;
-                    },
-                  ),
+                  },
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 40),
-                  child: TextFormField(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    controller: amountController,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.digitsOnly,
-                    ],
-                    textAlign: TextAlign.right,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'الكمية المتاحة',
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 3.0, horizontal: 23),
+              ),
+              /*  Container(
+              padding: const EdgeInsets.only(right: 41),
+              child: Text(
+                " *الكمية المتاحة يجب أن تكون بين 1-15",
+                style: TextStyle(color: gray),
+              ),
+            ),*/
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 40),
+                child: TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  controller: priceController,
+                  keyboardType: TextInputType.number,
+                  textAlign: TextAlign.right,
+                  decoration: InputDecoration(
+                    hintText: 'السعر',
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 3.0, horizontal: 23),
 
-                      hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
-                      suffixIcon: Padding(
-                        padding: EdgeInsets.only(top: 15),
-                        child: Icon(Icons.numbers,
-                            //Sara edits
-                            color: kPrimaryColor),
-                      ),
-                      labelStyle: TextStyle(
-                          color: kPrimaryColor, fontFamily: "Tajawal"),
-                      // floatingLabelBehavior: FloatingLabelBehavior.never,
-                      filled: true,
-
-                      fillColor: Colors.white,
-
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: kPrimaryColor),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 2, color: kPrimaryColor),
-                      ),
-                      errorStyle:
-                          TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
-
-                      errorBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
-                      ),
-
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            width: 2, color: Color.fromARGB(255, 164, 46, 46)),
-                      ),
+                    hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
+                    suffixIcon: Padding(
+                      padding: EdgeInsets.only(top: 15),
+                      child: Icon(Icons.money,
+                          //Sara edits
+                          color: kPrimaryColor),
                     ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty)
-                        return 'أدخل كمية المنتج';
-                      if (int.parse(value) <= 0) return "أدخل رقم أكبر من صفر";
-                      if (int.parse(value) > 15)
-                        return "أدخل رقم أصغر من أو يساوي 15";
-                      else
-                        return null;
-                    },
-                  ),
-                ),
-                /*  Container(
-                padding: const EdgeInsets.only(right: 41),
-                child: Text(
-                  " *الكمية المتاحة يجب أن تكون بين 1-15",
-                  style: TextStyle(color: gray),
-                ),
-              ),*/
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 40),
-                  child: TextFormField(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    controller: priceController,
-                    keyboardType: TextInputType.number,
-                    textAlign: TextAlign.right,
-                    decoration: InputDecoration(
-                      hintText: 'السعر',
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 3.0, horizontal: 23),
+                    labelStyle:
+                        TextStyle(color: kPrimaryColor, fontFamily: "Tajawal"),
+                    // floatingLabelBehavior: FloatingLabelBehavior.never,
+                    filled: true,
 
-                      hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
-                      suffixIcon: Padding(
-                        padding: EdgeInsets.only(top: 15),
-                        child: Icon(Icons.money,
-                            //Sara edits
-                            color: kPrimaryColor),
-                      ),
-                      labelStyle: TextStyle(
-                          color: kPrimaryColor, fontFamily: "Tajawal"),
-                      // floatingLabelBehavior: FloatingLabelBehavior.never,
-                      filled: true,
+                    fillColor: Colors.white,
 
-                      fillColor: Colors.white,
-
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: kPrimaryColor),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 2, color: kPrimaryColor),
-                      ),
-                      errorStyle:
-                          TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
-
-                      errorBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
-                      ),
-
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            width: 2, color: Color.fromARGB(255, 164, 46, 46)),
-                      ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: kPrimaryColor),
                     ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty)
-                        return 'أدخل السعر ';
-                      else if (double.parse(value!) <= 0)
-                        return "أدخل سعر أكبر من صفر";
-                      else if (double.parse(value!) > 500)
-                        return " أدخل سعر أقل من أو يساوي 500 ";
-                      else
-                        return null;
-                    },
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 2, color: kPrimaryColor),
+                    ),
+                    errorStyle:
+                        TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
 
-                SizedBox(
-                  height: 30,
+                    errorBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
+                    ),
+
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 2, color: Color.fromARGB(255, 164, 46, 46)),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty)
+                      return 'أدخل السعر ';
+                    else if (double.parse(value!) <= 0)
+                      return "أدخل سعر أكبر من صفر";
+                    else if (double.parse(value!) > 500)
+                      return " أدخل سعر أقل من أو يساوي 500 ";
+                    else
+                      return null;
+                  },
                 ),
-                ElevatedButton(
+              ),
+              SizedBox(
+                height: 20,
+              ),
+
+              SizedBox(
+                height: 30,
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 16),
+                child: ElevatedButton(
                   onPressed: () {
                     if (uploadImageUrl.isEmpty)
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -678,16 +676,19 @@ class _EditProduc extends State<EditProduct> {
                         fontWeight: FontWeight.bold),
                   ),
                 ),
-                /* child: Text("إضافة منتج"),
-                style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 26, 96, 91)),
-              ),*/
+              ),
+              /* child: Text("إضافة منتج"),
+              style: ElevatedButton.styleFrom(
+                  primary: Color.fromARGB(255, 26, 96, 91)),
+            ),*/
 
-                SizedBox(
-                  height: 10,
-                ),
+              SizedBox(
+                height: 10,
+              ),
 
-                ElevatedButton(
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 16),
+                child: ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
                         Color.fromARGB(255, 167, 29, 29)),
@@ -738,15 +739,15 @@ class _EditProduc extends State<EditProduct> {
                         });
                   },
                 ),
-                /* ElevatedButton(
-                style: ElevatedButton.styleFrom(primary: Colors.red),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text("إلغاء "),
-              ),*/
-              ],
-            ),
+              ),
+              /* ElevatedButton(
+              style: ElevatedButton.styleFrom(primary: Colors.red),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("إلغاء "),
+            ),*/
+            ],
           ),
         ),
       ),
