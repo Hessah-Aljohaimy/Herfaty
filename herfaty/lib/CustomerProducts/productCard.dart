@@ -357,7 +357,7 @@ class _productCardState extends State<productCard> {
       var data = wishListDoc.docs.elementAt(0).data() as Map;
       DocId = data["docId"];
       print(
-          '================product with id ${thisproductId} is in the wishList, wishList docId is ${DocId}============');
+          '=====product with id ${thisproductId} is in the wishList, wishList docId is ${DocId}=====');
     }
     return DocId;
   }

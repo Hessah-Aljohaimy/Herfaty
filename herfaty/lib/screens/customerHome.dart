@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/cupertino.dart';
 import 'package:herfaty/cart/cart.dart';
 import 'package:herfaty/constants/color.dart';
@@ -7,6 +9,7 @@ import 'package:herfaty/widgets/profile_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../CustomerProducts/CustomerProductsList.dart';
 import '../CustomerProducts/wishList/CustomerWishList.dart';
 
@@ -36,9 +39,14 @@ class _customerHomeScreenState extends State<customerHomeScreen> {
   }
 }
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);
 
+  @override
+  State<Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -70,13 +78,18 @@ class Body extends StatelessWidget {
   }
 }
 
-class CategoryCard extends StatelessWidget {
+class CategoryCard extends StatefulWidget {
   final Category category;
   const CategoryCard({
     Key? key,
     required this.category,
   }) : super(key: key);
 
+  @override
+  State<CategoryCard> createState() => _CategoryCardState();
+}
+
+class _CategoryCardState extends State<CategoryCard> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -99,14 +112,14 @@ class CategoryCard extends StatelessWidget {
             Align(
               alignment: Alignment.topRight,
               child: Image.asset(
-                category.photo,
+                widget.category.photo,
                 height: kCategoryCardImageSize,
               ),
             ),
             const SizedBox(
               height: 10,
             ),
-            Text(category.name,
+            Text(widget.category.name,
                 style: TextStyle(
                     color: kPrimaryColor,
                     fontWeight: FontWeight.bold,
@@ -123,10 +136,26 @@ class CategoryCard extends StatelessWidget {
   }
 }
 
-class AppBar extends StatelessWidget {
+class AppBar extends StatefulWidget {
   const AppBar({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<AppBar> createState() => _AppBarState();
+}
+
+class _AppBarState extends State<AppBar> {
+  String thisCustomerName = "";
+  @override
+  void initState() {
+    print("this is app bar initState====");
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    String thisCustomerId = user!.uid;
+    setCustomerName(thisCustomerId);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -162,17 +191,15 @@ class AppBar extends StatelessWidget {
               },
             ),
           ),*/
-
           const SizedBox(
             height: 20,
           ),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "مرحباً بكَ أيها المُشتَرٍي",
+                "مرحبًا بك ${thisCustomerName} ",
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -181,14 +208,38 @@ class AppBar extends StatelessWidget {
               ),
             ],
           ),
-
-          //to be deleted if no need it
-          /*const SizedBox(
-            height: 20,
-          ),*/
         ],
       ),
     );
+  }
+
+  //======================================================================================
+  Future<void> setCustomerName(String thisCustomerId) async {
+    String existedName = await getName(thisCustomerId);
+    if (existedName != "") {
+      setState(() {
+        thisCustomerName = existedName;
+      });
+    } else {
+      setState(() {
+        thisCustomerName = "أيها المشتري";
+      });
+    }
+  }
+
+  //===================================================================================
+  Future<String> getName(String thisCustomerId) async {
+    String CustomerName = "";
+    final customersDoc = await FirebaseFirestore.instance
+        .collection('customers')
+        .where("id", isEqualTo: thisCustomerId)
+        .get();
+    if (customersDoc.size > 0) {
+      var data = customersDoc.docs.elementAt(0).data() as Map;
+      CustomerName = data["name"];
+      print("existed name is ${CustomerName}");
+    }
+    return CustomerName;
   }
 }
 

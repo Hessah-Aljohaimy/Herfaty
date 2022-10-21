@@ -18,9 +18,9 @@ class _ExpandedWidgetState extends State<ExpandedWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.text.length > 66) {
-      firstHalf = widget.text.substring(0, 66);
-      secondHalf = widget.text.substring(67, widget.text.length);
+    if (widget.text.length > 88) {
+      firstHalf = widget.text.substring(0, 88);
+      secondHalf = widget.text.substring(89, widget.text.length);
       return expandingMethod();
     } else {
       firstHalf = widget.text;
