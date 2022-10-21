@@ -166,7 +166,7 @@ class _logOutButtonState extends State<logOutButton> {
           future: readUser(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              print('11111111111111111111111111111111111111');
+              //print('11111111111111111111111111111111111111');
               return Center(child: CircularProgressIndicator());
             }
 
@@ -178,7 +178,7 @@ class _logOutButtonState extends State<logOutButton> {
             }
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasData) {
-                print('4444444444444444444444444444444444444444');
+                //print('4444444444444444444444444444444444444444');
 
                 final customer = snapshot.data;
                 return customer == null
@@ -187,7 +187,7 @@ class _logOutButtonState extends State<logOutButton> {
               }
             }
             if (!snapshot.hasData) {
-              print('2222222222222222222222222222222222222222222222');
+              //print('2222222222222222222222222222222222222222222222');
               return Center(child: Text('! خطأ في عرض البيانات '));
             } else {
               return Center(child: Text("! هناك مشكلة ما حاول مجددا"));
@@ -215,7 +215,7 @@ class _logOutButtonState extends State<logOutButton> {
 
   Future<Customer?> readUser() async {
     try {
-      print("BBBBBBBBBBEGIningggggggggggggggggggggggg ");
+      //print("BBBBBBBBBBEGIningggggggggggggggggggggggg ");
       final FirebaseAuth auth = FirebaseAuth.instance;
       final User? user = auth.currentUser;
       final uid = user!.uid;
@@ -230,8 +230,7 @@ class _logOutButtonState extends State<logOutButton> {
       print('after the refrence');
 
       if (docCustomer.exists) {
-        print(
-            "SSSSSSSSSSSSSSSSSSNNNNNNNNNNNNNNNNAAAAAAAAAAAAAAAAAAPPPPPPPPPPP");
+        //print("SSSSSSSSSSSSSSSSSSNNNNNNNNNNNNNNNNAAAAAAAAAAAAAAAAAAPPPPPPPPPPP");
         return Customer.fromJson(docCustomer.data()!);
       }
     } catch (e) {
