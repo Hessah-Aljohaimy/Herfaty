@@ -140,7 +140,8 @@ class listOrderCustomer extends StatelessWidget {
                                                     for (int i = 0;
                                                         i < PItem.length;
                                                         i++) {
-                                                      if (PItem[i].id == key) {
+                                                      if (PItem[i].productId ==
+                                                          key) {
                                                         //if (!PItems.contains(PItem[i]))
                                                         PItems.add(PItem[i]);
                                                       }
@@ -435,7 +436,8 @@ class listOrderCustomer extends StatelessWidget {
                                                     for (int i = 0;
                                                         i < PItem.length;
                                                         i++) {
-                                                      if (PItem[i].id == key) {
+                                                      if (PItem[i].productId ==
+                                                          key) {
                                                         //if (!PItems.contains(PItem[i]))
                                                         PItems.add(PItem[i]);
                                                       }
@@ -733,7 +735,8 @@ class listOrderCustomer extends StatelessWidget {
                                                     for (int i = 0;
                                                         i < PItem.length;
                                                         i++) {
-                                                      if (PItem[i].id == key) {
+                                                      if (PItem[i].productId ==
+                                                          key) {
                                                         //if (!PItems.contains(PItem[i]))
                                                         PItems.add(PItem[i]);
                                                       }

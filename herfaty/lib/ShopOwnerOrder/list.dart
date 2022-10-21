@@ -25,7 +25,6 @@ class list extends StatelessWidget {
       .snapshots()
       .map((snapshot) =>
           snapshot.docs.map((doc) => orderModal.fromJson(doc.data())).toList());
-
   Widget buildUser(orderModal orderModel) => ListTile(
         //leading: CircleAvatar(child: Text('${orders.docId}')),
         title: Text(orderModel.docId),
