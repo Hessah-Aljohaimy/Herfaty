@@ -1,18 +1,18 @@
-//Shop owners can add a new product by specifying product category, name, photo, description and amount.  *title = name, category and amount isn't added here
-
 class Product1 {
-  int availableAmount = 0;
-  String id = "";
+  int availableAmount = 0, quantity = 1;
+  String productId = "";
   num price = 0;
   String categoryName = "",
       name = "",
       description = "",
       image = "",
       shopOwnerId = "",
+      customerId = "",
+      docId = "",
       shopName = "";
 
   Product1({
-    required this.id,
+    required this.productId,
     required this.availableAmount,
     required this.price,
     required this.categoryName,
@@ -24,7 +24,7 @@ class Product1 {
   });
 
   Product1.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    productId = json['id'];
     availableAmount = json['avalibleAmount'];
     price = json['price'];
     categoryName = json['categoryName'];
@@ -34,10 +34,24 @@ class Product1 {
     shopOwnerId = json['shopOwnerId'];
     shopName = json['shopName'];
   }
+  //for retrieving data from wishList
+  Product1.fromJson2(Map<String, dynamic> json) {
+    image = json['image'];
+    customerId = json['customerId'];
+    shopOwnerId = json['shopOwnerId'];
+    shopName = json['shopName'];
+    productId = json['productId'];
+    docId = json['docId'];
+    description = json['description'];
+    name = json['name'];
+    price = json['price'];
+    quantity = json['quantity'];
+    availableAmount = json['avalibleAmount'];
+  }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
+    data['id'] = this.productId;
     data['avalibleAmount'] = this.availableAmount;
     data['price'] = this.price;
     data['categoryName'] = this.categoryName;

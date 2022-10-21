@@ -6,6 +6,7 @@ class cart_wishlistModel {
   String shopOwnerId = "";
   String shopName = "";
   String docId = "";
+  String description = "";
   int quantity = 1;
   int availableAmount = 0;
   num price = 0;
@@ -18,6 +19,7 @@ class cart_wishlistModel {
     required this.shopOwnerId,
     required this.shopName,
     required this.docId,
+    required this.description,
     required this.quantity,
     required this.availableAmount,
     required this.price,
@@ -29,6 +31,7 @@ class cart_wishlistModel {
     shopName = json['shopName'];
     productId = json['productId'];
     docId = json['docId'];
+    description = json['description'];
     name = json['name'];
     price = json['price'];
     quantity = json['quantity'];
@@ -40,6 +43,7 @@ class cart_wishlistModel {
     data['customerId'] = customerId;
     data['productId'] = productId;
     data['docId'] = docId;
+    data['description'] = description;
     data['name'] = name;
     data['price'] = price;
     data['quantity'] = quantity;

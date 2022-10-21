@@ -3,7 +3,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:herfaty/cart/cart.dart';
 import 'package:herfaty/models/cart_wishlistModel.dart';
 import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/constants/color.dart';
@@ -44,31 +43,35 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
         FirebaseFirestore.instance.collection('Products');
     reference.snapshots().listen((querySnapshot) {
       querySnapshot.docChanges.forEach((change) {
-        if (change.type == DocumentChangeType.modified) {
-          for (var index = 0; index < querySnapshot.size; index++) {
-            var data = querySnapshot.docs.elementAt(index).data() as Map;
-            String productId = data["id"];
-            if (productId == widget.product.id) {
-              int updatedAvailabeAmount = data["avalibleAmount"];
-              if (updatedAvailabeAmount != widget.product.availableAmount) {
-                if (mounted) {
-                  setState(
-                    () {
-                      widget.product.availableAmount = updatedAvailabeAmount;
-                      if (updatedAvailabeAmount == 0) {
-                        thisPageQuantity = 0;
-                        isButtonsDisabled = true;
-                      } else {
-                        thisPageQuantity = 1;
-                        isButtonsDisabled = false;
-                      }
-                    },
-                  );
-                }
-                /*ShowDialogMethod(
-                    context, "تم تحديث الكمية المتوفرة من هذا المنتج");*/
+        if (change.type == DocumentChangeType.modified &&
+            change.doc.id == widget.product.productId) {
+          var data =
+              querySnapshot.docs.elementAt(change.newIndex).data() as Map;
+          String updatedDescription = data["dsscription"];
+          int updatedAvailabeAmount = data["avalibleAmount"];
+          num updatedPrice = data["price"];
+          String updatedImage = data["image"];
+          String updatedName = data["name"];
+          if (mounted) {
+            setState(() {
+              widget.product.availableAmount = updatedAvailabeAmount;
+              widget.product.name = updatedName;
+              widget.product.description = updatedDescription;
+              widget.product.price = updatedPrice;
+              widget.product.image = updatedImage;
+              if (updatedAvailabeAmount == 0) {
+                thisPageQuantity = 0;
+                isButtonsDisabled = true;
+              } else {
+                thisPageQuantity = 1;
+                isButtonsDisabled = false;
               }
-            }
+            });
+          }
+        } else if (change.type == DocumentChangeType.removed) {
+          if (change.doc.id == widget.product.productId) {
+            Navigator.pop(context);
+            //showToastMethod(context, "عذرًا، تم حذف المنتج من قبل المالك");
           }
         }
       });
@@ -321,7 +324,8 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                                       "quantity":
                                           thisPageQuantity + existedQuantity
                                     });
-                                    await showDoneToast(context);
+                                    await showToastMethod(context,
+                                        "تمت إضافة المنتج للسلة بنجاح");
                                   } else {
                                     ShowDialogMethod(context,
                                         "المنتج موجود لديك في السلة، لا توجد كمية متاحة أكثر من ذلك.");
@@ -335,8 +339,9 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                                       name: widget.product.name,
                                       detailsImage: widget.detailsImage,
                                       docId: productToBeAdded.id,
-                                      productId: widget.product.id,
+                                      productId: widget.product.productId,
                                       customerId: user.uid,
+                                      description: widget.product.description,
                                       shopName: widget.product.shopName,
                                       shopOwnerId: widget.product.shopOwnerId,
                                       quantity:
@@ -345,7 +350,8 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                                           widget.product.availableAmount,
                                       price: widget.product.price);
                                   createCartItem(item);
-                                  await showDoneToast(context);
+                                  await showToastMethod(
+                                      context, "تمت إضافة المنتج للسلة بنجاح");
                                 }
                               },
                         style: ElevatedButton.styleFrom(
@@ -382,8 +388,8 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                             style: const TextStyle(
                               fontSize: 22.0,
                               fontWeight: FontWeight.w600,
-                              fontFamily: "Tajawal",
-                              color: Colors.redAccent,
+                              //fontFamily: "Tajawal",
+                              color: Colors.red,
                             ),
                           ),
                         ),
@@ -416,7 +422,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
     print("==================this is get quantity method");
     final cartDoc = await FirebaseFirestore.instance
         .collection('cart')
-        .where("productId", isEqualTo: widget.product.id)
+        .where("productId", isEqualTo: widget.product.productId)
         .where("customerId", isEqualTo: thisCustomerId)
         .get();
     if (cartDoc.size > 0) {
@@ -435,7 +441,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
     print("==================this is get docId method");
     final cartDoc = await FirebaseFirestore.instance
         .collection('cart')
-        .where("productId", isEqualTo: widget.product.id)
+        .where("productId", isEqualTo: widget.product.productId)
         .where("customerId", isEqualTo: thisCustomerId)
         .get();
     if (cartDoc.size > 0) {
@@ -471,9 +477,10 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
   }
 
 ///////////////////////////////////////////////////////////////////////////////
-  Future<void> showDoneToast(BuildContext context) async {
+  Future<void> showToastMethod(
+      BuildContext context, String textToBeShown) async {
     Fluttertoast.showToast(
-      msg: "تمت إضافة المنتج للسلة بنجاح",
+      msg: textToBeShown,
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.CENTER,
       timeInSecForIosWeb: 3,
@@ -529,14 +536,14 @@ class ProductImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 20),
-      height: size.width * 0.7,
+      height: size.width * 0.8,
       color: const Color.fromARGB(255, 255, 255, 255),
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
           Container(
-            height: size.width * 0.7,
-            width: size.width * 0.7,
+            height: size.width * 0.8,
+            width: size.width * 0.8,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(10)),
               color: Colors.white,

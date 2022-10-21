@@ -161,7 +161,7 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
                                     widget.product.description,
                                     widget.detailsImage,
                                     widget.product.name,
-                                    widget.product.id,
+                                    widget.product.productId,
                                     widget.product.categoryName,
                                     ' ${thisPageQuantity * widget.product.price}')),
                           );
@@ -216,7 +216,7 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
                                       onPressed: () {
                                         FirebaseFirestore.instance
                                             .collection('Products')
-                                            .doc(widget.product.id)
+                                            .doc(widget.product.productId)
                                             //.doc(getDocId())
                                             .delete();
 
@@ -266,7 +266,7 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
     print("==================this is get quantity method");
     final cartDoc = await FirebaseFirestore.instance
         .collection('cart')
-        .where("productId", isEqualTo: widget.product.id)
+        .where("productId", isEqualTo: widget.product.productId)
         .where("customerId", isEqualTo: thisCustomerId)
         .get();
     if (cartDoc.size > 0) {
@@ -285,7 +285,7 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
     print("==================this is get docId method");
     final cartDoc = await FirebaseFirestore.instance
         .collection('cart')
-        .where("productId", isEqualTo: widget.product.id)
+        .where("productId", isEqualTo: widget.product.productId)
         .where("customerId", isEqualTo: thisCustomerId)
         .get();
     if (cartDoc.size > 0) {

@@ -638,7 +638,7 @@ class _EditProduc extends State<EditProduct> {
                                 availableAmount: amount,
                                 categoryName: dropdownvalue,
                                 description: descController.text,
-                                id: widget.id,
+                                productId: widget.id,
                                 image: uploadImageUrl,
                                 name: nameController.text,
                                 price: price,
