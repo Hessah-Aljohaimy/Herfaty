@@ -623,13 +623,15 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             child: Container(
-                height: 220,
+                height: 250,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     // final checkPasslField = TextFormField(
-
+                    SizedBox(
+                      height: 5,
+                    ),
                     Center(
                       child: Text(
                         "إمكانية الوصول",
@@ -643,11 +645,12 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                     ),
                     Center(
                       child: Container(
-                        width: 160,
-                        height: 70,
+                        width: 180,
+                        height: 110,
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                          image: AssetImage('assets/images/momPassword.png'),
+                          fit: BoxFit.scaleDown,
+                          image: AssetImage('assets/images/parents1.png'),
                         )),
                       ),
                     ),
@@ -757,7 +760,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             child: Container(
-                height: 220,
+                height: 250,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -777,11 +780,11 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                     ),
                     Center(
                       child: Container(
-                        width: 160,
-                        height: 70,
+                        width: 180,
+                        height: 110,
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                          image: AssetImage('assets/images/momPassword.png'),
+                          image: AssetImage('assets/images/parents1.png'),
                         )),
                       ),
                     ),
@@ -1070,7 +1073,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             child: Container(
-                height: 220,
+                height: 250,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -1090,11 +1093,11 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                     ),
                     Center(
                       child: Container(
-                        width: 160,
-                        height: 70,
+                        width: 180,
+                        height: 110,
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                          image: AssetImage('assets/images/momPassword.png'),
+                          image: AssetImage('assets/images/parents1.png'),
                         )),
                       ),
                     ),

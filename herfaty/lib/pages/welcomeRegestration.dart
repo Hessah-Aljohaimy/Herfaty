@@ -36,23 +36,27 @@ class WelcomeRegestration extends StatelessWidget {
                         ),
                         Row(
                           children: [
+                            SizedBox(
+                              width: 25,
+                            ),
                             Positioned(
                               bottom: 50,
                               top: 50,
-                              right: 10,
                               child: Image.asset(
-                                "assets/images/kid_Waving.png",
-                                width: 200,
+                                "assets/images/kid_Wavingcroped.png",
+                                width: 170,
                               ),
                             ),
                             Positioned(
                               bottom: 50,
                               top: 50,
-                              right: 10,
                               child: Image.asset(
-                                "assets/images/girlkidd.png",
-                                width: 200,
+                                "assets/images/girlkiddcroped.png",
+                                width: 180,
                               ),
+                            ),
+                            SizedBox(
+                              width: 25,
                             ),
                           ],
                         ),
