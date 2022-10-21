@@ -50,22 +50,22 @@ class nav extends StatelessWidget {
     return [
       PersistentBottomNavBarItem(
           icon: const Icon(CupertinoIcons.home),
-          title: "  الرئيسية",
+          title: "الرئيسية",
           activeColorPrimary: kPrimaryColor.withOpacity(0.9),
           inactiveColorPrimary: CupertinoColors.systemGrey),
       PersistentBottomNavBarItem(
           icon: const Icon(CupertinoIcons.cart),
-          title: "  السلة",
+          title: "سلتي",
           activeColorPrimary: kPrimaryColor.withOpacity(0.9),
           inactiveColorPrimary: CupertinoColors.systemGrey),
       PersistentBottomNavBarItem(
           icon: const Icon(Icons.favorite_border),
-          title: "  المفضلة",
+          title: "مفضلاتي",
           activeColorPrimary: kPrimaryColor.withOpacity(0.9),
           inactiveColorPrimary: CupertinoColors.systemGrey),
       PersistentBottomNavBarItem(
           icon: const Icon(CupertinoIcons.square_favorites),
-          title: "  الطلبات",
+          title: "طلباتي",
           activeColorPrimary: kPrimaryColor.withOpacity(0.9),
           inactiveColorPrimary: CupertinoColors.systemGrey),
       PersistentBottomNavBarItem(
