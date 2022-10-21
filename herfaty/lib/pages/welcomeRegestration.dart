@@ -25,23 +25,38 @@ class WelcomeRegestration extends StatelessWidget {
                       children: [
                         Text(
                           "أهلا بك !",
-                          style: TextStyle(fontSize: 33, fontFamily: "Tajawal" 
-                        ,fontWeight: FontWeight.bold,color: Color.fromARGB(255, 26, 96, 91)
-                          ),
+                          style: TextStyle(
+                              fontSize: 33,
+                              fontFamily: "Tajawal",
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 26, 96, 91)),
                         ),
-                         SizedBox(
+                        SizedBox(
                           height: 15,
                         ),
-                        Positioned(
-                          bottom: 50,
-                          top: 50,
-                          right: 10,
-                          child: Image.asset(
-                            "assets/images/kid_Waving.png",
-                            width: 200,
-                          ),
+                        Row(
+                          children: [
+                            Positioned(
+                              bottom: 50,
+                              top: 50,
+                              right: 10,
+                              child: Image.asset(
+                                "assets/images/kid_Waving.png",
+                                width: 200,
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 50,
+                              top: 50,
+                              right: 10,
+                              child: Image.asset(
+                                "assets/images/girlkidd.png",
+                                width: 200,
+                              ),
+                            ),
+                          ],
                         ),
- SizedBox(
+                        SizedBox(
                           height: 21,
                         ),
                         // Image.asset(
@@ -49,13 +64,15 @@ class WelcomeRegestration extends StatelessWidget {
                         //   width: 120,
                         // ),
 
-                         Text(
+                        Text(
                           "تسجيل حساب جديد",
-                          style: TextStyle(fontSize: 33, fontFamily: "Tajawal" 
-                        ,fontWeight: FontWeight.bold,color: Color.fromARGB(255, 26, 96, 91)
-                          ),
+                          style: TextStyle(
+                              fontSize: 33,
+                              fontFamily: "Tajawal",
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 26, 96, 91)),
                         ),
-                         SizedBox(
+                        SizedBox(
                           height: 21,
                         ),
                         ElevatedButton(
@@ -67,12 +84,14 @@ class WelcomeRegestration extends StatelessWidget {
                             );
                           },
                           style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                               Color(0xff51908E)),
-                      padding: MaterialStateProperty.all(
-                            EdgeInsets.symmetric(horizontal: 95, vertical: 13)),
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(27))),
+                            backgroundColor:
+                                MaterialStateProperty.all(Color(0xff51908E)),
+                            padding: MaterialStateProperty.all(
+                                EdgeInsets.symmetric(
+                                    horizontal: 95, vertical: 13)),
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(27))),
                           ),
                           child: Text(
                             " حرفي",
@@ -95,10 +114,11 @@ class WelcomeRegestration extends StatelessWidget {
                             );
                           },
                           style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                               Color(0xff51908E)),
+                            backgroundColor:
+                                MaterialStateProperty.all(Color(0xff51908E)),
                             padding: MaterialStateProperty.all(
-                                EdgeInsets.symmetric( horizontal: 88, vertical: 12)),
+                                EdgeInsets.symmetric(
+                                    horizontal: 88, vertical: 12)),
                             shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(27))),
@@ -112,30 +132,34 @@ class WelcomeRegestration extends StatelessWidget {
                             ),
                           ),
                         ),
- SizedBox(
+                        SizedBox(
                           height: 21,
                         ),
-                          
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                           Text("الرجوع إلى صفحة ",style: TextStyle(fontFamily: "Tajawal"),),
-                          GestureDetector(
-                            onTap: (){ Navigator.pushNamed(context, "/login");},
-                            child: Text("تسجيل الدخول ", style: TextStyle(fontFamily: "Tajawal", decoration: TextDecoration.underline,color: Color.fromARGB(255, 53, 47, 244)),)),
 
-                         
-
-                          
-                        ],
-                      )
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "الرجوع إلى صفحة ",
+                              style: TextStyle(fontFamily: "Tajawal"),
+                            ),
+                            GestureDetector(
+                                onTap: () {
+                                  Navigator.pushNamed(context, "/login");
+                                },
+                                child: Text(
+                                  "تسجيل الدخول ",
+                                  style: TextStyle(
+                                      fontFamily: "Tajawal",
+                                      decoration: TextDecoration.underline,
+                                      color: Color.fromARGB(255, 53, 47, 244)),
+                                )),
+                          ],
+                        )
                       ],
-                      
                     ),
                   ),
 
-
-                    
 //Here are the photos to the screen for UI
                   ///////////////Positioned///////
                   Positioned(
@@ -155,7 +179,6 @@ class WelcomeRegestration extends StatelessWidget {
                   ),
                 ],
               ),
-              
             ),
           ),
           // ),
