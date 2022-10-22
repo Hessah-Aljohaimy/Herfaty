@@ -62,7 +62,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                       if (snapshot.hasError) {
                         return Text("somting wrong \n ${snapshot.error}");
                       } else if (!snapshot.hasData) {
-                        return Text("");
+                        return Center(child: CircularProgressIndicator());
                       } else if (snapshot.hasData) {
                         final cItems = snapshot.data!.toList();
                         Size size = MediaQuery.of(context).size;
@@ -279,7 +279,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                 } else {
                                                   return Center(
                                                       child:
-                                                          Text("يتم التحميل"));
+                                                          CircularProgressIndicator());
                                                 }
                                               }),
                                         ],
@@ -380,7 +380,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                       if (snapshot.hasError) {
                         return Text("somting wrong \n ${snapshot.error}");
                       } else if (!snapshot.hasData) {
-                        return Text("");
+                        return Center(child: CircularProgressIndicator());
                       } else if (snapshot.hasData) {
                         final cItems = snapshot.data!.toList();
                         Size size = MediaQuery.of(context).size;
@@ -598,7 +598,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                 } else {
                                                   return Center(
                                                       child:
-                                                          Text("يتم التحميل"));
+                                                          CircularProgressIndicator());
                                                 }
                                               }),
                                         ],
@@ -699,7 +699,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                       if (snapshot.hasError) {
                         return Text("somting wrong \n ${snapshot.error}");
                       } else if (!snapshot.hasData) {
-                        return Text("");
+                        return Center(child: CircularProgressIndicator());
                       } else if (snapshot.hasData) {
                         final cItems = snapshot.data!.toList();
                         Size size = MediaQuery.of(context).size;
@@ -923,7 +923,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                 } else {
                                                   return Center(
                                                       child:
-                                                          Text("يتم التحميل"));
+                                                          CircularProgressIndicator());
                                                 }
                                               }),
                                         ],

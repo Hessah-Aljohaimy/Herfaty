@@ -215,7 +215,7 @@ class Services extends StatelessWidget {
                     itemCount: cItems.length,
                   );
                 } else {
-                  return Center(child: Text("يتم التحميل"));
+                  return Center(child: CircularProgressIndicator());
                 }
               })
         ],
