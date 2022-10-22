@@ -38,6 +38,8 @@ class ShopOwnerEditProfile extends StatefulWidget {
 }
 
 class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
+  bool isEditied = false;
+
   get kPrimaryColor => null;
   final ImagePicker _picker = ImagePicker();
   bool showLocalImage = false;
@@ -114,6 +116,16 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
         backgroundColor: Colors.white,
         shadowColor: Color.fromARGB(255, 39, 141, 134),
         elevation: 3,
+        leading: IconButton(
+          onPressed: () {
+            Future.delayed(const Duration(seconds: 1), () {
+              Navigator.pop(context);
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => ShopOwnerProfile()));
+            });
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
         automaticallyImplyLeading: false,
         iconTheme: IconThemeData(color: Color(0xff51908E)),
       ),
@@ -362,52 +374,72 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                   children: [
                     // Expanded(
                     //   child: Row(children: [
+
                     SizedBox(
                       width: 50,
                     ),
+
                     ElevatedButton(
                       onPressed: () {
-                        final docShopOwner = FirebaseFirestore.instance
-                            .collection('shop_owner')
-                            .doc(widget.uid);
-                        if (uploadImageUrl == "") {
-                          uploadImageUrl = widget.logo;
+                        if (_nameTextEditingController.text != widget.name ||
+                            _BODController.text != widget.DOB ||
+                            _PhoneNumberTextEditingController.text !=
+                                widget.phone_number ||
+                            _shopnameTextEditingController.text !=
+                                widget.shopname ||
+                            _shopdescriptionTextEditingController.text !=
+                                widget.shopdescription) {
+                          final docShopOwner = FirebaseFirestore.instance
+                              .collection('shop_owner')
+                              .doc(widget.uid);
+                          if (uploadImageUrl == "") {
+                            uploadImageUrl = widget.logo;
+                          }
+
+                          print(widget.uid);
+                          //update this spesific feild
+                          docShopOwner.update({
+                            'DOB': _BODController.text,
+                            'email': widget.email,
+                            'id': widget.uid,
+                            'logo': uploadImageUrl,
+                            'name': _nameTextEditingController.text,
+                            'password': widget.password,
+                            'phone_number':
+                                _PhoneNumberTextEditingController.text,
+                            'shopdescription':
+                                _shopdescriptionTextEditingController.text,
+                            'shopname': _shopnameTextEditingController.text,
+                          });
+                          Fluttertoast.showToast(
+                            msg: "تم تحديث حسابك بنجاح",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 3,
+                            backgroundColor: Color.fromARGB(255, 26, 96, 91),
+                            textColor: Colors.white,
+                            fontSize: 18.0,
+                          );
+                          // openPasswordDialog(context);
+
+                          Future.delayed(const Duration(seconds: 1), () {
+                            Navigator.pop(context);
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ShopOwnerProfile()));
+                          });
+                        } else {
+                          Fluttertoast.showToast(
+                            msg: "لم يتم تعديل بيانات الحساب",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 3,
+                            backgroundColor: Color.fromARGB(255, 156, 30, 21),
+                            textColor: Colors.white,
+                            fontSize: 18.0,
+                          );
                         }
-
-                        print(widget.uid);
-                        //update this spesific feild
-                        docShopOwner.update({
-                          'DOB': _BODController.text,
-                          'email': widget.email,
-                          'id': widget.uid,
-                          'logo': uploadImageUrl,
-                          'name': _nameTextEditingController.text,
-                          'password': widget.password,
-                          'phone_number':
-                              _PhoneNumberTextEditingController.text,
-                          'shopdescription':
-                              _shopdescriptionTextEditingController.text,
-                          'shopname': _shopnameTextEditingController.text,
-                        });
-                        Fluttertoast.showToast(
-                          msg: "تم تحديث حسابك بنجاح",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.CENTER,
-                          timeInSecForIosWeb: 3,
-                          backgroundColor: Color.fromARGB(255, 26, 96, 91),
-                          textColor: Colors.white,
-                          fontSize: 18.0,
-                        );
-                        // openPasswordDialog(context);
-
-                        Future.delayed(const Duration(seconds: 1), () {
-                          Navigator.pop(context);
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ShopOwnerProfile()));
-                        });
-
                         // Navigator.push(
                         //     context,
                         //     MaterialPageRoute(
@@ -433,57 +465,120 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                     SizedBox(
                       width: 10,
                     ),
+                    checkingButton(),
                     ElevatedButton(
                       onPressed: () async {
                         // Diolog to enter the password
+                        if (_nameTextEditingController.text != widget.name ||
+                            _BODController.text != widget.DOB ||
+                            _PhoneNumberTextEditingController.text !=
+                                widget.phone_number ||
+                            _shopnameTextEditingController.text !=
+                                widget.shopname ||
+                            _shopdescriptionTextEditingController.text !=
+                                widget.shopdescription) {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context1) {
+                              return AlertDialog(
+                                title: Text("تنبيه"),
+                                content: Text('سيتم إلغاء التعديلات'),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: Text("إلغاء",
+                                        style: TextStyle(color: Colors.red)),
+                                    onPressed: () {
+                                      Navigator.of(context1).pop();
+                                      Navigator.of(context).pop();
+                                      //The logic of cancle edits
+                                      // imageProfile(widget.logo);
+                                      // _nameTextEditingController
+                                      //   ..text = widget.name;
+                                      // _BODController..text = widget.DOB;
+                                      // _PhoneNumberTextEditingController
+                                      //   ..text = widget.phone_number;
+                                      // _shopdescriptionTextEditingController
+                                      //   ..text = widget.shopdescription;
+                                      // _shopnameTextEditingController
+                                      //   ..text = widget.shopname;
+                                      // Navigator.of(context).pop();
 
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context1) {
-                            return AlertDialog(
-                              title: Text("تنبيه"),
-                              content: Text('سيتم إلغاء التعديلات'),
-                              actions: <Widget>[
-                                TextButton(
-                                  child: Text("إلغاء",
-                                      style: TextStyle(color: Colors.red)),
-                                  onPressed: () {
-                                    Navigator.of(context1).pop();
-                                    Navigator.of(context).pop();
-                                    //The logic of cancle edits
-                                    // imageProfile(widget.logo);
-                                    // _nameTextEditingController
-                                    //   ..text = widget.name;
-                                    // _BODController..text = widget.DOB;
-                                    // _PhoneNumberTextEditingController
-                                    //   ..text = widget.phone_number;
-                                    // _shopdescriptionTextEditingController
-                                    //   ..text = widget.shopdescription;
-                                    // _shopnameTextEditingController
-                                    //   ..text = widget.shopname;
-                                    // Navigator.of(context).pop();
+                                      //Navigator.of(context).pop();
+                                      // FirebaseAuth.instance.signOut();
+                                      // Navigator.of(context, rootNavigator: true)
+                                      //     .pushReplacement(MaterialPageRoute(
+                                      //         builder: (context) => new Welcome()));
+                                    },
+                                  ),
+                                  TextButton(
+                                    child: Text("تراجع"),
+                                    onPressed: () {
+                                      Navigator.of(context1).pop();
+                                    },
+                                  )
+                                ],
+                              );
+                            },
+                          );
+                        } else {
+                          Fluttertoast.showToast(
+                            msg: "لم يتم تعديل بيانات الحساب",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 3,
+                            backgroundColor: Color.fromARGB(255, 156, 30, 21),
+                            textColor: Colors.white,
+                            fontSize: 18.0,
+                          );
+                        }
 
-                                    //Navigator.of(context).pop();
-                                    // FirebaseAuth.instance.signOut();
-                                    // Navigator.of(context, rootNavigator: true)
-                                    //     .pushReplacement(MaterialPageRoute(
-                                    //         builder: (context) => new Welcome()));
-                                  },
-                                ),
-                                TextButton(
-                                  child: Text("تراجع"),
-                                  onPressed: () {
-                                    Navigator.of(context1).pop();
-                                  },
-                                )
-                              ],
-                            );
-                          },
-                        );
+                        // showDialog(
+                        //   context: context,
+                        //   builder: (BuildContext context1) {
+                        //     return AlertDialog(
+                        //       title: Text("تنبيه"),
+                        //       content: Text('سيتم إلغاء التعديلات'),
+                        //       actions: <Widget>[
+                        //         TextButton(
+                        //           child: Text("إلغاء",
+                        //               style: TextStyle(color: Colors.red)),
+                        //           onPressed: () {
+                        //             Navigator.of(context1).pop();
+                        //             Navigator.of(context).pop();
+                        //             //The logic of cancle edits
+                        //             // imageProfile(widget.logo);
+                        //             // _nameTextEditingController
+                        //             //   ..text = widget.name;
+                        //             // _BODController..text = widget.DOB;
+                        //             // _PhoneNumberTextEditingController
+                        //             //   ..text = widget.phone_number;
+                        //             // _shopdescriptionTextEditingController
+                        //             //   ..text = widget.shopdescription;
+                        //             // _shopnameTextEditingController
+                        //             //   ..text = widget.shopname;
+                        //             // Navigator.of(context).pop();
+
+                        //             //Navigator.of(context).pop();
+                        //             // FirebaseAuth.instance.signOut();
+                        //             // Navigator.of(context, rootNavigator: true)
+                        //             //     .pushReplacement(MaterialPageRoute(
+                        //             //         builder: (context) => new Welcome()));
+                        //           },
+                        //         ),
+                        //         TextButton(
+                        //           child: Text("تراجع"),
+                        //           onPressed: () {
+                        //             Navigator.of(context1).pop();
+                        //           },
+                        //         )
+                        //       ],
+                        //     );
+                        //   },
+                        // );
                       },
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                            Color.fromARGB(255, 221, 112, 112)),
+                        backgroundColor:
+                            MaterialStateProperty.all(Color(0xff51908E)),
                         padding: MaterialStateProperty.all(
                             EdgeInsets.symmetric(horizontal: 55, vertical: 13)),
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
@@ -744,8 +839,8 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
     return TextFormField(
       autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: controller,
-      minLines: text == "وصف المتجر" ? 1 : 1,
-      maxLines: text == "وصف المتجر" ? 9 : 1,
+      minLines: text == "وصف المتجر" ? 3 : 1,
+      maxLines: text == "وصف المتجر" ? 3 : 1,
       maxLength: 160,
       style: TextStyle(
           color: Color.fromARGB(255, 90, 90, 90), fontFamily: "Tajawal"),
@@ -853,5 +948,14 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
         //   30;
       },
     );
+  }
+
+  Widget checkingButton() {
+    if (_nameTextEditingController.text != widget.name ||
+        _BODController.text != widget.DOB ||
+        _PhoneNumberTextEditingController.text != widget.phone_number ||
+        _shopnameTextEditingController.text != widget.shopname ||
+        _shopdescriptionTextEditingController.text != widget.shopdescription) {}
+    return Container();
   }
 }
