@@ -45,7 +45,7 @@ class _CartState extends State<Cart> {
                 if (snapshot.hasError) {
                   return Text("somting wrong \n ${snapshot.error}");
                 } else if (!snapshot.hasData) {
-                  return Text("جاري التحميل");
+                  return Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasData) {
                   final cItems = snapshot.data!.toList();
 

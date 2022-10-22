@@ -323,7 +323,7 @@ class _logOutButtonState extends State<logOutButton> {
                         ),
                         Center(
                           child: Text(
-                            "بيانات المشتري",
+                            "معلومات المشتري",
                             style: TextStyle(
                               color: Color.fromARGB(255, 26, 96, 91),
                               fontWeight: FontWeight.bold,
@@ -463,7 +463,7 @@ class _logOutButtonState extends State<logOutButton> {
                             borderRadius: BorderRadius.circular(27))),
                       ),
                       child: Text(
-                        " تعديل البيانات",
+                        " تعديل الحساب",
                         style: TextStyle(
                             fontSize: 14,
                             fontFamily: "Tajawal",

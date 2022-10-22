@@ -171,7 +171,7 @@ class appBar extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "مرحباً بكَ أيها الحِرَفِيّ \n قم بإختيار التصنيف لعرض منتجاتك  ",
+                "    \n قم بإختيار التصنيف لعرض منتجاتك  ",
                 // ignore: prefer_const_constructors
                 style: TextStyle(
                     color: Colors.white,
@@ -268,7 +268,7 @@ class categories extends StatelessWidget {
                     itemCount: cItems.length,
                   );
                 } else {
-                  return Center(child: Text("يتم التحميل"));
+                  return Center(child: CircularProgressIndicator());
                 }
               })
         ],

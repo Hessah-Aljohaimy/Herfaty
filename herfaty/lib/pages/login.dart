@@ -9,11 +9,9 @@ import 'package:herfaty/pages/reusable_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:herfaty/pages/forget_password.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:herfaty/screens/owner_base_screen.dart';
+
 import 'package:herfaty/models/shopOwnerModel.dart';
 import 'package:herfaty/pages/driverPage.dart';
-
-
 
 class login extends StatefulWidget {
   const login({Key? key}) : super(key: key);
@@ -131,7 +129,8 @@ class _login extends State<login> {
                               if (_formKey.currentState!.validate()) {
                                 try {
                                   UserCredential userCredentia =
-                                      await FirebaseAuth.instance.signInWithEmailAndPassword(
+                                      await FirebaseAuth.instance
+                                          .signInWithEmailAndPassword(
                                               email: _emailTextController.text,
                                               password:
                                                   _passwordTextController.text);
@@ -151,9 +150,8 @@ class _login extends State<login> {
 //                                     _passwordTextController.clear();
 //                                     Navigator.pushNamed(
 //                                         context, '/driverPage');
-                                        
-//                                         }
 
+//                                         }
 
                                   if (isShopOwner) {
                                     isShopOwner = false;

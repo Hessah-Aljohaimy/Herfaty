@@ -245,7 +245,7 @@ class AppBarOD extends StatelessWidget {
                     TextButton(
                       child: Text("تغيير",
                           style: TextStyle(
-                            color: Colors.red,
+                            color: kPrimaryColor,
                           )),
                       onPressed: () {
                         FirebaseFirestore.instance
@@ -443,7 +443,7 @@ class ProductsD extends StatelessWidget {
                 ),
               );
             } else {
-              return Center(child: Text("يتم التحميل"));
+              return Center(child: CircularProgressIndicator());
             }
           }),
     );

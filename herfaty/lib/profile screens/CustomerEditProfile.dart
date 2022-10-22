@@ -19,19 +19,22 @@ class CustomerEditProfile extends StatefulWidget {
 }
 
 class _CustomerEditProfileState extends State<CustomerEditProfile> {
+  TextEditingController _emailTextEditingController = TextEditingController();
+  TextEditingController _nameTextEditingController = TextEditingController();
+
   get kPrimaryColor => null;
   final _formKey = new GlobalKey<FormState>();
   String Oldname = '';
+  void initState() {
+    //..text = widget.email
+    //..text = widget.name
+    _nameTextEditingController.text = widget.name;
+    _emailTextEditingController.text = widget.email;
+  }
 
   @override
   Widget build(BuildContext context) {
     /// just  define _formkey with static final
-    TextEditingController _passwordTextController = new TextEditingController()
-      ..text = widget.password;
-    TextEditingController _emailTextEditingController =
-        new TextEditingController()..text = widget.email;
-    TextEditingController _nameTextEditingController =
-        new TextEditingController()..text = widget.name;
 
     final titles = [
       'اسم المشتري',
@@ -54,12 +57,6 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
 
     print(widget.uid);
 
-    int passlength = widget.password.length;
-    String passwordStar = '';
-
-    for (int i = 0; i < passlength; i++) {
-      passwordStar = passwordStar + '*';
-    }
     /**  SizedBox(
             width: 630,
             height: 100,
@@ -81,7 +78,7 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
     return Scaffold(
       // resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text("تعديل البيانات",
+        title: Text("تعديل الحساب",
             style: TextStyle(
               color: Color.fromARGB(255, 39, 141, 134),
               fontFamily: "Tajawal",
@@ -100,8 +97,15 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
         //     },
         //   ),
         // ],
+        leading: IconButton(
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => logOutButton()));
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
         automaticallyImplyLeading: false,
-        iconTheme: IconThemeData(color: kPrimaryColor),
+        iconTheme: IconThemeData(color: Color(0xff51908E)),
       ),
       body:
           //Center(child: Text('Customer Edit Profile page')));
@@ -218,29 +222,44 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
                       child: Row(children: [
                         ElevatedButton(
                           onPressed: () {
-                            print(widget.uid);
-                            //update this spesific feild
-                            docCustomer.update({
-                              'email': widget.email,
-                              'id': widget.uid,
-                              'name': _nameTextEditingController.text,
-                              'password': widget.password,
-                            });
-                            Fluttertoast.showToast(
-                              msg: "تم تحديث حسابك بنجاح",
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.CENTER,
-                              timeInSecForIosWeb: 3,
-                              backgroundColor: Color.fromARGB(255, 26, 96, 91),
-                              textColor: Colors.white,
-                              fontSize: 18.0,
-                            );
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => logOutButton()));
-                            // openPasswordDialog(context);
-                            //Navigator.of(context).pop();
+                            if (_nameTextEditingController.text !=
+                                widget.name) {
+                              print(widget.uid);
+                              //update this spesific feild
+                              docCustomer.update({
+                                'email': widget.email,
+                                'id': widget.uid,
+                                'name': _nameTextEditingController.text,
+                                'password': widget.password,
+                              });
+                              Fluttertoast.showToast(
+                                msg: "تم تحديث حسابك بنجاح",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 3,
+                                backgroundColor:
+                                    Color.fromARGB(255, 26, 96, 91),
+                                textColor: Colors.white,
+                                fontSize: 18.0,
+                              );
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => logOutButton()));
+                              // openPasswordDialog(context);
+                              //Navigator.of(context).pop();}
+                            } else {
+                              Fluttertoast.showToast(
+                                msg: "لم يتم تعديل بيانات الحساب",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 3,
+                                backgroundColor:
+                                    Color.fromARGB(255, 156, 30, 21),
+                                textColor: Colors.white,
+                                fontSize: 18.0,
+                              );
+                            }
                           },
                           style: ButtonStyle(
                             backgroundColor:
@@ -265,58 +284,71 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
                         ),
                         ElevatedButton(
                           onPressed: () async {
-                            // Diolog to enter the password
-
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context1) {
-                                return AlertDialog(
-                                  title: Text("تنبيه"),
-                                  content: Text('سيتم إلغاء التعديلات'),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      child: Text("إلغاء",
-                                          style: TextStyle(color: Colors.red)),
-                                      onPressed: () {
-                                        //The logic of cancle edits
-                                        Navigator.of(context1).pop();
-                                        Navigator.of(context).pop();
-                                        /* Navigator.push(
+                            if (_nameTextEditingController.text !=
+                                widget.name) {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context1) {
+                                  return AlertDialog(
+                                    title: Text("تنبيه"),
+                                    content: Text('سيتم إلغاء التعديلات'),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: Text("إلغاء",
+                                            style:
+                                                TextStyle(color: Colors.red)),
+                                        onPressed: () {
+                                          //The logic of cancle edits
+                                          Navigator.of(context1).pop();
+                                          Navigator.of(context).pop();
+                                          /* Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
                                                   logOutButton()),
                                         );*/
-                                        // _nameTextEditingController
-                                        //   ..text = widget.name;
-                                        // Navigator.of(context).pop();
+                                          // _nameTextEditingController
+                                          //   ..text = widget.name;
+                                          // Navigator.of(context).pop();
 
-                                        //Navigator.of(context).pop();
-                                        // FirebaseAuth.instance.signOut();
-                                        // Navigator.of(context, rootNavigator: true)
-                                        //     .pushReplacement(MaterialPageRoute(
-                                        //         builder: (context) => new Welcome()));
-                                      },
-                                    ),
-                                    TextButton(
-                                      child: Text("تراجع"),
-                                      onPressed: () {
-                                        Oldname =
-                                            _nameTextEditingController.text;
-                                        _nameTextEditingController
-                                          ..text = Oldname;
+                                          //Navigator.of(context).pop();
+                                          // FirebaseAuth.instance.signOut();
+                                          // Navigator.of(context, rootNavigator: true)
+                                          //     .pushReplacement(MaterialPageRoute(
+                                          //         builder: (context) => new Welcome()));
+                                        },
+                                      ),
+                                      TextButton(
+                                        child: Text("تراجع"),
+                                        onPressed: () {
+                                          Oldname =
+                                              _nameTextEditingController.text;
+                                          _nameTextEditingController
+                                            ..text = Oldname;
 
-                                        Navigator.of(context1).pop();
-                                      },
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
+                                          Navigator.of(context1).pop();
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            } else {
+                              Fluttertoast.showToast(
+                                msg: "لم يتم تعديل بيانات الحساب",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 3,
+                                backgroundColor:
+                                    Color.fromARGB(255, 156, 30, 21),
+                                textColor: Colors.white,
+                                fontSize: 18.0,
+                              );
+                            }
                           },
                           style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                                Color.fromARGB(255, 221, 112, 112)),
+                            backgroundColor:
+                                MaterialStateProperty.all(Color(0xff51908E)),
                             padding: MaterialStateProperty.all(
                                 EdgeInsets.symmetric(
                                     horizontal: 55, vertical: 13)),

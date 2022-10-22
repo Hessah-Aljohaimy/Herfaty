@@ -346,7 +346,7 @@ class ProductsD extends StatelessWidget {
                 ),
               );
             } else {
-              return Center(child: Text("يتم التحميل"));
+              return Center(child: CircularProgressIndicator());
             }
           }),
     );

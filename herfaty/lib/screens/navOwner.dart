@@ -10,6 +10,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:herfaty/LocalNotificationService.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
+import 'ownerProductsCateg.dart';
+
 class navOwner extends StatefulWidget {
   const navOwner({super.key});
 
@@ -59,7 +61,8 @@ class _navOwnerState extends State<navOwner> {
   List<Widget> screens() {
     return [
       ownerHomeScreen(),
-      //  OwnerSettings(),
+      ownerProductsCategScreen(),
+      list(selectedPage: 0),
       ShopOwnerProfile()
     ];
   }
@@ -69,6 +72,16 @@ class _navOwnerState extends State<navOwner> {
       PersistentBottomNavBarItem(
           icon: const Icon(CupertinoIcons.home),
           title: "  الرئيسية",
+          activeColorPrimary: kPrimaryColor.withOpacity(0.9),
+          inactiveColorPrimary: CupertinoColors.systemGrey),
+      PersistentBottomNavBarItem(
+          icon: const Icon(CupertinoIcons.cube_box),
+          title: "مُنتجاتي",
+          activeColorPrimary: kPrimaryColor.withOpacity(0.9),
+          inactiveColorPrimary: CupertinoColors.systemGrey),
+      PersistentBottomNavBarItem(
+          icon: const Icon(CupertinoIcons.square_favorites),
+          title: "طلبات متجري",
           activeColorPrimary: kPrimaryColor.withOpacity(0.9),
           inactiveColorPrimary: CupertinoColors.systemGrey),
       // PersistentBottomNavBarItem(
