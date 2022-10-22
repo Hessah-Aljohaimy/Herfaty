@@ -245,7 +245,7 @@ class AppBarOD extends StatelessWidget {
                     TextButton(
                       child: Text("تغيير",
                           style: TextStyle(
-                            color: Colors.red,
+                            color: kPrimaryColor,
                           )),
                       onPressed: () {
                         FirebaseFirestore.instance
