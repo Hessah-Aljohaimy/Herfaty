@@ -192,7 +192,7 @@ class _productCardState extends State<productCard> {
 
             //**********************This part contains product name, price and shop name
             Positioned(
-              top: 20,
+              top: 10,
               right: 20,
               child: SizedBox(
                 height: 136,
@@ -241,7 +241,7 @@ class _productCardState extends State<productCard> {
             Positioned(
               //top: 10,
               left: 190,
-              bottom: 26,
+              bottom: 10,
               child: IconButton(
                 icon: Icon(
                   Icons.favorite,
