@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:herfaty/customerOrder/scroll_indicator.dart';
 
 import '../ShopOwnerOrder/OrderModel.dart';
 import '../constants/color.dart';
@@ -11,8 +12,32 @@ import '../models/Product1.dart';
 //import 'package:flutterfiredemo/item_details.dart';
 //import 'add_item.dart';
 
-class listOrderCustomer extends StatelessWidget {
+class listOrderCustomer extends StatefulWidget {
   listOrderCustomer({Key? key}) : super(key: key) {}
+
+  @override
+  State<listOrderCustomer> createState() => _listOrderCustomerState();
+}
+
+class _listOrderCustomerState extends State<listOrderCustomer> {
+  List<ScrollController> arr = <ScrollController>[];
+  List<ScrollController> arr1 = <ScrollController>[];
+  List<ScrollController> arr2 = <ScrollController>[];
+
+  @override
+  void initState() {
+    arr = <ScrollController>[];
+    arr1 = <ScrollController>[];
+    arr2 = <ScrollController>[];
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    //scrollController.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -148,6 +173,12 @@ class listOrderCustomer extends StatelessWidget {
                                                     }
                                                   });
 
+                                                  for (int i = 0;
+                                                      i < cItems.length;
+                                                      i++) {
+                                                    arr.add(ScrollController());
+                                                  }
+
                                                   return Container(
                                                     width: 366,
                                                     height: 150,
@@ -196,6 +227,7 @@ class listOrderCustomer extends StatelessWidget {
                                                       ],
                                                     ),*/
                                                     child: ListView.builder(
+                                                        controller: arr[index],
                                                         scrollDirection:
                                                             Axis.horizontal,
                                                         //shrinkWrap: true,
@@ -252,6 +284,21 @@ class listOrderCustomer extends StatelessWidget {
                                               }),
                                         ],
                                       ),
+                                      if (cItems[index].products.length > 3)
+                                        ScrollIndicator(
+                                          scrollController: arr[index],
+                                          width: 50,
+                                          height: 5,
+                                          indicatorWidth: 35,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: Colors.grey[300]),
+                                          indicatorDecoration: BoxDecoration(
+                                              color: Color(0xff4C8F2F),
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                        ),
                                       SizedBox(
                                         height: 1,
                                       ),
@@ -444,6 +491,13 @@ class listOrderCustomer extends StatelessWidget {
                                                     }
                                                   });
 
+                                                  for (int i = 0;
+                                                      i < cItems.length;
+                                                      i++) {
+                                                    arr1.add(
+                                                        ScrollController());
+                                                  }
+
                                                   return Container(
                                                     width: 366,
                                                     height: 150,
@@ -492,6 +546,7 @@ class listOrderCustomer extends StatelessWidget {
                                                       ],
                                                     ),*/
                                                     child: ListView.builder(
+                                                        controller: arr1[index],
                                                         scrollDirection:
                                                             Axis.horizontal,
                                                         //shrinkWrap: true,
@@ -548,6 +603,21 @@ class listOrderCustomer extends StatelessWidget {
                                               }),
                                         ],
                                       ),
+                                      if (cItems[index].products.length > 3)
+                                        ScrollIndicator(
+                                          scrollController: arr1[index],
+                                          width: 50,
+                                          height: 5,
+                                          indicatorWidth: 35,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: Colors.grey[300]),
+                                          indicatorDecoration: BoxDecoration(
+                                              color: Color(0xffF06676),
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                        ),
                                       SizedBox(
                                         height: 1,
                                       ),
@@ -743,6 +813,13 @@ class listOrderCustomer extends StatelessWidget {
                                                     }
                                                   });
 
+                                                  for (int i = 0;
+                                                      i < cItems.length;
+                                                      i++) {
+                                                    arr2.add(
+                                                        ScrollController());
+                                                  }
+
                                                   return Container(
                                                     width: 366,
                                                     height: 150,
@@ -794,6 +871,7 @@ class listOrderCustomer extends StatelessWidget {
                                                       ],
                                                     ),*/
                                                     child: ListView.builder(
+                                                        controller: arr2[index],
                                                         scrollDirection:
                                                             Axis.horizontal,
                                                         //shrinkWrap: true,
@@ -850,6 +928,22 @@ class listOrderCustomer extends StatelessWidget {
                                               }),
                                         ],
                                       ),
+                                      if (cItems[index].products.length > 3)
+                                        ScrollIndicator(
+                                          scrollController: arr2[index],
+                                          width: 50,
+                                          height: 5,
+                                          indicatorWidth: 35,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: Colors.grey[300]),
+                                          indicatorDecoration: BoxDecoration(
+                                              color: Color.fromARGB(
+                                                  255, 48, 137, 162),
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                        ),
                                       SizedBox(
                                         height: 1,
                                       ),
