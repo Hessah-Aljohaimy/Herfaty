@@ -152,10 +152,28 @@ class _AddProductState extends State<AddProduct> {
                     ),
                   )
                 else
-                  Image.network(
-                    uploadImageUrl,
-                    width: 200,
+                  Container(
+                    width: 400,
                     height: 200,
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 0.1, color: Colors.white),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                      ),
+                      //color: Color(0xFFFAF9F6),
+                      color: Colors.white,
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                      ),
+                      child: Image.network(
+                        uploadImageUrl,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                 SizedBox(
                   height: 20,
@@ -168,38 +186,48 @@ class _AddProductState extends State<AddProduct> {
                     SizedBox(width: 20), // for space
                     Text(
                       'فئة المنتج',
-                      style: TextStyle(fontSize: 21, fontFamily: "Tajawal"),
+                      style: TextStyle(
+                          fontSize: 21,
+                          fontFamily: "Tajawal",
+                          color: kPrimaryColor,
+                          fontWeight: FontWeight.bold),
                     ),
 
-                    DropdownButton(
-                      // Initial Value
-                      value: dropdownvalue,
-                      underline: Container(
-                        height: 3,
-                        color: kPrimaryColor, //<-- SEE HERE
+                    Container(
+                      padding: EdgeInsets.all(7),
+                      decoration: BoxDecoration(
+                        color: Colors.white, //<-- SEE HERE
                       ),
-                      icon: Icon(Icons.arrow_drop_down),
-                      style: const TextStyle(
+                      child: DropdownButton(
+                        // Initial Value
+                        value: dropdownvalue,
+                        underline: Container(
+                          height: 3,
                           color: kPrimaryColor, //<-- SEE HERE
-                          fontSize: 19,
-                          fontWeight: FontWeight.bold),
-                      // Down Arrow Icon
-                      // Array list of items
-                      items: items.map((String items) {
-                        return DropdownMenuItem(
-                          value: items,
-                          child: Text(
-                            items,
-                          ),
-                        );
-                      }).toList(),
-                      // After selecting the desired option,it will
-                      // change button value to selected value
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          dropdownvalue = newValue!;
-                        });
-                      },
+                        ),
+                        icon: Icon(Icons.arrow_drop_down),
+                        style: const TextStyle(
+                            color: kPrimaryColor, //<-- SEE HERE
+                            fontSize: 19,
+                            fontWeight: FontWeight.bold),
+                        // Down Arrow Icon
+                        // Array list of items
+                        items: items.map((String items) {
+                          return DropdownMenuItem(
+                            value: items,
+                            child: Text(
+                              items,
+                            ),
+                          );
+                        }).toList(),
+                        // After selecting the desired option,it will
+                        // change button value to selected value
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            dropdownvalue = newValue!;
+                          });
+                        },
+                      ),
                     ),
                   ],
                 ),
@@ -242,7 +270,8 @@ class _AddProductState extends State<AddProduct> {
                   padding: EdgeInsets.symmetric(horizontal: 40),
                   child: TextFormField(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    controller: nameController,
+                    controller: nameController, maxLength: 30,
+
                     //right aligment
 
                     decoration: InputDecoration(
@@ -258,8 +287,9 @@ class _AddProductState extends State<AddProduct> {
                           vertical: 3.0, horizontal: 23),
                       labelStyle: TextStyle(
                           color: kPrimaryColor, fontFamily: "Tajawal"),
-                      // floatingLabelBehavior: FloatingLabelBehavior.never,
-                      fillColor: Colors.white.withOpacity(0.3),
+                      // floatingLabelBehavior: FloatingLabelBehavior.never,                      filled: true,
+
+                      fillColor: Colors.white,
 
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: kPrimaryColor),
@@ -285,14 +315,15 @@ class _AddProductState extends State<AddProduct> {
                       if (value == null || value.isEmpty) {
                         return 'أدخل اسم المنتج';
                       }
+                      if (value.length < 2) {
+                        return " أدخل اسم أكبر من أو يساوي حرفين ";
+                      }
                       if (!RegExp(
                               r"^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z- ][]*$")
                           .hasMatch(value)) {
                         return "أدخل اسم بلا أرقام ورموز";
                       }
-                      if (value.length < 2) {
-                        return " أدخل اسم أكبر من أو يساوي حرفين ";
-                      }
+
                       return null;
                     },
                   ),
@@ -331,7 +362,9 @@ class _AddProductState extends State<AddProduct> {
                       labelStyle: TextStyle(
                           color: kPrimaryColor, fontFamily: "Tajawal"),
                       // floatingLabelBehavior: FloatingLabelBehavior.never,
-                      fillColor: Colors.white.withOpacity(0.3),
+
+                      filled: true,
+                      fillColor: Colors.white,
 
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: kPrimaryColor),
@@ -372,6 +405,9 @@ class _AddProductState extends State<AddProduct> {
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: amountController,
                     keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly,
+                    ],
                     textAlign: TextAlign.right,
                     decoration: InputDecoration(
                       border: InputBorder.none,
@@ -389,7 +425,8 @@ class _AddProductState extends State<AddProduct> {
                       labelStyle: TextStyle(
                           color: kPrimaryColor, fontFamily: "Tajawal"),
                       // floatingLabelBehavior: FloatingLabelBehavior.never,
-                      fillColor: Colors.white.withOpacity(0.3),
+                      filled: true,
+                      fillColor: Colors.white,
 
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: kPrimaryColor),
@@ -413,8 +450,7 @@ class _AddProductState extends State<AddProduct> {
                     validator: (value) {
                       if (value == null || value.isEmpty)
                         return 'أدخل كمية المنتج';
-                      if (int.parse(value) <= 0)
-                        return "أدخل رقم أكبر من صفر";
+                      if (int.parse(value) <= 0) return "أدخل رقم أكبر من صفر";
                       if (int.parse(value) > 15)
                         return "أدخل رقم أصغر من أو يساوي 15";
                       else
@@ -454,7 +490,8 @@ class _AddProductState extends State<AddProduct> {
                       labelStyle: TextStyle(
                           color: kPrimaryColor, fontFamily: "Tajawal"),
                       // floatingLabelBehavior: FloatingLabelBehavior.never,
-                      fillColor: Colors.white.withOpacity(0.3),
+                      filled: true,
+                      fillColor: Colors.white,
 
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: kPrimaryColor),
@@ -479,9 +516,9 @@ class _AddProductState extends State<AddProduct> {
                       if (value == null || value.isEmpty)
                         return 'أدخل السعر ';
                       else if (double.parse(value!) <= 0)
-                        return "أدخل رقم أكبر من صفر";
+                        return "أدخل سعر أكبر من صفر";
                       else if (double.parse(value!) > 500)
-                        return " أدخل رقم أصغر من 500 ";
+                        return " أدخل سعر أصغر من أو يساوي 500 ";
                       else
                         return null;
                     },
