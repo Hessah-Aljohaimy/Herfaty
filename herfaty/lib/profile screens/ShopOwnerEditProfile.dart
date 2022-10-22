@@ -116,6 +116,16 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
         backgroundColor: Colors.white,
         shadowColor: Color.fromARGB(255, 39, 141, 134),
         elevation: 3,
+        leading: IconButton(
+          onPressed: () {
+            Future.delayed(const Duration(seconds: 1), () {
+              Navigator.pop(context);
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => ShopOwnerProfile()));
+            });
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
         automaticallyImplyLeading: false,
         iconTheme: IconThemeData(color: Color(0xff51908E)),
       ),
@@ -371,47 +381,65 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
 
                     ElevatedButton(
                       onPressed: () {
-                        final docShopOwner = FirebaseFirestore.instance
-                            .collection('shop_owner')
-                            .doc(widget.uid);
-                        if (uploadImageUrl == "") {
-                          uploadImageUrl = widget.logo;
+                        if (_nameTextEditingController.text != widget.name ||
+                            _BODController.text != widget.DOB ||
+                            _PhoneNumberTextEditingController.text !=
+                                widget.phone_number ||
+                            _shopnameTextEditingController.text !=
+                                widget.shopname ||
+                            _shopdescriptionTextEditingController.text !=
+                                widget.shopdescription) {
+                          final docShopOwner = FirebaseFirestore.instance
+                              .collection('shop_owner')
+                              .doc(widget.uid);
+                          if (uploadImageUrl == "") {
+                            uploadImageUrl = widget.logo;
+                          }
+
+                          print(widget.uid);
+                          //update this spesific feild
+                          docShopOwner.update({
+                            'DOB': _BODController.text,
+                            'email': widget.email,
+                            'id': widget.uid,
+                            'logo': uploadImageUrl,
+                            'name': _nameTextEditingController.text,
+                            'password': widget.password,
+                            'phone_number':
+                                _PhoneNumberTextEditingController.text,
+                            'shopdescription':
+                                _shopdescriptionTextEditingController.text,
+                            'shopname': _shopnameTextEditingController.text,
+                          });
+                          Fluttertoast.showToast(
+                            msg: "تم تحديث حسابك بنجاح",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 3,
+                            backgroundColor: Color.fromARGB(255, 26, 96, 91),
+                            textColor: Colors.white,
+                            fontSize: 18.0,
+                          );
+                          // openPasswordDialog(context);
+
+                          Future.delayed(const Duration(seconds: 1), () {
+                            Navigator.pop(context);
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ShopOwnerProfile()));
+                          });
+                        } else {
+                          Fluttertoast.showToast(
+                            msg: "لم يتم تعديل بيانات الحساب",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 3,
+                            backgroundColor: Color.fromARGB(255, 156, 30, 21),
+                            textColor: Colors.white,
+                            fontSize: 18.0,
+                          );
                         }
-
-                        print(widget.uid);
-                        //update this spesific feild
-                        docShopOwner.update({
-                          'DOB': _BODController.text,
-                          'email': widget.email,
-                          'id': widget.uid,
-                          'logo': uploadImageUrl,
-                          'name': _nameTextEditingController.text,
-                          'password': widget.password,
-                          'phone_number':
-                              _PhoneNumberTextEditingController.text,
-                          'shopdescription':
-                              _shopdescriptionTextEditingController.text,
-                          'shopname': _shopnameTextEditingController.text,
-                        });
-                        Fluttertoast.showToast(
-                          msg: "تم تحديث حسابك بنجاح",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.CENTER,
-                          timeInSecForIosWeb: 3,
-                          backgroundColor: Color.fromARGB(255, 26, 96, 91),
-                          textColor: Colors.white,
-                          fontSize: 18.0,
-                        );
-                        // openPasswordDialog(context);
-
-                        Future.delayed(const Duration(seconds: 1), () {
-                          Navigator.pop(context);
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ShopOwnerProfile()));
-                        });
-
                         // Navigator.push(
                         //     context,
                         //     MaterialPageRoute(
@@ -491,6 +519,16 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                                 ],
                               );
                             },
+                          );
+                        } else {
+                          Fluttertoast.showToast(
+                            msg: "لم يتم تعديل بيانات الحساب",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 3,
+                            backgroundColor: Color.fromARGB(255, 156, 30, 21),
+                            textColor: Colors.white,
+                            fontSize: 18.0,
                           );
                         }
 

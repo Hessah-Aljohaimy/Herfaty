@@ -388,7 +388,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                             Padding(
                               padding: const EdgeInsets.only(right: 8),
                               child: Text(
-                                "بيانات المتجر",
+                                "معلومات المتجر",
                                 style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.w700,
@@ -501,7 +501,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                       borderRadius: BorderRadius.circular(27))),
                             ),
                             child: Text(
-                              " تعديل البيانات",
+                              " تعديل الحساب",
                               style: TextStyle(
                                   fontSize: 14,
                                   fontFamily: "Tajawal",
