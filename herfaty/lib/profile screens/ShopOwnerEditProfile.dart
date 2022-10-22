@@ -839,8 +839,8 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
     return TextFormField(
       autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: controller,
-      minLines: text == "وصف المتجر" ? 1 : 1,
-      maxLines: text == "وصف المتجر" ? 9 : 1,
+      minLines: text == "وصف المتجر" ? 3 : 1,
+      maxLines: text == "وصف المتجر" ? 3 : 1,
       maxLength: 160,
       style: TextStyle(
           color: Color.fromARGB(255, 90, 90, 90), fontFamily: "Tajawal"),

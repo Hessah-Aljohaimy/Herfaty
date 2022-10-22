@@ -95,6 +95,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: Colors.blue,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text("حسابي",
@@ -217,6 +218,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
     final uid = user!.uid;
 
     return Container(
+      // color: Colors.purple,
       height: double.infinity,
       width: double.infinity,
       child: SingleChildScrollView(
@@ -227,7 +229,8 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
               height: 10,
             ),
             Container(
-              height: 600,
+              // color: Colors.green,
+              height: 670,
               width: double.infinity,
               child: SizedBox(
                 height: 500,
@@ -382,7 +385,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                         ],
                       ),
                       child: SizedBox(
-                        height: 160,
+                        height: 220,
                         child: Column(
                           children: [
                             Padding(
@@ -401,6 +404,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                             ),
                             Expanded(
                               child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Text(
                                     " اسم المتجر ",
@@ -426,13 +430,13 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                 ],
                               ),
                             ),
-                            SizedBox(
-                              height: 6,
-                            ),
+                            // SizedBox(
+                            //   height: 6,
+                            // ),
                             Expanded(
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.only(right: 0, left: 245),
+                                    const EdgeInsets.only(right: 0, left: 270),
                                 child: Text(
                                   "وصف المتجر",
                                   style: TextStyle(
@@ -444,25 +448,47 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                               ),
                             ),
                             Container(
+                              height: 130,
+                              // color: Colors.red,
                               width: double.infinity,
                               margin: const EdgeInsets.only(bottom: 2),
-                              padding: const EdgeInsets.symmetric(
-                                  // vertical: 10,
-                                  // horizontal: 30,
-                                  ),
-                              child: Expanded(
-                                child: SingleChildScrollView(
+                              child: Align(
+                                alignment: Alignment.topRight,
+                                child: Expanded(
+                                  child: SingleChildScrollView(
                                     scrollDirection: Axis.vertical,
-                                    /*hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh*/
-                                    //${shopowner.shopdescription}
-                                    child: ExpandedWidgetShop(
-                                        text: '${shopowner.shopdescription}')),
-                                //
+                                    child: Text(
+                                      '${shopowner.shopdescription}',
+                                      maxLines: 5,
+                                      textAlign: TextAlign.right,
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.black),
+                                    ),
+                                  ),
+                                ),
                               ),
+                              // child: Expanded(
+                              //   child: SingleChildScrollView(
+                              //       scrollDirection: Axis.vertical,
+                              //       /*hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh*/
+                              //       //${shopowner.sho
+                              //       //pdescription}
+                              //       child: Align(
+                              //         alignment: Alignment.topRight,
+                              //         child: ExpandedWidgetShop(
+                              //             text: '${shopowner.shopdescription}'),
+                              //       )),
+                              //   //
+                              // ),
                             ),
                           ],
                         ),
                       ),
+                    ),
+                    SizedBox(
+                      height: 10,
                     ),
                     Expanded(
                       child: Center(
