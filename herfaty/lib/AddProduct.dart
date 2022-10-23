@@ -494,6 +494,13 @@ class _AddProductState extends State<AddProduct> {
                 SizedBox(
                   height: 30,
                 ),
+                  Row(
+                children: [
+                  SizedBox(
+                    width: 38,
+                  ),
+                   Expanded(
+                    child: Row(children: [
                 ElevatedButton(
                   onPressed: () async {
                     if (uploadImageUrl.isEmpty)
@@ -590,14 +597,16 @@ class _AddProductState extends State<AddProduct> {
                   amountController.clear();
                   priceController.clear();*/
                   },
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(Color(0xff51908E)),
-                    padding: MaterialStateProperty.all(
-                        EdgeInsets.symmetric(horizontal: 40, vertical: 13)),
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(27))),
-                  ),
+                    style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Color(0xff51908E)),
+                          padding: MaterialStateProperty.all(
+                              EdgeInsets.symmetric(
+                                  horizontal: 40, vertical: 13)),
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(27))),
+                        ),
                   child: Text(
                     "إضافة منتج",
                     style: TextStyle(
@@ -616,14 +625,16 @@ class _AddProductState extends State<AddProduct> {
                 ),
 
                 ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
-                        Color.fromARGB(255, 167, 29, 29)),
-                    padding: MaterialStateProperty.all(
-                        EdgeInsets.symmetric(horizontal: 40, vertical: 13)),
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(27))),
-                  ),
+                 style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              Color.fromARGB(255, 221, 112, 112)),
+                          padding: MaterialStateProperty.all(
+                              EdgeInsets.symmetric(
+                                  horizontal: 40, vertical: 13)),
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(27))),
+                        ),
                   child: Text(
                     "إلغاء",
                     style: TextStyle(
@@ -641,7 +652,8 @@ class _AddProductState extends State<AddProduct> {
                             actions: <Widget>[
                               TextButton(
                                 child: Text(" تأكيد",
-                                    style: TextStyle(color: Colors.red)),
+                                    style: TextStyle(
+                                      color: Colors.red)),
                                 onPressed: () {
                                   Navigator.push(
                                     context,
@@ -662,6 +674,11 @@ class _AddProductState extends State<AddProduct> {
                         });
                   },
                 ),
+
+                 ]),
+                  )
+                ],
+              ),
                 /* ElevatedButton(
                 style: ElevatedButton.styleFrom(primary: Colors.red),
                 onPressed: () {
