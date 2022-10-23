@@ -14,7 +14,7 @@ TextFormField reusableTextField(String text, IconData icon, bool isPasswordType,
     style: TextStyle(
         color: Color.fromARGB(255, 26, 96, 91), fontFamily: "Tajawal"),
     decoration: InputDecoration(
-      contentPadding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 23),
+      contentPadding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 25),
 
       suffix: Icon(
         icon,
@@ -77,7 +77,7 @@ TextFormField reusableTextFieldForPhone(
     style: TextStyle(
         color: Color.fromARGB(255, 26, 96, 91), fontFamily: "Tajawal"),
     decoration: InputDecoration(
-      contentPadding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 23),
+      contentPadding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 25),
 
       suffix: Icon(
         icon,
@@ -133,7 +133,7 @@ TextFormField reusableTextFieldForName(
     style: TextStyle(
         color: Color.fromARGB(255, 26, 96, 91), fontFamily: "Tajawal"),
     decoration: InputDecoration(
-      contentPadding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 23),
+      contentPadding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 25),
 
       suffix: Icon(
         icon,
@@ -194,7 +194,7 @@ TextFormField reusableTextFieldForShopName(
     style: TextStyle(
         color: Color.fromARGB(255, 26, 96, 91), fontFamily: "Tajawal"),
     decoration: InputDecoration(
-      contentPadding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 23),
+      contentPadding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 25),
 
       labelText: text,
       labelStyle: TextStyle(
@@ -253,7 +253,7 @@ TextFormField reusableTextFieldForAge(String text, IconData icon,
     style: TextStyle(
         color: Color.fromARGB(255, 26, 96, 91), fontFamily: "Tajawal"),
     decoration: InputDecoration(
-      contentPadding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 23),
+      contentPadding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 25),
 
       suffix: Icon(
         icon,
@@ -305,7 +305,7 @@ TextFormField reusableTextFieldDec(
     style: TextStyle(
         color: Color.fromARGB(255, 26, 96, 91), fontFamily: "Tajawal"),
     decoration: InputDecoration(
-      contentPadding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 23),
+      contentPadding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 25),
       labelText: text,
       labelStyle: TextStyle(
           color: Color.fromARGB(106, 26, 96, 91), fontFamily: "Tajawal"),
