@@ -665,6 +665,9 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
         if (text == "كلمة المرور") {
           if (value.length < 6) return "ادخل كلمة مرور اكبر من 6 خانات";
         }
+        if (value.trim().isEmpty) {
+          return "أدخل " + text + " صحيح";
+        }
         // if (text == "اسم المشتري")
         //   maxLength:
         //   30;
@@ -714,6 +717,10 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
       validator: (value) {
         if (value == null || value.isEmpty) {
           return "أدخل " + text;
+        }
+        //RegExp(r"\s\s")
+        if (value.trim().isEmpty) {
+          return "أدخل " + text + " صحيح";
         }
       },
     );
@@ -880,6 +887,9 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
 
         if (value.length < 6) {
           if (value.length < 6) return "أدخل وصف للمنتج لا يقل عن 6 خانات";
+        }
+        if (value.trim().isEmpty) {
+          return "أدخل " + text + " صحيح";
         }
 
         return null;

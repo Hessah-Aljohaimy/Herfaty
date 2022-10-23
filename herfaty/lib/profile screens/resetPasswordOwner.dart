@@ -570,6 +570,9 @@ class _ResetPasswordOwnerState extends State<ResetPasswordOwner> {
                     if (value != oldpass) {
                       return "كلمة المرور لا تطابق كلمة المرور المسجلة مسبقا ";
                     }
+                    if (value.trim().isEmpty) {
+                      return "أدخل " + 'كلمة المرور القديمة' + " صحيح";
+                    }
                   },
                 ),
               ),
@@ -644,6 +647,9 @@ class _ResetPasswordOwnerState extends State<ResetPasswordOwner> {
                     if (_oldPasswordTextController.text ==
                         _newPasswordTextController1.text)
                       return "كلمة المرور تطابق كلمة المرور القديمة";
+                    if (value.trim().isEmpty) {
+                      return "أدخل " + 'كلمة المرور الجديدة' + " صحيح";
+                    }
 
                     //==============================
 
@@ -732,6 +738,9 @@ class _ResetPasswordOwnerState extends State<ResetPasswordOwner> {
                     if (_oldPasswordTextController.text ==
                         _newPasswordTextController2.text)
                       return "كلمة المرور تطابق كلمة المرور القديمة";
+                    if (value.trim().isEmpty) {
+                      return "أدخل " + 'تأكيد كلمة المرور' + " صحيح";
+                    }
 
                     //==============================
 

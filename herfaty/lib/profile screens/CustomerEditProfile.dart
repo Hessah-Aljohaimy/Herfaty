@@ -435,6 +435,9 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
         if (text == "كلمة المرور") {
           if (value.length < 6) return "ادخل كلمة مرور اكبر من 6 خانات";
         }
+        if (value.trim().isEmpty) {
+          return "أدخل " + text + " صحيح";
+        }
       },
     );
   }
@@ -481,6 +484,9 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
       validator: (value) {
         if (value == null || value.isEmpty) {
           return "أدخل " + text;
+        }
+        if (value.trim().isEmpty) {
+          return "أدخل " + text + " صحيح";
         }
       },
     );

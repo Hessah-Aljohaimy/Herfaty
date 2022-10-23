@@ -504,6 +504,9 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
                     if (value != oldpass) {
                       return "كلمة المرور لا تطابق كلمة المرور المسجلة مسبقا ";
                     }
+                    if (value.trim().isEmpty) {
+                      return "أدخل " + 'كلمة المرور القديمة' + " صحيح";
+                    }
                   },
 
                   //is it the same as the old one ?
@@ -580,6 +583,9 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
                     if (_oldPasswordTextController.text ==
                         _newPasswordTextController1.text)
                       return "كلمة المرور تطابق كلمة المرور القديمة";
+                    if (value.trim().isEmpty) {
+                      return "أدخل " + 'كلمة المرور الجديدة' + " صحيح";
+                    }
 
                     //==============================
 
@@ -681,6 +687,9 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
                     if (_newPasswordTextController1.text !=
                         _newPasswordTextController2.text)
                       return "كلمة المرور غير متطابقة";
+                    if (value.trim().isEmpty) {
+                      return "أدخل " + 'تأكيد كلمة المرور' + " صحيح";
+                    }
                   },
                 ),
               ),

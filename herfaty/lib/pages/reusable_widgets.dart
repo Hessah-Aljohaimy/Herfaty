@@ -58,6 +58,9 @@ TextFormField reusableTextField(String text, IconData icon, bool isPasswordType,
       if (text == "كلمة المرور") {
         if (value.length < 6) return "ادخل كلمة مرور اكبر من 6 خانات";
       }
+      if (value.trim().isEmpty) {
+        return "أدخل " + text + " صحيح";
+      }
 
       return null;
     },
@@ -170,8 +173,8 @@ TextFormField reusableTextFieldForName(
         return "أدخل اسم بلا أرقام ورموز";
       }
 
-      if (value.length >= 30) {
-        return " لايسمح بأكثر من 30 حرفا";
+      if (value.trim().isEmpty) {
+        return "أدخل " + text + " صحيح";
       }
 
       return null;
@@ -227,10 +230,9 @@ TextFormField reusableTextFieldForShopName(
         return "أدخل اسم بلا أرقام ورموز";
       }
 
-      if (value.length >= 30) {
-        return " لايسمح بأكثر من 30 حرفا";
+      if (value.trim().isEmpty) {
+        return "أدخل " + text + " صحيح";
       }
-
       return null;
     },
   );
@@ -331,6 +333,9 @@ TextFormField reusableTextFieldDec(
 
       if (value.length < 6) {
         if (value.length < 6) return "أدخل وصف للمنتج لا يقل عن 6 خانات";
+      }
+      if (value.trim().isEmpty) {
+        return "أدخل " + text + " صحيح";
       }
 
       return null;
