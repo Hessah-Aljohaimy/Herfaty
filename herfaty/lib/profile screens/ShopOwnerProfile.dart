@@ -67,29 +67,6 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
 
   get kPrimaryColor => null;
 
-  Future _getDataFromDatabase() async {
-    await FirebaseFirestore.instance
-        .collection("useres")
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get()
-        .then((snapshot) async {
-      if (snapshot.exists) {
-        setState(() {
-          DOB = snapshot.data()!["DOB"];
-          email = snapshot.data()!["email"];
-          id = snapshot.data()!["id"];
-
-          logo = snapshot.data()!["logo"];
-          name = snapshot.data()!["name"];
-          password = snapshot.data()!["password"];
-          phone_number = snapshot.data()!["phone_number"];
-          shopdescription = snapshot.data()!["shopdescription"];
-          shopname = snapshot.data()!["shopname"];
-        });
-      }
-    });
-  }
-
   TextEditingController passwordController = TextEditingController();
 //    fontFamily: "Tajawal",
   @override
