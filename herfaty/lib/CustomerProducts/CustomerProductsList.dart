@@ -32,7 +32,7 @@ class _CustomerProductsListState extends State<CustomerProductsList> {
  Stream<List<Product1>> readSerach(String srerch) => FirebaseFirestore.instance
       .collection('Products')
       .where("categoryName", isEqualTo: widget.categoryName)
-      .where('name', isGreaterThanOrEqualTo: srerch)
+      .where('name', isEqualTo: srerch)
       .snapshots()
       .map((snapshot) =>
           snapshot.docs.map((doc) => Product1.fromJson(doc.data())).toList());
@@ -66,8 +66,7 @@ String searchString = "";
           )),
           child: Column(
             children: [
-            TextFormField(
-               autovalidateMode: AutovalidateMode.onUserInteraction,
+            TextField(
                 onChanged: (value) {
           searchString=value;
         },
@@ -86,8 +85,9 @@ String searchString = "";
                 child: Stack(
                   children: [
                     //This is to list all of our items fetched from the DB========================
+
                     StreamBuilder<List<Product1>>(
-                      stream: (searchString != "") ?  readSerach(searchString) :readPrpducts(),
+                      stream: readPrpducts(),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
@@ -100,8 +100,17 @@ String searchString = "";
                         } else if (snapshot.hasData) {
                           final productItems = snapshot.data!.toList();
                           final data = snapshot.data!;
-                    
-
+                          var serchList=[];
+                           
+                            for (var i = 0; i < productItems.length; i++) {
+                              if(searchString!="" && productItems[i].name.contains(searchString)){
+                               serchList.add(productItems[i]);}
+                                       }           searchString="";
+                                 print(serchList.isEmpty);
+                                   print('sssssssssssssss');
+                            
+                           
+                        
                           if (data.isEmpty) {
                             return const Center(
                               child: Text(
@@ -115,12 +124,15 @@ String searchString = "";
                               ),
                             );
                           }
+
+                           
                           //هنا حالة النجاح في استرجاع البيانات...........................................
                           //String detailsImage = "";
 
                           else {
-                            if(searchString.isEmpty){
+                            if(serchList.isEmpty){
                             return ListView.builder(
+                              
                               itemCount: productItems.length,
                               itemBuilder: (context, index) => productCard(
                                 itemIndex: index,
@@ -142,13 +154,13 @@ String searchString = "";
                             );
                           }
                       
-                          else if(searchString.isEmpty){
+                         if(serchList.isNotEmpty){
 
        return ListView.builder(
-                              itemCount: productItems.length,
+                              itemCount: serchList.length,
                               itemBuilder: (context, index) => productCard(
                                 itemIndex: index,
-                                product: productItems[index],
+                                product: serchList[index],
                                 press: () {
                                   Navigator.push(
                                     context,
@@ -156,8 +168,8 @@ String searchString = "";
                                       builder: (context) =>
                                           CustomerProdectDetails(
                                         // يرسل المعلومات لصفحة المنتج عشان يعرض التفاصيل
-                                        detailsImage: productItems[index].image,
-                                        product: productItems[index],
+                                        detailsImage: serchList[index].image,
+                                        product: serchList[index],
                                       ),
                                     ),
                                   );
@@ -177,6 +189,7 @@ String searchString = "";
                               child: CircularProgressIndicator());
                         }
                       },
+                      
                     ),
                     //==================================================================================
                   ],
