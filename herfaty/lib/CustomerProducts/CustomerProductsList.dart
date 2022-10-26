@@ -66,21 +66,34 @@ String searchString = "";
           )),
           child: Column(
             children: [
-            TextField(
+              Container(
+                 padding: EdgeInsets.symmetric(horizontal: 40),
+                 // margin: EdgeInsets.symmetric(horizontal: 10,vertical: 9),
+          child:  TextField(
+            
                 onChanged: (value) {
           searchString=value;
         },
   
   decoration: InputDecoration(
-    
-      labelText: "البحث",
+  contentPadding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 25),    
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Color.fromARGB(255, 26, 96, 91)),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide:
+            BorderSide(width: 2, color: Color.fromARGB(255, 26, 96, 91)),
+      ),
       hintText: "البحث",
-      suffixIcon: Icon(Icons.search),
-      border: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(25.0)))),
+      suffixIcon: Icon(Icons.search
+      , color: Color.fromARGB(255, 26, 96, 91),),
+      // border: OutlineInputBorder(
+      //     borderRadius: BorderRadius.all(Radius.circular(29.0)))
+          ),
 ),
+              ),
               //تبعد لي البوكس اللي يعرض المنتجات عن الشريط العلوي
-              const SizedBox(height: 15),
+              const SizedBox(height: 13),
               Expanded(
                 child: Stack(
                   children: [
@@ -105,7 +118,22 @@ String searchString = "";
                             for (var i = 0; i < productItems.length; i++) {
                               if(searchString!="" && productItems[i].name.contains(searchString)){
                                serchList.add(productItems[i]);}
-                                       }           searchString="";
+                                       }      
+                                       
+                                     if(searchString.isNotEmpty && serchList.isEmpty)  {
+                                          return const Center(
+                              child: Text(
+                                'لا توجد منتجات بهذا الاسم',
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: "Tajawal",
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            );
+                    }
+                                  searchString="";
                                  print(serchList.isEmpty);
                                    print('sssssssssssssss');
                             
