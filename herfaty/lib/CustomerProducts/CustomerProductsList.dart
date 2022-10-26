@@ -28,8 +28,22 @@ class _CustomerProductsListState extends State<CustomerProductsList> {
       .snapshots()
       .map((snapshot) =>
           snapshot.docs.map((doc) => Product1.fromJson(doc.data())).toList());
-
+  TextEditingController editingController = TextEditingController();
+ 
+  
   //======================================================================================
+String searchString = "";
+
+List<Product1> forSearch=[];
+List<Product1> allPro=[];
+
+
+//  @override
+//   void initState() {
+//     forSearch.addAll(productItems);
+//     super.initState();
+//   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +60,18 @@ class _CustomerProductsListState extends State<CustomerProductsList> {
           )),
           child: Column(
             children: [
+            TextField(
+                onChanged: (value) {
+          filterSearchResults(value);
+        },
+  
+  decoration: InputDecoration(
+      labelText: "البحث",
+      hintText: "البحث",
+      suffixIcon: Icon(Icons.search),
+      border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(25.0)))),
+),
               //تبعد لي البوكس اللي يعرض المنتجات عن الشريط العلوي
               const SizedBox(height: 15),
               Expanded(
@@ -66,6 +92,7 @@ class _CustomerProductsListState extends State<CustomerProductsList> {
                         } else if (snapshot.hasData) {
                           final productItems = snapshot.data!.toList();
                           final data = snapshot.data!;
+                          allPro.addAll(productItems);
                           if (data.isEmpty) {
                             return const Center(
                               child: Text(
@@ -151,4 +178,24 @@ class _CustomerProductsListState extends State<CustomerProductsList> {
       ),
     );
   }
+  
+ void filterSearchResults(String query) {
+    List<Product1> results = [];
+    if (query.isEmpty) {
+      // if the search field is empty or only contains white-space, we'll display all users
+      results = allPro;
+    } else {
+      results = allPro
+          .where((name) =>
+          "name".toLowerCase().contains(query.toLowerCase()))
+          .toList();
+      // we use the toLowerCase() method to make it case-insensitive
+    }
+
+    setState(() {
+      forSearch=results;
+    });
+}
+
+
 }
