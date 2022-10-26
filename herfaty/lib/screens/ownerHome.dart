@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/constants/size.dart';
 import 'package:herfaty/models/ownerServices.dart';
+import 'package:herfaty/points%20base/RewardsCarousel.dart';
 import 'package:herfaty/points%20base/peofile_circle.dart';
 
 import 'package:herfaty/widgets/profile_button.dart';
@@ -30,7 +31,8 @@ class _ownerHomeScreenState extends State<ownerHomeScreen> {
           children: const [
             AppBar(),
             Body(),
-            Services(),
+            // Services(),
+            RewardsCarousel(),
           ],
         ),
       ),
@@ -164,7 +166,7 @@ class _AppBarState extends State<AppBar> {
       child: Column(
         children: [
           SizedBox(
-            height: 25,
+            height: 18,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

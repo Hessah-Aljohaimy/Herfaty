@@ -59,11 +59,11 @@ dependencies:
   path_provider: ^2.0.11
   persistent_bottom_nav_bar: any
   rxdart: ^0.27.4
+  scroll_snap_list: ^0.9.1
   status_change: ^2.0.0
   style_random: ^0.0.1+1
   timelines: ^0.1.0
   timezone: ^0.8.0
-
 
 dev_dependencies:
   flutter_lints: ^2.0.0
