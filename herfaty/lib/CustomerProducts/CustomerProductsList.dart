@@ -32,7 +32,7 @@ class _CustomerProductsListState extends State<CustomerProductsList> {
  Stream<List<Product1>> readSerach(String srerch) => FirebaseFirestore.instance
       .collection('Products')
       .where("categoryName", isEqualTo: widget.categoryName)
-      .where('name', isEqualTo: srerch)
+      .where('name', isGreaterThanOrEqualTo: srerch)
       .snapshots()
       .map((snapshot) =>
           snapshot.docs.map((doc) => Product1.fromJson(doc.data())).toList());
@@ -42,9 +42,6 @@ class _CustomerProductsListState extends State<CustomerProductsList> {
   
   //======================================================================================
 String searchString = "";
-
-List<Product1> forSearch=[];
-List<Product1> allPro=[];
 
 
 //  @override
@@ -103,10 +100,7 @@ List<Product1> allPro=[];
                         } else if (snapshot.hasData) {
                           final productItems = snapshot.data!.toList();
                           final data = snapshot.data!;
-                          allPro.addAll(productItems);
-                          print(searchString);
-                          searchString = "";
-                                                    print('aaaaaaaaaaaaaaaa');
+                    
 
                           if (data.isEmpty) {
                             return const Center(
@@ -125,6 +119,7 @@ List<Product1> allPro=[];
                           //String detailsImage = "";
 
                           else {
+                            if(searchString.isEmpty){
                             return ListView.builder(
                               itemCount: productItems.length,
                               itemBuilder: (context, index) => productCard(
@@ -145,6 +140,36 @@ List<Product1> allPro=[];
                                 },
                               ),
                             );
+                          }
+                      
+                          else if(searchString.isEmpty){
+
+       return ListView.builder(
+                              itemCount: productItems.length,
+                              itemBuilder: (context, index) => productCard(
+                                itemIndex: index,
+                                product: productItems[index],
+                                press: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          CustomerProdectDetails(
+                                        // يرسل المعلومات لصفحة المنتج عشان يعرض التفاصيل
+                                        detailsImage: productItems[index].image,
+                                        product: productItems[index],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
+
+                          }
+                          else {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        }
                           }
                           //..................................................................................
                         } else {
@@ -193,24 +218,4 @@ List<Product1> allPro=[];
       ),
     );
   }
-  
- void filterSearchResults(String query) {
-    List<Product1> results = [];
-    if (query.isEmpty) {
-      // if the search field is empty or only contains white-space, we'll display all users
-      results = allPro;
-    } else {
-      results = allPro
-          .where((name) =>
-          "name".toLowerCase().contains(query.toLowerCase()))
-          .toList();
-      // we use the toLowerCase() method to make it case-insensitive
-    }
-
-    setState(() {
-      forSearch=results;
-    });
-}
-
-
-}
+  }
