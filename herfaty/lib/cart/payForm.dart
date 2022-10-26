@@ -316,7 +316,8 @@ class payForm extends StatelessWidget {
                           notification: 'notPushed',
                           status: 'طلب جديد',
                           products: products,
-                          orderDate: date);
+                          orderDate: date,
+                          points: 10);
 
                       createNewOrder(order);
 //print('zzzzzzzvvvevevevvevevevvevv');
