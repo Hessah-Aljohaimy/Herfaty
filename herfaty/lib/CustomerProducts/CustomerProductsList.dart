@@ -28,6 +28,15 @@ class _CustomerProductsListState extends State<CustomerProductsList> {
       .snapshots()
       .map((snapshot) =>
           snapshot.docs.map((doc) => Product1.fromJson(doc.data())).toList());
+
+ Stream<List<Product1>> readSerach(String srerch) => FirebaseFirestore.instance
+      .collection('Products')
+      .where("categoryName", isEqualTo: widget.categoryName)
+      .where('name', isEqualTo: srerch)
+      .snapshots()
+      .map((snapshot) =>
+          snapshot.docs.map((doc) => Product1.fromJson(doc.data())).toList());
+
   TextEditingController editingController = TextEditingController();
  
   
@@ -60,12 +69,14 @@ List<Product1> allPro=[];
           )),
           child: Column(
             children: [
-            TextField(
+            TextFormField(
+               autovalidateMode: AutovalidateMode.onUserInteraction,
                 onChanged: (value) {
-          filterSearchResults(value);
+          searchString=value;
         },
   
   decoration: InputDecoration(
+    
       labelText: "البحث",
       hintText: "البحث",
       suffixIcon: Icon(Icons.search),
@@ -79,7 +90,7 @@ List<Product1> allPro=[];
                   children: [
                     //This is to list all of our items fetched from the DB========================
                     StreamBuilder<List<Product1>>(
-                      stream: readPrpducts(),
+                      stream: (searchString != "") ?  readSerach(searchString) :readPrpducts(),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
@@ -93,6 +104,10 @@ List<Product1> allPro=[];
                           final productItems = snapshot.data!.toList();
                           final data = snapshot.data!;
                           allPro.addAll(productItems);
+                          print(searchString);
+                          searchString = "";
+                                                    print('aaaaaaaaaaaaaaaa');
+
                           if (data.isEmpty) {
                             return const Center(
                               child: Text(
