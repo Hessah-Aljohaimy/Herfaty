@@ -19,7 +19,7 @@ class CustomerProductsList extends StatefulWidget {
   @override
   State<CustomerProductsList> createState() => _CustomerProductsListState();
 }
-
+enum Menu { itemOne, itemTwo, itemThree}
 class _CustomerProductsListState extends State<CustomerProductsList> {
   //variable to store the category name from categories page
   Stream<List<Product1>> readPrpducts() => FirebaseFirestore.instance
@@ -42,7 +42,7 @@ class _CustomerProductsListState extends State<CustomerProductsList> {
   
   //======================================================================================
 String searchString = "";
-
+String typeOfSort="العادي";
 
 //  @override
 //   void initState() {
@@ -114,7 +114,21 @@ String searchString = "";
                           final productItems = snapshot.data!.toList();
                           final data = snapshot.data!;
                           var serchList=[];
-                           
+                           if(typeOfSort=='itemThree'){
+                               productItems.sort((a, b) {
+                          return (b.price)
+                              .compareTo((a.price));
+                        });
+                           }
+
+  if(typeOfSort=='itemTwo'){
+                               productItems.sort((a, b) {
+                          return (a.price)
+                              .compareTo((b.price));
+                        });
+                           }
+
+
                             for (var i = 0; i < productItems.length; i++) {
                               if(searchString!="" && productItems[i].name.contains(searchString)){
                                serchList.add(productItems[i]);}
@@ -229,6 +243,7 @@ String searchString = "";
       ),
     );
   }
+  
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //AppBar
@@ -257,6 +272,67 @@ String searchString = "";
           Navigator.pop(context);
         }, //نخليه يرجع لصفحة المنتجات اللي عند عائشة
       ),
+       
+
+        actions: <Widget>[
+          // This button presents popup menu items.
+          PopupMenuButton<Menu>(
+                    
+            icon: Icon(
+              Icons.sort_rounded ,color: Color.fromARGB(255, 26, 96, 91),
+         size: 22.0,
+            ),
+              // Callback that sets the selected popup menu item.
+              onSelected: (Menu item) {
+                setState(() {
+                  typeOfSort = item.name;
+                  print(typeOfSort);
+                  print('ssssssssssssssssssssssssss');
+                });
+              },
+              itemBuilder: (BuildContext context) => <PopupMenuEntry<Menu>>[
+                  
+                    const PopupMenuItem<Menu>(
+                      value: Menu.itemTwo,
+                      child: Text('الأسعار من الأقل'),
+                    ),
+                    const PopupMenuItem<Menu>(
+                      value: Menu.itemThree,
+                      child: Text('الأسعار من الأعلى'),
+                    ),
+                   const PopupMenuItem<Menu>(
+                      value: Menu.itemOne,
+                      child: Text('بلا ترتيب'),
+                    ),
+                  ]),
+        ],
+
+//  actions: <Widget>[
+//           IconButton(
+//             icon: const Icon(Icons.sort_rounded ,color: Color.fromARGB(255, 26, 96, 91),
+//           size: 22.0,),
+//             onPressed: () {
+               
+//                 items: dropDown.map<DropdownMenuItem<String>>((String value) {
+//                   return DropdownMenuItem<String>(
+//                     value: value,
+//                     child: Text(value),
+//                   );
+//                 }).toList();
+//                 onChanged: (String value) {
+                
+//                 typeOfSort=value;
+                
+                
+//                 //  setState(() {});
+//                 };
+//             },
+//           ),
+        
+//         ],
+
+
     );
+    
   }
   }
