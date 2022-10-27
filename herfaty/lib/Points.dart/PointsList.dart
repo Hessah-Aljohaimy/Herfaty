@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:herfaty/Points.dart/pointsModel.dart';
+import 'package:herfaty/ShopOwnerOrder/orderDetails.dart';
+import 'package:herfaty/screens/ownerHome.dart';
 
 import '../ShopOwnerOrder/OrderModel.dart';
 import '../constants/color.dart';
@@ -105,32 +107,26 @@ class PointsList extends StatelessWidget {
                                           ),
                                         ],
                                       ),
-                                       MaterialButton(
-        padding: EdgeInsets.all(8.0),
-        textColor: Colors.white,
-        splashColor: Colors.greenAccent,
-        elevation: 8.0,
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/images/cartBack1.png'),
-                fit: BoxFit.cover),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text("تفاصيل الطلب"),
-          ),
-        ),
-        // ),
-        onPressed: () {
-         Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                       ownerHomeScreen ()),
-                                                );
-        },
-      ),
+                                      MaterialButton(
+                                        padding: EdgeInsets.all(8.0),
+                                        textColor: Colors.white,
+                                        splashColor: Colors.greenAccent,
+                                        elevation: 8.0,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                image: AssetImage(
+                                                    'assets/images/cartBack1.png'),
+                                                fit: BoxFit.cover),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text("تفاصيل الطلب"),
+                                          ),
+                                        ),
+                                        // ),
+                                        onPressed: () {},
+                                      ),
                                     ],
                                   ),
                                 );
