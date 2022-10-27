@@ -12,18 +12,19 @@ class orderModal {
 
   Map<String, num> products;
 
-  orderModal(
-      {required this.customerId,
-      required this.shopOwnerId,
-      required this.docId,
-      required this.location,
-      required this.total,
-      required this.shopName,
-      required this.notification,
-      required this.status,
-      required this.orderDate,
-      required this.products,
-      required this.points});
+  orderModal({
+    required this.customerId,
+    required this.shopOwnerId,
+    required this.docId,
+    required this.location,
+    required this.total,
+    required this.shopName,
+    required this.notification,
+    required this.status,
+    required this.orderDate,
+    required this.products,
+    required this.points,
+  });
 
   Map<String, dynamic> toJson() => {
         'docId': docId,
@@ -36,7 +37,7 @@ class orderModal {
         'status': status,
         'orderDate': orderDate,
         'products': products,
-        'points': points
+        'points': points,
       };
 
   static orderModal fromJson(Map<String, dynamic> json) => orderModal(

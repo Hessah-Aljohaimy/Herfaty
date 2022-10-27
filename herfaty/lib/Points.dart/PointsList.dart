@@ -83,16 +83,17 @@ class PointsList extends StatelessWidget {
                                                 children: [
                                                   Text(
                                                       //cItems[index].customerId,
-                                                      "  + ${cItems[index].shopOwnerId}",
+                                                      "  + ${cItems[index].points}",
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 17.0,
+                                                          color: kPrimaryColor,
+                                                          fontSize: 27.0,
                                                           fontFamily:
                                                               "Tajawal")),
+                                                  //Icon(Icons.numbers),
                                                   Text(
-                                                    "تاريخ الطلب :${cItems[index].orderDate} ",
+                                                    "  ${cItems[index].orderDate} ",
                                                     style: TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 17.0,
@@ -104,6 +105,32 @@ class PointsList extends StatelessWidget {
                                           ),
                                         ],
                                       ),
+                                       MaterialButton(
+        padding: EdgeInsets.all(8.0),
+        textColor: Colors.white,
+        splashColor: Colors.greenAccent,
+        elevation: 8.0,
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/images/cartBack1.png'),
+                fit: BoxFit.cover),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text("تفاصيل الطلب"),
+          ),
+        ),
+        // ),
+        onPressed: () {
+         Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                       ownerHomeScreen ()),
+                                                );
+        },
+      ),
                                     ],
                                   ),
                                 );

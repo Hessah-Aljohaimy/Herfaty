@@ -22,7 +22,7 @@ class payForm extends StatefulWidget {
   String shopName;
   num totalPrice;
   String shopOwnerId;
-
+  // num countItems;
   payForm({
     Key? key,
     required Items,
@@ -31,12 +31,14 @@ class payForm extends StatefulWidget {
     required totalPrice,
     required shopOwnerId,
     required temp,
+    //  required countItems,
   })  : this.temp = temp,
         this.Items = Items,
         this.location = location,
         this.shopName = shopName,
         this.totalPrice = totalPrice,
         this.shopOwnerId = shopOwnerId,
+        // this.countItems = countItems,
         super(key: key);
 
   @override
@@ -306,18 +308,26 @@ class payForm extends StatelessWidget {
                       DateTime now = new DateTime.now();
                       String date = "${now.year}-${now.month}-${now.day}";
 
+                      num totalPoints = 0;
+                      num points = 0;
+                      products.forEach((key, value) {
+                        points = value * 10;
+                        totalPoints += points;
+                      });
+
                       orderModal order = orderModal(
-                          customerId: user!.uid,
-                          shopOwnerId: widget.shopOwnerId,
-                          docId: orderToBeAdded.id,
-                          location: widget.location,
-                          total: widget.totalPrice,
-                          shopName: widget.shopName,
-                          notification: 'notPushed',
-                          status: 'طلب جديد',
-                          products: products,
-                          orderDate: date,
-                          points: 10);
+                        customerId: user!.uid,
+                        shopOwnerId: widget.shopOwnerId,
+                        docId: orderToBeAdded.id,
+                        location: widget.location,
+                        total: widget.totalPrice,
+                        shopName: widget.shopName,
+                        notification: 'notPushed',
+                        status: 'طلب جديد',
+                        products: products,
+                        orderDate: date,
+                        points: totalPoints,
+                      );
 
                       createNewOrder(order);
 //print('zzzzzzzvvvevevevvevevevvevv');

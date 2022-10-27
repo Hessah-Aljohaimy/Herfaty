@@ -8,6 +8,7 @@ class OrderModel {
   String notification = "notPushed";
   String status = "New order";
   String orderDate = "";
+  num points = 0.0;
   Map<String, dynamic> products;
 
   OrderModel(
@@ -20,6 +21,7 @@ class OrderModel {
       required this.notification,
       required this.status,
       required this.orderDate,
+      required this.points,
       required this.products});
 
   Map<String, dynamic> toJson() => {
@@ -33,6 +35,7 @@ class OrderModel {
         'status': status,
         'orderDate': orderDate,
         'products': products,
+        'points': points,
       };
 
   static OrderModel fromJson(Map<String, dynamic> json) => OrderModel(
@@ -45,5 +48,6 @@ class OrderModel {
       notification: json['notification'],
       status: json['status'],
       orderDate: json['orderDate'],
-      products: json['products']);
+      products: json['products'],
+      points: json['points']);
 }

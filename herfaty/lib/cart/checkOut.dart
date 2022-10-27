@@ -30,7 +30,6 @@ class checkOut extends StatelessWidget {
         this.shopName = shopName,
         super(key: key);
   var shopOwnerId;
-
   @override
   Widget build(BuildContext context) {
     print("class checkout");
