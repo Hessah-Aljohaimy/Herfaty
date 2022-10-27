@@ -15,13 +15,39 @@ class _PointPanelState extends State<PointPanel> {
     print('entering rewards scroll method ==================');
     return Container(
       // color: Colors.black,
-      height: 50,
+      height: 120,
+      width: 400,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(.1),
+            blurRadius: 4.0,
+            spreadRadius: .05,
+          ), //BoxShadow
+        ],
+      ),
       child: Column(children: [
+        SizedBox(
+          height: 10,
+        ),
         Text(
           "مجموع نقاطي",
           style: TextStyle(
               color: Color(0xffF19B1A),
               fontSize: 30,
+              fontWeight: FontWeight.bold,
+              fontFamily: "Tajawal"),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+          "10 ",
+          style: TextStyle(
+              color: Color(0xff51908E),
+              fontSize: 40,
               fontWeight: FontWeight.bold,
               fontFamily: "Tajawal"),
         ),
