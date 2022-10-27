@@ -5,6 +5,7 @@ import 'package:herfaty/cart/cart.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/constants/size.dart';
 import 'package:herfaty/models/Category.dart';
+import 'package:herfaty/topShops/topShops.dart';
 import 'package:herfaty/widgets/profile_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -321,7 +322,66 @@ class categories extends StatelessWidget {
                 } else {
                   return Center(child: CircularProgressIndicator());
                 }
-              })
+              }),
+          SizedBox(
+            height: 10,
+          ),
+          InkWell(
+            child: Container(
+              height: 60,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
+                ),
+                gradient: LinearGradient(
+                  colors: [
+                    (Color.fromARGB(255, 81, 144, 142)),
+                    (Color.fromARGB(255, 85, 150, 165)),
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(.1),
+                    blurRadius: 4.0,
+                    spreadRadius: .05,
+                  ), //BoxShadow
+                ],
+              ),
+              margin: EdgeInsets.only(left: 10, right: 10),
+              padding: EdgeInsets.all(10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Image.asset(
+                    "assets/icons/starno.gif",
+                    height: 40,
+                  ),
+                  Text(
+                    "تعرف على المتاجر الأكثر نقاطاً",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        fontFamily: "Tajawal"),
+                  ),
+                  Icon(
+                    Icons.arrow_back_ios_new,
+                    color: Colors.white,
+                  )
+                ],
+              ),
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => topShops()),
+              );
+            },
+          ),
         ],
       ),
     );

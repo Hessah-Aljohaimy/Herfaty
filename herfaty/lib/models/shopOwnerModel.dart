@@ -8,6 +8,8 @@ class shopOwnerModel {
   String phone_number = "";
   String shopdescription = "";
   String shopname = "";
+  num points = 0;
+
   shopOwnerModel(
       {required this.DOB,
       required this.email,
@@ -17,7 +19,8 @@ class shopOwnerModel {
       required this.password,
       required this.phone_number,
       required this.shopdescription,
-      required this.shopname});
+      required this.shopname,
+      required this.points});
 
   Map<String, dynamic> toJson() => {
         'DOB': DOB,
@@ -29,6 +32,7 @@ class shopOwnerModel {
         'phone_number': phone_number,
         'shopdescription': shopdescription,
         'shopname': shopname,
+        'points': points,
       };
 
   static shopOwnerModel fromJson(Map<String, dynamic> json) => shopOwnerModel(
@@ -41,5 +45,6 @@ class shopOwnerModel {
         phone_number: json['phone_number'],
         shopdescription: json['shopdescription'],
         shopname: json['shopname'],
+        points: json['points'],
       );
 }
