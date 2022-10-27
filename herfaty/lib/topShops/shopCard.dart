@@ -125,11 +125,35 @@ class _shopCardState extends State<shopCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+                    Container(
+                      decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
+                ),
+                gradient: LinearGradient(
+                  colors: [
+                    (Color.fromARGB(255, 81, 144, 142)),
+                    (Color.fromARGB(255, 85, 150, 165)),
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+                      child: Text(
+                        "${widget.shopRanking.toString()}",
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: "Tajawal",
+                          color: kPrimaryLight,
+                        ),
+                      ),
+                    ),
                     //product name===========================================================
                     Text(
                       widget.shop.name,
                       style: const TextStyle(
-                        fontSize: 20.0,
+                        fontSize: 26.0,
                         fontWeight: FontWeight.w600,
                         fontFamily: "Tajawal",
                         color: Colors.black,
@@ -137,24 +161,36 @@ class _shopCardState extends State<shopCard> {
                     ),
 
                     //اسم المتجر  ===========================================================
-                    Text(
-                      "عدد النقاط : ${widget.shop.points.toString()}",
-                      style: const TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: "Tajawal",
-                        color: kPrimaryLight,
+                    if (widget.shop.points > 2)
+                      Text(
+                        "${widget.shop.points.toString()} نقاط",
+                        style: const TextStyle(
+                          fontSize: 22.0,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: "Tajawal",
+                          color: kPrimaryLight,
+                        ),
                       ),
-                    ),
-                    Text(
-                      "الترتيب : ${widget.shopRanking.toString()}",
-                      style: const TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: "Tajawal",
-                        color: kPrimaryLight,
+                    if (widget.shop.points == 2)
+                      Text(
+                        "نقطتين",
+                        style: const TextStyle(
+                          fontSize: 22.0,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: "Tajawal",
+                          color: kPrimaryLight,
+                        ),
                       ),
-                    ),
+                    if (widget.shop.points == 1)
+                      Text(
+                        "نقطة",
+                        style: const TextStyle(
+                          fontSize: 22.0,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: "Tajawal",
+                          color: kPrimaryLight,
+                        ),
+                      ),
                   ],
                 ),
               ),
