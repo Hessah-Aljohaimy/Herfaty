@@ -369,7 +369,8 @@ class _SignupHerafyState extends State<SignupHerafy> {
                                 logo: uploadImageUrl,
                                 shopname: _shopnameTextEditingController.text,
                                 shopdescription:
-                                    _shopdescriptionTextEditingController.text);
+                                    _shopdescriptionTextEditingController.text,
+                                points: 0);
                             Fluttertoast.showToast(
                               msg: "تم تسجيل حسابك  بنجاح",
                               toastLength: Toast.LENGTH_SHORT,
@@ -1147,6 +1148,7 @@ class ShopOwner {
   final String logo;
   final String shopname;
   final String shopdescription;
+  final int points;
 
   ShopOwner({
     this.id = '',
@@ -1158,6 +1160,7 @@ class ShopOwner {
     required this.logo,
     required this.shopname,
     required this.shopdescription,
+    required this.points,
   });
 
   Map<String, dynamic> toJson() => {
@@ -1170,6 +1173,7 @@ class ShopOwner {
         'phone_number': phone_number,
         'shopdescription': shopdescription,
         'shopname': shopname,
+        'points': points,
       };
   static ShopOwner fromJson(Map<String, dynamic> json) => ShopOwner(
         id: json['id'],
@@ -1181,5 +1185,6 @@ class ShopOwner {
         phone_number: json['phone_number'],
         shopdescription: json['shopdescription'],
         shopname: json['shopname'],
+        points: json['points'],
       );
 }

@@ -50,6 +50,7 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
+    print('entering body method ==================');
     return Column(
       children: [
         SizedBox(
@@ -190,9 +191,9 @@ class _AppBarState extends State<AppBar> {
               ProfileCicle()
             ],
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          // const SizedBox(
+          //   height: 20,
+          // ),
         ],
       ),
     );

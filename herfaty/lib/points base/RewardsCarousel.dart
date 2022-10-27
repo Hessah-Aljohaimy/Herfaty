@@ -23,20 +23,21 @@ class _RewardsCarouselState extends State<RewardsCarousel> {
   ];
   @override
   Widget build(BuildContext context) {
+    print('entering rewards scroll method ==================');
     return SizedBox(
         height: 220,
         child: Column(
           children: [
-            Container(
-              height: 50,
-              child: Text(
-                "الكؤوس",
-                style: TextStyle(
-                  color: Color(0xffF19B1A),
-                  fontSize: 20,
-                ),
-              ),
-            ),
+            // Container(
+            //   height: 20,
+            //   child: Text(
+            //     "الكؤوس",
+            //     style: TextStyle(
+            //       color: Color(0xffF19B1A),
+            //       fontSize: 20,
+            //     ),
+            //   ),
+            // ),
             ScrollSnapList(
               itemBuilder: _buildListItem,
               itemCount: rewardList.length,
