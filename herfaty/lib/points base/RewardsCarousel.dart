@@ -25,12 +25,12 @@ class _RewardsCarouselState extends State<RewardsCarousel> {
   Widget build(BuildContext context) {
     print('entering rewards scroll method ==================');
     return SizedBox(
-        height: 235,
+        height: 300,
         child: Column(
           children: [
             Container(
-              width: 50,
-              height: 20,
+              width: 400,
+              height: 30,
               child: Text(
                 "الكؤوس",
                 style: TextStyle(

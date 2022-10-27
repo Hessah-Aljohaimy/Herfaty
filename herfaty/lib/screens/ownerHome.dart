@@ -5,6 +5,7 @@ import 'package:herfaty/constants/size.dart';
 import 'package:herfaty/models/ownerServices.dart';
 import 'package:herfaty/points%20base/RewardsCarousel.dart';
 import 'package:herfaty/points%20base/peofile_circle.dart';
+import 'package:herfaty/points%20base/pointsPanel.dart';
 
 import 'package:herfaty/widgets/profile_button.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,7 @@ class _ownerHomeScreenState extends State<ownerHomeScreen> {
             Body(),
             // Services(),
             RewardsCarousel(),
+            PointPanel(),
           ],
         ),
       ),
