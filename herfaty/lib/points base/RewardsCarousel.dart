@@ -15,23 +15,37 @@ class RewardsCarousel extends StatefulWidget {
 class _RewardsCarouselState extends State<RewardsCarousel> {
   int _current = 0;
   List<Reward> rewardList = [
-    Reward('assets/images/trophy50pt.png', 'كأس البدء'),
+    Reward('assets/images/trophy500', 'كأس الإحتراف'),
+    Reward('assets/images/trophy200.png', 'كأس الإبداع'),
+    Reward('assets/images/trophy100.png', 'كأس المهارة'),
     Reward('assets/images/trophy50ptclosed.png', 'كأس الإتقان'),
-    Reward('assets/images/trophy50ptclosed.png', 'كأس المهارة'),
-    Reward('assets/images/trophy50ptclosed.png', 'كأس الإبداع'),
-    Reward('assets/images/trophy50ptclosed.png', 'كأس الإحتراف'),
+    Reward('assets/images/trophy10.png', 'كأس البدء'),
   ];
   @override
   Widget build(BuildContext context) {
     return SizedBox(
         height: 220,
-        child: ScrollSnapList(
-          itemBuilder: _buildListItem,
-          itemCount: rewardList.length,
-          itemSize: 150,
-          onItemFocus: (index) {},
-          dynamicItemSize: true,
-          scrollDirection: Axis.horizontal,
+        child: Column(
+          children: [
+            Container(
+              height: 50,
+              child: Text(
+                "الكؤوس",
+                style: TextStyle(
+                  color: Color(0xffF19B1A),
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            ScrollSnapList(
+              itemBuilder: _buildListItem,
+              itemCount: rewardList.length,
+              itemSize: 150,
+              onItemFocus: (index) {},
+              dynamicItemSize: true,
+              scrollDirection: Axis.horizontal,
+            ),
+          ],
         ));
   }
 
