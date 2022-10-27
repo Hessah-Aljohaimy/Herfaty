@@ -191,9 +191,9 @@ class _AppBarState extends State<AppBar> {
               ProfileCicle()
             ],
           ),
-          // const SizedBox(
-          //   height: 20,
-          // ),
+          const SizedBox(
+            height: 20,
+          ),
         ],
       ),
     );

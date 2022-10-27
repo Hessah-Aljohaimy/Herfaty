@@ -15,48 +15,59 @@ class RewardsCarousel extends StatefulWidget {
 class _RewardsCarouselState extends State<RewardsCarousel> {
   int _current = 0;
   List<Reward> rewardList = [
-    Reward('assets/images/trophy500', 'كأس الإحتراف'),
-    Reward('assets/images/trophy200.png', 'كأس الإبداع'),
-    Reward('assets/images/trophy100.png', 'كأس المهارة'),
-    Reward('assets/images/trophy50ptclosed.png', 'كأس الإتقان'),
     Reward('assets/images/trophy10.png', 'كأس البدء'),
+    Reward('assets/images/trophy50ptclosed.png', 'كأس الإتقان'),
+    Reward('assets/images/trophy100.png', 'كأس المهارة'),
+    Reward('assets/images/trophy200.png', 'كأس الإبداع'),
+    Reward('assets/images/trophy500.png', 'كأس الإحتراف'),
   ];
   @override
   Widget build(BuildContext context) {
     print('entering rewards scroll method ==================');
     return SizedBox(
-        height: 220,
+        height: 235,
         child: Column(
           children: [
-            // Container(
-            //   height: 20,
-            //   child: Text(
-            //     "الكؤوس",
-            //     style: TextStyle(
-            //       color: Color(0xffF19B1A),
-            //       fontSize: 20,
-            //     ),
-            //   ),
-            // ),
-            ScrollSnapList(
-              itemBuilder: _buildListItem,
-              itemCount: rewardList.length,
-              itemSize: 150,
-              onItemFocus: (index) {},
-              dynamicItemSize: true,
-              scrollDirection: Axis.horizontal,
+            Container(
+              width: 50,
+              height: 20,
+              child: Text(
+                "الكؤوس",
+                style: TextStyle(
+                    color: Color(0xffF19B1A),
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "Tajawal"),
+              ),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Container(
+              height: 200,
+              child: ScrollSnapList(
+                itemBuilder: _buildListItem,
+                itemCount: rewardList.length,
+                itemSize: 150,
+                onItemFocus: (index) {},
+                dynamicItemSize: true,
+                scrollDirection: Axis.horizontal,
+              ),
             ),
           ],
         ));
   }
 
   Widget _buildListItem(BuildContext context, int index) {
+    print('entering build items  method ==================');
     Reward reward = rewardList[index];
     return SizedBox(
       width: 170,
       height: 200,
       child: GestureDetector(
         child: Container(
+          width: 150,
+          height: 154,
           // Within the SecondRoute widget
           padding: const EdgeInsets.all(10),
 
