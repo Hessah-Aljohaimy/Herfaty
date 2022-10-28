@@ -44,7 +44,7 @@ class WelcomeRegestration extends StatelessWidget {
                               top: 50,
                               child: Image.asset(
                                 "assets/images/kid_Wavingcroped.png",
-                                width: 170,
+                                width: 160,
                               ),
                             ),
                             Positioned(
@@ -52,7 +52,7 @@ class WelcomeRegestration extends StatelessWidget {
                               top: 50,
                               child: Image.asset(
                                 "assets/images/girlkiddcroped.png",
-                                width: 180,
+                                width: 170,
                               ),
                             ),
                             SizedBox(

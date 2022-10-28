@@ -486,7 +486,8 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                                 actions: <Widget>[
                                   TextButton(
                                     child: Text("إلغاء",
-                                        style: TextStyle(color: Colors.red)),
+                                        style: TextStyle(
+                                            color: Color(0xff51908E))),
                                     onPressed: () {
                                       Navigator.of(context1).pop();
                                       Navigator.of(context).pop();

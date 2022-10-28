@@ -20,20 +20,30 @@ class listOrderCustomer extends StatefulWidget {
 }
 
 class _listOrderCustomerState extends State<listOrderCustomer> {
-  List<ScrollController> arr = <ScrollController>[];
-  List<ScrollController> arr1 = <ScrollController>[];
-  List<ScrollController> arr2 = <ScrollController>[];
+  List<ScrollController> arr = List.empty(growable: true);
+  List<ScrollController> arr1 = List.empty(growable: true);
+  List<ScrollController> arr2 = List.empty(growable: true);
 
   @override
   void initState() {
-    arr = <ScrollController>[];
-    arr1 = <ScrollController>[];
-    arr2 = <ScrollController>[];
+    arr = List.empty(growable: true);
+    arr1 = List.empty(growable: true);
+    arr2 = List.empty(growable: true);
     super.initState();
   }
 
   @override
   void dispose() {
+    for (int i = 0; i < arr.length; i++) {
+      arr[i].dispose();
+    }
+    for (int i = 0; i < arr1.length; i++) {
+      arr1[i].dispose();
+    }
+    for (int i = 0; i < arr2.length; i++) {
+      arr2[i].dispose();
+    }
+
     //scrollController.dispose();
 
     super.dispose();
@@ -72,6 +82,14 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                               .compareTo(DateTime.parse(a.orderDate));
                         });
 
+                        /*arr = List.filled(cItems.length, ScrollController(),
+                            growable: false);*/
+
+                        for (int i = 0; i < cItems.length; i++) {
+                          //if (cItems[i].products.length > 3)
+                          arr.insert(i, ScrollController());
+                        }
+
                         if (cItems.isEmpty) {
                           return const Center(
                             child: Text(
@@ -88,6 +106,13 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                           return ListView.builder(
                               itemCount: cItems.length,
                               itemBuilder: (context, index) {
+                                var x;
+                                if (cItems[index].products.length > 3) {
+                                  x = arr[index];
+                                } else
+                                  x = null;
+                                print("111111111111111${x}");
+
                                 return Container(
                                   margin: EdgeInsets.only(top: 8.0, bottom: 10),
                                   padding: EdgeInsets.only(
@@ -172,12 +197,15 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                       }
                                                     }
                                                   });
+                                                  dynamic c = arr[index];
 
-                                                  for (int i = 0;
-                                                      i < cItems.length;
-                                                      i++) {
-                                                    arr.add(ScrollController());
-                                                  }
+                                                  if (cItems[index]
+                                                          .products
+                                                          .length <
+                                                      4) c = null;
+
+                                                  print(
+                                                      "erooorrr11111 ${index}");
 
                                                   return Container(
                                                     width: 366,
@@ -227,7 +255,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                       ],
                                                     ),*/
                                                     child: ListView.builder(
-                                                        controller: arr[index],
+                                                        controller: x,
                                                         scrollDirection:
                                                             Axis.horizontal,
                                                         //shrinkWrap: true,
@@ -390,6 +418,14 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                               .compareTo(DateTime.parse(b.orderDate));
                         });
 
+                        /* arr1 = List.filled(cItems.length, ScrollController(),
+                            growable: false);*/
+
+                        for (int i = 0; i < cItems.length; i++) {
+                          //if (cItems[i].products.length > 3)
+                          arr1.insert(i, ScrollController());
+                        }
+
                         if (cItems.isEmpty) {
                           return const Center(
                             child: Text(
@@ -406,6 +442,11 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                           return ListView.builder(
                               itemCount: cItems.length,
                               itemBuilder: (context, index) {
+                                var x;
+                                if (cItems[index].products.length > 3) {
+                                  x = arr1[index];
+                                } else
+                                  x = null;
                                 return Container(
                                   margin: EdgeInsets.only(top: 8.0, bottom: 10),
                                   padding: EdgeInsets.only(
@@ -491,13 +532,6 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                     }
                                                   });
 
-                                                  for (int i = 0;
-                                                      i < cItems.length;
-                                                      i++) {
-                                                    arr1.add(
-                                                        ScrollController());
-                                                  }
-
                                                   return Container(
                                                     width: 366,
                                                     height: 150,
@@ -546,7 +580,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                       ],
                                                     ),*/
                                                     child: ListView.builder(
-                                                        controller: arr1[index],
+                                                        controller: x,
                                                         scrollDirection:
                                                             Axis.horizontal,
                                                         //shrinkWrap: true,
@@ -709,6 +743,14 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                               .compareTo(DateTime.parse(a.orderDate));
                         });
 
+                        /*arr2 = List.filled(cItems.length, ScrollController(),
+                            growable: false);*/
+
+                        for (int i = 0; i < cItems.length; i++) {
+                          //if (cItems[i].products.length > 3)
+                          arr2.insert(i, ScrollController());
+                        }
+
                         if (cItems.isEmpty) {
                           return const Center(
                             child: Text(
@@ -725,6 +767,11 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                           return ListView.builder(
                               itemCount: cItems.length,
                               itemBuilder: (context, index) {
+                                var x;
+                                if (cItems[index].products.length > 3) {
+                                  x = arr2[index];
+                                } else
+                                  x = null;
                                 return Container(
                                   margin: EdgeInsets.only(top: 8.0, bottom: 10),
                                   padding: EdgeInsets.only(
@@ -813,13 +860,6 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                     }
                                                   });
 
-                                                  for (int i = 0;
-                                                      i < cItems.length;
-                                                      i++) {
-                                                    arr2.add(
-                                                        ScrollController());
-                                                  }
-
                                                   return Container(
                                                     width: 366,
                                                     height: 150,
@@ -871,7 +911,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                       ],
                                                     ),*/
                                                     child: ListView.builder(
-                                                        controller: arr2[index],
+                                                        controller: x,
                                                         scrollDirection:
                                                             Axis.horizontal,
                                                         //shrinkWrap: true,
@@ -879,6 +919,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                             PItems.length,
                                                         itemBuilder:
                                                             (context, index) {
+                                                          print("erooorrr");
                                                           return Container(
                                                             margin:
                                                                 EdgeInsets.only(
