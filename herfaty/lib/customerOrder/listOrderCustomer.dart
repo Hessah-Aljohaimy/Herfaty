@@ -5,7 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:herfaty/customerOrder/scroll_indicator.dart';
-
+import 'package:herfaty/rating/ratingDialog.dart';
+import 'package:rating_dialog/rating_dialog.dart';
 import '../ShopOwnerOrder/OrderModel.dart';
 import '../constants/color.dart';
 import 'orderDetailsCustomer.dart';
@@ -1016,8 +1017,15 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                   backgroundColor: Colors
                                                       .amber, // background
                                                 ),
-                                                onPressed: () {
+                                                onPressed: () async {
+                                                  String shopLogo =
+                                                      await getShopLogo(
+                                                          cItems[index]
+                                                              .shopOwnerId);
                                                   //show rating dialog
+                                                  showRatingDialog(
+                                                      cItems[index].shopName,
+                                                      shopLogo);
                                                 },
                                                 child: Text(
                                                   "تقييم المتجر",
@@ -1086,7 +1094,91 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
       ),
     );
   }
+
+  //=============================================================================================
+  ///////////////////////////////////////////////////////////////////////////////////////////////
+  void showRatingDialog(String shopName, String shopLogo) {
+    bool hasLogo = true;
+    if (shopLogo == "") {
+      hasLogo = false;
+    }
+    final _dialog = RatingDialog(
+      initialRating: 0.0,
+      // your app's name?
+      title: Text(
+        'قيّم متجري',
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+          fontSize: 28,
+          fontWeight: FontWeight.w900,
+          color: Colors.amber,
+        ),
+      ),
+      // encourage your user to leave a high rating?
+      message: Text(
+        "كيف كانت تجربتك مع متجر ${shopName}؟ يمكنك كتابة ملاحظاتك ليراها صاحب المتجر ",
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.w800,
+          color: Color.fromARGB(157, 20, 129, 137),
+        ),
+      ),
+      // logo
+
+      image: hasLogo
+          ? Image.network(
+              shopLogo,
+              height: 150,
+              width: 150,
+              fit: BoxFit.cover,
+            )
+          : Image.asset(
+              "assets/images/herfatyLogo.png",
+              height: 150,
+              width: 150,
+              fit: BoxFit.contain,
+            ),
+
+      // image: Icon(
+      //   Icons.check_outlined,
+      //   color: Color.fromARGB(157, 20, 129, 137),
+      //   size: 80.0,
+      // ),
+      submitButtonText: 'إرسال',
+      commentHint: 'اكتب ملاحظاتك هنا',
+      onCancelled: () => print('cancelled'),
+      onSubmitted: (response) {
+        print('rating: ${response.rating}, comment: ${response.comment}');
+      },
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      barrierDismissible: true, // set to false if you want to force a rating
+      builder: (context) => _dialog,
+    );
+  }
 }
+
+//--------------------------------------------------------------------
+Future<String> getShopLogo(String shopOwnerId) async {
+  String shopLogo = "";
+  final wishListDoc = await FirebaseFirestore.instance
+      .collection('shop_owner')
+      .where("id", isEqualTo: shopOwnerId)
+      .get();
+  if (wishListDoc.size > 0) {
+    var data = wishListDoc.docs.elementAt(0).data() as Map;
+    if (data["logo"] != "") {
+      shopLogo = data["logo"];
+    }
+  }
+  return shopLogo;
+}
+//=============================================================================================
+///////////////////////////////////////////////////////////////////////////////////////////////
 
 class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;

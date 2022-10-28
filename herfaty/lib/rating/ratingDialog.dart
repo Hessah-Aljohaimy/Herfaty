@@ -17,7 +17,7 @@ class _ratingDialogState extends State<ratingDialog> {
       initialRating: 0.0,
       // your app's name?
       title: Text(
-        'تقييم الطلب',
+        'تقييم المتجر',
         textAlign: TextAlign.center,
         style: const TextStyle(
           fontSize: 28,
@@ -47,6 +47,7 @@ class _ratingDialogState extends State<ratingDialog> {
       onSubmitted: (response) {
         print('rating: ${response.rating}, comment: ${response.comment}');
 
+        //---------------------------------------------------------------------------
         // TODO: add your own logic
         if (response.rating < 3.0) {
           // send their comments to your email or anywhere you wish
