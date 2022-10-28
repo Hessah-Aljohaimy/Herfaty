@@ -5,12 +5,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:herfaty/customerOrder/scroll_indicator.dart';
+import 'package:herfaty/models/ratingModel.dart';
 import 'package:herfaty/rating/ratingDialog.dart';
 import 'package:rating_dialog/rating_dialog.dart';
 import '../ShopOwnerOrder/OrderModel.dart';
 import '../constants/color.dart';
 import 'orderDetailsCustomer.dart';
 import '../models/Product1.dart';
+import 'package:intl/intl.dart';
 
 //import 'package:flutterfiredemo/item_details.dart';
 //import 'add_item.dart';
@@ -1024,7 +1026,9 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                               .shopOwnerId);
                                                   //show rating dialog
                                                   showRatingDialog(
+                                                      cItems[index].docId,
                                                       cItems[index].shopName,
+                                                      cItems[index].shopOwnerId,
                                                       shopLogo);
                                                 },
                                                 child: Text(
@@ -1097,7 +1101,8 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
 
   //=============================================================================================
   ///////////////////////////////////////////////////////////////////////////////////////////////
-  void showRatingDialog(String shopName, String shopLogo) {
+  void showRatingDialog(
+      String orderId, String shopName, String shopOwneerId, String shopLogo) {
     bool hasLogo = true;
     if (shopLogo == "") {
       hasLogo = false;
@@ -1139,16 +1144,31 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
               width: 150,
               fit: BoxFit.contain,
             ),
-
-      // image: Icon(
-      //   Icons.check_outlined,
-      //   color: Color.fromARGB(157, 20, 129, 137),
-      //   size: 80.0,
-      // ),
       submitButtonText: 'إرسال',
       commentHint: 'اكتب ملاحظاتك هنا',
       onCancelled: () => print('cancelled'),
+      //................................................add rating to the database
       onSubmitted: (response) {
+        //get current date and time firstly
+        String cdate = DateFormat("yyyy-MM-dd").format(DateTime.now());
+        String ctime = DateFormat("HH:mm:ss").format(DateTime.now());
+        print(cdate);
+        print(ctime);
+        String commentToBeStored;
+        if (response.comment == "") {
+          commentToBeStored = "بدون تعليق";
+        } else {
+          commentToBeStored = response.comment;
+        }
+        ratingModel item = ratingModel(
+            starsNumber: response.rating,
+            shopOwnerId: shopOwneerId,
+            orderId: orderId,
+            comment: commentToBeStored,
+            date: cdate,
+            time: ctime);
+        createRatingItem(item);
+        //..........................................................................
         print('rating: ${response.rating}, comment: ${response.comment}');
       },
     );
@@ -1176,6 +1196,17 @@ Future<String> getShopLogo(String shopOwnerId) async {
     }
   }
   return shopLogo;
+}
+
+//----------------------------------------------------------------------
+Future createRatingItem(ratingModel ratingItem) async {
+  final ratingDoc = FirebaseFirestore.instance
+      .collection('rating')
+      .doc("${ratingItem.orderId}");
+  final json = ratingItem.toJson();
+  await ratingDoc.set(
+    json,
+  );
 }
 //=============================================================================================
 ///////////////////////////////////////////////////////////////////////////////////////////////
