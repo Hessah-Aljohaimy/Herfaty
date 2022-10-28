@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -1004,6 +1006,29 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.end,
                                           children: [
+                                            //----------------------------------------
+                                            // زر تقييم المتجر
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 8.0),
+                                              child: ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  backgroundColor: Colors
+                                                      .amber, // background
+                                                ),
+                                                onPressed: () {
+                                                  //show rating dialog
+                                                },
+                                                child: Text(
+                                                  "تقييم المتجر",
+                                                  style: TextStyle(
+                                                    fontFamily: "Tajawal",
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            //-------------------------------------
+                                            //--------------------------------------------------
                                             ElevatedButton(
                                               style: ElevatedButton.styleFrom(
                                                   primary: Color.fromARGB(
