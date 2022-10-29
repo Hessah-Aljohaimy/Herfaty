@@ -151,16 +151,6 @@ class _productCardState extends State<productCard> {
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
-            Container(
-              //(small box inside the Big box)
-              padding: const EdgeInsets.only(top: 10),
-              height: 180,
-              decoration: BoxDecoration(
-                //color: const Color(0xFFFAF9F6),
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
             //*************************This part contains product photo:
             Positioned(
               top: 0,
@@ -184,7 +174,7 @@ class _productCardState extends State<productCard> {
                   ),
                   child: Image.network(
                     widget.product.image,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.contain,
                   ),
                 ),
               ),

@@ -1100,7 +1100,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
     );
   }
 
-  //=============================================================================================
+  //Rating=============================================================================================
   ///////////////////////////////////////////////////////////////////////////////////////////////
   void showRatingDialog(
       String orderId, String shopName, String shopOwneerId, String shopLogo) {
@@ -1131,13 +1131,12 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
         ),
       ),
       // logo
-
       image: hasLogo
           ? Image.network(
               shopLogo,
               height: 150,
               width: 150,
-              fit: BoxFit.cover,
+              fit: BoxFit.contain,
             )
           : Image.asset(
               "assets/images/herfatyLogo.png",
@@ -1153,8 +1152,6 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
         //get current date and time firstly
         String cdate = DateFormat("yyyy-MM-dd").format(DateTime.now());
         String ctime = DateFormat("HH:mm:ss").format(DateTime.now());
-        print(cdate);
-        print(ctime);
         String commentToBeStored;
         if (response.comment == "") {
           commentToBeStored = "بدون تعليق";
@@ -1187,12 +1184,12 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
 //--------------------------------------------------------------------
 Future<String> getShopLogo(String shopOwnerId) async {
   String shopLogo = "";
-  final wishListDoc = await FirebaseFirestore.instance
+  final shopDoc = await FirebaseFirestore.instance
       .collection('shop_owner')
       .where("id", isEqualTo: shopOwnerId)
       .get();
-  if (wishListDoc.size > 0) {
-    var data = wishListDoc.docs.elementAt(0).data() as Map;
+  if (shopDoc.size > 0) {
+    var data = shopDoc.docs.elementAt(0).data() as Map;
     if (data["logo"] != "") {
       shopLogo = data["logo"];
     }
