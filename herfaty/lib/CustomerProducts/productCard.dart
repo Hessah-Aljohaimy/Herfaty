@@ -28,6 +28,8 @@ class _productCardState extends State<productCard> {
 
   bool isFavourite = false;
   bool isAvailable = true;
+  num averageShopRating = 0;
+  int numberOfRatings = 0;
 
   @override
   void initState() {
@@ -36,6 +38,8 @@ class _productCardState extends State<productCard> {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     String thisCustomerId = user!.uid;
+    setShopRating(widget.product.shopOwnerId);
+    setNumOfRatings(widget.product.shopOwnerId);
     setIsFavourite(thisCustomerId, widget.product.productId);
     if (widget.product.availableAmount == 0) {
       isAvailable = false;
@@ -207,10 +211,10 @@ class _productCardState extends State<productCard> {
                     Text(
                       ' ${widget.product.price} ريال',
                       style: const TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.w400,
+                        fontSize: 19.0,
+                        fontWeight: FontWeight.w600,
                         fontFamily: "Tajawal",
-                        color: Colors.orange,
+                        color: Color.fromARGB(196, 84, 83, 83),
                       ),
                     ),
                     //اسم المتجر  ===========================================================
@@ -230,7 +234,7 @@ class _productCardState extends State<productCard> {
             //**********************المفضلة
             Positioned(
               //top: 10,
-              left: 185,
+              left: 177,
               bottom: 10,
               child: IconButton(
                 icon: Icon(
@@ -284,7 +288,7 @@ class _productCardState extends State<productCard> {
             Positioned(
               //top: 10,
               right: 5,
-              bottom: 10,
+              bottom: 15,
               child: IconButton(
                 icon: Icon(
                   //Icons.star_rate,
@@ -299,11 +303,11 @@ class _productCardState extends State<productCard> {
             Positioned(
               //top: 10,
               right: 43,
-              bottom: 22,
+              bottom: 27,
               child: Text(
-                "4.5",
+                "${averageShopRating}",
                 style: const TextStyle(
-                  fontSize: 16.0,
+                  fontSize: 14.0,
                   fontWeight: FontWeight.w400,
                   fontFamily: "Tajawal",
                   color: kPrimaryLight,
@@ -313,14 +317,15 @@ class _productCardState extends State<productCard> {
             //********************** عدد التقييمات
             Positioned(
               //top: 10,
-              right: 69,
-              bottom: 22,
+              right: 67,
+              bottom: 27,
               child: Text(
-                "(15)",
+                "(${numberOfRatings} تقييم)",
                 style: const TextStyle(
-                  fontSize: 16.0,
+                  fontSize: 13.0,
                   fontWeight: FontWeight.w600,
                   fontFamily: "Tajawal",
+                  decoration: TextDecoration.underline,
                   color: Colors.amber,
                 ),
               ),
@@ -396,6 +401,54 @@ class _productCardState extends State<productCard> {
           '===product with id${thisproductId}is in the wishList with docId ${DocId}');
     }
     return DocId;
+  }
+
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+  Future<void> setShopRating(String thisOwnerId) async {
+    num existedShopRating = await getShopRating(thisOwnerId);
+    setState(() {
+      averageShopRating = existedShopRating;
+    });
+  }
+
+  //=======================================================================================
+  Future<num> getShopRating(String shopOwnerId) async {
+    num averageShopRating = 0;
+    num sumRating = 0;
+    final shopDoc = await FirebaseFirestore.instance
+        .collection('rating')
+        .where("shopOwnerId", isEqualTo: shopOwnerId)
+        .get();
+    if (shopDoc.size > 0) {
+      for (int i = 0; i < shopDoc.size; i++) {
+        var data = shopDoc.docs.elementAt(i).data() as Map;
+        num thisDocRating = data["starsNumber"];
+        sumRating += thisDocRating;
+      }
+      averageShopRating = sumRating / shopDoc.size;
+    }
+    return averageShopRating;
+  }
+
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+  Future<void> setNumOfRatings(String thisOwnerId) async {
+    int existedRatingsNum = await getNumOfRatings(thisOwnerId);
+    setState(() {
+      numberOfRatings = existedRatingsNum;
+    });
+  }
+
+  //=======================================================================================
+  Future<int> getNumOfRatings(String shopOwnerId) async {
+    int existedRatingsNum = 0;
+    final shopDoc = await FirebaseFirestore.instance
+        .collection('rating')
+        .where("shopOwnerId", isEqualTo: shopOwnerId)
+        .get();
+    if (shopDoc.size > 0) {
+      existedRatingsNum = shopDoc.size;
+    }
+    return existedRatingsNum;
   }
 
 //=============================================================================================
