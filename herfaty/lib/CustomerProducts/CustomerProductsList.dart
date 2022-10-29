@@ -386,7 +386,6 @@ if( catCheck[widget.categoryName]==false){
 Stream<List<Product1>> readPrpducts() => FirebaseFirestore.instance
       .collection('Products')
       .where("categoryName", isEqualTo: CatName)
-      .where('name',isEqualTo: query)
       .snapshots()
       .map((snapshot) =>
           snapshot.docs.map((doc) => Product1.fromJson(doc.data())).toList());
@@ -471,16 +470,33 @@ Stream<List<Product1>> readPrpducts() => FirebaseFirestore.instance
                               );
                             } else {
                               final productItems = snapshot.data!.toList();
-                            
+                              List<Product1> productItems2=[];
+for (var i = 0; i < productItems.length; i++) {
+  if(productItems[i].name.contains(query)){
+    productItems2.add((productItems[i]));
+  }
+}
 
-
+if(productItems2.isEmpty){
+       return const Center(
+                                child: Text(
+                                  'لا توجد منتجات بهذا الاسم',
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w600,
+                                    fontFamily: "Tajawal",
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              );
+}
 
                              return ListView.builder(
                                 
-                                itemCount: productItems.length,
+                                itemCount: productItems2.length,
                                 itemBuilder: (context, index) => productCard(
                                   itemIndex: index,
-                                  product: productItems[index],
+                                  product: productItems2[index],
                                   press: () {
                                     Navigator.push(
                                       context,
@@ -488,8 +504,8 @@ Stream<List<Product1>> readPrpducts() => FirebaseFirestore.instance
                                         builder: (context) =>
                                             CustomerProdectDetails(
                                           // يرسل المعلومات لصفحة المنتج عشان يعرض التفاصيل
-                                          detailsImage: productItems[index].image,
-                                          product: productItems[index],
+                                          detailsImage: productItems2[index].image,
+                                          product: productItems2[index],
                                         ),
                                       ),
                                     );
@@ -521,8 +537,6 @@ Stream<List<Product1>> readPrpducts() => FirebaseFirestore.instance
       Suggestions.add(productsName[i]);
     }
   }
-   
-  
     return ListView.builder(
       itemCount:Suggestions.length ,
       itemBuilder: (context, index) {
@@ -541,8 +555,6 @@ Stream<List<Product1>> readPrpducts() => FirebaseFirestore.instance
       },
   
     );
-    
-   
-  
+
   }
     }
