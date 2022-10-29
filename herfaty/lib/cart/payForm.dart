@@ -329,7 +329,7 @@ class payForm extends StatelessWidget {
                         points: totalPoints,
                       );
 
-                      createNewOrder(order);
+                      createNewOrder(order, widget.shopOwnerId, totalPoints);
 //print('zzzzzzzvvvevevevvevevevvevv');
 
                       return Container(
@@ -487,10 +487,14 @@ class payForm extends StatelessWidget {
   }
 }
 
-Future createNewOrder(orderModal cartItem) async {
+Future createNewOrder(
+    orderModal cartItem, var shopOwnerId, var totalPoints) async {
   final docCartItem =
       FirebaseFirestore.instance.collection('orders').doc("${cartItem.docId}");
+  final updatedPoints =
+      FirebaseFirestore.instance.collection('shop_owner').doc("${shopOwnerId}");
   final json = cartItem.toJson();
+  updatedPoints.update({'points': totalPoints});
   await docCartItem.set(
     json,
     // SetOptions(merge: true)

@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:herfaty/Points.dart/pointsModel.dart';
-import 'package:herfaty/ShopOwnerOrder/orderDetails.dart';
-import 'package:herfaty/screens/ownerHome.dart';
+
+//import 'package:herfaty/screens/ownerHome.dart';
 
 import '../ShopOwnerOrder/OrderModel.dart';
 import '../constants/color.dart';
@@ -162,7 +161,18 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.white,
       elevation: 0,
       automaticallyImplyLeading: false,
-      iconTheme: IconThemeData(color: kPrimaryColor),
+      iconTheme: const IconThemeData(color: kPrimaryColor),
+      leading: IconButton(
+        padding: EdgeInsets.only(right: 20),
+        icon: const Icon(
+          Icons.arrow_back, //سهم العودة
+          color: Color.fromARGB(255, 26, 96, 91),
+          size: 22.0,
+        ),
+        onPressed: () {
+          Navigator.pop(context);
+        },
+      ),
     );
   }
 }
