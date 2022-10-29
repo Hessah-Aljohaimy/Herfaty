@@ -192,7 +192,7 @@ class _productCardState extends State<productCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    //product name===========================================================
+                    //اسم المنتج===========================================================
                     Text(
                       widget.product.name,
                       style: const TextStyle(
@@ -227,10 +227,10 @@ class _productCardState extends State<productCard> {
                 ),
               ),
             ),
-            //**********************This part contains wish list icon
+            //**********************المفضلة
             Positioned(
               //top: 10,
-              left: 190,
+              left: 185,
               bottom: 10,
               child: IconButton(
                 icon: Icon(
@@ -280,16 +280,62 @@ class _productCardState extends State<productCard> {
                 },
               ),
             ),
-            //**********************This part if the available amount is zero
+            //**********************صورة نجمة
             Positioned(
-                //top: 10,
-                //left: 235,
-                right: 60,
-                bottom: 6,
+              //top: 10,
+              right: 5,
+              bottom: 10,
+              child: IconButton(
+                icon: Icon(
+                  //Icons.star_rate,
+                  Icons.star_rounded,
+                  color: Colors.amber,
+                  size: 25.0,
+                ),
+                onPressed: () {},
+              ),
+            ),
+            //**********************نسبة التقييم للمتجر
+            Positioned(
+              //top: 10,
+              right: 43,
+              bottom: 22,
+              child: Text(
+                "4.5",
+                style: const TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: "Tajawal",
+                  color: kPrimaryLight,
+                ),
+              ),
+            ),
+            //********************** عدد التقييمات
+            Positioned(
+              //top: 10,
+              right: 69,
+              bottom: 22,
+              child: Text(
+                "(15)",
+                style: const TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: "Tajawal",
+                  color: Colors.amber,
+                ),
+              ),
+            ),
+            //=============================================================
+            //========================================غير متوفر
+            Positioned(
+                top: 25,
+                left: 215,
+                //right: 60,
+                //bottom: 6,
                 child: isAvailable
                     ? Text("")
                     : Container(
-                        padding: EdgeInsets.only(top: 25),
+                        //padding: EdgeInsets.only(top: 25),
                         child: Center(
                           child: Text(
                             '*غير متوفر',
