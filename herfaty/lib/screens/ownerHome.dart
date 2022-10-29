@@ -6,6 +6,7 @@ import 'package:herfaty/models/ownerServices.dart';
 import 'package:herfaty/points%20base/RewardsCarousel.dart';
 import 'package:herfaty/points%20base/peofile_circle.dart';
 import 'package:herfaty/points%20base/pointsPanel.dart';
+import 'package:herfaty/points%20base/points_Instructions.dart';
 
 import 'package:herfaty/widgets/profile_button.dart';
 import 'package:flutter/material.dart';
@@ -28,14 +29,27 @@ class _ownerHomeScreenState extends State<ownerHomeScreen> {
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Column(
-          children: const [
-            AppBar(),
-            Body(),
-            // Services(),
-            RewardsCarousel(),
-            PointPanel(),
-          ],
+        body: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/homeBackground.png'),
+                  fit: BoxFit.cover)),
+          child: SingleChildScrollView(
+            child: Column(
+              children: const [
+                AppBar(),
+                Body(),
+                // Services(),
+                RewardsCarousel(),
+                Rewards(),
+                PointPanel(),
+                const SizedBox(
+                  height: 10,
+                ),
+                PiointsInstruction(),
+              ],
+            ),
+          ),
         ),
       ),
     );

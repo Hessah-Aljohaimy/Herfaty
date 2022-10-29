@@ -350,6 +350,9 @@ class _SignupHerafyState extends State<SignupHerafy> {
 
                   ElevatedButton(
                     onPressed: () async {
+                      if (uploadImageUrl == "") {
+                        uploadImageUrl = 'assets/images/Circular_Logo.png';
+                      }
                       try {
                         //uploadImageUrl
                         if (formKeys[0].currentState!.validate() &&

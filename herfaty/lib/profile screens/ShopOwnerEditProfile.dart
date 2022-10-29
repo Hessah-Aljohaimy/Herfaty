@@ -69,6 +69,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
       TextEditingController();
   @override
   void initState() {
+    
     _passwordTextController.text = widget.password;
 
     _emailTextEditingController.text = widget.email;

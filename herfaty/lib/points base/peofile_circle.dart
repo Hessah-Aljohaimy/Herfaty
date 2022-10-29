@@ -21,7 +21,7 @@ class _ProfileCicleState extends State<ProfileCicle> {
         decoration: BoxDecoration(
             color: Colors.white,
             border: Border.all(
-              color: Color(0xffF19B1A),
+              color: Color(0xff51908E),
             ),
             borderRadius: BorderRadius.all(Radius.circular(50))),
         child: IconButton(
@@ -29,7 +29,7 @@ class _ProfileCicleState extends State<ProfileCicle> {
             Icons.person,
             size: 48,
           ),
-          color: Color(0xffF19B1A),
+          color: Color(0xff51908E),
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (BuildContext context) => ShopOwnerProfile()));
