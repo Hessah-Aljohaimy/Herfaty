@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/customerOrder/scroll_indicator.dart';
 import 'package:herfaty/models/ratingModel.dart';
 import 'package:herfaty/rating/ratingDialog.dart';
@@ -1121,7 +1122,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
       ),
       // encourage your user to leave a high rating?
       message: Text(
-        "كيف كانت تجربتك مع متجر ${shopName}؟ يمكنك كتابة ملاحظاتك ليراها صاحب المتجر ",
+        "في هذا الطلب كيف كانت تجربتك مع متجر ${shopName}؟ يمكنك إضافة ملاحظاتك لتصل لصاحب المتجر ",
         textAlign: TextAlign.center,
         style: const TextStyle(
           fontSize: 15,
@@ -1148,7 +1149,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
       commentHint: 'اكتب ملاحظاتك هنا',
       onCancelled: () => print('cancelled'),
       //................................................add rating to the database
-      onSubmitted: (response) {
+      onSubmitted: (response) async {
         //get current date and time firstly
         String cdate = DateFormat("yyyy-MM-dd").format(DateTime.now());
         String ctime = DateFormat("HH:mm:ss").format(DateTime.now());
@@ -1168,6 +1169,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
             date: cdate,
             time: ctime);
         createRatingItem(item);
+        await showToastMethod(context, "شكرًا، تم إرسال تقييمك");
         //..........................................................................
         print('rating: ${response.rating}, comment: ${response.comment}');
       },
@@ -1206,6 +1208,19 @@ Future createRatingItem(ratingModel ratingItem) async {
   final json = ratingItem.toJson();
   await ratingDoc.set(
     json,
+  );
+}
+
+//------------------------------------------------------------------------
+Future<void> showToastMethod(BuildContext context, String textToBeShown) async {
+  Fluttertoast.showToast(
+    msg: textToBeShown,
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.CENTER,
+    timeInSecForIosWeb: 3,
+    backgroundColor: Color.fromARGB(255, 26, 96, 91),
+    textColor: Colors.white,
+    fontSize: 18.0,
   );
 }
 //=============================================================================================
