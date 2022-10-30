@@ -315,18 +315,22 @@ class _productCardState extends State<productCard> {
               ),
             ),
             //********************** عدد التقييمات
-            Positioned(
-              //top: 10,
-              right: 67,
-              bottom: 27,
-              child: Text(
-                "(${numberOfRatings} تقييم)",
-                style: const TextStyle(
-                  fontSize: 13.0,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: "Tajawal",
-                  decoration: TextDecoration.underline,
-                  color: Colors.amber,
+            InkWell(
+              // onTap: () {
+              // Navigator.pushNamed(context, "YourRoute");},
+              child: Positioned(
+                //top: 10,
+                right: 67,
+                bottom: 27,
+                child: Text(
+                  "(${numberOfRatings} تقييم)",
+                  style: const TextStyle(
+                    fontSize: 13.0,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: "Tajawal",
+                    decoration: TextDecoration.underline,
+                    color: Colors.amber,
+                  ),
                 ),
               ),
             ),

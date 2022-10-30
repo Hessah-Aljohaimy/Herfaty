@@ -1122,7 +1122,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
       ),
       // encourage your user to leave a high rating?
       message: Text(
-        "في هذا الطلب كيف كانت تجربتك مع متجر ${shopName}؟ يمكنك إضافة ملاحظاتك لتصل لصاحب المتجر ",
+        "في هذا الطلب كيف كانت تجربتك مع ${shopName}؟ يمكنك إضافة ملاحظاتك لتصل لصاحب المتجر ",
         textAlign: TextAlign.center,
         style: const TextStyle(
           fontSize: 15,
