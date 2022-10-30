@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:herfaty/CustomerProducts/CustomerProductDetails.dart';
 import 'package:herfaty/CustomerProducts/productCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:herfaty/OwnerProducts/OwnerProductsList.dart';
 import 'package:herfaty/ShopOwnerOrder/list.dart';
 import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/constants/color.dart';
@@ -94,24 +95,66 @@ String typeOfSort="الأحدث";
                         } else if (snapshot.hasData) {
                           final productItems = snapshot.data!.toList();
                           final data = snapshot.data!;
-                          var serchList=[];
-                        
-if( catCheck[widget.categoryName]==false){
-  
-  
-  for (var i = 0; i < productItems.length; i++) {
-  
-    if((productsName.contains(productItems[i].name))==false){
-    
-                              productsName.add(productItems[i].name);
-
+                     
+                          if(cat1.isEmpty && widget.categoryName=="الخرز والإكسسوار") {
+                      for (var i = 0; i < productItems.length; i++) {
+         if((cat1.contains(productItems[i].name))==false &&
+                   productItems[i].categoryName=="الخرز والإكسسوار"){
+                              cat1.add(productItems[i].name);
     }
                                        }   
 
+
+                          }
                         
-               catCheck[widget.categoryName]=true;          
-   takeName=true;
-}
+                            if(cat2.isEmpty && widget.categoryName=="الفخاريات") {
+                      for (var i = 0; i < productItems.length; i++) {
+         if((cat2.contains(productItems[i].name))==false &&
+                   productItems[i].categoryName=="الفخاريات"){
+                              cat2.add(productItems[i].name);
+    }
+                                       }   
+
+
+                          }
+
+                              if(cat3.isEmpty && widget.categoryName=="الحياكة والتطريز") {
+                      for (var i = 0; i < productItems.length; i++) {
+         if((cat3.contains(productItems[i].name))==false &&
+                   productItems[i].categoryName=="الحياكة والتطريز"){
+                              cat3.add(productItems[i].name);
+    }
+                                       }   
+
+
+                          }
+
+                              if(cat4.isEmpty && widget.categoryName=="فنون الورق والتلوين") {
+                      for (var i = 0; i < productItems.length; i++) {
+         if((cat4.contains(productItems[i].name))==false &&
+                   productItems[i].categoryName=="فنون الورق والتلوين"){
+                              cat4.add(productItems[i].name);
+    }
+                                       }   
+
+
+                          }
+// if( catCheck[widget.categoryName]==false){
+  
+  
+//   for (var i = 0; i < productItems.length; i++) {
+  
+//     if((productsName.contains(productItems[i].name))==false){
+    
+//                               productsName.add(productItems[i].name);
+
+//     }
+//                                        }   
+
+                        
+//                catCheck[widget.categoryName]=true;          
+//    takeName=true;
+// }
   if(typeOfSort=='itemThree'){
                                productItems.sort((a, b) {
                           return (b.price)
@@ -275,6 +318,8 @@ Stream<List<Product1>> readPrpducts() => FirebaseFirestore.instance
       .map((snapshot) =>
           snapshot.docs.map((doc) => Product1.fromJson(doc.data())).toList());
 
+List<String> Suggestions=[];
+
   @override
   List<Widget>? buildActions(BuildContext context) {
       return [
@@ -342,6 +387,7 @@ Stream<List<Product1>> readPrpducts() => FirebaseFirestore.instance
                             //هنا حالة النجاح في استرجاع البيانات...........................................
                             final data = snapshot.data!;
                             if (data.isEmpty) {
+                              Suggestions.clear();  
                               return const Center(
                                 child: Text(
                                   'لا توجد منتجات بهذا الاسم',
@@ -354,6 +400,7 @@ Stream<List<Product1>> readPrpducts() => FirebaseFirestore.instance
                                 ),
                               );
                             } else {
+                              Suggestions.clear();  
                               final productItems = snapshot.data!.toList();
                               List<Product1> productItems2=[];
 for (var i = 0; i < productItems.length; i++) {
@@ -396,18 +443,24 @@ if(productItems2.isEmpty){
                                     );
                                   },
                                 ),
+                                
                               );
                               //..................................................................................
                             }
+
                           } 
                           else {
                             return const Center(
+                              
                                 child: CircularProgressIndicator());
+                                
                           }
+                          
                         },
                         
                       ),
- );    
+
+ );  
   }
   
   
@@ -415,13 +468,27 @@ if(productItems2.isEmpty){
   @override
   Widget buildSuggestions(BuildContext context) {
     // TODO: implement buildSuggestions
-     List<String> Suggestions=[];
+     
    
-  for (var i = 0; i < productsName.length; i++) {
-    if(productsName[i].contains(query)){
-      Suggestions.add(productsName[i]);
-    }
-  }
+if(CatName=="الخرز والإكسسوار"){
+  Suggestions.addAll(cat1);
+}
+
+else if(CatName=="الفخاريات"){
+Suggestions.addAll(cat2);
+}
+
+else if(CatName=="الحياكة والتطريز"){
+Suggestions.addAll(cat3);
+}
+else{
+Suggestions.addAll(cat4);
+}
+  // for (var i = 0; i < productsName.length; i++) {
+  //   if(productsName[i].contains(query)){
+  //     Suggestions.add(productsName[i]);
+  //   }
+  // }
     return ListView.builder(
       itemCount:Suggestions.length ,
       itemBuilder: (context, index) {
