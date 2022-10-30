@@ -127,6 +127,56 @@ class _RewardsState extends State<Rewards> {
             } else if (snapshot.hasData) {
               final RewardsItems = snapshot.data!.toList();
 
+              //sort the list
+              RewardsItems.sort((a, b) {
+                return a.order.compareTo(b.order);
+              });
+
+              //new list for the rewards ordered
+              List<Reward> RewardsItemsOrderd = [];
+
+              //fill the new list
+              if (points == 0) {
+                RewardsItemsOrderd.add(RewardsItems[2]);
+                RewardsItemsOrderd.add(RewardsItems[4]);
+                RewardsItemsOrderd.add(RewardsItems[6]);
+                RewardsItemsOrderd.add(RewardsItems[8]);
+                RewardsItemsOrderd.add(RewardsItems[10]);
+              } else {
+                for (int i = 0; i < RewardsItems.length; i++) {
+                  if (points >= 500) {
+                    RewardsItemsOrderd.add(RewardsItems[1]);
+                    RewardsItemsOrderd.add(RewardsItems[3]);
+                    RewardsItemsOrderd.add(RewardsItems[5]);
+                    RewardsItemsOrderd.add(RewardsItems[7]);
+                    RewardsItemsOrderd.add(RewardsItems[9]);
+                  } else if (points >= 200) {
+                    RewardsItemsOrderd.add(RewardsItems[1]);
+                    RewardsItemsOrderd.add(RewardsItems[3]);
+                    RewardsItemsOrderd.add(RewardsItems[5]);
+                    RewardsItemsOrderd.add(RewardsItems[7]);
+                    RewardsItemsOrderd.add(RewardsItems[10]);
+                  } else if (points >= 100) {
+                    RewardsItemsOrderd.add(RewardsItems[1]);
+                    RewardsItemsOrderd.add(RewardsItems[3]);
+                    RewardsItemsOrderd.add(RewardsItems[5]);
+                    RewardsItemsOrderd.add(RewardsItems[8]);
+                    RewardsItemsOrderd.add(RewardsItems[10]);
+                  } else if (points >= 50) {
+                    RewardsItemsOrderd.add(RewardsItems[1]);
+                    RewardsItemsOrderd.add(RewardsItems[3]);
+                    RewardsItemsOrderd.add(RewardsItems[6]);
+                    RewardsItemsOrderd.add(RewardsItems[8]);
+                    RewardsItemsOrderd.add(RewardsItems[10]);
+                  } else if (points >= 10) {
+                    RewardsItemsOrderd.add(RewardsItems[1]);
+                    RewardsItemsOrderd.add(RewardsItems[4]);
+                    RewardsItemsOrderd.add(RewardsItems[6]);
+                    RewardsItemsOrderd.add(RewardsItems[8]);
+                    RewardsItemsOrderd.add(RewardsItems[10]);
+                  }
+                }
+              }
               return Container(
                 height: 200,
                 child: ScrollSnapList(
@@ -401,6 +451,6 @@ class _IndicatorState extends State<Indicator> {
           backgroundColor: Color(0xffD9D9D9),
         ));
   }
-}//#FFC71F
+} //#FFC71F
 //Color(0xffA6A6A6),
 //A6A6A6
