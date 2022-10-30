@@ -43,7 +43,10 @@ class _ownerHomeScreenState extends State<ownerHomeScreen> {
                 // Services(),
                 RewardsCarousel(),
                 Rewards(),
-                Indicator(),
+                const SizedBox(
+                  height: 10,
+                ),
+                // Indicator(),
                 PointPanel(),
                 const SizedBox(
                   height: 10,

@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:herfaty/points%20base/RewardsCarousel.dart';
 
 class PointPanel extends StatefulWidget {
   const PointPanel({super.key});
@@ -28,7 +29,7 @@ class _PointPanelState extends State<PointPanel> {
     print('entering rewards scroll method ==================');
     return Container(
       // color: Colors.black,
-      height: 152,
+      height: 180,
       width: 390,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -78,6 +79,7 @@ class _PointPanelState extends State<PointPanel> {
               fontWeight: FontWeight.bold,
               fontFamily: "Tajawal"),
         ),
+        Indicator(),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
