@@ -41,28 +41,13 @@ class _CustomerProductsListState extends State<CustomerProductsList> {
       .map((snapshot) =>
           snapshot.docs.map((doc) => Product1.fromJson(doc.data())).toList());
 
- Stream<List<Product1>> readSerach(String srerch) => FirebaseFirestore.instance
-      .collection('Products')
-      .where("categoryName", isEqualTo: widget.categoryName)
-      .where('name', isEqualTo: srerch)
-      .snapshots()
-      .map((snapshot) =>
-          snapshot.docs.map((doc) => Product1.fromJson(doc.data())).toList());
-
-  TextEditingController editingController = TextEditingController();
  void initState(){
    CatName=widget.categoryName;
  }
   
   //======================================================================================
-String searchString = "";
-String typeOfSort="العادي";
+String typeOfSort="الأحدث";
 
-//  @override
-//   void initState() {
-//     forSearch.addAll(productItems);
-//     super.initState();
-//   }
 
   @override
   Widget build(BuildContext context) {
@@ -80,32 +65,7 @@ String typeOfSort="العادي";
           )),
           child: Column(
             children: [
-//               Container(
-//                  padding: EdgeInsets.symmetric(horizontal: 40),
-//                  // margin: EdgeInsets.symmetric(horizontal: 10,vertical: 9),
-//           child:  TextField(
-            
-//                 onChanged: (value) {
-//           searchString=value;
-//         },
-  
-//   decoration: InputDecoration(
-//   contentPadding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 25),    
-//       enabledBorder: OutlineInputBorder(
-//         borderSide: BorderSide(color: Color.fromARGB(255, 26, 96, 91)),
-//       ),
-//       focusedBorder: OutlineInputBorder(
-//         borderSide:
-//             BorderSide(width: 2, color: Color.fromARGB(255, 26, 96, 91)),
-//       ),
-//       hintText: "البحث",
-//       suffixIcon: Icon(Icons.search
-//       , color: Color.fromARGB(255, 26, 96, 91),),
-//       // border: OutlineInputBorder(
-//       //     borderRadius: BorderRadius.all(Radius.circular(29.0)))
-//           ),
-// ),
-//               ),
+
               //تبعد لي البوكس اللي يعرض المنتجات عن الشريط العلوي
               const SizedBox(height: 13),
               Expanded(
@@ -130,15 +90,12 @@ String typeOfSort="العادي";
                           var serchList=[];
                         
 if( catCheck[widget.categoryName]==false){
- print(productItems.length);  
-   print('ddddddddddddddddddddddddd'); 
+  
+  
   for (var i = 0; i < productItems.length; i++) {
-    print(productItems[i].name);
-    print('ddddddddddddddddddddddddd'); 
+  
     if((productsName.contains(productItems[i].name))==false){
-      print('ddddddddddddddddddddddddd');
-      print(productsName.contains(productItems[i].name));
-     
+    
                               productsName.add(productItems[i].name);
 
     }
@@ -162,30 +119,6 @@ if( catCheck[widget.categoryName]==false){
                            }
 
 
-                            for (var i = 0; i < productItems.length; i++) {
-                              if(searchString!="" && productItems[i].name.contains(searchString)){
-                               serchList.add(productItems[i]);}
-                                       }      
-                                       
-                                     if(searchString.isNotEmpty && serchList.isEmpty)  {
-                                          return const Center(
-                              child: Text(
-                                'لا توجد منتجات بهذا الاسم',
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.w600,
-                                  fontFamily: "Tajawal",
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            );
-                    }
-                                  searchString="";
-                                 print(serchList.isEmpty);
-                                   print('sssssssssssssss');
-                            
-                           
-                        
                           if (data.isEmpty) {
                             return const Center(
                               child: Text(
@@ -205,7 +138,7 @@ if( catCheck[widget.categoryName]==false){
                           //String detailsImage = "";
 
                           else {
-                            if(serchList.isEmpty){
+                       
                             return ListView.builder(
                               
                               itemCount: productItems.length,
@@ -227,36 +160,8 @@ if( catCheck[widget.categoryName]==false){
                                 },
                               ),
                             );
-                          }
+                          
                       
-                         if(serchList.isNotEmpty){
-
-       return ListView.builder(
-                              itemCount: serchList.length,
-                              itemBuilder: (context, index) => productCard(
-                                itemIndex: index,
-                                product: serchList[index],
-                                press: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          CustomerProdectDetails(
-                                        // يرسل المعلومات لصفحة المنتج عشان يعرض التفاصيل
-                                        detailsImage: serchList[index].image,
-                                        product: serchList[index],
-                                      ),
-                                    ),
-                                  );
-                                },
-                              ),
-                            );
-
-                          }
-                          else {
-                          return const Center(
-                              child: CircularProgressIndicator());
-                        }
                           }
                           //..................................................................................
                         } else {
@@ -312,13 +217,13 @@ if( catCheck[widget.categoryName]==false){
           IconButton(
         padding: EdgeInsets.only(right: 20),
         icon: const Icon(
-          Icons.search, //سهم العودة
+          Icons.search, 
           color: Color.fromARGB(255, 26, 96, 91),
           size: 22.0,
         ),
         onPressed: () {
         showSearch(context: context, delegate: mySearch(),);
-        }, //نخليه يرجع لصفحة المنتجات اللي عند عائشة
+        }, 
       ),
           PopupMenuButton<Menu>(
                     
@@ -330,8 +235,7 @@ if( catCheck[widget.categoryName]==false){
               onSelected: (Menu item) {
                 setState(() {
                   typeOfSort = item.name;
-                  print(typeOfSort);
-                  print('ssssssssssssssssssssssssss');
+
                 });
               },
               itemBuilder: (BuildContext context) => <PopupMenuEntry<Menu>>[
@@ -346,36 +250,10 @@ if( catCheck[widget.categoryName]==false){
                     ),
                    const PopupMenuItem<Menu>(
                       value: Menu.itemOne,
-                      child: Text('الأجدد'),
+                      child: Text('الأحدث'),
                     ),
                   ]),
         ],
-
-//  actions: <Widget>[
-//           IconButton(
-//             icon: const Icon(Icons.sort_rounded ,color: Color.fromARGB(255, 26, 96, 91),
-//           size: 22.0,),
-//             onPressed: () {
-               
-//                 items: dropDown.map<DropdownMenuItem<String>>((String value) {
-//                   return DropdownMenuItem<String>(
-//                     value: value,
-//                     child: Text(value),
-//                   );
-//                 }).toList();
-//                 onChanged: (String value) {
-                
-//                 typeOfSort=value;
-                
-                
-//                 //  setState(() {});
-//                 };
-//             },
-//           ),
-        
-//         ],
-
-
     );
     
   }

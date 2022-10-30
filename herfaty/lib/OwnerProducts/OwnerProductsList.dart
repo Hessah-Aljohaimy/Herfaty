@@ -10,7 +10,19 @@ import 'package:herfaty/OwnerProducts/productCard_Owner.dart';
 import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/constants/color.dart';
 
-class OwnerProductsList extends StatelessWidget {
+enum Menu { itemOne, itemTwo, itemThree}
+String CatName='';
+String thisOwnerId='';
+final List<String> productsName=[];
+bool takeName=false;
+Map catCheck={
+ "الخرز والإكسسوار":false,
+"الفخاريات":false,
+"الحياكة والتطريز":false,
+"فنون الورق والتلوين":false,
+ };
+
+class OwnerProductsList extends StatefulWidget {
   String categoryName;
 
   OwnerProductsList({
@@ -18,15 +30,36 @@ class OwnerProductsList extends StatelessWidget {
     Key? key,
   })  : this.categoryName = categoryName,
         super(key: key);
+ State<OwnerProductsList> createState() => _OwnerProductsList();
+ 
+ 
+}      
   //category name is a variable to store the category name from categories page
   //  صفحة عائشة ترسل لي هنا اسم الفئة بناء عليه أعرض المنتجات
   //======================================================================================
+String typeOfSort="الأحدث";
+
+ class _OwnerProductsList extends State<OwnerProductsList> {
+
+  Stream<List<Product1>> readPrpducts(String thisOwnerId) => FirebaseFirestore
+      .instance
+      .collection('Products')
+      .where("categoryName", isEqualTo: widget.categoryName)
+      .where("shopOwnerId", isEqualTo: thisOwnerId)
+      .snapshots()
+      .map((snapshot) =>
+          snapshot.docs.map((doc) => Product1.fromJson(doc.data())).toList());
+          
+  void initState(){
+   CatName=widget.categoryName;
+ }
 
   @override
   Widget build(BuildContext context) {
+    
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
-    String thisOwnerId = user!.uid;
+    thisOwnerId = user!.uid;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: productsListAppBar(context),
@@ -63,6 +96,7 @@ class OwnerProductsList extends StatelessWidget {
                         if (snapshot.hasData) {
                           //هنا حالة النجاح في استرجاع البيانات...........................................
                           final data = snapshot.data!;
+             
                           if (data.isEmpty) {
                             return const Center(
                               child: Text(
@@ -77,6 +111,38 @@ class OwnerProductsList extends StatelessWidget {
                             );
                           } else {
                             final productItems = snapshot.data!.toList();
+                            if( catCheck[widget.categoryName]==false){
+ print(productItems.length);  
+   print('ddddddddddddddddddddddddd'); 
+  for (var i = 0; i < productItems.length; i++) {
+    print(productItems[i].name);
+    print('ddddddddddddddddddddddddd'); 
+    if((productsName.contains(productItems[i].name))==false){
+      print('ddddddddddddddddddddddddd');
+      print(productsName.contains(productItems[i].name));
+     
+                              productsName.add(productItems[i].name);
+
+    }
+                                       }   
+
+                        
+               catCheck[widget.categoryName]=true;          
+   takeName=true;
+}
+                            if(typeOfSort=='itemThree'){
+                               productItems.sort((a, b) {
+                          return (b.price)
+                              .compareTo((a.price));
+                        });
+                           }
+                           if(typeOfSort=='itemTwo'){
+                               productItems.sort((a, b) {
+                          return (a.price)
+                              .compareTo((b.price));
+                        });
+                           }
+
                             return ListView.builder(
                               itemCount: productItems.length,
                               itemBuilder: (context, index) =>
@@ -117,14 +183,7 @@ class OwnerProductsList extends StatelessWidget {
   }
 
   //=====================================================================================
-  Stream<List<Product1>> readPrpducts(String thisOwnerId) => FirebaseFirestore
-      .instance
-      .collection('Products')
-      .where("categoryName", isEqualTo: categoryName)
-      .where("shopOwnerId", isEqualTo: thisOwnerId)
-      .snapshots()
-      .map((snapshot) =>
-          snapshot.docs.map((doc) => Product1.fromJson(doc.data())).toList());
+  
 
   //======================================================================================
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -135,7 +194,7 @@ class OwnerProductsList extends StatelessWidget {
       backgroundColor: Colors.white,
       centerTitle: true,
       title: Text(
-        categoryName,
+        widget.categoryName,
         style: TextStyle(
           fontSize: 20.0,
           fontWeight: FontWeight.w600,
@@ -154,6 +213,233 @@ class OwnerProductsList extends StatelessWidget {
           Navigator.pop(context);
         },
       ),
+
+
+ actions: <Widget>[
+          // This button presents popup menu items.
+          IconButton(
+        padding: EdgeInsets.only(right: 20),
+        icon: const Icon(
+          Icons.search, 
+          color: Color.fromARGB(255, 26, 96, 91),
+          size: 22.0,
+        ),
+        onPressed: () {
+        showSearch(context: context, delegate: mySearch(),);
+        }, //نخليه يرجع لصفحة المنتجات اللي عند عائشة
+      ),
+          PopupMenuButton<Menu>(
+                    
+            icon: Icon(
+              Icons.sort_rounded ,color: Color.fromARGB(255, 26, 96, 91),
+         size: 22.0,
+            ),
+              // Callback that sets the selected popup menu item.
+              onSelected: (Menu item) {
+             setState(() {
+                  typeOfSort = item.name;
+  
+                });
+              
+              },
+              itemBuilder: (BuildContext context) => <PopupMenuEntry<Menu>>[
+                  
+                    const PopupMenuItem<Menu>(
+                      value: Menu.itemTwo,
+                      child: Text('الأسعار من الأقل'),
+                    ),
+                    const PopupMenuItem<Menu>(
+                      value: Menu.itemThree,
+                      child: Text('الأسعار من الأعلى'),
+                    ),
+                   const PopupMenuItem<Menu>(
+                      value: Menu.itemOne,
+                      child: Text('الأحدث'),
+                    ),
+                  ]),
+        ],
+
+
     );
   }
 }
+
+
+class mySearch extends SearchDelegate{
+
+  Stream<List<Product1>> readPrpducts(String thisOwnerId) => FirebaseFirestore
+      .instance
+      .collection('Products')
+      .where("categoryName", isEqualTo: CatName)
+      .where("shopOwnerId", isEqualTo: thisOwnerId)
+      .snapshots()
+      .map((snapshot) =>
+          snapshot.docs.map((doc) => Product1.fromJson(doc.data())).toList());
+
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+      return [
+     IconButton(
+       
+        icon: const Icon(
+          Icons.clear, 
+          color: Color.fromARGB(255, 26, 96, 91),
+          size: 22.0,
+        ),
+        onPressed: () {
+          if(query.isEmpty){
+                      close(context, null);
+          }else{
+          query='';}
+        }, 
+      ),
+    // TODO: implement buildActions
+    
+  ];
+
+    
+  }
+  
+  @override
+  Widget? buildLeading(BuildContext context) {
+     return  IconButton(
+        padding: EdgeInsets.only(right: 20),
+        icon: const Icon(
+          Icons.arrow_back, 
+          color: Color.fromARGB(255, 26, 96, 91),
+          size: 22.0,
+        ),
+        onPressed: () {
+
+          close(context, null);
+        
+        }, 
+      );
+    
+  }
+  
+  @override
+  Widget buildResults(BuildContext context) {
+   
+ return   Container(
+     decoration: BoxDecoration(
+              image: DecorationImage(
+            image: AssetImage('assets/images/cartBack1.png'),
+            fit: BoxFit.cover,
+          )),
+         child: StreamBuilder<List<Product1>>(
+                        stream: readPrpducts(thisOwnerId),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          }
+                          if (snapshot.hasError) {
+                            return Text(
+                                'Something went wrong! ${snapshot.error}');
+                          }
+                          if (snapshot.hasData) {
+                            //هنا حالة النجاح في استرجاع البيانات...........................................
+                            final data = snapshot.data!;
+                            if (data.isEmpty) {
+                              return const Center(
+                                child: Text(
+                                  'لا توجد منتجات بهذا الاسم',
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w600,
+                                    fontFamily: "Tajawal",
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              );
+                            } else {
+                              final productItems = snapshot.data!.toList();
+                              List<Product1> productItems2=[];
+for (var i = 0; i < productItems.length; i++) {
+  if(productItems[i].name.contains(query)){
+    productItems2.add((productItems[i]));
+  }
+}
+
+if(productItems2.isEmpty){
+       return const Center(
+                                child: Text(
+                                  'لا توجد منتجات بهذا الاسم',
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w600,
+                                    fontFamily: "Tajawal",
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              );
+}
+
+                             return ListView.builder(
+                                
+                                itemCount: productItems2.length,
+                                itemBuilder: (context, index) =>    productCard_Owner(
+                                itemIndex: index,
+                                product: productItems2[index],
+                                press: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => OwnerProdectDetails(
+                                        // يرسل المعلومات لصفحة المنتج عشان يعرض التفاصيل
+                                        detailsImage: productItems2[index].image,
+                                        product: productItems2[index],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                              );
+                              //..................................................................................
+                            }
+                          } 
+                          else {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          }
+                        },
+                        
+                      ),
+ );    
+  }
+  
+  
+  
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    // TODO: implement buildSuggestions
+     List<String> Suggestions=[];
+   
+  for (var i = 0; i < productsName.length; i++) {
+    if(productsName[i].contains(query)){
+      Suggestions.add(productsName[i]);
+    }
+  }
+    return ListView.builder(
+      itemCount:Suggestions.length ,
+      itemBuilder: (context, index) {
+        final sugg=Suggestions[index];
+
+         return ListTile(
+          title: Text(sugg),
+          onTap: () {
+            query=sugg;
+            showResults(context);
+          },
+
+         );
+
+
+      },
+  
+    );
+
+  }
+    }
