@@ -32,7 +32,8 @@ class _ownerHomeScreenState extends State<ownerHomeScreen> {
         body: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('assets/images/homeBackground.png'),
+                  image:
+                      AssetImage('assets/images/HomePageBackgroundOwner.png'),
                   fit: BoxFit.cover)),
           child: SingleChildScrollView(
             child: Column(
@@ -42,11 +43,15 @@ class _ownerHomeScreenState extends State<ownerHomeScreen> {
                 // Services(),
                 RewardsCarousel(),
                 Rewards(),
+                Indicator(),
                 PointPanel(),
                 const SizedBox(
                   height: 10,
                 ),
                 PiointsInstruction(),
+                const SizedBox(
+                  height: 20,
+                ),
               ],
             ),
           ),
@@ -207,9 +212,9 @@ class _AppBarState extends State<AppBar> {
               ProfileCicle()
             ],
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          // const SizedBox(
+          //   height: 20,
+          // ),
         ],
       ),
     );

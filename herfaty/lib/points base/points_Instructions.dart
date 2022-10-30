@@ -15,7 +15,7 @@ class _PiointsInstructionState extends State<PiointsInstruction> {
     return Container(
       padding: const EdgeInsets.all(5),
       // color: Colors.black,
-      height: 150,
+      height: 180,
       width: 390,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -77,6 +77,9 @@ class _PiointsInstructionState extends State<PiointsInstruction> {
             ),
           ],
         ),
+        SizedBox(
+          height: 10,
+        ),
         Row(
           children: [
             Text(
@@ -96,6 +99,9 @@ class _PiointsInstructionState extends State<PiointsInstruction> {
               ),
             ),
           ],
+        ),
+        SizedBox(
+          height: 10,
         ),
         Row(
           children: [
@@ -117,10 +123,13 @@ class _PiointsInstructionState extends State<PiointsInstruction> {
             ),
           ],
         ),
+        SizedBox(
+          height: 10,
+        ),
         Row(
           children: [
             Text(
-              "كيف تكسب الكؤوس؟",
+              "بماذا تفيدك النقاط؟",
               style: TextStyle(
                   color: Color.fromARGB(255, 230, 153, 38),
                   fontSize: 15,
@@ -131,7 +140,7 @@ class _PiointsInstructionState extends State<PiointsInstruction> {
               // bottom: 50,
               // top: 50,
               child: Image.asset(
-                "assets/images/points_trophies/icons8-trophy-64.png",
+                "assets/images/points_trophies/icons8-sparkling-64.png",
                 width: 20,
               ),
             ),

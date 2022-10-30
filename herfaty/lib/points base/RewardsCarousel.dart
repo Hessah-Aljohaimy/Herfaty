@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:herfaty/points%20base/Reward.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 class RewardsCarousel extends StatefulWidget {
@@ -86,12 +87,21 @@ class Rewards extends StatefulWidget {
 class _RewardsState extends State<Rewards> {
   int points = 0;
 
+  late String rewardclosed10;
+  late String rewardclosed50;
+  late String rewardclosed100;
+  late String rewardclosed200;
+  late String rewardclosed500;
+  late String rewardopen10;
+  late String rewardopen50;
+  late String rewardopen100;
+  late String rewardopen200;
+  late String rewardopen500;
   late Reward reward1;
   late Reward reward2;
   late Reward reward3;
   late Reward reward4;
   late Reward reward5;
-
   void initState() {
     print("this is Rewards initState====");
     final FirebaseAuth auth = FirebaseAuth.instance;
@@ -124,50 +134,121 @@ class _RewardsState extends State<Rewards> {
                     print('entering build items  method ==================');
                     // Reward reward = rewardList[index];
 
+                    if (RewardsItems[index].title == 'كأس البدء مغلق') {
+                      // return GestureDetector(
+                      //     child: rewardsCard(
+                      //       rewardCard: RewardsItems[index],
+                      //     ),
+                      //     onTap: () {});
+                      rewardclosed10 = RewardsItems[index].imagePath;
+                    }
+                    if (RewardsItems[index].title == 'كأس الإتقان مغلق') {
+                      // return GestureDetector(
+                      //     child: rewardsCard(
+                      //       rewardCard: RewardsItems[index],
+                      //     ),
+                      //     onTap: () {});
+                      rewardclosed50 = RewardsItems[index].imagePath;
+                    }
+                    if (RewardsItems[index].title == 'كأس المهارة مغلق') {
+                      // return GestureDetector(
+                      //     child: rewardsCard(
+                      //       rewardCard: RewardsItems[index],
+                      //     ),
+                      //     onTap: () {});
+                      rewardclosed100 = RewardsItems[index].imagePath;
+                    }
+                    if (RewardsItems[index].title == 'كأس الإبداع مغلق') {
+                      // return GestureDetector(
+                      //     child: rewardsCard(
+                      //       rewardCard: RewardsItems[index],
+                      //     ),
+                      //     onTap: () {});
+                      rewardclosed200 = RewardsItems[index].imagePath;
+                    }
+                    if (RewardsItems[index].title == 'كأس الإحتراف مغلق') {
+                      // return GestureDetector(
+                      //     child: rewardsCard(
+                      //       rewardCard: RewardsItems[index],
+                      //     ),
+                      //     onTap: () {});
+                      rewardclosed500 = RewardsItems[index].imagePath;
+                    }
+
+//============================================================================
+
+                    if (RewardsItems[index].title == 'كأس البدء مفتوح') {
+                      // return GestureDetector(
+                      //     child: rewardsCard(
+                      //       rewardCard: RewardsItems[index],
+                      //     ),
+                      //     onTap: () {});
+                      rewardopen10 = RewardsItems[index].imagePath;
+                    }
+                    if (RewardsItems[index].title == 'كأس الإتقان مفتوح') {
+                      // return GestureDetector(
+                      //     child: rewardsCard(
+                      //       rewardCard: RewardsItems[index],
+                      //     ),
+                      //     onTap: () {});
+                      rewardopen50 = RewardsItems[index].imagePath;
+                    }
+                    if (RewardsItems[index].title == 'كأس المهارة مفتوح') {
+                      // return GestureDetector(
+                      //     child: rewardsCard(
+                      //       rewardCard: RewardsItems[index],
+                      //     ),
+                      //     onTap: () {});
+                      rewardopen100 = RewardsItems[index].imagePath;
+                    }
+                    if (RewardsItems[index].title == 'كأس الإبداع مفتوح') {
+                      // return GestureDetector(
+                      //     child: rewardsCard(
+                      //       rewardCard: RewardsItems[index],
+                      //     ),
+                      //     onTap: () {});
+                      rewardopen200 = RewardsItems[index].imagePath;
+                    }
+                    if (RewardsItems[index].title == 'كأس الإحتراف مفتوح') {
+                      // return GestureDetector(
+                      //     child: rewardsCard(
+                      //       rewardCard: RewardsItems[index],
+                      //     ),
+                      //     onTap: () {});
+                      rewardopen500 = RewardsItems[index].imagePath;
+                    }
+                    List<Reward> rewardList;
                     if (points == 0) {
-                      if (RewardsItems[index].title == 'كأس البدء مغلق') {
-                        return GestureDetector(
-                            child: rewardsCard(
-                              rewardCard: RewardsItems[index],
-                            ),
-                            onTap: () {});
-                      }
-                      if (RewardsItems[index].title == 'كأس الإتقان مغلق') {
-                        return GestureDetector(
-                            child: rewardsCard(
-                              rewardCard: RewardsItems[index],
-                            ),
-                            onTap: () {});
-                      }
-                      if (RewardsItems[index].title == 'كأس المهارة مغلق') {
-                        return GestureDetector(
-                            child: rewardsCard(
-                              rewardCard: RewardsItems[index],
-                            ),
-                            onTap: () {});
-                      }
-                      if (RewardsItems[index].title == 'كأس الإبداع مغلق') {
-                        return GestureDetector(
-                            child: rewardsCard(
-                              rewardCard: RewardsItems[index],
-                            ),
-                            onTap: () {});
-                      }
-                      if (RewardsItems[index].title == 'كأس الإحتراف مغلق') {
-                        return GestureDetector(
-                            child: rewardsCard(
-                              rewardCard: RewardsItems[index],
-                            ),
-                            onTap: () {});
-                      }
-                    } else {
+                      reward1 = new Reward(
+                          imagePath: rewardclosed10, title: 'كأس البدء');
+                      reward2 = new Reward(
+                          imagePath: rewardclosed50, title: 'كأس الإتقان');
+                      reward3 = new Reward(
+                          imagePath: rewardclosed100, title: 'كأس المهارة');
+                      reward4 = new Reward(
+                          imagePath: rewardclosed200, title: 'كأس الإبداع');
+
+                      reward5 = new Reward(
+                          imagePath: rewardclosed500, title: 'كأس الإحتراف');
+
+                      for (int i = 0; i < 5; i++) {}
                       return GestureDetector(
                           child: rewardsCard(
-                            rewardCard: RewardsItems[index],
+                            rewardCard: reward1,
                           ),
                           onTap: () {});
                     }
-                    return Text('');
+                    return GestureDetector(
+                        child: rewardsCard(
+                          rewardCard: reward1,
+                        ),
+                        onTap: () {});
+
+                    // return GestureDetector(
+                    //     child: rewardsCard(
+                    //       rewardCard: RewardsItems[index],
+                    //     ),
+                    //     onTap: () {});
                     // if (points == 0) {
                     //   if (RewardsItems[index].title == 'كأس البدء مغلق') {
 
@@ -180,7 +261,7 @@ class _RewardsState extends State<Rewards> {
                     //     ),
                     //     onTap: () {});
                   },
-                  itemCount: RewardsItems.length,
+                  itemCount: 5,
                   itemSize: 150,
                   onItemFocus: (index) {},
                   dynamicItemSize: true,
@@ -287,4 +368,39 @@ class rewardsCard extends StatelessWidget {
     );
   }
 }
+
 //#494B4A
+class Indicator extends StatefulWidget {
+  const Indicator({super.key});
+
+  @override
+  State<Indicator> createState() => _IndicatorState();
+}
+
+class _IndicatorState extends State<Indicator> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: EdgeInsets.all(15.0),
+        child: new LinearPercentIndicator(
+          width: MediaQuery.of(context).size.width - 30,
+          animation: true,
+          lineHeight: 20.0,
+          animationDuration: 2000,
+          percent: 0.5,
+          center: Text(
+            "50%",
+            style: new TextStyle(
+              fontSize: 15.0,
+              fontWeight: FontWeight.w800,
+              color: Color(0xff545454),
+            ),
+          ),
+          barRadius: const Radius.circular(16),
+          progressColor: Color(0xffFFC71F),
+          backgroundColor: Color(0xffD9D9D9),
+        ));
+  }
+}//#FFC71F
+//Color(0xffA6A6A6),
+//A6A6A6
