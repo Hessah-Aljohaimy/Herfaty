@@ -15,7 +15,7 @@ class _PiointsInstructionState extends State<PiointsInstruction> {
     return Container(
       padding: const EdgeInsets.all(5),
       // color: Colors.black,
-      height: 180,
+      height: 210,
       width: 390,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -146,6 +146,9 @@ class _PiointsInstructionState extends State<PiointsInstruction> {
             ),
           ],
         ),
+        SizedBox(
+          height: 10,
+        ),
         Row(
           children: [
             // Positioned(
@@ -156,13 +159,16 @@ class _PiointsInstructionState extends State<PiointsInstruction> {
             //     width: 27,
             //   ),
             // ),
-            Text(
-              "إذا قمت قمت بجمع العدد المطلوب من النقاط ستنال الكأس",
-              style: TextStyle(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: "Tajawal"),
+            Expanded(
+              flex: 3,
+              child: Text(
+                "إذا كانت قمت بجمع النقاط و الكؤوس الكثيرة سيتم عرض متجرك من المتاجر الأفضل مبيعا عند المشتريين",
+                style: TextStyle(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "Tajawal"),
+              ),
             ),
           ],
         ),
