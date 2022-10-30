@@ -6,6 +6,7 @@ import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/models/cart_wishlistModel.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:herfaty/rating/ratingsList.dart';
 
 class productCard extends StatefulWidget {
   const productCard({
@@ -316,8 +317,16 @@ class _productCardState extends State<productCard> {
             ),
             //********************** عدد التقييمات
             InkWell(
-              // onTap: () {
-              // Navigator.pushNamed(context, "YourRoute");},
+              onTap: () {
+                // Navigator.pushNamed(context, ratingsList(widget.product.shopOwnerId));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ratingsList(
+                        thisShopOwnerId: widget.product.shopOwnerId),
+                  ),
+                );
+              },
               child: Positioned(
                 //top: 10,
                 right: 67,

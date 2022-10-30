@@ -6,17 +6,28 @@ import 'package:herfaty/CustomerProducts/CustomerProductDetails.dart';
 import 'package:herfaty/CustomerProducts/productCard.dart';
 import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/constants/color.dart';
+import 'package:herfaty/models/ratingModel.dart';
+import 'package:herfaty/rating/ratingCard.dart';
 
-class CustomerRatingsList extends StatefulWidget {
-  CustomerRatingsList({
+class ratingsList extends StatefulWidget {
+  ratingsList({
     Key? key,
+    required this.thisShopOwnerId,
   }) : super(key: key);
 
+  final String thisShopOwnerId;
   @override
-  State<CustomerRatingsList> createState() => _CustomerRatingsListState();
+  State<ratingsList> createState() => _ratingsListState();
 }
 
-class _CustomerRatingsListState extends State<CustomerRatingsList> {
+class _ratingsListState extends State<ratingsList> {
+  String thisShopName = "";
+  @override
+  void initState() {
+    setShopName(widget.thisShopOwnerId);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final FirebaseAuth auth = FirebaseAuth.instance;
@@ -26,23 +37,24 @@ class _CustomerRatingsListState extends State<CustomerRatingsList> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Color.fromARGB(255, 250, 250, 250),
-      appBar: wishListAppBar(context),
+      appBar: ratingsListAppBar(context),
       body: SafeArea(
         child: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-            image: AssetImage('assets/images/cartBack1.png'),
-            fit: BoxFit.cover,
-          )),
+          // decoration: BoxDecoration(
+          //     image: DecorationImage(
+          //   image: AssetImage('assets/images/cartBack1.png'),
+          //   fit: BoxFit.cover,
+          // )),
           child: Column(
             children: [
-              //تبعد لي البوكس اللي يعرض المنتجات عن الشريط العلوي
               const SizedBox(height: 15),
+              //هنا المفروض يكن في مربع يعرض نسبة تقييم المتجر وعدد تقييماته
+              // ولو في وقت نحط نجون تعرض متوسط النجوم
               Expanded(
                 child: Stack(
                   children: [
                     //This is to list all of our items fetched from the DB========================
-                    StreamBuilder<List<Product1>>(
+                    StreamBuilder<List<ratingModel>>(
                       stream: readPrpducts(thisCustomerId),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
@@ -54,12 +66,12 @@ class _CustomerRatingsListState extends State<CustomerRatingsList> {
                           return Text(
                               'Something went wrong! ${snapshot.error}');
                         } else if (snapshot.hasData) {
-                          final productItems = snapshot.data!.toList();
+                          final ratings = snapshot.data!.toList();
                           final data = snapshot.data!;
                           if (data.isEmpty) {
                             return const Center(
                               child: Text(
-                                'لا توجد لديك منتجات مفضلة',
+                                'لا توجد تقييمات  ',
                                 style: TextStyle(
                                   fontSize: 18.0,
                                   fontWeight: FontWeight.w600,
@@ -72,23 +84,10 @@ class _CustomerRatingsListState extends State<CustomerRatingsList> {
                           //هنا حالة النجاح في استرجاع البيانات...........................................
                           else {
                             return ListView.builder(
-                              itemCount: productItems.length,
-                              itemBuilder: (context, index) => productCard(
+                              itemCount: ratings.length,
+                              itemBuilder: (context, index) => ratingCard(
                                 itemIndex: index,
-                                product: productItems[index],
-                                press: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          CustomerProdectDetails(
-                                        // يرسل المعلومات لصفحة المنتج عشان يعرض التفاصيل
-                                        detailsImage: productItems[index].image,
-                                        product: productItems[index],
-                                      ),
-                                    ),
-                                  );
-                                },
+                                ratingItem: ratings[index],
                               ),
                             );
                           }
@@ -111,24 +110,47 @@ class _CustomerRatingsListState extends State<CustomerRatingsList> {
   }
 
 //========================================================================================
-  Stream<List<Product1>> readPrpducts(String thisCustomerId) =>
+  Stream<List<ratingModel>> readPrpducts(String thisShopOwnerId) =>
       FirebaseFirestore.instance
-          .collection('wishList')
-          .where("customerId", isEqualTo: thisCustomerId)
+          .collection('rating')
+          .where("shopOwnerId", isEqualTo: thisShopOwnerId)
           .snapshots()
           .map((snapshot) => snapshot.docs
-              .map((doc) => Product1.fromJson2(doc.data()))
+              .map((doc) => ratingModel.fromJson(doc.data()))
               .toList());
+
+//===================================================================================
+  Future<String> getShopName(String thisOwneerId) async {
+    String shopName = "";
+    final customersDoc = await FirebaseFirestore.instance
+        .collection('shop_owner')
+        .where("id", isEqualTo: thisOwneerId)
+        .get();
+    if (customersDoc.size > 0) {
+      var data = customersDoc.docs.elementAt(0).data() as Map;
+      shopName = data["shopname"];
+      print("shop name is ${shopName}");
+    }
+    return shopName;
+  }
+
+//======================================================================================
+  Future<void> setShopName(String thisOwnerId) async {
+    String existedName = await getShopName(thisOwnerId);
+    setState(() {
+      thisShopName = existedName;
+    });
+  }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
   //AppBar
-  AppBar wishListAppBar(var context) {
+  AppBar ratingsListAppBar(var context) {
     return AppBar(
       elevation: 0,
-      backgroundColor: Color.fromARGB(255, 250, 250, 250),
+      backgroundColor: Colors.white,
       centerTitle: true,
       title: Text(
-        "مفضلاتي",
+        "تقييمات ${thisShopName}",
         style: TextStyle(
           fontSize: 20.0,
           fontWeight: FontWeight.w600,
