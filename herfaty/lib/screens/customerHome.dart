@@ -28,12 +28,22 @@ class _customerHomeScreenState extends State<customerHomeScreen> {
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Column(
-          children: const [
-            AppBar(),
-            Body(),
-            categories(),
-          ],
+        body: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+            image: AssetImage('assets/images/cartBack1.png'),
+            fit: BoxFit.cover,
+          )),
+          child: Column(
+            children: [
+              AppBar(),
+              Body(),
+              categories(),
+              SizedBox(
+                height: 10,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -209,6 +219,47 @@ class _AppBarState extends State<AppBar> {
               ),
             ],
           ),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: InkWell(
+              child: Container(
+                height: 45,
+                width: double.infinity,
+                margin: EdgeInsets.only(right: 160),
+                padding: EdgeInsets.only(top: 10),
+                child: Row(
+                  //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    /* Image.asset(
+                      "assets/icons/starno.gif",
+                      height: 25,
+                    ),*/
+                    Text(
+                      "تعرف على المتاجر الأكثر نقاطاً",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 15,
+                        decoration: TextDecoration.underline,
+                        //fontFamily: "Tajawal"
+                      ),
+                    ),
+                    Icon(
+                      Icons.arrow_back_ios_new,
+                      color: Colors.white,
+                      size: 15,
+                    )
+                  ],
+                ),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => topShops()),
+                );
+              },
+            ),
+          ),
         ],
       ),
     );
@@ -323,65 +374,6 @@ class categories extends StatelessWidget {
                   return Center(child: CircularProgressIndicator());
                 }
               }),
-          SizedBox(
-            height: 10,
-          ),
-          InkWell(
-            child: Container(
-              height: 60,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
-                ),
-                gradient: LinearGradient(
-                  colors: [
-                    (Color.fromARGB(255, 81, 144, 142)),
-                    (Color.fromARGB(255, 85, 150, 165)),
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(.1),
-                    blurRadius: 4.0,
-                    spreadRadius: .05,
-                  ), //BoxShadow
-                ],
-              ),
-              margin: EdgeInsets.only(left: 10, right: 10),
-              padding: EdgeInsets.all(10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Image.asset(
-                    "assets/icons/starno.gif",
-                    height: 40,
-                  ),
-                  Text(
-                    "تعرف على المتاجر الأكثر نقاطاً",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        fontFamily: "Tajawal"),
-                  ),
-                  Icon(
-                    Icons.arrow_back_ios_new,
-                    color: Colors.white,
-                  )
-                ],
-              ),
-            ),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => topShops()),
-              );
-            },
-          ),
         ],
       ),
     );
