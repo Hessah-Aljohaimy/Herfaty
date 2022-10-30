@@ -31,6 +31,13 @@ bool takeName=false;
 "الحياكة والتطريز":false,
 "فنون الورق والتلوين":false,
  };
+
+
+List<String> cat1=[];
+ List<String> cat2=[];
+ List<String> cat3=[];
+ List<String> cat4=[];
+
 class _CustomerProductsListState extends State<CustomerProductsList> {
 
   //variable to store the category name from categories page

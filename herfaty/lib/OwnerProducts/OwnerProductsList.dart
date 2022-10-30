@@ -22,6 +22,8 @@ Map catCheck={
 "فنون الورق والتلوين":false,
  };
 
+ 
+
 class OwnerProductsList extends StatefulWidget {
   String categoryName;
 
@@ -49,7 +51,7 @@ String typeOfSort="الأحدث";
       .snapshots()
       .map((snapshot) =>
           snapshot.docs.map((doc) => Product1.fromJson(doc.data())).toList());
-          
+
   void initState(){
    CatName=widget.categoryName;
  }
@@ -113,14 +115,9 @@ String typeOfSort="الأحدث";
                             final productItems = snapshot.data!.toList();
                             if( catCheck[widget.categoryName]==false){
  print(productItems.length);  
-   print('ddddddddddddddddddddddddd'); 
   for (var i = 0; i < productItems.length; i++) {
-    print(productItems[i].name);
-    print('ddddddddddddddddddddddddd'); 
     if((productsName.contains(productItems[i].name))==false){
-      print('ddddddddddddddddddddddddd');
-      print(productsName.contains(productItems[i].name));
-     
+
                               productsName.add(productItems[i].name);
 
     }
