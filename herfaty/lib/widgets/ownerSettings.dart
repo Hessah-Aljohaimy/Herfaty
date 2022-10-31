@@ -131,6 +131,7 @@ class _OwnerSettingsState extends State<OwnerSettings> {
           ),
         ),
         onPressed: () async {
+          ///=======================Exit Dialog================
           showDialog(
               context: context,
               builder: (BuildContext context) {
@@ -149,17 +150,21 @@ class _OwnerSettingsState extends State<OwnerSettings> {
                     ),
                   ),
                   content: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Center(
                         child: Container(
-                          width: 180,
+                          width: 250,
                           height: 50,
                           decoration: BoxDecoration(
                               image: DecorationImage(
                             fit: BoxFit.scaleDown,
-                            image: AssetImage('assets/images/parents1.png'),
+                            image: AssetImage('assets/images/logout.png'),
                           )),
                         ),
+                      ),
+                      SizedBox(
+                        height: 10,
                       ),
                       Center(
                           child: Text(
@@ -196,7 +201,10 @@ class _OwnerSettingsState extends State<OwnerSettings> {
                   ],
                 );
               });
+
+          ///=======================Exit Dialog================
         },
+
         //==========================================================
       );
 }

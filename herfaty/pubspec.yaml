@@ -99,6 +99,7 @@ flutter:
     - assets/images/points_trophies/icons8-settings-64.png
     - assets/images/points_trophies/icons8-shop-94.png
     - assets/images/trophies/
+    - assets/images/erase.png
 
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
