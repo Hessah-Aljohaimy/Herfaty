@@ -7,6 +7,7 @@ import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/models/cart_wishlistModel.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/rating/ratingsList.dart';
+import 'package:flutter/gestures.dart';
 
 class productCard extends StatefulWidget {
   const productCard({
@@ -163,15 +164,6 @@ class _productCardState extends State<productCard> {
               child: Container(
                 height: 180,
                 width: 180,
-                decoration: BoxDecoration(
-                  border: Border.all(width: 0.1, color: Colors.white),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    bottomLeft: Radius.circular(10),
-                  ),
-                  //color: Color(0xFFFAF9F6),
-                  color: Colors.white,
-                ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(10),
@@ -179,7 +171,7 @@ class _productCardState extends State<productCard> {
                   ),
                   child: Image.network(
                     widget.product.image,
-                    fit: BoxFit.contain,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
@@ -191,8 +183,8 @@ class _productCardState extends State<productCard> {
               right: 20,
               child: SizedBox(
                 height: 136,
-                //because our image is 200, so the siz of this box = width -200
-                width: size.width - 200,
+                //because our image is 180, so the siz of this box = width -200
+                width: size.width - 180,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -316,34 +308,64 @@ class _productCardState extends State<productCard> {
               ),
             ),
             //********************** عدد التقييمات
-            InkWell(
-              onTap: () {
-                // Navigator.pushNamed(context, ratingsList(widget.product.shopOwnerId));
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ratingsList(
-                      thisShopOwnerId: widget.product.shopOwnerId,
-                      averageShopRating: averageShopRating,
-                      numberOfRatings: numberOfRatings,
-                    ),
-                  ),
-                );
-              },
-              child: Positioned(
-                //top: 10,
-                right: 67,
-                bottom: 27,
-                child: Text(
-                  "(${numberOfRatings} تقييم)",
-                  style: const TextStyle(
-                    fontSize: 13.0,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: "Tajawal",
-                    decoration: TextDecoration.underline,
-                    color: Colors.amber,
-                  ),
-                ),
+            // GestureDetector(
+            //   onTap: () {
+            //     // Navigator.pushNamed(context, ratingsList(widget.product.shopOwnerId));
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //         builder: (context) => ratingsList(
+            //           thisShopOwnerId: widget.product.shopOwnerId,
+            //           averageShopRating: averageShopRating,
+            //           numberOfRatings: numberOfRatings,
+            //         ),
+            //       ),
+            //     );
+            //   },
+            //   child: Positioned(
+            //     //top: 10,
+            //     right: 67,
+            //     bottom: 27,
+            //     child: Text(
+            //       "(${numberOfRatings} تقييم)",
+            //       style: const TextStyle(
+            //         fontSize: 13.0,
+            //         fontWeight: FontWeight.w600,
+            //         fontFamily: "Tajawal",
+            //         decoration: TextDecoration.underline,
+            //         color: Colors.amber,
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            Positioned(
+              right: 67,
+              bottom: 29,
+              child: RichText(
+                text: TextSpan(children: [
+                  TextSpan(
+                      text: "(${numberOfRatings} تقييم)",
+                      style: TextStyle(
+                        fontSize: 13.0,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: "Tajawal",
+                        decoration: TextDecoration.underline,
+                        color: Colors.amber,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ratingsList(
+                                thisShopOwnerId: widget.product.shopOwnerId,
+                                averageShopRating: averageShopRating,
+                                numberOfRatings: numberOfRatings,
+                              ),
+                            ),
+                          );
+                        }),
+                ]),
               ),
             ),
             //=============================================================

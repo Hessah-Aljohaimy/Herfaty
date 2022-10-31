@@ -49,12 +49,12 @@ class _ratingsListState extends State<ratingsList> {
           // )),
           child: Column(
             children: [
-              const SizedBox(height: 15),
+              const SizedBox(height: 5),
               Container(
                 //---------------------------------------------------------------------------
                 //مستطيل في أعلى الليست يعرض نسبة تقييم المتجر وعدد تقييمات
-                padding: const EdgeInsets.only(top: 10, bottom: 10),
-                height: 140,
+                padding: const EdgeInsets.all(20),
+                height: 70,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(5),
@@ -72,10 +72,11 @@ class _ratingsListState extends State<ratingsList> {
                       ),
                     ),
                     //  عدد نجوم هذا التقييم على شكل نجوم ممتلئة نسبيًا
-                    StarRating(
-                      rating: widget.averageShopRating,
-                      onChangeRating: (int rating) {},
-                    )
+                    // StarRating(
+                    //   //rating: widget.averageShopRating,
+                    //   rating: 2,
+                    //   onChangeRating: (int rating) {},
+                    // )
                   ],
                 ),
               ),
@@ -85,7 +86,7 @@ class _ratingsListState extends State<ratingsList> {
                   children: [
                     //This is to list all of our items fetched from the DB========================
                     StreamBuilder<List<ratingModel>>(
-                      stream: readPrpducts(thisCustomerId),
+                      stream: readRatings(widget.thisShopOwnerId),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
@@ -140,14 +141,15 @@ class _ratingsListState extends State<ratingsList> {
   }
 
 //========================================================================================
-  Stream<List<ratingModel>> readPrpducts(String thisShopOwnerId) =>
-      FirebaseFirestore.instance
-          .collection('rating')
-          .where("shopOwnerId", isEqualTo: thisShopOwnerId)
-          .snapshots()
-          .map((snapshot) => snapshot.docs
-              .map((doc) => ratingModel.fromJson(doc.data()))
-              .toList());
+  Stream<List<ratingModel>> readRatings(String thisShopOwnerId) {
+    return FirebaseFirestore.instance
+        .collection('rating')
+        .where('shopOwnerId', isEqualTo: thisShopOwnerId)
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => ratingModel.fromJson(doc.data()))
+            .toList());
+  }
 
 //===================================================================================
   Future<String> getShopName(String thisOwneerId) async {
@@ -187,6 +189,17 @@ class _ratingsListState extends State<ratingsList> {
           color: kPrimaryColor,
           fontFamily: "Tajawal",
         ),
+      ),
+      leading: IconButton(
+        padding: EdgeInsets.only(right: 20),
+        icon: const Icon(
+          Icons.arrow_back,
+          color: Color.fromARGB(255, 26, 96, 91),
+          size: 22.0,
+        ),
+        onPressed: () {
+          Navigator.pop(context);
+        },
       ),
     );
   }
