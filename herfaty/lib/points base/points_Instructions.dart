@@ -162,7 +162,7 @@ class _PiointsInstructionState extends State<PiointsInstruction> {
             Expanded(
               flex: 3,
               child: Text(
-                "إذا كانت قمت بجمع النقاط و الكؤوس الكثيرة سيتم عرض متجرك من المتاجر الأفضل مبيعا عند المشتريين",
+                " إذا قمت بجمع عدد أكبر النقاط و الكؤوس سيتم عرض متجرك من المتاجر الأفضل مبيعا عند المشتريين في لائحة المتاجر المميزة",
                 style: TextStyle(
                     color: Color.fromARGB(255, 0, 0, 0),
                     fontSize: 12,
