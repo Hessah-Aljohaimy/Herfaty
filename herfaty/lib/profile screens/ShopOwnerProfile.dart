@@ -256,14 +256,31 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(right: 8),
-                              child: Text(
-                                "معلومات الحرفي",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w700,
-                                  color: Color.fromARGB(255, 26, 96, 91),
-                                  fontFamily: "Tajawal",
-                                ),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Flexible(
+                                    flex: 5,
+                                    child: Text(
+                                      "معلومات الحرفي",
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700,
+                                        color: Color.fromARGB(255, 26, 96, 91),
+                                        fontFamily: "Tajawal",
+                                      ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    bottom: 50,
+                                    top: 50,
+                                    child: Image.asset(
+                                      "assets/images/points_trophies/icons8-customer-64.png",
+                                      width: 35,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                             Expanded(
@@ -367,13 +384,34 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(right: 8),
-                              child: Text(
-                                "معلومات المتجر",
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700,
-                                    fontFamily: "Tajawal",
-                                    color: Color.fromARGB(255, 26, 96, 91)),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Flexible(
+                                    flex: 5,
+                                    child: Text(
+                                      "معلومات المتجر",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w700,
+                                          fontFamily: "Tajawal",
+                                          color:
+                                              Color.fromARGB(255, 26, 96, 91)),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Positioned(
+                                    bottom: 50,
+                                    top: 50,
+                                    child: Image.asset(
+                                      "assets/images/points_trophies/icons8-shop-94.png",
+                                      width: 30,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                             SizedBox(

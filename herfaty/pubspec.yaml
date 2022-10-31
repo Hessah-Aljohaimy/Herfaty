@@ -94,6 +94,10 @@ flutter:
     - assets/images/points_trophies/icons8-approval-64.png
     - assets/images/points_trophies/icons8-trophy-64.png
     - assets/images/points_trophies/icons8-sparkling-64.png
+    - assets/images/points_trophies/icons8-address-64.png
+    - assets/images/points_trophies/icons8-customer-64.png
+    - assets/images/points_trophies/icons8-settings-64.png
+    - assets/images/points_trophies/icons8-shop-94.png
     - assets/images/trophies/
 
   #   - images/a_dot_ham.jpeg
