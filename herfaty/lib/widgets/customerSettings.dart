@@ -125,8 +125,48 @@ class _CustomerSettingsState extends State<CustomerSettings> {
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title: Text("تنبيه"),
-                  content: Text('سيتم تسجيل خروجك من الحساب'),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  title: Center(
+                    child: Text(
+                      "تنبيه",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        color: Color.fromARGB(255, 221, 112, 112),
+                        fontFamily: "Tajawal",
+                      ),
+                    ),
+                  ),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Center(
+                        child: Container(
+                          width: 250,
+                          height: 50,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                            fit: BoxFit.scaleDown,
+                            image: AssetImage('assets/images/logout.png'),
+                          )),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Center(
+                          child: Text(
+                        'سيتم تسجيل خروجك من الحساب',
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700,
+                          color: Color.fromARGB(255, 26, 96, 91),
+                          fontFamily: "Tajawal",
+                        ),
+                      )),
+                    ],
+                  ),
                   actions: <Widget>[
                     TextButton(
                       child: Text("تسجيل خروج",
