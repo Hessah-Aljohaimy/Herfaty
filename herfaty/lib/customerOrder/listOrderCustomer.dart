@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/customerOrder/scroll_indicator.dart';
 import 'package:herfaty/models/ratingModel.dart';
-import 'package:herfaty/rating/ratingDialog.dart';
 import 'package:rating_dialog/rating_dialog.dart';
 import '../ShopOwnerOrder/OrderModel.dart';
 import '../constants/color.dart';

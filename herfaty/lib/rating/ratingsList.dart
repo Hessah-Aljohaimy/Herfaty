@@ -2,9 +2,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:herfaty/CustomerProducts/CustomerProductDetails.dart';
-import 'package:herfaty/CustomerProducts/productCard.dart';
-import 'package:herfaty/models/Product1.dart';
+import 'package:flutter_star_rating/flutter_star_rating.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/models/ratingModel.dart';
 import 'package:herfaty/rating/ratingCard.dart';
@@ -13,9 +11,13 @@ class ratingsList extends StatefulWidget {
   ratingsList({
     Key? key,
     required this.thisShopOwnerId,
+    required this.averageShopRating,
+    required this.numberOfRatings,
   }) : super(key: key);
 
   final String thisShopOwnerId;
+  final double averageShopRating;
+  final int numberOfRatings;
   @override
   State<ratingsList> createState() => _ratingsListState();
 }
@@ -48,8 +50,36 @@ class _ratingsListState extends State<ratingsList> {
           child: Column(
             children: [
               const SizedBox(height: 15),
-              //هنا المفروض يكن في مربع يعرض نسبة تقييم المتجر وعدد تقييماته
-              // ولو في وقت نحط نجون تعرض متوسط النجوم
+              Container(
+                //---------------------------------------------------------------------------
+                //مستطيل في أعلى الليست يعرض نسبة تقييم المتجر وعدد تقييمات
+                padding: const EdgeInsets.only(top: 10, bottom: 10),
+                height: 140,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Row(
+                  children: [
+                    // عدد نجوم هذا التقييم رقمًا
+                    Text(
+                      "${widget.averageShopRating}",
+                      style: const TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: "Tajawal",
+                        color: kPrimaryColor,
+                      ),
+                    ),
+                    //  عدد نجوم هذا التقييم على شكل نجوم ممتلئة نسبيًا
+                    StarRating(
+                      rating: widget.averageShopRating,
+                      onChangeRating: (int rating) {},
+                    )
+                  ],
+                ),
+              ),
+              //-------------------------------------------------------------------------------------------
               Expanded(
                 child: Stack(
                   children: [
@@ -86,9 +116,9 @@ class _ratingsListState extends State<ratingsList> {
                             return ListView.builder(
                               itemCount: ratings.length,
                               itemBuilder: (context, index) => ratingCard(
-                                itemIndex: index,
-                                ratingItem: ratings[index],
-                              ),
+                                  itemIndex: index,
+                                  ratingItem: ratings[index],
+                                  averageShopRating: widget.averageShopRating),
                             );
                           }
                           //..................................................................................

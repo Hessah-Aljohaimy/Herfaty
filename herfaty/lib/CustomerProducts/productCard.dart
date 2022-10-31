@@ -29,7 +29,7 @@ class _productCardState extends State<productCard> {
 
   bool isFavourite = false;
   bool isAvailable = true;
-  num averageShopRating = 0;
+  double averageShopRating = 0;
   int numberOfRatings = 0;
 
   @override
@@ -39,7 +39,7 @@ class _productCardState extends State<productCard> {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     String thisCustomerId = user!.uid;
-    setShopRating(widget.product.shopOwnerId);
+    setShopAverageRating(widget.product.shopOwnerId);
     setNumOfRatings(widget.product.shopOwnerId);
     setIsFavourite(thisCustomerId, widget.product.productId);
     if (widget.product.availableAmount == 0) {
@@ -323,7 +323,10 @@ class _productCardState extends State<productCard> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => ratingsList(
-                        thisShopOwnerId: widget.product.shopOwnerId),
+                      thisShopOwnerId: widget.product.shopOwnerId,
+                      averageShopRating: averageShopRating,
+                      numberOfRatings: numberOfRatings,
+                    ),
                   ),
                 );
               },
@@ -417,16 +420,16 @@ class _productCardState extends State<productCard> {
   }
 
 //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-  Future<void> setShopRating(String thisOwnerId) async {
-    num existedShopRating = await getShopRating(thisOwnerId);
+  Future<void> setShopAverageRating(String thisOwnerId) async {
+    double existedShopRating = await getShopAverageRating(thisOwnerId);
     setState(() {
       averageShopRating = existedShopRating;
     });
   }
 
   //=======================================================================================
-  Future<num> getShopRating(String shopOwnerId) async {
-    num averageShopRating = 0;
+  Future<double> getShopAverageRating(String shopOwnerId) async {
+    double averageShopRating = 0;
     num sumRating = 0;
     final shopDoc = await FirebaseFirestore.instance
         .collection('rating')
@@ -435,7 +438,7 @@ class _productCardState extends State<productCard> {
     if (shopDoc.size > 0) {
       for (int i = 0; i < shopDoc.size; i++) {
         var data = shopDoc.docs.elementAt(i).data() as Map;
-        num thisDocRating = data["starsNumber"];
+        double thisDocRating = data["starsNumber"];
         sumRating += thisDocRating;
       }
       averageShopRating = sumRating / shopDoc.size;

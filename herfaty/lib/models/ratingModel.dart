@@ -1,5 +1,5 @@
 class ratingModel {
-  num starsNumber = 0;
+  double starsNumber = 0;
   String orderId = "", shopOwnerId = "", comment = "", date = "", time = "";
 
   ratingModel({

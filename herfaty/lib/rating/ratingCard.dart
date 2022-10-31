@@ -1,19 +1,21 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:herfaty/constants/color.dart';
-import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/models/ratingModel.dart';
+import 'package:rate_in_stars/rate_in_stars.dart';
 
 class ratingCard extends StatefulWidget {
   const ratingCard({
     Key? key,
     required this.itemIndex,
     required this.ratingItem,
+    required this.averageShopRating,
   }) : super(key: key);
 
   final int itemIndex;
   final ratingModel ratingItem;
+  final num averageShopRating;
 
   @override
   State<ratingCard> createState() => _ratingCardState();
@@ -46,46 +48,23 @@ class _ratingCardState extends State<ratingCard> {
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
-          Container(
-            //(small box inside the Big box)
-            padding: const EdgeInsets.only(top: 10),
-            height: 180,
-            decoration: BoxDecoration(
-              //color: const Color(0xFFFAF9F6),
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
-          //*************************This part contains product photo:
+          //*************************This part contains rating date
           Positioned(
-            top: 0,
+            bottom: 0,
             left: 0,
-            child: Container(
-              height: 180,
-              width: 180,
-              decoration: BoxDecoration(
-                border: Border.all(width: 0.1, color: Colors.white),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  bottomLeft: Radius.circular(10),
-                ),
-                //color: Color(0xFFFAF9F6),
-                color: Colors.white,
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  bottomLeft: Radius.circular(10),
-                ),
-                // child: Image.network(
-                //   widget.product.image,
-                //   fit: BoxFit.cover,
-                // ),
+            child: Text(
+              widget.ratingItem.date,
+              style: const TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.w600,
+                fontFamily: "Tajawal",
+                color: Colors.black,
               ),
             ),
+            // ممكن نضيف ايكون ساعة او وقت جنب التاريخ
           ),
 
-          //**********************This part contains product name, price and shop name
+          //**********************This part contains rating comment, number of stars
           Positioned(
             top: 20,
             right: 20,
@@ -97,58 +76,55 @@ class _ratingCardState extends State<ratingCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  //product name===========================================================
+                  //التعليق===========================================================
                   Text(
-                    "widget.product.name",
+                    widget.ratingItem.comment,
                     style: const TextStyle(
                       fontSize: 20.0,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w400,
                       fontFamily: "Tajawal",
                       color: Colors.black,
                     ),
                   ),
 
-                  //سعر المنتج  ===========================================================
-                  Text(
-                    ' ريال',
-                    style: const TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: "Tajawal",
-                      color: Colors.orange,
-                    ),
+                  // عدد النجوم  ===========================================================
+                  Row(
+                    children: [
+                      // عدد نجوم هذا التقييم رقمًا
+                      Text(
+                        "${widget.ratingItem.starsNumber}",
+                        style: const TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: "Tajawal",
+                          color: kPrimaryColor,
+                        ),
+                      ),
+                      //  عدد نجوم هذا التقييم على شكل نجوم ممتلئة نسبيًا
+                      RatingStars(
+                        editable: false,
+                        rating: widget.ratingItem.starsNumber,
+                        color: Colors.amber,
+                        iconSize: 32,
+                      ),
+                      // StarRating(
+                      //   rating: 0,
+                      //   onChangeRating: (int rating) {},
+                      // )
+                    ],
                   ),
-                  //اسم المتجر  ===========================================================
-                  Text(
-                    "widget.product.shopName",
-                    style: const TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: "Tajawal",
-                      color: kPrimaryLight,
-                    ),
+                  //خط في نهاية الكارد
+                  Divider(
+                    height: 1,
+                    thickness: 1,
+                    indent: 0,
+                    endIndent: 0,
+                    color: Colors.grey,
                   ),
                 ],
               ),
             ),
           ),
-          //**********************This part contains wish list icon
-          Positioned(
-            //top: 10,
-            left: 190,
-            bottom: 26,
-            child: IconButton(
-              //padding: EdgeInsets.only(right: 1),
-              icon: const Icon(
-                Icons.favorite,
-                color: Colors.red,
-                size: 32.0,
-              ),
-              onPressed: () {
-                //Navigator.pop(context);
-              },
-            ),
-          )
         ],
       ),
     );

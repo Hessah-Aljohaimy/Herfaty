@@ -258,6 +258,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "7.1.0"
+  flutter_hooks:
+    dependency: transitive
+    description:
+      name: flutter_hooks
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.18.5+1"
   flutter_icons:
     dependency: "direct main"
     description:
@@ -340,6 +347,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.2+1"
+  flutter_star_rating:
+    dependency: "direct main"
+    description:
+      name: flutter_star_rating
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.3"
   flutter_stripe:
     dependency: "direct main"
     description:
@@ -777,6 +791,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.0"
+  rate_in_stars:
+    dependency: "direct main"
+    description:
+      name: rate_in_stars
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.3"
   rating_dialog:
     dependency: "direct main"
     description:
@@ -852,13 +873,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
-  smooth_star_rating:
-    dependency: "direct main"
-    description:
-      name: smooth_star_rating
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.1.1"
   source_span:
     dependency: transitive
     description:
