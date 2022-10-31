@@ -201,12 +201,12 @@ class _RewardsState extends State<Rewards> {
                       currentPage: position,
                       numPages: 5,
                       gradient: LinearGradient(colors: [
-                        Color(0xff9BD6E6),
-                        Color(0xff51908E),
+                        Color.fromARGB(255, 130, 130, 130),
+                        Color.fromARGB(255, 126, 126, 126),
                       ]),
                       activeGradient: LinearGradient(colors: [
-                        Color(0xff9BD6E6),
-                        Color(0xff51908E),
+                        Color.fromARGB(255, 96, 170, 168),
+                        Color.fromARGB(255, 97, 172, 170),
                       ]),
                     )
                   ],
