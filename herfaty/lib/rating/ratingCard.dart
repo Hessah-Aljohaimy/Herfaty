@@ -52,16 +52,29 @@ class _ratingCardState extends State<ratingCard> {
           Positioned(
             bottom: 0,
             left: 0,
-            child: Text(
-              widget.ratingItem.date,
-              style: const TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.w600,
-                fontFamily: "Tajawal",
-                color: Colors.black,
-              ),
+            child: Row(
+              children: [
+                //التاريخ نصًا
+                Text(
+                  widget.ratingItem.date,
+                  style: const TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: "Tajawal",
+                    color: Colors.black,
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(
+                    //Icons.star_rate,
+                    Icons.access_time_outlined,
+                    color: kPrimaryLight,
+                    size: 20.0,
+                  ),
+                  onPressed: () {},
+                ),
+              ],
             ),
-            // ممكن نضيف ايكون ساعة او وقت جنب التاريخ
           ),
 
           //**********************This part contains rating comment, number of stars
