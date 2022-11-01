@@ -49,7 +49,7 @@ class _ratingsListState extends State<ratingsList> {
           // )),
           child: Column(
             children: [
-              const SizedBox(height: 5),
+              const SizedBox(height: 20),
               Container(
                 //---------------------------------------------------------------------------
                 //مستطيل في أعلى الليست يعرض نسبة تقييم المتجر وعدد تقييمات
@@ -225,8 +225,9 @@ class _ratingsListState extends State<ratingsList> {
   //AppBar
   AppBar ratingsListAppBar(var context) {
     return AppBar(
-      elevation: 0,
       backgroundColor: Colors.white,
+      shadowColor: Color.fromARGB(255, 39, 141, 134),
+      elevation: 3,
       centerTitle: true,
       title: Text(
         "تقييمات ${thisShopName}",
