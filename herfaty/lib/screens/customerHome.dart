@@ -221,47 +221,6 @@ class _AppBarState extends State<AppBar> {
               ProfileCircleCustomer()
             ],
           ),
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: InkWell(
-              child: Container(
-                height: 45,
-                width: double.infinity,
-                margin: EdgeInsets.only(right: 160),
-                padding: EdgeInsets.only(top: 10),
-                child: Row(
-                  //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    /* Image.asset(
-                      "assets/icons/starno.gif",
-                      height: 25,
-                    ),*/
-                    Text(
-                      "تعرف على المتاجر الأكثر نقاطاً",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 15,
-                        decoration: TextDecoration.underline,
-                        //fontFamily: "Tajawal"
-                      ),
-                    ),
-                    Icon(
-                      Icons.arrow_back_ios_new,
-                      color: Colors.white,
-                      size: 15,
-                    )
-                  ],
-                ),
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => topShops()),
-                );
-              },
-            ),
-          ),
         ],
       ),
     );

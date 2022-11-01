@@ -63,7 +63,7 @@ class _ProfileCircleCustomerState extends State<ProfileCircleCustomer> {
         child: IconButton(
           icon: const Icon(
             Icons.person,
-            size: 48,
+            size: 40,
           ),
           color: Color(0xff51908E),
           onPressed: () {
