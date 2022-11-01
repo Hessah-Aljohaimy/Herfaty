@@ -435,7 +435,7 @@ class _productCardState extends State<productCard> {
       }
 
       averageShopRating = sumRating / shopDoc.size;
-      String inString = averageShopRating.toStringAsFixed(2); // '2.35'
+      String inString = averageShopRating.toStringAsFixed(2);
       averageShopRating = double.parse(inString);
     }
     return averageShopRating;
