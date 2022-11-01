@@ -123,16 +123,21 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
         //     }));*/
         //   },
         // ),
-        actions: [
+        
+           actions: <Widget>[
+             
           GestureDetector(
             onTap: () {
               showAlertDialogSettengs(context);
             }, // Image tapped
-            child: Image.asset(
+        
+            child:
+             Image.asset(
               'assets/images/points_trophies/icons8-settings-64.png',
               fit: BoxFit.contain, // Fixes border issues
               width: 35.0,
               height: 35.0,
+              
             ),
           ),
           // IconButton(

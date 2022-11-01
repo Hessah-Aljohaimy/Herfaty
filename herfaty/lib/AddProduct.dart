@@ -581,7 +581,7 @@ class _AddProductState extends State<AddProduct> {
 
 
 DateTime now = DateTime.now();
-String formattedDate = DateFormat('yyyy-MM-dd').format(now);
+String formattedDate = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
 
 
                       final productToBeAdded = FirebaseFirestore.instance

@@ -376,7 +376,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                     //   child: Row(children: [
 
                     SizedBox(
-                      width: 50,
+                      width: 80,
                     ),
 
                     ElevatedButton(
