@@ -83,7 +83,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
         centerTitle: true,
         backgroundColor: Colors.white,
         shadowColor: Color.fromARGB(255, 39, 141, 134),
-        elevation: 0,
+        elevation: 3,
         // leading: IconButton(
         //   icon: Icon(Icons.logout, color: Color.fromARGB(255, 81, 144, 142)),
         //   onPressed: () async {
@@ -877,6 +877,8 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
 //check if it was correct
                             if (shopowner.password ==
                                 _checkPasslController.text) {
+                              Navigator.of(context).pop();
+
                               ///=======================Delete Dialog================
 
                               showDialog(
@@ -931,6 +933,12 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                       ],
                                     ),
                                     actions: <Widget>[
+                                      TextButton(
+                                        child: Text("تراجع"),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
                                       TextButton(
                                         child: Text(
                                           "حذف",
@@ -1106,12 +1114,6 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                                           new login()));
                                         },
                                       ),
-                                      TextButton(
-                                        child: Text("تراجع"),
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                      )
                                     ],
                                   );
                                 },
