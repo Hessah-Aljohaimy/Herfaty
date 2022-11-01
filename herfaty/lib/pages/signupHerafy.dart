@@ -4,7 +4,21 @@ import 'package:herfaty/pages/login.dart';
 import 'package:herfaty/pages/reusable_widgets.dart';
 import 'package:herfaty/pages/welcomeRegestration.dart';
 import 'package:herfaty/screens/navOwner.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_place_picker/google_maps_place_picker.dart';
+import 'package:herfaty/cart/cart.dart';
+import 'package:herfaty/cart/payForm.dart';
+import 'package:herfaty/constants/color.dart';
+import 'package:herfaty/models/cartModal.dart';
+
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -12,6 +26,8 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+
+import 'ownerLocModel.dart';
 // import 'package:herfaty/firestore/firestore.dart';
 // ignore_for_file: file_names, prefer_const_constructors
 
@@ -368,7 +384,11 @@ class _SignupHerafyState extends State<SignupHerafy> {
                   SizedBox(
                     height: 15,
                   ),
+//add(),
 
+SizedBox(
+                    height: 15,
+                  ),
                   Text(
                     "هيا لتبدأ رحلتك!",
                     style: TextStyle(fontFamily: 'Tajawal', fontSize: 18),
@@ -378,7 +398,11 @@ class _SignupHerafyState extends State<SignupHerafy> {
                     onPressed: () async {
                       if (uploadImageUrl == "") {
                         uploadImageUrl = 'assets/images/Circular_Logo.png';
+                        
+
                       }
+                    //     if (add.msg == 'ادخل موقعك') {
+                    // ShowDialogMethod(context, "من فضلك قم بتحديد موقع المتجر");}
                       try {
                         //uploadImageUrl
                         if (formKeys[0].currentState!.validate() &&
@@ -400,6 +424,19 @@ class _SignupHerafyState extends State<SignupHerafy> {
                                 shopdescription:
                                     _shopdescriptionTextEditingController.text,
                                 points: 0);
+
+
+
+
+
+                                ownerLocModel shopLocation=ownerLocModel(
+                                  shopName:_shopnameTextEditingController.text,
+                                  location:add.msg
+                                );
+
+                                
+//creatOwnerLoc(shopLocation);
+
                             Fluttertoast.showToast(
                               msg: "تم تسجيل حسابك  بنجاح",
                               toastLength: Toast.LENGTH_SHORT,
@@ -482,6 +519,9 @@ class _SignupHerafyState extends State<SignupHerafy> {
 
   @override
   Widget build(BuildContext context) {
+    print('jjjjjjjjjjjj');
+     add.msg = 'ادخل موقعك';
+    _addState._changeFormat();
     return Scaffold(
       body: Theme(
         
@@ -554,6 +594,8 @@ class _SignupHerafyState extends State<SignupHerafy> {
         ),
       ),
     );
+
+    
     // return Form(
     //   //autovalidateMode: AutovalidateMode.onUserInteraction,
     //   key: _formKey,
@@ -1161,8 +1203,55 @@ class _SignupHerafyState extends State<SignupHerafy> {
       }
     });
   }
+  
+  Future creatOwnerLoc(ownerLocModel shopLocation) async {
+ final docCartItem =
+      FirebaseFirestore.instance.collection('owner_loc').doc();
+  final json = shopLocation.toJson();
+  await docCartItem.set(
+    json,
+    // SetOptions(merge: true)
+  );
+
+
+
+  }
 }
 
+
+class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final String title;
+  const DefaultAppBar({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
+
+  @override
+  Size get preferredSize => Size.fromHeight(56.0);
+  Widget build(BuildContext context) {
+    return AppBar(
+      title: Text(title,
+          style: TextStyle(color: kPrimaryColor, fontFamily: "Tajawal")),
+      centerTitle: true,
+      backgroundColor: Colors.white,
+      elevation: 0,
+      automaticallyImplyLeading: false,
+      iconTheme: IconThemeData(color: kPrimaryColor),
+      leading: IconButton(
+        padding: EdgeInsets.only(right: 20),
+        icon: const Icon(
+          Icons.arrow_back, //سهم العودة
+          color: Color.fromARGB(255, 26, 96, 91),
+          size: 22.0,
+        ),
+        onPressed: () {
+          add.msg = 'ادخل موقعك';
+          Navigator.pop(context);
+        },
+      ),
+    );
+  }
+}
 //Datebase
 Future createShopOwner(ShopOwner shopowner) async {
   final FirebaseAuth auth = FirebaseAuth.instance;
@@ -1227,4 +1316,120 @@ class ShopOwner {
         shopname: json['shopname'],
         points: json['points'],
       );
+}
+
+class add extends StatefulWidget {
+  static String msg = 'ادخل موقعك';
+  add({Key? key}) : super(key: key);
+  @override
+  _addState createState() => _addState();
+}
+
+class _addState extends State<add> {
+  static String msgButton = "اضغط هنا لتحديد موقعك";
+  static Color color = new Color(0xff51908E);
+  static Color Tcolor = new Color.fromARGB(255, 255, 255, 255);
+  static TextDecoration t = TextDecoration.none;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(top: 1.0, left: 40.0, right: 40.0, bottom: 5.0),
+      padding: EdgeInsets.all(1.0),
+      decoration: BoxDecoration(
+       
+        border: Border.all(color: Color.fromARGB(255, 26, 96, 91), width: 1),
+        borderRadius: BorderRadius.all(Radius.circular(6.0)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0),
+            spreadRadius: 2,
+            blurRadius: 7,
+            offset: Offset(0, 3), // changes position of shadow
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(right: 15.0),
+              child: Text(
+                add.msg,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: new Color(0xff51908E),
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "Tajawal",
+                ),
+                overflow: TextOverflow.ellipsis,
+                softWrap: false,
+                maxLines: 5,
+              ),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(left: 8.0, top: 2.0, bottom: 2.0),
+            child: ElevatedButton(
+              child: Text(
+                msgButton,
+                style: TextStyle(
+                  fontSize: 13,
+                  color: Tcolor,
+                  decoration: t,
+                  //fontFamily: "Tajawal"
+                ),
+              ),
+              onPressed: _changeText,
+              style: ElevatedButton.styleFrom(
+                  shadowColor: Colors.white,
+                  elevation: 0,
+                  primary: color,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  fixedSize: Size(165, 35)),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  _changeText() {
+    final kInitialPosition = LatLng(24.575714, 46.830308);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PlacePicker(
+          apiKey:
+              "AIzaSyAwT-rSNhTijJZ2Op4IWMddDdLF0Dcq8-o", // Put YOUR OWN KEY here.
+          onPlacePicked: (result) {
+            //print(result.formattedAddress);
+            Navigator.of(context).pop();
+            setState(() {
+              if (result.formattedAddress is Null) {
+                add.msg = 'ادخل الموقع';
+              } else {
+                add.msg = result.formattedAddress!;
+                //msgButton = "تم تحديد الموقع";
+                color = new Color.fromARGB(255, 255, 255, 255);
+                Tcolor = Color.fromARGB(255, 8, 24, 246);
+                t = TextDecoration.underline;
+                msgButton = "اضغط لتغيير الموقع";
+              }
+            });
+          },
+          initialPosition: kInitialPosition,
+          useCurrentLocation: true,
+        ),
+      ),
+    );
+  }
+
+  static _changeFormat() {
+    msgButton = "اضغط هنا لتحديد موقعك";
+    color = new Color(0xff51908E);
+    Tcolor = new Color.fromARGB(255, 255, 255, 255);
+    t = TextDecoration.none;
+  }
 }
