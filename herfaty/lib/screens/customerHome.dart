@@ -43,6 +43,49 @@ class _customerHomeScreenState extends State<customerHomeScreen> {
               SizedBox(
                 height: 10,
               ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: InkWell(
+                  child: Container(
+                    height: 45,
+                    width: double.infinity,
+                    margin: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(10),
+                    child: Row(
+                      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Image.asset(
+                          "assets/icons/starno.gif",
+                          height: 25,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4),
+                          child: Text(
+                            "تعرف على المتاجر الأكثر نقاطاً",
+                            style: TextStyle(
+                                color: kPrimaryColor,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18.5,
+                                //decoration: TextDecoration.underline,
+                                fontFamily: "Tajawal"),
+                          ),
+                        ),
+                        Icon(
+                          Icons.arrow_back_ios_new,
+                          color: kPrimaryColor,
+                          size: 18,
+                        )
+                      ],
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => topShops()),
+                    );
+                  },
+                ),
+              ),
             ],
           ),
         ),
@@ -203,20 +246,21 @@ class _AppBarState extends State<AppBar> {
               },
             ),
           ),*/
-          const SizedBox(
-            height: 20,
-          ),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "مرحبًا بك ${thisCustomerName} ",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25,
-                    fontFamily: "Tajawal"),
+              Padding(
+                padding: const EdgeInsets.only(top: 30.0),
+                child: Text(
+                  "مرحبًا بك ${thisCustomerName} ",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                      fontFamily: "Tajawal"),
+                ),
               ),
               ProfileCircleCustomer()
             ],
