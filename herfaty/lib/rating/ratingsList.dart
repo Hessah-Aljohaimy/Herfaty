@@ -77,11 +77,6 @@ class _ratingsListState extends State<ratingsList> {
                         height: 55,
                         width: 55,
                         child: Image.asset('assets/images/star-100.png')),
-                    // Icon(
-                    //   Icons.star,
-                    //   color: Colors.amber,
-                    //   size: 55.0,
-                    // ),
                     // عدد نجوم هذا التقييم رقمًا
                     Padding(
                       padding:
@@ -110,12 +105,6 @@ class _ratingsListState extends State<ratingsList> {
                         ),
                       ),
                     ),
-                    //  عدد نجوم هذا التقييم على شكل نجوم ممتلئة نسبيًا
-                    // StarRating(
-                    //   //rating: widget.averageShopRating,
-                    //   rating: 2,
-                    //   onChangeRating: (int rating) {},
-                    // )
                   ],
                 ),
               ),
@@ -138,16 +127,11 @@ class _ratingsListState extends State<ratingsList> {
                         } else if (snapshot.hasData) {
                           final ratings = snapshot.data!.toList();
                           final data = snapshot.data!;
-                          //sort the products according to date
+                          //sort the ratings according to date
                           ratings.sort((a, b) {
                             return DateTime.parse(b.dateTime)
                                 .compareTo(DateTime.parse(a.dateTime));
                           });
-                          // ratings.sort((a, b) {
-                          //   return DateTime.parse(b.time)
-                          //       .compareTo(DateTime.parse(a.time));
-                          // });
-
                           if (data.isEmpty) {
                             return const Center(
                               child: Text(

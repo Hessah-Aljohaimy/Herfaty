@@ -61,7 +61,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
       length: 3,
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: DefaultAppBar(title: " الطلبات"),
+        appBar: DefaultAppBar(title: "طلباتي"),
         body: TabBarView(
           children: <Widget>[
             SingleChildScrollView(

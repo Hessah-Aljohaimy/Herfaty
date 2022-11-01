@@ -129,8 +129,9 @@ class _CustomerWishListState extends State<CustomerWishList> {
   //AppBar
   AppBar wishListAppBar(var context) {
     return AppBar(
-      elevation: 0,
-      backgroundColor: Color.fromARGB(255, 250, 250, 250),
+      backgroundColor: Colors.white,
+      shadowColor: Color.fromARGB(255, 39, 141, 134),
+      elevation: 3,
       centerTitle: true,
       title: Text(
         "مفضلاتي",

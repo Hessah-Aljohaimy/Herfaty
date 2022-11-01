@@ -575,7 +575,8 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
           style: TextStyle(color: kPrimaryColor, fontFamily: "Tajawal")),
       centerTitle: true,
       backgroundColor: Colors.white,
-      elevation: 0,
+      shadowColor: Color.fromARGB(255, 39, 141, 134),
+      elevation: 3,
       automaticallyImplyLeading: false,
       iconTheme: IconThemeData(color: kPrimaryColor),
     );
