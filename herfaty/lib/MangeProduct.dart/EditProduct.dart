@@ -333,13 +333,14 @@ class _EditProduc extends State<EditProduct> {
                     ),
 
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'أدخل اسم المنتج';
-                      }
+                 
+                    if (value!.trim() == null || value.trim().isEmpty) {
+                      return 'أدخل اسم المنتج';
+                    }
 
-                      if (value.length < 2) {
-                        return " أدخل اسم أكبر من أو يساوي حرفين ";
-                      }
+                     if (value.trim().length < 2) {
+                      return " أدخل اسم أكبر من أو يساوي حرفين ";
+                    }
 
                       if (!RegExp(
                               r"^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z- ][]*$")
@@ -409,15 +410,16 @@ class _EditProduc extends State<EditProduct> {
                       ),
                     ),
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'أدخل وصف المنتج';
-                      }
-                      if (value.length < 2) {
-                        return " أدخل وصف أكبر من أو يساوي حرفين ";
-                      }
-                      if (value.trim().isEmpty) {
-                        return "أدخل " + ' وصف المنتج' + " صحيح";
-                      }
+                      if (value!.trim() == null || value.trim().isEmpty) {
+                      return 'أدخل وصف المنتج';
+                    }
+                      if (value.trim().length < 2) {
+return " أدخل وصف أكبر من أو يساوي حرفين ";                    }
+                        
+                      
+                      // if (value.trim().isEmpty) {
+                      //   return "أدخل " + ' وصف المنتج' + " صحيح";
+                      // }
                       return null;
                     },
                   ),
@@ -559,7 +561,24 @@ class _EditProduc extends State<EditProduct> {
                 SizedBox(
                   height: 30,
                 ),
-                ElevatedButton(
+              
+                /* child: Text("إضافة منتج"),
+                style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(255, 26, 96, 91)),
+              ),*/
+
+                SizedBox(
+                  height: 10,
+                ),
+Row(
+                children: [
+                  SizedBox(
+                    width: 35,
+                  ),
+              
+  Expanded(
+                    child: Row(children: [
+                  ElevatedButton(
                   onPressed: () async {
                     if (uploadImageUrl.isEmpty)
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -659,19 +678,13 @@ class _EditProduc extends State<EditProduct> {
                         fontWeight: FontWeight.bold),
                   ),
                 ),
-                /* child: Text("إضافة منتج"),
-                style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 26, 96, 91)),
-              ),*/
-
-                SizedBox(
-                  height: 10,
+                  SizedBox(
+                  width: 10,
                 ),
-
-                ElevatedButton(
+                   ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
-                        Color.fromARGB(255, 167, 29, 29)),
+                       Color(0xff51908E)),
                     padding: MaterialStateProperty.all(
                         EdgeInsets.symmetric(horizontal: 40, vertical: 13)),
                     shape: MaterialStateProperty.all(RoundedRectangleBorder(
@@ -760,6 +773,11 @@ class _EditProduc extends State<EditProduct> {
                         });
                   },
                 ),
+   ]),
+                  )
+                ],
+              ), 
+               
                 /* ElevatedButton(
                 style: ElevatedButton.styleFrom(primary: Colors.red),
                 onPressed: () {
