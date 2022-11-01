@@ -92,7 +92,7 @@ class _login extends State<login> {
                           ),
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 60),
-                            child: reusableTextField("كلمة المرور", Icons.lock,
+                            child: reusableTextFieldPassLogin("كلمة المرور", Icons.lock,
                                 true, _passwordTextController),
                           ),
                           SizedBox(
