@@ -171,18 +171,32 @@ class _shopCardState extends State<shopCard> {
                         ),
                       ],
                     ),
-                    Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Text(
-                        "${widget.shop.points.toString()} نقطة",
-                        style: const TextStyle(
-                          fontSize: 22.0,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: "Tajawal",
-                          color: kPrimaryLight,
+                    if (widget.shop.points > 10)
+                      Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Text(
+                          "${widget.shop.points.toString()} نقطة",
+                          style: const TextStyle(
+                              fontSize: 22.0,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: "Tajawal",
+                              //color: Color(0xffFECE00),
+                              color: kPrimaryColor),
                         ),
                       ),
-                    ),
+                    if (widget.shop.points == 10)
+                      Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Text(
+                          "${widget.shop.points.toString()} نقاط",
+                          style: const TextStyle(
+                              fontSize: 22.0,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: "Tajawal",
+                              //color: Color(0xffFECE00),
+                              color: kPrimaryColor),
+                        ),
+                      ),
                   ],
                 ),
               ),
