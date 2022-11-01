@@ -39,7 +39,9 @@ TextFormField reusableTextField(String text, IconData icon, bool isPasswordType,
         borderSide: BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
       ),
 
-      focusedErrorBorder: OutlineInputBorder(
+      focusedErrorBorder: 
+      OutlineInputBorder(
+        
         borderSide:
             BorderSide(width: 2, color: Color.fromARGB(255, 164, 46, 46)),
       ),
@@ -56,7 +58,8 @@ TextFormField reusableTextField(String text, IconData icon, bool isPasswordType,
       }
 
       if (text == "كلمة المرور") {
-        if (value.length < 6) return "ادخل كلمة مرور اكبر من 6 خانات";
+        if (value.length < 6) 
+        return "ادخل كلمة مرور اكبر من 6 خانات";
       }
       if (value.trim().isEmpty) {
         return "أدخل " + text + " صحيح";
