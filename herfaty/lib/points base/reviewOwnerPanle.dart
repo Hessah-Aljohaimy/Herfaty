@@ -99,7 +99,18 @@ class _reviewOwnerPanleState extends State<reviewOwnerPanle> {
                     }),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ratingsList(
+                            thisShopOwnerId: thisShopOwnerId,
+                            averageShopRating: averageShopRating,
+                            numberOfRatings: numberOfRatings,
+                          ),
+                        ),
+                      );
+                    },
                     icon: Icon(
                       Icons.arrow_forward_rounded,
                       size: 20,
