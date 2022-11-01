@@ -6,6 +6,7 @@ import 'package:flutter_star_rating/flutter_star_rating.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/models/ratingModel.dart';
 import 'package:herfaty/rating/ratingCard.dart';
+import 'package:herfaty/rating/ratingCard2.dart';
 
 class ratingsList extends StatefulWidget {
   ratingsList({
@@ -38,7 +39,7 @@ class _ratingsListState extends State<ratingsList> {
     //====================================================================
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color.fromARGB(255, 250, 250, 250),
+      backgroundColor: Colors.white,
       appBar: ratingsListAppBar(context),
       body: SafeArea(
         child: Container(
@@ -53,22 +54,61 @@ class _ratingsListState extends State<ratingsList> {
               Container(
                 //---------------------------------------------------------------------------
                 //مستطيل في أعلى الليست يعرض نسبة تقييم المتجر وعدد تقييمات
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.all(0),
+                margin: EdgeInsets.only(bottom: 20, left: 20, right: 20),
                 height: 70,
                 decoration: BoxDecoration(
+                  border: Border.all(color: Colors.amber),
+                  borderRadius: BorderRadius.circular(10),
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(5),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.orange.withOpacity(.2),
+                      blurRadius: 5.0,
+                      spreadRadius: .05,
+                    ), //BoxShadow
+                  ],
                 ),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    //Star icon
+                    Container(
+                        //padding: const EdgeInsets.only(bottom: 0, right: 10),
+                        height: 55,
+                        width: 55,
+                        child: Image.asset('assets/images/star-100.png')),
+                    // Icon(
+                    //   Icons.star,
+                    //   color: Colors.amber,
+                    //   size: 55.0,
+                    // ),
                     // عدد نجوم هذا التقييم رقمًا
-                    Text(
-                      "${widget.averageShopRating}",
-                      style: const TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: "Tajawal",
-                        color: kPrimaryColor,
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 18.0, left: 10, right: 5),
+                      child: Text(
+                        "${widget.averageShopRating}",
+                        style: const TextStyle(
+                          fontSize: 45.0,
+                          fontWeight: FontWeight.w800,
+                          fontFamily: "Tajawal",
+                          color: kPrimaryColor,
+                        ),
+                      ),
+                    ),
+                    //عدد التققيمات
+                    Padding(
+                      padding: const EdgeInsets.only(top: 22.0),
+                      child: Text(
+                        "بناءً على (${widget.numberOfRatings}) من التقييمات",
+                        style: TextStyle(
+                          fontSize: 19.0,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: "Tajawal",
+                          decoration: TextDecoration.underline,
+                          color: Colors.amber,
+                        ),
                       ),
                     ),
                     //  عدد نجوم هذا التقييم على شكل نجوم ممتلئة نسبيًا
@@ -114,9 +154,23 @@ class _ratingsListState extends State<ratingsList> {
                           }
                           //هنا حالة النجاح في استرجاع البيانات...........................................
                           else {
-                            return ListView.builder(
+                            // return ListView.builder(
+                            //   itemCount: ratings.length,
+                            //   itemBuilder: (context, index) => ratingCard(
+                            //       itemIndex: index,
+                            //       ratingItem: ratings[index],
+                            //       averageShopRating: widget.averageShopRating),
+                            // );
+                            return ListView.separated(
+                              separatorBuilder: (_, __) => const Divider(
+                                height: 0,
+                                thickness: 1,
+                                indent: 20,
+                                endIndent: 20,
+                                color: kPrimaryColor,
+                              ),
                               itemCount: ratings.length,
-                              itemBuilder: (context, index) => ratingCard(
+                              itemBuilder: (context, index) => ratingCard2(
                                   itemIndex: index,
                                   ratingItem: ratings[index],
                                   averageShopRating: widget.averageShopRating),

@@ -295,7 +295,7 @@ class _productCardState extends State<productCard> {
             //**********************نسبة التقييم للمتجر
             Positioned(
               //top: 10,
-              right: 43,
+              right: 42,
               bottom: 27,
               child: Text(
                 "${averageShopRating}",
@@ -308,38 +308,8 @@ class _productCardState extends State<productCard> {
               ),
             ),
             //********************** عدد التقييمات
-            // GestureDetector(
-            //   onTap: () {
-            //     // Navigator.pushNamed(context, ratingsList(widget.product.shopOwnerId));
-            //     Navigator.push(
-            //       context,
-            //       MaterialPageRoute(
-            //         builder: (context) => ratingsList(
-            //           thisShopOwnerId: widget.product.shopOwnerId,
-            //           averageShopRating: averageShopRating,
-            //           numberOfRatings: numberOfRatings,
-            //         ),
-            //       ),
-            //     );
-            //   },
-            //   child: Positioned(
-            //     //top: 10,
-            //     right: 67,
-            //     bottom: 27,
-            //     child: Text(
-            //       "(${numberOfRatings} تقييم)",
-            //       style: const TextStyle(
-            //         fontSize: 13.0,
-            //         fontWeight: FontWeight.w600,
-            //         fontFamily: "Tajawal",
-            //         decoration: TextDecoration.underline,
-            //         color: Colors.amber,
-            //       ),
-            //     ),
-            //   ),
-            // ),
             Positioned(
-              right: 67,
+              right: 70,
               bottom: 29,
               child: RichText(
                 text: TextSpan(children: [
@@ -463,7 +433,10 @@ class _productCardState extends State<productCard> {
         double thisDocRating = data["starsNumber"];
         sumRating += thisDocRating;
       }
+
       averageShopRating = sumRating / shopDoc.size;
+      String inString = averageShopRating.toStringAsFixed(2); // '2.35'
+      averageShopRating = double.parse(inString);
     }
     return averageShopRating;
   }
@@ -485,6 +458,7 @@ class _productCardState extends State<productCard> {
         .get();
     if (shopDoc.size > 0) {
       existedRatingsNum = shopDoc.size;
+      print("shop ratings doc size is ${shopDoc.size}");
     }
     return existedRatingsNum;
   }
