@@ -333,17 +333,18 @@ class _productCardState extends State<productCard> {
   Future<void> setIsFavourite(
       String thisCustomerId, String thisproductId) async {
     String existedDocId = await getWishListDocId(thisCustomerId, thisproductId);
-    if (existedDocId != "") {
+   if (existedDocId != "") {
+      if(mounted){
       setState(() {
         isFavourite = true;
-      });
+      });}
     } else {
+       if(mounted){
       setState(() {
         isFavourite = false;
-      });
+      }); }
     }
   }
-
   //=======================================================================================
   Future<String> getWishListDocId(
       String thisCustomerId, String thisproductId) async {
