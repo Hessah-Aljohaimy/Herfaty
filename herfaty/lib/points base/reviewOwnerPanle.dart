@@ -24,7 +24,7 @@ class _reviewOwnerPanleState extends State<reviewOwnerPanle> {
             ),
             Container(
               padding: const EdgeInsets.all(10),
-              width: 200,
+              width: 210,
               height: 50,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -44,27 +44,32 @@ class _reviewOwnerPanleState extends State<reviewOwnerPanle> {
                     top: 50,
                     child: Image.asset(
                       "assets/images/star-100.png",
-                      width: 30,
+                      width: 24,
                     ),
                   ),
                   Container(
                     // width: 80,
                     // height: 30,
-                    child: Text(
-                      "تقييمات متجري",
-                      style: TextStyle(
-                          color: Color(0xffF19B1A),
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "Tajawal"),
-                    ),
+                    child: Builder(builder: (context) {
+                      return TextButton(
+                        child: Text(
+                          "تقييمات متجري",
+                          style: TextStyle(
+                              color: Color(0xffF19B1A),
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Tajawal"),
+                        ),
+                        onPressed: () {},
+                      );
+                    }),
                   ),
                   IconButton(
                     onPressed: () {},
                     icon: Icon(
                       Icons.arrow_forward_rounded,
                       size: 20,
-                      color: Color(0xff44ADE8),
+                      color: Color(0xffF19B1A),
                     ),
                   ),
                 ],
