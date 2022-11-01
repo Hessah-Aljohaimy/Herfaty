@@ -1,13 +1,18 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/customerOrder/scroll_indicator.dart';
-
+import 'package:herfaty/models/ratingModel.dart';
+import 'package:rating_dialog/rating_dialog.dart';
 import '../ShopOwnerOrder/OrderModel.dart';
 import '../constants/color.dart';
 import 'orderDetailsCustomer.dart';
 import '../models/Product1.dart';
+import 'package:intl/intl.dart';
 
 //import 'package:flutterfiredemo/item_details.dart';
 //import 'add_item.dart';
@@ -20,20 +25,30 @@ class listOrderCustomer extends StatefulWidget {
 }
 
 class _listOrderCustomerState extends State<listOrderCustomer> {
-  List<ScrollController> arr = <ScrollController>[];
-  List<ScrollController> arr1 = <ScrollController>[];
-  List<ScrollController> arr2 = <ScrollController>[];
+  List<ScrollController> arr = List.empty(growable: true);
+  List<ScrollController> arr1 = List.empty(growable: true);
+  List<ScrollController> arr2 = List.empty(growable: true);
 
   @override
   void initState() {
-    arr = <ScrollController>[];
-    arr1 = <ScrollController>[];
-    arr2 = <ScrollController>[];
+    arr = List.empty(growable: true);
+    arr1 = List.empty(growable: true);
+    arr2 = List.empty(growable: true);
     super.initState();
   }
 
   @override
   void dispose() {
+    for (int i = 0; i < arr.length; i++) {
+      arr[i].dispose();
+    }
+    for (int i = 0; i < arr1.length; i++) {
+      arr1[i].dispose();
+    }
+    for (int i = 0; i < arr2.length; i++) {
+      arr2[i].dispose();
+    }
+
     //scrollController.dispose();
 
     super.dispose();
@@ -72,6 +87,14 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                               .compareTo(DateTime.parse(a.orderDate));
                         });
 
+                        /*arr = List.filled(cItems.length, ScrollController(),
+                            growable: false);*/
+
+                        for (int i = 0; i < cItems.length; i++) {
+                          //if (cItems[i].products.length > 3)
+                          arr.insert(i, ScrollController());
+                        }
+
                         if (cItems.isEmpty) {
                           return const Center(
                             child: Text(
@@ -88,6 +111,13 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                           return ListView.builder(
                               itemCount: cItems.length,
                               itemBuilder: (context, index) {
+                                var x;
+                                if (cItems[index].products.length > 3) {
+                                  x = arr[index];
+                                } else
+                                  x = null;
+                                print("111111111111111${x}");
+
                                 return Container(
                                   margin: EdgeInsets.only(top: 8.0, bottom: 10),
                                   padding: EdgeInsets.only(
@@ -172,12 +202,15 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                       }
                                                     }
                                                   });
+                                                  dynamic c = arr[index];
 
-                                                  for (int i = 0;
-                                                      i < cItems.length;
-                                                      i++) {
-                                                    arr.add(ScrollController());
-                                                  }
+                                                  if (cItems[index]
+                                                          .products
+                                                          .length <
+                                                      4) c = null;
+
+                                                  print(
+                                                      "erooorrr11111 ${index}");
 
                                                   return Container(
                                                     width: 366,
@@ -227,7 +260,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                       ],
                                                     ),*/
                                                     child: ListView.builder(
-                                                        controller: arr[index],
+                                                        controller: x,
                                                         scrollDirection:
                                                             Axis.horizontal,
                                                         //shrinkWrap: true,
@@ -390,6 +423,14 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                               .compareTo(DateTime.parse(b.orderDate));
                         });
 
+                        /* arr1 = List.filled(cItems.length, ScrollController(),
+                            growable: false);*/
+
+                        for (int i = 0; i < cItems.length; i++) {
+                          //if (cItems[i].products.length > 3)
+                          arr1.insert(i, ScrollController());
+                        }
+
                         if (cItems.isEmpty) {
                           return const Center(
                             child: Text(
@@ -406,6 +447,11 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                           return ListView.builder(
                               itemCount: cItems.length,
                               itemBuilder: (context, index) {
+                                var x;
+                                if (cItems[index].products.length > 3) {
+                                  x = arr1[index];
+                                } else
+                                  x = null;
                                 return Container(
                                   margin: EdgeInsets.only(top: 8.0, bottom: 10),
                                   padding: EdgeInsets.only(
@@ -491,13 +537,6 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                     }
                                                   });
 
-                                                  for (int i = 0;
-                                                      i < cItems.length;
-                                                      i++) {
-                                                    arr1.add(
-                                                        ScrollController());
-                                                  }
-
                                                   return Container(
                                                     width: 366,
                                                     height: 150,
@@ -546,7 +585,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                       ],
                                                     ),*/
                                                     child: ListView.builder(
-                                                        controller: arr1[index],
+                                                        controller: x,
                                                         scrollDirection:
                                                             Axis.horizontal,
                                                         //shrinkWrap: true,
@@ -709,6 +748,14 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                               .compareTo(DateTime.parse(a.orderDate));
                         });
 
+                        /*arr2 = List.filled(cItems.length, ScrollController(),
+                            growable: false);*/
+
+                        for (int i = 0; i < cItems.length; i++) {
+                          //if (cItems[i].products.length > 3)
+                          arr2.insert(i, ScrollController());
+                        }
+
                         if (cItems.isEmpty) {
                           return const Center(
                             child: Text(
@@ -725,6 +772,11 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                           return ListView.builder(
                               itemCount: cItems.length,
                               itemBuilder: (context, index) {
+                                var x;
+                                if (cItems[index].products.length > 3) {
+                                  x = arr2[index];
+                                } else
+                                  x = null;
                                 return Container(
                                   margin: EdgeInsets.only(top: 8.0, bottom: 10),
                                   padding: EdgeInsets.only(
@@ -813,13 +865,6 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                     }
                                                   });
 
-                                                  for (int i = 0;
-                                                      i < cItems.length;
-                                                      i++) {
-                                                    arr2.add(
-                                                        ScrollController());
-                                                  }
-
                                                   return Container(
                                                     width: 366,
                                                     height: 150,
@@ -871,7 +916,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                       ],
                                                     ),*/
                                                     child: ListView.builder(
-                                                        controller: arr2[index],
+                                                        controller: x,
                                                         scrollDirection:
                                                             Axis.horizontal,
                                                         //shrinkWrap: true,
@@ -879,6 +924,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                             PItems.length,
                                                         itemBuilder:
                                                             (context, index) {
+                                                          print("erooorrr");
                                                           return Container(
                                                             margin:
                                                                 EdgeInsets.only(
@@ -963,6 +1009,38 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.end,
                                           children: [
+                                            //----------------------------------------
+                                            // زر تقييم المتجر
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 8.0),
+                                              child: ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  backgroundColor: Colors
+                                                      .amber, // background
+                                                ),
+                                                onPressed: () async {
+                                                  String shopLogo =
+                                                      await getShopLogo(
+                                                          cItems[index]
+                                                              .shopOwnerId);
+                                                  //show rating dialog
+                                                  showRatingDialog(
+                                                      cItems[index].docId,
+                                                      cItems[index].shopName,
+                                                      cItems[index].shopOwnerId,
+                                                      shopLogo);
+                                                },
+                                                child: Text(
+                                                  "تقييم المتجر",
+                                                  style: TextStyle(
+                                                    fontFamily: "Tajawal",
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            //-------------------------------------
+                                            //--------------------------------------------------
                                             ElevatedButton(
                                               style: ElevatedButton.styleFrom(
                                                   primary: Color.fromARGB(
@@ -1020,8 +1098,132 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
       ),
     );
   }
+
+  //Rating=============================================================================================
+  ///////////////////////////////////////////////////////////////////////////////////////////////
+  void showRatingDialog(
+      String orderId, String shopName, String shopOwneerId, String shopLogo) {
+    bool hasLogo = true;
+    if (shopLogo == "") {
+      hasLogo = false;
+    }
+    final _dialog = RatingDialog(
+      initialRating: 0.0,
+      // your app's name?
+      title: Text(
+        'قيّم متجري',
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+          fontSize: 28,
+          fontWeight: FontWeight.w900,
+          color: Colors.amber,
+        ),
+      ),
+      // encourage your user to leave a high rating?
+      message: Text(
+        "في هذا الطلب كيف كانت تجربتك مع ${shopName}؟ يمكنك إضافة ملاحظاتك لتصل لصاحب المتجر ",
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.w800,
+          color: Color.fromARGB(157, 20, 129, 137),
+        ),
+      ),
+      // logo
+      image: hasLogo
+          ? Image.network(
+              shopLogo,
+              height: 150,
+              width: 150,
+              fit: BoxFit.contain,
+            )
+          : Image.asset(
+              "assets/images/herfatyLogo.png",
+              height: 150,
+              width: 150,
+              fit: BoxFit.contain,
+            ),
+      submitButtonText: 'إرسال',
+      commentHint: 'اكتب ملاحظاتك هنا',
+      onCancelled: () => print('cancelled'),
+      //................................................add rating to the database
+      onSubmitted: (response) async {
+        //get current date and time firstly
+        String cdate = DateFormat("yyyy-MM-dd").format(DateTime.now());
+        String cdateTime =
+            DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now());
+
+        String commentToBeStored;
+        if (response.comment == "") {
+          commentToBeStored = "بدون تعليق";
+        } else {
+          commentToBeStored = response.comment;
+        }
+        ratingModel item = ratingModel(
+            starsNumber: response.rating,
+            shopOwnerId: shopOwneerId,
+            orderId: orderId,
+            comment: commentToBeStored,
+            date: cdate,
+            dateTime: cdateTime);
+        createRatingItem(item);
+        await showToastMethod(context, "شكرًا، تم إرسال تقييمك");
+        //..........................................................................
+        print('rating: ${response.rating}, comment: ${response.comment}');
+      },
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      barrierDismissible: true, // set to false if you want to force a rating
+      builder: (context) => _dialog,
+    );
+  }
 }
 
+//--------------------------------------------------------------------
+Future<String> getShopLogo(String shopOwnerId) async {
+  String shopLogo = "";
+  final shopDoc = await FirebaseFirestore.instance
+      .collection('shop_owner')
+      .where("id", isEqualTo: shopOwnerId)
+      .get();
+  if (shopDoc.size > 0) {
+    var data = shopDoc.docs.elementAt(0).data() as Map;
+    if (data["logo"] != "") {
+      shopLogo = data["logo"];
+    }
+  }
+  return shopLogo;
+}
+
+//----------------------------------------------------------------------
+Future createRatingItem(ratingModel ratingItem) async {
+  final ratingDoc = FirebaseFirestore.instance
+      .collection('rating')
+      .doc("${ratingItem.orderId}");
+  final json = ratingItem.toJson();
+  await ratingDoc.set(
+    json,
+  );
+}
+
+//------------------------------------------------------------------------
+Future<void> showToastMethod(BuildContext context, String textToBeShown) async {
+  Fluttertoast.showToast(
+    msg: textToBeShown,
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.CENTER,
+    timeInSecForIosWeb: 3,
+    backgroundColor: Color.fromARGB(255, 26, 96, 91),
+    textColor: Colors.white,
+    fontSize: 18.0,
+  );
+}
+
+//=============================================================================================
+///////////////////////////////////////////////////////////////////////////////////////////////
 class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   const DefaultAppBar({
