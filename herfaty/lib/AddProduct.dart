@@ -271,12 +271,13 @@ class _AddProductState extends State<AddProduct> {
                   padding: EdgeInsets.symmetric(horizontal: 40),
                   child: TextFormField(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    controller: nameController, maxLength: 30,
-
+                    controller: nameController,
+                    maxLength: 30,
                     //right aligment
 
                     decoration: InputDecoration(
                       border: InputBorder.none,
+
                       hintText: 'اسم المنتج',
                       hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
                       suffixIcon: Padding(
@@ -288,7 +289,8 @@ class _AddProductState extends State<AddProduct> {
                           vertical: 3.0, horizontal: 23),
                       labelStyle: TextStyle(
                           color: kPrimaryColor, fontFamily: "Tajawal"),
-                      // floatingLabelBehavior: FloatingLabelBehavior.never,                      filled: true,
+                      // floatingLabelBehavior: FloatingLabelBehavior.never,
+                      filled: true,
 
                       fillColor: Colors.white,
 
@@ -313,12 +315,12 @@ class _AddProductState extends State<AddProduct> {
                     ),
 
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'أدخل اسم المنتج';
-                      }
-                      if (value.length < 2) {
-                        return " أدخل اسم أكبر من أو يساوي حرفين ";
-                      }
+                    if (value!.trim() == null || value.trim().isEmpty) {
+                      return 'أدخل اسم المنتج';
+                    }
+                       if (value.trim().length < 2) {
+                      return " أدخل اسم أكبر من أو يساوي حرفين ";
+                    }
                       if (!RegExp(
                               r"^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z- ][]*$")
                           .hasMatch(value)) {
@@ -387,12 +389,11 @@ class _AddProductState extends State<AddProduct> {
                       ),
                     ),
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'أدخل وصف المنتج';
-                      }
-                      if (value.length < 2) {
-                        return " أدخل وصف أكبر من أو يساوي حرفين ";
-                      }
+                      if (value!.trim() == null || value.trim().isEmpty) {
+                      return 'أدخل وصف المنتج';
+                    }
+                      if (value.trim().length < 2) {
+return " أدخل وصف أكبر من أو يساوي حرفين ";                    }
                       return null;
                     },
                   ),
@@ -669,7 +670,7 @@ String formattedDate = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
               ),*/
 
                 SizedBox(
-                  height: 10,
+                  width: 10,
                 ),
 
                 ElevatedButton(
