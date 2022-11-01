@@ -13,7 +13,6 @@ import 'package:flutter/services.dart';
 //import'package:assets/images/productPic.png';
 import 'constants/color.dart';
 import 'models/shopOwnerModel.dart';
-import 'package:intl/intl.dart';
 
 class AddProduct extends StatefulWidget {
   AddProduct({super.key});
@@ -575,12 +574,6 @@ class _AddProductState extends State<AddProduct> {
                         .map((snapshot) =>
                         snapshot.docs.map((doc) => CartModal.fromJson(doc.data())).toList());*/
 
-
-
-DateTime now = DateTime.now();
-String formattedDate = DateFormat('yyyy-MM-dd').format(now);
-
-
                       final productToBeAdded = FirebaseFirestore.instance
                           .collection('Products')
                           .doc();
@@ -593,8 +586,7 @@ String formattedDate = DateFormat('yyyy-MM-dd').format(now);
                           categoryName: dropdownvalue,
                           price: priceN,
                           shopOwnerId: thisOwnerId,
-                          shopName: shopNameData,
-                          proudctDate:formattedDate);
+                          shopName: shopNameData);
 
                       final json = product.toJson();
                       await productToBeAdded.set(json);
