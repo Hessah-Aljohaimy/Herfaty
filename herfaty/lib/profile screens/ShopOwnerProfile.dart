@@ -67,29 +67,6 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
 
   get kPrimaryColor => null;
 
-  Future _getDataFromDatabase() async {
-    await FirebaseFirestore.instance
-        .collection("useres")
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get()
-        .then((snapshot) async {
-      if (snapshot.exists) {
-        setState(() {
-          DOB = snapshot.data()!["DOB"];
-          email = snapshot.data()!["email"];
-          id = snapshot.data()!["id"];
-
-          logo = snapshot.data()!["logo"];
-          name = snapshot.data()!["name"];
-          password = snapshot.data()!["password"];
-          phone_number = snapshot.data()!["phone_number"];
-          shopdescription = snapshot.data()!["shopdescription"];
-          shopname = snapshot.data()!["shopname"];
-        });
-      }
-    });
-  }
-
   TextEditingController passwordController = TextEditingController();
 //    fontFamily: "Tajawal",
   @override
@@ -106,7 +83,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
         centerTitle: true,
         backgroundColor: Colors.white,
         shadowColor: Color.fromARGB(255, 39, 141, 134),
-        elevation: 0,
+        elevation: 3,
         // leading: IconButton(
         //   icon: Icon(Icons.logout, color: Color.fromARGB(255, 81, 144, 142)),
         //   onPressed: () async {
@@ -147,15 +124,26 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
         //   },
         // ),
         actions: [
-          IconButton(
-            onPressed: () {
+          GestureDetector(
+            onTap: () {
               showAlertDialogSettengs(context);
-              // Navigator.of(context).push(MaterialPageRoute(
-              //     builder: (BuildContext context) => OwnerSettings()));
-            },
-            icon: Icon(CupertinoIcons.settings,
-                color: Color.fromARGB(255, 81, 144, 142)),
+            }, // Image tapped
+            child: Image.asset(
+              'assets/images/points_trophies/icons8-settings-64.png',
+              fit: BoxFit.contain, // Fixes border issues
+              width: 35.0,
+              height: 35.0,
+            ),
           ),
+          // IconButton(
+          //   onPressed: () {
+          //     showAlertDialogSettengs(context);
+          //     // Navigator.of(context).push(MaterialPageRoute(
+          //     //     builder: (BuildContext context) => OwnerSettings()));
+          //   },
+          //   icon: Icon(CupertinoIcons.settings,
+          //       color: Color.fromARGB(255, 81, 144, 142)),
+          // ),
         ],
         automaticallyImplyLeading: false,
         iconTheme: IconThemeData(color: Color.fromARGB(255, 39, 141, 134)),
@@ -279,14 +267,31 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(right: 8),
-                              child: Text(
-                                "معلومات الحرفي",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w700,
-                                  color: Color.fromARGB(255, 26, 96, 91),
-                                  fontFamily: "Tajawal",
-                                ),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Flexible(
+                                    flex: 5,
+                                    child: Text(
+                                      "معلومات الحرفي",
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700,
+                                        color: Color.fromARGB(255, 26, 96, 91),
+                                        fontFamily: "Tajawal",
+                                      ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    bottom: 50,
+                                    top: 50,
+                                    child: Image.asset(
+                                      "assets/images/points_trophies/icons8-customer-64.png",
+                                      width: 35,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                             Expanded(
@@ -390,13 +395,34 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(right: 8),
-                              child: Text(
-                                "معلومات المتجر",
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700,
-                                    fontFamily: "Tajawal",
-                                    color: Color.fromARGB(255, 26, 96, 91)),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Flexible(
+                                    flex: 5,
+                                    child: Text(
+                                      "معلومات المتجر",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w700,
+                                          fontFamily: "Tajawal",
+                                          color:
+                                              Color.fromARGB(255, 26, 96, 91)),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Positioned(
+                                    bottom: 50,
+                                    top: 50,
+                                    child: Image.asset(
+                                      "assets/images/points_trophies/icons8-shop-94.png",
+                                      width: 30,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                             SizedBox(
@@ -806,7 +832,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                     ),
                     Center(
                       child: Container(
-                        width: 180,
+                        // width: 180,
                         height: 110,
                         decoration: BoxDecoration(
                             image: DecorationImage(
@@ -851,18 +877,72 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
 //check if it was correct
                             if (shopowner.password ==
                                 _checkPasslController.text) {
+                              Navigator.of(context).pop();
+
+                              ///=======================Delete Dialog================
+
                               showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
-                                    title: Text("تنبيه"),
-                                    content: Text('سيتم حذف الحساب نهائيا'),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    title: Center(
+                                      child: Text(
+                                        "تنبيه",
+                                        style: TextStyle(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.w700,
+                                          color: Color.fromARGB(
+                                              255, 221, 112, 112),
+                                          fontFamily: "Tajawal",
+                                        ),
+                                      ),
+                                    ),
+                                    content: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Center(
+                                          child: Container(
+                                            width: 280,
+                                            height: 60,
+                                            decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                              fit: BoxFit.scaleDown,
+                                              image: AssetImage(
+                                                  'assets/images/delete.png'),
+                                            )),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Center(
+                                          child: Text(
+                                            'سيتم حذف الحساب نهائيا',
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w700,
+                                              color: Color.fromARGB(
+                                                  255, 26, 96, 91),
+                                              fontFamily: "Tajawal",
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                     actions: <Widget>[
+                                      TextButton(
+                                        child: Text("تراجع"),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
                                       TextButton(
                                         child: Text(
                                           "حذف",
-                                          style: TextStyle(
-                                              color: Colors.red, fontSize: 20),
+                                          style: TextStyle(color: Colors.red),
                                         ),
                                         onPressed: () async {
 //All the logics for deleting a profile for shop owner
@@ -1034,16 +1114,12 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                                           new login()));
                                         },
                                       ),
-                                      TextButton(
-                                        child: Text("تراجع"),
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                      )
                                     ],
                                   );
                                 },
                               );
+
+                              ///=======================Delete Dialog================
                             } else {
                               //error try again
                               Fluttertoast.showToast(

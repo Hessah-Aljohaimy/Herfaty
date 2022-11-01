@@ -57,16 +57,14 @@ dependencies:
   http: ^0.13.5
   image_picker: ^0.8.5+3
   path_provider: ^2.0.11
+  percent_indicator: ^4.2.2
   persistent_bottom_nav_bar: any
   rxdart: ^0.27.4
+  scroll_snap_list: ^0.9.1
   status_change: ^2.0.0
   style_random: ^0.0.1+1
   timelines: ^0.1.0
   timezone: ^0.8.0
-  rating_dialog: ^2.0.4
-  intl: ^0.17.0
-  flutter_star_rating: ^0.0.2
-  rate_in_stars: ^0.0.3
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -91,6 +89,17 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/images/productPic.png
+    - assets/images/points_trophies/
+    - assets/images/points_trophies/icons8receivecash.png
+    - assets/images/points_trophies/icons8-approval-64.png
+    - assets/images/points_trophies/icons8-trophy-64.png
+    - assets/images/points_trophies/icons8-sparkling-64.png
+    - assets/images/points_trophies/icons8-address-64.png
+    - assets/images/points_trophies/icons8-customer-64.png
+    - assets/images/points_trophies/icons8-settings-64.png
+    - assets/images/points_trophies/icons8-shop-94.png
+    - assets/images/trophies/
+    - assets/images/erase.png
 
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see

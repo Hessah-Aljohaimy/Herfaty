@@ -689,8 +689,49 @@ class _EditProduc extends State<EditProduct> {
                         context: context,
                         builder: (BuildContext context1) {
                           return AlertDialog(
-                            title: Text("تنبيه"),
-                            content: Text('سيتم إلغاء حفظ التعديلات'),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            title: Center(
+                              child: Text(
+                                "تنبيه",
+                                style: TextStyle(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color.fromARGB(255, 221, 112, 112),
+                                  fontFamily: "Tajawal",
+                                ),
+                              ),
+                            ),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Center(
+                                  child: Container(
+                                    width: 250,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                      fit: BoxFit.scaleDown,
+                                      image:
+                                          AssetImage('assets/images/erase.png'),
+                                    )),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Center(
+                                    child: Text(
+                                  'سيتم إلغاء حفظ التعديلات',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w700,
+                                    color: Color.fromARGB(255, 26, 96, 91),
+                                    fontFamily: "Tajawal",
+                                  ),
+                                )),
+                              ],
+                            ),
                             actions: <Widget>[
                               TextButton(
                                 child: Text(" تأكيد",
