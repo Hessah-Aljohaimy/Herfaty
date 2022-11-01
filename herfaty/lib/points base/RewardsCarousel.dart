@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:herfaty/points%20base/Reward.dart';
+import 'package:herfaty/points%20base/reviewOwnerPanle.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 
@@ -19,61 +20,69 @@ class _RewardsCarouselState extends State<RewardsCarousel> {
   @override
   Widget build(BuildContext context) {
     print('entering rewards scroll method ==================');
-    return SizedBox(
-        height: 60,
-        child: Row(
-          // mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
+    return Row(
+      children: [
+        SizedBox(
+            height: 60,
+            child: Row(
+              // mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
 
-          children: [
-            SizedBox(
-              width: 5,
-            ),
-            Container(
-              padding: const EdgeInsets.all(10),
-              width: 160,
-              height: 50,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(.1),
-                    blurRadius: 4.0,
-                    spreadRadius: .05,
-                  ), //BoxShadow
-                ],
-              ),
-              child: Row(
-                children: [
-                  Container(
-                    // width: 80,
-                    // height: 30,
-                    child: Text(
-                      "الكؤوس",
-                      style: TextStyle(
-                          color: Color(0xffF19B1A),
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "Tajawal"),
-                    ),
+              children: [
+                SizedBox(
+                  width: 5,
+                ),
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  width: 160,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(.1),
+                        blurRadius: 4.0,
+                        spreadRadius: .05,
+                      ), //BoxShadow
+                    ],
                   ),
-                  Positioned(
-                    bottom: 50,
-                    top: 50,
-                    child: Image.asset(
-                      "assets/images/points_trophies/icons8-trophy.png",
-                      width: 40,
-                    ),
+                  child: Row(
+                    children: [
+                      Container(
+                        // width: 80,
+                        // height: 30,
+                        child: Text(
+                          "الكؤوس",
+                          style: TextStyle(
+                              color: Color(0xffF19B1A),
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Tajawal"),
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 50,
+                        top: 50,
+                        child: Image.asset(
+                          "assets/images/points_trophies/icons8-trophy.png",
+                          width: 40,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-          ],
-        ));
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+              ],
+            )),
+        SizedBox(
+          width: 25,
+        ),
+        reviewOwnerPanle()
+      ],
+    );
   }
 }
 
