@@ -8,6 +8,7 @@ import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/widgets/ExpandedWidget.dart';
+import 'package:intl/intl.dart';
 
 class CustomerProdectDetails extends StatefulWidget {
   final Product1 product;
@@ -335,6 +336,9 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                                       .instance
                                       .collection('cart')
                                       .doc();
+                                  String cdateTime =
+                                      DateFormat("yyyy-MM-dd HH:mm:ss")
+                                          .format(DateTime.now());
                                   cart_wishlistModel item = cart_wishlistModel(
                                       name: widget.product.name,
                                       detailsImage: widget.detailsImage,
@@ -348,7 +352,8 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                                           existedQuantity + thisPageQuantity,
                                       availableAmount:
                                           widget.product.availableAmount,
-                                      price: widget.product.price);
+                                      price: widget.product.price,
+                                      proudctDate: cdateTime);
                                   createCartItem(item);
                                   await showToastMethod(
                                       context, "تمت إضافة المنتج للسلة بنجاح");

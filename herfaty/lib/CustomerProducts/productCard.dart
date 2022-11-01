@@ -8,6 +8,7 @@ import 'package:herfaty/models/cart_wishlistModel.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/rating/ratingsList.dart';
 import 'package:flutter/gestures.dart';
+import 'package:intl/intl.dart';
 
 class productCard extends StatefulWidget {
   const productCard({
@@ -242,6 +243,8 @@ class _productCardState extends State<productCard> {
                     //المنتج غير موجود مسبقًا في قائمة المفضلة
                     final productToBeAdded =
                         FirebaseFirestore.instance.collection('wishList').doc();
+                    String cdateTime = DateFormat("yyyy-MM-dd HH:mm:ss")
+                        .format(DateTime.now());
                     cart_wishlistModel item = cart_wishlistModel(
                         name: widget.product.name,
                         detailsImage: widget.product.image,
@@ -253,7 +256,8 @@ class _productCardState extends State<productCard> {
                         shopOwnerId: widget.product.shopOwnerId,
                         quantity: 1,
                         availableAmount: widget.product.availableAmount,
-                        price: widget.product.price);
+                        price: widget.product.price,
+                        proudctDate: cdateTime);
                     createWishListItem(item);
                     setState(() {
                       isFavourite = !isFavourite;
