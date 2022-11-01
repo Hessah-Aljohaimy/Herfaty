@@ -169,6 +169,12 @@ class _CustomerSettingsState extends State<CustomerSettings> {
                   ),
                   actions: <Widget>[
                     TextButton(
+                      child: Text("تراجع"),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    TextButton(
                       child: Text("تسجيل خروج",
                           style: TextStyle(color: Colors.red)),
                       onPressed: () {
@@ -181,12 +187,6 @@ class _CustomerSettingsState extends State<CustomerSettings> {
                                 builder: (context) => new login()));
                       },
                     ),
-                    TextButton(
-                      child: Text("تراجع"),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    )
                   ],
                 );
               });

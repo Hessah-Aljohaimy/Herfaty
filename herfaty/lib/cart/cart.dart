@@ -283,6 +283,7 @@ class _CartState extends State<Cart> {
                                                       } else if (cItems[index]
                                                               .quantity ==
                                                           1) {
+                                                        ////////////////////////Dialog Less than 1
                                                         ShowDialogMethod(
                                                             context,
                                                             "أقل عدد للمنتج هو واحد");
@@ -387,10 +388,58 @@ class _CartState extends State<Cart> {
                                       showDialog(
                                           context: context,
                                           builder: (BuildContext context) {
+                                            //Delete Product
                                             return AlertDialog(
-                                              title: Text("حذف منتج"),
-                                              content: Text(
-                                                  'سيتم حذف هذا المنتج من سلتك'),
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20)),
+                                              title: Center(
+                                                child: Text(
+                                                  "تنبيه",
+                                                  style: TextStyle(
+                                                    fontSize: 25,
+                                                    fontWeight: FontWeight.w700,
+                                                    color: Color.fromARGB(
+                                                        255, 221, 112, 112),
+                                                    fontFamily: "Tajawal",
+                                                  ),
+                                                ),
+                                              ),
+                                              content: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Center(
+                                                    child: Container(
+                                                      width: 280,
+                                                      height: 60,
+                                                      decoration: BoxDecoration(
+                                                          image:
+                                                              DecorationImage(
+                                                        fit: BoxFit.scaleDown,
+                                                        image: AssetImage(
+                                                            'assets/images/delete.png'),
+                                                      )),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  Center(
+                                                    child: Text(
+                                                      'سيتم حذف هذا المنتج من سلتك',
+                                                      style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        color: Color.fromARGB(
+                                                            255, 26, 96, 91),
+                                                        fontFamily: "Tajawal",
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                               actions: <Widget>[
                                                 TextButton(
                                                   child: Text("تراجع"),
@@ -589,8 +638,29 @@ Future<dynamic> ShowDialogMethod(BuildContext context, String textToBeShown) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text("عفواً"),
-        content: Text(textToBeShown),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: Center(
+          child: Center(
+            child: Text(
+              "عفواً",
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.w700,
+                color: Color.fromARGB(255, 221, 112, 112),
+                fontFamily: "Tajawal",
+              ),
+            ),
+          ),
+        ),
+        content: Text(
+          textToBeShown,
+          style: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w700,
+            color: Color.fromARGB(255, 26, 96, 91),
+            fontFamily: "Tajawal",
+          ),
+        ),
         actions: <Widget>[
           TextButton(
             child: Text("حسنا"),

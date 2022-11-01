@@ -734,7 +734,13 @@ class _EditProduc extends State<EditProduct> {
                             ),
                             actions: <Widget>[
                               TextButton(
-                                child: Text(" تأكيد",
+                                child: Text("تراجع"),
+                                onPressed: () {
+                                  Navigator.of(context1).pop();
+                                },
+                              ),
+                              TextButton(
+                                child: Text("إلغاء",
                                     style: TextStyle(color: Colors.red)),
                                 onPressed: () {
                                   Navigator.of(context1).pop();
@@ -749,12 +755,6 @@ class _EditProduc extends State<EditProduct> {
                                   );*/
                                 },
                               ),
-                              TextButton(
-                                child: Text("تراجع"),
-                                onPressed: () {
-                                  Navigator.of(context1).pop();
-                                },
-                              )
                             ],
                           );
                         });
