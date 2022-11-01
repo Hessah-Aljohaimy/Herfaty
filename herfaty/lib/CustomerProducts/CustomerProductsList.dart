@@ -96,6 +96,13 @@ String typeOfSort="الأحدث";
                           final productItems = snapshot.data!.toList();
                           final data = snapshot.data!;
                      
+
+    productItems.sort((a, b) {
+                          return DateTime.parse(b.proudctDate)
+                              .compareTo(DateTime.parse(a.proudctDate));
+                        });
+
+
                           if(cat1.isEmpty && widget.categoryName=="الخرز والإكسسوار") {
                       for (var i = 0; i < productItems.length; i++) {
          if((cat1.contains(productItems[i].name))==false &&
@@ -400,7 +407,7 @@ List<String> Suggestions=[];
                                 ),
                               );
                             } else {
-                              Suggestions.clear();  
+                           
                               final productItems = snapshot.data!.toList();
                               List<Product1> productItems2=[];
 for (var i = 0; i < productItems.length; i++) {
@@ -468,9 +475,10 @@ if(productItems2.isEmpty){
   @override
   Widget buildSuggestions(BuildContext context) {
     // TODO: implement buildSuggestions
-     
+        Suggestions.clear();  
    
 if(CatName=="الخرز والإكسسوار"){
+
   Suggestions.addAll(cat1);
 }
 
