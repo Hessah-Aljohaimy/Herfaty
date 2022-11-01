@@ -5,6 +5,7 @@ import 'package:herfaty/cart/cart.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/constants/size.dart';
 import 'package:herfaty/models/Category.dart';
+import 'package:herfaty/topShops/topShops.dart';
 import 'package:herfaty/points%20base/peofile_circle.dart';
 import 'package:herfaty/widgets/profile_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -28,12 +29,22 @@ class _customerHomeScreenState extends State<customerHomeScreen> {
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Column(
-          children: const [
-            AppBar(),
-            Body(),
-            categories(),
-          ],
+        body: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+            image: AssetImage('assets/images/cartBack1.png'),
+            fit: BoxFit.cover,
+          )),
+          child: Column(
+            children: [
+              AppBar(),
+              Body(),
+              categories(),
+              SizedBox(
+                height: 10,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -210,6 +221,47 @@ class _AppBarState extends State<AppBar> {
               ProfileCircleCustomer()
             ],
           ),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: InkWell(
+              child: Container(
+                height: 45,
+                width: double.infinity,
+                margin: EdgeInsets.only(right: 160),
+                padding: EdgeInsets.only(top: 10),
+                child: Row(
+                  //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    /* Image.asset(
+                      "assets/icons/starno.gif",
+                      height: 25,
+                    ),*/
+                    Text(
+                      "تعرف على المتاجر الأكثر نقاطاً",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 15,
+                        decoration: TextDecoration.underline,
+                        //fontFamily: "Tajawal"
+                      ),
+                    ),
+                    Icon(
+                      Icons.arrow_back_ios_new,
+                      color: Colors.white,
+                      size: 15,
+                    )
+                  ],
+                ),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => topShops()),
+                );
+              },
+            ),
+          ),
         ],
       ),
     );
@@ -323,7 +375,7 @@ class categories extends StatelessWidget {
                 } else {
                   return Center(child: CircularProgressIndicator());
                 }
-              })
+              }),
         ],
       ),
     );
