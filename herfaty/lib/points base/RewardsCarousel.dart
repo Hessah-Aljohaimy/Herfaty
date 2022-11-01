@@ -34,7 +34,7 @@ class _RewardsCarouselState extends State<RewardsCarousel> {
                 ),
                 Container(
                   padding: const EdgeInsets.all(10),
-                  width: 160,
+                  width: 139,
                   height: 50,
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -50,15 +50,17 @@ class _RewardsCarouselState extends State<RewardsCarousel> {
                   child: Row(
                     children: [
                       Container(
+                      margin:  const EdgeInsets.all(3),
                         // width: 80,
                         // height: 30,
                         child: Text(
                           "الكؤوس",
                           style: TextStyle(
                               color: Color(0xffF19B1A),
-                              fontSize: 20,
+                              fontSize: 19,
                               fontWeight: FontWeight.bold,
-                              fontFamily: "Tajawal"),
+                              fontFamily: "Tajawal"
+                              ),
                         ),
                       ),
                       Positioned(

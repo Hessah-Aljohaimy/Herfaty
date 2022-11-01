@@ -19,9 +19,9 @@ class _reviewOwnerPanleState extends State<reviewOwnerPanle> {
           crossAxisAlignment: CrossAxisAlignment.start,
 
           children: [
-            SizedBox(
-              width: 5,
-            ),
+            // SizedBox(
+            //   width:4,
+            // ),
             Container(
               padding: const EdgeInsets.all(10),
               width: 210,
