@@ -43,7 +43,7 @@ class _reviewOwnerPanleState extends State<reviewOwnerPanle> {
                     bottom: 50,
                     top: 50,
                     child: Image.asset(
-                      "assets/images/points_trophies/icons8-trophy.png",
+                      "assets/images/star-100.png",
                       width: 30,
                     ),
                   ),

@@ -99,6 +99,7 @@ flutter:
     - assets/images/points_trophies/icons8-settings-64.png
     - assets/images/points_trophies/icons8-shop-94.png
     - assets/images/trophies/
+    - assets/images/star-100.png
     - assets/images/erase.png
 
   #   - images/a_dot_ham.jpeg

@@ -355,6 +355,9 @@ class _IndicatorState extends State<Indicator> {
     //   pt = 0.6;
     // }
     pt = points / 500;
+    if (points > 500) {
+      pt = 1;
+    }
     return Row(
       children: [
         Padding(
