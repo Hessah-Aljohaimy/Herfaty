@@ -1,13 +1,18 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/customerOrder/scroll_indicator.dart';
-
+import 'package:herfaty/models/ratingModel.dart';
+import 'package:rating_dialog/rating_dialog.dart';
 import '../ShopOwnerOrder/OrderModel.dart';
 import '../constants/color.dart';
 import 'orderDetailsCustomer.dart';
 import '../models/Product1.dart';
+import 'package:intl/intl.dart';
 
 //import 'package:flutterfiredemo/item_details.dart';
 //import 'add_item.dart';
@@ -1004,6 +1009,38 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.end,
                                           children: [
+                                            //----------------------------------------
+                                            // زر تقييم المتجر
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 8.0),
+                                              child: ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  backgroundColor: Colors
+                                                      .amber, // background
+                                                ),
+                                                onPressed: () async {
+                                                  String shopLogo =
+                                                      await getShopLogo(
+                                                          cItems[index]
+                                                              .shopOwnerId);
+                                                  //show rating dialog
+                                                  showRatingDialog(
+                                                      cItems[index].docId,
+                                                      cItems[index].shopName,
+                                                      cItems[index].shopOwnerId,
+                                                      shopLogo);
+                                                },
+                                                child: Text(
+                                                  "تقييم المتجر",
+                                                  style: TextStyle(
+                                                    fontFamily: "Tajawal",
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            //-------------------------------------
+                                            //--------------------------------------------------
                                             ElevatedButton(
                                               style: ElevatedButton.styleFrom(
                                                   primary: Color.fromARGB(
@@ -1061,7 +1098,129 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
       ),
     );
   }
+
+  //Rating=============================================================================================
+  ///////////////////////////////////////////////////////////////////////////////////////////////
+  void showRatingDialog(
+      String orderId, String shopName, String shopOwneerId, String shopLogo) {
+    bool hasLogo = true;
+    if (shopLogo == "") {
+      hasLogo = false;
+    }
+    final _dialog = RatingDialog(
+      initialRating: 0.0,
+      // your app's name?
+      title: Text(
+        'قيّم متجري',
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+          fontSize: 28,
+          fontWeight: FontWeight.w900,
+          color: Colors.amber,
+        ),
+      ),
+      // encourage your user to leave a high rating?
+      message: Text(
+        "في هذا الطلب كيف كانت تجربتك مع ${shopName}؟ يمكنك إضافة ملاحظاتك لتصل لصاحب المتجر ",
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.w800,
+          color: Color.fromARGB(157, 20, 129, 137),
+        ),
+      ),
+      // logo
+      image: hasLogo
+          ? Image.network(
+              shopLogo,
+              height: 150,
+              width: 150,
+              fit: BoxFit.contain,
+            )
+          : Image.asset(
+              "assets/images/herfatyLogo.png",
+              height: 150,
+              width: 150,
+              fit: BoxFit.contain,
+            ),
+      submitButtonText: 'إرسال',
+      commentHint: 'اكتب ملاحظاتك هنا',
+      onCancelled: () => print('cancelled'),
+      //................................................add rating to the database
+      onSubmitted: (response) async {
+        //get current date and time firstly
+        String cdate = DateFormat("yyyy-MM-dd").format(DateTime.now());
+        String ctime = DateFormat("HH:mm:ss").format(DateTime.now());
+        String commentToBeStored;
+        if (response.comment == "") {
+          commentToBeStored = "بدون تعليق";
+        } else {
+          commentToBeStored = response.comment;
+        }
+        ratingModel item = ratingModel(
+            starsNumber: response.rating,
+            shopOwnerId: shopOwneerId,
+            orderId: orderId,
+            comment: commentToBeStored,
+            date: cdate,
+            time: ctime);
+        createRatingItem(item);
+        await showToastMethod(context, "شكرًا، تم إرسال تقييمك");
+        //..........................................................................
+        print('rating: ${response.rating}, comment: ${response.comment}');
+      },
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      barrierDismissible: true, // set to false if you want to force a rating
+      builder: (context) => _dialog,
+    );
+  }
 }
+
+//--------------------------------------------------------------------
+Future<String> getShopLogo(String shopOwnerId) async {
+  String shopLogo = "";
+  final shopDoc = await FirebaseFirestore.instance
+      .collection('shop_owner')
+      .where("id", isEqualTo: shopOwnerId)
+      .get();
+  if (shopDoc.size > 0) {
+    var data = shopDoc.docs.elementAt(0).data() as Map;
+    if (data["logo"] != "") {
+      shopLogo = data["logo"];
+    }
+  }
+  return shopLogo;
+}
+
+//----------------------------------------------------------------------
+Future createRatingItem(ratingModel ratingItem) async {
+  final ratingDoc = FirebaseFirestore.instance
+      .collection('rating')
+      .doc("${ratingItem.orderId}");
+  final json = ratingItem.toJson();
+  await ratingDoc.set(
+    json,
+  );
+}
+
+//------------------------------------------------------------------------
+Future<void> showToastMethod(BuildContext context, String textToBeShown) async {
+  Fluttertoast.showToast(
+    msg: textToBeShown,
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.CENTER,
+    timeInSecForIosWeb: 3,
+    backgroundColor: Color.fromARGB(255, 26, 96, 91),
+    textColor: Colors.white,
+    fontSize: 18.0,
+  );
+}
+//=============================================================================================
+///////////////////////////////////////////////////////////////////////////////////////////////
 
 class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;

@@ -141,13 +141,13 @@ class _CustomerProductsListState extends State<CustomerProductsList> {
       leading: IconButton(
         padding: EdgeInsets.only(right: 20),
         icon: const Icon(
-          Icons.arrow_back, //سهم العودة
+          Icons.arrow_back,
           color: Color.fromARGB(255, 26, 96, 91),
           size: 22.0,
         ),
         onPressed: () {
           Navigator.pop(context);
-        }, //نخليه يرجع لصفحة المنتجات اللي عند عائشة
+        },
       ),
     );
   }
