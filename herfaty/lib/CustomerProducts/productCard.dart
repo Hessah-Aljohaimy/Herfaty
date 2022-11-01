@@ -383,13 +383,15 @@ class _productCardState extends State<productCard> {
       String thisCustomerId, String thisproductId) async {
     String existedDocId = await getWishListDocId(thisCustomerId, thisproductId);
     if (existedDocId != "") {
+      if(mounted){
       setState(() {
         isFavourite = true;
-      });
+      });}
     } else {
+       if(mounted){
       setState(() {
         isFavourite = false;
-      });
+      }); }
     }
   }
 
