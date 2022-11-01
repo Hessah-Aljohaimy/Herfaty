@@ -336,9 +336,20 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
                                     ),
                                     actions: <Widget>[
                                       TextButton(
+                                        child: Text("تراجع"),
+                                        onPressed: () {
+                                          Oldname =
+                                              _nameTextEditingController.text;
+                                          _nameTextEditingController
+                                            ..text = Oldname;
+
+                                          Navigator.of(context1).pop();
+                                        },
+                                      ),
+                                      TextButton(
                                         child: Text("إلغاء",
-                                            style: TextStyle(
-                                                color: Color(0xff51908E))),
+                                            style:
+                                                TextStyle(color: Colors.red)),
                                         onPressed: () {
                                           //The logic of cancle edits
                                           Navigator.of(context1).pop();
@@ -358,17 +369,6 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
                                           // Navigator.of(context, rootNavigator: true)
                                           //     .pushReplacement(MaterialPageRoute(
                                           //         builder: (context) => new Welcome()));
-                                        },
-                                      ),
-                                      TextButton(
-                                        child: Text("تراجع"),
-                                        onPressed: () {
-                                          Oldname =
-                                              _nameTextEditingController.text;
-                                          _nameTextEditingController
-                                            ..text = Oldname;
-
-                                          Navigator.of(context1).pop();
                                         },
                                       ),
                                     ],

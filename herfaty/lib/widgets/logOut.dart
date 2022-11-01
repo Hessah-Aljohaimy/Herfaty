@@ -552,6 +552,12 @@ class _logOutButtonState extends State<logOutButton> {
                               ),
                               actions: <Widget>[
                                 TextButton(
+                                  child: Text("تراجع"),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                TextButton(
                                   child: Text("حذف",
                                       style: TextStyle(color: Colors.red)),
                                   onPressed: () async {
@@ -667,12 +673,6 @@ class _logOutButtonState extends State<logOutButton> {
                                             builder: (context) => new login()));
                                   },
                                 ),
-                                TextButton(
-                                  child: Text("تراجع"),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                )
                               ],
                             );
                           },

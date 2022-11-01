@@ -526,9 +526,14 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                                 ),
                                 actions: <Widget>[
                                   TextButton(
+                                    child: Text("تراجع"),
+                                    onPressed: () {
+                                      Navigator.of(context1).pop();
+                                    },
+                                  ),
+                                  TextButton(
                                     child: Text("إلغاء",
-                                        style: TextStyle(
-                                            color: Color(0xff51908E))),
+                                        style: TextStyle(color: Colors.red)),
                                     onPressed: () {
                                       Navigator.of(context1).pop();
                                       Navigator.of(context).pop();
@@ -552,12 +557,6 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                                       //         builder: (context) => new Welcome()));
                                     },
                                   ),
-                                  TextButton(
-                                    child: Text("تراجع"),
-                                    onPressed: () {
-                                      Navigator.of(context1).pop();
-                                    },
-                                  )
                                 ],
                               );
                             },
