@@ -67,6 +67,72 @@ TextFormField reusableTextField(String text, IconData icon, bool isPasswordType,
   );
 }
 
+
+
+TextFormField reusableTextFieldPassLogin(String text, IconData icon, bool isPasswordType,
+    TextEditingController controller) {
+  return TextFormField(
+    autovalidateMode: AutovalidateMode.onUserInteraction,
+    controller: controller,
+    obscureText: isPasswordType,
+    enableSuggestions: !isPasswordType,
+    autocorrect: !isPasswordType,
+    keyboardType: isPasswordType
+        ? TextInputType.visiblePassword
+        : TextInputType.emailAddress,
+    style: TextStyle(
+        color: Color.fromARGB(255, 26, 96, 91), fontFamily: "Tajawal"),
+    decoration: InputDecoration(
+      contentPadding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 25),
+
+      suffix: Icon(
+        icon,
+        color: Color.fromARGB(255, 26, 96, 91),
+      ),
+      labelText: text,
+      labelStyle: TextStyle(
+          color: Color.fromARGB(106, 26, 96, 91), fontFamily: "Tajawal"),
+      // floatingLabelBehavior: FloatingLabelBehavior.never,
+      fillColor: Colors.white.withOpacity(0.3),
+
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Color.fromARGB(255, 26, 96, 91)),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide:
+            BorderSide(width: 2, color: Color.fromARGB(255, 26, 96, 91)),
+      ),
+      errorStyle: TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
+
+      errorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
+      ),
+
+      focusedErrorBorder: OutlineInputBorder(
+        borderSide:
+            BorderSide(width: 2, color: Color.fromARGB(255, 164, 46, 46)),
+      ),
+    ),
+    validator: (value) {
+      if (value == null || value.isEmpty) {
+        return "أدخل " + text;
+      }
+      if (!RegExp(r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
+              .hasMatch(value) &&
+          !isPasswordType &&
+          text == 'البريد الإلكتروني') {
+        return 'أدخل بريد إلكتروني صحيح';
+      }
+
+      if (value.trim().isEmpty) {
+        return "أدخل " + text + " صحيح";
+      }
+
+      return null;
+    },
+  );
+}
+
 TextFormField reusableTextFieldForPhone(
     String text, IconData icon, TextEditingController controller) {
   return TextFormField(
