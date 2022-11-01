@@ -739,7 +739,6 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
                           //     'password': _newPasswordTextController1.text,
                           //   });
                           // }
-
                           Fluttertoast.showToast(
                             msg: "تم إعادة تعيين كلمة المرور بنجاح",
                             toastLength: Toast.LENGTH_SHORT,
