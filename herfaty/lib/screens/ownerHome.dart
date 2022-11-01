@@ -1,7 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/constants/size.dart';
 import 'package:herfaty/models/ownerServices.dart';
+import 'package:herfaty/points%20base/RewardsCarousel.dart';
+import 'package:herfaty/points%20base/peofile_circle.dart';
+import 'package:herfaty/points%20base/pointsPanel.dart';
+import 'package:herfaty/points%20base/points_Instructions.dart';
+import 'package:herfaty/points%20base/reviewOwnerPanle.dart';
 
 import 'package:herfaty/widgets/profile_button.dart';
 import 'package:flutter/material.dart';
@@ -24,23 +30,53 @@ class _ownerHomeScreenState extends State<ownerHomeScreen> {
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Column(
-          children: const [
-            AppBar(),
-            Body(),
-            Services(),
-          ],
+        body: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image:
+                      AssetImage('assets/images/HomePageBackgroundOwner.png'),
+                  fit: BoxFit.cover)),
+          child: SingleChildScrollView(
+            child: Column(
+              children: const [
+                AppBar(),
+                Body(),
+                // Services(),
+                RewardsCarousel(),
+
+                Rewards(),
+                const SizedBox(
+                  height: 10,
+                ),
+                // Indicator(),
+                PointPanel(),
+                const SizedBox(
+                  height: 10,
+                ),
+                PiointsInstruction(),
+                const SizedBox(
+                  height: 20,
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
   }
 }
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);
 
   @override
+  State<Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  @override
   Widget build(BuildContext context) {
+    print('entering body method ==================');
     return Column(
       children: [
         SizedBox(
@@ -111,10 +147,27 @@ class ownerServicesCard extends StatelessWidget {
   }
 }
 
-class AppBar extends StatelessWidget {
+class AppBar extends StatefulWidget {
   const AppBar({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<AppBar> createState() => _AppBarState();
+}
+
+class _AppBarState extends State<AppBar> {
+  String thisOwnerName = "";
+  @override
+  void initState() {
+    print("this is app bar initState====");
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    String thisOwnerId = user!.uid;
+    setOwnerName(thisOwnerId);
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +193,7 @@ class AppBar extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: 25,
+            height: 18,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -148,7 +201,7 @@ class AppBar extends StatelessWidget {
             children: [
               // ignore: prefer_const_constructors
               Text(
-                "مرحباً بكَ أيها الحِرَفِيّ",
+                "مرحباً بك  ${thisOwnerName} ",
                 // ignore: prefer_const_constructors
                 style: TextStyle(
                     color: Colors.white,
@@ -161,14 +214,45 @@ class AppBar extends StatelessWidget {
                 icon: Icons.account_circle_sharp,
                 onPressed: () {},
               ),*/
+              ProfileCicle()
             ],
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          // const SizedBox(
+          //   height: 20,
+          // ),
         ],
       ),
     );
+  }
+  //======================================================================================
+
+  Future<void> setOwnerName(String thisOwnerId) async {
+    String existedName = await getName(thisOwnerId);
+    if (existedName != "") {
+      setState(() {
+        thisOwnerName = existedName;
+      });
+    } else {
+      setState(() {
+        thisOwnerName = "أيها الحرفي";
+      });
+    }
+  }
+
+//===================================================================================
+  Future<String> getName(String thisOwnerId) async {
+    String OwnerName = "";
+    final OwnersDoc = await FirebaseFirestore.instance
+        .collection('shop_owner')
+        .where("id", isEqualTo: thisOwnerId)
+        .get();
+
+    if (OwnersDoc.size > 0) {
+      var data = OwnersDoc.docs.elementAt(0).data() as Map;
+      OwnerName = data["name"];
+      print("existed name is ${OwnerName}");
+    }
+    return OwnerName;
   }
 }
 

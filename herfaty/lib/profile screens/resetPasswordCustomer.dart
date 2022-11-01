@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/pages/signupCustomer.dart';
 import 'package:herfaty/widgets/customerSettings.dart';
+import 'package:herfaty/widgets/logOut.dart';
 
 class ResetPasswordCustomer extends StatefulWidget {
   const ResetPasswordCustomer({super.key});
@@ -65,13 +66,14 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
             }
             if (!snapshot.hasData) {
               print('2222222222222222222222222222222222222222222222');
-              return Center(child: Text('! خطأ في عرض البيانات '));
+              // return Center(child: Text('!  11خطأ في عرض البيانات '));
+              return Center(child: CircularProgressIndicator());
             }
 
-            if (!snapshot.hasData) {
-              print('2222222222222222222222222222222222222222222222');
-              return Center(child: Text('! خطأ في عرض البيانات '));
-            }
+            // if (!snapshot.hasData) {
+            //   print('2222222222222222222222222222222222222222222222');
+            //   return Center(child: Text('! خطأ في عرض البيانات '));
+            // }
             if (snapshot.hasData) {
               print('4444444444444444444444444444444444444444');
 
@@ -696,66 +698,180 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
               SizedBox(
                 height: 35,
               ),
-              ElevatedButton(
-                onPressed: () async {
-                  FocusScope.of(context).unfocus();
-                  FocusScope.of(context).requestFocus(new FocusNode());
-                  if (_formKey.currentState!.validate()) {
-                    final docCustomer = FirebaseFirestore.instance
-                        .collection('customers')
-                        .doc(uid);
-                    // final docCustomer = FirebaseFirestore.instance
-                    //     .collection('customers')
-                    //     .doc(uid);
+              Expanded(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () async {
+                        FocusScope.of(context).unfocus();
+                        FocusScope.of(context).requestFocus(new FocusNode());
+                        if (_formKey.currentState!.validate()) {
+                          final docCustomer = FirebaseFirestore.instance
+                              .collection('customers')
+                              .doc(uid);
+                          // final docCustomer = FirebaseFirestore.instance
+                          //     .collection('customers')
+                          //     .doc(uid);
 
-                    String email = customer.email;
-                    String password = customer.password;
+                          String email = customer.email;
+                          String password = customer.password;
 
-// Create a credential
-                    AuthCredential credential = EmailAuthProvider.credential(
-                        email: email, password: password);
+                          // Create a credential
+                          AuthCredential credential =
+                              EmailAuthProvider.credential(
+                                  email: email, password: password);
 
-// Reauthenticate
-                    await FirebaseAuth.instance.currentUser!
-                        .reauthenticateWithCredential(credential);
+                          // Reauthenticate
+                          await FirebaseAuth.instance.currentUser!
+                              .reauthenticateWithCredential(credential);
 
-                    FirebaseAuth.instance.currentUser
-                        ?.updatePassword(_newPasswordTextController1.text);
+                          FirebaseAuth.instance.currentUser?.updatePassword(
+                              _newPasswordTextController1.text);
 
-                    docCustomer.update({
-                      'password': _newPasswordTextController1.text,
-                    });
+                          docCustomer.update({
+                            'password': _newPasswordTextController1.text,
+                          });
 
-                    // if (docCustomer != null) {
-                    //   docCustomer.update({
-                    //     'password': _newPasswordTextController1.text,
-                    //   });
-                    // }
-
-                    Fluttertoast.showToast(
-                      msg: "تم إعادة تعيين كلمة المرور بنجاح",
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.CENTER,
-                      timeInSecForIosWeb: 3,
-                      backgroundColor: Color.fromARGB(255, 26, 96, 91),
-                      textColor: Colors.white,
-                      fontSize: 18.0,
-                    );
-                  }
-                },
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Color(0xff51908E)),
-                  padding: MaterialStateProperty.all(
-                      EdgeInsets.symmetric(horizontal: 160, vertical: 13)),
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(27))),
-                ),
-                child: Text(
-                  "حفظ",
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontFamily: "Tajawal",
-                      fontWeight: FontWeight.bold),
+                          // if (docCustomer != null) {
+                          //   docCustomer.update({
+                          //     'password': _newPasswordTextController1.text,
+                          //   });
+                          // }
+                          Fluttertoast.showToast(
+                            msg: "تم إعادة تعيين كلمة المرور بنجاح",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 3,
+                            backgroundColor: Color.fromARGB(255, 26, 96, 91),
+                            textColor: Colors.white,
+                            fontSize: 18.0,
+                          );
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  logOutButton()));
+                        }
+                      },
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Color(0xff51908E)),
+                        padding: MaterialStateProperty.all(
+                            EdgeInsets.symmetric(horizontal: 55, vertical: 13)),
+                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(27))),
+                      ),
+                      child: Text(
+                        "حفظ",
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontFamily: "Tajawal",
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    ElevatedButton(
+                      onPressed: () async {
+                        if (_oldPasswordTextController.text != '' &&
+                            _newPasswordTextController1.text != '' &&
+                            _newPasswordTextController2.text != '') {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context1) {
+                              return AlertDialog(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20)),
+                                title: Text(
+                                  "تنبيه",
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w700,
+                                    color: Color.fromARGB(255, 221, 112, 112),
+                                    fontFamily: "Tajawal",
+                                  ),
+                                ),
+                                content: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Center(
+                                      child: Container(
+                                        width: 250,
+                                        height: 50,
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                          fit: BoxFit.scaleDown,
+                                          image: AssetImage(
+                                              'assets/images/erase.png'),
+                                        )),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Center(
+                                        child: Text(
+                                      'سيتم إلغاء التعديلات',
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w700,
+                                        color: Color.fromARGB(255, 26, 96, 91),
+                                        fontFamily: "Tajawal",
+                                      ),
+                                    )),
+                                  ],
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: Text("إلغاء",
+                                        style: TextStyle(
+                                            color: Color(0xff51908E))),
+                                    onPressed: () {
+                                      //The logic of cancle edits
+                                      Navigator.of(context1).pop();
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                  TextButton(
+                                    child: Text("تراجع"),
+                                    onPressed: () {
+                                      Navigator.of(context1).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        } else {
+                          Fluttertoast.showToast(
+                            msg: "لم يتم تعديل كلمة المرور",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 3,
+                            backgroundColor: Color.fromARGB(255, 156, 30, 21),
+                            textColor: Colors.white,
+                            fontSize: 18.0,
+                          );
+                        }
+                      },
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Color(0xff51908E)),
+                        padding: MaterialStateProperty.all(
+                            EdgeInsets.symmetric(horizontal: 55, vertical: 13)),
+                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(27))),
+                      ),
+                      child: Text(
+                        "إلغاء",
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: "Tajawal",
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],

@@ -6,6 +6,7 @@ import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/constants/size.dart';
 import 'package:herfaty/models/Category.dart';
 import 'package:herfaty/topShops/topShops.dart';
+import 'package:herfaty/points%20base/peofile_circle.dart';
 import 'package:herfaty/widgets/profile_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -217,6 +218,7 @@ class _AppBarState extends State<AppBar> {
                     fontSize: 25,
                     fontFamily: "Tajawal"),
               ),
+              ProfileCircleCustomer()
             ],
           ),
           Align(

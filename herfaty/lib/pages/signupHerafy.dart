@@ -70,6 +70,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
               key: formKeys[0],
               child: Column(
                 children: [
+                  
                   Container(
                       child: Image.asset(
                     "assets/images/HerfatyLogoCroped.png",
@@ -97,10 +98,10 @@ class _SignupHerafyState extends State<SignupHerafy> {
                     height: 10,
                   ),
                   Container(
-                    // width: 290,
-                    // height: 53,
-                    // padding: EdgeInsets.symmetric(horizontal: 16),
-                    padding: EdgeInsets.symmetric(horizontal: 60),
+                    width: 290,
+                    height: 80,
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                //    padding: EdgeInsets.symmetric(horizontal: 60),
                     child: reusableTextFieldForName(
                         "اسم الحرفي", Icons.person, _nameTextEditingController),
                   ),
@@ -108,10 +109,10 @@ class _SignupHerafyState extends State<SignupHerafy> {
                     height: 10,
                   ),
                   Container(
-                    // width: 290,
-                    // height: 53,
-                    // padding: EdgeInsets.symmetric(horizontal: 16),
-                    padding: EdgeInsets.symmetric(horizontal: 60),
+           width: 290,
+                    height: 80,
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                 //   padding: EdgeInsets.symmetric(horizontal: 60),
                     child: reusableTextField(
                         "البريد الإلكتروني",
                         Icons.email_rounded,
@@ -122,10 +123,10 @@ class _SignupHerafyState extends State<SignupHerafy> {
                     height: 10,
                   ),
                   Container(
-                    // width: 290,
-                    // height: 53,
-                    // padding: EdgeInsets.symmetric(horizontal: 16),
-                    padding: EdgeInsets.symmetric(horizontal: 60),
+                width: 290,
+                    height: 80,
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                   // padding: EdgeInsets.symmetric(horizontal: 60),
                     child: reusableTextField("كلمة المرور", Icons.lock, true,
                         _passwordTextController),
                   ),
@@ -141,7 +142,9 @@ class _SignupHerafyState extends State<SignupHerafy> {
                     height: 10,
                   ),
                   Container(
-                      padding: EdgeInsets.symmetric(horizontal: 60),
+                    width: 290,
+                    height: 80,
+                    padding: EdgeInsets.symmetric(horizontal: 16),
                       child: Center(
                           child: TextFormField(
                         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -255,10 +258,9 @@ class _SignupHerafyState extends State<SignupHerafy> {
                     height: 10,
                   ),
                   Container(
-                    // width: 290,
-                    // height: 53,
-                    // padding: EdgeInsets.symmetric(horizontal: 16),
-                    padding: EdgeInsets.symmetric(horizontal: 60),
+                width: 290,
+                    height: 80,
+                    padding: EdgeInsets.symmetric(horizontal: 16),
                     child: reusableTextFieldForPhone("رقم الجوال",
                         Icons.phone_android, _PhoneNumberTextEditingController),
                   ),
@@ -270,6 +272,30 @@ class _SignupHerafyState extends State<SignupHerafy> {
                           color: Color.fromARGB(255, 86, 86, 86), fontSize: 13),
                     ),
                   ),
+
+  SizedBox(
+                    height: 12,
+                  ),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "الرجوع إلى صفحة ",
+                              style: TextStyle(fontFamily: "Tajawal"),
+                            ),
+                            GestureDetector(
+                                onTap: () {
+                                  Navigator.pushNamed(context, "/login");
+                                },
+                                child: Text(
+                                  "تسجيل الدخول ",
+                                  style: TextStyle(
+                                      fontFamily: "Tajawal",
+                                      decoration: TextDecoration.underline,
+                                      color: Color.fromARGB(255, 53, 47, 244)),
+                                )),
+                          ],
+                        )
                 ],
               ),
             )),
@@ -320,9 +346,9 @@ class _SignupHerafyState extends State<SignupHerafy> {
                   ),
 
                   Container(
-                    // width: 290,
-                    // height: 53,
-                    padding: EdgeInsets.symmetric(horizontal: 60),
+                 width: 290,
+                    height: 80,
+                    padding: EdgeInsets.symmetric(horizontal: 16),
                     child: reusableTextFieldForShopName(
                         "اسم المتجر", _shopnameTextEditingController),
                   ),
@@ -332,9 +358,9 @@ class _SignupHerafyState extends State<SignupHerafy> {
                   ),
 
                   Container(
-                    // width: 290,
-                    // height: 53,
-                    padding: EdgeInsets.symmetric(horizontal: 60),
+                  width: 290,
+                    height: 80,
+                    padding: EdgeInsets.symmetric(horizontal: 16),
                     child: reusableTextFieldDec(
                         "وصف المتجر", _shopdescriptionTextEditingController),
                   ),
@@ -350,6 +376,9 @@ class _SignupHerafyState extends State<SignupHerafy> {
 
                   ElevatedButton(
                     onPressed: () async {
+                      if (uploadImageUrl == "") {
+                        uploadImageUrl = 'assets/images/Circular_Logo.png';
+                      }
                       try {
                         //uploadImageUrl
                         if (formKeys[0].currentState!.validate() &&
@@ -369,7 +398,8 @@ class _SignupHerafyState extends State<SignupHerafy> {
                                 logo: uploadImageUrl,
                                 shopname: _shopnameTextEditingController.text,
                                 shopdescription:
-                                    _shopdescriptionTextEditingController.text);
+                                    _shopdescriptionTextEditingController.text,
+                                points: 0);
                             Fluttertoast.showToast(
                               msg: "تم تسجيل حسابك  بنجاح",
                               toastLength: Toast.LENGTH_SHORT,
@@ -454,14 +484,20 @@ class _SignupHerafyState extends State<SignupHerafy> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Theme(
+        
         data: ThemeData(
+          
             colorScheme:
-                ColorScheme.light(primary: Color.fromARGB(255, 26, 96, 91))),
-        child: Stepper(
+                ColorScheme.light(primary: Color(0xff51908E))),
+        child: 
+      
+                  Stepper(
           type: StepperType.horizontal,
+          
           currentStep: currentStep,
           steps: steps(),
           onStepContinue: () {
+            
             if (!formKeys[currentStep].currentState!.validate()) {
               return;
             }
@@ -482,7 +518,12 @@ class _SignupHerafyState extends State<SignupHerafy> {
           },
           controlsBuilder: (BuildContext context, ControlsDetails controls) {
             return Container(
-              margin: EdgeInsets.only(top: 10),
+                  padding: 
+                              EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 13),
+                                    decoration: BoxDecoration(
+  
+  ),
               child: Row(
                 children: [
                   if (currentStep == 0)
@@ -1147,6 +1188,7 @@ class ShopOwner {
   final String logo;
   final String shopname;
   final String shopdescription;
+  final int points;
 
   ShopOwner({
     this.id = '',
@@ -1158,6 +1200,7 @@ class ShopOwner {
     required this.logo,
     required this.shopname,
     required this.shopdescription,
+    required this.points,
   });
 
   Map<String, dynamic> toJson() => {
@@ -1170,6 +1213,7 @@ class ShopOwner {
         'phone_number': phone_number,
         'shopdescription': shopdescription,
         'shopname': shopname,
+        'points': points,
       };
   static ShopOwner fromJson(Map<String, dynamic> json) => ShopOwner(
         id: json['id'],
@@ -1181,5 +1225,6 @@ class ShopOwner {
         phone_number: json['phone_number'],
         shopdescription: json['shopdescription'],
         shopname: json['shopname'],
+        points: json['points'],
       );
 }
