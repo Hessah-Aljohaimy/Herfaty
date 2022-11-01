@@ -65,6 +65,10 @@ dependencies:
   style_random: ^0.0.1+1
   timelines: ^0.1.0
   timezone: ^0.8.0
+  rating_dialog: ^2.0.4
+  intl: ^0.17.0
+  flutter_star_rating: ^0.0.2
+  rate_in_stars: ^0.0.3
 
 dev_dependencies:
   flutter_lints: ^2.0.0

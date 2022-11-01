@@ -13,6 +13,7 @@ import 'package:herfaty/models/cartModal.dart';
 import 'package:herfaty/models/orderModel.dart';
 import '../widgets/emptySection.dart';
 import '../widgets/subTitle.dart';
+import 'package:intl/intl.dart';
 
 class payForm extends StatefulWidget {
   List<CartModal> Items;
@@ -303,7 +304,11 @@ class payForm extends StatelessWidget {
                       final orderToBeAdded =
                           FirebaseFirestore.instance.collection('orders').doc();
 
-                      DateTime now = new DateTime.now();
+
+DateTime now = DateTime.now();
+String formattedDate = DateFormat('yyyy-MM-dd').format(now);
+                  
+                   //   DateTime now = DateTime.now();
                       String date = "${now.year}-${now.month}-${now.day}";
 
                       orderModal order = orderModal(
@@ -316,7 +321,7 @@ class payForm extends StatelessWidget {
                           notification: 'notPushed',
                           status: 'طلب جديد',
                           products: products,
-                          orderDate: date);
+                          orderDate: formattedDate);
 
                       createNewOrder(order);
 //print('zzzzzzzvvvevevevvevevevvevv');

@@ -6,6 +6,8 @@ import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/models/cart_wishlistModel.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:herfaty/rating/ratingsList.dart';
+import 'package:flutter/gestures.dart';
 
 class productCard extends StatefulWidget {
   const productCard({
@@ -28,6 +30,8 @@ class _productCardState extends State<productCard> {
 
   bool isFavourite = false;
   bool isAvailable = true;
+  double averageShopRating = 0;
+  int numberOfRatings = 0;
 
   @override
   void initState() {
@@ -36,6 +40,8 @@ class _productCardState extends State<productCard> {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     String thisCustomerId = user!.uid;
+    setShopAverageRating(widget.product.shopOwnerId);
+    setNumOfRatings(widget.product.shopOwnerId);
     setIsFavourite(thisCustomerId, widget.product.productId);
     if (widget.product.availableAmount == 0) {
       isAvailable = false;
@@ -151,16 +157,6 @@ class _productCardState extends State<productCard> {
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
-            Container(
-              //(small box inside the Big box)
-              padding: const EdgeInsets.only(top: 10),
-              height: 180,
-              decoration: BoxDecoration(
-                //color: const Color(0xFFFAF9F6),
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
             //*************************This part contains product photo:
             Positioned(
               top: 0,
@@ -168,15 +164,6 @@ class _productCardState extends State<productCard> {
               child: Container(
                 height: 180,
                 width: 180,
-                decoration: BoxDecoration(
-                  border: Border.all(width: 0.1, color: Colors.white),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    bottomLeft: Radius.circular(10),
-                  ),
-                  //color: Color(0xFFFAF9F6),
-                  color: Colors.white,
-                ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(10),
@@ -196,13 +183,13 @@ class _productCardState extends State<productCard> {
               right: 20,
               child: SizedBox(
                 height: 136,
-                //because our image is 200, so the siz of this box = width -200
-                width: size.width - 200,
+                //because our image is 180, so the siz of this box = width -200
+                width: size.width - 180,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    //product name===========================================================
+                    //اسم المنتج===========================================================
                     Text(
                       widget.product.name,
                       style: const TextStyle(
@@ -217,10 +204,10 @@ class _productCardState extends State<productCard> {
                     Text(
                       ' ${widget.product.price} ريال',
                       style: const TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.w400,
+                        fontSize: 19.0,
+                        fontWeight: FontWeight.w600,
                         fontFamily: "Tajawal",
-                        color: Colors.orange,
+                        color: Color.fromARGB(196, 84, 83, 83),
                       ),
                     ),
                     //اسم المتجر  ===========================================================
@@ -237,10 +224,10 @@ class _productCardState extends State<productCard> {
                 ),
               ),
             ),
-            //**********************This part contains wish list icon
+            //**********************المفضلة
             Positioned(
               //top: 10,
-              left: 190,
+              left: 177,
               bottom: 10,
               child: IconButton(
                 icon: Icon(
@@ -290,16 +277,78 @@ class _productCardState extends State<productCard> {
                 },
               ),
             ),
-            //**********************This part if the available amount is zero
+            //**********************صورة نجمة
             Positioned(
-                //top: 10,
-                //left: 235,
-                right: 60,
-                bottom: 6,
+              //top: 10,
+              right: 5,
+              bottom: 15,
+              child: IconButton(
+                icon: Icon(
+                  //Icons.star_rate,
+                  Icons.star_rounded,
+                  color: Colors.amber,
+                  size: 25.0,
+                ),
+                onPressed: () {},
+              ),
+            ),
+            //**********************نسبة التقييم للمتجر
+            Positioned(
+              //top: 10,
+              right: 42,
+              bottom: 27,
+              child: Text(
+                "${averageShopRating}",
+                style: const TextStyle(
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: "Tajawal",
+                  color: kPrimaryLight,
+                ),
+              ),
+            ),
+            //********************** عدد التقييمات
+            Positioned(
+              right: 70,
+              bottom: 29,
+              child: RichText(
+                text: TextSpan(children: [
+                  TextSpan(
+                      text: "(${numberOfRatings} تقييم)",
+                      style: TextStyle(
+                        fontSize: 13.0,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: "Tajawal",
+                        decoration: TextDecoration.underline,
+                        color: Colors.amber,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ratingsList(
+                                thisShopOwnerId: widget.product.shopOwnerId,
+                                averageShopRating: averageShopRating,
+                                numberOfRatings: numberOfRatings,
+                              ),
+                            ),
+                          );
+                        }),
+                ]),
+              ),
+            ),
+            //=============================================================
+            //========================================غير متوفر
+            Positioned(
+                top: 25,
+                left: 215,
+                //right: 60,
+                //bottom: 6,
                 child: isAvailable
                     ? Text("")
                     : Container(
-                        padding: EdgeInsets.only(top: 25),
+                        //padding: EdgeInsets.only(top: 25),
                         child: Center(
                           child: Text(
                             '*غير متوفر',
@@ -334,13 +383,15 @@ class _productCardState extends State<productCard> {
       String thisCustomerId, String thisproductId) async {
     String existedDocId = await getWishListDocId(thisCustomerId, thisproductId);
     if (existedDocId != "") {
+      if(mounted){
       setState(() {
         isFavourite = true;
-      });
+      });}
     } else {
+       if(mounted){
       setState(() {
         isFavourite = false;
-      });
+      }); }
     }
   }
 
@@ -360,6 +411,58 @@ class _productCardState extends State<productCard> {
           '===product with id${thisproductId}is in the wishList with docId ${DocId}');
     }
     return DocId;
+  }
+
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+  Future<void> setShopAverageRating(String thisOwnerId) async {
+    double existedShopRating = await getShopAverageRating(thisOwnerId);
+    setState(() {
+      averageShopRating = existedShopRating;
+    });
+  }
+
+  //=======================================================================================
+  Future<double> getShopAverageRating(String shopOwnerId) async {
+    double averageShopRating = 0;
+    num sumRating = 0;
+    final shopDoc = await FirebaseFirestore.instance
+        .collection('rating')
+        .where("shopOwnerId", isEqualTo: shopOwnerId)
+        .get();
+    if (shopDoc.size > 0) {
+      for (int i = 0; i < shopDoc.size; i++) {
+        var data = shopDoc.docs.elementAt(i).data() as Map;
+        double thisDocRating = data["starsNumber"];
+        sumRating += thisDocRating;
+      }
+
+      averageShopRating = sumRating / shopDoc.size;
+      String inString = averageShopRating.toStringAsFixed(2);
+      averageShopRating = double.parse(inString);
+    }
+    return averageShopRating;
+  }
+
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+  Future<void> setNumOfRatings(String thisOwnerId) async {
+    int existedRatingsNum = await getNumOfRatings(thisOwnerId);
+    setState(() {
+      numberOfRatings = existedRatingsNum;
+    });
+  }
+
+  //=======================================================================================
+  Future<int> getNumOfRatings(String shopOwnerId) async {
+    int existedRatingsNum = 0;
+    final shopDoc = await FirebaseFirestore.instance
+        .collection('rating')
+        .where("shopOwnerId", isEqualTo: shopOwnerId)
+        .get();
+    if (shopDoc.size > 0) {
+      existedRatingsNum = shopDoc.size;
+      print("shop ratings doc size is ${shopDoc.size}");
+    }
+    return existedRatingsNum;
   }
 
 //=============================================================================================
