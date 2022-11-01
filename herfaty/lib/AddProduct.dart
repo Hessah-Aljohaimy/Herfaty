@@ -577,6 +577,9 @@ class _AddProductState extends State<AddProduct> {
 
 
 
+
+
+
 DateTime now = DateTime.now();
 String formattedDate = DateFormat('yyyy-MM-dd').format(now);
 
