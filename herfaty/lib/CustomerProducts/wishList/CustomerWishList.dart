@@ -56,6 +56,11 @@ class _CustomerWishListState extends State<CustomerWishList> {
                         } else if (snapshot.hasData) {
                           final productItems = snapshot.data!.toList();
                           final data = snapshot.data!;
+                          //sort the products according to date
+                          productItems.sort((a, b) {
+                            return DateTime.parse(b.proudctDate)
+                                .compareTo(DateTime.parse(a.proudctDate));
+                          });
                           if (data.isEmpty) {
                             return const Center(
                               child: Text(
