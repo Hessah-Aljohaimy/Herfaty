@@ -196,7 +196,7 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
                         onPressed: () {
                           showDialog(
                               context: context,
-                              builder: (BuildContext context) {
+                              builder: (BuildContext context1) {
                                 return AlertDialog(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20)),
@@ -247,7 +247,7 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
                                     TextButton(
                                       child: Text("تراجع"),
                                       onPressed: () {
-                                        Navigator.of(context).pop();
+                                        Navigator.of(context1).pop();
                                       },
                                     ),
                                     TextButton(
@@ -261,7 +261,8 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
                                             .doc(widget.product.productId)
                                             //.doc(getDocId())
                                             .delete();
-
+                                        Navigator.of(context1).pop();
+                                        Navigator.of(context).pop();
                                         showDoneDeleteToast(context);
                                       },
                                     )
@@ -370,19 +371,20 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
       textColor: Colors.white,
       fontSize: 18.0,
     );
-    await Future.delayed(const Duration(seconds: 1), () {
-      Navigator.push(
+    /*Future.delayed(const Duration(seconds: 1), () {
+      /* Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) =>
                 OwnerProductsList(categoryName: widget.product.categoryName)),
-      );
+      );*/
       // Navigator.of(context, rootNavigator: false).pop();
       //Navigator.pop(context, true);
 
+      Navigator.of(context).pop();
+      
       // Navigator.of(context).pop();
-      // Navigator.of(context).pop();
-    });
+    });*/
   }
 
 ///////////////////////////////////////////////////////////////////////////////
