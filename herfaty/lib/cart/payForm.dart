@@ -292,6 +292,20 @@ class payForm extends StatelessWidget {
                         ),
                       );
                     }
+                    Future<num> getPoints(String shopOwnerId) async {
+                      num existedDocId = 0;
+                      print("==================this is get docId method");
+                      final cartDoc = await FirebaseFirestore.instance
+                          .collection('shop_owner')
+                          .where("id", isEqualTo: shopOwnerId)
+                          .get();
+                      var data = cartDoc.docs.elementAt(0).data() as Map;
+                      existedDocId = data["points"];
+                      print(
+                          'Existed docId is ${existedDocId}============================');
+
+                      return existedDocId;
+                    }
 
                     if (state.status == PaymentStatus.success) {
                       deletFromCart();
@@ -304,12 +318,10 @@ class payForm extends StatelessWidget {
                       final orderToBeAdded =
                           FirebaseFirestore.instance.collection('orders').doc();
 
-   DateTime now = DateTime.now();
-                              String date =
-                                  DateFormat('yyyy-MM-dd').format(now);
+                      DateTime now = DateTime.now();
+                      String date = DateFormat('yyyy-MM-dd').format(now);
 
-
-                      num totalPoints = 0;
+                      num totalPoints = getPoints(widget.shopOwnerId) as num;
                       num points = 0;
                       products.forEach((key, value) {
                         points = value * 10;

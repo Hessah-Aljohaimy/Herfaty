@@ -600,7 +600,7 @@ class _AddProductState extends State<AddProduct> {
                       else if (double.parse(value!) <= 0)
                         return "أدخل سعر أكبر من صفر";
                       else if (double.parse(value!) > 500)
-                        return " أدخل سعر أصغر من أو يساوي 500 ";
+                        return " أدخل سعر أقل من أو يساوي 500 ";
                       else
                         return null;
                     },
