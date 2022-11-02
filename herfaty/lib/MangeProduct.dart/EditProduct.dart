@@ -572,8 +572,8 @@ class _EditProduc extends State<EditProduct> {
                   SizedBox(
                     width: 35,
                   ),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 5),
+                  Center(
+                    //margin: EdgeInsets.symmetric(horizontal: 7),
                     child: Expanded(
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -686,6 +686,9 @@ class _EditProduc extends State<EditProduct> {
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
+                            SizedBox(
+                              width: 10,
+                            ),
                             ElevatedButton(
                               style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all(
@@ -790,6 +793,9 @@ class _EditProduc extends State<EditProduct> {
                   )
                 ],
               ),
+              SizedBox(
+                height: 10,
+              )
 
               /* ElevatedButton(
               style: ElevatedButton.styleFrom(primary: Colors.red),
