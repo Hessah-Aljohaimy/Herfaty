@@ -756,7 +756,7 @@ class _AddProductState extends State<AddProduct> {
                           onPressed: () {
                             showDialog(
                                 context: context,
-                                builder: (BuildContext context) {
+                                builder: (BuildContext context1) {
                                   return AlertDialog(
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
@@ -815,14 +815,19 @@ class _AddProductState extends State<AddProduct> {
                                             style:
                                                 TextStyle(color: Colors.red)),
                                         onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const ownerProductsCategScreen()),
-                                          );
+                                          Navigator.of(context1).pop();
+                                          Navigator.of(context).pop();
                                         },
                                       ),
+<<<<<<< Updated upstream
+=======
+                                      TextButton(
+                                        child: Text("تراجع"),
+                                        onPressed: () {
+                                          Navigator.of(context1).pop();
+                                        },
+                                      )
+>>>>>>> Stashed changes
                                     ],
                                   );
                                 });
