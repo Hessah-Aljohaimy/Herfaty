@@ -1031,18 +1031,22 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                   backgroundColor: Colors
                                                       .amber, // background
                                                 ),
-                                                onPressed: () async {
-                                                  String shopLogo =
-                                                      await getShopLogo(
-                                                          cItems[index]
-                                                              .shopOwnerId);
-                                                  //show rating dialog
-                                                  showRatingDialog(
-                                                      cItems[index].docId,
-                                                      cItems[index].shopName,
-                                                      cItems[index].shopOwnerId,
-                                                      shopLogo);
-                                                },
+                                                onPressed: cItems[index].isRated
+                                                    ? null
+                                                    : () async {
+                                                        String shopLogo =
+                                                            await getShopLogo(
+                                                                cItems[index]
+                                                                    .shopOwnerId);
+                                                        //show rating dialog
+                                                        showRatingDialog(
+                                                            cItems[index].docId,
+                                                            cItems[index]
+                                                                .shopName,
+                                                            cItems[index]
+                                                                .shopOwnerId,
+                                                            shopLogo);
+                                                      },
                                                 child: Text(
                                                   "تقييم المتجر",
                                                   style: TextStyle(
@@ -1180,6 +1184,11 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
             dateTime: cdateTime);
         createRatingItem(item);
         await showToastMethod(context, "شكرًا، تم إرسال تقييمك");
+        //update isRated
+        FirebaseFirestore.instance
+            .collection('orders')
+            .doc('${orderId}')
+            .update({"isRated": true});
         //..........................................................................
         print('rating: ${response.rating}, comment: ${response.comment}');
       },

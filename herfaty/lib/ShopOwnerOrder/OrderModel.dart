@@ -9,6 +9,7 @@ class OrderModel {
   String status = "New order";
   String orderDate = "";
   num points = 0.0;
+  bool isRated = false;
 
   Map<String, dynamic> products;
 
@@ -23,6 +24,7 @@ class OrderModel {
       required this.status,
       required this.orderDate,
       required this.points,
+      required this.isRated,
       required this.products});
 
   Map<String, dynamic> toJson() => {
@@ -37,6 +39,7 @@ class OrderModel {
         'orderDate': orderDate,
         'points': points,
         'products': products,
+        'isRated': isRated
       };
 
   static OrderModel fromJson(Map<String, dynamic> json) => OrderModel(
@@ -50,5 +53,6 @@ class OrderModel {
       status: json['status'],
       orderDate: json['orderDate'],
       points: json['points'],
+      isRated: json['isRated'],
       products: json['products']);
 }

@@ -54,5 +54,5 @@ class orderModal {
       orderDate: json['orderDate'],
       points: json['points'],
       products: json['products'],
-      isRated: json['products']);
+      isRated: json['isRated']);
 }
