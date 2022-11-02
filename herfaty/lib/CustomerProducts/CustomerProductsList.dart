@@ -411,7 +411,20 @@ class mySearch extends SearchDelegate {
                   ),
                 ),
               );
-            } else {
+            }  else if(query.trim().isEmpty){
+                               return const Center(
+                                child: Text(
+                                  'لا توجد منتجات بهذا الاسم',
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w600,
+                                    fontFamily: "Tajawal",
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              );
+                            }
+                            else {
               final productItems = snapshot.data!.toList();
               List<Product1> productItems2 = [];
               for (var i = 0; i < productItems.length; i++) {
