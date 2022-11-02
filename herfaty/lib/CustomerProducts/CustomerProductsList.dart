@@ -8,7 +8,7 @@ import 'package:herfaty/OwnerProducts/OwnerProductsList.dart';
 import 'package:herfaty/ShopOwnerOrder/list.dart';
 import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/constants/color.dart';
-
+import 'package:dartarabic/dartarabic.dart';
 class CustomerProductsList extends StatefulWidget {
   String categoryName;
 
@@ -21,7 +21,26 @@ class CustomerProductsList extends StatefulWidget {
   @override
   State<CustomerProductsList> createState() => _CustomerProductsListState();
 }
-
+const Iterable<int> arabicTashkelChar = [
+  1617,
+  124,
+  1614,
+  124,
+  1611,
+  124,
+  1615,
+  124,
+  1612,
+  124,
+  1616,
+  124,
+  1613,
+  124,
+  1618,
+  625,
+  627,
+  655,
+];
 enum Menu { itemOne, itemTwo, itemThree }
 
 final List<String> productsName = [];
@@ -395,10 +414,14 @@ class mySearch extends SearchDelegate {
               final productItems = snapshot.data!.toList();
               List<Product1> productItems2 = [];
               for (var i = 0; i < productItems.length; i++) {
-                if (productItems[i].name.contains(query) || productItems[i].name.replaceAll('ة', "ه")
-                .replaceAll('\u0622', '\u0627')
-            .replaceAll('\u0623', '\u0627')
-            .replaceAll('\u0625', '\u0627').contains(query) 
+                if (productItems[i].name.contains(query)
+                
+            //     ||
+            //     // productItems[i].name.replaceAll('ة', "ه")
+            //     productItems[i].name.replaceAll('\u0622', '\u0627')
+            // .replaceAll('\u0623', '\u0627')
+            // .replaceAll('\u0625', '\u0627')
+            // .replaceAll(RegExp(String.fromCharCodes(arabicTashkelChar)), '').contains(query) 
               
                 ) {
                   productItems2.add((productItems[i]));
