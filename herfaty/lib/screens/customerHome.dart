@@ -263,7 +263,7 @@ class _AppBarState extends State<AppBar> {
                       fontFamily: "Tajawal"),
                 ),
               ),
-              ProfileCircleCustomer()
+              // ProfileCircleCustomer()
             ],
           ),
         ],

@@ -214,7 +214,7 @@ class _AppBarState extends State<AppBar> {
                 icon: Icons.account_circle_sharp,
                 onPressed: () {},
               ),*/
-              ProfileCicle()
+              // ProfileCicle()
             ],
           ),
           // const SizedBox(
