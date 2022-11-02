@@ -8,7 +8,7 @@ import 'package:herfaty/OwnerProducts/OwnerProductsList.dart';
 import 'package:herfaty/ShopOwnerOrder/list.dart';
 import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/constants/color.dart';
-import 'package:dartarabic/dartarabic.dart';
+// import 'package:dartarabic/dartarabic.dart';
 
 class CustomerProductsList extends StatefulWidget {
   String categoryName;
@@ -342,7 +342,6 @@ class mySearch extends SearchDelegate {
       .map((snapshot) =>
           snapshot.docs.map((doc) => Product1.fromJson(doc.data())).toList());
 
-  List<String> Suggestions = [];
 
   @override
   List<Widget>? buildActions(BuildContext context) {
@@ -401,7 +400,6 @@ class mySearch extends SearchDelegate {
             //هنا حالة النجاح في استرجاع البيانات...........................................
             final data = snapshot.data!;
             if (data.isEmpty) {
-              Suggestions.clear();
               return const Center(
                 child: Text(
                   'لا توجد منتجات بهذا الاسم',
@@ -477,16 +475,46 @@ class mySearch extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     // TODO: implement buildSuggestions
-    Suggestions.clear();
+
+  List<String> Suggestions = [];
 
     if (CatName == "الخرز والإكسسوار") {
-      Suggestions.addAll(cat1);
+
+       for (var i = 0; i < cat1.length; i++) {
+      if(cat1[i].contains(query)){
+        Suggestions.add(cat1[i]);
+      }
+    }
     } else if (CatName == "الفخاريات") {
-      Suggestions.addAll(cat2);
-    } else if (CatName == "الحياكة والتطريز") {
-      Suggestions.addAll(cat3);
+
+
+
+       for (var i = 0; i < cat2.length; i++) {
+      if(cat2[i].contains(query)){
+        Suggestions.add(cat2[i]);
+      }
+
+    
+    } }
+    else if (CatName == "الحياكة والتطريز") {
+
+
+
+       for (var i = 0; i < cat3.length; i++) {
+      if(cat3[i].contains(query)){
+        Suggestions.add(cat3[i]);
+      }
+
+       }
     } else {
-      Suggestions.addAll(cat4);
+
+       for (var i = 0; i < cat4.length; i++) {
+      if(cat4[i].contains(query)){
+        Suggestions.add(cat4[i]);
+      }
+
+       }
+   
     }
     // for (var i = 0; i < productsName.length; i++) {
     //   if(productsName[i].contains(query)){

@@ -340,7 +340,6 @@ class mySearch extends SearchDelegate{
       .snapshots()
       .map((snapshot) =>
           snapshot.docs.map((doc) => Product1.fromJson(doc.data())).toList());
-     List<String> Suggestions=[];
 
   @override
   List<Widget>? buildActions(BuildContext context) {
@@ -482,23 +481,47 @@ if(productItems2.isEmpty){
   Widget buildSuggestions(BuildContext context) {
     // TODO: implement buildSuggestions
    
-     Suggestions.clear();  
+    
+  List<String> Suggestions = [];
+
+    if (CatName == "الخرز والإكسسوار") {
+
+       for (var i = 0; i < cat1.length; i++) {
+      if(cat1[i].contains(query)){
+        Suggestions.add(cat1[i]);
+      }
+    }
+    } else if (CatName == "الفخاريات") {
+
+
+
+       for (var i = 0; i < cat2.length; i++) {
+      if(cat2[i].contains(query)){
+        Suggestions.add(cat2[i]);
+      }
+
+    
+    } }
+    else if (CatName == "الحياكة والتطريز") {
+
+
+
+       for (var i = 0; i < cat3.length; i++) {
+      if(cat3[i].contains(query)){
+        Suggestions.add(cat3[i]);
+      }
+
+       }
+    } else {
+
+       for (var i = 0; i < cat4.length; i++) {
+      if(cat4[i].contains(query)){
+        Suggestions.add(cat4[i]);
+      }
+
+       }
    
-if(CatName=="الخرز والإكسسوار"){
-
-  Suggestions.addAll(cat1);
-}
-
-else if(CatName=="الفخاريات"){
-Suggestions.addAll(cat2);
-}
-
-else if(CatName=="الحياكة والتطريز"){
-Suggestions.addAll(cat3);
-}
-else{
-Suggestions.addAll(cat4);
-}
+    }
 
 
   // for (var i = 0; i < productsName.length; i++) {
