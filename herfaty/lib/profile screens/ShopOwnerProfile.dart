@@ -783,7 +783,8 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                         shopowner.shopname,
                                         shopowner.shopdescription,
                                         shopowner.id,
-                                        shopowner.logo)),
+                                        shopowner.logo,
+                                        shopowner.location)),
                               );
                             } else {
                               Fluttertoast.showToast(

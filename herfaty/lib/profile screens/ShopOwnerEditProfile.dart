@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_place_picker/google_maps_place_picker.dart';
 import 'package:herfaty/screens/navOwner.dart';
 import 'package:intl/src/intl/date_format.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -22,7 +24,8 @@ class ShopOwnerEditProfile extends StatefulWidget {
       this.shopname,
       this.shopdescription,
       this.uid,
-      this.logo);
+      this.logo,
+      this.location);
   final String name;
   final String email;
   final String password;
@@ -32,6 +35,8 @@ class ShopOwnerEditProfile extends StatefulWidget {
   final String shopdescription;
   final String uid;
   final String logo;
+  final String location;
+  static String newLocation = "";
 
   @override
   State<ShopOwnerEditProfile> createState() => _ShopOwnerEditProfileState();
@@ -48,6 +53,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
   final storageRef = FirebaseStorage.instance.ref();
   PickedFile? _imageFile;
   File? pickedImage1;
+  String loc = "";
 
   final _formKey = GlobalKey<FormState>();
 
@@ -69,6 +75,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
       TextEditingController();
   @override
   void initState() {
+    loc = widget.location;
     _passwordTextController.text = widget.password;
 
     _emailTextEditingController.text = widget.email;
@@ -118,6 +125,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
         elevation: 3,
         leading: IconButton(
           onPressed: () {
+            ShopOwnerEditProfile.newLocation = "";
             Future.delayed(const Duration(seconds: 1), () {
               Navigator.pop(context);
               Navigator.pushReplacement(context,
@@ -134,7 +142,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
         child: SingleChildScrollView(
           child: SizedBox(
             width: 430,
-            height: 700,
+            // height: 700,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -321,10 +329,26 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                   child: reusableTextFieldDec(
                       "وصف المتجر", _shopdescriptionTextEditingController),
                 ),
+                Container(
+                  margin: EdgeInsets.only(right: 45, bottom: 0),
+                  child: Align(
+                    alignment: Alignment.bottomRight,
+                    child: Text(
+                      "موقع المتجر",
+                      style: TextStyle(
+                        //fontSize: 15,
+                        color: Color.fromARGB(255, 26, 96, 91),
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Tajawal",
+                      ),
+                    ),
+                  ),
+                ),
+                editOwner(msg: loc),
 
-                // SizedBox(
-                //   height: 20,
-                // ),
+                SizedBox(
+                  height: 20,
+                ),
 
                 // Container(
                 //   height: 48,
@@ -396,6 +420,10 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                             uploadImageUrl = widget.logo;
                           }
 
+                          if (ShopOwnerEditProfile.newLocation == "") {
+                            ShopOwnerEditProfile.newLocation = widget.location;
+                          }
+
                           print(widget.uid);
                           //update this spesific feild
                           docShopOwner.update({
@@ -410,7 +438,11 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                             'shopdescription':
                                 _shopdescriptionTextEditingController.text,
                             'shopname': _shopnameTextEditingController.text,
+                            'location': ShopOwnerEditProfile.newLocation,
                           });
+
+                          ShopOwnerEditProfile.newLocation = "";
+
                           Fluttertoast.showToast(
                             msg: "تم تحديث حسابك بنجاح",
                             toastLength: Toast.LENGTH_SHORT,
@@ -430,6 +462,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                                     builder: (context) => ShopOwnerProfile()));
                           });
                         } else {
+                          //ShopOwnerEditProfile.newLocation = "";
                           Fluttertoast.showToast(
                             msg: "لم يتم تعديل بيانات الحساب",
                             toastLength: Toast.LENGTH_SHORT,
@@ -462,7 +495,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                     SizedBox(
+                    SizedBox(
                       width: 25,
                     ),
                     checkingButton(),
@@ -535,6 +568,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                                     child: Text("إلغاء",
                                         style: TextStyle(color: Colors.red)),
                                     onPressed: () {
+                                      ShopOwnerEditProfile.newLocation = "";
                                       Navigator.of(context1).pop();
                                       Navigator.of(context).pop();
                                       //The logic of cancle edits
@@ -1008,5 +1042,138 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
         _shopnameTextEditingController.text != widget.shopname ||
         _shopdescriptionTextEditingController.text != widget.shopdescription) {}
     return Container();
+  }
+}
+
+class editOwner extends StatefulWidget {
+  String msg;
+  editOwner({Key? key, required msg})
+      : this.msg = msg,
+        super(key: key);
+  @override
+  _editOwnerState createState() => _editOwnerState();
+}
+
+class _editOwnerState extends State<editOwner> {
+  String msgButton = "اضغط هنا لتعديل الموقع";
+  Color color = new Color(0xff51908E);
+  Color msgcoloredit = Color.fromARGB(255, 90, 90, 90);
+  Color Tcolor = new Color.fromARGB(255, 255, 255, 255);
+  TextDecoration t = TextDecoration.none;
+  String m = "";
+
+  @override
+  void initState() {
+    m = widget.msg;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 320,
+      height: 80,
+      margin: EdgeInsets.only(left: 1.0, right: 1.0, bottom: 5.0),
+      //padding: EdgeInsets.all(1.0),
+      decoration: BoxDecoration(
+        border: Border.all(color: Color(0xff51908E), width: 1),
+        borderRadius: BorderRadius.all(Radius.circular(6.0)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0),
+            spreadRadius: 2,
+            blurRadius: 7,
+            offset: Offset(0, 3), // changes position of shadow
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(right: 19.0, top: 5, bottom: 5),
+              child: Text(
+                m,
+                style: TextStyle(
+                  //fontSize: 15,
+                  color: msgcoloredit,
+                  //fontWeight: FontWeight.bold,
+                  fontFamily: "Tajawal",
+                ),
+                overflow: TextOverflow.ellipsis,
+                softWrap: false,
+                maxLines: 5,
+              ),
+            ),
+          ),
+          Container(
+            height: 80,
+            width: 120,
+            //margin: EdgeInsets.only(left: 8.0, top: 2.0, bottom: 2.0),
+            child: ElevatedButton(
+              child: Text(
+                msgButton,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 13,
+                  color: Tcolor,
+                  decoration: t,
+                  //fontFamily: "Tajawal"
+                ),
+              ),
+              onPressed: _changeText,
+              style: ElevatedButton.styleFrom(
+                  shadowColor: Colors.white,
+                  elevation: 0,
+                  primary: color,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                  fixedSize: Size(165, 35)),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  _changeText() {
+    final kInitialPosition = LatLng(24.575714, 46.830308);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PlacePicker(
+          apiKey:
+              "AIzaSyA39qkpPUBK63CO4RGlDAacBIUlDl4RPgY", // Put YOUR OWN KEY here.
+          onPlacePicked: (result) {
+            //print(result.formattedAddress);
+            Navigator.of(context).pop();
+            //if (mounted)
+            setState(() {
+              if (result.formattedAddress == null) {
+                //widget.msg = 'ادخل الموقع';
+              } else {
+                m = result.formattedAddress!;
+                ShopOwnerEditProfile.newLocation = result.formattedAddress!;
+                //msgButton = "تم تعديل الموقع";
+                color = Colors.transparent;
+                Tcolor = Color.fromARGB(255, 8, 24, 246);
+                t = TextDecoration.underline;
+                msgButton = "اضغط لتغيير الموقع";
+                msgcoloredit = Color.fromARGB(255, 90, 90, 90);
+              }
+            });
+          },
+          initialPosition: kInitialPosition,
+          useCurrentLocation: true,
+        ),
+      ),
+    );
+  }
+
+  _changeFormat() {
+    msgButton = "اضغط هنا لتعديل الموقع";
+    color = new Color(0xff51908E);
+    Tcolor = new Color.fromARGB(255, 255, 255, 255);
+    t = TextDecoration.none;
   }
 }
