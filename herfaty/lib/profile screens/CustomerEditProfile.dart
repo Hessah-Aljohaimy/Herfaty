@@ -216,7 +216,7 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
                 Row(
                   children: [
                     SizedBox(
-                      width: 50,
+                      width: 38,
                     ),
                     Expanded(
                       child: Row(children: [
@@ -280,7 +280,7 @@ class _CustomerEditProfileState extends State<CustomerEditProfile> {
                           ),
                         ),
                         SizedBox(
-                          width: 10,
+                          width: 19,
                         ),
                         ElevatedButton(
                           onPressed: () async {

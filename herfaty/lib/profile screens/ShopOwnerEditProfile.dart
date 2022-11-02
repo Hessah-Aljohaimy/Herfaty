@@ -376,7 +376,7 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                     //   child: Row(children: [
 
                     SizedBox(
-                      width: 80,
+                      width: 34,
                     ),
 
                     ElevatedButton(
@@ -462,8 +462,8 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                    SizedBox(
-                      width: 10,
+                     SizedBox(
+                      width: 25,
                     ),
                     checkingButton(),
                     ElevatedButton(

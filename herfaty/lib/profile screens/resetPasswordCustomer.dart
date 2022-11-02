@@ -764,7 +764,7 @@ class _ResetPasswordCustomerState extends State<ResetPasswordCustomer> {
                       child: Text(
                         "حفظ",
                         style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 15,
                             fontFamily: "Tajawal",
                             fontWeight: FontWeight.bold),
                       ),
