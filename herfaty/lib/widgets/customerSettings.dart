@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/pages/login.dart';
 import 'package:herfaty/profile%20screens/resetPasswordOwner.dart';
 import 'package:herfaty/widgets/logOut.dart';
@@ -185,6 +186,15 @@ class _CustomerSettingsState extends State<CustomerSettings> {
                         Navigator.of(context, rootNavigator: true)
                             .pushReplacement(MaterialPageRoute(
                                 builder: (context) => new login()));
+                        Fluttertoast.showToast(
+                          msg: "تم تسجيل الخروج  بنجاح",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 3,
+                          backgroundColor: Color.fromARGB(255, 26, 96, 91),
+                          textColor: Colors.white,
+                          fontSize: 18.0,
+                        );
                       },
                     ),
                   ],

@@ -150,7 +150,6 @@ class _logOutButtonState extends State<logOutButton> {
         //   },
         // ),
         actions: [
-         
           GestureDetector(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
@@ -163,7 +162,9 @@ class _logOutButtonState extends State<logOutButton> {
               height: 35.0,
             ),
           ),
-           SizedBox(width: 10,),
+          SizedBox(
+            width: 10,
+          ),
           // IconButton(
           //   onPressed: () {
           //     Navigator.of(context).push(MaterialPageRoute(
@@ -673,6 +674,17 @@ class _logOutButtonState extends State<logOutButton> {
                                     Navigator.of(context, rootNavigator: true)
                                         .pushReplacement(MaterialPageRoute(
                                             builder: (context) => new login()));
+
+                                    Fluttertoast.showToast(
+                                      msg: "تم حذف الحساب  بنجاح",
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.CENTER,
+                                      timeInSecForIosWeb: 3,
+                                      backgroundColor:
+                                          Color.fromARGB(255, 26, 96, 91),
+                                      textColor: Colors.white,
+                                      fontSize: 18.0,
+                                    );
                                   },
                                 ),
                               ],

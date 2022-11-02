@@ -1139,6 +1139,17 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                                   MaterialPageRoute(
                                                       builder: (context) =>
                                                           new login()));
+
+                                          Fluttertoast.showToast(
+                                            msg: "تم حذف الحساب  بنجاح",
+                                            toastLength: Toast.LENGTH_SHORT,
+                                            gravity: ToastGravity.CENTER,
+                                            timeInSecForIosWeb: 3,
+                                            backgroundColor:
+                                                Color.fromARGB(255, 26, 96, 91),
+                                            textColor: Colors.white,
+                                            fontSize: 18.0,
+                                          );
                                         },
                                       ),
                                     ],
