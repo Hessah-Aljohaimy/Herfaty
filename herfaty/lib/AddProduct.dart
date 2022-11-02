@@ -807,7 +807,7 @@ class _AddProductState extends State<AddProduct> {
                                       TextButton(
                                         child: Text("تراجع"),
                                         onPressed: () {
-                                          Navigator.of(context).pop();
+                                          Navigator.of(context1).pop();
                                         },
                                       ),
                                       TextButton(
