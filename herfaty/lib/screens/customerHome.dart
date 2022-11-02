@@ -49,11 +49,26 @@ class _customerHomeScreenState extends State<customerHomeScreen> {
                   child: Container(
                     height: 45,
                     width: double.infinity,
-                    margin: EdgeInsets.all(10),
+                    margin: EdgeInsets.only(
+                        top: 10, bottom: 10, left: 18, right: 18),
                     padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(.1),
+                          blurRadius: 4.0,
+                          spreadRadius: .05,
+                        ), //BoxShadow
+                      ],
+                    ),
                     child: Row(
                       //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        SizedBox(
+                          width: 20,
+                        ),
                         Image.asset(
                           "assets/icons/points.png",
                           height: 64,
@@ -63,7 +78,7 @@ class _customerHomeScreenState extends State<customerHomeScreen> {
                           child: Text(
                             "تعرف على المتاجر الأكثر نقاطاً",
                             style: TextStyle(
-                                color: kPrimaryColor,
+                                color: Color(0xffF19B1A),
                                 //color: Color(0xffFECE00),
                                 fontWeight: FontWeight.w600,
                                 fontSize: 18.5,
@@ -73,7 +88,7 @@ class _customerHomeScreenState extends State<customerHomeScreen> {
                         ),
                         Icon(
                           Icons.arrow_back_ios_new,
-                          color: kPrimaryColor,
+                          color: Color(0xffF19B1A),
                           size: 18,
                         )
                       ],
