@@ -30,7 +30,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'ownerLocModel.dart';
 // import 'package:herfaty/firestore/firestore.dart';
 // ignore_for_file: file_names, prefer_const_constructors
-
+ var uid;
 class SignupHerafy extends StatefulWidget {
   const SignupHerafy({Key? key}) : super(key: key);
 
@@ -421,11 +421,14 @@ class _SignupHerafyState extends State<SignupHerafy> {
                                     _shopdescriptionTextEditingController.text,
                                 points: 0);
 
-                            ownerLocModel shopLocation = ownerLocModel(
-                                shopName: _shopnameTextEditingController.text,
-                                location: add.msg);
 
-//creatOwnerLoc(shopLocation);
+    // ownerLocModel shopLocation = ownerLocModel(
+    //                             shopName: _shopnameTextEditingController.text,
+    //                             location: add.msg);
+ ownerLocModel shopLocation = ownerLocModel(
+                                shopName: uid,
+                                location:'24.823708,46.624333');
+                        
 
                             Fluttertoast.showToast(
                               msg: "تم تسجيل حسابك  بنجاح",
@@ -437,6 +440,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
                               fontSize: 18.0,
                             );
                             createShopOwner(shopowner);
+                            creatOwnerLoc(shopLocation);
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -445,22 +449,17 @@ class _SignupHerafyState extends State<SignupHerafy> {
                           });
                         }
                       } on FirebaseAuthException catch (error) {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: Text("خطأ"),
-                                content: Text('البريد الإلكتروني موجود مسبقا'),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: Text("حسنا"),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  )
-                                ],
-                              );
-                            });
+                        Fluttertoast.showToast(
+                                    msg:
+                                        "البريد الإلكتروني موجود مسبقا",
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.TOP,
+                                    timeInSecForIosWeb: 3,
+                                    backgroundColor:
+                                        Color.fromARGB(255, 156, 30, 21),
+                                    textColor: Colors.white,
+                                    fontSize: 18.0,
+                                  );
                       }
                     },
                     style: ButtonStyle(
@@ -1232,7 +1231,7 @@ Future createShopOwner(ShopOwner shopowner) async {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   final User? user = auth.currentUser;
-  final uid = user!.uid;
+   uid = user!.uid;
   shopowner.id = uid;
 
   final json = shopowner.toJson();
