@@ -24,12 +24,19 @@ class _ownerProductsCategScreenState extends State<ownerProductsCategScreen> {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
-        body: Column(
-          children: const [
-            appBar(),
-            Body(),
-            categories(),
-          ],
+        body: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+            image: AssetImage('assets/images/cartBack1.png'),
+            fit: BoxFit.cover,
+          )),
+          child: Column(
+            children: const [
+              appBar(),
+              Body(),
+              categories(),
+            ],
+          ),
         ),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
