@@ -1048,7 +1048,9 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                             shopLogo);
                                                       },
                                                 child: Text(
-                                                  "تقييم المتجر",
+                                                  cItems[index].isRated
+                                                      ? "تم تقييم المتجر"
+                                                      : "تقييم المتجر",
                                                   style: TextStyle(
                                                     fontFamily: "Tajawal",
                                                   ),
@@ -1183,12 +1185,13 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
             date: cdate,
             dateTime: cdateTime);
         createRatingItem(item);
-        await showToastMethod(context, "شكرًا، تم إرسال تقييمك");
         //update isRated
         FirebaseFirestore.instance
             .collection('orders')
             .doc('${orderId}')
             .update({"isRated": true});
+        await showToastMethod(context, "شكرًا، تم إرسال تقييمك");
+
         //..........................................................................
         print('rating: ${response.rating}, comment: ${response.comment}');
       },
@@ -1203,28 +1206,6 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
   }
 
   //End of Rating==============================================================================
-  Future<void> setIsRated(String thisOrderId) async {
-    bool isRatedBool = await checkIfRated(thisOrderId);
-    setState(() {
-      //isRated = isRatedBool;
-    });
-  }
-
-  //============================================================================================
-  Future<bool> checkIfRated(String thisOrderId) async {
-    bool isRated = false;
-    final ratingsDoc = await FirebaseFirestore.instance
-        .collection('rating')
-        .where("orderId", isEqualTo: thisOrderId)
-        .get();
-    if (ratingsDoc.size > 0) {
-      //if (ratingsDoc.size > 0) means that the order isRated
-      isRated = true;
-    }
-    print('===order with id${thisOrderId} rating status is: ${isRated}');
-    return isRated;
-  }
-
   Future<String> getShopLogo(String shopOwnerId) async {
     String shopLogo = "";
     final shopDoc = await FirebaseFirestore.instance
