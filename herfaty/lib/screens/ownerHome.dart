@@ -49,11 +49,17 @@ class _ownerHomeScreenState extends State<ownerHomeScreen> {
                   height: 10,
                 ),
                 // Indicator(),
-                PointPanel(),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 5),
+                  child: PointPanel(),
+                ),
                 const SizedBox(
                   height: 10,
                 ),
-                PiointsInstruction(),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 5),
+                  child: PiointsInstruction(),
+                ),
                 const SizedBox(
                   height: 20,
                 ),
