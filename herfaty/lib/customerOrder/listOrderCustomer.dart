@@ -747,7 +747,6 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                           return DateTime.parse(b.orderDate)
                               .compareTo(DateTime.parse(a.orderDate));
                         });
-
                         /*arr2 = List.filled(cItems.length, ScrollController(),
                             growable: false);*/
 
@@ -773,6 +772,19 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                               itemCount: cItems.length,
                               itemBuilder: (context, index) {
                                 var x;
+                                // bool isRated = false;
+                                // bool isRatedBool = await checkIfRated("thisOrderId");
+
+                                //------------------------------------------------------
+                                //set isRated bool to enable to disable rating button
+                                // if (true) {
+                                //   setIsRated(cItems[index].docId);
+                                // }
+                                // for (int i = 0; i < cItems.length; i++) {
+                                //   setIsRated(cItems[index].docId);
+                                // }
+                                //------------------------------------------------------
+
                                 if (cItems[index].products.length > 3) {
                                   x = arr2[index];
                                 } else
@@ -1180,49 +1192,71 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
       builder: (context) => _dialog,
     );
   }
-}
 
-//--------------------------------------------------------------------
-Future<String> getShopLogo(String shopOwnerId) async {
-  String shopLogo = "";
-  final shopDoc = await FirebaseFirestore.instance
-      .collection('shop_owner')
-      .where("id", isEqualTo: shopOwnerId)
-      .get();
-  if (shopDoc.size > 0) {
-    var data = shopDoc.docs.elementAt(0).data() as Map;
-    if (data["logo"] != "") {
-      shopLogo = data["logo"];
-    }
+  //End of Rating==============================================================================
+  Future<void> setIsRated(String thisOrderId) async {
+    bool isRatedBool = await checkIfRated(thisOrderId);
+    setState(() {
+      //isRated = isRatedBool;
+    });
   }
-  return shopLogo;
-}
+
+  //============================================================================================
+  Future<bool> checkIfRated(String thisOrderId) async {
+    bool isRated = false;
+    final ratingsDoc = await FirebaseFirestore.instance
+        .collection('rating')
+        .where("orderId", isEqualTo: thisOrderId)
+        .get();
+    if (ratingsDoc.size > 0) {
+      //if (ratingsDoc.size > 0) means that the order isRated
+      isRated = true;
+    }
+    print('===order with id${thisOrderId} rating status is: ${isRated}');
+    return isRated;
+  }
+
+  Future<String> getShopLogo(String shopOwnerId) async {
+    String shopLogo = "";
+    final shopDoc = await FirebaseFirestore.instance
+        .collection('shop_owner')
+        .where("id", isEqualTo: shopOwnerId)
+        .get();
+    if (shopDoc.size > 0) {
+      var data = shopDoc.docs.elementAt(0).data() as Map;
+      if (data["logo"] != "") {
+        shopLogo = data["logo"];
+      }
+    }
+    return shopLogo;
+  }
 
 //----------------------------------------------------------------------
-Future createRatingItem(ratingModel ratingItem) async {
-  final ratingDoc = FirebaseFirestore.instance
-      .collection('rating')
-      .doc("${ratingItem.orderId}");
-  final json = ratingItem.toJson();
-  await ratingDoc.set(
-    json,
-  );
-}
+  Future createRatingItem(ratingModel ratingItem) async {
+    final ratingDoc = FirebaseFirestore.instance
+        .collection('rating')
+        .doc("${ratingItem.orderId}");
+    final json = ratingItem.toJson();
+    await ratingDoc.set(
+      json,
+    );
+  }
 
 //------------------------------------------------------------------------
-Future<void> showToastMethod(BuildContext context, String textToBeShown) async {
-  Fluttertoast.showToast(
-    msg: textToBeShown,
-    toastLength: Toast.LENGTH_SHORT,
-    gravity: ToastGravity.CENTER,
-    timeInSecForIosWeb: 3,
-    backgroundColor: Color.fromARGB(255, 26, 96, 91),
-    textColor: Colors.white,
-    fontSize: 18.0,
-  );
+  Future<void> showToastMethod(
+      BuildContext context, String textToBeShown) async {
+    Fluttertoast.showToast(
+      msg: textToBeShown,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: 3,
+      backgroundColor: Color.fromARGB(255, 26, 96, 91),
+      textColor: Colors.white,
+      fontSize: 18.0,
+    );
+  }
 }
 
-//=============================================================================================
 ///////////////////////////////////////////////////////////////////////////////////////////////
 class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;

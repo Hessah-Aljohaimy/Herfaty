@@ -322,6 +322,7 @@ class payForm extends StatelessWidget {
                           status: 'طلب جديد',
                           products: products,
                           points: totalPoints,
+                          isRated: false,
                           orderDate: date);
 
                       createNewOrder(order, widget.shopOwnerId, totalPoints);
