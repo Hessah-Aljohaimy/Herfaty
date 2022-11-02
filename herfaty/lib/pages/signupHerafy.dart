@@ -426,7 +426,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
 
                         Container(
                           width: 290,
-                          height: 80,
+                          height: 130,
                           padding: EdgeInsets.symmetric(horizontal: 16),
                           child: reusableTextFieldDec("وصف المتجر",
                               _shopdescriptionTextEditingController),
@@ -1366,6 +1366,7 @@ class addOwner extends StatefulWidget {
 class _addOwnerState extends State<addOwner> {
   static String msgButton = "اضغط هنا لتحديدالموقع";
   static Color color = new Color(0xff51908E);
+  static Color msgcolor = Color.fromARGB(106, 26, 96, 91);
   static Color Tcolor = new Color.fromARGB(255, 255, 255, 255);
   static TextDecoration t = TextDecoration.none;
 
@@ -1391,12 +1392,12 @@ class _addOwnerState extends State<addOwner> {
         children: [
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(right: 19.0),
+              padding: const EdgeInsets.only(right: 19.0, top: 5, bottom: 5),
               child: Text(
                 addOwner.msg,
                 style: TextStyle(
                   //fontSize: 15,
-                  color: Color.fromARGB(106, 26, 96, 91),
+                  color: msgcolor,
                   //fontWeight: FontWeight.bold,
                   fontFamily: "Tajawal",
                 ),
@@ -1413,6 +1414,7 @@ class _addOwnerState extends State<addOwner> {
             child: ElevatedButton(
               child: Text(
                 msgButton,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 13,
                   color: Tcolor,
@@ -1453,10 +1455,11 @@ class _addOwnerState extends State<addOwner> {
                 } else {
                   addOwner.msg = result.formattedAddress!;
                   //msgButton = "تم تحديد الموقع";
-                  color = new Color.fromARGB(255, 255, 255, 255);
+                  color = Colors.transparent;
                   Tcolor = Color.fromARGB(255, 8, 24, 246);
                   t = TextDecoration.underline;
                   msgButton = "اضغط لتغيير الموقع";
+                  msgcolor = Color.fromARGB(255, 26, 96, 91);
                 }
               });
           },
