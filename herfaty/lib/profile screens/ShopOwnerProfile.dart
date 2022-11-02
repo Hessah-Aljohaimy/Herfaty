@@ -394,148 +394,145 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                           ),
                         ],
                       ),
-                      child: Expanded(
-                        child: SizedBox(
-                          height: 220,
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(right: 8),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Flexible(
-                                      flex: 5,
-                                      child: Text(
-                                        "معلومات المتجر",
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w700,
-                                            fontFamily: "Tajawal",
-                                            color: Color.fromARGB(
-                                                255, 26, 96, 91)),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Positioned(
-                                      bottom: 50,
-                                      top: 50,
-                                      child: Image.asset(
-                                        "assets/images/points_trophies/icons8-shop-94.png",
-                                        width: 30,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
+                      child: SizedBox(
+                        //height: 220,
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    " اسم المتجر ",
-                                    style: TextStyle(
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.w900,
-                                        fontFamily: "Tajawal",
-                                        color:
-                                            Color.fromARGB(255, 39, 141, 134)),
+                                  Flexible(
+                                    flex: 5,
+                                    child: Text(
+                                      "معلومات المتجر",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w700,
+                                          fontFamily: "Tajawal",
+                                          color:
+                                              Color.fromARGB(255, 26, 96, 91)),
+                                    ),
                                   ),
                                   SizedBox(
                                     width: 5,
                                   ),
-                                  /**hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh */
-                                  //
-                                  Text(
-                                    "${shopowner.shopname}",
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400,
-                                        color: Colors.black),
-                                  )
+                                  Positioned(
+                                    bottom: 50,
+                                    top: 50,
+                                    child: Image.asset(
+                                      "assets/images/points_trophies/icons8-shop-94.png",
+                                      width: 30,
+                                    ),
+                                  ),
                                 ],
                               ),
-                              // SizedBox(
-                              //   height: 6,
-                              // ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(right: 0, left: 247),
-                                child: Text(
-                                  "وصف المتجر",
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  " اسم المتجر ",
                                   style: TextStyle(
-                                      fontSize: 16,
+                                      fontSize: 17,
                                       fontWeight: FontWeight.w900,
                                       fontFamily: "Tajawal",
                                       color: Color.fromARGB(255, 39, 141, 134)),
                                 ),
-                              ),
-                              Container(
-                                // height: 100,
-                                // color: Colors.red,
-                                width: double.infinity,
-                                margin:
-                                    const EdgeInsets.only(bottom: 2, right: 5),
-                                child: Text(
-                                  '${shopowner.shopdescription}  ${shopowner.shopdescription}',
-                                  maxLines: 5,
-                                  textAlign: TextAlign.right,
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                /**hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh */
+                                //
+                                Text(
+                                  "${shopowner.shopname}",
                                   style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w400,
                                       color: Colors.black),
-                                ),
+                                )
+                              ],
+                            ),
+                            // SizedBox(
+                            //   height: 6,
+                            // ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 0, left: 247),
+                              child: Text(
+                                "وصف المتجر",
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w900,
+                                    fontFamily: "Tajawal",
+                                    color: Color.fromARGB(255, 39, 141, 134)),
                               ),
+                            ),
+                            Container(
+                              // height: 100,
+                              // color: Colors.red,
+                              width: double.infinity,
+                              margin:
+                                  const EdgeInsets.only(bottom: 2, right: 5),
+                              child: Text(
+                                '${shopowner.shopdescription}',
+                                maxLines: 5,
+                                textAlign: TextAlign.right,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.black),
+                              ),
+                            ),
 
-                              //location view
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(right: 0, left: 247),
-                                child: Text(
-                                  "موقع المتجر",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w900,
-                                      fontFamily: "Tajawal",
-                                      color: Color.fromARGB(255, 39, 141, 134)),
-                                ),
+                            //location view
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 0, left: 247),
+                              child: Text(
+                                "موقع المتجر",
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w900,
+                                    fontFamily: "Tajawal",
+                                    color: Color.fromARGB(255, 39, 141, 134)),
                               ),
-                              Container(
-                                // height: 70,
-                                // color: Colors.red,
-                                width: double.infinity,
-                                margin:
-                                    const EdgeInsets.only(bottom: 2, right: 5),
-                                child: Text(
-                                  '${shopowner.location}',
-                                  maxLines: 5,
-                                  textAlign: TextAlign.right,
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.black),
-                                ),
-                                // child: Expanded(
-                                //   child: SingleChildScrollView(
-                                //       scrollDirection: Axis.vertical,
-                                //       /*hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh*/
-                                //       //${shopowner.sho
-                                //       //pdescription}
-                                //       child: Align(
-                                //         alignment: Alignment.topRight,
-                                //         child: ExpandedWidgetShop(
-                                //             text: '${shopowner.shopdescription}'),
-                                //       )),
-                                //   //
-                                // ),
+                            ),
+                            Container(
+                              // height: 70,
+                              // color: Colors.red,
+                              width: double.infinity,
+                              margin:
+                                  const EdgeInsets.only(bottom: 2, right: 5),
+                              child: Text(
+                                '${shopowner.location}',
+                                maxLines: 5,
+                                textAlign: TextAlign.right,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.black),
                               ),
-                            ],
-                          ),
+                              // child: Expanded(
+                              //   child: SingleChildScrollView(
+                              //       scrollDirection: Axis.vertical,
+                              //       /*hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh*/
+                              //       //${shopowner.sho
+                              //       //pdescription}
+                              //       child: Align(
+                              //         alignment: Alignment.topRight,
+                              //         child: ExpandedWidgetShop(
+                              //             text: '${shopowner.shopdescription}'),
+                              //       )),
+                              //   //
+                              // ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -660,6 +657,9 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                         ]),
                       ),
                     ),
+                    SizedBox(
+                      height: 10,
+                    )
                   ],
                 ),
               ),
