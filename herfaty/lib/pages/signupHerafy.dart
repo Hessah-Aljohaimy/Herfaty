@@ -28,9 +28,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 import 'ownerLocModel.dart';
+
 // import 'package:herfaty/firestore/firestore.dart';
 // ignore_for_file: file_names, prefer_const_constructors
- var uid;
+var uid;
+
 class SignupHerafy extends StatefulWidget {
   const SignupHerafy({Key? key}) : super(key: key);
 
@@ -382,7 +384,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
                   SizedBox(
                     height: 15,
                   ),
-                  add(),
+                  addOwner(),
 
                   SizedBox(
                     height: 15,
@@ -397,69 +399,67 @@ class _SignupHerafyState extends State<SignupHerafy> {
                       if (uploadImageUrl == "") {
                         uploadImageUrl = 'assets/images/Circular_Logo.png';
                       }
-                      //     if (add.msg == 'ادخل موقعك') {
-                      // ShowDialogMethod(context, "من فضلك قم بتحديد موقع المتجر");}
-                      try {
-                        //uploadImageUrl
-                        if (formKeys[0].currentState!.validate() &&
-                            formKeys[1].currentState!.validate()) {
-                          await FirebaseAuth.instance
-                              .createUserWithEmailAndPassword(
+                      if (addOwner.msg == 'ادخل موقعك') {
+                        ShowDialogMethod(
+                            context, "من فضلك قم بتحديد موقع المتجر");
+                      } else {
+                        try {
+                          //uploadImageUrl
+                          if (formKeys[0].currentState!.validate() &&
+                              formKeys[1].currentState!.validate()) {
+                            await FirebaseAuth.instance
+                                .createUserWithEmailAndPassword(
+                                    email: _emailTextEditingController.text,
+                                    password: _passwordTextController.text)
+                                .then((value) {
+                              final shopowner = ShopOwner(
+                                  name: _nameTextEditingController.text,
                                   email: _emailTextEditingController.text,
-                                  password: _passwordTextController.text)
-                              .then((value) {
-                            final shopowner = ShopOwner(
-                                name: _nameTextEditingController.text,
-                                email: _emailTextEditingController.text,
-                                password: _passwordTextController.text,
-                                DOB: _BODController.text,
-                                phone_number:
-                                    _PhoneNumberTextEditingController.text,
-                                logo: uploadImageUrl,
-                                shopname: _shopnameTextEditingController.text,
-                                shopdescription:
-                                    _shopdescriptionTextEditingController.text,
-                                points: 0);
+                                  password: _passwordTextController.text,
+                                  DOB: _BODController.text,
+                                  phone_number:
+                                      _PhoneNumberTextEditingController.text,
+                                  logo: uploadImageUrl,
+                                  shopname: _shopnameTextEditingController.text,
+                                  shopdescription:
+                                      _shopdescriptionTextEditingController
+                                          .text,
+                                  points: 0);
 
+                              ownerLocModel shopLocation = ownerLocModel(
+                                  shopName: _shopnameTextEditingController.text,
+                                  location: addOwner.msg);
 
-    // ownerLocModel shopLocation = ownerLocModel(
-    //                             shopName: _shopnameTextEditingController.text,
-    //                             location: add.msg);
- ownerLocModel shopLocation = ownerLocModel(
-                                shopName: uid,
-                                location:'24.823708,46.624333');
-                        
-
-                            Fluttertoast.showToast(
-                              msg: "تم تسجيل حسابك  بنجاح",
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.CENTER,
-                              timeInSecForIosWeb: 3,
-                              backgroundColor: Color.fromARGB(255, 26, 96, 91),
-                              textColor: Colors.white,
-                              fontSize: 18.0,
-                            );
-                            createShopOwner(shopowner);
-                            creatOwnerLoc(shopLocation);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const navOwner()),
-                            );
-                          });
+                              Fluttertoast.showToast(
+                                msg: "تم تسجيل حسابك  بنجاح",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 3,
+                                backgroundColor:
+                                    Color.fromARGB(255, 26, 96, 91),
+                                textColor: Colors.white,
+                                fontSize: 18.0,
+                              );
+                              createShopOwner(shopowner);
+                              creatOwnerLoc(shopLocation);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const navOwner()),
+                              );
+                            });
+                          }
+                        } on FirebaseAuthException catch (error) {
+                          Fluttertoast.showToast(
+                            msg: "البريد الإلكتروني موجود مسبقا",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.TOP,
+                            timeInSecForIosWeb: 3,
+                            backgroundColor: Color.fromARGB(255, 156, 30, 21),
+                            textColor: Colors.white,
+                            fontSize: 18.0,
+                          );
                         }
-                      } on FirebaseAuthException catch (error) {
-                        Fluttertoast.showToast(
-                                    msg:
-                                        "البريد الإلكتروني موجود مسبقا",
-                                    toastLength: Toast.LENGTH_SHORT,
-                                    gravity: ToastGravity.TOP,
-                                    timeInSecForIosWeb: 3,
-                                    backgroundColor:
-                                        Color.fromARGB(255, 156, 30, 21),
-                                    textColor: Colors.white,
-                                    fontSize: 18.0,
-                                  );
                       }
                     },
                     style: ButtonStyle(
@@ -509,8 +509,8 @@ class _SignupHerafyState extends State<SignupHerafy> {
   @override
   Widget build(BuildContext context) {
     print('jjjjjjjjjjjj');
-    add.msg = 'ادخل موقعك';
-    _addState._changeFormat();
+    addOwner.msg = 'ادخل موقعك';
+    _addOwnerState._changeFormat();
     return Scaffold(
       body: Theme(
         data: ThemeData(
@@ -1218,7 +1218,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
           size: 22.0,
         ),
         onPressed: () {
-          add.msg = 'ادخل موقعك';
+          addOwner.msg = 'ادخل موقعك';
           Navigator.pop(context);
         },
       ),
@@ -1231,7 +1231,7 @@ Future createShopOwner(ShopOwner shopowner) async {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   final User? user = auth.currentUser;
-   uid = user!.uid;
+  uid = user!.uid;
   shopowner.id = uid;
 
   final json = shopowner.toJson();
@@ -1292,14 +1292,14 @@ class ShopOwner {
       );
 }
 
-class add extends StatefulWidget {
+class addOwner extends StatefulWidget {
   static String msg = 'ادخل موقعك';
-  add({Key? key}) : super(key: key);
+  addOwner({Key? key}) : super(key: key);
   @override
-  _addState createState() => _addState();
+  _addOwnerState createState() => _addOwnerState();
 }
 
-class _addState extends State<add> {
+class _addOwnerState extends State<addOwner> {
   static String msgButton = "اضغط هنا لتحديد موقعك";
   static Color color = new Color(0xff51908E);
   static Color Tcolor = new Color.fromARGB(255, 255, 255, 255);
@@ -1328,7 +1328,7 @@ class _addState extends State<add> {
             child: Padding(
               padding: const EdgeInsets.only(right: 15.0),
               child: Text(
-                add.msg,
+                addOwner.msg,
                 style: TextStyle(
                   fontSize: 15,
                   color: new Color(0xff51908E),
@@ -1375,15 +1375,15 @@ class _addState extends State<add> {
       MaterialPageRoute(
         builder: (context) => PlacePicker(
           apiKey:
-              "AIzaSyAwT-rSNhTijJZ2Op4IWMddDdLF0Dcq8-o", // Put YOUR OWN KEY here.
+              "AIzaSyA39qkpPUBK63CO4RGlDAacBIUlDl4RPgY", // Put YOUR OWN KEY here.
           onPlacePicked: (result) {
             //print(result.formattedAddress);
             Navigator.of(context).pop();
             setState(() {
               if (result.formattedAddress is Null) {
-                add.msg = 'ادخل الموقع';
+                addOwner.msg = 'ادخل الموقع';
               } else {
-                add.msg = result.formattedAddress!;
+                addOwner.msg = result.formattedAddress!;
                 //msgButton = "تم تحديد الموقع";
                 color = new Color.fromARGB(255, 255, 255, 255);
                 Tcolor = Color.fromARGB(255, 8, 24, 246);
