@@ -43,6 +43,14 @@ class SignupHerafy extends StatefulWidget {
 }
 
 class _SignupHerafyState extends State<SignupHerafy> {
+  @override
+  void dispose() {
+    addOwner.msg = 'موقع المتجر';
+    _addOwnerState._changeFormat();
+    super.dispose();
+    //...
+  }
+
   DateTime todaysDate = DateTime.now();
 
   int currentStep = 0;
@@ -330,7 +338,10 @@ class _SignupHerafyState extends State<SignupHerafy> {
                             ),
                             GestureDetector(
                                 onTap: () {
-                                  Navigator.pushNamed(context, "/login");
+                                  Navigator.of(context).pushNamedAndRemoveUntil(
+                                      '/login',
+                                      (Route<dynamic> route) => false);
+                                  // Navigator.pushNamed(context, "/login");
                                 },
                                 child: Text(
                                   "تسجيل الدخول ",
@@ -551,7 +562,10 @@ class _SignupHerafyState extends State<SignupHerafy> {
                             ),
                             GestureDetector(
                                 onTap: () {
-                                  Navigator.pushNamed(context, "/login");
+                                  Navigator.of(context).pushNamedAndRemoveUntil(
+                                      '/login',
+                                      (Route<dynamic> route) => false);
+                                  //Navigator.pushNamed(context, "/login");
                                 },
                                 child: Text(
                                   "تسجيل الدخول ",
@@ -573,8 +587,8 @@ class _SignupHerafyState extends State<SignupHerafy> {
   @override
   Widget build(BuildContext context) {
     print('jjjjjjjjjjjj');
-    addOwner.msg = 'موقع المتجر';
-    _addOwnerState._changeFormat();
+    //addOwner.msg = 'موقع المتجر';
+    //_addOwnerState._changeFormat();
     return Scaffold(
       body: Theme(
         data: ThemeData(
