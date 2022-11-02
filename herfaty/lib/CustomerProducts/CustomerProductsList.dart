@@ -9,6 +9,7 @@ import 'package:herfaty/ShopOwnerOrder/list.dart';
 import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:dartarabic/dartarabic.dart';
+
 class CustomerProductsList extends StatefulWidget {
   String categoryName;
 
@@ -21,6 +22,7 @@ class CustomerProductsList extends StatefulWidget {
   @override
   State<CustomerProductsList> createState() => _CustomerProductsListState();
 }
+
 const Iterable<int> arabicTashkelChar = [
   1617,
   124,
@@ -41,6 +43,7 @@ const Iterable<int> arabicTashkelChar = [
   627,
   655,
 ];
+
 enum Menu { itemOne, itemTwo, itemThree }
 
 final List<String> productsName = [];
@@ -71,15 +74,15 @@ class _CustomerProductsListState extends State<CustomerProductsList> {
   void initState() {
     CatName = widget.categoryName;
     Map catCheck = {
-  "الخرز والإكسسوار": false,
-  "الفخاريات": false,
-  "الحياكة والتطريز": false,
-  "فنون الورق والتلوين": false,
-};
-cat1.clear();
-cat2.clear();
-cat3.clear();
-cat4.clear();
+      "الخرز والإكسسوار": false,
+      "الفخاريات": false,
+      "الحياكة والتطريز": false,
+      "فنون الورق والتلوين": false,
+    };
+    cat1.clear();
+    cat2.clear();
+    cat3.clear();
+    cat4.clear();
   }
 
   //======================================================================================
@@ -127,14 +130,14 @@ cat4.clear();
                             return DateTime.parse(b.proudctDate)
                                 .compareTo(DateTime.parse(a.proudctDate));
                           });
-//(cat1.contains(productItems[i].name.replaceAll('ه', "ة")))
+                          //(cat1.contains(productItems[i].name.replaceAll('ه', "ة")))
                           if (cat1.isEmpty &&
                               widget.categoryName == "الخرز والإكسسوار") {
                             for (var i = 0; i < productItems.length; i++) {
                               if ((cat1.contains(productItems[i].name)) ==
                                       false &&
                                   productItems[i].categoryName ==
-                                      "الخرز والإكسسوار"        ) {
+                                      "الخرز والإكسسوار") {
                                 cat1.add(productItems[i].name);
                               }
                             }
@@ -415,15 +418,15 @@ class mySearch extends SearchDelegate {
               List<Product1> productItems2 = [];
               for (var i = 0; i < productItems.length; i++) {
                 if (productItems[i].name.contains(query)
-                
-            //     ||
-            //     // productItems[i].name.replaceAll('ة', "ه")
-            //     productItems[i].name.replaceAll('\u0622', '\u0627')
-            // .replaceAll('\u0623', '\u0627')
-            // .replaceAll('\u0625', '\u0627')
-            // .replaceAll(RegExp(String.fromCharCodes(arabicTashkelChar)), '').contains(query) 
-              
-                ) {
+
+                    //     ||
+                    //     // productItems[i].name.replaceAll('ة', "ه")
+                    //     productItems[i].name.replaceAll('\u0622', '\u0627')
+                    // .replaceAll('\u0623', '\u0627')
+                    // .replaceAll('\u0625', '\u0627')
+                    // .replaceAll(RegExp(String.fromCharCodes(arabicTashkelChar)), '').contains(query)
+
+                    ) {
                   productItems2.add((productItems[i]));
                 }
               }
