@@ -819,15 +819,6 @@ class _AddProductState extends State<AddProduct> {
                                           Navigator.of(context).pop();
                                         },
                                       ),
-<<<<<<< Updated upstream
-=======
-                                      TextButton(
-                                        child: Text("تراجع"),
-                                        onPressed: () {
-                                          Navigator.of(context1).pop();
-                                        },
-                                      )
->>>>>>> Stashed changes
                                     ],
                                   );
                                 });
