@@ -86,7 +86,6 @@ class _SignupHerafyState extends State<SignupHerafy> {
               key: formKeys[0],
               child: Column(
                 children: [
-                  
                   Container(
                       child: Image.asset(
                     "assets/images/HerfatyLogoCroped.png",
@@ -117,7 +116,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
                     width: 290,
                     height: 80,
                     padding: EdgeInsets.symmetric(horizontal: 16),
-                //    padding: EdgeInsets.symmetric(horizontal: 60),
+                    //    padding: EdgeInsets.symmetric(horizontal: 60),
                     child: reusableTextFieldForName(
                         "اسم الحرفي", Icons.person, _nameTextEditingController),
                   ),
@@ -125,10 +124,10 @@ class _SignupHerafyState extends State<SignupHerafy> {
                     height: 10,
                   ),
                   Container(
-           width: 290,
+                    width: 290,
                     height: 80,
                     padding: EdgeInsets.symmetric(horizontal: 16),
-                 //   padding: EdgeInsets.symmetric(horizontal: 60),
+                    //   padding: EdgeInsets.symmetric(horizontal: 60),
                     child: reusableTextField(
                         "البريد الإلكتروني",
                         Icons.email_rounded,
@@ -139,10 +138,10 @@ class _SignupHerafyState extends State<SignupHerafy> {
                     height: 10,
                   ),
                   Container(
-                width: 290,
+                    width: 290,
                     height: 80,
                     padding: EdgeInsets.symmetric(horizontal: 16),
-                   // padding: EdgeInsets.symmetric(horizontal: 60),
+                    // padding: EdgeInsets.symmetric(horizontal: 60),
                     child: reusableTextField("كلمة المرور", Icons.lock, true,
                         _passwordTextController),
                   ),
@@ -158,9 +157,9 @@ class _SignupHerafyState extends State<SignupHerafy> {
                     height: 10,
                   ),
                   Container(
-                    width: 290,
-                    height: 80,
-                    padding: EdgeInsets.symmetric(horizontal: 16),
+                      width: 290,
+                      height: 80,
+                      padding: EdgeInsets.symmetric(horizontal: 16),
                       child: Center(
                           child: TextFormField(
                         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -274,7 +273,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
                     height: 10,
                   ),
                   Container(
-                width: 290,
+                    width: 290,
                     height: 80,
                     padding: EdgeInsets.symmetric(horizontal: 16),
                     child: reusableTextFieldForPhone("رقم الجوال",
@@ -288,30 +287,29 @@ class _SignupHerafyState extends State<SignupHerafy> {
                           color: Color.fromARGB(255, 86, 86, 86), fontSize: 13),
                     ),
                   ),
-
-  SizedBox(
+                  SizedBox(
                     height: 12,
                   ),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "الرجوع إلى صفحة ",
-                              style: TextStyle(fontFamily: "Tajawal"),
-                            ),
-                            GestureDetector(
-                                onTap: () {
-                                  Navigator.pushNamed(context, "/login");
-                                },
-                                child: Text(
-                                  "تسجيل الدخول ",
-                                  style: TextStyle(
-                                      fontFamily: "Tajawal",
-                                      decoration: TextDecoration.underline,
-                                      color: Color.fromARGB(255, 53, 47, 244)),
-                                )),
-                          ],
-                        )
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "الرجوع إلى صفحة ",
+                        style: TextStyle(fontFamily: "Tajawal"),
+                      ),
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, "/login");
+                          },
+                          child: Text(
+                            "تسجيل الدخول ",
+                            style: TextStyle(
+                                fontFamily: "Tajawal",
+                                decoration: TextDecoration.underline,
+                                color: Color.fromARGB(255, 53, 47, 244)),
+                          )),
+                    ],
+                  )
                 ],
               ),
             )),
@@ -362,7 +360,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
                   ),
 
                   Container(
-                 width: 290,
+                    width: 290,
                     height: 80,
                     padding: EdgeInsets.symmetric(horizontal: 16),
                     child: reusableTextFieldForShopName(
@@ -374,7 +372,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
                   ),
 
                   Container(
-                  width: 290,
+                    width: 290,
                     height: 80,
                     padding: EdgeInsets.symmetric(horizontal: 16),
                     child: reusableTextFieldDec(
@@ -384,9 +382,9 @@ class _SignupHerafyState extends State<SignupHerafy> {
                   SizedBox(
                     height: 15,
                   ),
-//add(),
+                  add(),
 
-SizedBox(
+                  SizedBox(
                     height: 15,
                   ),
                   Text(
@@ -398,11 +396,9 @@ SizedBox(
                     onPressed: () async {
                       if (uploadImageUrl == "") {
                         uploadImageUrl = 'assets/images/Circular_Logo.png';
-                        
-
                       }
-                    //     if (add.msg == 'ادخل موقعك') {
-                    // ShowDialogMethod(context, "من فضلك قم بتحديد موقع المتجر");}
+                      //     if (add.msg == 'ادخل موقعك') {
+                      // ShowDialogMethod(context, "من فضلك قم بتحديد موقع المتجر");}
                       try {
                         //uploadImageUrl
                         if (formKeys[0].currentState!.validate() &&
@@ -425,16 +421,10 @@ SizedBox(
                                     _shopdescriptionTextEditingController.text,
                                 points: 0);
 
+                            ownerLocModel shopLocation = ownerLocModel(
+                                shopName: _shopnameTextEditingController.text,
+                                location: add.msg);
 
-
-
-
-                                ownerLocModel shopLocation=ownerLocModel(
-                                  shopName:_shopnameTextEditingController.text,
-                                  location:add.msg
-                                );
-
-                                
 //creatOwnerLoc(shopLocation);
 
                             Fluttertoast.showToast(
@@ -520,24 +510,17 @@ SizedBox(
   @override
   Widget build(BuildContext context) {
     print('jjjjjjjjjjjj');
-     add.msg = 'ادخل موقعك';
+    add.msg = 'ادخل موقعك';
     _addState._changeFormat();
     return Scaffold(
       body: Theme(
-        
         data: ThemeData(
-          
-            colorScheme:
-                ColorScheme.light(primary: Color(0xff51908E))),
-        child: 
-      
-                  Stepper(
+            colorScheme: ColorScheme.light(primary: Color(0xff51908E))),
+        child: Stepper(
           type: StepperType.horizontal,
-          
           currentStep: currentStep,
           steps: steps(),
           onStepContinue: () {
-            
             if (!formKeys[currentStep].currentState!.validate()) {
               return;
             }
@@ -558,12 +541,8 @@ SizedBox(
           },
           controlsBuilder: (BuildContext context, ControlsDetails controls) {
             return Container(
-                  padding: 
-                              EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 13),
-                                    decoration: BoxDecoration(
-  
-  ),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 13),
+              decoration: BoxDecoration(),
               child: Row(
                 children: [
                   if (currentStep == 0)
@@ -595,7 +574,6 @@ SizedBox(
       ),
     );
 
-    
     // return Form(
     //   //autovalidateMode: AutovalidateMode.onUserInteraction,
     //   key: _formKey,
@@ -1203,21 +1181,17 @@ SizedBox(
       }
     });
   }
-  
+
   Future creatOwnerLoc(ownerLocModel shopLocation) async {
- final docCartItem =
-      FirebaseFirestore.instance.collection('owner_loc').doc();
-  final json = shopLocation.toJson();
-  await docCartItem.set(
-    json,
-    // SetOptions(merge: true)
-  );
-
-
-
+    final docCartItem =
+        FirebaseFirestore.instance.collection('owner_loc').doc();
+    final json = shopLocation.toJson();
+    await docCartItem.set(
+      json,
+      // SetOptions(merge: true)
+    );
   }
 }
-
 
 class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -1252,6 +1226,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 }
+
 //Datebase
 Future createShopOwner(ShopOwner shopowner) async {
   final FirebaseAuth auth = FirebaseAuth.instance;
@@ -1337,7 +1312,6 @@ class _addState extends State<add> {
       margin: EdgeInsets.only(top: 1.0, left: 40.0, right: 40.0, bottom: 5.0),
       padding: EdgeInsets.all(1.0),
       decoration: BoxDecoration(
-       
         border: Border.all(color: Color.fromARGB(255, 26, 96, 91), width: 1),
         borderRadius: BorderRadius.all(Radius.circular(6.0)),
         boxShadow: [
