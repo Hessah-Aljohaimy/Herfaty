@@ -482,7 +482,7 @@ if(productItems2.isEmpty){
   Widget buildSuggestions(BuildContext context) {
     // TODO: implement buildSuggestions
    
-      Suggestions.clear();  
+     Suggestions.clear();  
    
 if(CatName=="الخرز والإكسسوار"){
 
