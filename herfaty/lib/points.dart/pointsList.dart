@@ -36,7 +36,7 @@ class PointsList extends StatelessWidget {
                         return Text("");
                       } else if (snapshot.hasData) {
                         final cItems = snapshot.data!.toList();
-                        // Size size = MediaQuery.of(context).size;
+                        Size size = MediaQuery.of(context).size;
 
                         cItems.sort((a, b) {
                           return DateTime.parse(a.orderDate)
@@ -73,183 +73,135 @@ class PointsList extends StatelessWidget {
                                     ),
                                   ),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment
-                                        .start, //takes the row to the top
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
+                                    // crossAxisAlignment: CrossAxisAlignment
+                                    //     .start, //takes the row to the top
+                                    // mainAxisAlignment:
+                                    //     MainAxisAlignment.spaceAround,
                                     children: [
                                       Row(
-                                        crossAxisAlignment: CrossAxisAlignment
-                                            .start, //used for aligning the children vertically
-
-                                        //
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         children: [
-                                          Expanded(
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 8.0),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                      //cItems[index].customerId,
-                                                      "  +${cItems[index].points}",
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      style: TextStyle(
-                                                          color: kPrimaryColor,
-                                                          fontSize: 35.0,
-                                                          fontFamily:
-                                                              "Tajawal")),
-
-                                                  //Icon(Icons.numbers),
-                                                  RichText(
-                                                    text: TextSpan(children: [
-                                                      TextSpan(
-                                                          text:
-                                                              "${cItems[index].orderDate}",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.blue,
-                                                              fontSize: 17.0,
-                                                              decoration:
-                                                                  TextDecoration
-                                                                      .underline,
-                                                              fontFamily:
-                                                                  "Tajawal"),
-                                                          recognizer:
-                                                              TapGestureRecognizer()
-                                                                ..onTap = () {
-                                                                  Navigator
-                                                                      .push(
-                                                                    context,
-                                                                    MaterialPageRoute(
-                                                                        builder: (context) =>
-                                                                            pointsDetails(
-                                                                              date: cItems[index].orderDate,
-                                                                              totalOrder: cItems[index].total,
-                                                                              docID: cItems[index].docId,
-                                                                              products: cItems[index].products,
-                                                                              status: cItems[index].status,
-                                                                            )),
-                                                                  );
-                                                                }),
-                                                    ]),
-                                                  ),
-                                                  // Text(
-                                                  //     //cItems[index].customerId,
-                                                  //     "  + ${cItems[index].points}",
-                                                  //     overflow:
-                                                  //         TextOverflow.ellipsis,
-                                                  //     style: TextStyle(
-                                                  //         color: kPrimaryColor,
-                                                  //         fontSize: 27.0,
-                                                  //         fontFamily:
-                                                  //             "Tajawal")),
-                                                  // //Icon(Icons.numbers),
-                                                  // Text(
-                                                  //   "  ${cItems[index].orderDate} ",
-                                                  //   style: TextStyle(
-                                                  //       color: Colors.black,
-                                                  //       fontSize: 17.0,
-                                                  //       fontFamily: "Tajawal"),
-                                                  // ),
-
-                                                  // Padding(
-                                                  //   padding:
-                                                  //       const EdgeInsets.only(
-                                                  //           left: 10),
-                                                  //   child: Row(
-                                                  //     mainAxisAlignment:
-                                                  //         MainAxisAlignment.end,
-                                                  //     children: [
-                                                  //       Image.asset(
-                                                  //         "assets/images/points_trophies/icons8-coins-64.png",
-                                                  //         width: 40,
-                                                  //       ),
-                                                  //     ],
-                                                  //   ),
-                                                  // ),
-                                                ],
-                                              ),
+                                          Text(
+                                            "  +${cItems[index].points}",
+                                            style: TextStyle(
+                                                color: Color(0xffF19B1A),
+                                                fontSize: 35,
+                                                fontWeight: FontWeight.bold,
+                                                fontFamily: "Tajawal"),
+                                          ),
+                                          Positioned(
+                                            bottom: 50,
+                                            top: 50,
+                                            child: Image.asset(
+                                              "assets/images/points_trophies/icons8-coins-64.png",
+                                              width: 40,
                                             ),
                                           ),
                                         ],
                                       ),
-//                                       Padding(
-//                                         padding:
-//                                             const EdgeInsets.only(left: 10),
-//                                         child: Row(
-//                                           mainAxisAlignment:
-//                                               MainAxisAlignment.end,
-//                                           children: [
-//                                             Image.asset(
-//                                               "assets/images/points_trophies/icons8-coins-64.png",
-//                                               width: 40,
-//                                             ),
-// ],
-//                                         ),
-//                                       ),
-                                      // ElevatedButton(
-                                      //   style: ElevatedButton.styleFrom(
-                                      //       primary: Color(
-                                      //           0xff4C8F2F) // background
-                                      //       ),
-                                      //   onPressed: () {
-                                      //     Navigator.push(
-                                      //       context,
-                                      //       MaterialPageRoute(
-                                      //           builder: (context) =>
-                                      //               orderDetails(
-                                      //                 date: cItems[index]
-                                      //                     .orderDate,
-                                      //                 totalOrder:
-                                      //                     cItems[index]
-                                      //                         .total,
-                                      //                 docID: cItems[index]
-                                      //                     .docId,
-                                      //                 products:
-                                      //                     cItems[index]
-                                      //                         .products,
-                                      //                 status:
-                                      //                     cItems[index]
-                                      //                         .status,
-                                      //               )),
-                                      //     );
-                                      //     //go to order deatils page
-                                      //   },
-                                      //   child: Text(
-                                      //     "تفاصيل الطلب",
-                                      //     style: TextStyle(
-                                      //       fontFamily: "Tajawal",
-                                      //     ),
-                                      //   ),
-                                      // ),
-
-                                      // MaterialButton(
-                                      //   padding: EdgeInsets.all(8.0),
-                                      //   textColor: Colors.white,
-                                      //   splashColor: Colors.greenAccent,
-                                      //   elevation: 8.0,
-                                      //   child: Container(
-                                      //     decoration: BoxDecoration(
-                                      //       image: DecorationImage(
-                                      //           image: AssetImage(
-                                      //               'assets/images/cartBack1.png'),
-                                      //           fit: BoxFit.cover),
-                                      //     ),
-                                      //     child: Padding(
-                                      //       padding: const EdgeInsets.all(8.0),
-                                      //       child: Text("تفاصيل الطلب"),
-                                      //     ),
-                                      //   ),
-                                      //   // ),
-                                      //   onPressed: () {},
-                                      // ),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          RichText(
+                                            text: TextSpan(children: [
+                                              TextSpan(
+                                                text:
+                                                    "   ${cItems[index].orderDate}",
+                                                style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 39, 141, 134),
+                                                    fontSize: 20.0,
+                                                    // decoration: TextDecoration
+                                                    //     .underline,
+                                                    fontFamily: "Tajawal"),
+                                                // recognizer:
+                                                //     TapGestureRecognizer()
+                                                //       ..onTap = () {
+                                                //         Navigator.push(
+                                                //           context,
+                                                // MaterialPageRoute(
+                                                //     builder:
+                                                //         (context) =>
+                                                //               pointsDetails(
+                                                //                 date:
+                                                //                     cItems[index].orderDate,
+                                                //                 totalOrder:
+                                                //                     cItems[index].total,
+                                                //                 docID:
+                                                //                     cItems[index].docId,
+                                                //                 products:
+                                                //                     cItems[index].products,
+                                                //                 status:
+                                                //                     cItems[index].status,
+                                                //               )),
+                                                // );
+                                                //  }
+                                              ),
+                                            ]),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          Align(
+                                            alignment: Alignment.bottomLeft,
+                                            child: TextButton(
+                                              child: Text(
+                                                " تفاصيل الطلب",
+                                                style: TextStyle(
+                                                    color: Color(0xff44ADE8),
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontFamily: "Tajawal"),
+                                              ),
+                                              onPressed: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          pointsDetails(
+                                                            date: cItems[index]
+                                                                .orderDate,
+                                                            totalOrder:
+                                                                cItems[index]
+                                                                    .total,
+                                                            docID: cItems[index]
+                                                                .docId,
+                                                            products:
+                                                                cItems[index]
+                                                                    .products,
+                                                            status:
+                                                                cItems[index]
+                                                                    .status,
+                                                          )),
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                          IconButton(
+                                            onPressed: () {},
+                                            icon: Icon(
+                                              Icons.arrow_forward_rounded,
+                                              size: 20,
+                                              color: Color(0xff44ADE8),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ],
                                   ),
+
+//
                                 );
                               });
                         }
@@ -281,7 +233,8 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
           style: TextStyle(color: kPrimaryColor, fontFamily: "Tajawal")),
       centerTitle: true,
       backgroundColor: Colors.white,
-      elevation: 0,
+      shadowColor: Color.fromARGB(255, 39, 141, 134),
+      elevation: 3,
       automaticallyImplyLeading: false,
       iconTheme: const IconThemeData(color: kPrimaryColor),
       leading: IconButton(

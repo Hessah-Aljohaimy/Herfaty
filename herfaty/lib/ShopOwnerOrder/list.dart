@@ -756,7 +756,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       backgroundColor: Colors.white,
       shadowColor: Color.fromARGB(255, 39, 141, 134),
-      elevation: 0,
+      elevation: 3,
       automaticallyImplyLeading: false,
       iconTheme: IconThemeData(color: Color(0xff51908E)),
       bottom: const TabBar(

@@ -104,7 +104,12 @@ class _PointPanelState extends State<PointPanel> {
               ),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PointsList()),
+                );
+              },
               icon: Icon(
                 Icons.arrow_forward_rounded,
                 size: 20,
