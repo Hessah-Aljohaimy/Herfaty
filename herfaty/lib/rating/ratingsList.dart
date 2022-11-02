@@ -54,7 +54,7 @@ class _ratingsListState extends State<ratingsList> {
                 //---------------------------------------------------------------------------
                 //مستطيل في أعلى الليست يعرض نسبة تقييم المتجر وعدد تقييمات
                 padding: const EdgeInsets.all(0),
-                margin: EdgeInsets.only(bottom: 20, left: 20, right: 20),
+                margin: EdgeInsets.only(bottom: 20, left: 19, right: 18),
                 height: 70,
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.amber),
