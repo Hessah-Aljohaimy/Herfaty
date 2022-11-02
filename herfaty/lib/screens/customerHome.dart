@@ -232,7 +232,7 @@ class _AppBarState extends State<AppBar> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
-      height: 150,
+      height: 130,
       width: double.infinity,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
@@ -268,7 +268,7 @@ class _AppBarState extends State<AppBar> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 30.0),
+                padding: const EdgeInsets.only(top: 10.0),
                 child: Text(
                   "مرحبًا بك ${thisCustomerName} ",
                   style: TextStyle(

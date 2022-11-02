@@ -173,7 +173,7 @@ class _AppBarState extends State<AppBar> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
-      height: 150,
+      height: 130,
       width: double.infinity,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
@@ -200,15 +200,19 @@ class _AppBarState extends State<AppBar> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // ignore: prefer_const_constructors
-              Text(
-                "مرحباً بك  ${thisOwnerName} ",
-                // ignore: prefer_const_constructors
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25,
-                    fontFamily: "Tajawal"),
-                //textDirection: TextDirection.rtl,
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: Text(
+                  "مرحباً بك ${thisOwnerName} ",
+
+                  // ignore: prefer_const_constructors
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                      fontFamily: "Tajawal"),
+                  //textDirection: TextDirection.rtl,
+                ),
               ),
               /* profileButton(
                 icon: Icons.account_circle_sharp,
