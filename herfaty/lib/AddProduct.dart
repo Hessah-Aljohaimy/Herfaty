@@ -47,6 +47,8 @@ class _AddProductState extends State<AddProduct> {
   var uploadImageUrl = ""; //image URL before choose pic
   // Firebase storage + ref for pic place
   final storageRef = FirebaseStorage.instance.ref();
+  bool showLocalImage = false;
+  File? pickedImage1;
 
   @override
   Widget build(BuildContext context) {
@@ -151,65 +153,75 @@ class _AddProductState extends State<AddProduct> {
                 // ),
 
                 if (uploadImageUrl.isEmpty)
-                  SizedBox(
-                    child: Container(
-                      color: Colors.white, //
-                      //margin: EdgeInsets.symmetric(horizontal: 200),
-                      // child: SizedBox(
-                      // width: 300,
-                      // height: 200,
-                      child: IconButton(
-                        icon: Image.asset('assets/images/productPic.png'),
-                        iconSize: 200,
-                        onPressed: () async {
-                          await _showMyDialog();
-                        },
-                      ),
-                      // child: ElevatedButton.icon(
-                      //   onPressed: () async {
-                      //     await _showMyDialog();
-                      //   },
+                  imageProfile()
+                // SizedBox(
+                //   child: Container(
+                //     color: Colors.white, //
+                //     //margin: EdgeInsets.symmetric(horizontal: 200),
+                //     // child: SizedBox(
+                //     // width: 300,
+                //     // height: 200,
+                //     child: IconButton(
+                //       icon: Image.asset('assets/images/Image.png'),
+                //       iconSize: 200,
+                //       onPressed: () async {
+                //         await _showMyDialog();
+                //       },
+                //     ),
+                // child: ElevatedButton.icon(
+                //   onPressed: () async {
+                //     await _showMyDialog();
+                //   },
 
-                      //   style: ElevatedButton.styleFrom(primary: kPrimaryColor),
-                      //   icon: Icon(
-                      //     // <-- Icon
-                      //     Icons.image,
-                      //     size: 24.0,
-                      //   ),
+                //   style: ElevatedButton.styleFrom(primary: kPrimaryColor),
+                //   icon: Icon(
+                //     // <-- Icon
+                //     Icons.image,
+                //     size: 24.0,
+                //   ),
 
-                      //   label: Text(
-                      //     'إرفاق صورة',
-                      //     style: TextStyle(fontSize: 22, fontFamily: "Tajawal"),
-                      //     //textAlign: TextAlign.right,
-                      //   ), // <-- Text
-                      // ),
-                      // ),
-                    ),
-                  )
+                //   label: Text(
+                //     'إرفاق صورة',
+                //     style: TextStyle(fontSize: 22, fontFamily: "Tajawal"),
+                //     //textAlign: TextAlign.right,
+                //   ), // <-- Text
+                // ),
+                // ),
+                //   ),
+                // )
                 else
                   Container(
-                    width: 400,
                     height: 200,
-                    decoration: BoxDecoration(
-                      border: Border.all(width: 0.1, color: Colors.white),
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        bottomLeft: Radius.circular(10),
-                      ),
-                      //color: Color(0xFFFAF9F6),
-                      color: Colors.white,
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        bottomLeft: Radius.circular(10),
-                      ),
-                      child: Image.network(
-                        uploadImageUrl,
-                        fit: BoxFit.cover,
-                      ),
+                    width: 200,
+                    //color: Color(0xffFF0E58),
+                    child: Image.network(
+                      uploadImageUrl,
+                      //fit: BoxFit.cover,
                     ),
                   ),
+                // Container(
+                //   width: 400,
+                //   height: 200,
+                //   decoration: BoxDecoration(
+                //     border: Border.all(width: 0.1, color: Colors.white),
+                //     borderRadius: BorderRadius.only(
+                //       topLeft: Radius.circular(10),
+                //       bottomLeft: Radius.circular(10),
+                //     ),
+                //     //color: Color(0xFFFAF9F6),
+                //     color: Colors.white,
+                //   ),
+                //   child: ClipRRect(
+                //     borderRadius: BorderRadius.only(
+                //       topLeft: Radius.circular(10),
+                //       bottomLeft: Radius.circular(10),
+                //     ),
+                //     child: Image.network(
+                //       uploadImageUrl,
+                //       fit: BoxFit.cover,
+                //     ),
+                //   ),
+                // ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center, //for right edge
                   children: [
@@ -244,7 +256,7 @@ class _AddProductState extends State<AddProduct> {
                   children: [
                     SizedBox(width: 20), // for space
                     Text(
-                      'فئة المنتج',
+                      '    فئة المنتج:    ',
                       style: TextStyle(
                           fontSize: 21,
                           fontFamily: "Tajawal",
@@ -323,7 +335,7 @@ class _AddProductState extends State<AddProduct> {
               ),*/
 
                 SizedBox(
-                  height: 40,
+                  height: 20,
                 ),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 40),
@@ -843,6 +855,128 @@ class _AddProductState extends State<AddProduct> {
       ),
       // ),
     );
+  }
+
+  Widget imageProfile() {
+    return Center(
+      child: Stack(children: <Widget>[
+        //ClipRRect(
+        //borderRadius: BorderRadius.circular(20.0), //or 15.0
+        Container(
+          height: 200,
+          width: 200,
+          //color: Color(0xffFF0E58),
+
+          child: Image.asset('assets/images/points_trophies/squareImagee.jpg'),
+        ),
+        // ),
+        // CircleAvatar(
+        //   radius: 80.0,
+        //   child: Image.asset('assets/images/Circular_Logo.png'),
+        //   // backgroundImage: showLocalImage == false
+        //   // ?
+        //   //  AssetImage("assets/images/Circular_Logo.png") ,
+        //   //as ImageProvider
+        //   // : FileImage(pickedImage1!) as ImageProvider,
+
+        //   // _imageFile.path
+        //   //
+        //   // ?  as ImageProvider
+        //   // :
+        // ),
+        Positioned(
+          bottom: 20.0,
+          right: 20.0,
+          child: InkWell(
+            onTap: () {
+              _showMyDialog();
+            },
+            // child: Icon(
+            //   Icons.camera_alt,
+            //   color: Colors.teal,
+            //   size: 28.0,
+            // ),
+          ),
+        ),
+      ]),
+    );
+  }
+
+  Widget bottomSheet() {
+    return Container(
+      height: 100.0,
+      width: MediaQuery.of(context).size.width,
+      margin: EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 20,
+      ),
+      child: Column(
+        children: <Widget>[
+          Text(
+            "اختر صورة",
+            style: TextStyle(
+              fontSize: 20.0,
+            ),
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+            TextButton.icon(
+              icon: Icon(Icons.camera),
+              onPressed: () async {
+                // Capture a photo
+                takePhoto(ImageSource.camera);
+
+                Navigator.of(context).pop();
+              },
+              label: Text("الكاميرا"),
+            ),
+            TextButton.icon(
+              icon: Icon(Icons.image),
+              onPressed: () async {
+                takePhoto(ImageSource.gallery);
+
+                Navigator.of(context).pop();
+              },
+              label: Text("الصور"),
+            ),
+          ])
+        ],
+      ),
+    );
+  }
+
+  void takePhoto(ImageSource source) async {
+    XFile? file1 = await ImagePicker().pickImage(source: source);
+    if (file1 == null) return;
+
+    setState(() {
+      try {
+        pickedImage1 = File(file1.path);
+        showLocalImage = true;
+
+        uploadImageToFirebaseStorage(pickedImage1!);
+        uploadImageUrl = pickedImage1!.uri.toString();
+        print(uploadImageUrl);
+        Fluttertoast.showToast(
+          msg: 'تمت إضافة الصورة بنجاح',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 3,
+          backgroundColor: Color.fromARGB(255, 26, 96, 91),
+          textColor: Colors.white,
+          fontSize: 18.0,
+        );
+      } catch (e) {
+        Fluttertoast.showToast(
+          msg: 'هناك مشكلة أعد ادخال الصوره مجددا',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 3,
+          backgroundColor: Colors.white,
+          textColor: Colors.red,
+          fontSize: 18.0,
+        );
+      }
+    });
   }
 
   Future<void> _showMyDialog() async {

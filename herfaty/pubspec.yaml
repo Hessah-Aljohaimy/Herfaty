@@ -115,7 +115,8 @@ flutter:
     - assets/images/erase.png
     - assets/images/cartBack1.png
     - assets/images/productPic.png
-
+    - assets/images/Image.png
+    - assets\images\points_trophies\squareImagee.jpg
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

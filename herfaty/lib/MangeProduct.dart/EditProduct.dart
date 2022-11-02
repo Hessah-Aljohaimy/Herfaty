@@ -69,6 +69,8 @@ class _EditProduc extends State<EditProduct> {
   late var uploadImageUrl = widget.image; //image URL before choose pic
   // Firebase storage + ref for pic place
   final storageRef = FirebaseStorage.instance.ref();
+  bool showLocalImage = false;
+  File? pickedImage1;
 // late final ownerProduct =FirebaseFirestore.instance.collection('Products').doc(widget.thisOwnerId);
   Widget build(BuildContext context) {
     //////////////////////////////////////////////////////////////////////////////////////////
@@ -115,31 +117,31 @@ class _EditProduc extends State<EditProduct> {
               SizedBox(
                 height: 10,
               ),
-              Container(
-                //margin: EdgeInsets.symmetric(horizontal: 200),
-                child: SizedBox(
-                  width: 300,
-                  height: 40,
-                  child: ElevatedButton.icon(
-                    onPressed: () async {
-                      await _showMyDialog();
-                    },
+              // Container(
+              //margin: EdgeInsets.symmetric(horizontal: 200),
+              //   child: SizedBox(
+              //     width: 300,
+              //     height: 40,
+              //     child: ElevatedButton.icon(
+              //       onPressed: () async {
+              //         await _showMyDialog();
+              //       },
 
-                    style: ElevatedButton.styleFrom(primary: kPrimaryColor),
-                    icon: Icon(
-                      // <-- Icon
-                      Icons.image,
-                      size: 24.0,
-                    ),
+              //       style: ElevatedButton.styleFrom(primary: kPrimaryColor),
+              //       icon: Icon(
+              //         // <-- Icon
+              //         Icons.image,
+              //         size: 24.0,
+              //       ),
 
-                    label: Text(
-                      'تغيير الصورة',
-                      style: TextStyle(fontSize: 22, fontFamily: "Tajawal"),
-                      //textAlign: TextAlign.right,
-                    ), // <-- Text
-                  ),
-                ),
-              ),
+              //       label: Text(
+              //         'تغيير الصورة',
+              //         style: TextStyle(fontSize: 22, fontFamily: "Tajawal"),
+              //         //textAlign: TextAlign.right,
+              //       ), // <-- Text
+              //     ),
+              //   ),
+              // ),
               StreamBuilder<List<shopOwnerModel>>(
                   stream: shopOwnerData(),
                   builder: (context, snapshot) {
@@ -162,45 +164,52 @@ class _EditProduc extends State<EditProduct> {
               //   height: 20,
               // ),
               if (uploadImageUrl.isEmpty)
-                SizedBox(
-                  width: 200,
-                  height: 200,
-                )
+                imageProfile()
               else
                 Container(
-                  width: 400,
                   height: 200,
-                  decoration: BoxDecoration(
-                    border: Border.all(width: 0.1, color: Colors.white),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      bottomLeft: Radius.circular(10),
-                    ),
-                    //color: Color(0xFFFAF9F6),
-                    color: Colors.white,
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      bottomLeft: Radius.circular(10),
-                    ),
-                    child: Image.network(
-                      uploadImageUrl,
-                      fit: BoxFit.cover,
-                    ),
+                  width: 200,
+                  //color: Color(0xffFF0E58),
+                  child: Image.network(
+                    uploadImageUrl,
+                    //fit: BoxFit.cover,
                   ),
                 ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center, //for right edge
+                children: [
+                  //SizedBox(width: 20), // for space
+
+                  ElevatedButton.icon(
+                    onPressed: () async {
+                      await _showMyDialog();
+                    },
+
+                    style: ElevatedButton.styleFrom(primary: kPrimaryColor),
+                    icon: Icon(
+                      // <-- Icon
+                      Icons.image,
+                      size: 24.0,
+                    ),
+
+                    label: Text(
+                      'تحديث الصورة ',
+                      style: TextStyle(fontSize: 22, fontFamily: "Tajawal"),
+                      //textAlign: TextAlign.right,
+                    ), // <-- Text
+                  ),
+                ],
+              ),
               SizedBox(
                 height: 20,
               ),
               Row(
                 //
-                mainAxisAlignment:
-                    MainAxisAlignment.spaceEvenly, //for right edge
+                mainAxisAlignment: MainAxisAlignment.start, //for right edge
                 children: [
                   SizedBox(width: 20), // for space
                   Text(
-                    "فئة المنتج:",
+                    '    فئة المنتج:    ',
                     style: TextStyle(
                         fontSize: 21,
                         fontFamily: "Tajawal",
@@ -281,7 +290,7 @@ class _EditProduc extends State<EditProduct> {
             ),*/
 
               SizedBox(
-                height: 40,
+                height: 20,
               ),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 40),
@@ -295,11 +304,12 @@ class _EditProduc extends State<EditProduct> {
                     border: InputBorder.none,
 
                     hintText: 'اسم المنتج',
+                    labelText: 'اسم المنتج',
                     hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
                     suffixIcon: Padding(
                       padding: EdgeInsets.only(top: 15),
-                      child: Icon(Icons.production_quantity_limits_sharp,
-                          color: kPrimaryColor),
+                      // child: Icon(Icons.production_quantity_limits_sharp,
+                      //     color: kPrimaryColor),
                     ),
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 3.0, horizontal: 23),
@@ -371,14 +381,16 @@ class _EditProduc extends State<EditProduct> {
                   maxLength: 300,
                   decoration: InputDecoration(
                     hintText: 'تفاصيل المنتج',
+                    labelText: 'تفاصيل المنتج',
+
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 3.0, horizontal: 23),
 
                     hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
                     suffixIcon: Padding(
                       padding: EdgeInsets.only(top: 15),
-                      child: Icon(Icons.description, //Sara edits
-                          color: kPrimaryColor),
+                      // child: Icon(Icons.description, //Sara edits
+                      //     color: kPrimaryColor),
                     ),
                     labelStyle:
                         TextStyle(color: kPrimaryColor, fontFamily: "Tajawal"),
@@ -437,15 +449,16 @@ class _EditProduc extends State<EditProduct> {
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'الكمية المتاحة',
+                    labelText: 'الكمية المتاحة',
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 3.0, horizontal: 23),
 
                     hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
                     suffixIcon: Padding(
                       padding: EdgeInsets.only(top: 15),
-                      child: Icon(Icons.numbers,
-                          //Sara edits
-                          color: kPrimaryColor),
+                      // child: Icon(Icons.numbers,
+                      //     //Sara edits
+                      //     color: kPrimaryColor),
                     ),
                     labelStyle:
                         TextStyle(color: kPrimaryColor, fontFamily: "Tajawal"),
@@ -503,15 +516,16 @@ class _EditProduc extends State<EditProduct> {
                   textAlign: TextAlign.right,
                   decoration: InputDecoration(
                     hintText: 'السعر',
+                    labelText: 'السعر',
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 3.0, horizontal: 23),
 
                     hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
                     suffixIcon: Padding(
                       padding: EdgeInsets.only(top: 15),
-                      child: Icon(Icons.money,
-                          //Sara edits
-                          color: kPrimaryColor),
+                      // child: Icon(Icons.money,
+                      //     //Sara edits
+                      //     color: kPrimaryColor),
                     ),
                     labelStyle:
                         TextStyle(color: kPrimaryColor, fontFamily: "Tajawal"),
@@ -713,7 +727,7 @@ class _EditProduc extends State<EditProduct> {
                             ElevatedButton(
                               style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all(
-                                    Color(0xff51908E)),
+                                    Color.fromARGB(255, 221, 112, 112)),
                                 padding: MaterialStateProperty.all(
                                     EdgeInsets.symmetric(
                                         horizontal: 60, vertical: 13)),
@@ -832,6 +846,51 @@ class _EditProduc extends State<EditProduct> {
     );
   }
 
+  Widget imageProfile() {
+    return Center(
+      child: Stack(children: <Widget>[
+        //ClipRRect(
+        //borderRadius: BorderRadius.circular(20.0), //or 15.0
+        Container(
+          height: 200,
+          width: 200,
+          //color: Color(0xffFF0E58),
+
+          child: Image.asset('assets/images/points_trophies/squareImagee.jpg'),
+        ),
+        // ),
+        // CircleAvatar(
+        //   radius: 80.0,
+        //   child: Image.asset('assets/images/Circular_Logo.png'),
+        //   // backgroundImage: showLocalImage == false
+        //   // ?
+        //   //  AssetImage("assets/images/Circular_Logo.png") ,
+        //   //as ImageProvider
+        //   // : FileImage(pickedImage1!) as ImageProvider,
+
+        //   // _imageFile.path
+        //   //
+        //   // ?  as ImageProvider
+        //   // :
+        // ),
+        Positioned(
+          bottom: 20.0,
+          right: 20.0,
+          child: InkWell(
+            onTap: () {
+              _showMyDialog();
+            },
+            // child: Icon(
+            //   Icons.camera_alt,
+            //   color: Colors.teal,
+            //   size: 28.0,
+            // ),
+          ),
+        ),
+      ]),
+    );
+  }
+
   Future<void> _showMyDialog() async {
     return showDialog<void>(
       context: context,
@@ -924,7 +983,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       centerTitle: true,
       backgroundColor: Colors.white,
-      elevation: 0,
+      elevation: 3,
       automaticallyImplyLeading: false,
       iconTheme: IconThemeData(color: kPrimaryColor),
     );
