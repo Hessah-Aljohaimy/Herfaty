@@ -92,34 +92,42 @@ class _AddProductState extends State<AddProduct> {
               //can doing scroll
 
               children: <Widget>[
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  //margin: EdgeInsets.symmetric(horizontal: 200),
-                  child: SizedBox(
-                    width: 300,
-                    height: 40,
-                    child: ElevatedButton.icon(
-                      onPressed: () async {
-                        await _showMyDialog();
-                      },
+                // SizedBox(
+                //   height: 10,
+                // ),
 
-                      style: ElevatedButton.styleFrom(primary: kPrimaryColor),
-                      icon: Icon(
-                        // <-- Icon
-                        Icons.image,
-                        size: 24.0,
-                      ),
+                // Container(
+                //   //margin: EdgeInsets.symmetric(horizontal: 200),
+                //   child: SizedBox(
+                //     width: 300,
+                //     height: 200,
+                //     child: IconButton(
+                //       icon: Image.asset('assets/images/productPic.png'),
+                //       iconSize: 50,
+                //       onPressed: () async {
+                //         await _showMyDialog();
+                //       },
+                //     ),
+                //     // child: ElevatedButton.icon(
+                //     //   onPressed: () async {
+                //     //     await _showMyDialog();
+                //     //   },
 
-                      label: Text(
-                        'إرفاق صورة',
-                        style: TextStyle(fontSize: 22, fontFamily: "Tajawal"),
-                        //textAlign: TextAlign.right,
-                      ), // <-- Text
-                    ),
-                  ),
-                ),
+                //     //   style: ElevatedButton.styleFrom(primary: kPrimaryColor),
+                //     //   icon: Icon(
+                //     //     // <-- Icon
+                //     //     Icons.image,
+                //     //     size: 24.0,
+                //     //   ),
+
+                //     //   label: Text(
+                //     //     'إرفاق صورة',
+                //     //     style: TextStyle(fontSize: 22, fontFamily: "Tajawal"),
+                //     //     //textAlign: TextAlign.right,
+                //     //   ), // <-- Text
+                //     // ),
+                //   ),
+                // ),
                 StreamBuilder<List<shopOwnerModel>>(
                     stream: shopOwnerData(),
                     builder: (context, snapshot) {
@@ -138,18 +146,44 @@ class _AddProductState extends State<AddProduct> {
                       return Text('');
                     }),
 
-                SizedBox(
-                  height: 20,
-                ),
+                // SizedBox(
+                //   height: 20,
+                // ),
+
                 if (uploadImageUrl.isEmpty)
                   SizedBox(
                     child: Container(
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage('assets\images\productPic.png'),
-                              fit: BoxFit.cover)),
-                      width: 200,
-                      height: 200,
+                      color: Colors.white, //
+                      //margin: EdgeInsets.symmetric(horizontal: 200),
+                      // child: SizedBox(
+                      // width: 300,
+                      // height: 200,
+                      child: IconButton(
+                        icon: Image.asset('assets/images/productPic.png'),
+                        iconSize: 200,
+                        onPressed: () async {
+                          await _showMyDialog();
+                        },
+                      ),
+                      // child: ElevatedButton.icon(
+                      //   onPressed: () async {
+                      //     await _showMyDialog();
+                      //   },
+
+                      //   style: ElevatedButton.styleFrom(primary: kPrimaryColor),
+                      //   icon: Icon(
+                      //     // <-- Icon
+                      //     Icons.image,
+                      //     size: 24.0,
+                      //   ),
+
+                      //   label: Text(
+                      //     'إرفاق صورة',
+                      //     style: TextStyle(fontSize: 22, fontFamily: "Tajawal"),
+                      //     //textAlign: TextAlign.right,
+                      //   ), // <-- Text
+                      // ),
+                      // ),
                     ),
                   )
                 else
@@ -176,13 +210,37 @@ class _AddProductState extends State<AddProduct> {
                       ),
                     ),
                   ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center, //for right edge
+                  children: [
+                    //SizedBox(width: 20), // for space
+
+                    ElevatedButton.icon(
+                      onPressed: () async {
+                        await _showMyDialog();
+                      },
+
+                      style: ElevatedButton.styleFrom(primary: kPrimaryColor),
+                      icon: Icon(
+                        // <-- Icon
+                        Icons.image,
+                        size: 24.0,
+                      ),
+
+                      label: Text(
+                        'إرفاق صورة',
+                        style: TextStyle(fontSize: 22, fontFamily: "Tajawal"),
+                        //textAlign: TextAlign.right,
+                      ), // <-- Text
+                    ),
+                  ],
+                ),
                 SizedBox(
                   height: 20,
                 ),
                 Row(
                   //
-                  mainAxisAlignment:
-                      MainAxisAlignment.spaceEvenly, //for right edge
+                  mainAxisAlignment: MainAxisAlignment.start, //for right edge
                   children: [
                     SizedBox(width: 20), // for space
                     Text(
@@ -279,11 +337,13 @@ class _AddProductState extends State<AddProduct> {
                       border: InputBorder.none,
 
                       hintText: 'اسم المنتج',
+                      labelText: 'اسم المنتج',
+
                       hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
                       suffixIcon: Padding(
                         padding: EdgeInsets.only(top: 15),
-                        child: Icon(Icons.production_quantity_limits_sharp,
-                            color: kPrimaryColor),
+                        // child: Icon(Icons.production_quantity_limits_sharp,
+                        //     color: kPrimaryColor),
                       ),
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 3.0, horizontal: 23),
@@ -315,12 +375,12 @@ class _AddProductState extends State<AddProduct> {
                     ),
 
                     validator: (value) {
-                    if (value!.trim() == null || value.trim().isEmpty) {
-                      return 'أدخل اسم المنتج';
-                    }
-                       if (value.trim().length < 2) {
-                      return " أدخل اسم أكبر من أو يساوي حرفين ";
-                    }
+                      if (value!.trim() == null || value.trim().isEmpty) {
+                        return 'أدخل اسم المنتج';
+                      }
+                      if (value.trim().length < 2) {
+                        return " أدخل اسم أكبر من أو يساوي حرفين ";
+                      }
                       if (!RegExp(
                               r"^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z- ][]*$")
                           .hasMatch(value)) {
@@ -353,14 +413,17 @@ class _AddProductState extends State<AddProduct> {
                     maxLength: 300,
                     decoration: InputDecoration(
                       hintText: 'تفاصيل المنتج',
+                      labelText: 'تفاصيل المنتج',
+
+                      // floatingLabelBehavior: FloatingLabelBehavior.never,
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 3.0, horizontal: 23),
 
                       hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
                       suffixIcon: Padding(
                         padding: EdgeInsets.only(top: 15),
-                        child: Icon(Icons.description, //Sara edits
-                            color: kPrimaryColor),
+                        // child: Icon(Icons.description, //Sara edits
+                        //     color: kPrimaryColor),
                       ),
                       labelStyle: TextStyle(
                           color: kPrimaryColor, fontFamily: "Tajawal"),
@@ -390,10 +453,11 @@ class _AddProductState extends State<AddProduct> {
                     ),
                     validator: (value) {
                       if (value!.trim() == null || value.trim().isEmpty) {
-                      return 'أدخل وصف المنتج';
-                    }
+                        return 'أدخل وصف المنتج';
+                      }
                       if (value.trim().length < 2) {
-return " أدخل وصف أكبر من أو يساوي حرفين ";                    }
+                        return " أدخل وصف أكبر من أو يساوي حرفين ";
+                      }
                       return null;
                     },
                   ),
@@ -414,15 +478,17 @@ return " أدخل وصف أكبر من أو يساوي حرفين ";            
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: 'الكمية المتاحة',
+                      labelText: 'الكمية المتاحة',
+
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 3.0, horizontal: 23),
 
                       hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
                       suffixIcon: Padding(
                         padding: EdgeInsets.only(top: 15),
-                        child: Icon(Icons.numbers,
-                            //Sara edits
-                            color: kPrimaryColor),
+                        // child: Icon(Icons.numbers,
+                        //     //Sara edits
+                        //     color: kPrimaryColor),
                       ),
                       labelStyle: TextStyle(
                           color: kPrimaryColor, fontFamily: "Tajawal"),
@@ -479,15 +545,17 @@ return " أدخل وصف أكبر من أو يساوي حرفين ";            
                     textAlign: TextAlign.right,
                     decoration: InputDecoration(
                       hintText: 'السعر',
+                      labelText: 'السعر',
+
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 3.0, horizontal: 23),
 
                       hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
                       suffixIcon: Padding(
                         padding: EdgeInsets.only(top: 15),
-                        child: Icon(Icons.money,
-                            //Sara edits
-                            color: kPrimaryColor),
+                        // child: Icon(Icons.money,
+                        //     //Sara edits
+                        //     color: kPrimaryColor),
                       ),
                       labelStyle: TextStyle(
                           color: kPrimaryColor, fontFamily: "Tajawal"),
@@ -533,37 +601,40 @@ return " أدخل وصف أكبر من أو يساوي حرفين ";            
                 SizedBox(
                   height: 30,
                 ),
-                  Row(
-                children: [
-                  SizedBox(
-                    width: 38,
-                  ),
-                   Expanded(
-                    child: Row(children: [
-                ElevatedButton(
-                  onPressed: () async {
-                    if (uploadImageUrl.isEmpty)
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('الرجاء إرفاق صورة')));
-                    if (dropdownvalue == '  اختر الفئة:')
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          content: Text('الرجاء إختيار الفئة ')));
-                    /*if (uploadImageUrl.isEmpty &&
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 38,
+                    ),
+                    Expanded(
+                      child: Row(children: [
+                        ElevatedButton(
+                          onPressed: () async {
+                            if (uploadImageUrl.isEmpty)
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text('الرجاء إرفاق صورة')));
+                            if (dropdownvalue == '  اختر الفئة:')
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text('الرجاء إختيار الفئة ')));
+                            /*if (uploadImageUrl.isEmpty &&
                       _formKey.currentState.validate()) {
                     ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('الرجاء إرفاق صورة')));
                     _showMyDialog();
                   }*/
 
-                    if (_formKey.currentState!.validate() &&
-                        uploadImageUrl != "" &&
-                        dropdownvalue != '  اختر الفئة:') {
-                      String prodName = nameController.text;
-                      String desc = descController.text;
-                      int amount = int.parse(amountController.text);
-                      double priceN = double.parse(priceController.text);
+                            if (_formKey.currentState!.validate() &&
+                                uploadImageUrl != "" &&
+                                dropdownvalue != '  اختر الفئة:') {
+                              String prodName = nameController.text;
+                              String desc = descController.text;
+                              int amount = int.parse(amountController.text);
+                              double priceN =
+                                  double.parse(priceController.text);
 
-                      /*
+                              /*
 
                     final user;
                     user = FirebaseAuth.instance.currentUser;
@@ -576,158 +647,156 @@ return " أدخل وصف أكبر من أو يساوي حرفين ";            
                         .map((snapshot) =>
                         snapshot.docs.map((doc) => CartModal.fromJson(doc.data())).toList());*/
 
+                              DateTime now = DateTime.now();
+                              String formattedDate =
+                                  DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
 
+                              final productToBeAdded = FirebaseFirestore
+                                  .instance
+                                  .collection('Products')
+                                  .doc();
+                              Product product = Product(
+                                  id: productToBeAdded.id,
+                                  name: prodName,
+                                  dsscription: desc,
+                                  avalibleAmount: amount,
+                                  image: uploadImageUrl,
+                                  categoryName: dropdownvalue,
+                                  price: priceN,
+                                  shopOwnerId: thisOwnerId,
+                                  shopName: shopNameData,
+                                  proudctDate: formattedDate);
 
+                              final json = product.toJson();
+                              await productToBeAdded.set(json);
 
+                              //---------------------------- duplicate collection
 
+                              final productToBeAdded1 = FirebaseFirestore
+                                  .instance
+                                  .collection('OrdersProducts')
+                                  .doc(productToBeAdded.id);
+                              Product product1 = Product(
+                                  id: productToBeAdded.id,
+                                  name: prodName,
+                                  dsscription: desc,
+                                  avalibleAmount: amount,
+                                  image: uploadImageUrl,
+                                  categoryName: dropdownvalue,
+                                  price: priceN,
+                                  shopOwnerId: thisOwnerId,
+                                  shopName: shopNameData);
 
-DateTime now = DateTime.now();
-String formattedDate = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
+                              final json1 = product1.toJson();
+                              await productToBeAdded1.set(json1);
 
+                              //------------------------------------
+                              //await Firestore.saveProduct(product);
+                              Fluttertoast.showToast(
+                                msg: "تمت إضافة المنتج بنجاح",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 3,
+                                backgroundColor:
+                                    Color.fromARGB(255, 26, 96, 91),
+                                textColor: Colors.white,
+                                fontSize: 18.0,
+                              );
+                              await Future.delayed(const Duration(seconds: 1),
+                                  () {
+                                Navigator.pop(context);
+                              });
 
-                      final productToBeAdded = FirebaseFirestore.instance
-                          .collection('Products')
-                          .doc();
-                      Product product = Product(
-                          id: productToBeAdded.id,
-                          name: prodName,
-                          dsscription: desc,
-                          avalibleAmount: amount,
-                          image: uploadImageUrl,
-                          categoryName: dropdownvalue,
-                          price: priceN,
-                          shopOwnerId: thisOwnerId,
-                          shopName: shopNameData,
-                          proudctDate:formattedDate);
-
-                      final json = product.toJson();
-                      await productToBeAdded.set(json);
-
-                      //---------------------------- duplicate collection
-
-                      final productToBeAdded1 = FirebaseFirestore.instance
-                          .collection('OrdersProducts')
-                          .doc(productToBeAdded.id);
-                      Product product1 = Product(
-                          id: productToBeAdded.id,
-                          name: prodName,
-                          dsscription: desc,
-                          avalibleAmount: amount,
-                          image: uploadImageUrl,
-                          categoryName: dropdownvalue,
-                          price: priceN,
-                          shopOwnerId: thisOwnerId,
-                          shopName: shopNameData);
-
-                      final json1 = product1.toJson();
-                      await productToBeAdded1.set(json1);
-
-                      //------------------------------------
-                      //await Firestore.saveProduct(product);
-                      Fluttertoast.showToast(
-                        msg: "تمت إضافة المنتج بنجاح",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.CENTER,
-                        timeInSecForIosWeb: 3,
-                        backgroundColor: Color.fromARGB(255, 26, 96, 91),
-                        textColor: Colors.white,
-                        fontSize: 18.0,
-                      );
-                      await Future.delayed(const Duration(seconds: 1), () {
-                        Navigator.pop(context);
-                      });
-
-                      // ScaffoldMessenger.of(context).showSnackBar(
-                      //   const SnackBar(content: Text('تم حفظ المنتج')),
-                      // );
-                    }
-                    /*   nameController.clear();
+                              // ScaffoldMessenger.of(context).showSnackBar(
+                              //   const SnackBar(content: Text('تم حفظ المنتج')),
+                              // );
+                            }
+                            /*   nameController.clear();
                   descController.clear();
                   amountController.clear();
                   priceController.clear();*/
-                  },
-                    style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Color(0xff51908E)),
-                          padding: MaterialStateProperty.all(
-                              EdgeInsets.symmetric(
-                                  horizontal: 40, vertical: 13)),
-                          shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(27))),
+                          },
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Color(0xff51908E)),
+                            padding: MaterialStateProperty.all(
+                                EdgeInsets.symmetric(
+                                    horizontal: 40, vertical: 13)),
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(27))),
+                          ),
+                          child: Text(
+                            "إضافة منتج",
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: "Tajawal",
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
-                  child: Text(
-                    "إضافة منتج",
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontFamily: "Tajawal",
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-                /* child: Text("إضافة منتج"),
+                        /* child: Text("إضافة منتج"),
                 style: ElevatedButton.styleFrom(
                     primary: Color.fromARGB(255, 26, 96, 91)),
               ),*/
 
-                SizedBox(
-                  width: 10,
-                ),
-
-                ElevatedButton(
-                 style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              Color.fromARGB(255, 221, 112, 112)),
-                          padding: MaterialStateProperty.all(
-                              EdgeInsets.symmetric(
-                                  horizontal: 40, vertical: 13)),
-                          shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(27))),
+                        SizedBox(
+                          width: 10,
                         ),
-                  child: Text(
-                    "إلغاء",
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontFamily: "Tajawal",
-                        fontWeight: FontWeight.bold),
-                  ),
-                  onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text("تنبيه"),
-                            content: Text('سيتم إلغاء إضافة هذا المنتج'),
-                            actions: <Widget>[
-                              TextButton(
-                                child: Text(" تأكيد",
-                                    style: TextStyle(
-                                      color: Colors.red)),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const ownerProductsCategScreen()),
+                        ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                Color.fromARGB(255, 221, 112, 112)),
+                            padding: MaterialStateProperty.all(
+                                EdgeInsets.symmetric(
+                                    horizontal: 40, vertical: 13)),
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(27))),
+                          ),
+                          child: Text(
+                            "إلغاء",
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: "Tajawal",
+                                fontWeight: FontWeight.bold),
+                          ),
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text("تنبيه"),
+                                    content:
+                                        Text('سيتم إلغاء إضافة هذا المنتج'),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: Text(" تأكيد",
+                                            style:
+                                                TextStyle(color: Colors.red)),
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const ownerProductsCategScreen()),
+                                          );
+                                        },
+                                      ),
+                                      TextButton(
+                                        child: Text("تراجع"),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      )
+                                    ],
                                   );
-                                },
-                              ),
-                              TextButton(
-                                child: Text("تراجع"),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              )
-                            ],
-                          );
-                        });
-                  },
+                                });
+                          },
+                        ),
+                      ]),
+                    )
+                  ],
                 ),
-
-                 ]),
-                  )
-                ],
-              ),
                 /* ElevatedButton(
                 style: ElevatedButton.styleFrom(primary: Colors.red),
                 onPressed: () {
@@ -842,7 +911,7 @@ class DefaultAppBar extends StatelessWidget {
       ),
       centerTitle: true,
       backgroundColor: Colors.white,
-      elevation: 0,
+      elevation: 3,
       automaticallyImplyLeading: false,
       iconTheme: IconThemeData(color: kPrimaryColor),
     );

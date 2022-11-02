@@ -105,6 +105,8 @@ flutter:
     - assets/images/trophies/
     - assets/images/star-100.png
     - assets/images/erase.png
+    - assets/images/cartBack1.png
+    - assets/images/productPic.png
 
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see

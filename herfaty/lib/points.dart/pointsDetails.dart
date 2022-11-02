@@ -400,7 +400,7 @@ class DefaultAppBarO extends StatelessWidget implements PreferredSizeWidget {
           style: TextStyle(color: kPrimaryColor, fontFamily: "Tajawal")),
       centerTitle: true,
       backgroundColor: Colors.white,
-      elevation: 0,
+      elevation: 3,
       automaticallyImplyLeading: false,
       iconTheme: IconThemeData(color: kPrimaryColor),
       leading: IconButton(
