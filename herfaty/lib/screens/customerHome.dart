@@ -55,8 +55,8 @@ class _customerHomeScreenState extends State<customerHomeScreen> {
                       //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Image.asset(
-                          "assets/icons/starno.gif",
-                          height: 25,
+                          "assets/icons/points.png",
+                          height: 64,
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 4),
@@ -64,6 +64,7 @@ class _customerHomeScreenState extends State<customerHomeScreen> {
                             "تعرف على المتاجر الأكثر نقاطاً",
                             style: TextStyle(
                                 color: kPrimaryColor,
+                                //color: Color(0xffFECE00),
                                 fontWeight: FontWeight.w600,
                                 fontSize: 18.5,
                                 //decoration: TextDecoration.underline,
