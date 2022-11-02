@@ -80,7 +80,7 @@ class _AddProductState extends State<AddProduct> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(0.0),
         child: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
@@ -601,13 +601,11 @@ class _AddProductState extends State<AddProduct> {
                 SizedBox(
                   height: 30,
                 ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 38,
-                    ),
-                    Expanded(
-                      child: Row(children: [
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 25),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
                         ElevatedButton(
                           onPressed: () async {
                             if (uploadImageUrl.isEmpty)
@@ -619,11 +617,11 @@ class _AddProductState extends State<AddProduct> {
                                   const SnackBar(
                                       content: Text('الرجاء إختيار الفئة ')));
                             /*if (uploadImageUrl.isEmpty &&
-                      _formKey.currentState.validate()) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('الرجاء إرفاق صورة')));
-                    _showMyDialog();
-                  }*/
+                  _formKey.currentState.validate()) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('الرجاء إرفاق صورة')));
+                  _showMyDialog();
+                    }*/
 
                             if (_formKey.currentState!.validate() &&
                                 uploadImageUrl != "" &&
@@ -635,15 +633,15 @@ class _AddProductState extends State<AddProduct> {
                                   double.parse(priceController.text);
 
                               /*
-                    final user;
-                    user = FirebaseAuth.instance.currentUser;
-                    final uid = user.uid;
-                    FirebaseFirestore.instance
-                        .collection("users")
-                        .where("email", isEqualTo: uid)
-                        .snapshots()
-                        .map((snapshot) =>
-                        snapshot.docs.map((doc) => CartModal.fromJson(doc.data())).toList());*/
+                  final user;
+                  user = FirebaseAuth.instance.currentUser;
+                  final uid = user.uid;
+                  FirebaseFirestore.instance
+                    .collection("users")
+                    .where("email", isEqualTo: uid)
+                    .snapshots()
+                    .map((snapshot) =>
+                    snapshot.docs.map((doc) => CartModal.fromJson(doc.data())).toList());*/
 
                               DateTime now = DateTime.now();
                               String formattedDate =
@@ -710,9 +708,9 @@ class _AddProductState extends State<AddProduct> {
                               // );
                             }
                             /*   nameController.clear();
-                  descController.clear();
-                  amountController.clear();
-                  priceController.clear();*/
+                    descController.clear();
+                    amountController.clear();
+                    priceController.clear();*/
                           },
                           style: ButtonStyle(
                             backgroundColor:
@@ -725,7 +723,7 @@ class _AddProductState extends State<AddProduct> {
                                     borderRadius: BorderRadius.circular(27))),
                           ),
                           child: Text(
-                            "إضافة منتج",
+                            "إضافة المنتج",
                             style: TextStyle(
                                 fontSize: 14,
                                 fontFamily: "Tajawal",
@@ -733,20 +731,17 @@ class _AddProductState extends State<AddProduct> {
                           ),
                         ),
                         /* child: Text("إضافة منتج"),
-                style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 26, 96, 91)),
+                  style: ElevatedButton.styleFrom(
+                  primary: Color.fromARGB(255, 26, 96, 91)),
               ),*/
 
-                        SizedBox(
-                          width: 10,
-                        ),
                         ElevatedButton(
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
                                 Color.fromARGB(255, 221, 112, 112)),
                             padding: MaterialStateProperty.all(
                                 EdgeInsets.symmetric(
-                                    horizontal: 40, vertical: 13)),
+                                    horizontal: 60, vertical: 13)),
                             shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(27))),
@@ -792,9 +787,10 @@ class _AddProductState extends State<AddProduct> {
                           },
                         ),
                       ]),
-                    )
-                  ],
                 ),
+                SizedBox(
+                  height: 10,
+                )
                 /* ElevatedButton(
                 style: ElevatedButton.styleFrom(primary: Colors.red),
                 onPressed: () {
