@@ -180,6 +180,12 @@ class _OwnerSettingsState extends State<OwnerSettings> {
                   ),
                   actions: <Widget>[
                     TextButton(
+                      child: Text("تراجع"),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    TextButton(
                       child: Text("تسجيل خروج",
                           style: TextStyle(color: Colors.red)),
                       onPressed: () {
@@ -192,12 +198,6 @@ class _OwnerSettingsState extends State<OwnerSettings> {
                                 builder: (context) => new login()));
                       },
                     ),
-                    TextButton(
-                      child: Text("تراجع"),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    )
                   ],
                 );
               });
