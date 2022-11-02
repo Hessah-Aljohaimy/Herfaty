@@ -306,7 +306,7 @@ class payForm extends StatelessWidget {
 
    DateTime now = DateTime.now();
                               String date =
-                                  DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
+                                  DateFormat('yyyy-MM-dd').format(now);
 
 
                       num totalPoints = 0;
