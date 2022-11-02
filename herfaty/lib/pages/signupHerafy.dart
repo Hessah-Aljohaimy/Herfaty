@@ -426,7 +426,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
 
                         Container(
                           width: 290,
-                          height: 130,
+                          //height: 130,
                           padding: EdgeInsets.symmetric(horizontal: 16),
                           child: reusableTextFieldDec("وصف المتجر",
                               _shopdescriptionTextEditingController),
