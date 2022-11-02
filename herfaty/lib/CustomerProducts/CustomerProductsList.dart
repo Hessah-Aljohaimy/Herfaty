@@ -51,6 +51,16 @@ class _CustomerProductsListState extends State<CustomerProductsList> {
 
   void initState() {
     CatName = widget.categoryName;
+    Map catCheck = {
+  "الخرز والإكسسوار": false,
+  "الفخاريات": false,
+  "الحياكة والتطريز": false,
+  "فنون الورق والتلوين": false,
+};
+cat1.clear();
+cat2.clear();
+cat3.clear();
+cat4.clear();
   }
 
   //======================================================================================
@@ -98,14 +108,14 @@ class _CustomerProductsListState extends State<CustomerProductsList> {
                             return DateTime.parse(b.proudctDate)
                                 .compareTo(DateTime.parse(a.proudctDate));
                           });
-
+//(cat1.contains(productItems[i].name.replaceAll('ه', "ة")))
                           if (cat1.isEmpty &&
                               widget.categoryName == "الخرز والإكسسوار") {
                             for (var i = 0; i < productItems.length; i++) {
                               if ((cat1.contains(productItems[i].name)) ==
                                       false &&
                                   productItems[i].categoryName ==
-                                      "الخرز والإكسسوار") {
+                                      "الخرز والإكسسوار"        ) {
                                 cat1.add(productItems[i].name);
                               }
                             }
@@ -385,7 +395,12 @@ class mySearch extends SearchDelegate {
               final productItems = snapshot.data!.toList();
               List<Product1> productItems2 = [];
               for (var i = 0; i < productItems.length; i++) {
-                if (productItems[i].name.contains(query)) {
+                if (productItems[i].name.contains(query) || productItems[i].name.replaceAll('ة', "ه")
+                .replaceAll('\u0622', '\u0627')
+            .replaceAll('\u0623', '\u0627')
+            .replaceAll('\u0625', '\u0627').contains(query) 
+              
+                ) {
                   productItems2.add((productItems[i]));
                 }
               }

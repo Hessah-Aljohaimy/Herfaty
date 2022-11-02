@@ -58,6 +58,16 @@ String typeOfSort="الأحدث";
 
   void initState(){
    CatName=widget.categoryName;
+    Map catCheck = {
+  "الخرز والإكسسوار": false,
+  "الفخاريات": false,
+  "الحياكة والتطريز": false,
+  "فنون الورق والتلوين": false,
+};
+cat1.clear();
+cat2.clear();
+cat3.clear();
+cat4.clear();
  }
 
   @override
