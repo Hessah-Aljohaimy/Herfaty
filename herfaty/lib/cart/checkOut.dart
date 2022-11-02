@@ -149,10 +149,12 @@ class checkOut extends StatelessWidget {
                       fontSize: 15, color: Colors.white, fontFamily: "Tajawal"),
                 ),
                 onPressed: () {
-                  if (add.msg == 'ادخل موقعك') {
-                    ShowDialogMethod(context, "من فضلك قم بتحديد موقع التوصيل");
-                  } else {
-                    String loc = add.msg;
+                  // if (add.msg == 'ادخل موقعك') {
+                  //   ShowDialogMethod(context, "من فضلك قم بتحديد موقع التوصيل");
+                  // } 
+                  // else {
+                    //add.msg
+                    String loc = '3854 Said Al Salami, An Nakheel, Riyadh 12384, Saudi Arabia';
                     Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => payForm(
                         Items: Items,
@@ -163,7 +165,7 @@ class checkOut extends StatelessWidget {
                         temp: Items,
                       ),
                     ));
-                  }
+                  // }
                 },
                 style: ElevatedButton.styleFrom(
                     shadowColor: Colors.white,
