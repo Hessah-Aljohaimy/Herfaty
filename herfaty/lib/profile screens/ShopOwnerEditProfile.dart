@@ -412,7 +412,8 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                             _shopnameTextEditingController.text !=
                                 widget.shopname ||
                             _shopdescriptionTextEditingController.text !=
-                                widget.shopdescription) {
+                                widget.shopdescription ||
+                            ShopOwnerEditProfile.newLocation != "") {
                           final docShopOwner = FirebaseFirestore.instance
                               .collection('shop_owner')
                               .doc(widget.uid);
@@ -509,7 +510,8 @@ class _ShopOwnerEditProfileState extends State<ShopOwnerEditProfile> {
                             _shopnameTextEditingController.text !=
                                 widget.shopname ||
                             _shopdescriptionTextEditingController.text !=
-                                widget.shopdescription) {
+                                widget.shopdescription ||
+                            ShopOwnerEditProfile.newLocation != "") {
                           showDialog(
                             context: context,
                             builder: (BuildContext context1) {
