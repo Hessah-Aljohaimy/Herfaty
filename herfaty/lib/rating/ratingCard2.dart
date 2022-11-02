@@ -26,75 +26,82 @@ class _ratingCard2State extends State<ratingCard2> {
   Widget build(BuildContext context) {
     Size size =
         MediaQuery.of(context).size; //to get the width and height of the app
-    return ListTile(
-      minVerticalPadding: 10,
-      contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
-      //leading: FlutterLogo(size: 72.0),
-      title: Text(
-        widget.ratingItem.comment,
-        style: const TextStyle(
-          fontSize: 18.0,
-          fontWeight: FontWeight.w400,
-          fontFamily: "Tajawal",
-          color: Colors.black,
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+      ),
+      child: ListTile(
+        tileColor: Colors.white,
+        minVerticalPadding: 10,
+        contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
+        //leading: FlutterLogo(size: 72.0),
+        title: Text(
+          widget.ratingItem.comment,
+          style: const TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.w400,
+            fontFamily: "Tajawal",
+            color: Colors.black,
+          ),
         ),
-      ),
-      subtitle: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              // عدد نجوم هذا التقييم رقمًا
-              Padding(
-                padding: const EdgeInsets.only(top: 9.0, left: 5.0),
-                child: Text(
-                  "${widget.ratingItem.starsNumber}",
-                  style: const TextStyle(
-                    fontSize: 19.0,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: "Tajawal",
-                    color: kPrimaryColor,
+        subtitle: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                // عدد نجوم هذا التقييم رقمًا
+                Padding(
+                  padding: const EdgeInsets.only(top: 9.0, left: 5.0),
+                  child: Text(
+                    "${widget.ratingItem.starsNumber}",
+                    style: const TextStyle(
+                      fontSize: 19.0,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: "Tajawal",
+                      color: kPrimaryColor,
+                    ),
                   ),
                 ),
-              ),
-              //  عدد نجوم هذا التقييم على شكل نجوم ممتلئة نسبيًا
-              RatingStars(
-                editable: false,
-                rating: widget.ratingItem.starsNumber,
-                color: Colors.amber,
-                iconSize: 28,
-              ),
-            ],
-          ),
-          //-----------------------------------------------------
-          Row(
-            // mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              //Date Icon
-              Icon(
-                Icons.access_time_outlined,
-                color: kPrimaryLight,
-                size: 16.0,
-              ),
+                //  عدد نجوم هذا التقييم على شكل نجوم ممتلئة نسبيًا
+                RatingStars(
+                  editable: false,
+                  rating: widget.ratingItem.starsNumber,
+                  color: Colors.amber,
+                  iconSize: 28,
+                ),
+              ],
+            ),
+            //-----------------------------------------------------
+            Row(
+              // mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                //Date Icon
+                Icon(
+                  Icons.access_time_outlined,
+                  color: kPrimaryLight,
+                  size: 16.0,
+                ),
 
-              //*************************This part contains rating date التاريخ
-              Padding(
-                padding: const EdgeInsets.only(top: 5.0, right: 5.0),
-                child: Text(
-                  widget.ratingItem.date,
-                  style: const TextStyle(
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.w500,
-                    fontFamily: "Tajawal",
-                    color: Color.fromARGB(255, 93, 91, 91),
+                //*************************This part contains rating date التاريخ
+                Padding(
+                  padding: const EdgeInsets.only(top: 5.0, right: 5.0),
+                  child: Text(
+                    widget.ratingItem.date,
+                    style: const TextStyle(
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: "Tajawal",
+                      color: Color.fromARGB(255, 93, 91, 91),
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
+        isThreeLine: true,
       ),
-      isThreeLine: true,
     );
   }
 }

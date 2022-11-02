@@ -42,11 +42,11 @@ class _ratingsListState extends State<ratingsList> {
       appBar: ratingsListAppBar(context),
       body: SafeArea(
         child: Container(
-          // decoration: BoxDecoration(
-          //     image: DecorationImage(
-          //   image: AssetImage('assets/images/cartBack1.png'),
-          //   fit: BoxFit.cover,
-          // )),
+          decoration: BoxDecoration(
+              image: DecorationImage(
+            image: AssetImage('assets/images/cartBack1.png'),
+            fit: BoxFit.cover,
+          )),
           child: Column(
             children: [
               const SizedBox(height: 20),
