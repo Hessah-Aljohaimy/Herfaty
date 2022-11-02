@@ -151,7 +151,7 @@ class appBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
-      height: 150,
+      height: 130,
       width: double.infinity,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
@@ -177,15 +177,18 @@ class appBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "    \n قم بإختيار التصنيف لعرض منتجاتك  ",
-                // ignore: prefer_const_constructors
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    fontFamily: "Tajawal"),
-                textDirection: TextDirection.rtl,
+              Padding(
+                padding: const EdgeInsets.only(top: 5.0, right: 10),
+                child: Text(
+                  "  قم بإختيار التصنيف لعرض منتجاتك  ",
+                  // ignore: prefer_const_constructors
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      fontFamily: "Tajawal"),
+                  textDirection: TextDirection.rtl,
+                ),
               ),
               /* profileButton(
                 icon: Icons.account_circle_sharp,
