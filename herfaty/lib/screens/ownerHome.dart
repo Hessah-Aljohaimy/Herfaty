@@ -256,63 +256,63 @@ class _AppBarState extends State<AppBar> {
   }
 }
 
-class Services extends StatelessWidget {
-  const Services({Key? key}) : super(key: key);
+// class Services extends StatelessWidget {
+//   const Services({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          StreamBuilder<List<ownerServices>>(
-              stream: readCaterories(),
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  return Text('somting wrong \n ${snapshot.error}');
-                } else if (snapshot.hasData) {
-                  final cItems = snapshot.data!.toList();
+//   @override
+//   Widget build(BuildContext context) {
+//     return SizedBox(
+//       child: Column(
+//         mainAxisAlignment: MainAxisAlignment.center,
+//         children: [
+//           StreamBuilder<List<ownerServices>>(
+//               stream: readCaterories(),
+//               builder: (context, snapshot) {
+//                 if (snapshot.hasError) {
+//                   return Text('somting wrong \n ${snapshot.error}');
+//                 } else if (snapshot.hasData) {
+//                   final cItems = snapshot.data!.toList();
 
-                  return GridView.builder(
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 8,
-                    ),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.8,
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 24,
-                    ),
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                          child: ownerServicesCard(
-                            ownerService: cItems[index],
-                          ),
-                          onTap: () {
-                            if (cItems[index].name == "لعبة") {
-                            } else if (cItems[index].name == "احصائيات") {}
-                          });
-                    },
-                    itemCount: cItems.length,
-                  );
-                } else {
-                  return Center(child: CircularProgressIndicator());
-                }
-              })
-        ],
-      ),
-    );
-  }
-}
+//                   return GridView.builder(
+//                     shrinkWrap: true,
+//                     padding: const EdgeInsets.symmetric(
+//                       horizontal: 20,
+//                       vertical: 8,
+//                     ),
+//                     gridDelegate:
+//                         const SliverGridDelegateWithFixedCrossAxisCount(
+//                       crossAxisCount: 2,
+//                       childAspectRatio: 0.8,
+//                       crossAxisSpacing: 20,
+//                       mainAxisSpacing: 24,
+//                     ),
+//                     itemBuilder: (context, index) {
+//                       return GestureDetector(
+//                           child: ownerServicesCard(
+//                             ownerService: cItems[index],
+//                           ),
+//                           onTap: () {
+//                             if (cItems[index].name == "لعبة") {
+//                             } else if (cItems[index].name == "احصائيات") {}
+//                           });
+//                     },
+//                     itemCount: cItems.length,
+//                   );
+//                 } else {
+//                   return Center(child: CircularProgressIndicator());
+//                 }
+//               })
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 // Stream to reach collection
 
-Stream<List<ownerServices>> readCaterories() => FirebaseFirestore.instance
-    .collection('ownerServices')
-    .snapshots()
-    .map((snapshot) => snapshot.docs
-        .map((doc) => ownerServices.fromJson(doc.data()))
-        .toList());
+// Stream<List<ownerServices>> readCaterories() => FirebaseFirestore.instance
+//     .collection('ownerServices')
+//     .snapshots()
+//     .map((snapshot) => snapshot.docs
+//         .map((doc) => ownerServices.fromJson(doc.data()))
+//         .toList());
