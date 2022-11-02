@@ -635,11 +635,9 @@ class _AddProductState extends State<AddProduct> {
                                   double.parse(priceController.text);
 
                               /*
-
                     final user;
                     user = FirebaseAuth.instance.currentUser;
                     final uid = user.uid;
-
                     FirebaseFirestore.instance
                         .collection("users")
                         .where("email", isEqualTo: uid)
