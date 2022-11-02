@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:herfaty/points%20base/RewardsCarousel.dart';
+import 'package:herfaty/points.dart/pointsList.dart';
 
 class PointPanel extends StatefulWidget {
   const PointPanel({super.key});
@@ -94,7 +95,12 @@ class _PointPanelState extends State<PointPanel> {
                       fontWeight: FontWeight.bold,
                       fontFamily: "Tajawal"),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PointsList()),
+                  );
+                },
               ),
             ),
             IconButton(

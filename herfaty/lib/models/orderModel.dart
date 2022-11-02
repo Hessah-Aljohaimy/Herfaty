@@ -8,6 +8,8 @@ class orderModal {
   String notification = "notPushed";
   String status = "New order";
   String orderDate = "";
+  num points = 0.0;
+
   Map<String, num> products;
 
   orderModal(
@@ -20,6 +22,7 @@ class orderModal {
       required this.notification,
       required this.status,
       required this.orderDate,
+      required this.points,
       required this.products});
 
   Map<String, dynamic> toJson() => {
@@ -32,6 +35,7 @@ class orderModal {
         'notification': notification,
         'status': status,
         'orderDate': orderDate,
+        'points': points,
         'products': products,
       };
 
@@ -45,5 +49,6 @@ class orderModal {
       notification: json['notification'],
       status: json['status'],
       orderDate: json['orderDate'],
+      points: json['points'],
       products: json['products']);
 }

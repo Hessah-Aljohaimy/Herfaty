@@ -73,8 +73,16 @@ class PointsList extends StatelessWidget {
                                     ),
                                   ),
                                   child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment
+                                        .start, //takes the row to the top
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
                                     children: [
                                       Row(
+                                        crossAxisAlignment: CrossAxisAlignment
+                                            .start, //used for aligning the children vertically
+
+                                        //
                                         children: [
                                           Expanded(
                                             child: Padding(
@@ -95,6 +103,7 @@ class PointsList extends StatelessWidget {
                                                           fontSize: 35.0,
                                                           fontFamily:
                                                               "Tajawal")),
+
                                                   //Icon(Icons.numbers),
                                                   RichText(
                                                     text: TextSpan(children: [
@@ -147,77 +156,98 @@ class PointsList extends StatelessWidget {
                                                   //       fontSize: 17.0,
                                                   //       fontFamily: "Tajawal"),
                                                   // ),
+
+                                                  // Padding(
+                                                  //   padding:
+                                                  //       const EdgeInsets.only(
+                                                  //           left: 10),
+                                                  //   child: Row(
+                                                  //     mainAxisAlignment:
+                                                  //         MainAxisAlignment.end,
+                                                  //     children: [
+                                                  //       Image.asset(
+                                                  //         "assets/images/points_trophies/icons8-coins-64.png",
+                                                  //         width: 40,
+                                                  //       ),
+                                                  //     ],
+                                                  //   ),
+                                                  // ),
                                                 ],
                                               ),
                                             ),
                                           ),
                                         ],
                                       ),
-                                      // Padding(
-                                      //   padding:
-                                      //       const EdgeInsets.only(left: 10),
-                                      //   child: Row(
-                                      //     mainAxisAlignment:
-                                      //         MainAxisAlignment.end,
-                                      //     children: [
-                                      //       ElevatedButton(
-                                      //         style: ElevatedButton.styleFrom(
-                                      //             primary: Color(
-                                      //                 0xff4C8F2F) // background
-                                      //             ),
-                                      //         onPressed: () {
-                                      //           Navigator.push(
-                                      //             context,
-                                      //             MaterialPageRoute(
-                                      //                 builder: (context) =>
-                                      //                     orderDetails(
-                                      //                       date: cItems[index]
-                                      //                           .orderDate,
-                                      //                       totalOrder:
-                                      //                           cItems[index]
-                                      //                               .total,
-                                      //                       docID: cItems[index]
-                                      //                           .docId,
-                                      //                       products:
-                                      //                           cItems[index]
-                                      //                               .products,
-                                      //                       status:
-                                      //                           cItems[index]
-                                      //                               .status,
-                                      //                     )),
-                                      //           );
-                                      //           //go to order deatils page
-                                      //         },
-                                      //         child: Text(
-                                      //           "تفاصيل الطلب",
-                                      //           style: TextStyle(
-                                      //             fontFamily: "Tajawal",
-                                      //           ),
-                                      //         ),
+//                                       Padding(
+//                                         padding:
+//                                             const EdgeInsets.only(left: 10),
+//                                         child: Row(
+//                                           mainAxisAlignment:
+//                                               MainAxisAlignment.end,
+//                                           children: [
+//                                             Image.asset(
+//                                               "assets/images/points_trophies/icons8-coins-64.png",
+//                                               width: 40,
+//                                             ),
+// ],
+//                                         ),
+//                                       ),
+                                      // ElevatedButton(
+                                      //   style: ElevatedButton.styleFrom(
+                                      //       primary: Color(
+                                      //           0xff4C8F2F) // background
                                       //       ),
-                                      //     ],
+                                      //   onPressed: () {
+                                      //     Navigator.push(
+                                      //       context,
+                                      //       MaterialPageRoute(
+                                      //           builder: (context) =>
+                                      //               orderDetails(
+                                      //                 date: cItems[index]
+                                      //                     .orderDate,
+                                      //                 totalOrder:
+                                      //                     cItems[index]
+                                      //                         .total,
+                                      //                 docID: cItems[index]
+                                      //                     .docId,
+                                      //                 products:
+                                      //                     cItems[index]
+                                      //                         .products,
+                                      //                 status:
+                                      //                     cItems[index]
+                                      //                         .status,
+                                      //               )),
+                                      //     );
+                                      //     //go to order deatils page
+                                      //   },
+                                      //   child: Text(
+                                      //     "تفاصيل الطلب",
+                                      //     style: TextStyle(
+                                      //       fontFamily: "Tajawal",
+                                      //     ),
                                       //   ),
                                       // ),
-                                      MaterialButton(
-                                        padding: EdgeInsets.all(8.0),
-                                        textColor: Colors.white,
-                                        splashColor: Colors.greenAccent,
-                                        elevation: 8.0,
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                                image: AssetImage(
-                                                    'assets/images/cartBack1.png'),
-                                                fit: BoxFit.cover),
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text("تفاصيل الطلب"),
-                                          ),
-                                        ),
-                                        // ),
-                                        onPressed: () {},
-                                      ),
+
+                                      // MaterialButton(
+                                      //   padding: EdgeInsets.all(8.0),
+                                      //   textColor: Colors.white,
+                                      //   splashColor: Colors.greenAccent,
+                                      //   elevation: 8.0,
+                                      //   child: Container(
+                                      //     decoration: BoxDecoration(
+                                      //       image: DecorationImage(
+                                      //           image: AssetImage(
+                                      //               'assets/images/cartBack1.png'),
+                                      //           fit: BoxFit.cover),
+                                      //     ),
+                                      //     child: Padding(
+                                      //       padding: const EdgeInsets.all(8.0),
+                                      //       child: Text("تفاصيل الطلب"),
+                                      //     ),
+                                      //   ),
+                                      //   // ),
+                                      //   onPressed: () {},
+                                      // ),
                                     ],
                                   ),
                                 );

@@ -305,7 +305,12 @@ class payForm extends StatelessWidget {
 
                       DateTime now = new DateTime.now();
                       String date = "${now.year}-${now.month}-${now.day}";
-
+                      num totalPoints = 0;
+                      num points = 0;
+                      products.forEach((key, value) {
+                        points = value * 10;
+                        totalPoints += points;
+                      });
                       orderModal order = orderModal(
                           customerId: user!.uid,
                           shopOwnerId: widget.shopOwnerId,
@@ -316,9 +321,10 @@ class payForm extends StatelessWidget {
                           notification: 'notPushed',
                           status: 'طلب جديد',
                           products: products,
+                          points: totalPoints,
                           orderDate: date);
 
-                      createNewOrder(order);
+                      createNewOrder(order, widget.shopOwnerId, totalPoints);
 //print('zzzzzzzvvvevevevvevevevvevv');
 
                       return Container(
@@ -476,10 +482,14 @@ class payForm extends StatelessWidget {
   }
 }
 
-Future createNewOrder(orderModal cartItem) async {
+Future createNewOrder(
+    orderModal cartItem, var shopOwnerId, var totalPoints) async {
   final docCartItem =
       FirebaseFirestore.instance.collection('orders').doc("${cartItem.docId}");
+  final updatedPoints =
+      FirebaseFirestore.instance.collection('shop_owner').doc("${shopOwnerId}");
   final json = cartItem.toJson();
+  updatedPoints.update({'points': totalPoints});
   await docCartItem.set(
     json,
     // SetOptions(merge: true)
