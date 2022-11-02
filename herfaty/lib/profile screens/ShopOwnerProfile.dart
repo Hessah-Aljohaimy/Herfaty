@@ -140,6 +140,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
               
             ),
           ),
+           SizedBox(width: 10,),
           // IconButton(
           //   onPressed: () {
           //     showAlertDialogSettengs(context);
@@ -467,11 +468,11 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                             Expanded(
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.only(right: 0, left: 270),
+                                    const EdgeInsets.only(right: 0, left: 247),
                                 child: Text(
                                   "وصف المتجر",
                                   style: TextStyle(
-                                      fontSize: 17,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.w900,
                                       fontFamily: "Tajawal",
                                       color: Color.fromARGB(255, 39, 141, 134)),
@@ -525,7 +526,7 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                       child: Center(
                         child: Row(children: [
                           SizedBox(
-                            width: 14,
+                            width: 9,
                           ),
                           ElevatedButton(
                             onPressed: () {

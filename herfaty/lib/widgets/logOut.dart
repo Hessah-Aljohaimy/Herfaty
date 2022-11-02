@@ -150,6 +150,7 @@ class _logOutButtonState extends State<logOutButton> {
         //   },
         // ),
         actions: [
+         
           GestureDetector(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
@@ -162,6 +163,7 @@ class _logOutButtonState extends State<logOutButton> {
               height: 35.0,
             ),
           ),
+           SizedBox(width: 10,),
           // IconButton(
           //   onPressed: () {
           //     Navigator.of(context).push(MaterialPageRoute(
