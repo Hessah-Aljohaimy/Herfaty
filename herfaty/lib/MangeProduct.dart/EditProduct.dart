@@ -643,6 +643,18 @@ class _EditProduc extends State<EditProduct> {
                                     'shopName': shopNameData,
                                     'shopOwnerId': thisOwnerId
                                   });
+
+                                  Product1 product = Product1(
+                                      availableAmount: amount,
+                                      categoryName: dropdownvalue,
+                                      description: descController.text,
+                                      image: uploadImageUrl,
+                                      name: nameController.text,
+                                      price: price,
+                                      shopName: shopNameData,
+                                      shopOwnerId: thisOwnerId,
+                                      productId: widget.id,
+                                      proudctDate: '');
                                   Fluttertoast.showToast(
                                     msg: "تم تعديل المنتج بنجاح",
                                     toastLength: Toast.LENGTH_SHORT,
@@ -653,9 +665,18 @@ class _EditProduc extends State<EditProduct> {
                                     textColor: Colors.white,
                                     fontSize: 18.0,
                                   );
-                                  await Future.delayed(
-                                      const Duration(seconds: 1), () {
-                                    Navigator.pop(context);
+                                  Future.delayed(const Duration(seconds: 1),
+                                      () {
+                                    //Navigator.pop(context);
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              OwnerProdectDetails(
+                                                  product: product,
+                                                  detailsImage:
+                                                      uploadImageUrl)),
+                                    );
                                   });
 
                                   // ScaffoldMessenger.of(context).showSnackBar(

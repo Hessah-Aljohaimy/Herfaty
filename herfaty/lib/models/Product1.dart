@@ -8,9 +8,8 @@ class Product1 {
       image = "",
       shopOwnerId = "",
       customerId = "",
-      docId = "",
       shopName = "",
-      proudctDate="";
+      proudctDate = "";
 
   Product1({
     required this.productId,
@@ -35,7 +34,7 @@ class Product1 {
     image = json['image'];
     shopOwnerId = json['shopOwnerId'];
     shopName = json['shopName'];
-    proudctDate=json['proudctDate'];
+    proudctDate = json['proudctDate'];
   }
   //for retrieving data from wishList
   Product1.fromJson2(Map<String, dynamic> json) {
@@ -44,13 +43,12 @@ class Product1 {
     shopOwnerId = json['shopOwnerId'];
     shopName = json['shopName'];
     productId = json['productId'];
-    docId = json['docId'];
     description = json['description'];
     name = json['name'];
     price = json['price'];
     quantity = json['quantity'];
     availableAmount = json['avalibleAmount'];
-    proudctDate=json['proudctDate'];
+    proudctDate = json['proudctDate'];
   }
 
   Map<String, dynamic> toJson() {
@@ -64,7 +62,7 @@ class Product1 {
     data['image'] = this.image;
     data['shopOwnerId'] = this.shopOwnerId;
     data['shopName'] = this.shopName;
-    data['proudctDate']=this.proudctDate;
+    data['proudctDate'] = this.proudctDate;
     return data;
   }
 }
