@@ -11,6 +11,7 @@ import 'package:herfaty/cart/cart.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/models/cartModal.dart';
 import 'package:herfaty/models/orderModel.dart';
+import 'package:intl/intl.dart';
 import '../widgets/emptySection.dart';
 import '../widgets/subTitle.dart';
 
@@ -303,8 +304,11 @@ class payForm extends StatelessWidget {
                       final orderToBeAdded =
                           FirebaseFirestore.instance.collection('orders').doc();
 
-                      DateTime now = new DateTime.now();
-                      String date = "${now.year}-${now.month}-${now.day}";
+   DateTime now = DateTime.now();
+                              String date =
+                                  DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
+
+
                       num totalPoints = 0;
                       num points = 0;
                       products.forEach((key, value) {
