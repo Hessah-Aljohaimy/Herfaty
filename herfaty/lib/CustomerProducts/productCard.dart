@@ -345,8 +345,8 @@ class _productCardState extends State<productCard> {
             //=============================================================
             //========================================غير متوفر
             Positioned(
-                top: 25,
-                left: 215,
+                top: 5,
+                left: 185,
                 //right: 60,
                 //bottom: 6,
                 child: isAvailable
