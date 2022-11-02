@@ -123,24 +123,23 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
         //     }));*/
         //   },
         // ),
-        
-           actions: <Widget>[
-             
+
+        actions: <Widget>[
           GestureDetector(
             onTap: () {
               showAlertDialogSettengs(context);
             }, // Image tapped
-        
-            child:
-             Image.asset(
+
+            child: Image.asset(
               'assets/images/points_trophies/icons8-settings-64.png',
               fit: BoxFit.contain, // Fixes border issues
               width: 35.0,
               height: 35.0,
-              
             ),
           ),
-           SizedBox(width: 10,),
+          SizedBox(
+            width: 10,
+          ),
           // IconButton(
           //   onPressed: () {
           //     showAlertDialogSettengs(context);
@@ -395,47 +394,47 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                           ),
                         ],
                       ),
-                      child: SizedBox(
-                        height: 220,
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 8),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Flexible(
-                                    flex: 5,
-                                    child: Text(
-                                      "معلومات المتجر",
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w700,
-                                          fontFamily: "Tajawal",
-                                          color:
-                                              Color.fromARGB(255, 26, 96, 91)),
+                      child: Expanded(
+                        child: SizedBox(
+                          height: 220,
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 8),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Flexible(
+                                      flex: 5,
+                                      child: Text(
+                                        "معلومات المتجر",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w700,
+                                            fontFamily: "Tajawal",
+                                            color: Color.fromARGB(
+                                                255, 26, 96, 91)),
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Positioned(
-                                    bottom: 50,
-                                    top: 50,
-                                    child: Image.asset(
-                                      "assets/images/points_trophies/icons8-shop-94.png",
-                                      width: 30,
+                                    SizedBox(
+                                      width: 5,
                                     ),
-                                  ),
-                                ],
+                                    Positioned(
+                                      bottom: 50,
+                                      top: 50,
+                                      child: Image.asset(
+                                        "assets/images/points_trophies/icons8-shop-94.png",
+                                        width: 30,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Expanded(
-                              child: Row(
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Text(
@@ -461,12 +460,10 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                   )
                                 ],
                               ),
-                            ),
-                            // SizedBox(
-                            //   height: 6,
-                            // ),
-                            Expanded(
-                              child: Padding(
+                              // SizedBox(
+                              //   height: 6,
+                              // ),
+                              Padding(
                                 padding:
                                     const EdgeInsets.only(right: 0, left: 247),
                                 child: Text(
@@ -478,44 +475,67 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                                       color: Color.fromARGB(255, 39, 141, 134)),
                                 ),
                               ),
-                            ),
-                            Container(
-                              height: 130,
-                              // color: Colors.red,
-                              width: double.infinity,
-                              margin: const EdgeInsets.only(bottom: 2),
-                              child: Align(
-                                alignment: Alignment.topRight,
-                                child: Expanded(
-                                  child: SingleChildScrollView(
-                                    scrollDirection: Axis.vertical,
-                                    child: Text(
-                                      '${shopowner.shopdescription}',
-                                      maxLines: 5,
-                                      textAlign: TextAlign.right,
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                          color: Colors.black),
-                                    ),
-                                  ),
+                              Container(
+                                // height: 100,
+                                // color: Colors.red,
+                                width: double.infinity,
+                                margin:
+                                    const EdgeInsets.only(bottom: 2, right: 5),
+                                child: Text(
+                                  '${shopowner.shopdescription}  ${shopowner.shopdescription}',
+                                  maxLines: 5,
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.black),
                                 ),
                               ),
-                              // child: Expanded(
-                              //   child: SingleChildScrollView(
-                              //       scrollDirection: Axis.vertical,
-                              //       /*hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh*/
-                              //       //${shopowner.sho
-                              //       //pdescription}
-                              //       child: Align(
-                              //         alignment: Alignment.topRight,
-                              //         child: ExpandedWidgetShop(
-                              //             text: '${shopowner.shopdescription}'),
-                              //       )),
-                              //   //
-                              // ),
-                            ),
-                          ],
+
+                              //location view
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(right: 0, left: 247),
+                                child: Text(
+                                  "موقع المتجر",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w900,
+                                      fontFamily: "Tajawal",
+                                      color: Color.fromARGB(255, 39, 141, 134)),
+                                ),
+                              ),
+                              Container(
+                                // height: 70,
+                                // color: Colors.red,
+                                width: double.infinity,
+                                margin:
+                                    const EdgeInsets.only(bottom: 2, right: 5),
+                                child: Text(
+                                  '${shopowner.location}',
+                                  maxLines: 5,
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.black),
+                                ),
+                                // child: Expanded(
+                                //   child: SingleChildScrollView(
+                                //       scrollDirection: Axis.vertical,
+                                //       /*hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh*/
+                                //       //${shopowner.sho
+                                //       //pdescription}
+                                //       child: Align(
+                                //         alignment: Alignment.topRight,
+                                //         child: ExpandedWidgetShop(
+                                //             text: '${shopowner.shopdescription}'),
+                                //       )),
+                                //   //
+                                // ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

@@ -491,7 +491,8 @@ class _SignupHerafyState extends State<SignupHerafy> {
                                         shopdescription:
                                             _shopdescriptionTextEditingController
                                                 .text,
-                                        points: 0);
+                                        points: 0,
+                                        location: addOwner.msg);
 
                                     ownerLocModel shopLocation = ownerLocModel(
                                         shopName:
@@ -1330,19 +1331,20 @@ class ShopOwner {
   final String shopname;
   final String shopdescription;
   final int points;
+  final String location;
 
-  ShopOwner({
-    this.id = '',
-    required this.name,
-    required this.email,
-    required this.password,
-    required this.DOB,
-    required this.phone_number,
-    required this.logo,
-    required this.shopname,
-    required this.shopdescription,
-    required this.points,
-  });
+  ShopOwner(
+      {this.id = '',
+      required this.name,
+      required this.email,
+      required this.password,
+      required this.DOB,
+      required this.phone_number,
+      required this.logo,
+      required this.shopname,
+      required this.shopdescription,
+      required this.points,
+      required this.location});
 
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -1355,19 +1357,20 @@ class ShopOwner {
         'shopdescription': shopdescription,
         'shopname': shopname,
         'points': points,
+        'location': location
       };
   static ShopOwner fromJson(Map<String, dynamic> json) => ShopOwner(
-        id: json['id'],
-        name: json['name'],
-        email: json['email'],
-        password: json['password'],
-        DOB: json['DOB'],
-        logo: json['logo'],
-        phone_number: json['phone_number'],
-        shopdescription: json['shopdescription'],
-        shopname: json['shopname'],
-        points: json['points'],
-      );
+      id: json['id'],
+      name: json['name'],
+      email: json['email'],
+      password: json['password'],
+      DOB: json['DOB'],
+      logo: json['logo'],
+      phone_number: json['phone_number'],
+      shopdescription: json['shopdescription'],
+      shopname: json['shopname'],
+      points: json['points'],
+      location: json['location']);
 }
 
 class addOwner extends StatefulWidget {
