@@ -67,10 +67,8 @@ TextFormField reusableTextField(String text, IconData icon, bool isPasswordType,
   );
 }
 
-
-
-TextFormField reusableTextFieldPassLogin(String text, IconData icon, bool isPasswordType,
-    TextEditingController controller) {
+TextFormField reusableTextFieldPassLogin(String text, IconData icon,
+    bool isPasswordType, TextEditingController controller) {
   return TextFormField(
     autovalidateMode: AutovalidateMode.onUserInteraction,
     controller: controller,

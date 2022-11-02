@@ -86,232 +86,262 @@ class _SignupHerafyState extends State<SignupHerafy> {
             title: Text("معلومات الحرفي"),
             content: Form(
               key: formKeys[0],
-              child: Column(
+              child: Stack(
                 children: [
-                  Container(
-                      child: Image.asset(
-                    "assets/images/HerfatyLogoCroped.png",
-                    height: 80,
-                  )),
-                  Text(
-                    "تسجيل حساب جديد",
-                    style: TextStyle(
-                      fontSize: 35,
-                      fontFamily: "Tajawal",
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 26, 96, 91),
-                    ),
-                  ),
-                  Text(
-                    "معلومات الحرفي",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontFamily: "Tajawal",
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(248, 228, 175, 122),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Image.asset(
+                      "assets/images/login_toppp.png",
+                      width: 150,
                     ),
                   ),
                   SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    width: 290,
-                    height: 80,
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    //    padding: EdgeInsets.symmetric(horizontal: 60),
-                    child: reusableTextFieldForName(
-                        "اسم الحرفي", Icons.person, _nameTextEditingController),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    width: 290,
-                    height: 80,
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    //   padding: EdgeInsets.symmetric(horizontal: 60),
-                    child: reusableTextField(
-                        "البريد الإلكتروني",
-                        Icons.email_rounded,
-                        false,
-                        _emailTextEditingController),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    width: 290,
-                    height: 80,
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    // padding: EdgeInsets.symmetric(horizontal: 60),
-                    child: reusableTextField("كلمة المرور", Icons.lock, true,
-                        _passwordTextController),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.only(left: 110),
-                    child: Text(
-                      " كلمه المرور يجب ان لا تقل عن 6 خانات",
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 84, 84, 84), fontSize: 13),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                      width: 290,
-                      height: 80,
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      child: Center(
-                          child: TextFormField(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        controller: _BODController,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'أدخل تاريخ الميلاد';
-                          } else {
-                            return null;
-                          }
-                        },
-
-                        //editing controller of this TextField
-                        decoration: InputDecoration(
-                          suffix: Icon(
-                            Icons.calendar_today_rounded,
+                    width: double.infinity,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 70,
+                        ),
+                        Container(
+                            child: Image.asset(
+                          "assets/images/HerfatyLogoCroped.png",
+                          height: 80,
+                        )),
+                        Text(
+                          "تسجيل حساب جديد",
+                          style: TextStyle(
+                            fontSize: 35,
+                            fontFamily: "Tajawal",
+                            fontWeight: FontWeight.bold,
                             color: Color.fromARGB(255, 26, 96, 91),
                           ),
-                          labelText: "تاريخ الميلاد",
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 1.0, horizontal: 23),
-                          labelStyle:
-                              TextStyle(color: Color.fromARGB(106, 26, 96, 91)),
-                          fillColor: Colors.white.withOpacity(0.3),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(255, 26, 96, 91)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                width: 2,
-                                color: Color.fromARGB(255, 26, 96, 91)),
-                          ),
-                          errorStyle: TextStyle(
-                              color: Color.fromARGB(255, 164, 46, 46)),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(255, 164, 46, 46)),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                width: 2,
-                                color: Color.fromARGB(255, 164, 46, 46)),
+                        ),
+                        Text(
+                          "معلومات الحرفي",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontFamily: "Tajawal",
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(248, 228, 175, 122),
                           ),
                         ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          //width: 290,
+                          height: 80,
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          //    padding: EdgeInsets.symmetric(horizontal: 60),
+                          child: reusableTextFieldForName("اسم الحرفي",
+                              Icons.person, _nameTextEditingController),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          //width: 290,
+                          height: 80,
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          //   padding: EdgeInsets.symmetric(horizontal: 60),
+                          child: reusableTextField(
+                              "البريد الإلكتروني",
+                              Icons.email_rounded,
+                              false,
+                              _emailTextEditingController),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          //width: 290,
+                          height: 80,
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          // padding: EdgeInsets.symmetric(horizontal: 60),
+                          child: reusableTextField("كلمة المرور", Icons.lock,
+                              true, _passwordTextController),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.only(left: 110),
+                          child: Text(
+                            " كلمه المرور يجب ان لا تقل عن 6 خانات",
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 84, 84, 84),
+                                fontSize: 13),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                            // width: 290,
+                            height: 80,
+                            padding: EdgeInsets.symmetric(horizontal: 16),
+                            child: Center(
+                                child: TextFormField(
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              controller: _BODController,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'أدخل تاريخ الميلاد';
+                                } else {
+                                  return null;
+                                }
+                              },
 
-                        readOnly:
-                            true, //set it true, so that user will not able to edit text
-                        onTap: () async {
-                          var formatter = DateFormat('dd/MM/yyyy');
-
-                          DateTime today = DateTime.now();
-                          DateTime initYear = DateTime(today.year - 15, 1, 1);
-                          DateTime lastYear = DateTime(today.year - 5, 12, 31);
-
-                          DateTime? pickedDate = await showDatePicker(
-                            context: context,
-                            initialDate: initYear,
-                            firstDate:
-                                initYear, //DateTime.now() - not to allow to choose before today.
-                            lastDate: lastYear,
-
-                            builder: (context, child) {
-                              return Theme(
-                                data: Theme.of(context).copyWith(
-                                  colorScheme: ColorScheme.light(
-                                    primary: Color(0xff51908E), // <-- SEE HERE
-                                    onPrimary: Colors.white, // <-- SEE HERE
-                                    onSurface: Colors.black, // <-- SEE HERE
-                                  ),
-                                  textButtonTheme: TextButtonThemeData(
-                                    style: TextButton.styleFrom(
-                                      primary: Color(
-                                          0xff51908E), // button text color
-                                    ),
-                                  ),
+                              //editing controller of this TextField
+                              decoration: InputDecoration(
+                                suffix: Icon(
+                                  Icons.calendar_today_rounded,
+                                  color: Color.fromARGB(255, 26, 96, 91),
                                 ),
-                                child: child!,
-                              );
-                            },
-                          );
+                                labelText: "تاريخ الميلاد",
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 1.0, horizontal: 23),
+                                labelStyle: TextStyle(
+                                    color: Color.fromARGB(106, 26, 96, 91)),
+                                fillColor: Colors.white.withOpacity(0.3),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 26, 96, 91)),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 2,
+                                      color: Color.fromARGB(255, 26, 96, 91)),
+                                ),
+                                errorStyle: TextStyle(
+                                    color: Color.fromARGB(255, 164, 46, 46)),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 164, 46, 46)),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 2,
+                                      color: Color.fromARGB(255, 164, 46, 46)),
+                                ),
+                              ),
 
-                          if (pickedDate != null && pickedDate != todaysDate) {
-                            print(
-                                pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
-                            String formattedDate =
-                                DateFormat('yyyy-MM-dd').format(pickedDate);
-                            print(
-                                formattedDate); //formatted date output using intl package =>  2021-03-16
-                            //you can implement different kind of Date Format here according to your requirement
+                              readOnly:
+                                  true, //set it true, so that user will not able to edit text
+                              onTap: () async {
+                                var formatter = DateFormat('dd/MM/yyyy');
 
-                            setState(() {
-                              _BODController.text =
-                                  formattedDate; //set output date to TextField value.
-                            });
-                          } else {
-                            print("لم يتم اختيار تاريخ الميلاد");
-                            Fluttertoast.showToast(
-                              msg: "لم يتم اختيار تاريخ الميلاد  ",
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.CENTER,
-                              timeInSecForIosWeb: 3,
-                              backgroundColor: Colors.white,
-                              textColor: Colors.red,
-                              fontSize: 18.0,
-                            );
-                          }
-                        },
-                      ))),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    width: 290,
-                    height: 80,
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    child: reusableTextFieldForPhone("رقم الجوال",
-                        Icons.phone_android, _PhoneNumberTextEditingController),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.only(left: 100),
-                    child: Text(
-                      "رقم الجوال يجب أن يبدأ بـ(05) لعشرة أرقام",
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 86, 86, 86), fontSize: 13),
+                                DateTime today = DateTime.now();
+                                DateTime initYear =
+                                    DateTime(today.year - 15, 1, 1);
+                                DateTime lastYear =
+                                    DateTime(today.year - 5, 12, 31);
+
+                                DateTime? pickedDate = await showDatePicker(
+                                  context: context,
+                                  initialDate: initYear,
+                                  firstDate:
+                                      initYear, //DateTime.now() - not to allow to choose before today.
+                                  lastDate: lastYear,
+
+                                  builder: (context, child) {
+                                    return Theme(
+                                      data: Theme.of(context).copyWith(
+                                        colorScheme: ColorScheme.light(
+                                          primary:
+                                              Color(0xff51908E), // <-- SEE HERE
+                                          onPrimary:
+                                              Colors.white, // <-- SEE HERE
+                                          onSurface:
+                                              Colors.black, // <-- SEE HERE
+                                        ),
+                                        textButtonTheme: TextButtonThemeData(
+                                          style: TextButton.styleFrom(
+                                            primary: Color(
+                                                0xff51908E), // button text color
+                                          ),
+                                        ),
+                                      ),
+                                      child: child!,
+                                    );
+                                  },
+                                );
+
+                                if (pickedDate != null &&
+                                    pickedDate != todaysDate) {
+                                  print(
+                                      pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                                  String formattedDate =
+                                      DateFormat('yyyy-MM-dd')
+                                          .format(pickedDate);
+                                  print(
+                                      formattedDate); //formatted date output using intl package =>  2021-03-16
+                                  //you can implement different kind of Date Format here according to your requirement
+
+                                  setState(() {
+                                    _BODController.text =
+                                        formattedDate; //set output date to TextField value.
+                                  });
+                                } else {
+                                  print("لم يتم اختيار تاريخ الميلاد");
+                                  Fluttertoast.showToast(
+                                    msg: "لم يتم اختيار تاريخ الميلاد  ",
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.CENTER,
+                                    timeInSecForIosWeb: 3,
+                                    backgroundColor: Colors.white,
+                                    textColor: Colors.red,
+                                    fontSize: 18.0,
+                                  );
+                                }
+                              },
+                            ))),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          //width: 290,
+                          height: 80,
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          child: reusableTextFieldForPhone(
+                              "رقم الجوال",
+                              Icons.phone_android,
+                              _PhoneNumberTextEditingController),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.only(left: 100),
+                          child: Text(
+                            "رقم الجوال يجب أن يبدأ بـ(05) لعشرة أرقام",
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 86, 86, 86),
+                                fontSize: 13),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "الرجوع إلى صفحة ",
+                              style: TextStyle(fontFamily: "Tajawal"),
+                            ),
+                            GestureDetector(
+                                onTap: () {
+                                  Navigator.pushNamed(context, "/login");
+                                },
+                                child: Text(
+                                  "تسجيل الدخول ",
+                                  style: TextStyle(
+                                      fontFamily: "Tajawal",
+                                      decoration: TextDecoration.underline,
+                                      color: Color.fromARGB(255, 53, 47, 244)),
+                                )),
+                          ],
+                        )
+                      ],
                     ),
                   ),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "الرجوع إلى صفحة ",
-                        style: TextStyle(fontFamily: "Tajawal"),
-                      ),
-                      GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, "/login");
-                          },
-                          child: Text(
-                            "تسجيل الدخول ",
-                            style: TextStyle(
-                                fontFamily: "Tajawal",
-                                decoration: TextDecoration.underline,
-                                color: Color.fromARGB(255, 53, 47, 244)),
-                          )),
-                    ],
-                  )
                 ],
               ),
             )),
@@ -322,6 +352,13 @@ class _SignupHerafyState extends State<SignupHerafy> {
               key: formKeys[1],
               child: Column(
                 children: [
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Image.asset(
+                      "assets/images/login_toppp.png",
+                      width: 150,
+                    ),
+                  ),
                   Text(
                     "تسجيل حساب جديد",
                     style: TextStyle(
@@ -362,7 +399,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
                   ),
 
                   Container(
-                    width: 290,
+                    //width: 290,
                     height: 80,
                     padding: EdgeInsets.symmetric(horizontal: 16),
                     child: reusableTextFieldForShopName(
@@ -374,7 +411,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
                   ),
 
                   Container(
-                    width: 290,
+                    // width: 290,
                     height: 80,
                     padding: EdgeInsets.symmetric(horizontal: 16),
                     child: reusableTextFieldDec(
@@ -515,60 +552,63 @@ class _SignupHerafyState extends State<SignupHerafy> {
       body: Theme(
         data: ThemeData(
             colorScheme: ColorScheme.light(primary: Color(0xff51908E))),
-        child: Stepper(
-          type: StepperType.horizontal,
-          currentStep: currentStep,
-          steps: steps(),
-          onStepContinue: () {
-            if (!formKeys[currentStep].currentState!.validate()) {
-              return;
-            }
+        child: Container(
+          padding: EdgeInsets.only(top: 10),
+          child: Stepper(
+            type: StepperType.horizontal,
+            currentStep: currentStep,
+            steps: steps(),
+            onStepContinue: () {
+              if (!formKeys[currentStep].currentState!.validate()) {
+                return;
+              }
 
-            if (currentStep < (steps().length - 1)) {
+              if (currentStep < (steps().length - 1)) {
+                setState(() {
+                  currentStep += 1;
+                });
+              }
+            },
+            onStepCancel: () {
+              if (currentStep == 0) {
+                return;
+              }
               setState(() {
-                currentStep += 1;
+                currentStep -= 1;
               });
-            }
-          },
-          onStepCancel: () {
-            if (currentStep == 0) {
-              return;
-            }
-            setState(() {
-              currentStep -= 1;
-            });
-          },
-          controlsBuilder: (BuildContext context, ControlsDetails controls) {
-            return Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 13),
-              decoration: BoxDecoration(),
-              child: Row(
-                children: [
-                  if (currentStep == 0)
-                    Expanded(
-                      child: ElevatedButton(
-                        child: Text('التالي'),
-                        onPressed: controls.onStepContinue,
-                      ),
-                    ),
-                  const SizedBox(
-                    width: 12,
-                  ),
-                  if (currentStep == 1)
-                    Expanded(
-                      child: ElevatedButton(
-                        child: Text('السابق'),
-                        onPressed: controls.onStepCancel,
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              Color.fromARGB(248, 228, 175, 122)),
+            },
+            controlsBuilder: (BuildContext context, ControlsDetails controls) {
+              return Container(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 13),
+                decoration: BoxDecoration(),
+                child: Row(
+                  children: [
+                    if (currentStep == 0)
+                      Expanded(
+                        child: ElevatedButton(
+                          child: Text('التالي'),
+                          onPressed: controls.onStepContinue,
                         ),
                       ),
+                    const SizedBox(
+                      width: 12,
                     ),
-                ],
-              ),
-            );
-          },
+                    if (currentStep == 1)
+                      Expanded(
+                        child: ElevatedButton(
+                          child: Text('السابق'),
+                          onPressed: controls.onStepCancel,
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                Color.fromARGB(248, 228, 175, 122)),
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              );
+            },
+          ),
         ),
       ),
     );
@@ -1379,18 +1419,19 @@ class _addOwnerState extends State<addOwner> {
           onPlacePicked: (result) {
             //print(result.formattedAddress);
             Navigator.of(context).pop();
-            setState(() {
-              if (result.formattedAddress is Null) {
-                addOwner.msg = 'ادخل الموقع';
-              } else {
-                addOwner.msg = result.formattedAddress!;
-                //msgButton = "تم تحديد الموقع";
-                color = new Color.fromARGB(255, 255, 255, 255);
-                Tcolor = Color.fromARGB(255, 8, 24, 246);
-                t = TextDecoration.underline;
-                msgButton = "اضغط لتغيير الموقع";
-              }
-            });
+            if (mounted)
+              setState(() {
+                if (result.formattedAddress is Null) {
+                  addOwner.msg = 'ادخل الموقع';
+                } else {
+                  addOwner.msg = result.formattedAddress!;
+                  //msgButton = "تم تحديد الموقع";
+                  color = new Color.fromARGB(255, 255, 255, 255);
+                  Tcolor = Color.fromARGB(255, 8, 24, 246);
+                  t = TextDecoration.underline;
+                  msgButton = "اضغط لتغيير الموقع";
+                }
+              });
           },
           initialPosition: kInitialPosition,
           useCurrentLocation: true,
