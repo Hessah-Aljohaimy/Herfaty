@@ -151,20 +151,21 @@ class checkOut extends StatelessWidget {
                 onPressed: () {
                   // if (add.msg == 'ادخل موقعك') {
                   //   ShowDialogMethod(context, "من فضلك قم بتحديد موقع التوصيل");
-                  // } 
+                  // }
                   // else {
-                    //add.msg
-                    String loc = '3854 Said Al Salami, An Nakheel, Riyadh 12384, Saudi Arabia';
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => payForm(
-                        Items: Items,
-                        location: loc,
-                        shopName: shopName,
-                        totalPrice: totalPrice,
-                        shopOwnerId: Items[0].shopOwnerId,
-                        temp: Items,
-                      ),
-                    ));
+                  //add.msg
+                  String loc =
+                      '3854 Said Al Salami, An Nakheel, Riyadh 12384, Saudi Arabia';
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => payForm(
+                      Items: Items,
+                      location: loc,
+                      shopName: shopName,
+                      totalPrice: totalPrice,
+                      shopOwnerId: Items[0].shopOwnerId,
+                      temp: Items,
+                    ),
+                  ));
                   // }
                 },
                 style: ElevatedButton.styleFrom(
@@ -393,22 +394,23 @@ class _addState extends State<add> {
       MaterialPageRoute(
         builder: (context) => PlacePicker(
           apiKey:
-              "AIzaSyAwT-rSNhTijJZ2Op4IWMddDdLF0Dcq8-o", // Put YOUR OWN KEY here.
+              "AIzaSyA39qkpPUBK63CO4RGlDAacBIUlDl4RPgY", // Put YOUR OWN KEY here.
           onPlacePicked: (result) {
             //print(result.formattedAddress);
             Navigator.of(context).pop();
-            setState(() {
-              if (result.formattedAddress is Null) {
-                add.msg = 'ادخل الموقع';
-              } else {
-                add.msg = result.formattedAddress!;
-                //msgButton = "تم تحديد الموقع";
-                color = new Color.fromARGB(255, 255, 255, 255);
-                Tcolor = Color.fromARGB(255, 8, 24, 246);
-                t = TextDecoration.underline;
-                msgButton = "اضغط لتغيير الموقع";
-              }
-            });
+            if (mounted)
+              setState(() {
+                if (result.formattedAddress is Null) {
+                  add.msg = 'ادخل الموقع';
+                } else {
+                  add.msg = result.formattedAddress!;
+                  //msgButton = "تم تحديد الموقع";
+                  color = new Color.fromARGB(255, 255, 255, 255);
+                  Tcolor = Color.fromARGB(255, 8, 24, 246);
+                  t = TextDecoration.underline;
+                  msgButton = "اضغط لتغيير الموقع";
+                }
+              });
           },
           initialPosition: kInitialPosition,
           useCurrentLocation: true,

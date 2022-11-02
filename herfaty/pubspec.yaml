@@ -49,10 +49,17 @@ dependencies:
   flutter_settings_screens: ^0.2.2+1
   flutter_stripe: ^3.2.0
   fluttertoast: ^8.0.9
-  geocoding: any
-  geolocator: any
+  geocoding: ^2.0.5
+  geolocator: ^7.0.1
   google_fonts: ^3.0.1
-  google_maps_place_picker: any
+  google_maps_flutter: ^2.0.1
+  
+  permission_handler: ^6.0.1+1
+  provider: ^5.0.0
+  google_maps_webservice: ^0.0.20-nullsafety.2
+  google_api_headers: ^1.0.0
+  tuple: ^2.0.0-nullsafety.0
+  google_maps_place_picker: ^2.1.0-nullsafety.3
   google_nav_bar: ^5.0.6
   http: ^0.13.5
   image_picker: ^0.8.5+3
