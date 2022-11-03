@@ -45,6 +45,7 @@ class _productCardState extends State<productCard> {
     setNumOfRatings(widget.product.shopOwnerId);
     setIsFavourite(thisCustomerId, widget.product.productId);
     if (widget.product.availableAmount == 0) {
+      print("======not available");
       isAvailable = false;
     }
     super.initState();
@@ -55,9 +56,96 @@ class _productCardState extends State<productCard> {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     String thisCustomerId = user!.uid;
-    //-----------------------------------------------------------------
+    //Listen to changes in DB==============================
     //===============================================Listen To AvailableAmount Changes From DB
     CollectionReference reference =
+        FirebaseFirestore.instance.collection('Products');
+    reference.snapshots().listen((querySnapshot) {
+      querySnapshot.docChanges.forEach((change) async {
+        if (change.type == DocumentChangeType.modified) {
+          for (var index = 0; index < querySnapshot.size; index++) {
+            var data = querySnapshot.docs.elementAt(index).data() as Map;
+            String productId = data["id"];
+            if (productId == widget.product.productId) {
+              String updatedDescription = data["dsscription"];
+              int updatedAvailabeAmount = data["avalibleAmount"];
+              num updatedPrice = data["price"];
+              String updatedImage = data["image"];
+              String updatedName = data["name"];
+              if (mounted) {
+                setState(
+                  () {
+                    widget.product.availableAmount = updatedAvailabeAmount;
+                    widget.product.name = updatedName;
+                    widget.product.description = updatedDescription;
+                    widget.product.price = updatedPrice;
+                    widget.product.image = updatedImage;
+
+                    if (updatedAvailabeAmount == 0) {
+                      setState(() {
+                        isAvailable = false;
+                      });
+                    } else if (updatedAvailabeAmount != 0) {
+                      setState(() {
+                        isAvailable = true;
+                      });
+                    }
+                  },
+                );
+              }
+              //update wish list
+              String existedWishListDocId = await getWishListDocId(
+                  thisCustomerId, widget.product.productId);
+              FirebaseFirestore.instance
+                  .collection('wishList')
+                  .doc('${existedWishListDocId}')
+                  .update({
+                "description": updatedDescription,
+                "avalibleAmount": updatedAvailabeAmount,
+                "price": updatedPrice,
+                "image": updatedImage,
+                "name": updatedName
+              });
+              // if (updatedAvailabeAmount != widget.product.availableAmount) {
+              //   // if (mounted) {
+              //   //   setState(
+              //   //     () {
+              //   //       widget.product.availableAmount = updatedAvailabeAmount;
+              //   //       if (updatedAvailabeAmount == 0) {
+              //   //         setState(() {
+              //   //           isAvailable = false;
+              //   //         });
+              //   //         print("=======availableAmount became zero======= ");
+              //   //       } else if (updatedAvailabeAmount != 0) {
+              //   //         setState(() {
+              //   //           isAvailable = true;
+              //   //         });
+              //   //         print(
+              //   //             "=======availableAmount changed but not zero======= ");
+              //   //       }
+              //   //     },
+              //   //   );
+              //   // }
+              // }
+            }
+          }
+        } else if (change.type == DocumentChangeType.removed) {
+          //delete the product from the wish list, because it is no longer exists in the products list
+          if (change.doc.id == widget.product.productId) {
+            String existedWishListDocId = await getWishListDocId(
+                thisCustomerId, widget.product.productId);
+            FirebaseFirestore.instance
+                .collection('wishList')
+                .doc('${existedWishListDocId}')
+                .delete();
+          }
+        }
+      });
+    });
+    //===================================================================================
+
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    CollectionReference reference2 =
         FirebaseFirestore.instance.collection('Products');
     reference.snapshots().listen((querySnapshot) {
       querySnapshot.docChanges.forEach((change) async {
@@ -485,4 +573,7 @@ class _productCardState extends State<productCard> {
       fontSize: 18.0,
     );
   }
+
+  //----------------------
+  void listenHelperMethod() {}
 }
