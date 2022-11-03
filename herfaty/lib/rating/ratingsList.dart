@@ -74,8 +74,8 @@ class _ratingsListState extends State<ratingsList> {
                     //Star icon
                     Container(
                         //padding: const EdgeInsets.only(bottom: 0, right: 10),
-                        height: 55,
-                        width: 55,
+                        height: 50,
+                        width: 50,
                         child: Image.asset('assets/images/star-100.png')),
                     // عدد نجوم هذا التقييم رقمًا
                     Padding(
@@ -84,7 +84,7 @@ class _ratingsListState extends State<ratingsList> {
                       child: Text(
                         "${widget.averageShopRating}",
                         style: const TextStyle(
-                          fontSize: 45.0,
+                          fontSize: 35.0,
                           fontWeight: FontWeight.w800,
                           fontFamily: "Tajawal",
                           color: kPrimaryColor,
@@ -97,7 +97,7 @@ class _ratingsListState extends State<ratingsList> {
                       child: Text(
                         "بناءً على (${widget.numberOfRatings}) من التقييمات",
                         style: TextStyle(
-                          fontSize: 19.0,
+                          fontSize: 16.0,
                           fontWeight: FontWeight.w600,
                           fontFamily: "Tajawal",
                           decoration: TextDecoration.underline,
