@@ -6,6 +6,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:herfaty/points%20base/RewardsCarousel.dart';
 import 'package:herfaty/points.dart/pointsList.dart';
 
+//import '../pages/signupHerafy.dart';
+
 class PointPanel extends StatefulWidget {
   const PointPanel({super.key});
 
@@ -14,12 +16,13 @@ class PointPanel extends StatefulWidget {
 }
 
 class _PointPanelState extends State<PointPanel> {
-  int points = 0;
+  String thisOwnerId = "";
+  int pointss = 0;
   void initState() {
     print("this is app bar initState====");
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
-    String thisOwnerId = user!.uid;
+    thisOwnerId = user!.uid;
     setOwnerPoints(thisOwnerId);
 
     super.initState();
@@ -28,98 +31,113 @@ class _PointPanelState extends State<PointPanel> {
   @override
   Widget build(BuildContext context) {
     print('entering rewards scroll method ==================');
-    return Container(
-      // color: Colors.black,
-      height: 180,
-      width: 390,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(.1),
-            blurRadius: 4.0,
-            spreadRadius: .05,
-          ), //BoxShadow
-        ],
-      ),
-      child: Column(children: [
-        SizedBox(
-          height: 12,
-        ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "مجموع نقاطي",
-              style: TextStyle(
-                  color: Color(0xffF19B1A),
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: "Tajawal"),
-            ),
-            Positioned(
-              bottom: 50,
-              top: 50,
-              child: Image.asset(
-                "assets/images/points_trophies/icons8-coins-64.png",
-                width: 40,
+    return StreamBuilder<List<ShopOwner>>(
+        stream: getpoints1(thisOwnerId),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Text("somting wrong \n ${snapshot.error}");
+          } else if (!snapshot.hasData) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasData) {
+            final owner = snapshot.data!.toList();
+
+            return Container(
+              // color: Colors.black,
+              height: 180,
+              width: 390,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(.1),
+                    blurRadius: 4.0,
+                    spreadRadius: .05,
+                  ), //BoxShadow
+                ],
               ),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        Text(
-          "${points}",
-          style: TextStyle(
-              color: Color(0xff51908E),
-              fontSize: 35,
-              fontWeight: FontWeight.bold,
-              fontFamily: "Tajawal"),
-        ),
-        Indicator(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: TextButton(
-                child: Text(
-                  "سجل نقاطي",
+              child: Column(children: [
+                SizedBox(
+                  height: 12,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "مجموع نقاطي",
+                      style: TextStyle(
+                          color: Color(0xffF19B1A),
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "Tajawal"),
+                    ),
+                    Positioned(
+                      bottom: 50,
+                      top: 50,
+                      child: Image.asset(
+                        "assets/images/points_trophies/icons8-coins-64.png",
+                        width: 40,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "${owner[0].points}",
                   style: TextStyle(
-                      color: Color(0xff44ADE8),
-                      fontSize: 15,
+                      color: Color(0xff51908E),
+                      fontSize: 35,
                       fontWeight: FontWeight.bold,
                       fontFamily: "Tajawal"),
                 ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => PointsList()),
-                  );
-                },
-              ),
-            ),
-            IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => PointsList()),
-                );
-              },
-              icon: Icon(
-                Icons.arrow_forward_rounded,
-                size: 20,
-                color: Color(0xff44ADE8),
-              ),
-            ),
-          ],
-        ),
-      ]),
-    );
+                Indicator(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Align(
+                      alignment: Alignment.bottomLeft,
+                      child: TextButton(
+                        child: Text(
+                          "سجل نقاطي",
+                          style: TextStyle(
+                              color: Color(0xff44ADE8),
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Tajawal"),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PointsList()),
+                          );
+                        },
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => PointsList()),
+                        );
+                      },
+                      icon: Icon(
+                        Icons.arrow_forward_rounded,
+                        size: 20,
+                        color: Color(0xff44ADE8),
+                      ),
+                    ),
+                  ],
+                ),
+              ]),
+            );
+          } else {
+            return Center();
+          }
+        });
   }
 
 //read current user
@@ -129,16 +147,15 @@ class _PointPanelState extends State<PointPanel> {
     int existedPoints = await getpoints(thisOwnerId);
     if (existedPoints != 0) {
       setState(() {
-        points = existedPoints;
+        pointss = existedPoints;
       });
     } else {
       setState(() {
-        points = 0;
+        pointss = 0;
       });
     }
   }
 
-  //===================================================
   Future<int> getpoints(String thisOwnerId) async {
     int OwnerPoints = 0;
     final OwnersDoc = await FirebaseFirestore.instance
@@ -152,4 +169,80 @@ class _PointPanelState extends State<PointPanel> {
     }
     return OwnerPoints;
   }
+}
+
+//===================================================
+Stream<List<ShopOwner>> getpoints1(String thisOwnerId) {
+  int OwnerPoints = 0;
+  return FirebaseFirestore.instance
+      .collection('shop_owner')
+      .where("customerId", isEqualTo: thisOwnerId)
+      .snapshots()
+      .map((snapshot) =>
+          snapshot.docs.map((doc) => ShopOwner.fromJson(doc.data())).toList());
+  /* final OwnersDoc =  FirebaseFirestore.instance
+        .collection('shop_owner')
+        .where("id", isEqualTo: thisOwnerId)
+        .get();
+         var data = OwnersDoc.data() as Map;
+    if (OwnersDoc.size > 0) {
+      var data = OwnersDoc.docs.elementAt(0).data() as Map;
+      OwnerPoints = data["points"];
+      print("existed points is ${OwnerPoints}");
+    }
+    return OwnerPoints;
+  }*/
+}
+
+class ShopOwner {
+  String id;
+  final String name;
+  final String email;
+  final String password;
+  final String DOB;
+  final String phone_number;
+  final String logo;
+  final String shopname;
+  final String shopdescription;
+  final int points;
+  final String location;
+
+  ShopOwner(
+      {this.id = '',
+      required this.name,
+      required this.email,
+      required this.password,
+      required this.DOB,
+      required this.phone_number,
+      required this.logo,
+      required this.shopname,
+      required this.shopdescription,
+      required this.points,
+      required this.location});
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'email': email,
+        'password': password,
+        'DOB': DOB,
+        'logo': logo,
+        'phone_number': phone_number,
+        'shopdescription': shopdescription,
+        'shopname': shopname,
+        'points': points,
+        'location': location
+      };
+  static ShopOwner fromJson(Map<String, dynamic> json) => ShopOwner(
+      id: json['id'],
+      name: json['name'],
+      email: json['email'],
+      password: json['password'],
+      DOB: json['DOB'],
+      logo: json['logo'],
+      phone_number: json['phone_number'],
+      shopdescription: json['shopdescription'],
+      shopname: json['shopname'],
+      points: json['points'],
+      location: json['location']);
 }
