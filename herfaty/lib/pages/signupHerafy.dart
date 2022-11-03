@@ -496,7 +496,7 @@ class _SignupHerafyState extends State<SignupHerafy> {
 
                                     ownerLocModel shopLocation = ownerLocModel(
                                         shopName:
-                                            _shopnameTextEditingController.text,
+                                            uid,
                                         location: addOwner.msg);
 
                                     Fluttertoast.showToast(

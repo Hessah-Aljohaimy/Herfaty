@@ -45,7 +45,7 @@ class payForm extends StatefulWidget {
   @override
   State<payForm> createState() => _payFormState();
 }
-var realTotalPoints=0;
+
 Stream<List<OrderModel>> readPrpoints(String thisOwnerId) => FirebaseFirestore
       .instance
  .collection('orders')
@@ -392,9 +392,11 @@ class payForm extends StatelessWidget {
                           if (data.isEmpty) {
                             return Text('');
                           } else {
+                            var realTotalPoints=0;
                             final alldet = snapshot.data!.toList();
                             for (var i = 0; i < alldet.length; i++) {
-                              realTotalPoints+=alldet[i].points.toInt();
+                              
+                          realTotalPoints+=alldet[i].points.toInt();
                               print('SSSSSSOOOOOOOOOOSSSSSSSSSSS');
                               print(realTotalPoints);
                               print(alldet[i].points.toInt());
