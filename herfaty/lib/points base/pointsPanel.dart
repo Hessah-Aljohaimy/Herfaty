@@ -40,6 +40,7 @@ class _PointPanelState extends State<PointPanel> {
             return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasData) {
             final owner = snapshot.data!.toList();
+            print("aaaaaaaaaaa ${owner.length}");
 
             return Container(
               // color: Colors.black,
@@ -174,9 +175,13 @@ class _PointPanelState extends State<PointPanel> {
 //===================================================
 Stream<List<ShopOwner>> getpoints1(String thisOwnerId) {
   int OwnerPoints = 0;
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  final User? user = auth.currentUser;
+  String thisOwnerIdd = user!.uid;
+  print("aaaaaaa $thisOwnerIdd");
   return FirebaseFirestore.instance
       .collection('shop_owner')
-      .where("customerId", isEqualTo: thisOwnerId)
+      .where("id", isEqualTo: thisOwnerIdd)
       .snapshots()
       .map((snapshot) =>
           snapshot.docs.map((doc) => ShopOwner.fromJson(doc.data())).toList());
