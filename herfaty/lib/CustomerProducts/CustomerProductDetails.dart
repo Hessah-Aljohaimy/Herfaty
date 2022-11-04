@@ -80,27 +80,6 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                   },
                 );
               }
-              // if (updatedAvailabeAmount != widget.product.availableAmount) {
-              //   // if (mounted) {
-              //   //   setState(
-              //   //     () {
-              //   //       widget.product.availableAmount = updatedAvailabeAmount;
-              //   //       if (updatedAvailabeAmount == 0) {
-              //   //         setState(() {
-              //   //           isAvailable = false;
-              //   //         });
-              //   //         print("=======availableAmount became zero======= ");
-              //   //       } else if (updatedAvailabeAmount != 0) {
-              //   //         setState(() {
-              //   //           isAvailable = true;
-              //   //         });
-              //   //         print(
-              //   //             "=======availableAmount changed but not zero======= ");
-              //   //       }
-              //   //     },
-              //   //   );
-              //   // }
-              // }
             }
           }
         } else if (change.type == DocumentChangeType.removed) {
@@ -111,46 +90,6 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
         }
       });
     });
-    //===============================================Listen To AvailableAmount Change From DB
-    CollectionReference reference2 =
-        FirebaseFirestore.instance.collection('Products');
-    reference2.snapshots().listen((querySnapshot) {
-      querySnapshot.docChanges.forEach((change) {
-        if (change.type == DocumentChangeType.modified &&
-            change.doc.id == widget.product.productId) {
-          var data =
-              querySnapshot.docs.elementAt(change.newIndex).data() as Map;
-          String updatedDescription = data["dsscription"];
-          int updatedAvailabeAmount = data["avalibleAmount"];
-          num updatedPrice = data["price"];
-          String updatedImage = data["image"];
-          String updatedName = data["name"];
-          if (mounted) {
-            setState(() {
-              widget.product.availableAmount = updatedAvailabeAmount;
-              widget.product.name = updatedName;
-              widget.product.description = updatedDescription;
-              widget.product.price = updatedPrice;
-              widget.product.image = updatedImage;
-              if (updatedAvailabeAmount == 0) {
-                thisPageQuantity = 0;
-                isButtonsDisabled = true;
-              } else {
-                thisPageQuantity = 1;
-                isButtonsDisabled = false;
-              }
-            });
-          }
-        } else if (change.type == DocumentChangeType.removed) {
-          if (change.doc.id == widget.product.productId) {
-            Navigator.pop(context);
-            //showToastMethod(context, "عذرًا، تم حذف المنتج من قبل المالك");
-          }
-        }
-      });
-    });
-    //==============================================================================
-
     //////////////////////////////////////////////////////////////////////////////////////////
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -169,7 +108,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                   //to make the container covers the full width of the screen
                   width: double.infinity,
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 20 * 1.5,
+                    horizontal: 40,
                   ),
                   decoration: const BoxDecoration(
                     color: Colors.white,
@@ -200,8 +139,8 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                             child: Text(
                               widget.product.name,
                               style: const TextStyle(
-                                fontSize: 26.0,
-                                fontWeight: FontWeight.w500,
+                                fontSize: 22.0,
+                                fontWeight: FontWeight.w600,
                                 fontFamily: "Tajawal",
                                 color: Color.fromARGB(255, 0, 0, 0),
                               ),
@@ -237,7 +176,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                       ),
                       //this sizebox is to add a space after the price
                       const SizedBox(
-                        height: 20,
+                        height: 25,
                       ),
                     ],
                   ),
@@ -250,11 +189,21 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                     vertical: 10,
                     horizontal: 30,
                   ),
-                  child: SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
-                      child: ExpandedWidget(
-                        text: widget.product.description,
-                      )),
+                  child: Text(
+                    "${widget.product.description}",
+                    style: TextStyle(
+                      fontSize: 17,
+                      height: 1.4,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
+                      fontFamily: "Tajawal",
+                    ),
+                  ),
+                  // child: SingleChildScrollView(
+                  //     scrollDirection: Axis.vertical,
+                  //     child: ExpandedWidget(
+                  //       text: widget.product.description,
+                  //     )),
                 ),
                 // const Spacer(),
                 //(أضافة إلى السلة)============================================================//
@@ -610,7 +559,7 @@ class ProductImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 20),
+      margin: const EdgeInsets.only(bottom: 20),
       height: size.width * 0.8,
       color: const Color.fromARGB(255, 255, 255, 255),
       child: Stack(
@@ -620,15 +569,18 @@ class ProductImage extends StatelessWidget {
             height: size.width * 0.8,
             width: size.width * 0.8,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
+              borderRadius: BorderRadius.all(Radius.circular(25)),
               color: Colors.white,
             ),
-          ),
-          Image.network(
-            image,
-            height: size.width * 0.8,
-            width: size.width * 0.8,
-            fit: BoxFit.cover,
+            child: ClipRRect(
+              borderRadius: BorderRadius.all(
+                Radius.circular(25),
+              ),
+              child: Image.network(
+                image,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
         ],
       ),

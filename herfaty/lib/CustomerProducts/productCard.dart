@@ -36,18 +36,15 @@ class _productCardState extends State<productCard> {
 
   @override
   void initState() {
-    fToast = FToast();
-    fToast.init(context);
+    // fToast = FToast();
+    // fToast.init(context);
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     String thisCustomerId = user!.uid;
     setShopAverageRating(widget.product.shopOwnerId);
     setNumOfRatings(widget.product.shopOwnerId);
     setIsFavourite(thisCustomerId, widget.product.productId);
-    if (widget.product.availableAmount == 0) {
-      print("======not available");
-      isAvailable = false;
-    }
+    setIsAvailable();
     super.initState();
   }
 
@@ -56,6 +53,8 @@ class _productCardState extends State<productCard> {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     String thisCustomerId = user!.uid;
+    setIsAvailable();
+
     //Listen to changes in DB==============================
     //===============================================Listen To AvailableAmount Changes From DB
     CollectionReference reference =
@@ -106,27 +105,6 @@ class _productCardState extends State<productCard> {
                 "image": updatedImage,
                 "name": updatedName
               });
-              // if (updatedAvailabeAmount != widget.product.availableAmount) {
-              //   // if (mounted) {
-              //   //   setState(
-              //   //     () {
-              //   //       widget.product.availableAmount = updatedAvailabeAmount;
-              //   //       if (updatedAvailabeAmount == 0) {
-              //   //         setState(() {
-              //   //           isAvailable = false;
-              //   //         });
-              //   //         print("=======availableAmount became zero======= ");
-              //   //       } else if (updatedAvailabeAmount != 0) {
-              //   //         setState(() {
-              //   //           isAvailable = true;
-              //   //         });
-              //   //         print(
-              //   //             "=======availableAmount changed but not zero======= ");
-              //   //       }
-              //   //     },
-              //   //   );
-              //   // }
-              // }
             }
           }
         } else if (change.type == DocumentChangeType.removed) {
@@ -143,82 +121,6 @@ class _productCardState extends State<productCard> {
       });
     });
     //===================================================================================
-
-    ////////////////////////////////////////////////////////////////////////////////////////////
-    CollectionReference reference2 =
-        FirebaseFirestore.instance.collection('Products');
-    reference.snapshots().listen((querySnapshot) {
-      querySnapshot.docChanges.forEach((change) async {
-        if (change.type == DocumentChangeType.modified &&
-            change.doc.id == widget.product.productId) {
-          var data =
-              querySnapshot.docs.elementAt(change.newIndex).data() as Map;
-          String updatedDescription = data["dsscription"];
-          int updatedAvailabeAmount = data["avalibleAmount"];
-          num updatedPrice = data["price"];
-          String updatedImage = data["image"];
-          String updatedName = data["name"];
-          //update
-          String existedWishListDocId =
-              await getWishListDocId(thisCustomerId, widget.product.productId);
-          FirebaseFirestore.instance
-              .collection('wishList')
-              .doc('${existedWishListDocId}')
-              .update({
-            "description": updatedDescription,
-            "avalibleAmount": updatedAvailabeAmount,
-            "price": updatedPrice,
-            "image": updatedImage,
-            "name": updatedName
-          });
-          if (mounted) {
-            setState(
-              () {
-                widget.product.availableAmount = updatedAvailabeAmount;
-                widget.product.name = updatedName;
-                widget.product.description = updatedDescription;
-                widget.product.price = updatedPrice;
-                widget.product.image = updatedImage;
-
-                if (updatedAvailabeAmount == 0) {
-                  setState(() {
-                    isAvailable = false;
-                  });
-                } else if (updatedAvailabeAmount != 0) {
-                  setState(() {
-                    isAvailable = true;
-                  });
-                }
-              },
-            );
-          }
-        } else if (change.type == DocumentChangeType.removed) {
-          //delete the product from the wish list, because it is no longer exists in the products list
-          if (change.doc.id == widget.product.productId) {
-            print(
-                "Product with id ${widget.product.productId} has been deleted");
-
-            String existedWishListDocId = await getWishListDocId(
-                thisCustomerId, widget.product.productId);
-            FirebaseFirestore.instance
-                .collection('wishList')
-                .doc('${existedWishListDocId}')
-                .delete();
-
-            // showToastMethod(
-            //     context, "عذرًا، تم حذف بعض المنتجات من قبل المالك");
-          }
-        }
-        // //remove toast after one second because sometimes it runs into an infinite loop
-        // await Future.delayed(const Duration(seconds: 1), () {
-        //   Fluttertoast.cancel();
-        //   fToast.removeCustomToast();
-        //   fToast.removeQueuedCustomToasts();
-        // });
-      });
-    });
-    //===================================================================================
-
     Size size =
         MediaQuery.of(context).size; //to get the width and height of the app
     return Container(
@@ -313,6 +215,96 @@ class _productCardState extends State<productCard> {
                 ),
               ),
             ),
+            //=============================Shop rating part=============================
+            //**************صورة نجمة
+            Positioned(
+              //top: 10,
+              right: 5,
+              bottom: 15,
+              child: IconButton(
+                icon: Icon(
+                  //Icons.star_rate,
+                  Icons.star_rounded,
+                  color: Colors.amber,
+                  size: 25.0,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ratingsList(
+                        thisShopOwnerId: widget.product.shopOwnerId,
+                        averageShopRating: averageShopRating,
+                        numberOfRatings: numberOfRatings,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+            //************نسبة التقييم للمتجر
+            Positioned(
+              //top: 10,
+              right: 42,
+              bottom: 27,
+              child: RichText(
+                text: TextSpan(children: [
+                  TextSpan(
+                      text: "${averageShopRating}",
+                      style: const TextStyle(
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: "Tajawal",
+                        color: kPrimaryLight,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ratingsList(
+                                thisShopOwnerId: widget.product.shopOwnerId,
+                                averageShopRating: averageShopRating,
+                                numberOfRatings: numberOfRatings,
+                              ),
+                            ),
+                          );
+                        }),
+                ]),
+              ),
+            ),
+            //*************** عدد التقييمات
+            Positioned(
+              right: 70,
+              bottom: 29,
+              child: RichText(
+                text: TextSpan(children: [
+                  TextSpan(
+                      text: "(${numberOfRatings} تقييم)",
+                      style: TextStyle(
+                        fontSize: 13.0,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: "Tajawal",
+                        decoration: TextDecoration.underline,
+                        color: Colors.amber,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ratingsList(
+                                thisShopOwnerId: widget.product.shopOwnerId,
+                                averageShopRating: averageShopRating,
+                                numberOfRatings: numberOfRatings,
+                              ),
+                            ),
+                          );
+                        }),
+                ]),
+              ),
+            ),
+            //=====================================================================
             //**********************المفضلة
             Positioned(
               //top: 10,
@@ -327,6 +319,7 @@ class _productCardState extends State<productCard> {
                   size: 32.0,
                 ),
                 onPressed: () async {
+                  setIsAvailable();
                   if (isFavourite == false) {
                     //المنتج غير موجود مسبقًا في قائمة المفضلة
                     final productToBeAdded =
@@ -369,95 +362,7 @@ class _productCardState extends State<productCard> {
                 },
               ),
             ),
-            //**********************صورة نجمة
-            Positioned(
-              //top: 10,
-              right: 5,
-              bottom: 15,
-              child: IconButton(
-                icon: Icon(
-                  //Icons.star_rate,
-                  Icons.star_rounded,
-                  color: Colors.amber,
-                  size: 25.0,
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ratingsList(
-                        thisShopOwnerId: widget.product.shopOwnerId,
-                        averageShopRating: averageShopRating,
-                        numberOfRatings: numberOfRatings,
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-            //**********************نسبة التقييم للمتجر
-            Positioned(
-              //top: 10,
-              right: 42,
-              bottom: 27,
-              child: RichText(
-                text: TextSpan(children: [
-                  TextSpan(
-                      text: "${averageShopRating}",
-                      style: const TextStyle(
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: "Tajawal",
-                        color: kPrimaryLight,
-                      ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ratingsList(
-                                thisShopOwnerId: widget.product.shopOwnerId,
-                                averageShopRating: averageShopRating,
-                                numberOfRatings: numberOfRatings,
-                              ),
-                            ),
-                          );
-                        }),
-                ]),
-              ),
-            ),
-            //********************** عدد التقييمات
-            Positioned(
-              right: 70,
-              bottom: 29,
-              child: RichText(
-                text: TextSpan(children: [
-                  TextSpan(
-                      text: "(${numberOfRatings} تقييم)",
-                      style: TextStyle(
-                        fontSize: 13.0,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: "Tajawal",
-                        decoration: TextDecoration.underline,
-                        color: Colors.amber,
-                      ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ratingsList(
-                                thisShopOwnerId: widget.product.shopOwnerId,
-                                averageShopRating: averageShopRating,
-                                numberOfRatings: numberOfRatings,
-                              ),
-                            ),
-                          );
-                        }),
-                ]),
-              ),
-            ),
-            //=============================================================
+
             //========================================غير متوفر
             Positioned(
                 top: 1,
@@ -486,7 +391,21 @@ class _productCardState extends State<productCard> {
     );
   }
 
-  //==========================================================================================
+  void setIsAvailable() {
+    if (mounted) {
+      if (widget.product.availableAmount == 0) {
+        setState(() {
+          isAvailable = false;
+        });
+      } else {
+        setState(() {
+          isAvailable = true;
+        });
+      }
+    }
+  }
+
+  //========================================================================================
   Future createWishListItem(cart_wishlistModel wishListItem) async {
     final docCartItem = FirebaseFirestore.instance
         .collection('wishList')
@@ -497,7 +416,7 @@ class _productCardState extends State<productCard> {
     );
   }
 
-  //==========================================================================================
+  //========================================================================================
   Future<void> setIsFavourite(
       String thisCustomerId, String thisproductId) async {
     String existedDocId = await getWishListDocId(thisCustomerId, thisproductId);
@@ -600,7 +519,4 @@ class _productCardState extends State<productCard> {
       fontSize: 18.0,
     );
   }
-
-  //----------------------
-  void listenHelperMethod() {}
 }
