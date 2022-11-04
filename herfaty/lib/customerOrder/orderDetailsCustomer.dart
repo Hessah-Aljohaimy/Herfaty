@@ -84,11 +84,12 @@ class AppBarOD extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color color = Color(0xff4C8F2F);
+    Color color = Color.fromARGB(255, 48, 137, 162);
+
     if (status == "تم التوصيل")
-      color = Color.fromARGB(255, 48, 137, 162);
+      color = Color(0xff4C8F2F);
     else if (status == "خارج للتوصيل") {
-      color = Color(0xffF06676);
+      color = Color.fromARGB(255, 241, 145, 0);
     }
     return Column(
       mainAxisSize: MainAxisSize.min,

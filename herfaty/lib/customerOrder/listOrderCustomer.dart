@@ -150,8 +150,11 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: TextStyle(
-                                                          color:
-                                                              Color(0xff4C8F2F),
+                                                          color: Color.fromARGB(
+                                                              255,
+                                                              48,
+                                                              137,
+                                                              162),
                                                           fontSize: 17.0,
                                                           fontFamily:
                                                               "Tajawal")),
@@ -159,8 +162,8 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                     "تاريخ الطلب : ${cItems[index].orderDate} ",
                                                     style: TextStyle(
                                                         fontSize: 17.0,
-                                                        color:
-                                                            Color(0xff4C8F2F),
+                                                        color: Color.fromARGB(
+                                                            255, 48, 137, 162),
                                                         fontFamily: "Tajawal"),
                                                   ),
                                                 ],
@@ -224,9 +227,10 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                     decoration: BoxDecoration(
                                                         border: Border(
                                                       top: BorderSide(
-                                                          width: 1.0,
-                                                          color: Color(
-                                                              0xff4C8F2F)),
+                                                        width: 1.0,
+                                                        color: Color.fromARGB(
+                                                            255, 48, 137, 162),
+                                                      ),
                                                       /*bottom: BorderSide(
                                                           width: 1.0,
                                                           color: Color.fromARGB(
@@ -328,7 +332,8 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                   BorderRadius.circular(10),
                                               color: Colors.grey[300]),
                                           indicatorDecoration: BoxDecoration(
-                                              color: Color(0xff4C8F2F),
+                                              color: Color.fromARGB(
+                                                  255, 48, 137, 162),
                                               borderRadius:
                                                   BorderRadius.circular(10)),
                                         ),
@@ -353,9 +358,9 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                           children: [
                                             ElevatedButton(
                                               style: ElevatedButton.styleFrom(
-                                                  primary: Color(
-                                                      0xff4C8F2F) // background
-                                                  ),
+                                                primary: Color.fromARGB(255, 48,
+                                                    137, 162), // background
+                                              ),
                                               onPressed: () {
                                                 Navigator.push(
                                                   context,
@@ -484,8 +489,8 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: TextStyle(
-                                                          color:
-                                                              Color(0xffF06676),
+                                                          color: Color.fromARGB(
+                                                              255, 241, 145, 0),
                                                           fontSize: 17.0,
                                                           fontFamily:
                                                               "Tajawal")),
@@ -493,8 +498,8 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                     "تاريخ الطلب : ${cItems[index].orderDate} ",
                                                     style: TextStyle(
                                                         fontSize: 17.0,
-                                                        color:
-                                                            Color(0xffF06676),
+                                                        color: Color.fromARGB(
+                                                            255, 241, 145, 0),
                                                         fontFamily: "Tajawal"),
                                                   ),
                                                 ],
@@ -549,9 +554,10 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                     decoration: BoxDecoration(
                                                         border: Border(
                                                       top: BorderSide(
-                                                          width: 1.0,
-                                                          color: Color(
-                                                              0xffF06676)),
+                                                        width: 1.0,
+                                                        color: Color.fromARGB(
+                                                            255, 241, 145, 0),
+                                                      ),
                                                       /*bottom: BorderSide(
                                                           width: 1.0,
                                                           color: Color.fromARGB(
@@ -653,7 +659,8 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                   BorderRadius.circular(10),
                                               color: Colors.grey[300]),
                                           indicatorDecoration: BoxDecoration(
-                                              color: Color(0xffF06676),
+                                              color: Color.fromARGB(
+                                                  255, 241, 145, 0),
                                               borderRadius:
                                                   BorderRadius.circular(10)),
                                         ),
@@ -678,9 +685,9 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                           children: [
                                             ElevatedButton(
                                               style: ElevatedButton.styleFrom(
-                                                  primary: Color(
-                                                      0xffF06676) // background
-                                                  ),
+                                                primary: Color.fromARGB(255,
+                                                    241, 145, 0), // background
+                                              ),
                                               onPressed: () {
                                                 Navigator.push(
                                                   context,
@@ -821,11 +828,8 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              48,
-                                                              137,
-                                                              162),
+                                                          color:
+                                                              Color(0xff4C8F2F),
                                                           fontSize: 17.0,
                                                           fontFamily:
                                                               "Tajawal")),
@@ -833,8 +837,8 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                     "تاريخ الطلب : ${cItems[index].orderDate} ",
                                                     style: TextStyle(
                                                         fontSize: 17.0,
-                                                        color: Color.fromARGB(
-                                                            255, 48, 137, 162),
+                                                        color:
+                                                            Color(0xff4C8F2F),
                                                         fontFamily: "Tajawal"),
                                                   ),
                                                 ],
@@ -889,12 +893,10 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                     decoration: BoxDecoration(
                                                         border: Border(
                                                       top: BorderSide(
-                                                          width: 1.0,
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              48,
-                                                              137,
-                                                              162)),
+                                                        width: 1.0,
+                                                        color:
+                                                            Color(0xff4C8F2F),
+                                                      ),
                                                       /*bottom: BorderSide(
                                                           width: 1.0,
                                                           color: Color.fromARGB(
@@ -997,8 +999,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                   BorderRadius.circular(10),
                                               color: Colors.grey[300]),
                                           indicatorDecoration: BoxDecoration(
-                                              color: Color.fromARGB(
-                                                  255, 48, 137, 162),
+                                              color: Color(0xff4C8F2F),
                                               borderRadius:
                                                   BorderRadius.circular(10)),
                                         ),
@@ -1061,12 +1062,9 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                             //--------------------------------------------------
                                             ElevatedButton(
                                               style: ElevatedButton.styleFrom(
-                                                  primary: Color.fromARGB(
-                                                      255,
-                                                      48,
-                                                      137,
-                                                      162) // background
-                                                  ),
+                                                primary: Color(
+                                                    0xff4C8F2F), // background
+                                              ),
                                               onPressed: () {
                                                 Navigator.push(
                                                   context,
