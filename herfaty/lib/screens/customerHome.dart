@@ -241,6 +241,7 @@ class _AppBarState extends State<AppBar> {
         ),
         gradient: LinearGradient(
           colors: [
+            // (Color.fromARGB(255, 161, 230, 226)),
             (Color.fromARGB(255, 81, 144, 142)),
             (Color.fromARGB(255, 85, 150, 165)),
           ],

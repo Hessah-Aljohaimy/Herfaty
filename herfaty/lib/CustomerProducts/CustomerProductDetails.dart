@@ -95,6 +95,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: kPrimaryColor,
+
       appBar: productDetailsAppBar(context),
       //..............................................................................................................
       body: SafeArea(
@@ -141,12 +142,13 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                               style: const TextStyle(
                                 fontSize: 22.0,
                                 fontWeight: FontWeight.w600,
+                                height: 1.5,
                                 fontFamily: "Tajawal",
                                 color: Color.fromARGB(255, 0, 0, 0),
                               ),
                             ),
                           ),
-                          // price======================================================================
+                          // price and quanity ======================================================================
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -192,7 +194,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                   child: Text(
                     "${widget.product.description}",
                     style: TextStyle(
-                      fontSize: 17,
+                      fontSize: 17.5,
                       height: 1.4,
                       fontWeight: FontWeight.w500,
                       color: Colors.white,
@@ -210,6 +212,8 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
                 //////////////////////////////////////////////////////////////////////////////////
                 /////=============================================================================
                 //////////////////////////////////////////////////////////////////////////////////
+                //=================== التحكم في الكمية
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -405,7 +409,7 @@ class _CustomerProdectDetailsState extends State<CustomerProdectDetails> {
 
                 isButtonsDisabled
                     ? Container(
-                        padding: EdgeInsets.only(top: 25),
+                        padding: EdgeInsets.only(top: 16),
                         child: Center(
                           child: Text(
                             'هذا المنتج غير متوفر حاليًا',
