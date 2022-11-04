@@ -129,16 +129,19 @@ class list extends StatelessWidget {
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: TextStyle(
-                                                          color:
-                                                              Color(0xff4C8F2F),
+                                                          color: Color.fromARGB(
+                                                              255,
+                                                              48,
+                                                              137,
+                                                              162),
                                                           fontSize: 17.0,
                                                           fontFamily:
                                                               "Tajawal")),
                                                   Text(
                                                     "تاريخ الطلب :${cItems[index].orderDate} ",
                                                     style: TextStyle(
-                                                        color:
-                                                            Color(0xff4C8F2F),
+                                                        color: Color.fromARGB(
+                                                            255, 48, 137, 162),
                                                         fontSize: 17.0,
                                                         fontFamily: "Tajawal"),
                                                   ),
@@ -157,9 +160,10 @@ class list extends StatelessWidget {
                                           children: [
                                             ElevatedButton(
                                               style: ElevatedButton.styleFrom(
-                                                  primary: Color(
-                                                      0xff4C8F2F) // background
-                                                  ),
+                                                primary: Color.fromARGB(
+                                                    255, 48, 137, 162),
+                                                // background
+                                              ),
                                               onPressed: () {
                                                 Navigator.push(
                                                   context,
@@ -275,16 +279,16 @@ class list extends StatelessWidget {
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: TextStyle(
-                                                          color:
-                                                              Color(0xffE87118),
+                                                          color: Color.fromARGB(
+                                                              255, 194, 146, 3),
                                                           fontSize: 17.0,
                                                           fontFamily:
                                                               "Tajawal")),
                                                   Text(
                                                     "تاريخ الطلب :${cItems[index].orderDate} ",
                                                     style: TextStyle(
-                                                        color:
-                                                            Color(0xffE87118),
+                                                        color: Color.fromARGB(
+                                                            255, 194, 146, 3),
                                                         fontSize: 17.0,
                                                         fontFamily: "Tajawal"),
                                                   ),
@@ -303,9 +307,9 @@ class list extends StatelessWidget {
                                           children: [
                                             ElevatedButton(
                                               style: ElevatedButton.styleFrom(
-                                                  primary: Color(
-                                                      0xffE87118) // background
-                                                  ),
+                                                primary: Color.fromARGB(255,
+                                                    194, 146, 3), // background
+                                              ),
                                               onPressed: () {
                                                 Navigator.push(
                                                   context,
@@ -421,16 +425,16 @@ class list extends StatelessWidget {
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: TextStyle(
-                                                          color:
-                                                              Color(0xffF06676),
+                                                          color: Color.fromARGB(
+                                                              255, 241, 145, 0),
                                                           fontSize: 17.0,
                                                           fontFamily:
                                                               "Tajawal")),
                                                   Text(
                                                     "تاريخ الطلب :${cItems[index].orderDate} ",
                                                     style: TextStyle(
-                                                        color:
-                                                            Color(0xffF06676),
+                                                        color: Color.fromARGB(
+                                                            255, 241, 145, 0),
                                                         fontSize: 17.0,
                                                         fontFamily: "Tajawal"),
                                                   ),
@@ -449,9 +453,10 @@ class list extends StatelessWidget {
                                           children: [
                                             ElevatedButton(
                                               style: ElevatedButton.styleFrom(
-                                                  primary: Color(
-                                                      0xffF06676) // background
-                                                  ),
+                                                primary: Color.fromARGB(
+                                                    255, 241, 145, 0),
+                                                // background
+                                              ),
                                               onPressed: () {
                                                 Navigator.push(
                                                   context,
@@ -567,19 +572,16 @@ class list extends StatelessWidget {
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              48,
-                                                              137,
-                                                              162),
+                                                          color:
+                                                              Color(0xff4C8F2F),
                                                           fontSize: 17.0,
                                                           fontFamily:
                                                               "Tajawal")),
                                                   Text(
                                                     "تاريخ الطلب : ${cItems[index].orderDate} ",
                                                     style: TextStyle(
-                                                        color: Color.fromARGB(
-                                                            255, 48, 137, 162),
+                                                        color:
+                                                            Color(0xff4C8F2F),
                                                         fontSize: 17.0,
                                                         fontFamily: "Tajawal"),
                                                   ),
@@ -598,12 +600,9 @@ class list extends StatelessWidget {
                                           children: [
                                             ElevatedButton(
                                               style: ElevatedButton.styleFrom(
-                                                  primary: Color.fromARGB(
-                                                      255,
-                                                      48,
-                                                      137,
-                                                      162) // background
-                                                  ),
+                                                primary: Color(
+                                                    0xff4C8F2F), // background
+                                              ),
                                               onPressed: () {
                                                 Navigator.push(
                                                   context,

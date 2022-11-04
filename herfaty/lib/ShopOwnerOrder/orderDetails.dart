@@ -86,18 +86,18 @@ class AppBarOD extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String newStatus = "";
-    Color color = Color(0xff4C8F2F);
+    Color color = Color.fromARGB(255, 48, 137, 162);
     if (status == "طلب جديد")
       newStatus = "جاهز للتوصيل";
     else if (status == "جاهز للتوصيل") {
       newStatus = "المنتج خارج للتوصيل";
-      color = Color(0xffE87118);
+      color = Color.fromARGB(255, 194, 146, 3);
     } else if (status == "تم التوصيل") {
       newStatus = "تم التوصيل";
-      color = Color.fromARGB(255, 48, 137, 162);
+      color = Color(0xff4C8F2F);
     } else if (status == "خارج للتوصيل") {
       newStatus = "خارج للتوصيل";
-      color = Color(0xffF06676);
+      color = Color.fromARGB(255, 241, 145, 0);
     }
 
     return Column(
@@ -232,7 +232,7 @@ class AppBarOD extends StatelessWidget {
       return ElevatedButton(
         style: ElevatedButton.styleFrom(
           //primary: Color.fromARGB(255, 81, 144, 142), // background
-          primary: Color(0xffE87118),
+          primary: Color.fromARGB(255, 194, 146, 3),
         ),
         onPressed: () {
           showDialog(
@@ -483,7 +483,8 @@ class DefaultAppBarO extends StatelessWidget implements PreferredSizeWidget {
           style: TextStyle(color: kPrimaryColor, fontFamily: "Tajawal")),
       centerTitle: true,
       backgroundColor: Colors.white,
-      elevation: 0,
+      shadowColor: Color.fromARGB(255, 39, 141, 134),
+      elevation: 3,
       automaticallyImplyLeading: false,
       iconTheme: IconThemeData(color: kPrimaryColor),
       leading: IconButton(
