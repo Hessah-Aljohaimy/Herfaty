@@ -381,7 +381,18 @@ class _productCardState extends State<productCard> {
                   color: Colors.amber,
                   size: 25.0,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ratingsList(
+                        thisShopOwnerId: widget.product.shopOwnerId,
+                        averageShopRating: averageShopRating,
+                        numberOfRatings: numberOfRatings,
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
             //**********************نسبة التقييم للمتجر
@@ -389,14 +400,30 @@ class _productCardState extends State<productCard> {
               //top: 10,
               right: 42,
               bottom: 27,
-              child: Text(
-                "${averageShopRating}",
-                style: const TextStyle(
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.w400,
-                  fontFamily: "Tajawal",
-                  color: kPrimaryLight,
-                ),
+              child: RichText(
+                text: TextSpan(children: [
+                  TextSpan(
+                      text: "${averageShopRating}",
+                      style: const TextStyle(
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: "Tajawal",
+                        color: kPrimaryLight,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ratingsList(
+                                thisShopOwnerId: widget.product.shopOwnerId,
+                                averageShopRating: averageShopRating,
+                                numberOfRatings: numberOfRatings,
+                              ),
+                            ),
+                          );
+                        }),
+                ]),
               ),
             ),
             //********************** عدد التقييمات
@@ -433,8 +460,8 @@ class _productCardState extends State<productCard> {
             //=============================================================
             //========================================غير متوفر
             Positioned(
-                top: 5,
-                left: 185,
+                top: 1,
+                right: 21,
                 //right: 60,
                 //bottom: 6,
                 child: isAvailable

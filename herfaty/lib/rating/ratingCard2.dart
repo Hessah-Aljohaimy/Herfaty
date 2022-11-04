@@ -35,7 +35,6 @@ class _ratingCard2State extends State<ratingCard2> {
         tileColor: Colors.white,
         minVerticalPadding: 10,
         contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
-        //leading: FlutterLogo(size: 72.0),
         title: Text(
           widget.ratingItem.comment,
           style: const TextStyle(
