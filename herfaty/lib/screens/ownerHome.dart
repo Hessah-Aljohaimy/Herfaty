@@ -184,8 +184,8 @@ class _AppBarState extends State<AppBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
-      height: 130,
+      padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+      height: 100,
       width: double.infinity,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
@@ -208,14 +208,22 @@ class _AppBarState extends State<AppBar> {
             height: 18,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 5.0, left: 10),
+                child: Image.asset(
+                  "assets/images/lamp.png",
+                  width: 36,
+                  height: 30,
+                ),
+              ),
               // ignore: prefer_const_constructors
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: Text(
-                  "مرحباً بك ${thisOwnerName} ",
+                  "مرحباً بك ${thisOwnerName} !",
 
                   // ignore: prefer_const_constructors
                   style: TextStyle(

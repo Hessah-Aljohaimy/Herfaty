@@ -25,7 +25,7 @@ class _PointPanelState extends State<PointPanel> {
   int numberOfRatings = 0;
 
   void initState() {
-    print("this is app bar initState====");
+    print("============this is point panel initState====");
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     thisOwnerId = user!.uid;
@@ -268,6 +268,8 @@ class _PointPanelState extends State<PointPanel> {
       averageShopRating = sumRating / shopDoc.size;
       String inString = averageShopRating.toStringAsFixed(2);
       averageShopRating = double.parse(inString);
+      print(
+          "=====this is point panel===== shop average rating is ${averageShopRating} ");
     }
     return averageShopRating;
   }
