@@ -53,7 +53,7 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
                   //to make the container covers the full width of the screen
                   width: double.infinity,
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 20 * 1.5,
+                    horizontal: 40,
                   ),
                   decoration: const BoxDecoration(
                     color: Colors.white,
@@ -84,8 +84,9 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
                             child: Text(
                               widget.product.name,
                               style: const TextStyle(
-                                fontSize: 26.0,
-                                fontWeight: FontWeight.w500,
+                                fontSize: 22.0,
+                                fontWeight: FontWeight.w600,
+                                height: 1.5,
                                 fontFamily: "Tajawal",
                                 color: Color.fromARGB(255, 0, 0, 0),
                               ),
@@ -119,7 +120,7 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
                       ),
                       //this sizebox is to add a space after the price
                       const SizedBox(
-                        height: 20,
+                        height: 25,
                       ),
                     ],
                   ),
@@ -132,11 +133,19 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
                     vertical: 10,
                     horizontal: 30,
                   ),
-                  child: SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
-                      child: ExpandedWidget(
-                        text: widget.product.description,
-                      )),
+                  child: Text(
+                    "${widget.product.description}",
+                    style: TextStyle(
+                      fontSize: 17.5,
+                      height: 1.4,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
+                      fontFamily: "Tajawal",
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 5,
                 ),
                 //(أزرار التعديل والحذف)============================================================//
                 //////////////////////////////////////////////////////////////////////////////////
@@ -387,21 +396,6 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
     });*/
   }
 
-///////////////////////////////////////////////////////////////////////////////
-  Future<void> showDoneToast(BuildContext context) async {
-    Fluttertoast.showToast(
-      msg: "تمت إضافة المنتج للسلة بنجاح",
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.CENTER,
-      timeInSecForIosWeb: 3,
-      backgroundColor: Color.fromARGB(255, 26, 96, 91),
-      textColor: Colors.white,
-      fontSize: 18.0,
-    );
-
-    Navigator.pop(context);
-  }
-
 /////////////////////////////////////////////////////////////////////////////
   AppBar productDetailsAppBar(BuildContext context) {
     return AppBar(
@@ -444,25 +438,28 @@ class ProductImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 20),
-      height: size.width * 0.7,
+      margin: const EdgeInsets.only(bottom: 20),
+      height: size.width * 0.8,
       color: const Color.fromARGB(255, 255, 255, 255),
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
           Container(
-            height: size.width * 0.7,
-            width: size.width * 0.7,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              color: Colors.white,
-            ),
-          ),
-          Image.network(
-            image,
             height: size.width * 0.8,
             width: size.width * 0.8,
-            fit: BoxFit.cover,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(25)),
+              color: Colors.white,
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.all(
+                Radius.circular(25),
+              ),
+              child: Image.network(
+                image,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
         ],
       ),
