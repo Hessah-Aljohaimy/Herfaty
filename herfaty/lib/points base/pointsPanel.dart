@@ -31,8 +31,8 @@ class _PointPanelState extends State<PointPanel> {
     thisOwnerId = user!.uid;
     setOwnerPoints(thisOwnerId);
     //--------------------------------------------------------
-    setShopAverageRating(thisOwnerId);
-    setNumOfRatings(thisOwnerId);
+    // setShopAverageRating(thisOwnerId);
+    // setNumOfRatings(thisOwnerId);
 
     super.initState();
   }
