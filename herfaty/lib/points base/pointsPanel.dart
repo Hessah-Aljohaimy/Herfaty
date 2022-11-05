@@ -39,6 +39,16 @@ class _PointPanelState extends State<PointPanel> {
 
   @override
   Widget build(BuildContext context) {
+    //To update shop rating continuously
+    // CollectionReference reference =
+    //     FirebaseFirestore.instance.collection('rating');
+    // reference.snapshots().listen((querySnapshot) {
+    //   querySnapshot.docChanges.forEach((change) async {
+    //     setShopAverageRating(thisOwnerId);
+    //     setNumOfRatings(thisOwnerId);
+    //   });
+    // });
+    //===============================================
     print('entering rewards scroll method ==================');
     return StreamBuilder<List<ShopOwner>>(
         stream: getpoints1(thisOwnerId),
@@ -53,7 +63,7 @@ class _PointPanelState extends State<PointPanel> {
 
             return Container(
               // color: Colors.black,
-              height: 180,
+              height: 225,
               width: 390,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -104,14 +114,15 @@ class _PointPanelState extends State<PointPanel> {
                       fontFamily: "Tajawal"),
                 ),
                 Indicator(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    //====================================
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Align(
-                          alignment: Alignment.bottomLeft,
+                          //alignment: Alignment.topRight,
                           child: TextButton(
                             child: Text(
                               "سجل نقاطي",
@@ -153,7 +164,7 @@ class _PointPanelState extends State<PointPanel> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Align(
-                          alignment: Alignment.topLeft,
+                          //alignment: Alignment.topRight,
                           child: TextButton(
                             child: Text(
                               "تقييمات متجري",
