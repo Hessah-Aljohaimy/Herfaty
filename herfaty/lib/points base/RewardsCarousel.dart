@@ -39,18 +39,31 @@ class _RewardsCarouselState extends State<RewardsCarousel> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Colors.amber),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(.1),
-                        blurRadius: 4.0,
+                        //color: Colors.black.withOpacity(.1),
+                        color: Colors.amber.withOpacity(.7),
+                        blurRadius: 6.0,
                         spreadRadius: .05,
                       ), //BoxShadow
                     ],
                   ),
+                  // decoration: BoxDecoration(
+                  //   color: Colors.white,
+                  //   borderRadius: BorderRadius.circular(20),
+                  //   boxShadow: [
+                  //     BoxShadow(
+                  //       color: Colors.black.withOpacity(.1),
+                  //       blurRadius: 4.0,
+                  //       spreadRadius: .05,
+                  //     ), //BoxShadow
+                  //   ],
+                  // ),
                   child: Row(
                     children: [
                       Container(
-                      margin:  const EdgeInsets.all(3),
+                        margin: const EdgeInsets.all(3),
                         // width: 80,
                         // height: 30,
                         child: Text(
@@ -59,8 +72,7 @@ class _RewardsCarouselState extends State<RewardsCarousel> {
                               color: Color(0xffF19B1A),
                               fontSize: 19,
                               fontWeight: FontWeight.bold,
-                              fontFamily: "Tajawal"
-                              ),
+                              fontFamily: "Tajawal"),
                         ),
                       ),
                       Positioned(
@@ -82,7 +94,7 @@ class _RewardsCarouselState extends State<RewardsCarousel> {
         SizedBox(
           width: 25,
         ),
-        reviewOwnerPanle()
+        //reviewOwnerPanle()
       ],
     );
   }
@@ -290,10 +302,12 @@ class rewardsCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: Colors.amber),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(.1),
-              blurRadius: 4.0,
+              //color: Colors.black.withOpacity(.1),
+              color: Colors.amber.withOpacity(.7),
+              blurRadius: 6.0,
               spreadRadius: .05,
             ), //BoxShadow
           ],

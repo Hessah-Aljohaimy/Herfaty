@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +7,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:herfaty/points%20base/RewardsCarousel.dart';
 import 'package:herfaty/points.dart/pointsList.dart';
+import 'package:herfaty/rating/ratingsList.dart';
 
 //import '../pages/signupHerafy.dart';
 
@@ -18,12 +21,18 @@ class PointPanel extends StatefulWidget {
 class _PointPanelState extends State<PointPanel> {
   String thisOwnerId = "";
   int pointss = 0;
+  double averageShopRating = 0;
+  int numberOfRatings = 0;
+
   void initState() {
     print("this is app bar initState====");
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     thisOwnerId = user!.uid;
     setOwnerPoints(thisOwnerId);
+    //--------------------------------------------------------
+    setShopAverageRating(thisOwnerId);
+    setNumOfRatings(thisOwnerId);
 
     super.initState();
   }
@@ -96,43 +105,105 @@ class _PointPanelState extends State<PointPanel> {
                 ),
                 Indicator(),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Align(
-                      alignment: Alignment.bottomLeft,
-                      child: TextButton(
-                        child: Text(
-                          "سجل نقاطي",
-                          style: TextStyle(
-                              color: Color(0xff44ADE8),
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: "Tajawal"),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Align(
+                          alignment: Alignment.bottomLeft,
+                          child: TextButton(
+                            child: Text(
+                              "سجل نقاطي",
+                              style: TextStyle(
+                                  color: Color(0xff44ADE8),
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: "Tajawal"),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => PointsList()),
+                              );
+                            },
+                          ),
                         ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PointsList()),
-                          );
-                        },
-                      ),
+                        IconButton(
+                          padding: EdgeInsets.zero,
+                          constraints: BoxConstraints(),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PointsList()),
+                            );
+                          },
+                          icon: Icon(
+                            Icons.arrow_forward_rounded,
+                            size: 20,
+                            color: Color(0xff44ADE8),
+                          ),
+                        ),
+                      ],
                     ),
-                    IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => PointsList()),
-                        );
-                      },
-                      icon: Icon(
-                        Icons.arrow_forward_rounded,
-                        size: 20,
-                        color: Color(0xff44ADE8),
-                      ),
+                    //===========================================تقييمات المتجر
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: TextButton(
+                            child: Text(
+                              "تقييمات متجري",
+                              style: TextStyle(
+                                  color: Color(0xff44ADE8),
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: "Tajawal"),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ratingsList(
+                                    thisShopOwnerId: thisOwnerId,
+                                    averageShopRating: averageShopRating,
+                                    numberOfRatings: numberOfRatings,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        IconButton(
+                          padding: EdgeInsets.only(
+                              top: 0, right: 0, bottom: 0, left: 2),
+                          constraints: BoxConstraints(),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ratingsList(
+                                  thisShopOwnerId: thisOwnerId,
+                                  averageShopRating: averageShopRating,
+                                  numberOfRatings: numberOfRatings,
+                                ),
+                              ),
+                            );
+                          },
+                          icon: Icon(
+                            Icons.arrow_forward_rounded,
+                            size: 20,
+                            color: Color(0xff44ADE8),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
+                //==================
               ]),
             );
           } else {
@@ -170,6 +241,61 @@ class _PointPanelState extends State<PointPanel> {
     }
     return OwnerPoints;
   }
+
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+  Future<void> setShopAverageRating(String thisOwnerId) async {
+    double existedShopRating = await getShopAverageRating(thisOwnerId);
+    setState(() {
+      averageShopRating = existedShopRating;
+    });
+  }
+
+  //=======================================================================================
+  Future<double> getShopAverageRating(String shopOwnerId) async {
+    double averageShopRating = 0;
+    num sumRating = 0;
+    final shopDoc = await FirebaseFirestore.instance
+        .collection('rating')
+        .where("shopOwnerId", isEqualTo: shopOwnerId)
+        .get();
+    if (shopDoc.size > 0) {
+      for (int i = 0; i < shopDoc.size; i++) {
+        var data = shopDoc.docs.elementAt(i).data() as Map;
+        double thisDocRating = data["starsNumber"];
+        sumRating += thisDocRating;
+      }
+
+      averageShopRating = sumRating / shopDoc.size;
+      String inString = averageShopRating.toStringAsFixed(2);
+      averageShopRating = double.parse(inString);
+    }
+    return averageShopRating;
+  }
+
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+  Future<void> setNumOfRatings(String thisOwnerId) async {
+    int existedRatingsNum = await getNumOfRatings(thisOwnerId);
+    setState(() {
+      numberOfRatings = existedRatingsNum;
+    });
+  }
+
+  //=======================================================================================
+  Future<int> getNumOfRatings(String shopOwnerId) async {
+    int existedRatingsNum = 0;
+    final shopDoc = await FirebaseFirestore.instance
+        .collection('rating')
+        .where("shopOwnerId", isEqualTo: shopOwnerId)
+        .get();
+    if (shopDoc.size > 0) {
+      existedRatingsNum = shopDoc.size;
+      print("shop ratings doc size is ${shopDoc.size}");
+    }
+    return existedRatingsNum;
+  }
+
+//=============================================================================================
+///////////////////////////////////////////////////////////////////////////////
 }
 
 //===================================================

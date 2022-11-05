@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:herfaty/constants/color.dart';
@@ -34,7 +36,8 @@ class _ownerHomeScreenState extends State<ownerHomeScreen> {
           decoration: BoxDecoration(
               image: DecorationImage(
                   image:
-                      AssetImage('assets/images/HomePageBackgroundOwner.png'),
+                      // AssetImage('assets/images/HomePageBackgroundOwner.png'),
+                      AssetImage('assets/images/cartBack1.png'),
                   fit: BoxFit.cover)),
           child: SingleChildScrollView(
             child: Column(
@@ -85,11 +88,14 @@ class _BodyState extends State<Body> {
     print('entering body method ==================');
     return Column(
       children: [
-        SizedBox(
-          height: 10,
-        ),
+        // SizedBox(
+        //   height: 10,
+        // ),
         Padding(
-          padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+          padding: const EdgeInsets.only(
+              // top: 10,
+              left: 20,
+              right: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
           ),
