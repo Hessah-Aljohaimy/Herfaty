@@ -63,7 +63,7 @@ class _PointPanelState extends State<PointPanel> {
 
             return Container(
               // color: Colors.black,
-              height: 225,
+              height: 180,
               width: 390,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -114,103 +114,43 @@ class _PointPanelState extends State<PointPanel> {
                       fontFamily: "Tajawal"),
                 ),
                 Indicator(),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    //====================================
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Align(
-                          //alignment: Alignment.topRight,
-                          child: TextButton(
-                            child: Text(
-                              "سجل نقاطي",
-                              style: TextStyle(
-                                  color: Color(0xff44ADE8),
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "Tajawal"),
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => PointsList()),
-                              );
-                            },
-                          ),
+                    Align(
+                      //alignment: Alignment.topRight,
+                      child: TextButton(
+                        child: Text(
+                          "سجل نقاطي",
+                          style: TextStyle(
+                              color: Color(0xff44ADE8),
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Tajawal"),
                         ),
-                        IconButton(
-                          padding: EdgeInsets.zero,
-                          constraints: BoxConstraints(),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => PointsList()),
-                            );
-                          },
-                          icon: Icon(
-                            Icons.arrow_forward_rounded,
-                            size: 20,
-                            color: Color(0xff44ADE8),
-                          ),
-                        ),
-                      ],
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PointsList()),
+                          );
+                        },
+                      ),
                     ),
-                    //===========================================تقييمات المتجر
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Align(
-                          //alignment: Alignment.topRight,
-                          child: TextButton(
-                            child: Text(
-                              "تقييمات متجري",
-                              style: TextStyle(
-                                  color: Color(0xff44ADE8),
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "Tajawal"),
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ratingsList(
-                                    thisShopOwnerId: thisOwnerId,
-                                    averageShopRating: averageShopRating,
-                                    numberOfRatings: numberOfRatings,
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                        IconButton(
-                          padding: EdgeInsets.only(
-                              top: 0, right: 0, bottom: 0, left: 2),
-                          constraints: BoxConstraints(),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ratingsList(
-                                  thisShopOwnerId: thisOwnerId,
-                                  averageShopRating: averageShopRating,
-                                  numberOfRatings: numberOfRatings,
-                                ),
-                              ),
-                            );
-                          },
-                          icon: Icon(
-                            Icons.arrow_forward_rounded,
-                            size: 20,
-                            color: Color(0xff44ADE8),
-                          ),
-                        ),
-                      ],
+                    IconButton(
+                      padding: EdgeInsets.zero,
+                      constraints: BoxConstraints(),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => PointsList()),
+                        );
+                      },
+                      icon: Icon(
+                        Icons.arrow_forward_rounded,
+                        size: 20,
+                        color: Color(0xff44ADE8),
+                      ),
                     ),
                   ],
                 ),
