@@ -6,6 +6,7 @@ class orderModal {
   num total = 0.0;
   String shopName = "";
   String notification = "notPushed";
+  String notificationCustomer = "notPushed";
   String status = "New order";
   String orderDate = "";
   bool isRated = false;
@@ -21,6 +22,7 @@ class orderModal {
       required this.total,
       required this.shopName,
       required this.notification,
+      required this.notificationCustomer,
       required this.status,
       required this.orderDate,
       required this.points,
@@ -35,6 +37,7 @@ class orderModal {
         'total': total,
         'shopName': shopName,
         'notification': notification,
+        'notificationCustomer': notificationCustomer,
         'status': status,
         'orderDate': orderDate,
         'points': points,
@@ -50,6 +53,7 @@ class orderModal {
       total: json['total'],
       shopName: json['shopName'],
       notification: json['notification'],
+      notificationCustomer: json['notificationCustomer'],
       status: json['status'],
       orderDate: json['orderDate'],
       points: json['points'],

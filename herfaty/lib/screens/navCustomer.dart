@@ -32,6 +32,8 @@ class _navState extends State<nav> {
 
   @override
   Widget build(BuildContext context) {
+    listenToDB();
+    //---------------------------------------------------------------------------------------------------
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         localizationsDelegates: [
@@ -115,14 +117,16 @@ class _navState extends State<nav> {
             //print(notificationStatus);
             //print(index);
             if (customerId == thisCustomerId) {
-              print("--Notification: This customer id is:${customerId}");
               if (notificationStatus == "notPushed" &&
                   orderState == "خارج للتوصيل") {
+                print("--Notification: This customer id is:${customerId}");
                 print("pushinnnng===========================");
                 createNotification(0, "طلب خارج للتوصيل",
                     "لديك طلب خارج للتوصيل سيصلك قريبًا، استعد لاستلامه!", "");
                 //print(docId);
-                reference.doc('${docId}').update({"notification": "pushed"});
+                reference
+                    .doc('${docId}')
+                    .update({"notificationCustomer": "pushed"});
               }
             }
           }
