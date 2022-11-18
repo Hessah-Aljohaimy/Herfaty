@@ -104,7 +104,8 @@ class _navState extends State<nav> {
 
     reference.snapshots().listen((querySnapshot) {
       querySnapshot.docChanges.forEach((change) {
-        if (change.type == DocumentChangeType.added) {
+        if (change.type == DocumentChangeType.added ||
+            change.type == DocumentChangeType.modified) {
           for (var index = 0; index < querySnapshot.size; index++) {
             final FirebaseAuth auth = FirebaseAuth.instance;
             final User? user = auth.currentUser;
@@ -119,7 +120,8 @@ class _navState extends State<nav> {
             if (customerId == thisCustomerId) {
               if (notificationStatus == "notPushed" &&
                   orderState == "خارج للتوصيل") {
-                print("--Notification: This customer id is:${customerId}");
+                print(
+                    "--Notification: customer id is:${customerId}, orderId is:${docId} ");
                 print("pushinnnng===========================");
                 createNotification(0, "طلب خارج للتوصيل",
                     "لديك طلب خارج للتوصيل سيصلك قريبًا، استعد لاستلامه!", "");
