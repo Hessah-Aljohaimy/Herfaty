@@ -157,8 +157,8 @@ class appBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
-      height: 100,
+      padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
+      height: 85,
       width: double.infinity,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
@@ -170,6 +170,7 @@ class appBar extends StatelessWidget {
           colors: [
             (Color.fromARGB(255, 81, 144, 142)),
             (Color.fromARGB(255, 85, 150, 165)),
+            //(Color.fromARGB(255, 110, 191, 209)),
           ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
@@ -192,7 +193,7 @@ class appBar extends StatelessWidget {
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                      fontSize: 21,
                       fontFamily: "Tajawal"),
                   textDirection: TextDirection.rtl,
                 ),

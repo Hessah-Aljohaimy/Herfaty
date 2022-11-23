@@ -213,18 +213,18 @@ class _AppBarState extends State<AppBar> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 1.0, left: 10),
+                padding: const EdgeInsets.only(top: 1.0, left: 8),
                 child: Image.asset(
                   "assets/images/lamp.png",
-                  width: 38,
-                  height: 31,
+                  width: 45,
+                  height: 40,
                 ),
               ),
               // ignore: prefer_const_constructors
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: Text(
-                  "مرحباً بك ${thisOwnerName}",
+                  "مرحباً بك ${thisOwnerName} !",
 
                   // ignore: prefer_const_constructors
                   style: TextStyle(
