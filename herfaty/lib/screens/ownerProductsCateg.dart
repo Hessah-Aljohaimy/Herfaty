@@ -45,7 +45,14 @@ class _ownerProductsCategScreenState extends State<ownerProductsCategScreen> {
               MaterialPageRoute(builder: (context) => AddProduct()),
             );
           },
-          label: const Text('أضف منتج جديد'),
+          label: const Text(
+            'إضافة منتج جديد',
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                fontFamily: "Tajawal"),
+          ),
           icon: const Icon(Icons.add),
           backgroundColor: Color(0xff51908E),
           extendedPadding: EdgeInsetsDirectional.only(start: 100.0, end: 100.0),
