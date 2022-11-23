@@ -381,12 +381,12 @@ class categories extends StatelessWidget {
                                         categoryName: "الخرز والإكسسوار")),
                               );
                             }
-                            if (cItems[index].name == "الفخاريات") {
+                            if (cItems[index].name == "الفخاريات والتشكيل") {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => CustomerProductsList(
-                                        categoryName: "الفخاريات")),
+                                        categoryName: "الفخاريات والتشكيل")),
                               );
                             }
                             if (cItems[index].name == "الحياكة والتطريز") {

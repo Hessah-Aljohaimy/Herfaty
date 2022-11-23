@@ -52,7 +52,7 @@ String CatName = '';
 
 Map catCheck = {
   "الخرز والإكسسوار": false,
-  "الفخاريات": false,
+  "الفخاريات والتشكيل": false,
   "الحياكة والتطريز": false,
   "فنون الورق والتلوين": false,
 };
@@ -75,7 +75,7 @@ class _CustomerProductsListState extends State<CustomerProductsList> {
     CatName = widget.categoryName;
     Map catCheck = {
       "الخرز والإكسسوار": false,
-      "الفخاريات": false,
+      "الفخاريات والتشكيل": false,
       "الحياكة والتطريز": false,
       "فنون الورق والتلوين": false,
     };
@@ -144,11 +144,12 @@ class _CustomerProductsListState extends State<CustomerProductsList> {
                           }
 
                           if (cat2.isEmpty &&
-                              widget.categoryName == "الفخاريات") {
+                              widget.categoryName == "الفخاريات والتشكيل") {
                             for (var i = 0; i < productItems.length; i++) {
                               if ((cat2.contains(productItems[i].name)) ==
                                       false &&
-                                  productItems[i].categoryName == "الفخاريات") {
+                                  productItems[i].categoryName ==
+                                      "الفخاريات والتشكيل") {
                                 cat2.add(productItems[i].name);
                               }
                             }
@@ -342,7 +343,6 @@ class mySearch extends SearchDelegate {
       .map((snapshot) =>
           snapshot.docs.map((doc) => Product1.fromJson(doc.data())).toList());
 
-
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
@@ -411,20 +411,19 @@ class mySearch extends SearchDelegate {
                   ),
                 ),
               );
-            }  else if(query.trim().isEmpty){
-                               return const Center(
-                                child: Text(
-                                  'لا توجد منتجات بهذا الاسم',
-                                  style: TextStyle(
-                                    fontSize: 18.0,
-                                    fontWeight: FontWeight.w600,
-                                    fontFamily: "Tajawal",
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              );
-                            }
-                            else {
+            } else if (query.trim().isEmpty) {
+              return const Center(
+                child: Text(
+                  'لا توجد منتجات بهذا الاسم',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: "Tajawal",
+                    color: Colors.grey,
+                  ),
+                ),
+              );
+            } else {
               final productItems = snapshot.data!.toList();
               List<Product1> productItems2 = [];
               for (var i = 0; i < productItems.length; i++) {
@@ -489,45 +488,32 @@ class mySearch extends SearchDelegate {
   Widget buildSuggestions(BuildContext context) {
     // TODO: implement buildSuggestions
 
-  List<String> Suggestions = [];
+    List<String> Suggestions = [];
 
     if (CatName == "الخرز والإكسسوار") {
-
-       for (var i = 0; i < cat1.length; i++) {
-      if(cat1[i].contains(query)){
-        Suggestions.add(cat1[i]);
+      for (var i = 0; i < cat1.length; i++) {
+        if (cat1[i].contains(query)) {
+          Suggestions.add(cat1[i]);
+        }
       }
-    }
-    } else if (CatName == "الفخاريات") {
-
-
-
-       for (var i = 0; i < cat2.length; i++) {
-      if(cat2[i].contains(query)){
-        Suggestions.add(cat2[i]);
+    } else if (CatName == "الفخاريات والتشكيل") {
+      for (var i = 0; i < cat2.length; i++) {
+        if (cat2[i].contains(query)) {
+          Suggestions.add(cat2[i]);
+        }
       }
-
-    
-    } }
-    else if (CatName == "الحياكة والتطريز") {
-
-
-
-       for (var i = 0; i < cat3.length; i++) {
-      if(cat3[i].contains(query)){
-        Suggestions.add(cat3[i]);
+    } else if (CatName == "الحياكة والتطريز") {
+      for (var i = 0; i < cat3.length; i++) {
+        if (cat3[i].contains(query)) {
+          Suggestions.add(cat3[i]);
+        }
       }
-
-       }
     } else {
-
-       for (var i = 0; i < cat4.length; i++) {
-      if(cat4[i].contains(query)){
-        Suggestions.add(cat4[i]);
+      for (var i = 0; i < cat4.length; i++) {
+        if (cat4[i].contains(query)) {
+          Suggestions.add(cat4[i]);
+        }
       }
-
-       }
-   
     }
     // for (var i = 0; i < productsName.length; i++) {
     //   if(productsName[i].contains(query)){

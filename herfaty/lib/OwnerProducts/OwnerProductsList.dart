@@ -18,7 +18,7 @@ final List<String> productsName = [];
 bool takeName = false;
 Map catCheck = {
   "الخرز والإكسسوار": false,
-  "الفخاريات": false,
+  "الفخاريات والتشكيل": false,
   "الحياكة والتطريز": false,
   "فنون الورق والتلوين": false,
 };
@@ -58,7 +58,7 @@ class _OwnerProductsList extends State<OwnerProductsList> {
     CatName = widget.categoryName;
     Map catCheck = {
       "الخرز والإكسسوار": false,
-      "الفخاريات": false,
+      "الفخاريات والتشكيل": false,
       "الحياكة والتطريز": false,
       "فنون الورق والتلوين": false,
     };
@@ -143,12 +143,12 @@ class _OwnerProductsList extends State<OwnerProductsList> {
                             }
 
                             if (cat2.isEmpty &&
-                                widget.categoryName == "الفخاريات") {
+                                widget.categoryName == "الفخاريات والتشكيل") {
                               for (var i = 0; i < productItems.length; i++) {
                                 if ((cat2.contains(productItems[i].name)) ==
                                         false &&
                                     productItems[i].categoryName ==
-                                        "الفخاريات") {
+                                        "الفخاريات والتشكيل") {
                                   cat2.add(productItems[i].name);
                                 }
                               }
@@ -473,7 +473,7 @@ class mySearch extends SearchDelegate {
           Suggestions.add(cat1[i]);
         }
       }
-    } else if (CatName == "الفخاريات") {
+    } else if (CatName == "الفخاريات والتشكيل") {
       for (var i = 0; i < cat2.length; i++) {
         if (cat2[i].contains(query)) {
           Suggestions.add(cat2[i]);
