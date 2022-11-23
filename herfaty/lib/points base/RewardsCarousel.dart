@@ -29,26 +29,26 @@ class _RewardsCarouselState extends State<RewardsCarousel> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  width: 9,
-                ),
+                // SizedBox(
+                //   width: 9,
+                // ),
                 Container(
-                  padding: const EdgeInsets.all(10),
-                  width: 139,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.amber),
-                    boxShadow: [
-                      BoxShadow(
-                        //color: Colors.black.withOpacity(.1),
-                        color: Colors.amber.withOpacity(.7),
-                        blurRadius: 6.0,
-                        spreadRadius: .05,
-                      ), //BoxShadow
-                    ],
-                  ),
+                  padding: const EdgeInsets.only(right: 30),
+                  width: 200,
+                  height: 60,
+                  // decoration: BoxDecoration(
+                  //   color: Colors.white,
+                  //   borderRadius: BorderRadius.circular(20),
+                  //   border: Border.all(color: Colors.amber),
+                  //   boxShadow: [
+                  //     BoxShadow(
+                  //       //color: Colors.black.withOpacity(.1),
+                  //       color: Colors.amber.withOpacity(.7),
+                  //       blurRadius: 6.0,
+                  //       spreadRadius: .05,
+                  //     ), //BoxShadow
+                  //   ],
+                  // ),
                   // decoration: BoxDecoration(
                   //   color: Colors.white,
                   //   borderRadius: BorderRadius.circular(20),
@@ -67,20 +67,21 @@ class _RewardsCarouselState extends State<RewardsCarousel> {
                         // width: 80,
                         // height: 30,
                         child: Text(
-                          "الكؤوس",
+                          "الكـؤوس",
                           style: TextStyle(
                               color: Color(0xffF19B1A),
-                              fontSize: 19,
+                              fontSize: 28,
                               fontWeight: FontWeight.bold,
                               fontFamily: "Tajawal"),
                         ),
                       ),
-                      Positioned(
-                        bottom: 50,
-                        top: 50,
+
+                      //top: 50,
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
                         child: Image.asset(
                           "assets/images/points_trophies/icons8-trophy.png",
-                          width: 40,
+                          width: 50,
                         ),
                       ),
                     ],
