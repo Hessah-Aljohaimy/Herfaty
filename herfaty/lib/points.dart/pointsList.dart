@@ -17,11 +17,12 @@ class PointsList extends StatelessWidget {
       length: 4,
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: DefaultAppBar(title: "قائمة نقاطي"),
+        appBar: DefaultAppBar(title: "سجل نقاطي"),
         body: TabBarView(
           children: <Widget>[
             SingleChildScrollView(
               child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 height: 630,
                 decoration: BoxDecoration(
                     image: DecorationImage(
@@ -108,42 +109,46 @@ class PointsList extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         children: [
-                                          RichText(
-                                            text: TextSpan(children: [
-                                              TextSpan(
-                                                text:
-                                                    "   ${cItems[index].orderDate}",
-                                                style: TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 39, 141, 134),
-                                                    fontSize: 20.0,
-                                                    // decoration: TextDecoration
-                                                    //     .underline,
-                                                    fontFamily: "Tajawal"),
-                                                // recognizer:
-                                                //     TapGestureRecognizer()
-                                                //       ..onTap = () {
-                                                //         Navigator.push(
-                                                //           context,
-                                                // MaterialPageRoute(
-                                                //     builder:
-                                                //         (context) =>
-                                                //               pointsDetails(
-                                                //                 date:
-                                                //                     cItems[index].orderDate,
-                                                //                 totalOrder:
-                                                //                     cItems[index].total,
-                                                //                 docID:
-                                                //                     cItems[index].docId,
-                                                //                 products:
-                                                //                     cItems[index].products,
-                                                //                 status:
-                                                //                     cItems[index].status,
-                                                //               )),
-                                                // );
-                                                //  }
-                                              ),
-                                            ]),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 8.0),
+                                            child: RichText(
+                                              text: TextSpan(children: [
+                                                TextSpan(
+                                                  text:
+                                                      "   ${cItems[index].orderDate}",
+                                                  style: TextStyle(
+                                                      color: Color.fromARGB(
+                                                          255, 39, 141, 134),
+                                                      fontSize: 20.0,
+                                                      // decoration: TextDecoration
+                                                      //     .underline,
+                                                      fontFamily: "Tajawal"),
+                                                  // recognizer:
+                                                  //     TapGestureRecognizer()
+                                                  //       ..onTap = () {
+                                                  //         Navigator.push(
+                                                  //           context,
+                                                  // MaterialPageRoute(
+                                                  //     builder:
+                                                  //         (context) =>
+                                                  //               pointsDetails(
+                                                  //                 date:
+                                                  //                     cItems[index].orderDate,
+                                                  //                 totalOrder:
+                                                  //                     cItems[index].total,
+                                                  //                 docID:
+                                                  //                     cItems[index].docId,
+                                                  //                 products:
+                                                  //                     cItems[index].products,
+                                                  //                 status:
+                                                  //                     cItems[index].status,
+                                                  //               )),
+                                                  // );
+                                                  //  }
+                                                ),
+                                              ]),
+                                            ),
                                           ),
                                         ],
                                       ),
