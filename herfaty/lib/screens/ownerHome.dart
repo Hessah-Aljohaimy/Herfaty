@@ -101,7 +101,7 @@ class _BodyState extends State<Body> {
               ),
         ),
         SizedBox(
-          height: 15,
+          height: 9,
         ),
       ],
     );
@@ -184,8 +184,8 @@ class _AppBarState extends State<AppBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
-      height: 100,
+      padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
+      height: 85,
       width: double.infinity,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
@@ -197,6 +197,7 @@ class _AppBarState extends State<AppBar> {
           colors: [
             (Color.fromARGB(255, 81, 144, 142)),
             (Color.fromARGB(255, 85, 150, 165)),
+            (Color.fromARGB(255, 110, 191, 209)),
           ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
@@ -212,24 +213,24 @@ class _AppBarState extends State<AppBar> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 5.0, left: 10),
+                padding: const EdgeInsets.only(top: 1.0, left: 10),
                 child: Image.asset(
                   "assets/images/lamp.png",
-                  width: 36,
-                  height: 30,
+                  width: 38,
+                  height: 31,
                 ),
               ),
               // ignore: prefer_const_constructors
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: Text(
-                  "مرحباً بك ${thisOwnerName} !",
+                  "مرحباً بك ${thisOwnerName}",
 
                   // ignore: prefer_const_constructors
                   style: TextStyle(
                       color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 29,
                       fontFamily: "Tajawal"),
                   //textDirection: TextDirection.rtl,
                 ),

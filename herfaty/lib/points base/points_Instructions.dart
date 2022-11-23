@@ -13,6 +13,8 @@ class _PiointsInstructionState extends State<PiointsInstruction> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.symmetric(horizontal: 8),
+
       padding: const EdgeInsets.all(5),
       // color: Colors.black,
       height: 210,

@@ -24,7 +24,7 @@ class _RewardsCarouselState extends State<RewardsCarousel> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
-            height: 70,
+            height: 62,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,7 +33,7 @@ class _RewardsCarouselState extends State<RewardsCarousel> {
                 //   width: 9,
                 // ),
                 Container(
-                  padding: const EdgeInsets.only(right: 30),
+                  padding: const EdgeInsets.only(right: 32),
                   width: 200,
                   height: 60,
                   // decoration: BoxDecoration(
@@ -70,7 +70,7 @@ class _RewardsCarouselState extends State<RewardsCarousel> {
                           "الكـؤوس",
                           style: TextStyle(
                               color: Color(0xffF19B1A),
-                              fontSize: 28,
+                              fontSize: 26,
                               fontWeight: FontWeight.bold,
                               fontFamily: "Tajawal"),
                         ),
@@ -81,7 +81,7 @@ class _RewardsCarouselState extends State<RewardsCarousel> {
                         padding: const EdgeInsets.only(bottom: 8.0),
                         child: Image.asset(
                           "assets/images/points_trophies/icons8-trophy.png",
-                          width: 50,
+                          width: 45,
                         ),
                       ),
                     ],
