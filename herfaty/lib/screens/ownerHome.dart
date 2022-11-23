@@ -97,11 +97,11 @@ class _BodyState extends State<Body> {
               left: 20,
               right: 20),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          ),
+              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              ),
         ),
         SizedBox(
-          height: 20,
+          height: 15,
         ),
       ],
     );

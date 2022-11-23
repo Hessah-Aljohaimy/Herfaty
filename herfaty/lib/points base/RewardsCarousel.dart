@@ -30,7 +30,7 @@ class _RewardsCarouselState extends State<RewardsCarousel> {
 
               children: [
                 SizedBox(
-                  width: 4,
+                  width: 9,
                 ),
                 Container(
                   padding: const EdgeInsets.all(10),
@@ -86,13 +86,13 @@ class _RewardsCarouselState extends State<RewardsCarousel> {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 15,
-                ),
+                // SizedBox(
+                //   height: 15,
+                // ),
               ],
             )),
         SizedBox(
-          width: 27,
+          width: 140,
         ),
         reviewOwnerPanle()
       ],

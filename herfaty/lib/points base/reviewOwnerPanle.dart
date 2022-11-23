@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/rating/ratingsList.dart';
 
 class reviewOwnerPanle extends StatefulWidget {
@@ -35,104 +36,95 @@ class _reviewOwnerPanleState extends State<reviewOwnerPanle> {
     final User? user = auth.currentUser;
     String thisShopOwnerId = user!.uid;
     //--------------------------------------------------------
-    return SizedBox(
-        height: 60,
-        child: Row(
-          // mainAxisAlignment: MainAxisAlignment.start,
-          //crossAxisAlignment: CrossAxisAlignment.start,
+    return Container(
+      //margin: const EdgeInsets.only(bottom: 12),
+      //padding: const EdgeInsets.only(left: 5),
+      // width: 210,
+      // height: 48,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(40),
+        border: Border.all(color: Color.fromARGB(117, 81, 144, 142)),
+        boxShadow: [
+          BoxShadow(
+            color: kPrimaryLight.withOpacity(.4),
+            blurRadius: 6.0,
+            spreadRadius: .05,
+          ), //BoxShadow
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 5, left: 26),
+            child: Image.asset(
+              "assets/images/star-100.png",
+              width: 30,
+            ),
+          ),
+          Container(
+            width: 80,
+            // height: 30,
+            child: Builder(builder: (context) {
+              return TextButton(
+                child: SizedBox(
+                  width: 45,
+                  child: Text(
+                    "تقييمات مـتـجـري",
+                    style: TextStyle(
+                        // color: Color(0xff44ADE8),
+                        color: kPrimaryLight,
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Tajawal"),
+                  ),
+                ),
+                onPressed: () {
+                  setShopAverageRating(thisShopOwnerId);
+                  setNumOfRatings(thisShopOwnerId);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ratingsList(
+                        thisShopOwnerId: thisShopOwnerId,
+                        averageShopRating: averageShopRating,
+                        numberOfRatings: numberOfRatings,
+                      ),
+                    ),
+                  );
+                },
+              );
+            }),
+          ),
 
-          children: [
-            // SizedBox(
-            //   width:4,
-            // ),
-            Container(
-              margin: const EdgeInsets.only(bottom: 12),
-              padding: const EdgeInsets.only(left: 5),
-              width: 210,
-              height: 48,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: Color.fromARGB(79, 68, 172, 232)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Color.fromARGB(19, 128, 208, 255).withOpacity(.4),
-                    blurRadius: 6.0,
-                    spreadRadius: .05,
-                  ), //BoxShadow
-                ],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 10.0),
-                    child: Image.asset(
-                      "assets/images/star-100.png",
-                      width: 32,
-                    ),
-                  ),
-                  Container(
-                    // width: 80,
-                    // height: 30,
-                    child: Builder(builder: (context) {
-                      return TextButton(
-                        child: Text(
-                          "تقييمات متجري",
-                          style: TextStyle(
-                              color: Color(0xff44ADE8),
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: "Tajawal"),
-                        ),
-                        onPressed: () {
-                          setShopAverageRating(thisShopOwnerId);
-                          setNumOfRatings(thisShopOwnerId);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ratingsList(
-                                thisShopOwnerId: thisShopOwnerId,
-                                averageShopRating: averageShopRating,
-                                numberOfRatings: numberOfRatings,
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    }),
-                  ),
-                  IconButton(
-                    padding: EdgeInsets.only(bottom: 5),
-                    constraints: BoxConstraints(),
-                    onPressed: () {
-                      setShopAverageRating(thisShopOwnerId);
-                      setNumOfRatings(thisShopOwnerId);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ratingsList(
-                            thisShopOwnerId: thisShopOwnerId,
-                            averageShopRating: averageShopRating,
-                            numberOfRatings: numberOfRatings,
-                          ),
-                        ),
-                      );
-                    },
-                    icon: Icon(
-                      Icons.arrow_forward_rounded,
-                      size: 22,
-                      color: Color(0xff44ADE8),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-          ],
-        ));
+          // IconButton(
+          //   //padding: EdgeInsets.only(bottom: 5),
+          //   constraints: BoxConstraints(),
+          //   onPressed: () {
+          //     setShopAverageRating(thisShopOwnerId);
+          //     setNumOfRatings(thisShopOwnerId);
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //         builder: (context) => ratingsList(
+          //           thisShopOwnerId: thisShopOwnerId,
+          //           averageShopRating: averageShopRating,
+          //           numberOfRatings: numberOfRatings,
+          //         ),
+          //       ),
+          //     );
+          //   },
+          //   icon: Icon(
+          //     Icons.arrow_forward_rounded,
+          //     size: 22,
+          //     color: Color(0xff44ADE8),
+          //   ),
+          // ),
+        ],
+      ),
+    );
   }
 
 //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||

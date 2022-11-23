@@ -68,7 +68,7 @@ class _PiointsInstructionState extends State<PiointsInstruction> {
             //   ),
             // ),
             Text(
-              "إذا قمت قمت ببيع منتج من منتجاتك ستحصل على 10 نقاط",
+              "إذا قمت ببيع منتج من منتجاتك ستحصل على 10 نقاط",
               style: TextStyle(
                   color: Color.fromARGB(255, 0, 0, 0),
                   fontSize: 12,
@@ -114,7 +114,7 @@ class _PiointsInstructionState extends State<PiointsInstruction> {
             //   ),
             // ),
             Text(
-              "إذا قمت قمت بجمع العدد المطلوب من النقاط ستنال الكأس",
+              "إذا قمت بجمع العدد المطلوب من النقاط ستنال الكأس",
               style: TextStyle(
                   color: Color.fromARGB(255, 0, 0, 0),
                   fontSize: 12,
