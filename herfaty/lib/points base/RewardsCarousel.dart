@@ -21,13 +21,13 @@ class _RewardsCarouselState extends State<RewardsCarousel> {
   Widget build(BuildContext context) {
     print('entering rewards scroll method ==================');
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
-            height: 60,
+            height: 70,
             child: Row(
-              // mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
-
               children: [
                 SizedBox(
                   width: 9,
@@ -91,10 +91,10 @@ class _RewardsCarouselState extends State<RewardsCarousel> {
                 // ),
               ],
             )),
-        SizedBox(
-          width: 140,
-        ),
-        reviewOwnerPanle()
+        // SizedBox(
+        //   width: 140,
+        // ),
+        // reviewOwnerPanle()
       ],
     );
   }
