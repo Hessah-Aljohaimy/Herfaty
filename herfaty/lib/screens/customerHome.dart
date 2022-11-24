@@ -283,7 +283,7 @@ class _AppBarState extends State<AppBar> {
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: Text(
-                  "مرحبًا بك ${thisCustomerName} ",
+                  "مرحبًا بك ${thisCustomerName} !",
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
