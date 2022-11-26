@@ -7,30 +7,27 @@ import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/models/ratingModel.dart';
 import 'package:herfaty/rating/ratingCard2.dart';
 
-class ratingsList extends StatefulWidget {
-  ratingsList({
+class ratingsListOwner extends StatefulWidget {
+  ratingsListOwner({
     Key? key,
-    required this.thisShopOwnerId,
-    required this.averageShopRating,
-    required this.numberOfRatings,
   }) : super(key: key);
 
-  final String thisShopOwnerId;
-  final double averageShopRating;
-  final int numberOfRatings;
   @override
-  State<ratingsList> createState() => _ratingsListState();
+  State<ratingsListOwner> createState() => _ratingsListOwnerState();
 }
 
-class _ratingsListState extends State<ratingsList> {
+class _ratingsListOwnerState extends State<ratingsListOwner> {
   String thisShopName = "";
   double averageShopRating = 0;
   int numberOfRatings = 0;
   @override
   void initState() {
-    averageShopRating = widget.averageShopRating;
-    numberOfRatings = widget.numberOfRatings;
-    setShopName(widget.thisShopOwnerId);
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    String thisOwnerId = user!.uid;
+    //====================================================================
+    setShopAverageRating(thisOwnerId);
+    setNumOfRatings(thisOwnerId);
     super.initState();
   }
 
@@ -38,7 +35,8 @@ class _ratingsListState extends State<ratingsList> {
   Widget build(BuildContext context) {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
-    String thisCustomerId = user!.uid;
+    String thisOwnerId = user!.uid;
+    //streamRatingsHeader(thisOwnerId);
     //====================================================================
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -46,8 +44,8 @@ class _ratingsListState extends State<ratingsList> {
       appBar: ratingsListAppBar(context),
       body: RefreshIndicator(
         onRefresh: () async {
-          setShopAverageRating(widget.thisShopOwnerId);
-          setNumOfRatings(widget.thisShopOwnerId);
+          setShopAverageRating(thisOwnerId);
+          setNumOfRatings(thisOwnerId);
         },
         child: SafeArea(
           child: Container(
@@ -124,7 +122,7 @@ class _ratingsListState extends State<ratingsList> {
                     children: [
                       //This is to list all of our items fetched from the DB========================
                       StreamBuilder<List<ratingModel>>(
-                        stream: readRatings(widget.thisShopOwnerId),
+                        stream: readRatings(thisOwnerId),
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
@@ -169,8 +167,7 @@ class _ratingsListState extends State<ratingsList> {
                                 itemBuilder: (context, index) => ratingCard2(
                                     itemIndex: index,
                                     ratingItem: ratings[index],
-                                    averageShopRating:
-                                        widget.averageShopRating),
+                                    averageShopRating: averageShopRating),
                               );
                             }
                             //..................................................................................
@@ -201,29 +198,6 @@ class _ratingsListState extends State<ratingsList> {
         .map((snapshot) => snapshot.docs
             .map((doc) => ratingModel.fromJson(doc.data()))
             .toList());
-  }
-
-//===================================================================================
-  Future<String> getShopName(String thisOwneerId) async {
-    String shopName = "";
-    final customersDoc = await FirebaseFirestore.instance
-        .collection('shop_owner')
-        .where("id", isEqualTo: thisOwneerId)
-        .get();
-    if (customersDoc.size > 0) {
-      var data = customersDoc.docs.elementAt(0).data() as Map;
-      shopName = data["shopname"];
-      print("shop name is ${shopName}");
-    }
-    return shopName;
-  }
-
-//======================================================================================
-  Future<void> setShopName(String thisOwnerId) async {
-    String existedName = await getShopName(thisOwnerId);
-    setState(() {
-      thisShopName = existedName;
-    });
   }
 
 //===================================================================================
@@ -308,6 +282,8 @@ class _ratingsListState extends State<ratingsList> {
     return existedRatingsNum;
   }
 
+//=============================================================================================
+///////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////
   //AppBar
   AppBar ratingsListAppBar(var context) {
@@ -317,24 +293,13 @@ class _ratingsListState extends State<ratingsList> {
       elevation: 3,
       centerTitle: true,
       title: Text(
-        "تقييمات ${thisShopName}",
+        "تقييمات متجري ",
         style: TextStyle(
           fontSize: 20.0,
           fontWeight: FontWeight.w600,
           color: kPrimaryColor,
           fontFamily: "Tajawal",
         ),
-      ),
-      leading: IconButton(
-        padding: EdgeInsets.only(right: 20),
-        icon: const Icon(
-          Icons.arrow_back,
-          color: Color.fromARGB(255, 26, 96, 91),
-          size: 22.0,
-        ),
-        onPressed: () {
-          Navigator.pop(context);
-        },
       ),
     );
   }

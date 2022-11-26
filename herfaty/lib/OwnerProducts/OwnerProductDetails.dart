@@ -137,8 +137,8 @@ class _OwnerProdectDetailsState extends State<OwnerProdectDetails> {
                     "${widget.product.description}",
                     style: TextStyle(
                       fontSize: 17.5,
-                      height: 1.4,
-                      fontWeight: FontWeight.w500,
+                      height: 1.7,
+                      fontWeight: FontWeight.w600,
                       color: Colors.white,
                       fontFamily: "Tajawal",
                     ),

@@ -62,6 +62,7 @@ class _PointPanelState extends State<PointPanel> {
             print("aaaaaaaaaaa ${owner.length}");
 
             return Container(
+              margin: EdgeInsets.symmetric(horizontal: 8),
               // color: Colors.black,
               height: 180,
               width: 390,
@@ -192,63 +193,6 @@ class _PointPanelState extends State<PointPanel> {
     }
     return OwnerPoints;
   }
-
-//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-  Future<void> setShopAverageRating(String thisOwnerId) async {
-    double existedShopRating = await getShopAverageRating(thisOwnerId);
-    setState(() {
-      averageShopRating = existedShopRating;
-    });
-  }
-
-  //=======================================================================================
-  Future<double> getShopAverageRating(String shopOwnerId) async {
-    double averageShopRating = 0;
-    num sumRating = 0;
-    final shopDoc = await FirebaseFirestore.instance
-        .collection('rating')
-        .where("shopOwnerId", isEqualTo: shopOwnerId)
-        .get();
-    if (shopDoc.size > 0) {
-      for (int i = 0; i < shopDoc.size; i++) {
-        var data = shopDoc.docs.elementAt(i).data() as Map;
-        double thisDocRating = data["starsNumber"];
-        sumRating += thisDocRating;
-      }
-
-      averageShopRating = sumRating / shopDoc.size;
-      String inString = averageShopRating.toStringAsFixed(2);
-      averageShopRating = double.parse(inString);
-      print(
-          "=====this is point panel===== shop average rating is ${averageShopRating} ");
-    }
-    return averageShopRating;
-  }
-
-//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-  Future<void> setNumOfRatings(String thisOwnerId) async {
-    int existedRatingsNum = await getNumOfRatings(thisOwnerId);
-    setState(() {
-      numberOfRatings = existedRatingsNum;
-    });
-  }
-
-  //=======================================================================================
-  Future<int> getNumOfRatings(String shopOwnerId) async {
-    int existedRatingsNum = 0;
-    final shopDoc = await FirebaseFirestore.instance
-        .collection('rating')
-        .where("shopOwnerId", isEqualTo: shopOwnerId)
-        .get();
-    if (shopDoc.size > 0) {
-      existedRatingsNum = shopDoc.size;
-      print("shop ratings doc size is ${shopDoc.size}");
-    }
-    return existedRatingsNum;
-  }
-
-//=============================================================================================
-///////////////////////////////////////////////////////////////////////////////
 }
 
 //===================================================

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:herfaty/constants/color.dart';
 import 'package:herfaty/profile%20screens/ShopOwnerProfile.dart';
+import 'package:herfaty/rating/ratingsListOwner.dart';
 import 'package:herfaty/screens/ownerHome.dart';
 import 'package:herfaty/ShopOwnerOrder/list.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -63,7 +64,8 @@ class _navOwnerState extends State<navOwner> {
       ownerHomeScreen(),
       ownerProductsCategScreen(),
       list(selectedPage: 0),
-      ShopOwnerProfile()
+      ratingsListOwner(),
+      ShopOwnerProfile(),
     ];
   }
 
@@ -82,6 +84,11 @@ class _navOwnerState extends State<navOwner> {
       PersistentBottomNavBarItem(
           icon: const Icon(CupertinoIcons.square_favorites),
           title: "طلبات متجري",
+          activeColorPrimary: kPrimaryColor.withOpacity(0.9),
+          inactiveColorPrimary: CupertinoColors.systemGrey),
+      PersistentBottomNavBarItem(
+          icon: const Icon(CupertinoIcons.star),
+          title: "تقييمات متجري",
           activeColorPrimary: kPrimaryColor.withOpacity(0.9),
           inactiveColorPrimary: CupertinoColors.systemGrey),
       // PersistentBottomNavBarItem(

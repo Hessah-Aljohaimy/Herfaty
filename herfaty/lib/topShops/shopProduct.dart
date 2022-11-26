@@ -127,7 +127,8 @@ class _shopProductState extends State<shopProduct> {
   //AppBar
   AppBar shopProductsListAppBar(var context) {
     return AppBar(
-      elevation: 0,
+      shadowColor: Color.fromARGB(255, 39, 141, 134),
+      elevation: 3,
       backgroundColor: Colors.white,
       centerTitle: true,
       title: Text(

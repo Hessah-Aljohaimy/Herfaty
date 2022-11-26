@@ -231,19 +231,20 @@ class _AppBarState extends State<AppBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
-      height: 100,
+      padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
+      height: 85,
       width: double.infinity,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(20),
           bottomRight: Radius.circular(20),
         ),
+        color: Color.fromARGB(232, 238, 232, 182),
         gradient: LinearGradient(
           colors: [
-            // (Color.fromARGB(255, 161, 230, 226)),
             (Color.fromARGB(255, 81, 144, 142)),
             (Color.fromARGB(255, 85, 150, 165)),
+            (Color.fromARGB(255, 110, 191, 209)),
           ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
@@ -272,17 +273,17 @@ class _AppBarState extends State<AppBar> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 5.0, left: 10),
+                padding: const EdgeInsets.only(top: 1.0, left: 8),
                 child: Image.asset(
                   "assets/images/lamp.png",
-                  width: 36,
-                  height: 30,
+                  width: 45,
+                  height: 40,
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: Text(
-                  "مرحبًا بك ${thisCustomerName} ",
+                  "مرحبًا بك ${thisCustomerName} !",
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -380,12 +381,12 @@ class categories extends StatelessWidget {
                                         categoryName: "الخرز والإكسسوار")),
                               );
                             }
-                            if (cItems[index].name == "الفخاريات") {
+                            if (cItems[index].name == "الفخاريات والتشكيل") {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => CustomerProductsList(
-                                        categoryName: "الفخاريات")),
+                                        categoryName: "الفخاريات والتشكيل")),
                               );
                             }
                             if (cItems[index].name == "الحياكة والتطريز") {
