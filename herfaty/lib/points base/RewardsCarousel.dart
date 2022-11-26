@@ -92,7 +92,7 @@ class _RewardsCarouselState extends State<RewardsCarousel> {
               ],
             )),
         SizedBox(
-          width: 47,
+          width: 25,
         ),
         reviewOwnerPanle()
       ],

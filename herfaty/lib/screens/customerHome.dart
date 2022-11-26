@@ -41,7 +41,7 @@ class _customerHomeScreenState extends State<customerHomeScreen> {
               Body(),
               categories(),
               SizedBox(
-                height: 10,
+                height: 30,
               ),
               Align(
                 alignment: Alignment.bottomCenter,
