@@ -138,7 +138,7 @@ class _CartState extends State<Cart> {
                 initiallyExpanded: true,
                 title: Text(
                   //k, //ضعي اسم المتجر ثم شيلي الكومنت
-                  " $k",
+                  "متجر $k",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
