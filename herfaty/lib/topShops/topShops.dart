@@ -379,7 +379,7 @@ class _topShopsState extends State<topShops> {
                                     MaterialPageRoute(
                                       builder: (context) => shopProduct(
                                         shopID: topShops1[index].id,
-                                        shopName: topShops1[index].shopname,
+                                        shopName: topShops1[index].name,
                                       ),
                                     ),
                                   );
@@ -461,7 +461,7 @@ class _topShopsState extends State<topShops> {
                                   MaterialPageRoute(
                                     builder: (context) => shopProduct(
                                       shopID: topShops2[index].id,
-                                      shopName: topShops2[index].shopname,
+                                      shopName: topShops2[index].name,
                                     ),
                                   ),
                                 );
@@ -541,7 +541,7 @@ class _topShopsState extends State<topShops> {
                                   MaterialPageRoute(
                                     builder: (context) => shopProduct(
                                       shopID: topShops3[index].id,
-                                      shopName: topShops3[index].shopname,
+                                      shopName: topShops3[index].name,
                                     ),
                                   ),
                                 );
@@ -621,7 +621,7 @@ class _topShopsState extends State<topShops> {
                                   MaterialPageRoute(
                                     builder: (context) => shopProduct(
                                       shopID: topShops4[index].id,
-                                      shopName: topShops4[index].shopname,
+                                      shopName: topShops4[index].name,
                                     ),
                                   ),
                                 );
@@ -702,7 +702,7 @@ class _topShopsState extends State<topShops> {
                                   MaterialPageRoute(
                                     builder: (context) => shopProduct(
                                       shopID: topShops5[index].id,
-                                      shopName: topShops5[index].shopname,
+                                      shopName: topShops5[index].name,
                                     ),
                                   ),
                                 );
@@ -728,8 +728,7 @@ class _topShopsState extends State<topShops> {
   //AppBar
   AppBar topShopsAppBar(var context) {
     return AppBar(
-      shadowColor: Color.fromARGB(255, 39, 141, 134),
-      elevation: 3,
+      elevation: 0,
       backgroundColor: Colors.white,
       centerTitle: true,
       title: Text(

@@ -45,14 +45,7 @@ class _ownerProductsCategScreenState extends State<ownerProductsCategScreen> {
               MaterialPageRoute(builder: (context) => AddProduct()),
             );
           },
-          label: const Text(
-            'إضافة منتج جديد',
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-                fontFamily: "Tajawal"),
-          ),
+          label: const Text('أضف منتج جديد'),
           icon: const Icon(Icons.add),
           backgroundColor: Color(0xff51908E),
           extendedPadding: EdgeInsetsDirectional.only(start: 100.0, end: 100.0),
@@ -157,8 +150,8 @@ class appBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
-      height: 85,
+      padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+      height: 100,
       width: double.infinity,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
@@ -170,7 +163,6 @@ class appBar extends StatelessWidget {
           colors: [
             (Color.fromARGB(255, 81, 144, 142)),
             (Color.fromARGB(255, 85, 150, 165)),
-            //(Color.fromARGB(255, 110, 191, 209)),
           ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
@@ -193,7 +185,7 @@ class appBar extends StatelessWidget {
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 21,
+                      fontSize: 20,
                       fontFamily: "Tajawal"),
                   textDirection: TextDirection.rtl,
                 ),
@@ -265,12 +257,12 @@ class categories extends StatelessWidget {
                                         categoryName: "الخرز والإكسسوار")),
                               );
                             }
-                            if (cItems[index].name == "الفخاريات والتشكيل") {
+                            if (cItems[index].name == "الفخاريات") {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => OwnerProductsList(
-                                        categoryName: "الفخاريات والتشكيل")),
+                                        categoryName: "الفخاريات")),
                               );
                             }
                             if (cItems[index].name == "الحياكة والتطريز") {

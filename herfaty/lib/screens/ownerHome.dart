@@ -97,11 +97,11 @@ class _BodyState extends State<Body> {
               left: 20,
               right: 20),
           child: Row(
-              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              ),
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          ),
         ),
         SizedBox(
-          height: 9,
+          height: 20,
         ),
       ],
     );
@@ -184,8 +184,8 @@ class _AppBarState extends State<AppBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
-      height: 85,
+      padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+      height: 100,
       width: double.infinity,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
@@ -197,7 +197,6 @@ class _AppBarState extends State<AppBar> {
           colors: [
             (Color.fromARGB(255, 81, 144, 142)),
             (Color.fromARGB(255, 85, 150, 165)),
-            (Color.fromARGB(255, 110, 191, 209)),
           ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
@@ -213,11 +212,11 @@ class _AppBarState extends State<AppBar> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 1.0, left: 8),
+                padding: const EdgeInsets.only(top: 5.0, left: 10),
                 child: Image.asset(
                   "assets/images/lamp.png",
-                  width: 45,
-                  height: 40,
+                  width: 36,
+                  height: 30,
                 ),
               ),
               // ignore: prefer_const_constructors
@@ -229,8 +228,8 @@ class _AppBarState extends State<AppBar> {
                   // ignore: prefer_const_constructors
                   style: TextStyle(
                       color: Colors.white,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 29,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
                       fontFamily: "Tajawal"),
                   //textDirection: TextDirection.rtl,
                 ),

@@ -47,13 +47,16 @@ class payForm extends StatefulWidget {
 }
 
 Stream<List<OrderModel>> readPrpoints(String thisOwnerId) => FirebaseFirestore
-    .instance
-    .collection('orders')
-    .where("shopOwnerId", isEqualTo: thisOwnerId)
-    // .where("status", isEqualTo: "طلب جديد")
-    .snapshots()
-    .map((snapshot) =>
-        snapshot.docs.map((doc) => OrderModel.fromJson(doc.data())).toList());
+      .instance
+ .collection('orders')
+        .where("shopOwnerId", isEqualTo: thisOwnerId)
+        // .where("status", isEqualTo: "طلب جديد")
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => OrderModel.fromJson(doc.data()))
+            .toList());
+
+
 
 class _payFormState extends State<payForm> {
   bool checkDonePay = false;
@@ -105,6 +108,7 @@ class payForm extends StatelessWidget {
             )),
             child: SingleChildScrollView(
               child: Container(
+                
                 height: 500,
                 margin: EdgeInsets.only(top: 60.0, left: 8.0, right: 8.0),
                 padding: EdgeInsets.all(1.0),
@@ -126,8 +130,9 @@ class payForm extends StatelessWidget {
                     CardFormEditController controller = CardFormEditController(
                       initialDetails: state.cardFieldInputDetails,
                     );
-
+                    
                     if (state.status == PaymentStatus.initial) {
+                      
                       try {
                         if (state.status != PaymentStatus.success) {
                           print("enter wrong");
@@ -234,6 +239,7 @@ class payForm extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
+                         
                             Text(
                               'بيانات البطاقة',
                               style: TextStyle(
@@ -332,6 +338,7 @@ class payForm extends StatelessWidget {
 
                       DateTime now = DateTime.now();
                       String date = DateFormat('yyyy-MM-dd').format(now);
+ 
 
                       num totalPoints = 0;
                       num points = 0;
@@ -347,7 +354,6 @@ class payForm extends StatelessWidget {
                           total: widget.totalPrice,
                           shopName: widget.shopName,
                           notification: 'notPushed',
-                          notificationCustomer: 'notPushed',
                           status: 'طلب جديد',
                           products: products,
                           points: totalPoints,
@@ -366,48 +372,53 @@ class payForm extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            StreamBuilder<List<OrderModel>>(
-                                stream: readPrpoints(widget.shopOwnerId),
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return const Center(
-                                        child: CircularProgressIndicator());
-                                  }
-                                  if (snapshot.hasError) {
-                                    return Text(
-                                        'Something went wrong! ${snapshot.error}');
-                                  }
-                                  if (snapshot.hasData) {
-                                    //هنا حالة النجاح في استرجاع البيانات...........................................
-                                    final data = snapshot.data!;
+                               StreamBuilder<List<OrderModel>>(
+                      stream: readPrpoints(widget.shopOwnerId),
+                      builder: (context, snapshot) {
 
-                                    if (data.isEmpty) {
-                                      return Text('');
-                                    } else {
-                                      var realTotalPoints = 0;
-                                      final alldet = snapshot.data!.toList();
-                                      for (var i = 0; i < alldet.length; i++) {
-                                        realTotalPoints +=
-                                            alldet[i].points.toInt();
-                                        print('SSSSSSOOOOOOOOOOSSSSSSSSSSS');
-                                        print(realTotalPoints);
-                                        print(alldet[i].points.toInt());
-                                      }
-                                      final updatedPoints = FirebaseFirestore
-                                          .instance
-                                          .collection('shop_owner')
-                                          .doc(widget.shopOwnerId);
-                                      updatedPoints
-                                          .update({'points': realTotalPoints});
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        }
+                        if (snapshot.hasError) {
+                          return Text(
+                              'Something went wrong! ${snapshot.error}');
+                        }
+                        if (snapshot.hasData) {
+                          //هنا حالة النجاح في استرجاع البيانات...........................................
+                          final data = snapshot.data!;
+             
+                          if (data.isEmpty) {
+                            return Text('');
+                          } else {
+                            var realTotalPoints=0;
+                            final alldet = snapshot.data!.toList();
+                            for (var i = 0; i < alldet.length; i++) {
+                              
+                          realTotalPoints+=alldet[i].points.toInt();
+                              print('SSSSSSOOOOOOOOOOSSSSSSSSSSS');
+                              print(realTotalPoints);
+                              print(alldet[i].points.toInt());
+                            }
+                            final updatedPoints =
+      FirebaseFirestore.instance.collection('shop_owner').doc(widget.shopOwnerId);
+                              updatedPoints.update({'points': realTotalPoints});
 
-                                      return Text('');
-                                    }
-                                  } else {
-                                    return const Center(
-                                        child: CircularProgressIndicator());
-                                  }
-                                }),
+                          return Text('');
+                        
+
+ }
+                      }else {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        }
+    }
+    
+    
+    ),
+
+    
                             EmptySection(
                               emptyImg: 'assets/images/success.gif',
                               emptyMsg: 'عملية ناجحة',
@@ -552,7 +563,7 @@ class payForm extends StatelessWidget {
     }
     print("-------------finish update");
   }
-
+  
 //   totalpointowner(int realTotalPoints) {
 
 // var updatedPoints =
@@ -562,20 +573,26 @@ class payForm extends StatelessWidget {
 //   await docCartItem.set(
 //     json,);
 
+
+
 //   }
 }
 
-Future createNewOrder(orderModal cartItem, var shopOwnerId) async {
+Future createNewOrder(
+    orderModal cartItem, var shopOwnerId) async {
   final docCartItem =
       FirebaseFirestore.instance.collection('orders').doc("${cartItem.docId}");
   final updatedPoints =
       FirebaseFirestore.instance.collection('shop_owner').doc("${shopOwnerId}");
 
-  var json = cartItem.toJson();
+     var json = cartItem.toJson();
   await docCartItem.set(
-    json,
-  );
+    json,);
+ 
 }
+
+
+
 
 class DefaultAppBarPay extends StatelessWidget implements PreferredSizeWidget {
   final String title;

@@ -10,24 +10,24 @@ import 'package:herfaty/OwnerProducts/productCard_Owner.dart';
 import 'package:herfaty/models/Product1.dart';
 import 'package:herfaty/constants/color.dart';
 
-enum Menu { itemOne, itemTwo, itemThree }
+enum Menu { itemOne, itemTwo, itemThree}
+String CatName='';
+String thisOwnerId='';
+final List<String> productsName=[];
+bool takeName=false;
+Map catCheck={
+ "الخرز والإكسسوار":false,
+"الفخاريات":false,
+"الحياكة والتطريز":false,
+"فنون الورق والتلوين":false,
+ };
 
-String CatName = '';
-String thisOwnerId = '';
-final List<String> productsName = [];
-bool takeName = false;
-Map catCheck = {
-  "الخرز والإكسسوار": false,
-  "الفخاريات والتشكيل": false,
-  "الحياكة والتطريز": false,
-  "فنون الورق والتلوين": false,
-};
+ 
 
-List<String> cat1 = [];
-List<String> cat2 = [];
-List<String> cat3 = [];
-List<String> cat4 = [];
-
+List<String> cat1=[];
+ List<String> cat2=[];
+ List<String> cat3=[];
+ List<String> cat4=[];
 class OwnerProductsList extends StatefulWidget {
   String categoryName;
 
@@ -36,15 +36,17 @@ class OwnerProductsList extends StatefulWidget {
     Key? key,
   })  : this.categoryName = categoryName,
         super(key: key);
-  State<OwnerProductsList> createState() => _OwnerProductsList();
-}
+ State<OwnerProductsList> createState() => _OwnerProductsList();
+ 
+ 
+}      
+  //category name is a variable to store the category name from categories page
+  //  صفحة عائشة ترسل لي هنا اسم الفئة بناء عليه أعرض المنتجات
+  //======================================================================================
+String typeOfSort="الأحدث";
 
-//category name is a variable to store the category name from categories page
-//  صفحة عائشة ترسل لي هنا اسم الفئة بناء عليه أعرض المنتجات
-//======================================================================================
-String typeOfSort = "الأحدث";
+ class _OwnerProductsList extends State<OwnerProductsList> {
 
-class _OwnerProductsList extends State<OwnerProductsList> {
   Stream<List<Product1>> readPrpducts(String thisOwnerId) => FirebaseFirestore
       .instance
       .collection('Products')
@@ -54,22 +56,23 @@ class _OwnerProductsList extends State<OwnerProductsList> {
       .map((snapshot) =>
           snapshot.docs.map((doc) => Product1.fromJson(doc.data())).toList());
 
-  void initState() {
-    CatName = widget.categoryName;
+  void initState(){
+   CatName=widget.categoryName;
     Map catCheck = {
-      "الخرز والإكسسوار": false,
-      "الفخاريات والتشكيل": false,
-      "الحياكة والتطريز": false,
-      "فنون الورق والتلوين": false,
-    };
-    cat1.clear();
-    cat2.clear();
-    cat3.clear();
-    cat4.clear();
-  }
+  "الخرز والإكسسوار": false,
+  "الفخاريات": false,
+  "الحياكة والتطريز": false,
+  "فنون الورق والتلوين": false,
+};
+cat1.clear();
+cat2.clear();
+cat3.clear();
+cat4.clear();
+ }
 
   @override
   Widget build(BuildContext context) {
+    
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     thisOwnerId = user!.uid;
@@ -109,7 +112,7 @@ class _OwnerProductsList extends State<OwnerProductsList> {
                         if (snapshot.hasData) {
                           //هنا حالة النجاح في استرجاع البيانات...........................................
                           final data = snapshot.data!;
-
+             
                           if (data.isEmpty) {
                             return const Center(
                               child: Text(
@@ -125,82 +128,85 @@ class _OwnerProductsList extends State<OwnerProductsList> {
                           } else {
                             final productItems = snapshot.data!.toList();
 
-                            productItems.sort((a, b) {
-                              return DateTime.parse(b.proudctDate)
-                                  .compareTo(DateTime.parse(a.proudctDate));
-                            });
 
-                            if (cat1.isEmpty &&
-                                widget.categoryName == "الخرز والإكسسوار") {
-                              for (var i = 0; i < productItems.length; i++) {
-                                if ((cat1.contains(productItems[i].name)) ==
-                                        false &&
-                                    productItems[i].categoryName ==
-                                        "الخرز والإكسسوار") {
-                                  cat1.add(productItems[i].name);
-                                }
-                              }
-                            }
 
-                            if (cat2.isEmpty &&
-                                widget.categoryName == "الفخاريات والتشكيل") {
-                              for (var i = 0; i < productItems.length; i++) {
-                                if ((cat2.contains(productItems[i].name)) ==
-                                        false &&
-                                    productItems[i].categoryName ==
-                                        "الفخاريات والتشكيل") {
-                                  cat2.add(productItems[i].name);
-                                }
-                              }
-                            }
 
-                            if (cat3.isEmpty &&
-                                widget.categoryName == "الحياكة والتطريز") {
-                              for (var i = 0; i < productItems.length; i++) {
-                                if ((cat3.contains(productItems[i].name)) ==
-                                        false &&
-                                    productItems[i].categoryName ==
-                                        "الحياكة والتطريز") {
-                                  cat3.add(productItems[i].name);
-                                }
-                              }
-                            }
+    productItems.sort((a, b) {
+                          return DateTime.parse(b.proudctDate)
+                              .compareTo(DateTime.parse(a.proudctDate));
+                        });
 
-                            if (cat4.isEmpty &&
-                                widget.categoryName == "فنون الورق والتلوين") {
-                              for (var i = 0; i < productItems.length; i++) {
-                                if ((cat4.contains(productItems[i].name)) ==
-                                        false &&
-                                    productItems[i].categoryName ==
-                                        "فنون الورق والتلوين") {
-                                  cat4.add(productItems[i].name);
-                                }
-                              }
-                            }
 
-                            //                             if( catCheck[widget.categoryName]==false){
-                            //  print(productItems.length);
-                            //   for (var i = 0; i < productItems.length; i++) {
-                            //     if((productsName.contains(productItems[i].name))==false){
+                          if(cat1.isEmpty && widget.categoryName=="الخرز والإكسسوار") {
+                      for (var i = 0; i < productItems.length; i++) {
+         if((cat1.contains(productItems[i].name))==false &&
+                   productItems[i].categoryName=="الخرز والإكسسوار"){
+                              cat1.add(productItems[i].name);
+    }
+                                       }   
 
-                            //                               productsName.add(productItems[i].name);
 
-                            //     }
-                            //                                        }
+                          }
+                        
+                            if(cat2.isEmpty && widget.categoryName=="الفخاريات") {
+                      for (var i = 0; i < productItems.length; i++) {
+         if((cat2.contains(productItems[i].name))==false &&
+                   productItems[i].categoryName=="الفخاريات"){
+                              cat2.add(productItems[i].name);
+    }
+                                       }   
 
-                            //                catCheck[widget.categoryName]=true;
-                            //    takeName=true;
-                            // }
-                            if (typeOfSort == 'itemThree') {
-                              productItems.sort((a, b) {
-                                return (b.price).compareTo((a.price));
-                              });
-                            }
-                            if (typeOfSort == 'itemTwo') {
-                              productItems.sort((a, b) {
-                                return (a.price).compareTo((b.price));
-                              });
-                            }
+
+                          }
+
+                              if(cat3.isEmpty && widget.categoryName=="الحياكة والتطريز") {
+                      for (var i = 0; i < productItems.length; i++) {
+         if((cat3.contains(productItems[i].name))==false &&
+                   productItems[i].categoryName=="الحياكة والتطريز"){
+                              cat3.add(productItems[i].name);
+    }
+                                       }   
+
+
+                          }
+
+                              if(cat4.isEmpty && widget.categoryName=="فنون الورق والتلوين") {
+                      for (var i = 0; i < productItems.length; i++) {
+         if((cat4.contains(productItems[i].name))==false &&
+                   productItems[i].categoryName=="فنون الورق والتلوين"){
+                              cat4.add(productItems[i].name);
+    }
+                                       }   
+
+
+                          }
+
+//                             if( catCheck[widget.categoryName]==false){
+//  print(productItems.length);  
+//   for (var i = 0; i < productItems.length; i++) {
+//     if((productsName.contains(productItems[i].name))==false){
+
+//                               productsName.add(productItems[i].name);
+
+//     }
+//                                        }   
+
+                        
+//                catCheck[widget.categoryName]=true;          
+//    takeName=true;
+// }
+                            if(typeOfSort=='itemThree'){
+                               productItems.sort((a, b) {
+                          return (b.price)
+                              .compareTo((a.price));
+                        });
+                           }
+                           if(typeOfSort=='itemTwo'){
+                               productItems.sort((a, b) {
+                          return (a.price)
+                              .compareTo((b.price));
+                        });
+                           }
 
                             return ListView.builder(
                               itemCount: productItems.length,
@@ -242,14 +248,14 @@ class _OwnerProductsList extends State<OwnerProductsList> {
   }
 
   //=====================================================================================
+  
 
   //======================================================================================
 //////////////////////////////////////////////////////////////////////////////////////////////
   //AppBar
   AppBar productsListAppBar(var context) {
     return AppBar(
-      shadowColor: Color.fromARGB(255, 39, 141, 134),
-      elevation: 3,
+      elevation: 0,
       backgroundColor: Colors.white,
       centerTitle: true,
       title: Text(
@@ -272,54 +278,60 @@ class _OwnerProductsList extends State<OwnerProductsList> {
           Navigator.pop(context);
         },
       ),
-      actions: <Widget>[
-        // This button presents popup menu items.
-        IconButton(
-          padding: EdgeInsets.only(right: 20),
-          icon: const Icon(
-            Icons.search,
-            color: Color.fromARGB(255, 26, 96, 91),
-            size: 22.0,
-          ),
-          onPressed: () {
-            showSearch(
-              context: context,
-              delegate: mySearch(),
-            );
-          },
+
+
+ actions: <Widget>[
+          // This button presents popup menu items.
+          IconButton(
+        padding: EdgeInsets.only(right: 20),
+        icon: const Icon(
+          Icons.search, 
+          color: Color.fromARGB(255, 26, 96, 91),
+          size: 22.0,
         ),
-        PopupMenuButton<Menu>(
+        onPressed: () {
+        showSearch(context: context, delegate: mySearch(),);
+        }, 
+      ),
+          PopupMenuButton<Menu>(
+                    
             icon: Icon(
-              Icons.sort_rounded,
-              color: Color.fromARGB(255, 26, 96, 91),
-              size: 22.0,
+              Icons.sort_rounded ,color: Color.fromARGB(255, 26, 96, 91),
+         size: 22.0,
             ),
-            // Callback that sets the selected popup menu item.
-            onSelected: (Menu item) {
-              setState(() {
-                typeOfSort = item.name;
-              });
-            },
-            itemBuilder: (BuildContext context) => <PopupMenuEntry<Menu>>[
-                  const PopupMenuItem<Menu>(
-                    value: Menu.itemTwo,
-                    child: Text('الأسعار من الأقل'),
-                  ),
-                  const PopupMenuItem<Menu>(
-                    value: Menu.itemThree,
-                    child: Text('الأسعار من الأعلى'),
-                  ),
-                  const PopupMenuItem<Menu>(
-                    value: Menu.itemOne,
-                    child: Text('الأحدث'),
-                  ),
-                ]),
-      ],
+              // Callback that sets the selected popup menu item.
+              onSelected: (Menu item) {
+             setState(() {
+                  typeOfSort = item.name;
+  
+                });
+              
+              },
+              itemBuilder: (BuildContext context) => <PopupMenuEntry<Menu>>[
+                  
+                    const PopupMenuItem<Menu>(
+                      value: Menu.itemTwo,
+                      child: Text('الأسعار من الأقل'),
+                    ),
+                    const PopupMenuItem<Menu>(
+                      value: Menu.itemThree,
+                      child: Text('الأسعار من الأعلى'),
+                    ),
+                   const PopupMenuItem<Menu>(
+                      value: Menu.itemOne,
+                      child: Text('الأحدث'),
+                    ),
+                  ]),
+        ],
+
+
     );
   }
 }
 
-class mySearch extends SearchDelegate {
+
+class mySearch extends SearchDelegate{
+
   Stream<List<Product1>> readPrpducts(String thisOwnerId) => FirebaseFirestore
       .instance
       .collection('Products')
@@ -331,186 +343,225 @@ class mySearch extends SearchDelegate {
 
   @override
   List<Widget>? buildActions(BuildContext context) {
-    return [
-      IconButton(
+      return [
+     IconButton(
+       
         icon: const Icon(
-          Icons.clear,
+          Icons.clear, 
           color: Color.fromARGB(255, 26, 96, 91),
           size: 22.0,
         ),
         onPressed: () {
-          if (query.isEmpty) {
-            close(context, null);
-          } else {
-            query = '';
-          }
-        },
+          if(query.isEmpty){
+                      close(context, null);
+          }else{
+          query='';}
+        }, 
       ),
-      // TODO: implement buildActions
-    ];
-  }
+    // TODO: implement buildActions
+    
+  ];
 
+    
+  }
+  
   @override
   Widget? buildLeading(BuildContext context) {
-    return IconButton(
-      padding: EdgeInsets.only(right: 20),
-      icon: const Icon(
-        Icons.arrow_back,
-        color: Color.fromARGB(255, 26, 96, 91),
-        size: 22.0,
-      ),
-      onPressed: () {
-        close(context, null);
-      },
-    );
-  }
+     return  IconButton(
+        padding: EdgeInsets.only(right: 20),
+        icon: const Icon(
+          Icons.arrow_back, 
+          color: Color.fromARGB(255, 26, 96, 91),
+          size: 22.0,
+        ),
+        onPressed: () {
 
+          close(context, null);
+        
+        }, 
+      );
+    
+  }
+  
   @override
   Widget buildResults(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          image: DecorationImage(
-        image: AssetImage('assets/images/cartBack1.png'),
-        fit: BoxFit.cover,
-      )),
-      child: StreamBuilder<List<Product1>>(
-        stream: readPrpducts(thisOwnerId),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          if (snapshot.hasError) {
-            return Text('Something went wrong! ${snapshot.error}');
-          }
-          if (snapshot.hasData) {
-            //هنا حالة النجاح في استرجاع البيانات...........................................
-            final data = snapshot.data!;
-            if (data.isEmpty) {
-              return const Center(
-                child: Text(
-                  'لا توجد منتجات بهذا الاسم',
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: "Tajawal",
-                    color: Colors.grey,
-                  ),
-                ),
-              );
-            } else if (query.trim().isEmpty) {
-              return const Center(
-                child: Text(
-                  'لا توجد منتجات بهذا الاسم',
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: "Tajawal",
-                    color: Colors.grey,
-                  ),
-                ),
-              );
-            } else {
-              final productItems = snapshot.data!.toList();
-              List<Product1> productItems2 = [];
-              for (var i = 0; i < productItems.length; i++) {
-                if (productItems[i].name.contains(query)) {
-                  productItems2.add((productItems[i]));
-                }
-              }
-
-              if (productItems2.isEmpty) {
-                return const Center(
-                  child: Text(
-                    'لا توجد منتجات بهذا الاسم',
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: "Tajawal",
-                      color: Colors.grey,
-                    ),
-                  ),
-                );
-              }
-
-              return ListView.builder(
-                itemCount: productItems2.length,
-                itemBuilder: (context, index) => productCard_Owner(
-                  itemIndex: index,
-                  product: productItems2[index],
-                  press: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => OwnerProdectDetails(
-                          // يرسل المعلومات لصفحة المنتج عشان يعرض التفاصيل
-                          detailsImage: productItems2[index].image,
-                          product: productItems2[index],
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              );
-              //..................................................................................
-            }
-          } else {
-            return const Center(child: CircularProgressIndicator());
-          }
-        },
-      ),
-    );
+   
+ return   Container(
+     decoration: BoxDecoration(
+              image: DecorationImage(
+            image: AssetImage('assets/images/cartBack1.png'),
+            fit: BoxFit.cover,
+          )),
+         child: StreamBuilder<List<Product1>>(
+                        stream: readPrpducts(thisOwnerId),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          }
+                          if (snapshot.hasError) {
+                            return Text(
+                                'Something went wrong! ${snapshot.error}');
+                          }
+                          if (snapshot.hasData) {
+                            //هنا حالة النجاح في استرجاع البيانات...........................................
+                            final data = snapshot.data!;
+                            if (data.isEmpty) {
+                              return const Center(
+                                child: Text(
+                                  'لا توجد منتجات بهذا الاسم',
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w600,
+                                    fontFamily: "Tajawal",
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              );
+                            }
+                            else if(query.trim().isEmpty){
+                               return const Center(
+                                child: Text(
+                                  'لا توجد منتجات بهذا الاسم',
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w600,
+                                    fontFamily: "Tajawal",
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              );
+                            }
+                             else {
+                              final productItems = snapshot.data!.toList();
+                              List<Product1> productItems2=[];
+for (var i = 0; i < productItems.length; i++) {
+  if(productItems[i].name.contains(query)){
+    productItems2.add((productItems[i]));
   }
+}
 
+if(productItems2.isEmpty){
+       return const Center(
+                                child: Text(
+                                  'لا توجد منتجات بهذا الاسم',
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w600,
+                                    fontFamily: "Tajawal",
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              );
+}
+
+                             return ListView.builder(
+                                
+                                itemCount: productItems2.length,
+                                itemBuilder: (context, index) =>    productCard_Owner(
+                                itemIndex: index,
+                                product: productItems2[index],
+                                press: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => OwnerProdectDetails(
+                                        // يرسل المعلومات لصفحة المنتج عشان يعرض التفاصيل
+                                        detailsImage: productItems2[index].image,
+                                        product: productItems2[index],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                              );
+                              //..................................................................................
+                            }
+                          } 
+                          else {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          }
+                        },
+                        
+                      ),
+ );    
+  }
+  
+  
+  
   @override
   Widget buildSuggestions(BuildContext context) {
     // TODO: implement buildSuggestions
-
-    List<String> Suggestions = [];
+   
+    
+  List<String> Suggestions = [];
 
     if (CatName == "الخرز والإكسسوار") {
-      for (var i = 0; i < cat1.length; i++) {
-        if (cat1[i].contains(query)) {
-          Suggestions.add(cat1[i]);
-        }
-      }
-    } else if (CatName == "الفخاريات والتشكيل") {
-      for (var i = 0; i < cat2.length; i++) {
-        if (cat2[i].contains(query)) {
-          Suggestions.add(cat2[i]);
-        }
-      }
-    } else if (CatName == "الحياكة والتطريز") {
-      for (var i = 0; i < cat3.length; i++) {
-        if (cat3[i].contains(query)) {
-          Suggestions.add(cat3[i]);
-        }
-      }
-    } else {
-      for (var i = 0; i < cat4.length; i++) {
-        if (cat4[i].contains(query)) {
-          Suggestions.add(cat4[i]);
-        }
+
+       for (var i = 0; i < cat1.length; i++) {
+      if(cat1[i].contains(query)){
+        Suggestions.add(cat1[i]);
       }
     }
+    } else if (CatName == "الفخاريات") {
 
-    // for (var i = 0; i < productsName.length; i++) {
-    //   if(productsName[i].contains(query)){
-    //     Suggestions.add(productsName[i]);
-    //   }
-    // }
+
+
+       for (var i = 0; i < cat2.length; i++) {
+      if(cat2[i].contains(query)){
+        Suggestions.add(cat2[i]);
+      }
+
+    
+    } }
+    else if (CatName == "الحياكة والتطريز") {
+
+
+
+       for (var i = 0; i < cat3.length; i++) {
+      if(cat3[i].contains(query)){
+        Suggestions.add(cat3[i]);
+      }
+
+       }
+    } else {
+
+       for (var i = 0; i < cat4.length; i++) {
+      if(cat4[i].contains(query)){
+        Suggestions.add(cat4[i]);
+      }
+
+       }
+   
+    }
+
+
+  // for (var i = 0; i < productsName.length; i++) {
+  //   if(productsName[i].contains(query)){
+  //     Suggestions.add(productsName[i]);
+  //   }
+  // }
     return ListView.builder(
-      itemCount: Suggestions.length,
+      itemCount:Suggestions.length ,
       itemBuilder: (context, index) {
-        final sugg = Suggestions[index];
+        final sugg=Suggestions[index];
 
-        return ListTile(
+         return ListTile(
           title: Text(sugg),
           onTap: () {
-            query = sugg;
+            
+            query=sugg;
             showResults(context);
           },
-        );
+
+         );
+
+
       },
+  
     );
+
   }
-}
+    }

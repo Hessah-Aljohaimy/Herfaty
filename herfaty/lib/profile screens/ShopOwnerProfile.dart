@@ -436,19 +436,13 @@ class _ShopOwnerProfileState extends State<ShopOwnerProfile> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                    right: 6,
-                                  ),
-                                  child: Text(
-                                    " اسم المتجر ",
-                                    style: TextStyle(
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.w900,
-                                        fontFamily: "Tajawal",
-                                        color:
-                                            Color.fromARGB(255, 39, 141, 134)),
-                                  ),
+                                Text(
+                                  " اسم المتجر ",
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w900,
+                                      fontFamily: "Tajawal",
+                                      color: Color.fromARGB(255, 39, 141, 134)),
                                 ),
                                 SizedBox(
                                   width: 5,

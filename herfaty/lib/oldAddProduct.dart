@@ -30,7 +30,7 @@ class _AddProductState extends State<AddProduct> {
   var items = [
     'فنون الورق والتلوين',
     'الخرز والإكسسوار',
-    'الفخاريات والتشكيل',
+    'الفخاريات',
     'الحياكة والتطريز',
   ];
 
