@@ -13,9 +13,9 @@ import firebase_storage
 import flutter_local_notifications
 import flutter_native_timezone
 import geolocator_apple
-import package_info_plus_macos
-import path_provider_macos
-import shared_preferences_macos
+import package_info_plus
+import path_provider_foundation
+import shared_preferences_foundation
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   FLTFirebaseFirestorePlugin.register(with: registry.registrar(forPlugin: "FLTFirebaseFirestorePlugin"))
