@@ -936,7 +936,6 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
     }
     final _dialog = RatingDialog(
       initialRating: 0.0,
-      // your app's name?
       title: Text(
         'قيّم متجري',
         textAlign: TextAlign.center,
@@ -946,17 +945,6 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
           color: Colors.amber,
         ),
       ),
-      // encourage your user to leave a high rating?
-      message: Text(
-        "في هذا الطلب كيف كانت تجربتك مع ${shopName}؟ يمكنك إضافة ملاحظاتك لتصل لصاحب المتجر ",
-        textAlign: TextAlign.center,
-        style: const TextStyle(
-          fontSize: 15,
-          fontWeight: FontWeight.w800,
-          color: Color.fromARGB(157, 20, 129, 137),
-        ),
-      ),
-      // logo
       image: hasLogo
           ? Image.network(
               shopLogo,
@@ -970,6 +958,15 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
               width: 150,
               fit: BoxFit.contain,
             ),
+      message: Text(
+        "في هذا الطلب كيف كانت تجربتك مع ${shopName}؟ يمكنك إضافة ملاحظاتك لتصل لصاحب المتجر ",
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.w800,
+          color: Color.fromARGB(157, 20, 129, 137),
+        ),
+      ),
       submitButtonText: 'إرسال',
       commentHint: 'اكتب ملاحظاتك هنا',
       onCancelled: () => print('cancelled'),
@@ -1000,12 +997,10 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
             .doc('${orderId}')
             .update({"isRated": true});
         await showToastMethod(context, "شكرًا، تم إرسال تقييمك");
-
         //..........................................................................
         print('rating: ${response.rating}, comment: ${response.comment}');
       },
     );
-
     // show the dialog
     showDialog(
       context: context,
