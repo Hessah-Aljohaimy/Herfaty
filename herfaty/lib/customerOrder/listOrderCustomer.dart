@@ -3,19 +3,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:herfaty/customerOrder/scroll_indicator.dart';
 import 'package:herfaty/models/ratingModel.dart';
 import 'package:rating_dialog/rating_dialog.dart';
 import '../ShopOwnerOrder/OrderModel.dart';
-import '../constants/color.dart';
 import 'orderDetailsCustomer.dart';
 import '../models/Product1.dart';
 import 'package:intl/intl.dart';
-
-//import 'package:flutterfiredemo/item_details.dart';
-//import 'add_item.dart';
 
 class listOrderCustomer extends StatefulWidget {
   listOrderCustomer({Key? key}) : super(key: key) {}
@@ -86,10 +81,6 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                           return DateTime.parse(b.orderDate)
                               .compareTo(DateTime.parse(a.orderDate));
                         });
-
-                        /*arr = List.filled(cItems.length, ScrollController(),
-                            growable: false);*/
-
                         for (int i = 0; i < cItems.length; i++) {
                           //if (cItems[i].products.length > 3)
                           arr.insert(i, ScrollController());
@@ -223,38 +214,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                         color: Color.fromARGB(
                                                             255, 48, 137, 162),
                                                       ),
-                                                      /*bottom: BorderSide(
-                                                          width: 1.0,
-                                                          color: Color.fromARGB(
-                                                              255, 0, 0, 0)),
-                                                      right: BorderSide(
-                                                          width: 1.0,
-                                                          color: Color.fromARGB(
-                                                              255, 0, 0, 0)),*/
                                                     )),
-                                                    /*decoration: BoxDecoration(
-                                                      color: Color.fromARGB(
-                                                          255, 255, 255, 255),
-                                                      border: Border.all(
-                                                          color: Color(
-                                                              0xff51908E),
-                                                          width: 2),
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0)),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.grey
-                                                              .withOpacity(
-                                                                  0.5),
-                                                          spreadRadius: 2,
-                                                          blurRadius: 7,
-                                                          offset: Offset(0,
-                                                              3), // changes position of shadow
-                                                        ),
-                                                      ],
-                                                    ),*/
                                                     child: ListView.builder(
                                                         controller: x,
                                                         scrollDirection:
@@ -400,10 +360,6 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                           return DateTime.parse(a.orderDate)
                               .compareTo(DateTime.parse(b.orderDate));
                         });
-
-                        /* arr1 = List.filled(cItems.length, ScrollController(),
-                            growable: false);*/
-
                         for (int i = 0; i < cItems.length; i++) {
                           //if (cItems[i].products.length > 3)
                           arr1.insert(i, ScrollController());
@@ -523,38 +479,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                         color: Color.fromARGB(
                                                             255, 241, 145, 0),
                                                       ),
-                                                      /*bottom: BorderSide(
-                                                          width: 1.0,
-                                                          color: Color.fromARGB(
-                                                              255, 0, 0, 0)),
-                                                      right: BorderSide(
-                                                          width: 1.0,
-                                                          color: Color.fromARGB(
-                                                              255, 0, 0, 0)),*/
                                                     )),
-                                                    /*decoration: BoxDecoration(
-                                                      color: Color.fromARGB(
-                                                          255, 255, 255, 255),
-                                                      border: Border.all(
-                                                          color: Color(
-                                                              0xff51908E),
-                                                          width: 2),
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0)),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.grey
-                                                              .withOpacity(
-                                                                  0.5),
-                                                          spreadRadius: 2,
-                                                          blurRadius: 7,
-                                                          offset: Offset(0,
-                                                              3), // changes position of shadow
-                                                        ),
-                                                      ],
-                                                    ),*/
                                                     child: ListView.builder(
                                                         controller: x,
                                                         scrollDirection:
@@ -700,9 +625,6 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                           return DateTime.parse(b.orderDate)
                               .compareTo(DateTime.parse(a.orderDate));
                         });
-                        /*arr2 = List.filled(cItems.length, ScrollController(),
-                            growable: false);*/
-
                         for (int i = 0; i < cItems.length; i++) {
                           //if (cItems[i].products.length > 3)
                           arr2.insert(i, ScrollController());
@@ -725,19 +647,6 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                               itemCount: cItems.length,
                               itemBuilder: (context, index) {
                                 var x;
-                                // bool isRated = false;
-                                // bool isRatedBool = await checkIfRated("thisOrderId");
-
-                                //------------------------------------------------------
-                                //set isRated bool to enable to disable rating button
-                                // if (true) {
-                                //   setIsRated(cItems[index].docId);
-                                // }
-                                // for (int i = 0; i < cItems.length; i++) {
-                                //   setIsRated(cItems[index].docId);
-                                // }
-                                //------------------------------------------------------
-
                                 if (cItems[index].products.length > 3) {
                                   x = arr2[index];
                                 } else
@@ -835,38 +744,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                         color:
                                                             Color(0xff4C8F2F),
                                                       ),
-                                                      /*bottom: BorderSide(
-                                                          width: 1.0,
-                                                          color: Color.fromARGB(
-                                                              255, 0, 0, 0)),
-                                                      right: BorderSide(
-                                                          width: 1.0,
-                                                          color: Color.fromARGB(
-                                                              255, 0, 0, 0)),*/
                                                     )),
-                                                    /*decoration: BoxDecoration(
-                                                      color: Color.fromARGB(
-                                                          255, 255, 255, 255),
-                                                      border: Border.all(
-                                                          color: Color(
-                                                              0xff51908E),
-                                                          width: 2),
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0)),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.grey
-                                                              .withOpacity(
-                                                                  0.5),
-                                                          spreadRadius: 2,
-                                                          blurRadius: 7,
-                                                          offset: Offset(0,
-                                                              3), // changes position of shadow
-                                                        ),
-                                                      ],
-                                                    ),*/
                                                     child: ListView.builder(
                                                         controller: x,
                                                         scrollDirection:
