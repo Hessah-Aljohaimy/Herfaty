@@ -122,15 +122,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                   margin: EdgeInsets.only(top: 8.0, bottom: 10),
                                   padding: EdgeInsets.only(
                                       top: 8.0, bottom: 8.0, right: 8.0),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    // border: Border.all(color: kPrimaryColor)
-                                    border: Border(
-                                      top: BorderSide(color: Color(0xFFF1F1F1)),
-                                      bottom:
-                                          BorderSide(color: Color(0xFFF1F1F1)),
-                                    ),
-                                  ),
+                                  decoration: whiteBoxDecoration(),
                                   child: Column(
                                     children: [
                                       Row(
@@ -278,26 +270,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                                     top: 10.0,
                                                                     left: 10.0),
                                                             decoration:
-                                                                BoxDecoration(
-                                                                    border:
-                                                                        Border(
-                                                              bottom: BorderSide(
-                                                                  width: 1.0,
-                                                                  color: Colors
-                                                                      .grey),
-                                                              top: BorderSide(
-                                                                  width: 1.0,
-                                                                  color: Colors
-                                                                      .grey),
-                                                              left: BorderSide(
-                                                                  width: 1.0,
-                                                                  color: Colors
-                                                                      .grey),
-                                                              right: BorderSide(
-                                                                  width: 1.0,
-                                                                  color: Colors
-                                                                      .grey),
-                                                            )),
+                                                                greyBoxDecoration(),
                                                             child: Row(
                                                               children: [
                                                                 ProductImage(
@@ -461,15 +434,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                   margin: EdgeInsets.only(top: 8.0, bottom: 10),
                                   padding: EdgeInsets.only(
                                       top: 8.0, bottom: 8.0, right: 8.0),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    // border: Border.all(color: kPrimaryColor)
-                                    border: Border(
-                                      top: BorderSide(color: Color(0xFFF1F1F1)),
-                                      bottom:
-                                          BorderSide(color: Color(0xFFF1F1F1)),
-                                    ),
-                                  ),
+                                  decoration: whiteBoxDecoration(),
                                   child: Column(
                                     children: [
                                       Row(
@@ -605,26 +570,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                                     top: 10.0,
                                                                     left: 10.0),
                                                             decoration:
-                                                                BoxDecoration(
-                                                                    border:
-                                                                        Border(
-                                                              bottom: BorderSide(
-                                                                  width: 1.0,
-                                                                  color: Colors
-                                                                      .grey),
-                                                              top: BorderSide(
-                                                                  width: 1.0,
-                                                                  color: Colors
-                                                                      .grey),
-                                                              left: BorderSide(
-                                                                  width: 1.0,
-                                                                  color: Colors
-                                                                      .grey),
-                                                              right: BorderSide(
-                                                                  width: 1.0,
-                                                                  color: Colors
-                                                                      .grey),
-                                                            )),
+                                                                greyBoxDecoration(),
                                                             child: Row(
                                                               children: [
                                                                 ProductImage(
@@ -800,15 +746,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                   margin: EdgeInsets.only(top: 8.0, bottom: 10),
                                   padding: EdgeInsets.only(
                                       top: 8.0, bottom: 8.0, right: 8.0),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    // border: Border.all(color: kPrimaryColor)
-                                    border: Border(
-                                      top: BorderSide(color: Color(0xFFF1F1F1)),
-                                      bottom:
-                                          BorderSide(color: Color(0xFFF1F1F1)),
-                                    ),
-                                  ),
+                                  decoration: whiteBoxDecoration(),
                                   child: Column(
                                     children: [
                                       Row(
@@ -945,26 +883,7 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
                                                                     top: 10.0,
                                                                     left: 10.0),
                                                             decoration:
-                                                                BoxDecoration(
-                                                                    border:
-                                                                        Border(
-                                                              bottom: BorderSide(
-                                                                  width: 1.0,
-                                                                  color: Colors
-                                                                      .grey),
-                                                              top: BorderSide(
-                                                                  width: 1.0,
-                                                                  color: Colors
-                                                                      .grey),
-                                                              left: BorderSide(
-                                                                  width: 1.0,
-                                                                  color: Colors
-                                                                      .grey),
-                                                              right: BorderSide(
-                                                                  width: 1.0,
-                                                                  color: Colors
-                                                                      .grey),
-                                                            )),
+                                                                greyBoxDecoration(),
                                                             child: Row(
                                                               children: [
                                                                 ProductImage(
@@ -1113,6 +1032,20 @@ class _listOrderCustomerState extends State<listOrderCustomer> {
         ),
       ),
     );
+  }
+
+  BoxDecoration whiteBoxDecoration() {
+    return BoxDecoration(
+      color: Colors.white,
+      border: Border(
+        top: BorderSide(color: Color(0xFFF1F1F1)),
+        bottom: BorderSide(color: Color(0xFFF1F1F1)),
+      ),
+    );
+  }
+
+  BoxDecoration greyBoxDecoration() {
+    return BoxDecoration(border: Border.all(color: Colors.grey, width: 1));
   }
 
   //Rating=============================================================================================
