@@ -87,15 +87,18 @@ class AppBarOD extends StatelessWidget {
   Widget build(BuildContext context) {
     String newStatus = "";
     Color color = Color(0xff4C8F2F);
-    if (status == "طلب جديد")
+    if (status == "طلب جديد") {
       newStatus = "جاهز للتوصيل";
-    else if (status == "جاهز للتوصيل") {
+    }
+    if (status == "جاهز للتوصيل") {
       newStatus = "المنتج خارج للتوصيل";
       color = Color(0xffE87118);
-    } else if (status == "تم التوصيل") {
+    }
+    if (status == "تم التوصيل") {
       newStatus = "تم التوصيل";
       color = Color.fromARGB(255, 48, 137, 162);
-    } else if (status == "خارج للتوصيل") {
+    }
+    if (status == "خارج للتوصيل") {
       newStatus = "خارج للتوصيل";
       color = Color(0xffF06676);
     }
