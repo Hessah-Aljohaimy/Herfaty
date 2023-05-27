@@ -248,7 +248,170 @@ class _PointPanelState extends State<PointPanel> {
   }
 
 //=============================================================================================
-///////////////////////////////////////////////////////////////////////////////
+  Container points_instructions() {
+    return Container(
+      padding: const EdgeInsets.all(5),
+      // color: Colors.black,
+      height: 210,
+      width: 390,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(.1),
+            blurRadius: 4.0,
+            spreadRadius: .05,
+          ), //BoxShadow
+        ],
+      ),
+      child: Column(children: [
+        SizedBox(
+          height: 12,
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(
+              "كيف تكسب نقاطك؟",
+              style: TextStyle(
+                  color: Color.fromARGB(255, 230, 153, 38),
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "Tajawal"),
+            ),
+            Positioned(
+              // bottom: 50,
+              // top: 50,
+              child: Image.asset(
+                "assets/images/points_trophies/icons8receivecash.png",
+                width: 27,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Row(
+          children: [
+            // Positioned(
+            //   // bottom: 50,
+            //   // top: 50,
+            //   child: Image.asset(
+            //     "assets/images/points_trophies/icons8-approval-64.png",
+            //     width: 27,
+            //   ),
+            // ),
+            Text(
+              "إذا قمت قمت ببيع منتج من منتجاتك ستحصل على 10 نقاط",
+              style: TextStyle(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "Tajawal"),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Row(
+          children: [
+            Text(
+              "كيف تكسب الكؤوس؟",
+              style: TextStyle(
+                  color: Color.fromARGB(255, 230, 153, 38),
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "Tajawal"),
+            ),
+            Positioned(
+              // bottom: 50,
+              // top: 50,
+              child: Image.asset(
+                "assets/images/points_trophies/icons8-trophy-64.png",
+                width: 20,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Row(
+          children: [
+            // Positioned(
+            //   // bottom: 50,
+            //   // top: 50,
+            //   child: Image.asset(
+            //     "assets/images/points_trophies/icons8-shop-94.png",
+            //     width: 27,
+            //   ),
+            // ),
+            Text(
+              "إذا قمت قمت بجمع العدد المطلوب من النقاط ستنال الكأس",
+              style: TextStyle(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "Tajawal"),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Row(
+          children: [
+            Text(
+              "بماذا تفيدك النقاط؟",
+              style: TextStyle(
+                  color: Color.fromARGB(255, 230, 153, 38),
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "Tajawal"),
+            ),
+            Positioned(
+              // bottom: 50,
+              // top: 50,
+              child: Image.asset(
+                "assets/images/points_trophies/icons8-sparkling-64.png",
+                width: 20,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Row(
+          children: [
+            // Positioned(
+            //   // bottom: 50,
+            //   // top: 50,
+            //   child: Image.asset(
+            //     "assets/images/points_trophies/icons8-shop-94.png",
+            //     width: 27,
+            //   ),
+            // ),
+            Expanded(
+              flex: 3,
+              child: Text(
+                " إذا قمت بجمع عدد أكبر النقاط و الكؤوس سيتم عرض متجرك من المتاجر الأفضل مبيعا عند المشتريين في لائحة المتاجر المميزة",
+                style: TextStyle(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "Tajawal"),
+              ),
+            ),
+          ],
+        ),
+      ]),
+    );
+  }
 }
 
 //===================================================
