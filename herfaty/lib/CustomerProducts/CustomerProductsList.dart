@@ -537,12 +537,12 @@ class mySearch extends SearchDelegate {
     return ListView.builder(
       itemCount: Suggestions.length,
       itemBuilder: (context, index) {
-        final sugg = Suggestions[index];
+        final Suggestion = Suggestions[index];
 
         return ListTile(
-          title: Text(sugg),
+          title: Text(Suggestion),
           onTap: () {
-            query = sugg;
+            query = Suggestion;
             showResults(context);
           },
         );
