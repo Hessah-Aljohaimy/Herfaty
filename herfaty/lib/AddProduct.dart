@@ -94,42 +94,6 @@ class _AddProductState extends State<AddProduct> {
               //can doing scroll
 
               children: <Widget>[
-                // SizedBox(
-                //   height: 10,
-                // ),
-
-                // Container(
-                //   //margin: EdgeInsets.symmetric(horizontal: 200),
-                //   child: SizedBox(
-                //     width: 300,
-                //     height: 200,
-                //     child: IconButton(
-                //       icon: Image.asset('assets/images/productPic.png'),
-                //       iconSize: 50,
-                //       onPressed: () async {
-                //         await _showMyDialog();
-                //       },
-                //     ),
-                //     // child: ElevatedButton.icon(
-                //     //   onPressed: () async {
-                //     //     await _showMyDialog();
-                //     //   },
-
-                //     //   style: ElevatedButton.styleFrom(primary: kPrimaryColor),
-                //     //   icon: Icon(
-                //     //     // <-- Icon
-                //     //     Icons.image,
-                //     //     size: 24.0,
-                //     //   ),
-
-                //     //   label: Text(
-                //     //     'إرفاق صورة',
-                //     //     style: TextStyle(fontSize: 22, fontFamily: "Tajawal"),
-                //     //     //textAlign: TextAlign.right,
-                //     //   ), // <-- Text
-                //     // ),
-                //   ),
-                // ),
                 StreamBuilder<List<shopOwnerModel>>(
                     stream: shopOwnerData(),
                     builder: (context, snapshot) {
@@ -148,47 +112,8 @@ class _AddProductState extends State<AddProduct> {
                       return Text('');
                     }),
 
-                // SizedBox(
-                //   height: 20,
-                // ),
-
                 if (uploadImageUrl.isEmpty)
                   imageProfile()
-                // SizedBox(
-                //   child: Container(
-                //     color: Colors.white, //
-                //     //margin: EdgeInsets.symmetric(horizontal: 200),
-                //     // child: SizedBox(
-                //     // width: 300,
-                //     // height: 200,
-                //     child: IconButton(
-                //       icon: Image.asset('assets/images/Image.png'),
-                //       iconSize: 200,
-                //       onPressed: () async {
-                //         await _showMyDialog();
-                //       },
-                //     ),
-                // child: ElevatedButton.icon(
-                //   onPressed: () async {
-                //     await _showMyDialog();
-                //   },
-
-                //   style: ElevatedButton.styleFrom(primary: kPrimaryColor),
-                //   icon: Icon(
-                //     // <-- Icon
-                //     Icons.image,
-                //     size: 24.0,
-                //   ),
-
-                //   label: Text(
-                //     'إرفاق صورة',
-                //     style: TextStyle(fontSize: 22, fontFamily: "Tajawal"),
-                //     //textAlign: TextAlign.right,
-                //   ), // <-- Text
-                // ),
-                // ),
-                //   ),
-                // )
                 else
                   Container(
                     height: 200,
@@ -199,29 +124,7 @@ class _AddProductState extends State<AddProduct> {
                       //fit: BoxFit.cover,
                     ),
                   ),
-                // Container(
-                //   width: 400,
-                //   height: 200,
-                //   decoration: BoxDecoration(
-                //     border: Border.all(width: 0.1, color: Colors.white),
-                //     borderRadius: BorderRadius.only(
-                //       topLeft: Radius.circular(10),
-                //       bottomLeft: Radius.circular(10),
-                //     ),
-                //     //color: Color(0xFFFAF9F6),
-                //     color: Colors.white,
-                //   ),
-                //   child: ClipRRect(
-                //     borderRadius: BorderRadius.only(
-                //       topLeft: Radius.circular(10),
-                //       bottomLeft: Radius.circular(10),
-                //     ),
-                //     child: Image.network(
-                //       uploadImageUrl,
-                //       fit: BoxFit.cover,
-                //     ),
-                //   ),
-                // ),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center, //for right edge
                   children: [
@@ -302,37 +205,6 @@ class _AddProductState extends State<AddProduct> {
                     ),
                   ],
                 ),
-                /* DropdownButton(
-                // Initial Value
-                value: dropdownvalueNumber,
-                underline: Container(
-                  height: 3,
-                  color: Color.fromARGB(255, 26, 96, 91), //<-- SEE HERE
-                ),
-                icon: Icon(Icons.arrow_drop_down),
-                style: const TextStyle(
-                    color: Color.fromARGB(255, 26, 96, 91), //<-- SEE HERE
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
-                // Down Arrow Icon
-                // Array list of items
-                items: numberitems.map((var items) {
-                  return DropdownMenuItem(
-                    value: items,
-                    child: Text(
-                      items,
-                      textAlign: TextAlign.right,
-                    ),
-                  );
-                }).toList(),
-                // After selecting the desired option,it will
-                // change button value to selected value
-                onChanged: (var? newValue) {
-                  setState(() {
-                    dropdownvalueNumber = newValue!;
-                  });
-                },
-              ),*/
 
                 SizedBox(
                   height: 20,
@@ -354,8 +226,6 @@ class _AddProductState extends State<AddProduct> {
                       hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
                       suffixIcon: Padding(
                         padding: EdgeInsets.only(top: 15),
-                        // child: Icon(Icons.production_quantity_limits_sharp,
-                        //     color: kPrimaryColor),
                       ),
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 3.0, horizontal: 23),
@@ -403,13 +273,6 @@ class _AddProductState extends State<AddProduct> {
                     },
                   ),
                 ),
-                /*Container(
-                child: Text(
-                  "اسم صحيح بلا أرقام ورموز",
-                  textAlign: TextAlign.right,
-                  style: TextStyle(color: Color.fromARGB(255, 235, 47, 26)),
-                ),
-              ),*/
 
                 SizedBox(
                   height: 20,
@@ -426,24 +289,16 @@ class _AddProductState extends State<AddProduct> {
                     decoration: InputDecoration(
                       hintText: 'تفاصيل المنتج',
                       labelText: 'تفاصيل المنتج',
-
-                      // floatingLabelBehavior: FloatingLabelBehavior.never,
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 3.0, horizontal: 23),
-
                       hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
                       suffixIcon: Padding(
                         padding: EdgeInsets.only(top: 15),
-                        // child: Icon(Icons.description, //Sara edits
-                        //     color: kPrimaryColor),
                       ),
                       labelStyle: TextStyle(
                           color: kPrimaryColor, fontFamily: "Tajawal"),
-                      // floatingLabelBehavior: FloatingLabelBehavior.never,
-
                       filled: true,
                       fillColor: Colors.white,
-
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: kPrimaryColor),
                       ),
@@ -452,12 +307,10 @@ class _AddProductState extends State<AddProduct> {
                       ),
                       errorStyle:
                           TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
-
                       errorBorder: OutlineInputBorder(
                         borderSide:
                             BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
                       ),
-
                       focusedErrorBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                             width: 2, color: Color.fromARGB(255, 164, 46, 46)),
@@ -538,13 +391,7 @@ class _AddProductState extends State<AddProduct> {
                     },
                   ),
                 ),
-                /* Container(
-                padding: const EdgeInsets.only(right: 41),
-                child: Text(
-                  " *الكمية المتاحة يجب أن تكون بين 1-15",
-                style: TextStyle(color: Color.fromARGB(255, 235, 47, 26)),
-                ),
-              ),*/
+
                 SizedBox(
                   height: 20,
                 ),
@@ -558,23 +405,16 @@ class _AddProductState extends State<AddProduct> {
                     decoration: InputDecoration(
                       hintText: 'السعر',
                       labelText: 'السعر',
-
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 3.0, horizontal: 23),
-
                       hintStyle: TextStyle(fontSize: 18, fontFamily: "Tajawal"),
                       suffixIcon: Padding(
                         padding: EdgeInsets.only(top: 15),
-                        // child: Icon(Icons.money,
-                        //     //Sara edits
-                        //     color: kPrimaryColor),
                       ),
                       labelStyle: TextStyle(
                           color: kPrimaryColor, fontFamily: "Tajawal"),
-                      // floatingLabelBehavior: FloatingLabelBehavior.never,
                       filled: true,
                       fillColor: Colors.white,
-
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: kPrimaryColor),
                       ),
@@ -583,12 +423,10 @@ class _AddProductState extends State<AddProduct> {
                       ),
                       errorStyle:
                           TextStyle(color: Color.fromARGB(255, 164, 46, 46)),
-
                       errorBorder: OutlineInputBorder(
                         borderSide:
                             BorderSide(color: Color.fromARGB(255, 164, 46, 46)),
                       ),
-
                       focusedErrorBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                             width: 2, color: Color.fromARGB(255, 164, 46, 46)),
@@ -628,12 +466,6 @@ class _AddProductState extends State<AddProduct> {
                               ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
                                       content: Text('الرجاء إختيار الفئة ')));
-                            /*if (uploadImageUrl.isEmpty &&
-                  _formKey.currentState.validate()) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('الرجاء إرفاق صورة')));
-                  _showMyDialog();
-                    }*/
 
                             if (_formKey.currentState!.validate() &&
                                 uploadImageUrl != "" &&
@@ -643,17 +475,6 @@ class _AddProductState extends State<AddProduct> {
                               int amount = int.parse(amountController.text);
                               double priceN =
                                   double.parse(priceController.text);
-
-                              /*
-                  final user;
-                  user = FirebaseAuth.instance.currentUser;
-                  final uid = user.uid;
-                  FirebaseFirestore.instance
-                    .collection("users")
-                    .where("email", isEqualTo: uid)
-                    .snapshots()
-                    .map((snapshot) =>
-                    snapshot.docs.map((doc) => CartModal.fromJson(doc.data())).toList());*/
 
                               DateTime now = DateTime.now();
                               String formattedDate =
@@ -714,15 +535,7 @@ class _AddProductState extends State<AddProduct> {
                                   () {
                                 Navigator.pop(context);
                               });
-
-                              // ScaffoldMessenger.of(context).showSnackBar(
-                              //   const SnackBar(content: Text('تم حفظ المنتج')),
-                              // );
                             }
-                            /*   nameController.clear();
-                    descController.clear();
-                    amountController.clear();
-                    priceController.clear();*/
                           },
                           style: ButtonStyle(
                             backgroundColor:
@@ -742,11 +555,6 @@ class _AddProductState extends State<AddProduct> {
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
-                        /* child: Text("إضافة منتج"),
-                  style: ElevatedButton.styleFrom(
-                  primary: Color.fromARGB(255, 26, 96, 91)),
-              ),*/
-
                         ElevatedButton(
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
@@ -841,13 +649,6 @@ class _AddProductState extends State<AddProduct> {
                 SizedBox(
                   height: 10,
                 )
-                /* ElevatedButton(
-                style: ElevatedButton.styleFrom(primary: Colors.red),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text("إلغاء "),
-              ),*/
               ],
             ),
           ),
@@ -860,30 +661,11 @@ class _AddProductState extends State<AddProduct> {
   Widget imageProfile() {
     return Center(
       child: Stack(children: <Widget>[
-        //ClipRRect(
-        //borderRadius: BorderRadius.circular(20.0), //or 15.0
         Container(
           height: 200,
           width: 200,
-          //color: Color(0xffFF0E58),
-
           child: Image.asset('assets/images/points_trophies/squareImagee.jpg'),
         ),
-        // ),
-        // CircleAvatar(
-        //   radius: 80.0,
-        //   child: Image.asset('assets/images/Circular_Logo.png'),
-        //   // backgroundImage: showLocalImage == false
-        //   // ?
-        //   //  AssetImage("assets/images/Circular_Logo.png") ,
-        //   //as ImageProvider
-        //   // : FileImage(pickedImage1!) as ImageProvider,
-
-        //   // _imageFile.path
-        //   //
-        //   // ?  as ImageProvider
-        //   // :
-        // ),
         Positioned(
           bottom: 20.0,
           right: 20.0,
@@ -891,11 +673,6 @@ class _AddProductState extends State<AddProduct> {
             onTap: () {
               _showMyDialog();
             },
-            // child: Icon(
-            //   Icons.camera_alt,
-            //   color: Colors.teal,
-            //   size: 28.0,
-            // ),
           ),
         ),
       ]),
@@ -1039,19 +816,6 @@ class _AddProductState extends State<AddProduct> {
     print("uploaded:" + uploadImageUrl);
   }
 }
-
-/*Container(
-                        
-                        // decoration: BoxDecoration(
-                          
-                        //   color: Color.fromARGB(255, 114, 159, 160),
-                        //   borderRadius: BorderRadius.circular(66),
-                          
-                        // ),
-                      //  width: 290,
-                      //   height: 53,
-                        padding: EdgeInsets.symmetric(horizontal: 60),
-                        child:*/
 
 class DefaultAppBar extends StatelessWidget {
   final String title;
