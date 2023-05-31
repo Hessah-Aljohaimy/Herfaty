@@ -8,7 +8,7 @@ import 'package:herfaty/models/ownerServices.dart';
 import 'package:herfaty/points%20base/RewardsCarousel.dart';
 import 'package:herfaty/points%20base/peofile_circle.dart';
 import 'package:herfaty/points%20base/pointsPanel.dart';
-import 'package:herfaty/points%20base/points_Instructions.dart';
+// import 'package:herfaty/points%20base/points_Instructions.dart';
 import 'package:herfaty/points%20base/reviewOwnerPanle.dart';
 
 import 'package:herfaty/widgets/profile_button.dart';
@@ -59,10 +59,10 @@ class _ownerHomeScreenState extends State<ownerHomeScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 5),
-                  child: PiointsInstruction(),
-                ),
+                // Padding(
+                //   padding: EdgeInsets.symmetric(horizontal: 5),
+                //   //child: PiointsInstruction(),
+                // ),
                 const SizedBox(
                   height: 20,
                 ),

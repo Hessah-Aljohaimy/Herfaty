@@ -86,6 +86,9 @@ flutter_icons:
   android: true
   ios: true
   image_path: "assets/images/AppIcon.png"
+dependency_overrides:
+  firebase_core_platform_interface: 4.5.1
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
