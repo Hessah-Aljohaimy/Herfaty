@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:async';
 import 'dart:math';
 
@@ -137,8 +139,8 @@ class _CartState extends State<Cart> {
               ExpansionTile(
                 initiallyExpanded: true,
                 title: Text(
-                  //k, //ضعي اسم المتجر ثم شيلي الكومنت
-                  "متجر $k",
+                  //k اسم المتجر
+                  "$k",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
